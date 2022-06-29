@@ -1,0 +1,3 @@
+parcelRequire is not defined
+
+peerjs ->add var parcelRequire in nodemodules 	

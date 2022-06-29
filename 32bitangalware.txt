@@ -1,0 +1,9 @@
+1st angalware 32 bit test
+copy d3dcompiler_47.dll
+C:\Program Files (x86)\Google\Chrome\Application\93.0.4577.63
+and replace into 
+electron project folder
+
+node_modules/electron/dist/d3dcompiler_47.dll
+
+then build and check

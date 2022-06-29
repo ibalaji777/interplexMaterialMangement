@@ -1,0 +1,22 @@
+.interInput{
+background: beige;
+border-radius:0 !important;
+width: 100%;
+color:black !important;
+padding: 5px;
+}
+
+.interInput:focus{
+    outline: none;
+}
+.inputContainer{
+    padding:5px;
+}
+.xyCenter_{
+position: absolute;
+top:50%;
+left:50%;
+width: 100%;
+padding:10px;
+transform: translate(-50%,-50%);
+}

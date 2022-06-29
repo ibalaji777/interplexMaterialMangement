@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+    <title>Document</title>
+    <style>
+@page {
+    size: 21cm 29.7cm;
+    margin: 30mm 45mm 30mm 45mm;
+     /* change the margins as you want them to be. */
+}        .a {
+            padding-left: 100px;
+        }
+
+        @media print {
+    body{
+        width: 21cm;
+        height: 29.7cm;
+        margin: 30mm 45mm 30mm 45mm; 
+        /* change the margins as you want them to be. */
+   } 
+}
+        .centered{
+
+            text-align:center;
+        }
+
+        .pa-5{
+
+
+padding:5px
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id='app'>
+        <!-- {{arr}} -->
+        <!-- <div class="a" v-for="v in arr">{{v}}</div> -->
+    
+    <div class="ticket">
+
+<table style="width: 100%;">
+    <tbody style="width:100%">
+        <tr style="width:100%">
+            <td style="width:50%">
+               <b> ANGALWARE</b>
+          <br>
+          2/35b poonamalee main road 
+                    <br>kattuppakam
+                     chennai-600056
+        <br>6380188237,9514242221
+        
+        <!-- <hr style="border: 1px dashed black;"></td> -->
+             <td style="width:50%;text-align: right;">
+            
+            Logo
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h1 class="centered"> Sale Order </h1>
+
+<table style="width: 100%;">
+    <tbody style="width:100%">
+        <tr style="width:100%">
+            <td style="width:50%">
+                <!-- <img src="./logo.png" alt="Logo"> -->
+                
+                <b>Bill To :</b>
+                2/35b poonamalee main road 
+                    <br>kattuppakam
+                     chennai-600056
+        <br>6380188237,9514242221
+        
+        <!-- <hr style="border: 1px dashed black;"></td> -->
+             <td style="width:50%;text-align: right;">
+            
+                <b>Invoice No:</b>1234567 <br>
+<b>Date:</b>2020-12-1<br>
+<b>Due Date:</b>2020-12-1<br>
+
+<br>kattuppakam
+                     chennai-600056
+        <br>6380188237,9514242221
+        
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+        <table style="width:100%">
+            <thead>
+                <tr style="background:orange;padding:10px">
+                    <th class="quantity pa-5">#</th>
+                    <th class="description pa-5">ITEM NAME</th>
+                    <th class="description pa-5">HSN</th>
+
+                    <th class="price pa-5">QTY</th>
+                    <th class="description pa-5">RATE</th>
+                    <th class="description pa-5">DISCOUNT</th>
+
+                    <th class="description pa-5">GST</th>
+                    <th class="description pa-5">AMOUNT</th>
+
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="quantity pa-5">#</th>
+                    <th class="description pa-5">ITEM NAME</th>
+                    <th class="description pa-5">HSN</th>
+
+                    <th class="price pa-5">QTY</th>
+                    <th class="description pa-5">RATE</th>
+                    <th class="description pa-5">DISCOUNT</th>
+
+                    <th class="description pa-5">GST</th>
+                    <th class="description pa-5">AMOUNT</th>
+
+                    <th>Price</th>
+                </tr>
+                <tr >
+                    <th class="quantity pa-5"></th>
+                    <th class="description pa-5">TOTALS</th>
+                    <th class="description pa-5"></th>
+
+                    <th class="price pa-5">QTY</th>
+                    <th class="description pa-5"></th>
+                    <th class="description pa-5">DISCOUNT</th>
+
+                    <th class="description pa-5">GST</th>
+                    <th class="description pa-5">AMOUNT</th>
+
+                    <th>Price</th>
+                </tr>
+
+     
+            </tbody>
+        </table>
+        <hr style="border: 1px dashed black;">
+        <table style="width: 100%;">
+            <tbody style="width:100%">
+                <tr style="width:100%">
+                    <td style="width: 80%;"></td>
+
+                    <td style="width:20%">Total :</td>
+                    <td style="width:5%"> 90 </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table style="width: 100%;">
+            <tbody style="width:100%">
+                <tr style="width:100%">
+                    <td style="width:50%">
+                        <!-- <img src="./logo.png" alt="Logo"> -->
+                        
+Tersms & Conditions<br>
+<div style="width:100%;background:gray;min-height:80px">
+
+</div>
+
+<td style="width:50%;text-align: right;">
+                    
+<table style="width:100%;text-align: right;">
+    <tbody style="text-align: right;">
+        <tr >
+            <td><b>Sub Total:</b></td><td>33</td>
+        </tr>
+        <tr>
+            <td><b>Discount:</b></td><td>43</td>
+        </tr>
+
+        <tr>
+            <td><b>Due Date:</b></td><td>33</td>
+        </tr>
+
+        
+        <tr>
+            <td><b>SGST@9%:</b></td><td>23</td>
+        </tr>
+                
+        <tr>
+            <td><b> CGST@9%:</b>
+            </td><td>333</td>
+        </tr>
+
+        <tr >
+            <td ><b style="background: orange;padding:5px;padding-left:90px">Total:</b>
+            </td><td style="background: orange;padding:5px;">33</td>
+        </tr>
+        <tr>
+            <td><b>Balance Due:</b>
+            </td><td>43</td>
+        </tr>
+        <tr>
+            <td><b>Payment Type:</b>
+            </td><td>33</td>
+        </tr>
+
+    </tbody>
+</table>
+
+                 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        
+
+        <p class="centered">Thanks for your purchase!
+            <br>isat software solutions</p>
+    </div>
+
+
+
+</div>
+
+</body>
+<script>
+    //引入ipcRenderer对象
+    const {
+        ipcRenderer
+    } = require('electron')
+    new Vue({
+        el: "#app",
+        data: {
+            arr: []
+        },
+        mounted() {
+            ipcRenderer.on('ping', (e, arr) => {
+                console.log(e)
+                console.log(arr)
+                this.arr = arr;
+                // ipcRenderer.sendToHost('pong') 
+            })
+        },
+        methods: {}
+    })
+</script>
+
+</html>

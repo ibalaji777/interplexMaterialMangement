@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+  
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    padding:0;
+    margin:0;
+    background: lightgray;
+}
+
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    position: relative;
+    flex: 50%;
+ 
+  height: 100%;
+ }
+
+/* Clear floats after the columns */
+/* .row:after {
+  content: "";
+  display: table;
+  clear: both;
+  height: 100%;
+} */
+@page{
+    size: auto;
+    margin:0;
+    padding:0;
+}
+</style>
+</head>
+<body>
+
+
+<div style="height:1in">
+    <div class="row">
+      <div class="column" style="background-color:#aaa;">
+        <p>Column 1</p>
+        <!-- <p style="position: absolute;bottom:0;right:0;">Some text..</p> -->
+      </div>
+      <div class="column" style="background-color:#bbb;">
+        <p>Column 2</p>
+  
+      </div>
+    </div>
+</div>
+
+</body>
+</html>

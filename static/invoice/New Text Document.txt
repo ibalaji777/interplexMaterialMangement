@@ -1,0 +1,614 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script> -->
+    <script src="vue.js"></script>
+
+  
+    <title>Document</title>
+    <style>
+        @page {
+            margin: 0;
+        }
+        .a {
+            padding-left: 100px;
+        }
+        .w25{
+            width:25%;
+        }
+
+        .centered{
+
+            text-align:center;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id='app'>
+<div v-if="mode">
+    <input class="w25" type="button" id="isat-bold" value="bold">
+        <input class="w25"  type="button" id="isat-italic" value="italic">
+        <input class="w25"  type="button" id="isat-header-1" value="header large">
+        <input class="w25"  type="button" id="isat-header-2" value="header small">
+        <!-- <input type="button" id="isat-header-2" value="b">-->
+        <input class="w25"  type="button" id="isat-subscript" value="subscript"> 
+   
+        <input class="w25"  type="button" id="isat-superscript" value="superscript">
+        <input class="w25"  type="button" id="isat-p" value="Paragraph">
+        <input class="w25"  type="button" id="isat-underline" value="undelrine">
+        <input class="w25"  type="button" id="isat-left" value="left">
+        <input class="w25"  type="button" id="isat-center" value="center">
+        
+        <input class="w25"  type="button" id="isat-right" value="right">
+        <input class="w25"  type="button" id="isat-jfull" value="Justify">
+
+        <input class="w25"  type="button" id="isat-boost_insertUnorderedList" value="UnorderList">
+        <input class="w25"  type="button" id="isat-insertOrderedList" value="OrderList">
+    </div>
+        
+        
+        
+        
+        
+        
+        <!-- {{sales}} -->
+<!-- {{print_paper}} -->
+        <!-- {{test}}
+        {{add_to_cart}}
+        {{sales}} -->
+        <!-- <div class="a" v-for="v in add_to_cart">{{v}}</div> -->
+    <!-- {{paper_setup}} -->
+    <div class="ticket">
+        <div v-if="mode" parm="pos_header" class="pos_header centered isat_editable_content" isat_editable_content="isat_editable_content" v-html="print_paper.company_info.header" ></div>  
+
+        <div v-else class="centered"  v-html="print_paper.company_info.header" ></div>  
+
+        <!-- <h1 class="centered">ANGALWARE</h1> -->
+<!-- <div class="centered" isat_editable_content="isat_editable_content" class="isat_editable_content" v-html="print_paper.header.brand_name">ANGALWARE</div>   -->
+        <!-- <p class="centered" v-html="print_paper.header.address">35b poonamalee main road 
+            <br>kattuppakam
+             chennai-600056
+<p class="centered" v-html="print_paper.header.contact">6380188237,9514242221
+</p>
+<p class="centered" v-html="print_paper.header.gst_no">123 -->
+<!-- </p> -->
+<hr style="border: 1px dashed black;">
+<table style="width: 100%;">
+    <tbody style="width:100%">
+        <tr style="width:100%">
+            <td style="width:20%">Bill NO </td>
+            <td style="width:1%"> : </td>
+            <td style="width:28%">{{print_paper.invoice_no}}</td>
+            <td style="width:2%"></td>
+            <td style="width:20%">Cashier </td>
+            <td  style="width:1%"> :</td>
+             <td style="width:28%">{{print_paper.salesman.name}}</td>
+        </tr>
+        <tr style="width:100%">
+            <td style="width:20%">Date</td>
+            <td style="width:1%"> : </td>
+            <td style="width:28%">{{print_paper.date}}</td>
+            <td style="width:2%"></td>
+            <td style="width:20%">Time </td>
+            <td  style="width:1%"> :</td>
+             <td style="width:28%">{{print_paper.time}}</td>
+        </tr>
+
+        <tr style="width:100%">
+            <td style="width:20%">Counter</td>
+            <td style="width:2%"> : </td>
+            <td style="width:78%">{{print_paper.salesman.counter}}</td>
+            <!-- <td style="width:10%"></td>
+            <td style="width:20%"></td>
+            <td  style="width:5%"></td>
+             <td style="width:20%"></td> -->
+        </tr>
+
+
+
+    </tbody>
+</table>
+
+<hr style="border: 1px dashed black;">
+
+        <table style="width:100%">
+            <thead>
+                <tr style="border: 1px solid black;">
+                    <th class="quantity">#</th>
+                    <th class="description">Name</th>
+                    <th class="price">Qty</th>
+                    <th class="price">Unit</th>
+                    <th>Price</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr v-for="(item,index) in add_to_cart" :key="'add_to_cart'+index">
+                    <th class="quantity">{{index+1}}</th>
+                    <th class="description">{{item.name}}</th>
+                    <th class="price">{{item.qty}}</th>
+                    <th class="price">{{item.unit}}</th>
+                    <th>{{ parseFloat(item.sales_rate).toFixed(2) }}</th>
+                </tr>
+
+            </tbody>
+
+
+        </table>
+
+       <!-- --------------------------------------------table-----------------------------  -->
+       <div v-if="paper_setup.est_type=='est_type_1'">
+
+       <table style="width: 100%;" >
+    
+
+
+    <tr>
+        <td style="width:80%"></td>
+    <td style="width: 20%;"><b> Total:</b>   {{print_paper.payment_info.total_amount}}</td>
+    </tr>
+
+        <td style="width:80%"></td>
+    <td style="width: 20%;"><b> Balance Due:</b>{{print_paper.payment_info.balance_due}}</td>
+    </tr>
+    <tr>
+        <td style="width:80%"></td>
+    <td style="width: 20%;"><b> Cash Received:</b>{{print_paper.payment_info.cash_received}}</td>
+    </tr>
+    <tr>
+</table>
+
+
+        <table style="border-collapse:collapse;width: 100%;border:1px solid black">
+<thead>
+    <tr style="width: 100%;border:1px solid black">
+        <td style="width:25%;text-align: center;">GST%</td>
+        <td style="width:25%;text-align: center;">Goods</td>
+        <td style="width:25%;text-align: center;">CGST AMT</td>
+      <td style="width:25%;text-align: center;">SGST AMT</td>
+
+      <td style="width:25%;text-align: center;">IGST AMT</td>
+
+
+    </tr>
+</thead>
+    <tbody>
+        <tr style="border:1px solid black">
+            <td style="width:25%;text-align: center;">{{print_paper.final_tax.total_tax_amt}}</td>
+            <td style="width:25%;text-align: center;">{{print_paper.payment_info.subtotal}}</td>
+            <td style="width:25%;text-align: center;">{{print_paper.final_tax.cgst_amt}}</td>
+          <td style="width:25%;text-align: center;">{{print_paper.final_tax.sgst_amt}}</td>
+          <td style="width:25%;text-align: center;">{{print_paper.final_tax.igst_amt}}</td>
+    
+    
+        </tr>
+    </tbody>
+</table>
+</div>
+<!-- ------------------------------------------------type 1-------------------------------- -->
+
+
+<!-- --------------------------------------type2-------------------------- -->
+
+<div v-if="paper_setup.est_type=='est_type_2'">
+        <hr style="border: 1px dashed black;">
+        <table style="width: 100%;">
+            <tbody style="width:100%">
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">Sub Total:</td>
+                    <td style="width:20%">{{print_paper.payment_info.subtotal }} </td>
+                </tr>
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">Discount Amt:</td>
+                    <td style="width:20%"> {{print_paper.payment_info.discount }} </td>
+                </tr>
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">CGST:</td>
+                    <td style="width:20%"> {{print_paper.final_tax.cgst_amt}} </td>
+                </tr>
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">SGST</td>
+                    <td style="width:20%"> {{print_paper.final_tax.sgst_amt}} </td>
+                </tr>
+
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">Total:</td>
+                    <td style="width:20%">{{print_paper.payment_info.total_amount}} </td>
+                </tr>
+
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">Balance Due:</td>
+                    <td style="width:20%"> {{print_paper.payment_info.balance_due}} </td>
+                </tr>
+
+
+                <tr style="width:100%">
+                    <td style="width: 50%;"></td>
+
+                    <td style="width:30%">                Cash Received:
+                    </td>
+                    <td style="width:20%"> {{print_paper.payment_info.cash_received}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+
+    </div>
+<!-- ---------------------------------------------type 2---------------------------------- -->
+
+<!-- ----------------------------------------------type 3--------------------------------- -->
+        <table style="width: 100%;border: 1px solid black;padding:10px" v-if="paper_setup.est_type=='est_type_3'">
+            <tbody style="width:100%">
+                <tr style="width:100%">
+
+                    <td style="width:50%">Sub Total:</td>
+                    <td style="width:50%;text-align: right;"> {{print_paper.payment_info.subtotal}} </td>
+                </tr>
+                <tr style="width:100%">
+
+                    <td style="width:50%">Discount :</td>
+                    <td style="width:50%;text-align: right;"> {{print_paper.payment_info.discount}} </td>
+                </tr>
+                <tr style="width:100%">
+
+                    <td style="width:50%">CGST:</td>
+                    <td style="width:50%;text-align: right;">{{print_paper.final_tax.cgst_amt}}</td>
+                </tr>
+                <tr style="width:100%">
+
+                    <td style="width:50%">SGST:</td>
+                    <td style="width:50%;text-align: right;"> {{print_paper.final_tax.sgst_amt}}</td>
+                </tr>
+
+                <tr style="width:100%">
+                    
+                    <td style="width:50%">Total:</td>
+                    <td style="width:50%;text-align: right;">{{print_paper.payment_info.total_amount}} </td>
+                </tr>
+
+                <tr style="width:100%">
+                    
+                    <td style="width:50%">Balance Due:</td>
+                    <td style="width:50%;text-align: right;"> {{print_paper.payment_info.balance_due}} </td>
+                </tr>
+
+
+                <tr style="width:100%">
+
+                    <td style="width:50%">Cash Received:
+                    </td>
+                    <td style="width:50%;text-align: right;"> {{print_paper.payment_info.cash_received}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+<!-- ----------------------------------------type 3----------------------------------- -->
+
+
+
+
+
+
+        <hr style="border: 1px dashed black;">
+
+
+
+
+
+
+         <p>
+Customer Detail<br>
+<b>Name:</b> {{print_paper.customer.name}}<br>
+<b>Phone:</b>{{print_paper.customer.phone}} <br>
+<b>Points:</b> {{print_paper.customer.points}}<br> 
+</p>
+        
+<hr style="border: 1px dashed black;">
+
+
+<div v-if="mode"  isat_editable_content="isat_editable_content" parm="pos_desc" class="pos_desc isat_editable_content centered" v-html="print_paper.company_info.desc"></div>
+<div v-else  class="centered" v-html="print_paper.company_info.desc"></div>
+<br>    
+<div v-if="mode" isat_editable_content="isat_editable_content" parm="pos_terms" class="pos_terms isat_editable_content centered" v-html="print_paper.company_info.terms"></div>
+<div v-else   class="centered" v-html="print_paper.company_info.terms"></div>
+
+<div class="centered">
+<canvas id="barcode"></canvas>
+</div>
+<!--  
+        <p class="centered">Thanks for your purchase!
+            <br>isat software solutions</p>
+             -->
+    </div>
+
+
+
+
+</div>
+<div id="isat_parameter"></div>
+<script src="js/barcode.js"></script>
+<script src="isat_wygsiwyg.js"></script>
+
+</body>
+<script>
+
+    const {
+        ipcRenderer
+    } = require('electron')
+
+//final  bill tax percentage
+total_cgst=0;
+total_sgst=0;
+total_igst=0;
+total_cess=0;
+
+var  editor_data={};
+
+
+    new Vue({
+        el: "#app",
+        data: {
+            mode:false,
+     total_cgst:0,
+     total_sgst:0,
+     total_igst:0,
+     total_cess:0,
+     total_bill_tax:0,
+     tax:{
+
+     },
+
+
+     
+            add_to_cart: [],
+            sales:{},
+            test:'',
+            paper_setup:{},
+            print_paper:{
+            // sales.invoice_no
+            invoice_no:'',
+            date:'',
+            time:'',
+            company_info:{
+            header:'',
+            desc:'',
+            terms:''
+
+            },
+    header:{
+    brand_name:'',
+    address:'',
+    contact:'',
+    gst_no:'',
+    description:'',
+    terms_and_conditions:'',
+
+    },
+   salesman:{
+            name:'',
+            counter:'',
+           },
+           time:'',
+           //brand name
+          
+            //details of 
+             // cgst:0,
+            // sgst:0,
+            // igst:0,
+            // cess:0,
+            // total_tax:0,
+payment_info:{
+            subtotal:0,
+             discount:0,
+            total_amount:0,
+            balance_due:0,
+            cash_received:0,
+},
+  final_tax:{
+total_tax_amt:0,
+cgst_amt:0,
+sgst_amt:0,
+igst_amt:0,
+cess_amt:0,
+       },
+      customer:{
+       name:'',
+       phone:'',
+       points:'',
+      },
+
+
+            }
+        },
+        mounted() {
+          var $vm=this;
+
+
+var header=document.querySelector(".pos_header")
+var description=document.querySelector(".pos_desc")
+var terms=document.querySelector(".pos_terms")
+    if(header){
+        this.observer(header);
+    }
+      
+    if(description){
+        this.observer(description);
+    }
+    if(terms){
+        this.observer(terms);
+    }
+
+
+
+
+    ipcRenderer.on('ping', (e, data) => {
+let customer_reward_point=0;
+let total_cgst=0;
+let total_sgst=0
+let total_igst=0;
+let total_cess=0;
+let tax={};
+var date = new Date();
+
+//get data from another window
+this.add_to_cart = data["add_to_cart"];
+this.sales=data["sales"];
+this.paper_setup=data["paper_setup"];
+this.mode=data['mode'];
+let company_info=data["company_info"];
+//for compution          
+  total_cgst=this.add_to_cart.reduce((a, b) => a + parseFloat((b["cgst"]) || 0), 0);
+  total_sgst=this.add_to_cart.reduce((a, b) => a + parseFloat((b["sgst"]) || 0), 0);
+  total_igst=this.add_to_cart.reduce((a, b) => a + (parseFloat(b["igst"]) || 0), 0);
+  total_cess=this.add_to_cart.reduce((a, b) => a + (parseFloat(b["cess"]) || 0), 0);
+
+// bill info
+$vm.print_paper.invoice_no=$vm.sales.invoice_no;
+$vm.barcode(event,$vm.sales.invoice_no)
+$vm.print_paper.date=$vm.sales.date;
+$vm.print_paper.time=date.toLocaleTimeString();;
+//company info
+$vm.print_paper.company_info.header=company_info.pos_header;
+$vm.print_paper.company_info.desc=company_info.pos_desc;
+$vm.print_paper.company_info.terms=company_info.pos_terms;
+
+//header info
+// $vm.print_paper.header.brand_name=company_info.brand_name;
+// $vm.print_paper.header.address=company_info.address;
+// $vm.print_paper.header.contact=company_info.contact;
+// $vm.print_paper.header.gst_no =company_info.gst_no; 
+// $vm.print_paper.header.description=company_info.description;
+// $vm.print_paper.header.terms_and_conditions=company_info.terms_and_conditions;
+
+ //customer info
+customer_reward_point=this.add_to_cart.reduce((a, b) => a + (parseFloat(b["reward_point"]) || 0), 0);
+
+$vm.print_paper.customer.name=$vm.sales.customer_name;
+$vm.print_paper.customer.phone=$vm.sales.customer_phone;
+$vm.print_paper.customer.points=$vm.sales.customer_reward_point;
+
+//salesman info
+$vm.print_paper.salesman.name=$vm.sales.salesman_name;
+$vm.print_paper.salesman.counter=$vm.sales.counter_id;
+
+
+//tax info
+let tax_=$vm.get_each_tax_by_total_tax_ammount($vm.sales.total_tax,total_cgst,total_sgst,total_igst,total_cess);
+tax["total_tax_amt"]=tax_.total_tax_amt;
+tax["cgst_amt"]=tax_.cgst_amt;
+tax["sgst_amt"]=tax_.sgst_amt;
+tax["igst_amt"]=tax_.igst_amt;
+tax["cess_amt"]=tax_.cess_amt;
+
+
+
+$vm.print_paper.subtotal=(parseFloat($vm.sales.subtotal).toFixed(2)||0);
+
+$vm.print_paper.discount=(parseFloat($vm.sales.total_discount_in_amt).toFixed(2)|| 0);
+$vm.print_paper.total_amount=parseFloat($vm.sales.total_amount).toFixed(2);
+$vm.print_paper.balance_due=(parseFloat($vm.sales.balance_due).toFixed(2)||0);
+$vm.print_paper.cash_received=(parseFloat($vm.sales.total_amount).toFixed(2)||0)
+$vm.print_paper['final_tax']=tax;
+            })
+        },
+        methods: {
+ barcode(event,val="test"){
+console.log(val)
+    JsBarcode("#barcode", val, {
+//   format: "pharmacode",
+  width:1,
+  height:40,
+//   displayValue: false
+});
+
+
+
+ },           
+sendToHost(data){
+
+    ipcRenderer.sendToHost("readyCompanyInfo",data) 
+
+
+},
+observer(elem){
+    var $vm=this;    
+    editor_data[elem.getAttribute("parm")]=elem.innerHTML;
+     
+    elem.addEventListener("input",()=>{
+        editor_data[elem.getAttribute("parm")]=elem.innerHTML;
+     
+$vm.sendToHost(editor_data);
+    });
+
+
+
+var observer=new MutationObserver(function(mutations,observer){
+    
+    observer.disconnect();
+
+    editor_data[elem.getAttribute("parm")]=elem.innerHTML;
+
+$vm.sendToHost(editor_data);
+$vm.observer(elem);
+
+})
+observer.observe(elem,{childList:true});
+
+
+
+
+
+
+},
+
+            get_each_tax_by_total_tax_ammount(total_tax_amount,cgst,sgst,igst,cess)
+{
+    let bill_tax={};
+let total_tax=(parseFloat(cgst)+parseFloat(sgst)+parseFloat(igst)+parseFloat(cess)||0);
+let each_tax=(parseFloat(total_tax_amount)/parseFloat(total_tax)||0);
+//apply
+bill_tax["total_tax_amt"]=(parseFloat(total_tax_amount)||0);
+bill_tax["cgst_amt"]=(parseFloat(cgst)*each_tax||0);
+bill_tax["sgst_amt"]=(parseFloat(sgst)*each_tax||0);
+bill_tax["igst_amt"]=(parseFloat(igst)*each_tax||0);
+bill_tax["cess_amt"]=(parseFloat(cess)*each_tax||0);
+
+
+
+return bill_tax;
+
+
+
+
+
+}
+        }
+    })
+</script>
+
+</html>

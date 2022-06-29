@@ -1,0 +1,209 @@
+<div style="height: 100%;">
+   
+    <table id="invoice-table">
+        <!-- <colgroup>
+            <col width="35mm" />
+            <col />
+            <col width="20mm" />
+            <col width="20mm" />
+            <col width="20mm" />
+        </colgroup> -->
+    <tr>
+        <th colspan="7" style="height:1">
+            <table class="table" style="width:100%;border-bottom: 0px solid ;">
+                <tr>
+                    <td style="width:65%;vertical-align: text-top;">
+                    <div>
+                        <div style="border-bottom:1px solid black">
+                            <h3>Quotation</h3><br>
+
+                   <h3>{{company_brand_name}}</h3><br>
+            <table class="inner_table">
+                <tr><td>Address:</td><td>{{company_address}}</td></tr>
+<tr><td>GSTIN/UIN:</td><td>{{company_gst_no }}</td></tr> 
+                <tr><td>STATE NAME:</td><td>TAMIL NADU</td></tr>
+                <tr><td>CONTACT:</td><td>{{company_contact }}</td></tr>
+                <tr><td> EMAIL:</td><td>{{company_email}}</td></tr>
+            </table>
+    
+                        <!-- Address:2/35b poonamallee main road kattuppakam chennai-600056<br>
+                        GSTIN/UIN:<br>
+                        STATE NAME:<br>
+                        CONTACT:<br>
+                        EMAIL:<br> -->
+                    </div>
+                    <div >
+                        Bill to:<br>
+                        <!-- Party Name:<br>
+                        Address:<br>
+                        GSTIN/UIN:<br>
+                        STATE NAME:<br>
+                        Phone:<br> -->
+                        <table class="inner_table">
+                            <tr><td>Party Name:</td><td>{{party_name}}</td></tr>
+    
+                            <tr><td>Address:</td><td>{{billing_address}}</td></tr>
+                            <!-- <tr><td>GSTIN/UIN:</td><td>{{party_gst_no}}</td></tr> -->
+                            <tr><td>STATE NAME:</td><td>{{party_state}}</td></tr>
+                            <tr><td>Phone:</td><td>{{party_phone}}</td></tr>
+                        </table>
+                        
+                    </div>
+            
+            
+                </div>
+                    
+                    </td>
+                    <td style="width:45%;vertical-align: text-top;">
+                    <table class="table">
+                        <tr>
+                            <td>INVOICE NO<br>
+                                {{invoice_no}}
+                            </td>
+                            <td>DATED<br>
+                                {{date}}
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+            </table>
+        
+        </td>
+    </tr>
+    <tr class="invoice_line">
+        <th>S.no</th>
+        <th>Product Name</th>
+        <!-- <th>GST(%)</th> -->
+        <th>Qty</th>
+        <!-- <th>Tax Rate</th> -->
+        <th>Dis(%)</th>
+        <th class="bright">Amount</th>
+    </tr>
+    {{#each add_to_cart}}
+        <tr class="invoice_line">
+            <td>{{angal_inc @index}}</td>
+            <td>
+            <b>{{this.product_name}}</b>
+                <!-- {{#if imei_1}} {{imei_1}}<br>{{/if}}  -->
+            <!-- <b> CGST@{{cgst}}%</b><br>
+             <b>SGST@{{sgst}}%</b> -->
+            </td>
+            <!-- <td><br>{{cgst}}%<br>{{sgst}}%<br> </td>  -->
+            <td>{{this.qty}}</td>
+            <!-- <td>{{angal_expression '{{cgst_amt}} + {{sgst_amt}}'}}</td> -->
+            <td>{{this.discount_percent}}{{#angal_if discount_percent '!=' 0}}({{discount_rate}}) {{/angal_if}} </td>
+            <!-- <td>{{angal_expression '{{rate}} + {{qty}}'}}</td> -->
+            <td class="bright"><b>{{sub_total}}</b><br>
+                <!-- <b>{{cgst_amt}}</b><br>
+                <b>{{sgst_amt}}</b> -->
+            </td>
+        </tr>
+        {{/each}}
+        <tr>
+            <td>&nbsp;</td>
+            <!-- <td>&nbsp;</td> -->
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <!-- <td>&nbsp;</td> -->
+            <td>&nbsp;</td>
+            <td class="bright">&nbsp;</td>
+        </tr>
+        <tr class="invoice_line">
+            <td class="btop" colspan="2" style="text-align: right;">Total</td>
+            <!-- <td class="btop"></td> -->
+            <td class="btop">{{angal_var_loop_expression " qty " add_to_cart}}</td>
+            <td class="btop"></td>
+            <!-- <td class="btop"></td> -->
+            <!-- <td class="btop">{{angal_var_loop_expression " sub_total " add_to_cart}}</td> -->
+            <td class="btop bright">{{final_amount}}</td>
+        </tr>
+    <!-- <tr>
+        <td colspan="7"></td>
+    </tr> -->
+    </table>
+    
+    <div class="fz" style="height: 10%;">
+        <b> Amount:{{angal_num_to_word final_amount}}</b><br>
+        <b>1.Total Working Days 15 </b><br>
+        <b>2.Total Workers 2 </b><br>
+        <b>3.Project Status Updates Every 5 th day</b><br>
+        <b>Note:Product Taxes are Exclusive</b><br>
+        <!-- <b>3.App Completly Handover</b> -->
+        <!-- Declaration. We declare that Invoice shows the actual price of the goods described and that all particulars are true and correct. E & O.E. -->
+        <br>
+
+     <div style="text-align: center;width:100%">   Invoice Made By Angalware Billing Software 
+    </div>
+    </div>
+    </div>
+
+    .fz{
+        /* font-size: */
+    }
+.btop{
+    border-top:1px solid black ;
+
+}
+
+.bright{
+    border-right:1px solid black ;
+
+}
+    .inner_table td,
+    .inner_table th{
+        border:0 !important;
+    }
+      #invoice-table {
+            border: 1px solid black;
+            border-spacing: 0;
+            clear: both;
+            /* margin: 2mm 0mm; */
+            height: 90%;
+            width: 100%;
+            /* border-top:none; */
+        }
+        #invoice-table th, td { border-left: 1px solid black; }
+        #invoice-table th:first-child, td:first-child { border-left: none; }
+        #invoice-table th { border-bottom: 1px solid black;font-size: 12px; }
+        #invoice-table td { vertical-align: top; font-size: 12px; }
+        th { text-align: center; font-weight: normal; }
+        .amount { text-align: right; }
+        .invoice_line { height: 6mm; }
+        .invoice_line td, .invoice_line th { padding: 1mm; }
+
+
+        .table{
+
+            width:100%;
+            border-collapse: collapse;
+            /* print mode font-size 2mm */
+        }
+
+        .table th,
+        .table td{
+
+/* border:1px solid ; */
+}
+
+@media print
+    {
+        .fz{
+        font-size:9px;
+    }
+
+        /* .table {
+            font-size:1mm;
+
+        } */
+        #invoice-table td { vertical-align: top; font-size: 9px; }
+        #invoice-table th { vertical-align: top; font-size: 9px;padding:0;margin:0 }
+    
+    
+        /* .inner_table td,
+    .inner_table th{
+font-size: 5px;
+    } */
+
+    }
+

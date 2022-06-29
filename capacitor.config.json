@@ -1,0 +1,11 @@
+{
+  "appId": "com.angalware.mobile",
+  "appName": "angalware",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

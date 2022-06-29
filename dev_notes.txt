@@ -1,0 +1,13 @@
+To run 
+----------------------------------------
+npm run electron:serve
+To build 
+-----------------------------------------
+npm run electron:build
+
+ see in dist folder
+
+
+32 bit build 
+---------------------------------
+npm run electron:build -- --ia32
