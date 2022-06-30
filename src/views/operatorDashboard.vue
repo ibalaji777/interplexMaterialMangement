@@ -75,8 +75,8 @@ $vm.productInsertDialog=true
 .insertProduct{
 
 border: 1px dashed red;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;

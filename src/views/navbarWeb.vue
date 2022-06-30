@@ -1,21 +1,17 @@
 <template>
     <v-navigation-drawer
-v-model="$store.state.control.isNavbarHidden"
-      fixed
-       app
+        v-model="$store.state.control.isNavbarHidden"
+        fixed
+        app
         color="#ff0000"
-
         style="color:white"
     >
-        <v-list  
-      nav>
+        <v-list nav>
             <v-divider></v-divider>
 
             <div v-for="navLink in items" :key="navLink.title">
-                <v-list-item
-                    v-if="!navLink.submenu"
-                 >
-                    <v-list-item-icon>
+                <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">
+                    <v-list-item-icon >
                         <v-icon>{{ navLink.icon }}</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>{{ navLink.title }}</v-list-item-title>
@@ -28,7 +24,9 @@ v-model="$store.state.control.isNavbarHidden"
                 >
                     <template v-slot:activator>
                         <v-list-item-icon>
-                            <v-icon style="color:white">{{ navLink.icon }}</v-icon>
+                            <v-icon style="color:white">{{
+                                navLink.icon
+                            }}</v-icon>
                         </v-list-item-icon>
                         <v-list-item-content>
                             <v-list-item-title>{{
@@ -40,10 +38,10 @@ v-model="$store.state.control.isNavbarHidden"
                     <v-list-item
                         v-for="sub in navLink.subLinks"
                         :key="sub.title"
-
                     >
-
-                        <v-list-item-title style="color:white">{{ sub.title }}</v-list-item-title>
+                        <v-list-item-title style="color:white">{{
+                            sub.title
+                        }}</v-list-item-title>
                     </v-list-item>
                 </v-list-group>
             </div>
@@ -117,11 +115,90 @@ export default {
             //     ]
             // },
             {
+                title: "adminDashobard",
+                icon: "fa-money-bill-wave",
+                action: "adminDashobard",
+                submenu: false
+            },
+            {
+                title: "branches",
+                icon: "fa-money-bill-wave",
+                action: "branches",
+                submenu: false
+            },
+            {
+                title: "login",
+                icon: "fa-money-bill-wave",
+                action: "login",
+                submenu: false
+            },
+            {
+                title: "userRole",
+                icon: "fa-money-bill-wave",
+                action: "userRole",
+                submenu: false
+            },
+            {
+                title: "operatorDashboard",
+                icon: "fa-money-bill-wave",
+                action: "operatorDashboard",
+                submenu: false
+            },
+            {
+                title: "operatorInsert",
+                icon: "fa-money-bill-wave",
+                action: "operatorInsert",
+                submenu: false
+            },
+            {
+                title: "verifierDashboard",
+                icon: "fa-money-bill-wave",
+                action: "verifierDashboard",
+                submenu: false
+            },
+            {
+                title: "verifierList",
+                icon: "fa-money-bill-wave",
+                action: "verifierList",
+                submenu: false
+            },
+            {
+                title: "verifierView",
+                icon: "fa-money-bill-wave",
+                action: "verifierView",
+                submenu: false
+            },
+            {
+                title: "adminDashboard",
+                icon: "fa-money-bill-wave",
+                action: "adminDashboard",
+                submenu: false
+            },
+            {
+                title: "adminDashboardList",
+                icon: "fa-money-bill-wave",
+                action: "adminDashboardList",
+                submenu: false
+            },
+            {
+                title: "adminDashboardView",
+                icon: "fa-money-bill-wave",
+                action: "adminDashboardView",
+                submenu: false
+            },
+            {
                 title: "Payments",
                 icon: "fa-money-bill-wave",
                 action: "main_payment",
                 submenu: false
             },
+            {
+                title: "adminDashboardOtherConfig",
+                icon: "fa-money-bill-wave",
+                action: "adminDashboardOtherConfig",
+                submenu: false
+            },
+
             //              {
             //                 title: "Payment IN/OUT",
             //                 icon: "fa-money-bill-wave",
@@ -139,12 +216,10 @@ export default {
                 icon: "fa-file-import",
                 action: "main_bulk_import",
                 submenu: false
-            },
+            }
         ]
     }),
-    computed: {
-       
-    },
+    computed: {},
     methods: {}
 };
 </script>

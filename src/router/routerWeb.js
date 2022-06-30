@@ -17,12 +17,13 @@ import verifierDashboard from '../views/verifierDashboard.vue'
 import verifierList from '../views/verifierList.vue'
 import verifierView from '../views/verifierView.vue'
 
-
+import adminMasterProductInsert from '../views/adminMasterProductInsert.vue'
 import adminDashobard from '../views/adminDashobard.vue'
 import adminDashboardList from '../views/adminDashboardList.vue'
 import adminDashboardView from '../views/adminDashboardView.vue'
 import adminDashboardOtherConfig from '../views/adminDashboardOtherConfig.vue'
 
+import photoCapture from '../views/photoCapture.vue'
 
 
 Vue.use(VueRouter);
@@ -45,7 +46,17 @@ const routes = [
 	{
 		path: '/',
 		name: 'index',
-		component:adminDashobard 
+		component:photoCapture 
+	},
+	{
+		path: '/photoCapture',
+		name: 'photoCapture',
+		component:photoCapture 
+	},
+	{
+		path: '/adminMasterProductInsert',
+		name: 'adminMasterProductInsert',
+		component:adminMasterProductInsert 
 	},
 
 // ----------------------------------
