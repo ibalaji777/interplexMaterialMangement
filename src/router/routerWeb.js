@@ -24,6 +24,7 @@ import adminDashboardView from '../views/adminDashboardView.vue'
 import adminDashboardOtherConfig from '../views/adminDashboardOtherConfig.vue'
 
 import photoCapture from '../views/photoCapture.vue'
+import nativePhotoCapture from '../views/nativePhotoCapture.vue'
 
 
 Vue.use(VueRouter);
@@ -52,6 +53,11 @@ const routes = [
 		path: '/photoCapture',
 		name: 'photoCapture',
 		component:photoCapture 
+	},
+	{
+		path: '/nativePhotoCapture',
+		name: 'nativePhotoCapture',
+		component:nativePhotoCapture 
 	},
 	{
 		path: '/adminMasterProductInsert',

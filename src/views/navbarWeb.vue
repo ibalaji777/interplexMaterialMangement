@@ -120,6 +120,19 @@ export default {
                 action: "adminDashobard",
                 submenu: false
             },
+                        {
+                title: "nativePhotoCapture",
+                icon: "fa-money-bill-wave",
+                action: "nativePhotoCapture",
+                submenu: false
+            },
+                        {
+                title: "photoCapture",
+                icon: "fa-money-bill-wave",
+                action: "photoCapture",
+                submenu: false
+            },
+            
             {
                 title: "branches",
                 icon: "fa-money-bill-wave",

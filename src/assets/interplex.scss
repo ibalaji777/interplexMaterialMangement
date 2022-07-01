@@ -21,3 +21,21 @@ width: 100%;
 padding:10px;
 transform: translate(-50%,-50%);
 }
+.interList{
+    background: blanchedalmond;
+    padding: 5px;
+    font-weight: 500;
+    margin: 1px;
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+ 
+    /*
+      Introduced in Internet Explorer 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+ 
+}

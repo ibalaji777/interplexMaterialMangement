@@ -83,7 +83,7 @@ library.add(
 	faList,
 	faListOl,
 	faHistory,
-	
+
 	// fa
 );
 Vue.component('fa', FontAwesomeIcon);
