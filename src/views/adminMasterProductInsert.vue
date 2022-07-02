@@ -324,7 +324,7 @@ MASTER PRODUCT
        <v-icon style="margin:0 5px" class="handle">fa-arrows-alt</v-icon>
     <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
 <input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
-        <v-icon style="margin:0 5px">fa-times</v-icon>
+        <v-icon @click="productsFormat.splice(index,1)" style="margin:0 5px">fa-times</v-icon>
  
                                             </div>
                                         </draggable>
@@ -382,7 +382,8 @@ this.productFieldSettingDialog=true;
     },
 createProductField(){
 
-    this.$store.commit('addProductsFormat',create_field)
+    // this.$store.commit('addProductsFormat',create_field)
+    this.productsFormat(create_field)
 }
 
 },
