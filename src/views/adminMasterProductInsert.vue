@@ -1,10 +1,9 @@
 <template>
     <div>
+        <div style="display:flex;justify-content:flex-end">
+<v-icon @click="productSettingDialog=true">fa-cog</v-icon>            
+        </div>
 MASTER PRODUCT 
-<div>
-<span >Supplier</span>
-<input class="interInput" v-model="insertForm.supplier_name" type="text" placeholder="Supplier Name" >
-</div>
 
 <div>
 <span >Part NO</span>
@@ -31,10 +30,18 @@ MASTER PRODUCT
 <input class="interInput" v-model="insertForm.skiplevel" type="text" placeholder="skiplevel" >
 </div>
 
+<div v-for="(productFormat , index) in productsFormat" :key="'product'+index">
+
+<div style="display:flex">
+<span style="width:40%">{{productFormat.label}}</span>
+<input style="width:60%" class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" ><v-icon @click="selectFieldSettingfn(productFormat)" style="margin:0 5px">fa-cog</v-icon>
+</div>
 
 
+</div>
 
-<div style="display:flex;align-items:center">
+
+<!-- <div style="display:flex;align-items:center">
 <span >
 <span >Width:</span>
 <div style="display:flex">
@@ -214,23 +221,177 @@ MASTER PRODUCT
 <input class="interInput" v-model="insertForm.coilweight_max_spec_org" type="text" placeholder="Max Spec" >
 </div>
 </span>
-</div>
+</div> -->
 <div style="display:flex;justify-content:flex-end">
 
 <v-btn outlined style="margin-top:10px;">Create New Product</v-btn>
 </div>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^field setting dialog^^^^^^^^^^^^^^^^^^^^ -->
+
+ <v-dialog
+      v-model="productFieldSettingDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="productFieldSettingDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <!-- <v-btn
+              dark
+              text
+              @click="saveProductsFormat"
+            >
+              SAVE
+            </v-btn> -->
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<!-- <v-textfield></v-textfield> -->
+
+<v-checkbox
+      v-model="selectedFieldSetting.show"
+      :label="'Show (Quality assurance)'"
+    ></v-checkbox>
+
+<input  class="interInput" v-model="selectedFieldSetting.headerMap" type="text" placeholder="Header File Map" >
+
+<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
+    <div style="display:flex">
+        <v-icon>fa-arrows</v-icon>
+    <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
+<input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
+        <v-icon>fa-times</v-icon>
+    </div>
+
+</div> -->
+</div>
+      </v-card>
+    </v-dialog>
+
+
+<!--*******************USER INSERT******************* -->
+   <v-dialog
+      v-model="productSettingDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="productSettingDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="saveProductsFormat"
+            >
+              SAVE
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<v-btn outlined @click="createProductField">Create Field</v-btn>
+
+                                       <draggable
+                                            :list="productsFormat"
+                                             handle=".handle"
+                                            style="
+                     margin-top:10px "
+                                            ghost-class="ghost"
+                                            group="product"
+                                            @start="dragging = true"
+                                            @end="dragging = false"
+                                        >
+                                            <div
+                                            style="display:flex;"
+                                                v-for="(productFormat, index) in productsFormat"
+                                                :key="'product' + index"
+                                            >
+       <v-icon style="margin:0 5px" class="handle">fa-arrows-alt</v-icon>
+    <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
+<input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
+        <v-icon style="margin:0 5px">fa-times</v-icon>
+ 
+                                            </div>
+                                        </draggable>
+
+<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
+    <div style="display:flex">
+        <v-icon>fa-arrows</v-icon>
+    <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
+<input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
+        <v-icon>fa-times</v-icon>
+    </div>
+
+</div> -->
+</div>
+      </v-card>
+    </v-dialog>
+
     </div>
 </template>
 <script>
+/*eslint-disable*/
+var create_field={
+    label:'',//input field label
+    name:'',//column name
+    value:'',//default value
+    show:true,
+    headerMap:'',//map name from header file put into 
+}
+
 export default {
 
 data(){
     return{
+                    productsFormat:_.cloneDeep(this.$store.state.productsFormat),
+
+        productSettingDialog:false,
+        productFieldSettingDialog:false,
+        selectedFieldSetting:create_field
+        ,
         insertForm:{
             
         }
     }
+},
+methods:{
+    selectFieldSettingfn(item){
+this.selectedFieldSetting=item
+this.productFieldSettingDialog=true;
+    },
+    saveProductsFormat(){
+        var $vm=this;
+        $vm.$alert('Saved','success','success')
+        this.$store.commit("updateProductsFormat",this.productsFormat)
+
+    },
+createProductField(){
+
+    this.$store.commit('addProductsFormat',create_field)
 }
+
+},
+// watch:{
+//     productsFormat(){
+
+//         this.$store.commit("updateProductsFormat",this.productsFormat)
+//     }
+// }
 
 }
 </script>

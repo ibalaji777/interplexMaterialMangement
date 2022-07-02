@@ -279,9 +279,10 @@ Items
   </div>
 </template>
 <script>
-var XLSX = require("xlsx");
-
 /*eslint-disable*/
+
+var XLSX = require("xlsx");
+import * as core from '../lib/core.js'
 import { Camera, CameraResultType } from '@capacitor/camera';
 
 export default {
@@ -353,6 +354,7 @@ export default {
   var data = $vm.to_json(workbook);
   console.log("+++result+++")
   console.log(data)
+  console.log(core.headerFileGroup(data))
 },
 
      to_json(workbook) {
@@ -365,8 +367,8 @@ export default {
     });
     if (roa.length) result[sheetName] = roa;
 var rt=JSON.stringify(roa)
-console.log("+++|||result|||++++")
-    console.log(JSON.parse(rt))
+// console.log("+++|||result|||++++")
+//     console.log(JSON.parse(rt))
 //   });
   return JSON.parse(rt);
 },

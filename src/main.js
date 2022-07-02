@@ -93,7 +93,7 @@ Vue.use(VJsoneditor)
 Vue.use(VueQuillEditor, /* { default global options } */)
 import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
-
+Vue.component('draggable',()=>import('vuedraggable'))
 Vue.config.productionTip = true;
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'

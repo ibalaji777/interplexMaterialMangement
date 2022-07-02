@@ -39,7 +39,7 @@ import {
 	faChartLine,
 	faPencilAlt,
 	faEdit,
-	faCubes
+	faCubes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(
@@ -83,7 +83,7 @@ library.add(
 	faList,
 	faListOl,
 	faHistory,
-
+	
 	// fa
 );
 Vue.component('fa', FontAwesomeIcon);

@@ -47,7 +47,7 @@ const routes = [
 	{
 		path: '/',
 		name: 'index',
-		component:photoCapture 
+		component:adminMasterProductInsert 
 	},
 	{
 		path: '/photoCapture',
