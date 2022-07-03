@@ -17,6 +17,9 @@ const mutations =
 	updateProductsFormat(state,payload){
 
 		Vue.set(state,'productsFormat',payload)
+	},
+	setBranch(state,branch){
+		state.currentBranch=branch
 	}
 
 

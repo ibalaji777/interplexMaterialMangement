@@ -4,7 +4,7 @@
       <div style="display:flex;margin-top:10px">
 
 
-                <div @click="userInsertDialog=true" class="insertProduct" style="margin-right:10px">
+                <div @click="addDialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-user-plus</v-icon>
 </div>
 
@@ -12,7 +12,7 @@
 <v-icon>fa-file</v-icon>
 </div>
 
-<div @click="addProduct" class="insertProduct">
+<div @click="$router.push({name:'adminDashboardList'})" class="insertProduct">
 <v-icon>fa-search</v-icon>
 </div>
 
@@ -21,7 +21,7 @@
 
       <div @click="headerFileDialog=true" class="insertProduct" style="margin-top:10px;height:100px;width:33.33%">
            <div style="text-align:center">
-            5<br>
+            {{$store.state.interplex.products.length}}<br>
 Total Products 
             </div>
 
@@ -33,14 +33,16 @@ Total Products
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
            <div style="text-align:center">
-            5<br>
+            {{approvalStatus.approved}}<br>
+
             Approved
             </div>
 
 </div>
    <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: darksalmon;">
            <div style="text-align:center">
-            5<br>
+            {{approvalStatus.acceptedOnDeviation}}<br>
+
             Accepted on Deviation
             </div>
 
@@ -49,14 +51,14 @@ Total Products
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
-            5<br>
+            {{approvalStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
    <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
-            5<br>
+            {{approvalStatus.ppap}}<br>
             PPAP
             </div>
 
@@ -67,21 +69,20 @@ Total Products
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
-            5<br>
-            Operator
+        {{users.admin}}<br>
+        Admin    
             </div>
 
 </div>
       <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
-            5<br>
-            Operator
-            </div>
+ {{users.operator}}<br>
+        Operator                </div>
 
 </div>
    <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
-            5<br>
+ {{users.approval}}<br>
             Approval 
             </div>
 
@@ -89,7 +90,7 @@ Total Products
 
 </div>
 <!--*******************USER INSERT******************* -->
-   <v-dialog
+   <!-- <v-dialog
       v-model="userInsertDialog"
       fullscreen
       hide-overlay
@@ -134,29 +135,51 @@ Total Products
 
 </div>
       </v-card>
+    </v-dialog> -->
+
+    
+ <v-dialog
+      v-model="addDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="addDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<div>
+  <div @click="$router.push({name:'adminCreateUser'})" class="interList" >Create User</div>
+  <div @click="$router.push({name:'adminMasterProductInsert'})" class="interList">Create Product&Quality Assurance </div>
+  <div @click="$router.push({name:'adminCreateBranch'})" class="interList">Create Branches </div>
+  <div @click="$router.push({name:'adminCreateFileType'})" class="interList">Create Upload Types </div>
+  <div @click="$router.push({name:'adminQualityAssuranceHeader'})" class="interList">Create Header & Config</div>
+</div>
+
+</div>
+      </v-card>
     </v-dialog>
+
 
 
   </div>
 </template>
 <script>
+import _ from 'lodash'
+/*eslint-disable*/
 export default {
   data(){
     return {
-        userRoles:[
-            {
-            name:'Operator',
-            value:'operator'
-        },
-           {
-            name:'Approval',
-            value:'approval'
-        },
-                   {
-            name:'Admin',
-            value:'admin'
-        }
-        ],
+        addDialog:false,
+
         user:{
 
         },
@@ -165,6 +188,31 @@ export default {
         galleryDialog:false,
         headerFileDialog:false,
     }
+  },
+  computed:{
+
+users(){
+var $vm=this;
+return {
+admin:_.filter($vm.$store.state.interplex.users,(x)=>x.roletype=='admin').length,
+operator:_.filter($vm.$store.state.interplex.users,(x)=>x.roletype=='operator').length,
+approval:_.filter($vm.$store.state.interplex.users,(x)=>x.roletype=='approval').length,
+}
+
+},
+approvalStatus(){
+var $vm=this;
+return {
+approved:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='approved').length,
+acceptedOnDeviation:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='acceptedOnDeviation').length,
+rejected:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='rejected').length,
+ppap:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='ppap').length,
+}
+
+},
+
+	
+
   },
   methods:{
     addProduct(){

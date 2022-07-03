@@ -21,7 +21,19 @@ import adminMasterProductInsert from '../views/adminMasterProductInsert.vue'
 import adminDashobard from '../views/adminDashobard.vue'
 import adminDashboardList from '../views/adminDashboardList.vue'
 import adminDashboardView from '../views/adminDashboardView.vue'
+import adminQualityAssuranceHeader from '../views/adminMasterHeaderInsert.vue'
 import adminDashboardOtherConfig from '../views/adminDashboardOtherConfig.vue'
+import adminCreateUser from '../views/adminCreateUser.vue'
+import adminCreateBranch from '../views/adminCreateBranches.vue' 
+import adminCreateFileType from '../views/adminCreateFileTypes.vue' 
+
+
+import adminUsersList from '../views/adminUsersList.vue'
+import adminProductsFormateList from '../views/adminProductsFormateList.vue'
+import adminBranchesList from '../views/adminBranchesList.vue' 
+import adminHeaderFormatList from '../views/adminHeaderFormatList.vue' 
+
+import adminFileTypeList from '../views/adminFileTypeList.vue' 
 
 import photoCapture from '../views/photoCapture.vue'
 import nativePhotoCapture from '../views/nativePhotoCapture.vue'
@@ -63,7 +75,45 @@ const routes = [
 		path: '/adminMasterProductInsert',
 		name: 'adminMasterProductInsert',
 		component:adminMasterProductInsert 
+	}
+
+	,
+
+
+	{
+		path: '/adminUsersList',
+		name: 'adminUsersList',
+		component:adminUsersList 
 	},
+	{
+		path: '/adminProductsFormateList',
+		name: 'adminProductsFormateList',
+		component:adminProductsFormateList 
+	},
+	{
+		path: '/adminBranchesList',
+		name: 'adminBranchesList',
+		component:adminBranchesList 
+	},
+	{
+		path: '/adminFileTypeList',
+		name: 'adminFileTypeList',
+		component:adminFileTypeList 
+	}
+,
+
+
+	{
+		path: '/adminHeaderFormatList',
+		name: 'adminHeaderFormatList',
+		component:adminHeaderFormatList 
+	}
+,{
+		path: '/adminQualityAssuranceHeader',
+		name: 'adminQualityAssuranceHeader',
+		component:adminQualityAssuranceHeader 
+	},
+	
 
 // ----------------------------------
 {
@@ -120,6 +170,26 @@ const routes = [
 		name: 'adminDashobard',
 		component:adminDashobard 
 	},
+	
+	
+
+	{
+		path: '/adminCreateFileType',
+		name: 'adminCreateFileType',
+		component:adminCreateFileType 
+	},
+
+	{
+		path: '/adminCreateBranch',
+		name: 'adminCreateBranch',
+		component:adminCreateBranch 
+	},
+	{
+		path: '/adminCreateUser',
+		name: 'adminCreateUser',
+		component:adminCreateUser 
+	},
+
 	{
 		path: '/adminDashboardList',
 		name: 'adminDashboardList',

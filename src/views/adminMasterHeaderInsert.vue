@@ -6,7 +6,7 @@
             </v-btn>
 
         </div>
-<h3 style="margin:10px 0">Product Format & Quality assurance Setting</h3>
+<h3 style="margin:10px 0">Header Config</h3>
 
 
 <div>
@@ -252,9 +252,6 @@
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-<div style="display:flex;justify-content:flex-end;padding:5px;">
-<v-icon @click="validationHelpDialog=true">fa-question-circle</v-icon>
-</div>
 
 <input  class="interInput" v-model="createField.label" type="text" placeholder="Label" >
 <input  class="interInput" v-model="createField.name" type="text" placeholder="Name" >
@@ -267,13 +264,6 @@
 <input  class="interInput" v-model="createField.headerMap" type="text" placeholder="Header File Map" >
 
 <br>
-<v-checkbox
-      v-model="createField.validation"
-      :label="'Validation'"
-    ></v-checkbox>
-<br>
-
-<v-textarea label="Rules(Must Follow Documentation)" v-if="createField.validation" outlined v-model="createField.rule"></v-textarea>
 
 <!-- <input v-if="createField.validation"  class="interInput" v-model="createField.rule" type="text" placeholder="Rule" > -->
 
@@ -358,141 +348,8 @@
     </v-dialog>
 
 
-<!--*******************USER INSERT******************* -->
 
 
-   <v-dialog
-      v-model="validationHelpDialog"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
-      <v-card>
-        <v-toolbar
-          dark
-          :color="$store.state.bgColor"
-        >
-          <v-toolbar-title><v-icon @click="validationHelpDialog = false">fa-times</v-icon></v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            </v-toolbar-items>
-        </v-toolbar>
-        <v-divider></v-divider>
-       <div style="padding:10px">
- 
- <h4>Help</h4><br>
-
-Rules For Validation<br>
-<table>
-  <thead>
-    <tr>
-      <th>Operators</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">(...)</code><br><code class="language-plaintext highlighter-rouge">[...]</code><br><code class="language-plaintext highlighter-rouge">{...}</code></td>
-      <td>Grouping<br>Matrix<br>Object</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">x(...)</code><br><code class="language-plaintext highlighter-rouge">x[...]</code><br><code class="language-plaintext highlighter-rouge">obj.prop</code><br><code class="language-plaintext highlighter-rouge">:</code></td>
-      <td>Function call<br>Matrix index<br>Property accessor<br>Key/value separator</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">'</code></td>
-      <td>Matrix transpose</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">!</code></td>
-      <td>Factorial</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">^</code>, <code class="language-plaintext highlighter-rouge">.^</code></td>
-      <td>Exponentiation</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">~</code>, <code class="language-plaintext highlighter-rouge">not</code></td>
-      <td>Unary plus, unary minus, bitwise not, logical not</td>
-    </tr>
-    <tr>
-      <td>See section below</td>
-      <td>Implicit multiplication</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">./</code>, <code class="language-plaintext highlighter-rouge">%</code>, <code class="language-plaintext highlighter-rouge">mod</code></td>
-      <td>Multiply, divide, percentage, modulus</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code></td>
-      <td>Add, subtract</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">:</code></td>
-      <td>Range</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">to</code>, <code class="language-plaintext highlighter-rouge">in</code></td>
-      <td>Unit conversion</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">&lt;&lt;</code>, <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code></td>
-      <td>Bitwise left shift, bitwise right arithmetic shift, bitwise right logical shift</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">==</code>, <code class="language-plaintext highlighter-rouge">!=</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">&gt;=</code></td>
-      <td>Relational</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">&amp;</code></td>
-      <td>Bitwise and</td>
-    </tr>
-    <tr>
-      <td><code>^|</code></td>
-      <td>Bitwise xor</td>
-    </tr>
-    <tr>
-      <td><code>|</code></td>
-      <td>Bitwise or</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">and</code></td>
-      <td>Logical and</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">xor</code></td>
-      <td>Logical xor</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">or</code></td>
-      <td>Logical or</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">?</code>, <code class="language-plaintext highlighter-rouge">:</code></td>
-      <td>Conditional expression</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">=</code></td>
-      <td>Assignment</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">,</code></td>
-      <td>Parameter and column separator</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">;</code></td>
-      <td>Row separator</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">\n</code>, <code class="language-plaintext highlighter-rouge">;</code></td>
-      <td>Statement separators</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-      </v-card>
-    </v-dialog>
- 
    <v-dialog
       v-model="productSettingDialog"
       fullscreen
@@ -546,15 +403,7 @@ Rules For Validation<br>
                                             </div>
                                         </draggable>
 
-<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
-    <div style="display:flex">
-        <v-icon>fa-arrows</v-icon>
-    <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
-<input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
-        <v-icon>fa-times</v-icon>
-    </div>
 
-</div> -->
 </div>
       </v-card>
     </v-dialog>
@@ -569,8 +418,6 @@ var create_field={
     value:'',//default value
     show:false,
     headerMap:'',//map name from header file put into,
-    validation:false,
-    rule:''
 }
 
 export default {
@@ -584,11 +431,8 @@ data(){
     value:'',//default value
     show:false,
     headerMap:'',//map name from header file put into,
-    validation:false,
-    rule:''
 },
-                    productsFormat:_.cloneDeep(this.$store.state.productsFormat),
-validationHelpDialog:false,
+productsFormat:_.cloneDeep(this.$store.state.interplex.qualityAssuranceHeaderFormat),
         productSettingDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field

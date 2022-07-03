@@ -40,9 +40,11 @@ import {
 	faPencilAlt,
 	faEdit,
 	faCubes,
+	faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(
+	faQuestionCircle,
 	faCubes,
 	faEdit,
 	faPencilAlt,
