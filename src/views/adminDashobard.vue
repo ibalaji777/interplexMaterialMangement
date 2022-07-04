@@ -8,9 +8,9 @@
 <v-icon>fa-user-plus</v-icon>
 </div>
 
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px">
+        <!-- <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-file</v-icon>
-</div>
+</div> -->
 
 <div @click="$router.push({name:'adminDashboardList'})" class="insertProduct">
 <v-icon>fa-search</v-icon>

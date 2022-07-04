@@ -7,8 +7,10 @@
 
         </div>
 <h3 style="margin:10px 0">Product Format & Quality assurance Setting</h3>
-
-
+<div>
+<span >Product Name</span>
+<input class="interInput" v-model="insertForm.product_name" type="text" placeholder="Product Name" >
+</div>
 <div>
 <span >Part NO</span>
 <input class="interInput" v-model="insertForm.part_num" type="text" placeholder="Part No" >
@@ -33,7 +35,10 @@
 <span >SKIP LEVEL</span>
 <input class="interInput" v-model="insertForm.skiplevel" type="text" placeholder="skiplevel" >
 </div>
-
+<div>
+<span >Form Format</span>
+<input class="interInput" v-model="insertForm.form_format" type="text" placeholder="Product Name" >
+</div>
 <div v-for="(productFormat , index) in productsFormat" :key="'product'+index">
 
 <div style="display:flex">
@@ -587,7 +592,7 @@ data(){
     validation:false,
     rule:''
 },
-                    productsFormat:_.cloneDeep(this.$store.state.productsFormat),
+                    productsFormat:_.cloneDeep(this.$store.state.interplex.productsFormat),
 validationHelpDialog:false,
         productSettingDialog:false,
         productFieldSettingDialog:false,

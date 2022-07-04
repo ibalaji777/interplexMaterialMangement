@@ -74,6 +74,7 @@
   "knex": "^0.20.11",
   "lodash": "^4.17.20",
   "material-design-icons-iconfont": "^5.0.1",
+  "mathjs": "^10.6.4",
   "memorystream": "^0.3.1",
   "mime-db": "^1.45.0",
   "moment": "^2.24.0",

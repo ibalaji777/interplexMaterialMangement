@@ -70,83 +70,14 @@ users:[
 
 
 
+
+
+interplex:{
+	currentBranch:'',
 	productsFormat:[
 
 		{
-			label:'product_name',//input field label
-			name:'product_name',//column name
-			value:'',//default value
-			show:true,
-		   validation:false,
-    rule:'' 
-		},
-		{
-			label:'supplier_name',//input field label
-			name:'supplier_name',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'part_num',//input field label
-			name:'part_num',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		}
-		,
-		{
-			label:'sap_num_new',//input field label
-			name:'sap_num_new',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'sap_num_old',//input field label
-			name:'sap_num_old',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'batch',//input field label
-			name:'batch',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'units',//input field label
-			name:'units',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'grn_num',//input field label
-			name:'grn_num',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'material_num',//input field label
-			name:'material_num',//column name
-			value:'',//default value
-			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
-		},
-		{
-			label:'width_unit_org',//input field label
+			label:'WIDTH UNIT',//input field label
 			name:'width_unit_org',//column name
 			value:'',//default value
 			show:true,
@@ -154,47 +85,48 @@ users:[
     rule:'' 
 		},
 		{
-			label:'width_min_spec_org',//input field label
+			label:'WIDTH MIN',//input field label
 			name:'width_min_spec_org',//column name
-			value:'',//default value
+			value:'2',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'', 
+			 validation:false,
     rule:'' 
 		},
 		{
-			label:'width_max_spec_org',//input field label
+			label:'WIDTH MAX',//input field label
 			name:'width_max_spec_org',//column name
-			value:'',//default value
+			value:'5',//default value
 			show:true,
 			headerMap:'',  validation:false,
     rule:'' 
 		},
 		{
-			label:'width_sup_one',//input field label
+			label:'WIDTH SUP ONE',//input field label
 			name:'width_sup_one',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
-    rule:'' 
+			headerMap:'',  validation:true,
+    rule:'width_min_spec_org <= width_sup_one and width_sup_one <= width_max_spec_org' 
 		},
 		{
-			label:'width_sup_two',//input field label
+			label:'WIDTH SUP TWO',//input field label
 			name:'width_sup_two',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'width_ielpl_one',//input field label
+			label:'WIDTH IELPL ONE',//input field label
 			name:'width_ielpl_one',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'width_ielpl_two',//input field label
+			label:'WIDTH IELPL TWO',//input field label
 			name:'width_ielpl_two',//column name
 			value:'',//default value
 			show:true,
@@ -202,7 +134,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'width_remarks',//input field label
+			label:'WIDTH REMARKS',//input field label
 			name:'width_remarks',//column name
 			value:'',//default value
 			show:true,
@@ -210,7 +142,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'thickness_unit_org',//input field label
+			label:'THICKNESS UNIT',//input field label
 			name:'thickness_unit_org',//column name
 			value:'',//default value
 			show:true,
@@ -218,7 +150,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'thickness_min_spec_org',//input field label
+			label:'THICKNESS MIN SPEC',//input field label
 			name:'thickness_min_spec_org',//column name
 			value:'',//default value
 			show:true,
@@ -226,7 +158,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'thickness_max_spec_org',//input field label
+			label:'THICKNESS MAX SPEC',//input field label
 			name:'thickness_max_spec_org',//column name
 			value:'',//default value
 			show:true,
@@ -234,39 +166,39 @@ users:[
     rule:'' 
 		},
 		{
-			label:'thickness_sup_one',//input field label
+			label:'THICKNESS SUP ONE',//input field label
 			name:'thickness_sup_one',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'thickness_sup_two',//input field label
+			label:'THICKNESS SUP TWO',//input field label
 			name:'thickness_sup_two',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'thickness_ielpl_one',//input field label
+			label:'THICKNESS IELPL ONE',//input field label
 			name:'thickness_ielpl_one',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'thickness_ielpl_two',//input field label
+			label:'THICKNESS IELPL TWO',//input field label
 			name:'thickness_ielpl_two',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'thickness_remarks',//input field label
+			label:'THICKNESS REMARKS',//input field label
 			name:'thickness_remarks',//column name
 			value:'',//default value
 			show:true,
@@ -274,7 +206,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'hardness_unit_org',//input field label
+			label:'HARDNESS UNIT',//input field label
 			name:'hardness_unit_org',//column name
 			value:'',//default value
 			show:true,
@@ -282,7 +214,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'hardness_min_spec_org',//input field label
+			label:'HARDNESS MIN SPEC',//input field label
 			name:'hardness_min_spec_org',//column name
 			value:'',//default value
 			show:true,
@@ -290,7 +222,7 @@ users:[
     rule:'' 
 		},
 		{
-			label:'hardness_max_spec_org',//input field label
+			label:'HARDNEWSS MAX SPEC',//input field label
 			name:'hardness_max_spec_org',//column name
 			value:'',//default value
 			show:true,
@@ -298,41 +230,41 @@ users:[
     rule:'' 
 		},
 		{
-			label:'hardness_sup_one',//input field label
+			label:'HARDNESS SUP ONE',//input field label
 			name:'hardness_sup_one',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'hardness_sup_two',//input field label
+			label:'HARDNEWSS SUP TWO',//input field label
 			name:'hardness_sup_two',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		},
 		{
-			label:'hardness_ielpl_one',//input field label
+			label:'HARDNESS IELPL ONE',//input field label
 			name:'hardness_ielpl_one',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		}
 		,
 		{
-			label:'hardness_ielpl_two',//input field label
+			label:'HARNDESS IELPL TWO',//input field label
 			name:'hardness_ielpl_two',//column name
 			value:'',//default value
 			show:true,
-			headerMap:'',  validation:false,
+			headerMap:'',  validation:true,
     rule:'' 
 		}
 		,
 		{
-			label:'hardness_remarks',//input field label
+			label:'HARDNESS REMARKS',//input field label
 			name:'hardness_remarks',//column name
 			value:'',//default value
 			show:true,
@@ -341,7 +273,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_unit_org',//input field label
+			label:'ELOGATION UNIT',//input field label
 			name:'elongation_unit_org',//column name
 			value:'',//default value
 			show:true,
@@ -350,7 +282,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_min_spec_org',//input field label
+			label:'ELONGATION MIN SPEC',//input field label
 			name:'elongation_min_spec_org',//column name
 			value:'',//default value
 			show:true,
@@ -359,7 +291,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_max_spec_org',//input field label
+			label:'ELONGATION MAX SPEC',//input field label
 			name:'elongation_max_spec_org',//column name
 			value:'',//default value
 			show:true,
@@ -368,7 +300,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_sup_one',//input field label
+			label:'ELONGATION SUP ONE',//input field label
 			name:'elongation_sup_one',//column name
 			value:'',//default value
 			show:true,
@@ -377,7 +309,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_sup_two',//input field label
+			label:'ELONGTATION SUP TWO',//input field label
 			name:'elongation_sup_two',//column name
 			value:'',//default value
 			show:true,
@@ -386,7 +318,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_ielpl_one',//input field label
+			label:'ELONGATION IELPL ONE',//input field label
 			name:'elongation_ielpl_one',//column name
 			value:'',//default value
 			show:true,
@@ -395,7 +327,7 @@ users:[
 		}
 		,
 		{
-			label:'elongation_ielpl_two',//input field label
+			label:'ELONGATION IELPL TWO',//input field label
 			name:'elongation_ielpl_two',//column name
 			value:'',//default value
 			show:true,
@@ -403,9 +335,6 @@ users:[
     rule:'' 
 		}
 	],
-
-interplex:{
-	currentBranch:'',
     branches:[
 		{
 		name:'Chennai',

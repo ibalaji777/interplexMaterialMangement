@@ -12,7 +12,7 @@ import userRole from '../views/userRole.vue'
 import operatorDashboard from '../views/operatorDashboard.vue'
 import operatorInsert from '../views/operatorInsert.vue'
 import operatorList from '../views/operatorList.vue'
-
+import operatorQsReport from '../views/operatorQsReport.vue'
 import verifierDashboard from '../views/verifierDashboard.vue'
 import verifierList from '../views/verifierList.vue'
 import verifierView from '../views/verifierView.vue'
@@ -140,6 +140,14 @@ const routes = [
 		name: 'operatorDashboard',
 		component:operatorDashboard 
 	},
+
+	,
+	{
+		path: '/operatorQsReport',
+		name: 'operatorQsReport',
+		component:operatorQsReport 
+	},
+
 	{
 		path: '/operatorInsert',
 		name: 'operatorInsert',

@@ -7,7 +7,7 @@
    
    color="#ff0000"
   >
-   <v-app-bar-nav-icon v-if="['adminDashobard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
+   <v-app-bar-nav-icon v-if="['index','adminDashobard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
    </v-app-bar-nav-icon>
    <v-icon v-else @click="$router.go(-1)">fa-chevron-left</v-icon>
 

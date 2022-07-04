@@ -15,6 +15,28 @@ return Object.keys(groups).map(function (group) {
 }
 
 
+export function onlyNumbers(str) {
+  return /^[0-9.,]+$/.test(str);
+}
+
+export function observation($vm){
+
+
+//dummy herey you want select product from from party no or grn no like that
+  return { 
+    
+    productFormat:_.cloneDeep($vm.$store.state.interplex.productsFormat),
+    scope:_.reduce(_.cloneDeep($vm.$store.state.interplex.productsFormat),(result,value,key)=>{
+// console.log("value")
+// console.log(value)
+// console.log("key",key)
+      result[value.name]=onlyNumbers(value.value)?parseFloat(value.value):0;
+      return result;
+    },{})
+
+  }
+}
+
 export function headerFileGroup(array){
 
 

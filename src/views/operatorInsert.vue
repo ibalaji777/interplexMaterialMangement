@@ -12,15 +12,15 @@
 
 <div class="productContainer">
 
-<div class="productItems">
+<div @click="$router.push({name:'operatorQsReport'})" class="productItems">
+Items
+</div>
+<!-- <div class="productItems">
 Items
 </div>
 <div class="productItems">
 Items
-</div>
-<div class="productItems">
-Items
-</div>
+</div> -->
 </div>
 <div class="otherContainer">
 <div class="insertProduct" style="position:relative" @click="galleryDialog=true">
