@@ -9,57 +9,83 @@ const state = {
 report:{
 branches:[
 	{
-		title:'Branch',
-		value:'branch'
+		text:'Branch',
+		value:'name'
 
 	},
 	{
-		title:'Description',
+		text:'Description',
 		value:'description'
+
+	},
+	{
+		text:'Action',
+		value:'action'
 
 	}
 ],
 users:[
 	{
-		title:'Name',
+		text:'Name',
 		value:'name'
+		,
+		class:'interplexHeader'
 
 	},
 	{
-		title:'Branch',
+		text:'Branch',
 		value:'branch'
+		,
+		class:'interplexHeader'
 
 	},
 	{
-		title:'Role',
-		value:'roleType'
+		text:'Role',
+		value:'roletype'
+		,
+		class:'interplexHeader'
 
 	},
 	{
-		title:'Username',
+		text:'Username',
 		value:'username'
+		,
+		class:'interplexHeader'
 
 	},
 	{
-		title:'Password',
-		value:'password'
+		text:'Password',
+		value:'password',
+		class:'interplexHeader'
 
 	},
 	{
-		title:'E-mail',
-		value:'email'
+		text:'E-mail',
+		value:'email',
+		class:'interplexHeader'
 
 	}
 	,
 	{
-		title:'Phone',
+		text:'Phone',
 		value:'phone'
+		,
+		class:'interplexHeader'
 
 	}
 	,
 	{
-		title:'Address',
+		text:'Address',
 		value:'address'
+		,
+		class:'interplexHeader'
+
+	},
+	{
+		text:'Action',
+		value:'action'
+		,
+		class:'interplexHeader'
 
 	}
 ]
@@ -74,7 +100,7 @@ users:[
 
 interplex:{
 	currentBranch:'',
-	productsFormat:[
+	configProductsFormat:[
 
 		{
 			label:'WIDTH UNIT',//input field label
@@ -335,22 +361,7 @@ interplex:{
     rule:'' 
 		}
 	],
-    branches:[
-		{
-		name:'Chennai',
-		description:'',
-
-	},
-	{
-		name:'Bangalore',
-		description:'',
-
-	}
-],
-	products:[],
-	users:[],
-	qualityAssurance:[],
-	qualityAssuranceHeaderFormat:[
+	configHeaderFormat:[
 
 		{
 			label:'product_name',//input field label
@@ -410,7 +421,15 @@ interplex:{
 
 
 	],
-
+    masterBranches:[
+],
+	masterProducts:[],
+	masterUsers:[],
+	masterUploadTypes:[],
+	masterHeaderTypes:[],
+	qualityAssuranceFormOne:[],
+	qualityAssuranceFormTwo:[],
+	
 
 }
 

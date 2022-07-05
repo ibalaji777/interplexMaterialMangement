@@ -21,7 +21,7 @@
 
       <div @click="headerFileDialog=true" class="insertProduct" style="margin-top:10px;height:100px;width:33.33%">
            <div style="text-align:center">
-            {{$store.state.interplex.products.length}}<br>
+            {{masterProductsTotal}}<br>
 Total Products 
             </div>
 
@@ -33,15 +33,15 @@ Total Products
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
            <div style="text-align:center">
-            {{approvalStatus.approved}}<br>
+            {{approverStatus.approved}}<br>
 
             Approved
-            </div>
+            </div> 
 
 </div>
    <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: darksalmon;">
            <div style="text-align:center">
-            {{approvalStatus.acceptedOnDeviation}}<br>
+            {{approverStatus.acceptedOnDeviation}}<br>
 
             Accepted on Deviation
             </div>
@@ -51,14 +51,14 @@ Total Products
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
-            {{approvalStatus.rejected}}<br>
+            {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
    <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
-            {{approvalStatus.ppap}}<br>
+            {{approverStatus.ppap}}<br>
             PPAP
             </div>
 
@@ -67,23 +67,23 @@ Total Products
 
 <h3 style="margin-top:10px">Users</h3>
     <div style="display:flex;margin-top:10px">
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
+        <div  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
         {{users.admin}}<br>
         Admin    
             </div>
 
 </div>
-      <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
+      <div  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
  {{users.operator}}<br>
         Operator                </div>
 
 </div>
-   <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
+   <div  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
- {{users.approval}}<br>
-            Approval 
+ {{users.approver}}<br>
+            approver 
             </div>
 
 </div>
@@ -173,8 +173,10 @@ Total Products
   </div>
 </template>
 <script>
-import _ from 'lodash'
 /*eslint-disable*/
+
+import _ from 'lodash'
+import * as core from '../lib/core.js'
 export default {
   data(){
     return {
@@ -190,28 +192,18 @@ export default {
     }
   },
   computed:{
-
+masterProductsTotal(){
+return core.database(this,'getMasterProductsTotal')
+},
 users(){
 var $vm=this;
-return {
-admin:_.filter($vm.$store.state.interplex.users,(x)=>x.roletype=='admin').length,
-operator:_.filter($vm.$store.state.interplex.users,(x)=>x.roletype=='operator').length,
-approval:_.filter($vm.$store.state.interplex.users,(x)=>x.roletype=='approval').length,
-}
-
+return core.database(this,'getUsersTotal')
 },
-approvalStatus(){
+approverStatus(){
 var $vm=this;
-return {
-approved:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='approved').length,
-acceptedOnDeviation:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='acceptedOnDeviation').length,
-rejected:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='rejected').length,
-ppap:_.filter($vm.$store.state.interplex.users,(x)=>x.approval_status=='ppap').length,
-}
-
+return core.database(this,'getQasFormOne')
 },
 
-	
 
   },
   methods:{

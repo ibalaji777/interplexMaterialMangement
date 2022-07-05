@@ -2,6 +2,153 @@
 import _ from 'lodash'
 
 
+export function database($vm,action,payload={}){
+
+  var prepareData={
+    action,
+    data:payload
+  }
+console.log(prepareData)
+// *********************insert****************************
+if(action=='insertMasterProduct')
+{
+$vm.$store.commit('database',prepareData)
+}
+if(action=='insertMasterBranches')
+{
+$vm.$store.commit('database',prepareData)
+} 
+
+if(action=='insertMasterUsers')
+{
+$vm.$store.commit('database',prepareData)
+}
+if(action=='insertUploadTypes')
+{
+$vm.$store.commit('database',prepareData)
+}
+
+if(action=='insertHeaderTypes')
+{
+$vm.$store.commit('database',prepareData)
+}
+// *********************Get****************************
+
+if(action=='getMasterProductsTotal')
+{
+
+  return $vm.$store.state.interplex.masterProducts.length
+
+}
+
+
+if(action=='getUsersTotal')
+{
+
+  return {
+    admin:_.filter($vm.$store.state.interplex.masterUsers,(x)=>x.roletype=='admin').length,
+    operator:_.filter($vm.$store.state.interplex.masterUsers,(x)=>x.roletype=='operator').length,
+    approver :_.filter($vm.$store.state.interplex.masterUsers,(x)=>x.roletype=='approver').length,
+    }
+
+}
+
+if(action=='getQasFormOne')
+{
+
+  return {
+    approved:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='approved').length,
+    acceptedOnDeviation:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='acceptedOnDeviation').length,
+    rejected:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='rejected').length,
+    ppap:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='ppap').length,
+    }
+
+}
+if(action=='getBranchesList')
+{
+console.log($vm.$store.state.interplex.masterBranches)
+  return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='getUsersList')
+{
+console.log($vm.$store.state.interplex.masterUsers)
+  return $vm.$store.state.interplex.masterUsers;
+
+}
+
+
+
+//*********************delete**********************
+if(action=='deleteMasterProduct')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+
+if(action=='deleteMasterBranch')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='deleteMasterUser')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='deleteUploadType')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='insertHeaderTypes')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+
+
+//*********************update**********************
+if(action=='updateMasterProduct')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+
+if(action=='updateMasterBranch')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='updateMasterUser')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='updateUploadType')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+if(action=='insertHeaderTypes')
+{
+console.log(payload.data)
+// return $vm.$store.state.interplex.masterBranches;
+
+}
+
+}
+
+
 function  groupBy(array, f) {
   let groups = {};
   array.forEach(function (o) {

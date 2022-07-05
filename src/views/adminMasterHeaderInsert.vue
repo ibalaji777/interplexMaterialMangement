@@ -432,7 +432,7 @@ data(){
     show:false,
     headerMap:'',//map name from header file put into,
 },
-productsFormat:_.cloneDeep(this.$store.state.interplex.qualityAssuranceHeaderFormat),
+productsFormat:_.cloneDeep(this.$store.state.interplex.configHeaderFormat),
         productSettingDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field

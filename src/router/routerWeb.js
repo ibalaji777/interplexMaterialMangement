@@ -24,7 +24,7 @@ import adminDashboardView from '../views/adminDashboardView.vue'
 import adminQualityAssuranceHeader from '../views/adminMasterHeaderInsert.vue'
 import adminDashboardOtherConfig from '../views/adminDashboardOtherConfig.vue'
 import adminCreateUser from '../views/adminCreateUser.vue'
-import adminCreateBranch from '../views/adminCreateBranches.vue' 
+import adminCreateBranch from '../views/adminCreateBranch.vue' 
 import adminCreateFileType from '../views/adminCreateFileTypes.vue' 
 
 

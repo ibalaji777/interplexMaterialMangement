@@ -8,28 +8,30 @@
         </div>
 <h3 style="margin:10px 0">Product Format & Quality assurance Setting</h3>
 <div>
+<span >Supplier Name</span>
+<input class="interInput" v-model="insertForm.supplier_name" type="text" placeholder="Supplier Name" >
+</div>
+
+
+<div>
 <span >Product Name</span>
 <input class="interInput" v-model="insertForm.product_name" type="text" placeholder="Product Name" >
 </div>
 <div>
-<span >Part NO</span>
-<input class="interInput" v-model="insertForm.part_num" type="text" placeholder="Part No" >
+<span >RM Code (Part NO)</span>
+<input class="interInput" v-model="insertForm.rmcode" type="text" placeholder="Rm code (Part No)" >
 </div>
-<div>
+<!-- <div>
 <span >Batch</span>
-<input class="interInput" v-model="insertForm.batch" type="text" placeholder="batch" >
+<input class="interInput" v-model="insertForm.eds" type="text" placeholder="batch" >
+</div> -->
+<div>
+<span >EDS</span>
+<input class="interInput" v-model="insertForm.eds" type="text" placeholder="EDS " >
 </div>
 <div>
-<span >SAP New </span>
-<input class="interInput" v-model="insertForm.sap_num_new" type="text" placeholder="SAP NEW " >
-</div>
-<div>
-<span >SAP OLD </span>
-<input class="interInput" v-model="insertForm.sap_num_old" type="text" placeholder="SAP OLD" >
-</div>
-<div>
-<span >GRN NO </span>
-<input class="interInput" v-model="insertForm.grn_num" type="text" placeholder="GRN NO" >
+<span >RM </span>
+<input class="interInput" v-model="insertForm.rm" type="text" placeholder="RM" >
 </div>
 <div>
 <span >SKIP LEVEL</span>
@@ -37,8 +39,54 @@
 </div>
 <div>
 <span >Form Format</span>
-<input class="interInput" v-model="insertForm.form_format" type="text" placeholder="Product Name" >
+<input class="interInput" v-model="insertForm.form_format" type="text" placeholder="Form Format" >
 </div>
+<div>
+<span >Due Date</span>
+<!-- put date field here -->
+<!-- <input class="interInput" v-model="insertForm.duedate" type="text" placeholder="Due Date" > -->
+
+ <v-dialog
+        ref="dialog"
+        v-model="modal"
+        :return-value.sync="insertForm.duedate"
+        persistent
+        width="290px"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-text-field
+            v-model="insertForm.duedate"
+            label="Picker in dialog"
+            prepend-icon="mdi-calendar"
+            readonly
+            v-bind="attrs"
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker
+          v-model="insertForm.duedate"
+          scrollable
+        >
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="primary"
+            @click="modal = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            text
+            color="primary"
+            @click="$refs.dialog.save(insertForm.duedate)"
+          >
+            OK
+          </v-btn>
+        </v-date-picker>
+      </v-dialog>
+</div>
+
+
 <div v-for="(productFormat , index) in productsFormat" :key="'product'+index">
 
 <div style="display:flex">
@@ -233,7 +281,7 @@
 </div> -->
 <div style="display:flex;justify-content:flex-end">
 
-<v-btn outlined style="margin-top:10px;">Dialog</v-btn>
+<v-btn outlined @click="save" style="margin-top:10px;">Create Product</v-btn>
 </div>
 
 
@@ -327,6 +375,9 @@
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
+<div style="display:flex;justify-content:flex-end;padding:5px;">
+<v-icon @click="validationHelpDialog=true">fa-question-circle</v-icon>
+</div>
 
 <!-- <v-textfield></v-textfield> -->
 
@@ -568,6 +619,7 @@ Rules For Validation<br>
 </template>
 <script>
 /*eslint-disable*/
+import moment from 'moment'
 var create_field={
     label:'',//input field label
     name:'',//column name
@@ -575,13 +627,15 @@ var create_field={
     show:false,
     headerMap:'',//map name from header file put into,
     validation:false,
-    rule:''
+    rule:'',
+    
 }
 
 export default {
 
 data(){
     return{
+        modal:false,
         createFieldSettingDialog:false,
         createField:{
     label:'',//input field label
@@ -592,18 +646,34 @@ data(){
     validation:false,
     rule:''
 },
-                    productsFormat:_.cloneDeep(this.$store.state.interplex.productsFormat),
+                    productsFormat:_.cloneDeep(this.$store.state.interplex.configProductsFormat),
 validationHelpDialog:false,
         productSettingDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field
         ,
         insertForm:{
-            
-        }
+product_name:'',
+supplier_name:'',
+rmcode:'',
+eds:'',
+rm:'',
+form_format:'',
+comment:'',
+skiplevel:0,
+duedate:moment().format("YYYY-MM-DD")   
+        }   
     }
 },
 methods:{
+
+    save(){
+        var $vm=this;
+        var prepareData=$vm.insertForm;
+        prepareData['observation_format']=$vm.productsFormat;
+        
+        console.log(prepareData)
+    },
     selectFieldSettingfn(item){
 this.selectedFieldSetting=item
 this.productFieldSettingDialog=true;
@@ -616,8 +686,8 @@ this.productFieldSettingDialog=true;
     },
 createProductField(){
 
-    // this.$store.commit('addProductsFormat',create_field)
-    this.productsFormat(this.createField)
+    this.$store.commit('addProductsFormat',this.createField)
+    this.productsFormat.push(this.createField)
 }
 
 },
