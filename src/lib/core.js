@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import _ from 'lodash'
-
+import moment from 'moment'
 
 export function database($vm,action,payload={}){
 
@@ -32,6 +32,18 @@ if(action=='insertHeaderTypes')
 {
 $vm.$store.commit('database',prepareData)
 }
+// *******************config****************************
+if(action=='saveHeaderConfig')
+{
+$vm.$store.commit('database',prepareData)
+}
+if(action=='saveProductConfig')
+{
+$vm.$store.commit('database',prepareData)
+}
+
+
+
 // *********************Get****************************
 
 if(action=='getMasterProductsTotal')
@@ -70,6 +82,12 @@ console.log($vm.$store.state.interplex.masterBranches)
   return $vm.$store.state.interplex.masterBranches;
 
 }
+if(action=='getMaseterProductList')
+{
+console.log($vm.$store.state.interplex.masterProducts)
+  return $vm.$store.state.interplex.masterProducts;
+
+}
 if(action=='getUsersList')
 {
 console.log($vm.$store.state.interplex.masterUsers)
@@ -77,6 +95,11 @@ console.log($vm.$store.state.interplex.masterUsers)
 
 }
 
+if(action=='getFileTypeList')
+{
+  return $vm.$store.state.interplex.masterUploadTypes;
+
+}
 
 
 //*********************delete**********************
@@ -222,3 +245,41 @@ return _.map(groupBy(array, function (item) {
   ...x[0]
 }));
 }
+
+export function choose_date_type(action){
+  var from_date=moment().format("YYYY-MM-DD"),to_date=moment().format("YYYY-MM-DD");
+      if(action=='today'){
+      from_date=moment().format("YYYY-MM-DD");
+      to_date=moment().format("YYYY-MM-DD");
+      }
+      
+      if(action=='yesterday'){
+      from_date=moment().subtract(1, 'days').format("YYYY-MM-DD");
+      to_date=moment().subtract(1, 'days').format("YYYY-MM-DD");
+      }
+      
+      if(action=='last_7_days'){
+      from_date=moment().subtract(6, 'days').format("YYYY-MM-DD");
+      to_date=moment().format("YYYY-MM-DD");
+      }
+      
+      if(action=='last_30_days'){
+      from_date=moment().subtract(29, 'days').format("YYYY-MM-DD");
+      to_date=moment().format("YYYY-MM-DD");
+      }
+      
+      if(action=='this_month'){
+      from_date=moment().startOf('month').format("YYYY-MM-DD");
+      to_date=moment().endOf('month').format("YYYY-MM-DD");
+      }
+      if(action=='last_month'){
+      from_date=moment().subtract(1, 'month').startOf('month').format("YYYY-MM-DD");
+      to_date=moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD");
+      }
+  
+      return {
+          from_date,
+          to_date
+      }
+  }
+  

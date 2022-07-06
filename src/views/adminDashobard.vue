@@ -5,7 +5,7 @@
 
 
                 <div @click="addDialog=true" class="insertProduct" style="margin-right:10px">
-<v-icon>fa-user-plus</v-icon>
+<v-icon>fa-plus</v-icon>
 </div>
 
         <!-- <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px">
@@ -29,7 +29,7 @@ Total Products
 
 
 <h3 style="margin-top:10px">Status</h3>
-<h5 style="text-align:right">Today</h5>
+<h5 style="text-align:right"><date @date="selected_date"></date></h5>
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
            <div style="text-align:center">
@@ -210,6 +210,11 @@ return core.database(this,'getQasFormOne')
     addProduct(){
         var $vm=this;
 $vm.productInsertDialog=true
+    },
+    selected_date(date){
+console.log(date.from_date)
+console.log(date.to_date)
+
     }
   }
 }

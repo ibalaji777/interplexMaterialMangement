@@ -28,7 +28,15 @@ if(payload.action=='insertHeaderTypes')
 
 }
 
-
+// *******************config****************************
+if(payload.action=='saveHeaderConfig')
+{
+	state.interplex.configHeaderFormat=payload.data
+}
+if(payload.action=='saveProductConfig')
+{
+	state.interplex.configProductsFormat=payload.data
+}
 
 
 

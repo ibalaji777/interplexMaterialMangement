@@ -87,7 +87,7 @@
 </div>
 
 
-<div v-for="(productFormat , index) in productsFormat" :key="'product'+index">
+<div v-for="(productFormat , index) in insertForm.observation_format" :key="'product'+index">
 
 <div style="display:flex">
 <span style="width:40%">{{productFormat.label}}</span>
@@ -279,9 +279,10 @@
 </div>
 </span>
 </div> -->
-<div style="display:flex;justify-content:flex-end">
-
-<v-btn outlined @click="save" style="margin-top:10px;">Create Product</v-btn>
+<div style="display:flex;justify-content:flex-end;margin-top:25px">
+<v-btn outlined @click="clear" style=";margin-right:10px;">Reset</v-btn>
+<v-btn v-if="!isStateForUpdate" outlined @click="save" style="">Save</v-btn>
+<v-btn v-else  @click="update" outlined>Update</v-btn>
 </div>
 
 
@@ -567,20 +568,23 @@ Rules For Validation<br>
               dark
               text
               @click="saveProductsFormat"
+              
             >
               SAVE
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
         <v-divider></v-divider>
-       <div style="padding:10px">
-        
-
-<div style="padding:10px">
+        <div style="padding:10px">
 <v-btn outlined @click="createFieldSettingDialog=true">Create Field</v-btn>
 </div>
+
+       <div style="padding:10px;height: 85vh;
+    overflow: scroll;">
+        
+
                                        <draggable
-                                            :list="productsFormat"
+                                            :list="insertForm.observation_format"
                                              handle=".handle"
                                             style="
                      margin-top:10px "
@@ -591,13 +595,13 @@ Rules For Validation<br>
                                         >
                                               <div
                                             style="display:flex;"
-                                                v-for="(productFormat, index) in productsFormat"
+                                                v-for="(productFormat, index) in insertForm.observation_format"
                                                 :key="'product' + index"
                                             >
        <v-icon style="margin:0 5px" class="handle">fa-arrows-alt</v-icon>
     <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
 <input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
-        <v-icon @click="productsFormat.splice(index,1)" style="margin:0 5px">fa-times</v-icon>
+        <v-icon @click="removeConfig(productFormat,index)" style="margin:0 5px">fa-times</v-icon>
  
                                             </div>
                                         </draggable>
@@ -619,6 +623,8 @@ Rules For Validation<br>
 </template>
 <script>
 /*eslint-disable*/
+import  * as core from '../lib/core.js'
+
 import moment from 'moment'
 var create_field={
     label:'',//input field label
@@ -628,13 +634,13 @@ var create_field={
     headerMap:'',//map name from header file put into,
     validation:false,
     rule:'',
+    default:false,
+note:'' 
     
 }
-
-export default {
-
-data(){
-    return{
+function intialState($vm){
+    return {
+                isStateForUpdate:false,
         modal:false,
         createFieldSettingDialog:false,
         createField:{
@@ -644,9 +650,11 @@ data(){
     show:false,
     headerMap:'',//map name from header file put into,
     validation:false,
-    rule:''
+    rule:'',
+    default:false,
+note:'' 
 },
-                    productsFormat:_.cloneDeep(this.$store.state.interplex.configProductsFormat),
+                    // productsFormat:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),
 validationHelpDialog:false,
         productSettingDialog:false,
         productFieldSettingDialog:false,
@@ -661,18 +669,77 @@ rm:'',
 form_format:'',
 comment:'',
 skiplevel:0,
+observation_format:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),
 duedate:moment().format("YYYY-MM-DD")   
         }   
-    }
-},
-methods:{
 
+    }
+}
+
+export default {
+
+data(){
+return intialState(this)
+},
+        mounted(){
+        var $vm=this;
+// isStateForUpdate:false,
+
+var params=this.$route.params;
+if(Object.prototype.hasOwnProperty.call(params, 'item')){
+    console.log("check ")
+    console.log(params.item)
+$vm.isStateForUpdate=true,
+    // $vm.$set($vm,'insertForm',params.item)
+    $vm.insertForm=Object.assign($vm.insertForm,params.item)
+    // $vm.$set($vm,'productsFormat',params.item.observation_format)
+    // $vm.insertForm.observation_format=params.item.observation_format
+
+
+}
+    },
+methods:{
+    removeConfig(item,index){
+        if(item.default){
+
+$vm.$alert("Cannot Delete Default Field",'Error','error')
+
+            return;
+        }
+this.insertForm.observation_format.splice(index,1)
+    },
+clear(){
+
+var $vm=this;
+$vm.$confirm("Do you want to reset ?",'warning','warning')
+.then(()=>{
+$vm.insertForm=intialState($vm).insertForm
+
+})
+
+},
     save(){
         var $vm=this;
-        var prepareData=$vm.insertForm;
-        prepareData['observation_format']=$vm.productsFormat;
+var prepareData=_.cloneDeep($vm.insertForm);
+// prepareData['observation_format']=$vm.productsFormat;
+
+if(prepareData.rmcode=='')
+{
+$vm.$alert("Part No Must Be Filled",'Error','error')
+return;
+}
+
+core.database(this,'insertMasterProduct',prepareData)
+   $vm.$alert("Successfully Created")
+$vm.insertForm=intialState($vm).insertForm
+
         
         console.log(prepareData)
+    },
+    update(){
+        var $vm=this;
+        core.database(this,'updateMasterProduct',this.insertForm)
+    $vm.$alert("Successfully Updated")
     },
     selectFieldSettingfn(item){
 this.selectedFieldSetting=item
@@ -680,14 +747,15 @@ this.productFieldSettingDialog=true;
     },
     saveProductsFormat(){
         var $vm=this;
-        $vm.$alert('Saved','success','success')
-        this.$store.commit("updateProductsFormat",this.productsFormat)
-
+        // $vm.$alert('Saved','success','success')
+        // this.$store.commit("updateProductsFormat",this.insertForm.observation_format)
+  core.database(this,'saveProductConfig',this.insertForm.observation_format)
+    $vm.$alert("Successfully Updated")
     },
 createProductField(){
 
     this.$store.commit('addProductsFormat',this.createField)
-    this.productsFormat.push(this.createField)
+    this.insertForm.observation_format.push(this.createField)
 }
 
 },

@@ -87,7 +87,7 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 
 //json editor----------------------------
 import VJsoneditor from 'v-jsoneditor'
-
+import date from './views/date.vue'
 Vue.use(VJsoneditor)
 
 Vue.use(VueQuillEditor, /* { default global options } */)
@@ -99,6 +99,7 @@ import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
 Vue.component('appWeb', appWeb);
 Vue.component('navbarWeb', navbarWeb);
+Vue.component('date', date);
 new Vue({
 	router:webRouter,
 	store: vuexstore,

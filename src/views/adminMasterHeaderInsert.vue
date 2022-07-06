@@ -1,7 +1,7 @@
 <template>
     <div>
         <div style="display:flex;justify-content:flex-end">
-                        <v-btn @click="productSettingDialog=true" outlined>
+                        <v-btn @click="configDialog=true" outlined>
                 config
             </v-btn>
 
@@ -9,32 +9,11 @@
 <h3 style="margin:10px 0">Header Config</h3>
 
 
-<div>
-<span >Part NO</span>
-<input class="interInput" v-model="insertForm.part_num" type="text" placeholder="Part No" >
-</div>
-<div>
-<span >Batch</span>
-<input class="interInput" v-model="insertForm.batch" type="text" placeholder="batch" >
-</div>
-<div>
-<span >SAP New </span>
-<input class="interInput" v-model="insertForm.sap_num_new" type="text" placeholder="SAP NEW " >
-</div>
-<div>
-<span >SAP OLD </span>
-<input class="interInput" v-model="insertForm.sap_num_old" type="text" placeholder="SAP OLD" >
-</div>
-<div>
-<span >GRN NO </span>
-<input class="interInput" v-model="insertForm.grn_num" type="text" placeholder="GRN NO" >
-</div>
-<div>
-<span >SKIP LEVEL</span>
-<input class="interInput" v-model="insertForm.skiplevel" type="text" placeholder="skiplevel" >
-</div>
 
-<div v-for="(productFormat , index) in productsFormat" :key="'product'+index">
+
+
+
+<div v-for="(productFormat , index) in configFormat" :key="'product'+index">
 
 <div style="display:flex">
 <span style="width:40%">{{productFormat.label}}</span>
@@ -45,190 +24,10 @@
 </div>
 
 
-<!-- <div style="display:flex;align-items:center">
-<span >
-<span >Width:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.width_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.width_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.width_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >thickness:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.thickness_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.thickness_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.thickness_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >hardness:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.hardness_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.hardness_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.hardness_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >elongation:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.elongation_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.elongation_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.elongation_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >tenstilstr:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.tenstilstr_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.tenstilstr_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.tenstilstr_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >yieldstr:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.yieldstr_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.yieldstr_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.yieldstr_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >cu:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.cu_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.cu_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.cu_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >pb:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.pb_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.pb_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.pb_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >bi:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.bi_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.bi_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.bi_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >o:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.o_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.o_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.o_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >others:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.others_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.others_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.others_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >slittingburr:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.slittingburr_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.slittingburr_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.slittingburr_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >twist:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.twist_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.twist_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.twist_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >camber:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.camber_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.camber_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.camber_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
 
-<div style="display:flex;align-items:center">
-<span >
-<span >surfacefinish:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.surfacefinish_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.surfacefinish_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.surfacefinish_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >thermalconduct:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.thermalconduct_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.thermalconduct_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.thermalconduct_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >density:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.density_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.density_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.density_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >coilweight:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.coilweight_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.coilweight_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.coilweight_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div> -->
 <div style="display:flex;justify-content:flex-end">
 
-<v-btn outlined style="margin-top:10px;">Dialog</v-btn>
+<v-btn @click="save" outlined style="margin-top:10px;">Save</v-btn>
 </div>
 
 
@@ -253,15 +52,21 @@
         <v-divider></v-divider>
        <div style="padding:10px">
 
-<input  class="interInput" v-model="createField.label" type="text" placeholder="Label" >
-<input  class="interInput" v-model="createField.name" type="text" placeholder="Name" >
-
+<input  class="interInput" v-model="createField.label" type="text" placeholder="Label(*)" >
+<input  class="interInput" v-model="createField.name" type="text" placeholder="Name(*)" >
 <v-checkbox
       v-model="createField.show"
       :label="'Show (Quality assurance)'"
     ></v-checkbox>
 
-<input  class="interInput" v-model="createField.headerMap" type="text" placeholder="Header File Map" >
+<select v-model="createField.mapFrom" class="interInput" >
+<option  v-for="(item,index) in mapTypes" :key="''+index" :value="item">{{item}}</option>
+
+</select>
+
+
+
+<input  class="interInput" v-model="createField.headerMap" type="text" placeholder="Map" >
 
 <br>
 
@@ -271,7 +76,7 @@
 <v-btn outlined @click="createProductField">Add</v-btn>
 </div>
 
-<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
+<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.configFormat" :key="index+'index'">
     <div style="display:flex">
         <v-icon>fa-arrows</v-icon>
     <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
@@ -312,29 +117,33 @@
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-
-<!-- <v-textfield></v-textfield> -->
-
+        <div style="background: black;
+    color: white;
+    padding: 10px;
+    border-radius: 9px;">
+      <b> Name :{{selectedFieldSetting.name}}</b><br>
+      <b v-if="selectedFieldSetting.default">Field is Default</b> 
+      <b v-else>Not a Default Field</b> 
+</div>
 <v-checkbox
       v-model="selectedFieldSetting.show"
-      :label="'Show (Quality assurance)'"
+      :label="'Show (In Quality assurance Form)'"
     ></v-checkbox>
+<select v-model="selectedFieldSetting.mapFrom" class="interInput" >
+<option  v-for="(item,index) in mapTypes" :key="''+index" :value="item">{{item}}</option>
 
-<input  class="interInput" v-model="selectedFieldSetting.headerMap" type="text" placeholder="Header File Map" >
+</select>
+<input  class="interInput" v-model="selectedFieldSetting.map" type="text" placeholder="Map" >
+<br>
 
-<br>
-<v-checkbox
-      v-model="selectedFieldSetting.validation"
-      :label="'Validation'"
-    ></v-checkbox>
-<br>
-<v-textarea label="Rules(Must Follow Documentation)" v-if="selectedFieldSetting.validation" outlined v-model="selectedFieldSetting.rule"></v-textarea>
+<div style="font-size:18px;color:red;margin-top:10px">
+    Note:</div><b> {{selectedFieldSetting.note}}</b>
 
 <!-- <input v-if="selectedFieldSetting.validation"  class="interInput" v-model="selectedFieldSetting.rule" type="text" placeholder="Rule" > -->
 
 
 
-<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
+<!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.configFormat" :key="index+'index'">
     <div style="display:flex">
         <v-icon>fa-arrows</v-icon>
     <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
@@ -351,8 +160,10 @@
 
 
    <v-dialog
-      v-model="productSettingDialog"
+      v-model="configDialog"
       fullscreen
+      persistent
+
       hide-overlay
       transition="dialog-bottom-transition"
     >
@@ -361,7 +172,7 @@
           dark
           :color="$store.state.bgColor"
         >
-          <v-toolbar-title><v-icon @click="productSettingDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-toolbar-title><v-icon @click="configDialog = false">fa-times</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -381,7 +192,7 @@
 <v-btn outlined @click="createFieldSettingDialog=true">Create Field</v-btn>
 </div>
                                        <draggable
-                                            :list="productsFormat"
+                                            :list="configFormat"
                                              handle=".handle"
                                             style="
                      margin-top:10px "
@@ -392,13 +203,13 @@
                                         >
                                               <div
                                             style="display:flex;"
-                                                v-for="(productFormat, index) in productsFormat"
+                                                v-for="(productFormat, index) in configFormat"
                                                 :key="'product' + index"
                                             >
        <v-icon style="margin:0 5px" class="handle">fa-arrows-alt</v-icon>
     <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
 <input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
-        <v-icon @click="productsFormat.splice(index,1)" style="margin:0 5px">fa-times</v-icon>
+        <v-icon @click="removeConfig(productFormat,index)" style="margin:0 5px">fa-times</v-icon>
  
                                             </div>
                                         </draggable>
@@ -411,29 +222,38 @@
     </div>
 </template>
 <script>
+import * as core from '../lib/core.js'
 /*eslint-disable*/
 var create_field={
-    label:'',//input field label
-    name:'',//column name
-    value:'',//default value
-    show:false,
-    headerMap:'',//map name from header file put into,
+			label:'',//input field label
+			name:'',//column name
+			value:'',//default value
+			show:false,
+			map:'',
+			mapFrom:'header',//header or product
+			default:false,
+			note:'',
+
 }
 
 export default {
 
 data(){
     return{
+       mapTypes:['header','product'],
         createFieldSettingDialog:false,
         createField:{
-    label:'',//input field label
-    name:'',//column name
-    value:'',//default value
-    show:false,
-    headerMap:'',//map name from header file put into,
+			label:'',//input field label
+			name:'',//column name
+			value:'',//default value
+			show:false,
+			map:'',
+			mapFrom:'header',//header or product
+            default:false,
+			note:'',
 },
-productsFormat:_.cloneDeep(this.$store.state.interplex.configHeaderFormat),
-        productSettingDialog:false,
+configFormat:_.cloneDeep(this.$store.state.interplex.configHeaderFormat),
+        configDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field
         ,
@@ -443,6 +263,20 @@ productsFormat:_.cloneDeep(this.$store.state.interplex.configHeaderFormat),
     }
 },
 methods:{
+    save(){
+        var $vm=this;
+        core.database(this,'saveHeaderConfig',this.configFormat)
+    $vm.$alert("Successfully Updated")
+
+    },
+    removeConfig(item,index){
+        var $vm=this;
+if(item.default){
+$vm.$alert("Cannot Delete Default Field",'Error','error')
+    return ;
+}
+configFormat.splice(index,1)
+    },
     selectFieldSettingfn(item){
 this.selectedFieldSetting=item
 this.productFieldSettingDialog=true;
@@ -450,20 +284,31 @@ this.productFieldSettingDialog=true;
     saveProductsFormat(){
         var $vm=this;
         $vm.$alert('Saved','success','success')
-        this.$store.commit("updateProductsFormat",this.productsFormat)
+        this.$store.commit("updateProductsFormat",this.configFormat)
 
     },
 createProductField(){
+    var $vm=this;
+    if(this.createField.label==''){
 
-    // this.$store.commit('addProductsFormat',create_field)
-    this.productsFormat(this.createField)
+$vm.$alert("Label Must be fill")
+        return ;
+    }
+    if(this.createField.name==''){
+
+$vm.$alert("Name Must be fill")
+        return ;
+    }
+this.configFormat.push(this.createField)
+this.createField=create_field;
+$vm.$alert("New Field Created")
 }
 
 },
 // watch:{
-//     productsFormat(){
+//     configFormat(){
 
-//         this.$store.commit("updateProductsFormat",this.productsFormat)
+//         this.$store.commit("updateProductsFormat",this.configFormat)
 //     }
 // }
 

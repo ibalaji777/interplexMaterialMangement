@@ -3,7 +3,7 @@
         
 <!-- eslint-disable -->
          <v-data-table
-      :headers="$store.state.report.fileType"
+      :headers="$store.state.report.masterProducts"
       :items="list"
       item-key="name"
       class="elevation-1"
@@ -53,13 +53,13 @@ export default {
     computed: {
      list(){
 
-return core.database(this,'getFileTypeList',)
+return core.database(this,'getMaseterProductList',)
      }
     },
     methods:{
         editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminCreateBranch',params: { item:item }})
+$vm.$router.push({name:'adminMasterProductInsert',params: { item:item }})
         },
         deleteItem(item){
 

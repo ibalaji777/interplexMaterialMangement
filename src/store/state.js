@@ -7,6 +7,75 @@ const state = {
 	,
 
 report:{
+fileType:[
+	{
+		text:'title',
+		value:'title'
+
+	},
+	{
+		text:'Name',
+		value:'name'
+
+	},
+	{
+		text:'Action',
+		value:'action'
+
+	}
+],
+
+	masterProducts:[
+		{
+			text:'Product Name',
+			value:'product_name',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'Supplier',
+			value:'supplier_name',
+			class:'interplexHeader'
+	
+		},
+		,
+		{
+			text:'RM Code',
+			value:'rmcode',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'EDS',
+			value:'eds',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'RM',
+			value:'rm',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'due Date',
+			value:'duedate',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'skiplevel',
+			value:'skiplevel',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'Action',
+			value:'action',
+			class:'interplexHeader'
+	
+		}
+	],	
 branches:[
 	{
 		text:'Branch',
@@ -108,7 +177,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'WIDTH MIN',//input field label
@@ -117,7 +188,9 @@ interplex:{
 			show:true,
 			headerMap:'', 
 			 validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'WIDTH MAX',//input field label
@@ -125,7 +198,9 @@ interplex:{
 			value:'5',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'WIDTH SUP ONE',//input field label
@@ -141,7 +216,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'WIDTH IELPL ONE',//input field label
@@ -149,7 +226,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'WIDTH IELPL TWO',//input field label
@@ -157,7 +236,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'WIDTH REMARKS',//input field label
@@ -165,7 +246,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS UNIT',//input field label
@@ -173,7 +256,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS MIN SPEC',//input field label
@@ -181,7 +266,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS MAX SPEC',//input field label
@@ -189,7 +276,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS SUP ONE',//input field label
@@ -197,7 +286,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS SUP TWO',//input field label
@@ -205,7 +296,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS IELPL ONE',//input field label
@@ -213,7 +306,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS IELPL TWO',//input field label
@@ -221,7 +316,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'THICKNESS REMARKS',//input field label
@@ -229,7 +326,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'HARDNESS UNIT',//input field label
@@ -237,7 +336,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'HARDNESS MIN SPEC',//input field label
@@ -245,7 +346,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'HARDNEWSS MAX SPEC',//input field label
@@ -253,7 +356,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'HARDNESS SUP ONE',//input field label
@@ -261,7 +366,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'HARDNEWSS SUP TWO',//input field label
@@ -269,7 +376,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		},
 		{
 			label:'HARDNESS IELPL ONE',//input field label
@@ -277,7 +386,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -286,7 +397,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:true,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -295,7 +408,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -304,7 +419,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -313,7 +430,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -322,7 +441,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -331,7 +452,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -340,7 +463,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -349,7 +474,9 @@ interplex:{
 			value:'',//default value
 			show:true,
 			headerMap:'',  validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 		,
 		{
@@ -358,68 +485,139 @@ interplex:{
 			value:'',//default value
 			show:true,
 		   validation:false,
-    rule:'' 
+    rule:'',
+default:true,
+note:'' 
 		}
 	],
 	configHeaderFormat:[
 
 		{
-			label:'product_name',//input field label
+			label:'Supplier Name',//input field label
+			name:'supplier_name',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},
+		{
+			label:'Product Name',//input field label
 			name:'product_name',//column name
 			value:'',//default value
 			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+
 		},
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
+	
 
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
-		// {
-		// 	label:'product_name',//input field label
-		// 	name:'product_name',//column name
-		// 	value:'',//default value
-		// 	show:true,
-		// },
+		{
+			label:'Invoice No',//input field label
+			name:'invoice_no',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
 
+		},
+		{
+			label:'Invoice Date',//input field label
+			name:'invoice_date',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
 
+		},
+		{
+			label:'Invoice Qty',//input field label
+			name:'invoice_qty',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'No Need to Map'
+
+		},
+		{
+			label:'ir',//input field label
+			name:'ir',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},
+		{
+			label:'grn_no',//input field label
+			name:'grn_no',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+
+		},
+		{
+			label:'grn_date',//input field label
+			name:'grn_date',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},
+		{
+			label:'rmcode',//input field label
+			name:'rmcode',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},		{
+			label:'eds',//input field label
+			name:'eds',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},		{
+			label:'rm',//input field label
+			name:'rm',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},		{
+			label:'received_qty',//input field label
+			name:'received_qty',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'No Need to Map'
+
+		},		
+		
 	],
     masterBranches:[
 ],

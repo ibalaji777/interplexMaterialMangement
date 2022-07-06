@@ -29,7 +29,7 @@ import adminCreateFileType from '../views/adminCreateFileTypes.vue'
 
 
 import adminUsersList from '../views/adminUsersList.vue'
-import adminProductsFormateList from '../views/adminProductsFormateList.vue'
+import adminProductsFormatList from '../views/adminProductsFormatList.vue'
 import adminBranchesList from '../views/adminBranchesList.vue' 
 import adminHeaderFormatList from '../views/adminHeaderFormatList.vue' 
 
@@ -86,9 +86,9 @@ const routes = [
 		component:adminUsersList 
 	},
 	{
-		path: '/adminProductsFormateList',
-		name: 'adminProductsFormateList',
-		component:adminProductsFormateList 
+		path: '/adminProductsFormatList',
+		name: 'adminProductsFormatList',
+		component:adminProductsFormatList 
 	},
 	{
 		path: '/adminBranchesList',
