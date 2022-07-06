@@ -46,6 +46,19 @@ $vm.$store.commit('database',prepareData)
 
 // *********************Get****************************
 
+if(action=='getMasterProductConfig')
+{
+
+  return _.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
+
+}
+if(action=='getMasterHeaderConfig')
+{
+
+  return _.cloneDeep($vm.$store.state.interplex.configProductsFormat);
+
+}
+
 if(action=='getMasterProductsTotal')
 {
 

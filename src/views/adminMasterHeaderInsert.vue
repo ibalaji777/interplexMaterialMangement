@@ -236,9 +236,8 @@ var create_field={
 
 }
 
-export default {
+export function initialState($vm){
 
-data(){
     return{
        mapTypes:['header','product'],
         createFieldSettingDialog:false,
@@ -252,7 +251,7 @@ data(){
             default:false,
 			note:'',
 },
-configFormat:_.cloneDeep(this.$store.state.interplex.configHeaderFormat),
+configFormat:core.database($vm,'getMasterHeaderConfig'),
         configDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field
@@ -261,6 +260,11 @@ configFormat:_.cloneDeep(this.$store.state.interplex.configHeaderFormat),
             
         }
     }
+}
+export default {
+
+data(){
+    return initialState(this)
 },
 methods:{
     save(){

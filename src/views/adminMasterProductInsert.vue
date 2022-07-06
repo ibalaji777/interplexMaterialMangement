@@ -669,7 +669,7 @@ rm:'',
 form_format:'',
 comment:'',
 skiplevel:0,
-observation_format:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),
+observation_format:core.database($vm,'getMasterProductConfig'),
 duedate:moment().format("YYYY-MM-DD")   
         }   
 
