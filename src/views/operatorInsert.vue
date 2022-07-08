@@ -15,7 +15,7 @@
 <div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartyNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
    NAME:  {{item['Vendor Name']}}<br>
    DATE: {{item["DATE_EXT"]}}<br>
-   PRDNO: {{item["PRDNO"]}}<br>
+   Part NO: {{item["OLMAT"]}}<br>
    Weight:{{item.invoiceQty}}<br>
    <!-- <v-text-field v-model="item['Vendor Name']"></v-text-field> -->
    Invoice No:<br>
@@ -30,7 +30,7 @@ Items
 Items
 </div> -->
 </div>
-<div class="otherContainer">
+<!-- <div class="otherContainer">
 <div class="insertProduct" style="position:relative" @click="galleryDialog=true">
 <v-icon>fa-image</v-icon>
 <div v-if="takePhoto.length!=0" style="position: absolute;
@@ -47,16 +47,16 @@ Items
 
 </div>
 </div>
-</div>
+</div> -->
 
-<div>
+<!-- <div>
 
     <v-textarea outlined label="remarks" style="margin-top:10px">
 
     </v-textarea>
-</div>
+</div> -->
 
-<div style="display:flex;align-items:flex-end;justify-content:flex-end">
+<div style="margin-top:15px;display:flex;align-items:flex-end;justify-content:flex-end">
 <v-btn color="primary" outlined>
     Submit To Approval
 </v-btn>
@@ -327,7 +327,7 @@ Items
     border-radius: 10px;margin:3px;">
    NAME:  {{item['Vendor Name']}}<br>
    DATE: {{item["DATE_EXT"]}}<br>
-   PRDNO: {{item["PRDNO"]}}<br>
+   Part No: {{item["OLMAT"]}}<br>
    TOTAL BATCH NOS:{{item.products.length}}
    <br>
    Weight:{{item.invoiceQty}}<br>
@@ -412,6 +412,8 @@ console.log(value)
   methods:{
     selectedPartyNoItem(item,index){
         var $vm=this;
+        console.log("selected item")
+        console.log(item)
 this.$store.commit('selectedPartyNoItem',item)
     },
     addToQualitFormOne(){
@@ -421,11 +423,11 @@ var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create header
 //create product form
 //create product list
-console.log(core.createProductList($vm,checked))
+var main_list=core.createProductList($vm,checked);
 
-$vm.$store.commit('addToQualitFormOne',_.cloneDeep(checked))
+$vm.$store.commit('addToQualitFormOne',_.cloneDeep(main_list))
 $vm.$store.commit('tempInvoice',createInvoice)
-console.log("Create Invoice ",createInvoice)
+// console.log("Create Invoice ",createInvoice)
 
 $vm.checkDialog=false;
         $vm.fileTypeDialog=false;
@@ -441,7 +443,7 @@ $vm.checkDialog=false;
     var r = new FileReader();
     r.onload = e => {
       var contents = $vm.processExcel(e.target.result);
-      console.log(contents)
+    //   console.log(contents)
     }
     r.readAsBinaryString(f);
   } else {
@@ -464,7 +466,7 @@ $vm.checkDialog=false;
 // ----------------------------------------------------
 var headerFile=_.map(core.headerFileGroup(data),(x)=>{
 x['selected']=true;
-x['ref']=x['Vendor Name']+x['LAST_GR_DATE']+(x['invoice no']||'');
+x['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
 x['isExist']=false;//validate server side
 if(x['DATE']){
     var str=x['DATE'];

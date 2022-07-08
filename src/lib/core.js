@@ -1,7 +1,13 @@
 /*eslint-disable*/
 import _ from 'lodash'
 import moment from 'moment'
+export var defaultFields={
 
+  partNo:'OLMAT',
+  supplierName:'Vendor Name',
+  invoiceDate:'LAST_GR_DATE',
+  invoiceNo:'Invoice No'
+}
 export function database($vm,action,payload={}){
 
   var prepareData={
@@ -99,13 +105,13 @@ if(action=='getQasFormOne')
 }
 if(action=='getBranchesList')
 {
-console.log($vm.$store.state.interplex.masterBranches)
+// console.log($vm.$store.state.interplex.masterBranches)
   return $vm.$store.state.interplex.masterBranches;
 
 }
 if(action=='getMaseterProductList')
 {
-console.log($vm.$store.state.interplex.masterProducts)
+// console.log($vm.$store.state.interplex.masterProducts)
   return $vm.$store.state.interplex.masterProducts;
 
 }
@@ -121,6 +127,13 @@ if(action=='getFileTypeList')
   return $vm.$store.state.interplex.masterUploadTypes;
 
 }
+if(action=='getProductConfigValue')
+{console.log("master products,",$vm.$store.state.interplex.masterProducts)
+console.log("payload data",prepareData.data)
+  return _.filter($vm.$store.state.interplex.masterProducts,(x)=>x['rmcode']==prepareData.data[defaultFields.partNo]);
+
+}
+
 
 
 //*********************delete**********************
@@ -228,34 +241,42 @@ export function observation($vm){
   }
 }
 
-export function headerConfigFormat($vm,object){
+export function headerConfigFormat($vm,uploadedFileObject){
 
 var header=_.cloneDeep(database($vm,'getMasterHeaderConfig'))
-_.map(header,(x)=>{
 
-  if(x.mapFrom=='header')
+var header_result= _.map(header,(x)=>{
+
+  if(x.mapFrom=='header'&&x.map!='')
   {
-  x['value']=(object[x.map]||'')
+  x['value']=(uploadedFileObject[x.map]||'')
   }
-  if(x.mapFrom=='product')
+  if(x.mapFrom=='product'&&x.map!='')
   {
-    x['value']=(object[x.map]||'')
+    x['value']=(uploadedFileObject[x.map]||'')
    
   }
-  if(x.map=='')
-  {
-    x['value']=(object['value']||'')
-  
-  }
+  return x;
 
 })
 
-return header;
+// console.log("header result",header_result)
+return header_result;
 }
 
 export function productConfigFormat($vm,object){
 
   var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
+ var originalProduct=database($vm,'getProductConfigValue',object)
+
+//  console.log('productConfigFormat',productConfigFormat)
+//  console.log("originalProduct",originalProduct)
+ if(originalProduct.length==0){
+
+  return productConfigFormat
+ }
+return originalProduct[0].observation_format||[];
+
   //apply default value from  product part not
   // _.map(productConfigFormat,(x)=>{
 
@@ -286,6 +307,7 @@ export function createProductList($vm,array){
  // create product form 
 return _.map(array,(x)=>{
 x['headerConfigFormat']=headerConfigFormat($vm,x)
+x['productConfigFormat']=productConfigFormat($vm,x)
 return x
 })
 
@@ -299,7 +321,8 @@ if(!check[invoiced_products.ref]){
 check[invoiced_products.ref]=invoiced_products.ref
 var invoice={
   ...invoiced_products,
-  gallery:[]
+  gallery:[],
+  remarks:''
 }
 
   create_array[invoiced_products.ref]=invoice
@@ -339,7 +362,7 @@ export function headerFileGroup(array){
 // console.log(result);
 
 return _.map(groupBy(array, function (item) {
-  return [item['PRDNO'], item['Vendor Name'],item['LAST_GR_DATE'],item['invoice no']||''];
+  return [item[defaultFields.partNo], item[defaultFields.supplierName],item[defaultFields.invoiceDate],item[defaultFields.invoiceNo]||''];
 }),(x)=>({
   total:x.length,
   products:x,

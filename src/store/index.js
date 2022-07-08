@@ -9,24 +9,36 @@ import actions from './action';
 
 Vue.use(Vuex);
 
-
-// vuex store
-const store = new Vuex.Store({
-	state,
-	mutations,
-	actions
-  })
-
 const vuexLocalStorage = new VuexPersist({
 	// strictMode:true,
 	key: '777777angalware777777',
 	storage:window.localStorage,
 	reducer: (state) =>{
 	
-return ({})
+return ({
+
+	interplex:{
+		configProductsFormat:state.interplex.configProductsFormat,
+		configHeaderFormat:state.interplex.configHeaderFormat,
+		masterBranches:state.interplex.masterBranches,
+		masterProducts:state.interplex.masterProducts,
+		// configProductsFormat:state.interplex.configProductsFormat,
+	}
+
+
+})
 }
 }
 );
+// vuex store
+const store = new Vuex.Store({
+	state,
+	mutations,
+	actions,
+	plugins: [vuexLocalStorage.plugin]
+  })
+
+
 
 
 export default store;
