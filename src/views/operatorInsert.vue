@@ -12,8 +12,16 @@
 
 <div class="productContainer">
 
-<div @click="$router.push({name:'operatorQsReport'})" class="productItems">
-Items
+<div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartyNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
+   NAME:  {{item['Vendor Name']}}<br>
+   DATE: {{item["DATE_EXT"]}}<br>
+   PRDNO: {{item["PRDNO"]}}<br>
+   Weight:{{item.invoiceQty}}<br>
+   <!-- <v-text-field v-model="item['Vendor Name']"></v-text-field> -->
+   Invoice No:<br>
+   Grn NO:<br>
+
+
 </div>
 <!-- <div class="productItems">
 Items
@@ -276,6 +284,69 @@ Items
 </div>
       </v-card>
     </v-dialog>
+    <!-- *********************checkdialog************************ -->
+    <v-dialog
+      v-model="checkDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="checkDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<div style="    padding: 0 17px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    /* background: lightgoldenrodyellow; */
+    border-radius: 5px;
+    border: 1px solid;
+    margin-bottom: 10px;">
+<v-checkbox
+      v-model="checkAllSelected"
+      label="Select"
+    ></v-checkbox>
+
+    <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn>
+</div>
+<div class="checkContainer">
+<div v-for="(item,index) in checkHeaderBefore" :key="index+'invoice'">
+
+<div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style="background: chartreuse;
+    padding: 10px;
+    border-radius: 10px;margin:3px;">
+   NAME:  {{item['Vendor Name']}}<br>
+   DATE: {{item["DATE_EXT"]}}<br>
+   PRDNO: {{item["PRDNO"]}}<br>
+   TOTAL BATCH NOS:{{item.products.length}}
+   <br>
+   Weight:{{item.invoiceQty}}<br>
+   Invoice No:<br>
+   Grn NO:<br>
+
+<div style="    display: flex;
+    justify-content: flex-end;">
+    <span v-if="item.isExist">Exist</span>
+    <span v-else>Not Exist</span>
+</div>
+</div>
+
+</div>
+</div>
+       </div>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 <script>
@@ -284,10 +355,13 @@ Items
 var XLSX = require("xlsx");
 import * as core from '../lib/core.js'
 import { Camera, CameraResultType } from '@capacitor/camera';
-
+import moment from 'moment'
 export default {
   data(){   
     return {
+checkAllSelected:true,
+        checkHeaderBefore:[],
+        checkDialog:false,
         fileTypeDialog:false,
         selected_gallery:-1,
         fileTypes:[
@@ -323,10 +397,43 @@ export default {
     var $vm=this;
 // $vm.headerFileUploader()
   },
+  computed:{
+
+getQualityAssuranceFormOne:{
+    get(){
+      return  core.database(this,'getQualityAssuranceFormOne')
+    },
+    set(value){
+console.log(value)
+
+    }
+}
+  },
   methods:{
+    selectedPartyNoItem(item,index){
+        var $vm=this;
+this.$store.commit('selectedPartyNoItem',item)
+    },
+    addToQualitFormOne(){
+var $vm=this;
+var checked=_.filter($vm.checkHeaderBefore,(x)=>(x.selected))
+var createInvoice=core.createInvoice(_.cloneDeep(checked));
+//create header
+//create product form
+//create product list
+console.log(core.createProductList($vm,checked))
+
+$vm.$store.commit('addToQualitFormOne',_.cloneDeep(checked))
+$vm.$store.commit('tempInvoice',createInvoice)
+console.log("Create Invoice ",createInvoice)
+
+$vm.checkDialog=false;
+        $vm.fileTypeDialog=false;
+    },
 
     headerFileUploader(){
         var $vm=this;
+        $vm.checkDialog=true;
         var file = document.getElementById('docpicker')
   var f = file.files[0];
 
@@ -354,7 +461,26 @@ export default {
   var data = $vm.to_json(workbook);
   console.log("+++result+++")
   console.log(data)
-  console.log(core.headerFileGroup(data))
+// ----------------------------------------------------
+var headerFile=_.map(core.headerFileGroup(data),(x)=>{
+x['selected']=true;
+x['ref']=x['Vendor Name']+x['LAST_GR_DATE']+(x['invoice no']||'');
+x['isExist']=false;//validate server side
+if(x['DATE']){
+    var str=x['DATE'];
+   x['DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+       var str=x['DOMF'];
+   x['DOMF_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+       var str=x['LAST_GR_DATE'];
+   x['LAST_GR_DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+}
+return x;
+})
+
+// ----------------------------------------------------
+//   console.log(core.headerFileGroup(data))
+    console.log(headerFile)
+    $vm.checkHeaderBefore=headerFile||[]
 },
 
      to_json(workbook) {
@@ -405,6 +531,21 @@ $vm.productInsertDialog=true
   console.log(theActualPicture)
   $vm.takePhoto.push({src:theActualPicture,file_type:''})
 }
+  },
+  watch:{
+
+    checkAllSelected(){
+var $vm=this;
+        $vm.checkHeaderBefor=_.map($vm.checkHeaderBefor,(x)=>{
+x['selected']=$vm.checkAllSelected
+
+console.log(x['selected'])
+        })
+
+        },
+
+    
+    
   }
 }
 

@@ -169,6 +169,8 @@ users:[
 
 interplex:{
 	currentBranch:'',
+	selectedPartyNoItem:{},
+	tempInvoice:{},//temprory
 	configProductsFormat:[
 
 		{
@@ -627,6 +629,7 @@ note:''
 	masterHeaderTypes:[],
 	qualityAssuranceFormOne:[],
 	qualityAssuranceFormTwo:[],
+	
 	
 
 }

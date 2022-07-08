@@ -25,6 +25,15 @@ width: 100%;
 padding:10px;
 transform: translate(-50%,-50%);
 }
+.selectedInvoice{
+    border:2px solid #577dff;
+}
+.checkContainer{
+
+
+    height: 81vh;
+    overflow: scroll;
+}
 .interList{
     background: blanchedalmond;
     padding: 5px;

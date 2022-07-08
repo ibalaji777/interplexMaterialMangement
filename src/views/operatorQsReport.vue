@@ -24,11 +24,28 @@
 
 </div>
 OBSERVATION
+<div style="display:flex;">
 
 <div @click="productFormatDialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-check</v-icon>
 </div>
+<div class="insertProduct" style="position:relative" @click="galleryDialog=true">
+<v-icon>fa-image</v-icon>
+<div v-if="takePhoto.length!=0" style="position: absolute;
+    top: -7px;
+    right: -7px;
+    background: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    color: antiquewhite;
+    font-size: 15px;
+">{{takePhoto.length}}
 
+</div>
+</div>
+</div>
 <v-textarea style="margin-top:10px" outlined label="Remarks"></v-textarea>
 
 
@@ -87,7 +104,72 @@ OBSERVATION
       </v-card>
     </v-dialog>
 
+<!-- *********************Gallery************************ -->
+       <v-dialog
+      v-model="galleryDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>Gallery</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="galleryDialog = false"
+            >
+              Close
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
 
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<div @click="takePicture" class="insertProduct">
+<v-icon>fa-camera</v-icon>
+</div>
+<br>
+<div style="border:1px solid black;background:beige;padding:5px">
+Total Capture:{{takePhoto.length}}
+</div>
+<div class="productContainer">
+<!-- {{takePhoto}} -->
+<div v-for="(image,index) in takePhoto" :key="index+image" class="productItems" style="    display: flex;
+    justify-content: space-between;">
+<img :src="image.src" alt="" style="max-width:100px;max-height:100px">
+<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+    height: 40px;
+    border: 1px dashed #ffeb3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
++
+</span>
+<span style="
+    padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+{{image.file_type}}
+</span>
+</div>
+
+</div>
+<!-- <div class="productItems">
+Items
+</div>
+<div class="productItems">
+Items
+</div> -->
+</div>
+
+
+</div>
+      </v-card>
+    </v-dialog>
 
     </div>
 </template>
@@ -96,19 +178,47 @@ OBSERVATION
 import * as core from '../lib/core'
 import { create, all } from 'mathjs'
 const math = create(all,  {})
-
+import { Camera, CameraResultType } from '@capacitor/camera';
 export default {
 
     data(){
 
         return {
-            header:{           }
-            ,
+            galleryDialog:false,
+            header:{ },
+            // takePhoto:[]
+            // ,
             productFormatDialog:false,
             productsFormat:core.observation(this).productFormat
         }
     },
+    computed:{
+takePhoto:{
+    get(){
+var $vm=this;
+var ref=$vm.$store.state.interplex.selectedPartyNoItem.ref;
+        return ($vm.$store.state.interplex.tempInvoice[ref].gallery)||[]//selectedPartyNoItem
+    },
+    set(value){
+        console.log(value)
+    }
+
+},
+    },
     methods:{
+                   async takePicture() {
+            var $vm=this;
+  const image = await Camera.getPhoto({
+    quality: 100,
+    allowEditing: false,
+    resultType: CameraResultType.DataUrl,
+  });
+
+  // Here you get the image as result.
+  const theActualPicture = image.dataUrl;
+  console.log(theActualPicture)
+  $vm.takePhoto.push({src:theActualPicture,file_type:''})
+},
         watchValue(event,productFormat){
 var $vm=this;
             // console.log(event.target.value)

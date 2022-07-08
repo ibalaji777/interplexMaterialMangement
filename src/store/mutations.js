@@ -28,6 +28,9 @@ if(payload.action=='insertHeaderTypes')
 
 }
 
+
+
+
 // *******************config****************************
 if(payload.action=='saveHeaderConfig')
 {
@@ -67,6 +70,18 @@ const mutations =
 console.log(state)
 database(state,payload)
 
+	},
+	addToQualitFormOne(state,payload){
+
+state.interplex.qualityAssuranceFormOne.push(...payload)
+	},
+	tempInvoice(state,payload){
+		// state.interplex.tempInvoice=payload
+Vue.set(state.interplex,'tempInvoice',payload)
+	},
+	selectedPartyNoItem(state,payload){
+
+state.interplex.selectedPartyNoItem=payload;
 	}
 
 

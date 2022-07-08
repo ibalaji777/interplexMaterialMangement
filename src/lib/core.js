@@ -49,14 +49,15 @@ $vm.$store.commit('database',prepareData)
 if(action=='getMasterProductConfig')
 {
 
-  return _.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
+  return _.cloneDeep($vm.$store.state.interplex.configProductsFormat);
+
 
 }
 if(action=='getMasterHeaderConfig')
 {
+  return _.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
 
-  return _.cloneDeep($vm.$store.state.interplex.configProductsFormat);
-
+ 
 }
 
 if(action=='getMasterProductsTotal')
@@ -66,6 +67,13 @@ if(action=='getMasterProductsTotal')
 
 }
 
+if(action=='getQualityAssuranceFormOne')
+{
+  //local reference
+
+  return $vm.$store.state.interplex.qualityAssuranceFormOne;
+
+}
 
 if(action=='getUsersTotal')
 {
@@ -220,6 +228,87 @@ export function observation($vm){
   }
 }
 
+export function headerConfigFormat($vm,object){
+
+var header=_.cloneDeep(database($vm,'getMasterHeaderConfig'))
+_.map(header,(x)=>{
+
+  if(x.mapFrom=='header')
+  {
+  x['value']=(object[x.map]||'')
+  }
+  if(x.mapFrom=='product')
+  {
+    x['value']=(object[x.map]||'')
+   
+  }
+  if(x.map=='')
+  {
+    x['value']=(object['value']||'')
+  
+  }
+
+})
+
+return header;
+}
+
+export function productConfigFormat($vm,object){
+
+  var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
+  //apply default value from  product part not
+  // _.map(productConfigFormat,(x)=>{
+
+  //   if(x.mapFrom=='header')
+  //   {
+  //   x['value']=(object[x.map]||'')
+  //   }
+  //   if(x.mapFrom=='product')
+  //   {
+  //     x['value']=(object[x.map]||'')
+     
+  //   }
+  //   if(x.map=='')
+  //   {
+  //     x['value']=(object['value']||'')
+    
+  //   }
+  
+  // })
+  
+  return productConfigFormat;
+  }
+  
+
+export function createProductList($vm,array){
+
+  //create header
+ // create product form 
+return _.map(array,(x)=>{
+x['headerConfigFormat']=headerConfigFormat($vm,x)
+return x
+})
+
+}
+export function createInvoice(array){
+
+  var check={}
+var create_array={}
+  _.map(array,(invoiced_products)=>{
+if(!check[invoiced_products.ref]){
+check[invoiced_products.ref]=invoiced_products.ref
+var invoice={
+  ...invoiced_products,
+  gallery:[]
+}
+
+  create_array[invoiced_products.ref]=invoice
+}
+  })
+return create_array;
+
+}
+
 export function headerFileGroup(array){
 
 
@@ -250,7 +339,7 @@ export function headerFileGroup(array){
 // console.log(result);
 
 return _.map(groupBy(array, function (item) {
-  return [item['PRDNO'], item['Vendor Name']];
+  return [item['PRDNO'], item['Vendor Name'],item['LAST_GR_DATE'],item['invoice no']||''];
 }),(x)=>({
   total:x.length,
   products:x,
