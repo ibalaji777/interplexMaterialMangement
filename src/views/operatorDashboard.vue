@@ -82,19 +82,19 @@ border: 1px dashed red;
     align-items: center;
     background:beige;
 }
-.productContainer{
+/* .productContainer{
     background: grey;
     margin-top: 20px;
     height: 51vh;
     overflow: scroll;
-}
-.productItems{
+} */
+/* .productItems{
 
     padding: 5px;
     color: white;
     background: darkturquoise;
     margin: 5px;
-}
+} */
 
 
 </style>

@@ -34,6 +34,20 @@ transform: translate(-50%,-50%);
     height: 81vh;
     overflow: scroll;
 }
+.productContainer{
+    background: grey;
+    margin-top: 20px;
+    height: 51vh;
+    overflow: scroll;
+}
+.productItems{
+
+    padding: 5px;
+    color: white;
+    background: darkturquoise;
+    margin: 5px;
+}
+
 .interList{
     background: blanchedalmond;
     padding: 5px;
@@ -51,4 +65,10 @@ transform: translate(-50%,-50%);
     -ms-user-select: none;
     user-select: none;
  
+}
+.rowColor:nth-child(even) {
+    background-color: Lightgreen;
+}
+.rowColor:nth-child(odd) {
+    background-color: lightcoral;
 }

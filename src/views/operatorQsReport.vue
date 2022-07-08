@@ -4,7 +4,7 @@
 <br>
 <div style="    display: flex;
     flex-wrap: wrap;">
-<div style="width:33%;margin:1px" v-for="(header,index) in selectedPartyNoItem.headerConfigFormat" :key="'header'+index">
+<div style="width:32.5%;margin:1px" v-for="(header,index) in selectedPartyNoItem.headerConfigFormat" :key="'header'+index">
 
 <!-- <input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" > -->
 
@@ -90,22 +90,39 @@ OBSERVATION
         <table>
             <tr>
                 <th></th>
-                <th>coil</th>
-                <th>cw/kg</th>
+                <th></th>
+                <th></th>
+                <!-- <th>cw/kg</th>
                 <th>w/mm</th>
                 <th>th/mm</th>
                 <th>Sup Coil#</th>
-                <th>Error</th>
+                <th>Error</th> -->
 
             </tr>
-<tr v-for="(productFormat , index) in selectedPartyNoItem.productConfigFormat" :key="'product'+index">
+<tr class="rowColor" v-for="(productFormat , index) in selectedPartyNoItem.productConfigFormat" :key="'product'+index">
     <td>{{index+1}}</td>
+<td>
+    <input placeholder="coild # (Batch No)"  class="interInput"   type="text" >
+    <input placeholder="sup coil #(Lot No)"  class="interInput"   type="text" >
+    <input  class="interInput"   type="text" placeholder="Width (W/KG)" >
+    <div style="display:flex">
+    
+    <input  class="interInput"   type="text" placeholder="Width One" >
+    <input  class="interInput"   type="text" placeholder="Width Two" >
+    </div>
+        <div style="display:flex">
+    <input  class="interInput"   type="text" placeholder="Thick One" >
+    <input  class="interInput"   type="text" placeholder="Thick Two" >
+    </div>
+</td>
+<td style="background:white;padding:9px">
+    <v-icon>fa-check</v-icon>
+</td>
+<!-- <td><input  class="interInput"   type="text" ></td>
 <td><input  class="interInput"   type="text" ></td>
 <td><input  class="interInput"   type="text" ></td>
 <td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td> -->
 
       </tr>
         </table>
@@ -142,17 +159,16 @@ OBSERVATION
 ">
         <table>
             <tr>
-                <th>Label</th>
-                <th>Input</th>
-                <th>Status</th>
+                <th></th>
+                <th></th>
             </tr>
-<tr v-for="(productFormat , index) in selectedPartyNoItem.productConfigFormat" :key="'product'+index">
+<tr  v-for="(productFormat , index) in selectedPartyNoItem.productConfigFormat" :key="'product'+index">
 
-<td style="width:40%">{{productFormat.label}}</td>
-<td style="width:55%">
-    <input @input="watchValue($event,productFormat)"   class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+<td >
+  <span style="font-size:14px">{{productFormat.label}}</span>
+    <input  @input="watchValue($event,productFormat)"   class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
 </td>
-<td style="width:5%;">
+<td style="padding:15px" >
     <div style="text-align:center">
     <v-icon v-if="productFormat.validation">fa-check</v-icon>
     </div></td>        </tr>
@@ -204,7 +220,11 @@ OBSERVATION
 <v-icon>fa-camera</v-icon>
 </div>
 <br>
-<div style="border:1px solid black;background:beige;padding:5px">
+<div style="    background: #f13454;
+    padding: 9px;
+    color: white;
+    border-radius: 29px;
+    font-weight: 300;">
 Total Capture:{{takePhoto.length}}
 </div>
 <div class="productContainer">
@@ -329,4 +349,5 @@ var $vm=this;
 </script>
 <style lang="scss">
 @import url('../assets/interplex.scss');
+
 </style>

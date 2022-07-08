@@ -9,7 +9,11 @@
 <v-icon>fa-plus</v-icon>
 </div>
 </div>
-
+<h3 style="background: red;
+    color: white;
+    padding: 5px;
+    margin-top: 17px;
+    text-align: center;">Invoice with Products</h3>
 <div class="productContainer">
 
 <div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartyNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
@@ -57,7 +61,11 @@ Items
 </div> -->
 
 <div style="margin-top:15px;display:flex;align-items:flex-end;justify-content:flex-end">
-<v-btn color="primary" outlined>
+<v-btn  style="position: absolute;
+    bottom: 25px;
+    background: linear-gradient(45deg, red, #c50303);
+    color: white !important;
+" outlined>
     Submit To Approval
 </v-btn>
 </div>
@@ -264,7 +272,7 @@ Items
           dark
           :color="$store.state.bgColor"
         >
-          <v-toolbar-title>Choose Header File</v-toolbar-title>
+          <v-toolbar-title>SAP File</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -277,10 +285,21 @@ Items
           </v-toolbar-items>
         </v-toolbar>
         <v-divider></v-divider>
-       <div style="padding:10px">
-<label for="avatar">Choose an Excel or CSV file:</label>
+    
+       <div style="    
+    
+      
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;">
+    <h3 style="text-align:center;">
+        Choose Header File
+    </h3>
+<div style="  margin-top: 10px;padding: 10px;display: flex;background: red;">
 <input type="file" id="docpicker" accept=".txt,.csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12">
 <v-btn @click="headerFileUploader">check</v-btn>
+</div>
 </div>
       </v-card>
     </v-dialog>
@@ -567,7 +586,7 @@ border: 1px dashed red;
     align-items: center;
     background:beige;
 }
-.productContainer{
+/* .productContainer{
     background: grey;
     margin-top: 20px;
     height: 51vh;
@@ -579,7 +598,7 @@ border: 1px dashed red;
     color: white;
     background: darkturquoise;
     margin: 5px;
-}
+} */
 
 
 </style>
