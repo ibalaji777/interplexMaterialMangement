@@ -18,7 +18,7 @@
 
 <div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
    NAME:  {{item['Vendor Name']}}<br>
-   DATE: {{item["DATE_EXT"]}}<br>
+   DATE: {{item["LAST_GR_DATE_EXT"]}}<br>
    Part NO: {{item["OLMAT"]}}<br>
    Weight:{{item.invoiceQty}}<br>
    <!-- <v-text-field v-model="item['Vendor Name']"></v-text-field> -->
@@ -345,7 +345,7 @@ Items
     padding: 10px;
     border-radius: 10px;margin:3px;">
    NAME:  {{item['Vendor Name']}}<br>
-   DATE: {{item["DATE_EXT"]}}<br>
+   DATE: {{item["LAST_GR_DATE_EXT"]}}<br>
    Part No: {{item["OLMAT"]}}<br>
    TOTAL BATCH NOS:{{item.products.length}}
    <br>
@@ -420,7 +420,7 @@ checkAllSelected:true,
 getQualityAssuranceFormOne:{
 
 get(){
-        var result=core.database(this,'getQualityAssuranceFormOne')
+var result=core.database(this,'getQualityAssuranceFormOne')
 console.log("===getQualityAssuranceFormOne===",result)
 return  result;
     },
@@ -439,15 +439,32 @@ return result;
 var $vm=this;
 console.log("====submit====")
 console.log($vm.tempInvoice)
-var invoices=[]
+var invoices=[];
+var user_id=1;
+var invoice_no_validate=true;
+
+
 _.each($vm.tempInvoice, ( val, key ) => { 
 var invoice={}
 console.log( key, val ); 
+
+
+var qasForm1Prod=_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
+
+// // validation
+// _.map(qasForm1Prod,(product)=>{
+// if(product.invoice_no==''){
+//     invoice_no_validate=false
+//    return; 
+//     }
+    
+//     })
+
+
 invoice['ref']=key;
 invoice['gallery']=val['gallery'];
 invoice['remarks']=val['remarks'];
 
-var qasForm1Prod=_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
 
 invoice['qasForm1Prod']=qasForm1Prod;//_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
 invoice['supplier_name']='';
@@ -484,6 +501,8 @@ _.map(headerData,(header)=>{
 
 invoice['qasForm1New']=_.map(qasForm1Prod,(product)=>{
 var object={};
+
+
 _.map(product.headerConfigFormat,(header)=>{
     object[header.name]=header.value;
 })
@@ -498,7 +517,8 @@ _.map(product.headerConfigFormat,(header)=>{
    });
 //Object.assign(core.dbFormate.qasform2)
 //asign default values 
-    return Object.assign(core.dbFormate.qasForm1,object) ;
+console.log($vm.$store.state.interplex.user)
+    return Object.assign(core.dbFormate.qasForm1,object,{operator_id:user_id}) ;
 
 })
 
@@ -531,9 +551,29 @@ _.map(product.headerConfigFormat,(header)=>{
 
     invoices.push(invoice)
 
+
+_.map(invoices,(invoice)=>{
+_.map(invoice.qasForm1New,(qasForm1)=>{
+var id=core.randomInteger(1,1000)
+qasForm1['id']=id;
+core.database($vm,'insertQasForm1',qasForm1)
+_.map(invoice.qasForm2New,(qasForm2)=>{
+var id=core.randomInteger(1,1000)
+qasForm2['id']=id;
+    core.database($vm,'insertQasForm2',qasForm2)
+})  
+})
+
+})
+
+
 } );
+$vm.$store.commit('defaultValue',{})
+$vm.$alert("Saved")
 console.log(invoices)
     },
+
+
     selectedPartNoItem(item,index){
         var $vm=this;
         console.log("selected item")
@@ -549,6 +589,8 @@ var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create product list
 var main_list=core.createProductList($vm,checked);
 
+//skiplevel check
+var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
 console.log("main product format",main_list)
 $vm.$store.commit('addToQualitFormOne',_.cloneDeep(main_list))
 $vm.$store.commit('tempInvoice',createInvoice)

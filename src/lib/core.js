@@ -6,6 +6,7 @@ export var defaultFields={
   partNo:'OLMAT',
   supplierName:'Vendor Name',
   invoiceDate:'LAST_GR_DATE',
+  invoiceDateEXT:'LAST_GR_DATE_EXT',
   invoiceNo:'Invoice No'
   
 }
@@ -36,8 +37,10 @@ export const dbFormate={
     observation_format:[],//(json)
     header_format:[],//(json)
     remarks:'',
-    status:'', //(approved or acceptedOnDeviation or ppap)
+    status:'pending', //(pending ,approved or acceptedOnDeviation or ppap)
     approved_by:'',
+    roletype:'',
+    skiplevel_status:false
       },
 
 qasform2:{
@@ -60,7 +63,9 @@ validation:''
 }
 
 }
-
+export function randomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 
 export function database($vm,action,payload={}){
@@ -69,12 +74,22 @@ export function database($vm,action,payload={}){
     action,
     data:payload
   }
-console.log(prepareData)
+// console.log(prepareData)
 // *********************insert****************************
 if(action=='insertMasterProduct')
 {
 $vm.$store.commit('database',prepareData)
 }
+if(action=='insertQasForm1')
+{
+  $vm.$store.commit('qualityAssuranceFormOne',prepareData.data)
+}
+if(action=='insertQasForm2')
+{
+  $vm.$store.commit('qualityAssuranceFormTwo',prepareData.data)
+}
+
+
 if(action=='insertMasterBranches')
 {
 $vm.$store.commit('database',prepareData)
@@ -147,6 +162,15 @@ if(action=='getQualityAssuranceFormOne')
   return $vm.$store.state.interplex.qualityAssuranceFormOne;
 
 }
+if(action=='getApproverList')
+{
+  //local reference
+
+  return $vm.$store.state.interplex.qasForm1;
+
+}
+
+
 
 if(action=='getUsersTotal')
 {
@@ -163,10 +187,11 @@ if(action=='getQasFormOne')
 {
 
   return {
-    approved:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='approved').length,
-    acceptedOnDeviation:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='acceptedOnDeviation').length,
-    rejected:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='rejected').length,
-    ppap:_.filter($vm.$store.state.interplex.users,(x)=>x.approver_status=='ppap').length,
+    pending :_.filter($vm.$store.state.interplex.qasForm1,(x)=>x.status=='pending').length,
+    approved:_.filter($vm.$store.state.interplex.qasForm1,(x)=>x.status=='approved').length,
+    acceptedOnDeviation:_.filter($vm.$store.state.interplex.qasForm1,(x)=>x.status=='acceptedOnDeviation').length,
+    rejected:_.filter($vm.$store.state.interplex.qasForm1,(x)=>x.status=='rejected').length,
+    ppap:_.filter($vm.$store.state.interplex.qasForm1,(x)=>x.status=='ppap').length,
     }
 
 }
@@ -184,7 +209,7 @@ if(action=='getMaseterProductList')
 }
 if(action=='getUsersList')
 {
-console.log($vm.$store.state.interplex.masterUsers)
+// console.log($vm.$store.state.interplex.masterUsers)
   return $vm.$store.state.interplex.masterUsers;
 
 }
@@ -195,8 +220,9 @@ if(action=='getFileTypeList')
 
 }
 if(action=='getProductConfigValue')
-{console.log("master products,",$vm.$store.state.interplex.masterProducts)
-console.log("payload data",prepareData.data)
+{
+//   console.log("master products,",$vm.$store.state.interplex.masterProducts)
+// console.log("payload data",prepareData.data)
   return _.filter($vm.$store.state.interplex.masterProducts,(x)=>x['rmcode']==prepareData.data[defaultFields.partNo]);
 
 }
@@ -272,15 +298,15 @@ console.log(payload.data)
 if(action=='login'){
 
   var check_users=  _.filter($vm.$store.state.interplex.masterUsers,(eachUser)=>{
-    console.log('each user',eachUser)
+    // console.log('each user',eachUser)
     return eachUser.username==prepareData.data.username&&eachUser.password==prepareData.data.password
     
       })
     
 
-  console.log("username",prepareData.data.username)
-  console.log("password,",prepareData.data.password)
-  console.log($vm.$store.state.interplex.masterUsers)
+  // console.log("username",prepareData.data.username)
+  // console.log("password,",prepareData.data.password)
+  // console.log($vm.$store.state.interplex.masterUsers)
 
 
   if(check_users.length!=0){
@@ -386,8 +412,8 @@ export function productQasForm2ConfigSArray($vm,sapProductArray=[]){
 
   return _.map(sapProductArray,(sapProduct)=>{
 
-    console.log('sapProduct',sapProduct)
-    console.log("====",productQasForm2ConfigSingle($vm,sapProduct))
+    // console.log('sapProduct',sapProduct)
+    // console.log("====",productQasForm2ConfigSingle($vm,sapProduct))
     return productQasForm2ConfigSingle($vm,sapProduct)
   })
 }
@@ -412,8 +438,8 @@ export function productQasForm2ConfigSingle($vm,sapObject={}){
 
  var productFormat=$vm.$store.state.interplex.configQasForm2Format;
  var productObject=database($vm,'getProductConfigValue',sapObject)
- console.log("productFormat,",productFormat)
- console.log("productObject",productObject)
+//  console.log("productFormat,",productFormat)
+//  console.log("productObject",productObject)
 
  if(productObject.length==0){
   productObject={}
@@ -427,7 +453,7 @@ export function productQasForm2ConfigSingle($vm,sapObject={}){
 
 
 
-    console.log('formate',format)
+    // console.log('formate',format)
     if(format.name=='validation'){
       object[format.name]=format.rule;
     
@@ -587,6 +613,69 @@ return _.map(groupBy(array, function (item) {
 }));
 }
 
+
+export function skiplevel($vm,array){
+console.log("sk array",array)
+  var groupSkipLevel=_.map(groupBy(array, function (item) {
+    return [item[defaultFields.partNo]];
+  }),(x)=>{
+
+    return {
+      partNo:x[0][defaultFields.partNo],
+      skipLevelProducts:x
+      };
+  });
+
+  
+//sort by date
+var groupSkipLevelsort=_.map(groupSkipLevel,(skiplevel)=>{
+  //part no
+  var partNo={}
+  partNo[defaultFields.partNo]=skiplevel.partNo;
+  skiplevel['skipLevelCount']=0
+var originalProduct=database($vm,'getProductConfigValue',partNo);
+if(originalProduct.length!=0){
+  skiplevel['skipLevelCount']=parseFloat(originalProduct[0].skiplevel||0);
+ 
+} 
+ 
+  skiplevel['skipLevelProducts']=_.orderBy(skiplevel.skipLevelProducts, [(obj) => new Date(obj[defaultFields.LAST_GR_DATE_EXT])], ['asc'])
+return skiplevel
+})
+//part no check
+var markSkipLevelsort=_.map(groupSkipLevelsort,(markSkipLevel)=>{
+var skipLevel=markSkipLevel['skiplevelCount'];  
+var skiplevelEnd=skipLevel+1;
+ (markSkipLevel.skipLevelProducts).forEach((value,index)=>{
+  value['skiplevel_status']=true;
+  if(index==0||skiplevelEnd==index){
+value['skiplevel_status']=false;
+  }
+      if(skipLevel==0){
+                  value['skiplevel_status']=false;
+      }
+return value
+})
+
+return markSkipLevel
+})
+
+var skipLevelResult=[];
+
+(markSkipLevelsort).forEach(element => {
+console.log("el=>",element)
+  skipLevelResult.push(...element.skipLevelProducts)
+});
+
+
+
+console.log("++++markskiplevel sort++++",markSkipLevelsort)
+
+
+console.log("++++markskiplevel sort++++",skipLevelResult)
+// console.log("skip level sort",groupSkipLevelsort)
+
+}
 export function choose_date_type(action){
   var from_date=moment().format("YYYY-MM-DD"),to_date=moment().format("YYYY-MM-DD");
       if(action=='today'){

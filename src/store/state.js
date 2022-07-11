@@ -7,6 +7,83 @@ const state = {
 	,
 
 report:{
+
+qasForm1:[
+	{
+		text:'Supplier Name',
+		value:'supplier_name'
+
+	}	,
+	{
+		text:'invoice_no',
+		value:'invoice_no'
+
+	},	{
+		text:'invoice_date',
+		value:'invoice_date'
+
+	},	{
+		text:'invoice_qty',
+		value:'invoice_qty'
+
+	},	{
+		text:'ir',
+		value:'ir'
+
+	},	{
+		text:'grn_no',
+		value:'grn_no'
+
+	},	{
+		text:'grn_date',
+		value:'grn_date'
+
+	},	{
+		text:'eds',
+		value:'eds'
+
+	},	{
+		text:'rm',
+		value:'rm'
+
+	},	{
+		text:'received_qty',
+		value:'received_qty'
+
+	},	{
+		text:'product_name',
+		value:'product_name'
+
+	}
+	,	{
+		text:'form_format',
+		value:'form_format'
+
+	}
+	,	{
+		text:'remarks',
+		value:'remarks'
+
+	}
+	,	{
+		text:'status',
+		value:'status'
+
+	}
+	,
+	{
+		text:'User Type',
+		value:'roletype'
+
+	},
+		{
+		text:'approved_by',
+		value:'approved_by'
+
+	},
+
+],
+
 fileType:[
 	{
 		text:'title',
@@ -169,7 +246,10 @@ users:[
 
 interplex:{
 	currentBranch:'',
+	qasForm1:[],//test
+	qasForm2:[],//test
     user:{
+		id:'',
         name:'',
         branch:'',
         roletype:'operator',
@@ -768,7 +848,8 @@ note:''
 	masterProducts:[],
 	masterUsers:[
         {
-            name:'operator',
+			id:1,
+			name:'operator',
             branch:'',
             roletype:'operator',
             username:'operator',
@@ -780,6 +861,7 @@ note:''
 
         },
         {
+			id:2,
             name:'approver',
             branch:'',
             roletype:'approver',
@@ -793,6 +875,7 @@ note:''
         },
         
         {
+			id:3,
             name:'admin',
             branch:'',
             roletype:'admin',

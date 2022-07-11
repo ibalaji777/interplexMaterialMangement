@@ -19,6 +19,22 @@
 
 <h3 style="margin-top:10px">Status</h3>
 <h5 style="text-align:right"><date @date="selected_date"></date></h5>
+
+    <div style="display:flex;margin-top:10px">
+        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right: 10px;
+    height: 100px;
+    font-weight: 800;
+    width: 50%;
+    background: brown;
+    width: 100%;
+    color: wheat;">
+           <div style="text-align:center">
+            {{approverStatus.pending}}<br>
+            Pending
+            </div>
+
+</div>
+    </div>
     <div style="display:flex;margin-top:10px">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
            <div style="text-align:center">
@@ -53,6 +69,7 @@
 
 </div>
 </div>
+
 
 
 <!--*******************USER INSERT******************* -->
@@ -166,7 +183,7 @@ users(){
 var $vm=this;
 return core.database(this,'getUsersTotal')
 },
-approverStatus(){
+    approverStatus(){
 var $vm=this;
 return core.database(this,'getQasFormOne')
 },

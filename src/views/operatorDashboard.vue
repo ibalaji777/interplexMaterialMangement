@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- eslint-disable -->
     <h3>Operator Dashboard</h3>
     <div style="display:flex;margin-top:10px">
         <div @click="$router.push({name:'operatorInsert'})" class="insertProduct" style="margin-right:10px">
@@ -11,34 +12,52 @@
 </div>
 </div>
 <h3 style="margin-top:10px">Status</h3>
-<h5 style="text-align:right">Today</h5>
+<h5 style="text-align:right"><date @date="selected_date"></date></h5>
+
     <div style="display:flex;margin-top:10px">
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;width:50%">
+        <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right: 10px;
+    height: 100px;
+    font-weight: 800;
+    width: 50%;
+    background: brown;
+    width: 100%;
+    color: wheat;">
            <div style="text-align:center">
-            5<br>
-            Approved
+            {{approverStatus.pending}}<br>
+            Pending
             </div>
 
 </div>
-   <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;width:50%">
+    </div>
+    <div style="display:flex;margin-top:10px">
+        <div @click="$router.push({name:'approverList',params: { status:'approved' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
            <div style="text-align:center">
-            5<br>
+            {{approverStatus.approved}}<br>
+
+            Approved
+            </div> 
+
+</div>
+   <div @click="$router.push({name:'approverList',params: { status:'acceptedOnDeviation' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: darksalmon;">
+           <div style="text-align:center">
+            {{approverStatus.acceptedOnDeviation}}<br>
+
             Accepted on Deviation
             </div>
 
 </div>
 </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;width:50%">
+        <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
-            5<br>
+            {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
-   <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;width:50%">
+   <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
-            5<br>
+            {{approverStatus.ppap}}<br>
             PPAP
             </div>
 
@@ -46,19 +65,31 @@
 </div>
 
 
-
   </div>
 </template>
 <script>
+/*eslint-disable*/
+import * as core from '../lib/core.js'
 export default {
   data(){
     return {
-        productInsertDialog:false,
+
+      productInsertDialog:false,
         galleryDialog:false,
         headerFileDialog:false,
     }
   },
+  computed:{
+    approverStatus(){
+var $vm=this;
+return core.database(this,'getQasFormOne')
+},
+
+  },
   methods:{
+    selected_date(date){
+console.log(date)
+    },
     addProduct(){
         var $vm=this;
 $vm.productInsertDialog=true

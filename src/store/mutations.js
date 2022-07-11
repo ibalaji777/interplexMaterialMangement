@@ -92,8 +92,23 @@ state.interplex.selectedPartNoItem=payload;
 
 
 state.interplex.user=payload.user;
-	}
+	},
+qualityAssuranceFormOne(state,payload){
+state.interplex.qasForm1.push(payload)
+},
 
+qualityAssuranceFormTwo(state,payload){
+	state.interplex.qasForm2.push(payload)
+
+	},
+				
+defaultValue(state,payload){
+
+
+	state.interplex.tempInvoice={}
+	state.interplex.qualityAssuranceFormOne=[]
+
+}
 
 };
 

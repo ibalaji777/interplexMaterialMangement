@@ -16,6 +16,8 @@ import operatorQsReport from '../views/operatorQsReport.vue'
 import verifierDashboard from '../views/verifierDashboard.vue'
 import verifierList from '../views/verifierList.vue'
 import verifierView from '../views/verifierView.vue'
+import approverList from '../views/approverList.vue'
+
 
 import adminMasterProductInsert from '../views/adminMasterProductInsert.vue'
 import adminDashboard from '../views/adminDashboard.vue'
@@ -187,6 +189,12 @@ const routes = [
 		component:adminDashboard 
 	},
 	
+	,
+	{
+		path: '/approverList',
+		name: 'approverList',
+		component:approverList 
+	},
 	
 
 	{
