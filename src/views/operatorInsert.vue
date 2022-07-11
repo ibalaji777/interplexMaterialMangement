@@ -16,7 +16,7 @@
     text-align: center;">Invoice with Products</h3>
 <div class="productContainer">
 
-<div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
+<div :class="{skiplevel:item.skiplevel_status}"  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
    NAME:  {{item['Vendor Name']}}<br>
    DATE: {{item["LAST_GR_DATE_EXT"]}}<br>
    Part NO: {{item["OLMAT"]}}<br>
@@ -591,8 +591,8 @@ var main_list=core.createProductList($vm,checked);
 
 //skiplevel check
 var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
-console.log("main product format",main_list)
-$vm.$store.commit('addToQualitFormOne',_.cloneDeep(main_list))
+console.log("main product format",skiplevel)
+$vm.$store.commit('addToQualitFormOne',_.cloneDeep(skiplevel))
 $vm.$store.commit('tempInvoice',createInvoice)
 // console.log("Create Invoice ",createInvoice)
 
@@ -752,6 +752,8 @@ border: 1px dashed red;
     background: darkturquoise;
     margin: 5px;
 } */
-
+.skiplevel{
+   background: #d22525 !important;
+}
 
 </style>

@@ -645,7 +645,7 @@ return skiplevel
 //part no check
 var markSkipLevelsort=_.map(groupSkipLevelsort,(markSkipLevel)=>{
 var skipLevel=markSkipLevel['skiplevelCount'];  
-var skiplevelEnd=skipLevel+1;
+var skiplevelEnd=skipLevel-1;
  (markSkipLevel.skipLevelProducts).forEach((value,index)=>{
   value['skiplevel_status']=true;
   if(index==0||skiplevelEnd==index){
@@ -675,6 +675,7 @@ console.log("++++markskiplevel sort++++",markSkipLevelsort)
 console.log("++++markskiplevel sort++++",skipLevelResult)
 // console.log("skip level sort",groupSkipLevelsort)
 
+return skipLevelResult;
 }
 export function choose_date_type(action){
   var from_date=moment().format("YYYY-MM-DD"),to_date=moment().format("YYYY-MM-DD");
