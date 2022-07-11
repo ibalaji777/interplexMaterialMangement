@@ -4,7 +4,7 @@
 <br>
 <div style="    display: flex;
     flex-wrap: wrap;">
-<div style="width:32.5%;margin:1px" v-for="(header,index) in selectedPartyNoItem.headerConfigFormat" :key="'header'+index">
+<div style="width:32.5%;margin:1px" v-for="(header,index) in selectedPartNoItem.headerConfigFormat" :key="'header'+index">
 
 <!-- <input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" > -->
 
@@ -83,7 +83,7 @@ OBSERVATION
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-
+<h3>QAS FORM LIST</h3>
 <div style="    height: 91vh;
     overflow: scroll;
 ">
@@ -99,24 +99,24 @@ OBSERVATION
                 <th>Error</th> -->
 
             </tr>
-<tr class="rowColor" v-for="(productFormat , index) in selectedPartyNoItem.productConfigFormat" :key="'product'+index">
+<tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
     <td>{{index+1}}</td>
 <td>
-    <input placeholder="coild # (Batch No)"  class="interInput"   type="text" >
-    <input placeholder="sup coil #(Lot No)"  class="interInput"   type="text" >
-    <input  class="interInput"   type="text" placeholder="Width (W/KG)" >
+    <input  v-model="productFormat.batch_no" placeholder="coild # (Batch No)"  class="interInput"   type="text" >
+    <input v-model="productFormat.lot_no" placeholder="sup coil #(Lot No)"  class="interInput"   type="text" >
+    <input v-model="productFormat.width"  class="interInput"   type="text" placeholder="Width (W/KG)" >
     <div style="display:flex">
     
-    <input  class="interInput"   type="text" placeholder="Width One" >
-    <input  class="interInput"   type="text" placeholder="Width Two" >
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_one"  class="interInput"   type="text" placeholder="Width One" >
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_two"  class="interInput"   type="text" placeholder="Width Two" >
     </div>
         <div style="display:flex">
-    <input  class="interInput"   type="text" placeholder="Thick One" >
-    <input  class="interInput"   type="text" placeholder="Thick Two" >
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_one"  class="interInput"   type="text" placeholder="Thick One" >
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_two" class="interInput"   type="text" placeholder="Thick Two" >
     </div>
 </td>
 <td style="background:white;padding:9px">
-    <v-icon>fa-check</v-icon>
+    <v-icon class="defaultErorr" :class="{errorStatus:productFormat.error_status}">fa-check</v-icon>
 </td>
 <!-- <td><input  class="interInput"   type="text" ></td>
 <td><input  class="interInput"   type="text" ></td>
@@ -157,21 +157,23 @@ OBSERVATION
 <div style="    height: 91vh;
     overflow: scroll;
 ">
-        <table>
+        <table style="width:100%">
             <tr>
                 <th></th>
-                <th></th>
+                <!-- <th></th> -->
             </tr>
-<tr  v-for="(productFormat , index) in selectedPartyNoItem.productConfigFormat" :key="'product'+index">
+<tr  v-for="(productFormat , index) in selectedPartNoItem.productConfigFormat" :key="'product'+index">
 
 <td >
   <span style="font-size:14px">{{productFormat.label}}</span>
     <input  @input="watchValue($event,productFormat)"   class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
 </td>
-<td style="padding:15px" >
+<!-- <td style="padding:15px" >
     <div style="text-align:center">
     <v-icon v-if="productFormat.validation">fa-check</v-icon>
-    </div></td>        </tr>
+    </div></td>  
+     -->
+          </tr>
         </table>
         </div>
         <!-- <div v-for="(productFormat , index) in productsFormat" :key="'product'+index" >
@@ -283,15 +285,17 @@ export default {
         }
     },
     computed:{
-        selectedPartyNoItem(){
+        selectedPartNoItem(){
 
-return this.$store.state.interplex.selectedPartyNoItem;
+return this.$store.state.interplex.selectedPartNoItem||{};
         },
 takePhoto:{
     get(){
 var $vm=this;
-var ref=$vm.$store.state.interplex.selectedPartyNoItem.ref;
-        return ($vm.$store.state.interplex.tempInvoice[ref].gallery)||[]//selectedPartyNoItem
+var ref=$vm.$store.state.interplex.selectedPartNoItem.ref;
+if($vm.$store.state.interplex.tempInvoice[ref])
+return ($vm.$store.state.interplex.tempInvoice[ref].gallery)||[]//selectedPartNoItem
+return []
     },
     set(value){
         console.log(value)
@@ -301,9 +305,11 @@ var ref=$vm.$store.state.interplex.selectedPartyNoItem.ref;
 remarks:{
   get(){
 var $vm=this;
-var ref=$vm.$store.state.interplex.selectedPartyNoItem.ref;
-        return ($vm.$store.state.interplex.tempInvoice[ref].remarks)||''//selectedPartyNoItem
-    },
+var ref=$vm.$store.state.interplex.selectedPartNoItem.ref;
+if($vm.$store.state.interplex.tempInvoice[ref])
+return ($vm.$store.state.interplex.tempInvoice[ref].remarks)||''//selectedPartNoItem
+return ''
+},
     set(value){
         console.log(value)
     }
@@ -312,10 +318,24 @@ var ref=$vm.$store.state.interplex.selectedPartyNoItem.ref;
     },
     mounted(){
         var $vm=this;
-        console.log("qs selectedPartyNoItem")
-console.log($vm.$store.state.interplex.selectedPartyNoItem)
+        console.log("qs selectedPartNoItem")
+console.log($vm.$store.state.interplex.selectedPartNoItem)
     },
     methods:{
+        checkErrorStatus(event,index,product){
+var $vm=this;
+
+var scope=core.validateProductDataset($vm);
+scope['width_one']=core.onlyNumbers(product['width_one'])?parseFloat(product['width_one']):0
+console.log("scope",scope)
+if(product.validation!=''){
+console.log(math.evaluate(product.validation,scope))
+product.error_status=math.evaluate(product.validation,scope) 
+
+}else
+console.log("validatiion failed please add validation")
+
+        },
                    async takePicture() {
             var $vm=this;
   const image = await Camera.getPhoto({
@@ -350,4 +370,11 @@ var $vm=this;
 <style lang="scss">
 @import url('../assets/interplex.scss');
 
+.defaultErorr{
+    color:red !important;
+}
+.errorStatus{
+
+    color:green !important
+}
 </style>

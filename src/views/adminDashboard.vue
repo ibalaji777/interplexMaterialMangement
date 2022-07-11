@@ -162,6 +162,7 @@ Total Products
   <div @click="$router.push({name:'adminCreateBranch'})" class="interList">Create Branches </div>
   <div @click="$router.push({name:'adminCreateFileType'})" class="interList">Create Upload Types </div>
   <div @click="$router.push({name:'adminQualityAssuranceHeader'})" class="interList">Create Header & Config</div>
+    <div @click="$router.push({name:'qasForm2Config'})" class="interList">QAS Form 2 Product & Config</div>
 </div>
 
 </div>

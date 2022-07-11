@@ -5,9 +5,9 @@
 <v-icon>fa-file</v-icon>
 </div>
 
-<div @click="addProduct" class="insertProduct">
+<!-- <div @click="addProduct" class="insertProduct">
 <v-icon>fa-plus</v-icon>
-</div>
+</div> -->
 </div>
 <h3 style="background: red;
     color: white;
@@ -16,7 +16,7 @@
     text-align: center;">Invoice with Products</h3>
 <div class="productContainer">
 
-<div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartyNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
+<div  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
    NAME:  {{item['Vendor Name']}}<br>
    DATE: {{item["DATE_EXT"]}}<br>
    Part NO: {{item["OLMAT"]}}<br>
@@ -65,7 +65,7 @@ Items
     bottom: 25px;
     background: linear-gradient(45deg, red, #c50303);
     color: white !important;
-" outlined>
+" outlined @click="submit">
     Submit To Approval
 </v-btn>
 </div>
@@ -417,23 +417,128 @@ checkAllSelected:true,
 // $vm.headerFileUploader()
   },
   computed:{
-
 getQualityAssuranceFormOne:{
-    get(){
-      return  core.database(this,'getQualityAssuranceFormOne')
+
+get(){
+        var result=core.database(this,'getQualityAssuranceFormOne')
+console.log("===getQualityAssuranceFormOne===",result)
+return  result;
     },
     set(value){
 console.log(value)
-
     }
+},
+tempInvoice(){
+var $vm=this;
+var result=$vm.$store.state.interplex.tempInvoice
+return result;
 }
   },
   methods:{
-    selectedPartyNoItem(item,index){
+    submit(){
+var $vm=this;
+console.log("====submit====")
+console.log($vm.tempInvoice)
+var invoices=[]
+_.each($vm.tempInvoice, ( val, key ) => { 
+var invoice={}
+console.log( key, val ); 
+invoice['ref']=key;
+invoice['gallery']=val['gallery'];
+invoice['remarks']=val['remarks'];
+
+var qasForm1Prod=_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
+
+invoice['qasForm1Prod']=qasForm1Prod;//_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
+invoice['supplier_name']='';
+invoice['invoice_no']='';
+invoice['invoice_date']='';
+invoice['invoice_qty']='';
+invoice['ir']='';
+invoice['date']='';
+invoice['grn_no']='';
+invoice['grn_date']='';
+invoice['rmcode']='';
+invoice['eds']='';
+invoice['rm']='';
+invoice['received_qty']='';
+invoice['product_name']='';
+invoice['form_format']='';
+invoice['comment']='';
+invoice['duedate']='';
+invoice['observation_format']='';
+invoice['header_format']='';
+invoice['remarks']='';
+invoice['status']='';
+invoice['approved_by']='';
+
+if(qasForm1Prod.length!=0){
+// ***********************************
+var headerData=qasForm1Prod[0].headerConfigFormat
+console.log("++++header++++",headerData)
+_.map(headerData,(header)=>{
+    invoice[header.name]=header.value;
+   })
+// ***********************************
+
+
+invoice['qasForm1New']=_.map(qasForm1Prod,(product)=>{
+var object={};
+_.map(product.headerConfigFormat,(header)=>{
+    object[header.name]=header.value;
+})
+ object['observation_format']=product.productConfigFormat
+ object['header_format']=product.headerConfigFormat
+
+//some fiels lag 
+   object['qasForm2New']=_.map(product.qasForm2,(qasform2)=>{
+    // qasform2
+
+    return Object.assign(core.dbFormate.qasform2,qasform2)
+   });
+//Object.assign(core.dbFormate.qasform2)
+//asign default values 
+    return Object.assign(core.dbFormate.qasForm1,object) ;
+
+})
+
+
+
+// invoice['supplier_name']='';
+// invoice['invoice_no']='';
+// invoice['invoice_date']='';
+// invoice['invoice_qty']='';
+// invoice['ir']='';
+// invoice['date']='';
+// invoice['grn_no']='';
+// invoice['grn_date']='';
+// invoice['rmcode']='';
+// invoice['eds']='';
+// invoice['rm']='';
+// invoice['received_qty']='';
+// invoice['product_name']='';
+// invoice['form_format']='';
+// invoice['comment']='';
+// invoice['duedate']='';
+// invoice['observation_format']='';
+// invoice['header_format']='';
+// invoice['remarks']='';
+// invoice['status']='';
+// invoice['approved_by']='';
+
+
+}
+
+    invoices.push(invoice)
+
+} );
+console.log(invoices)
+    },
+    selectedPartNoItem(item,index){
         var $vm=this;
         console.log("selected item")
         console.log(item)
-this.$store.commit('selectedPartyNoItem',item)
+this.$store.commit('selectedPartNoItem',item)
     },
     addToQualitFormOne(){
 var $vm=this;
@@ -444,6 +549,7 @@ var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create product list
 var main_list=core.createProductList($vm,checked);
 
+console.log("main product format",main_list)
 $vm.$store.commit('addToQualitFormOne',_.cloneDeep(main_list))
 $vm.$store.commit('tempInvoice',createInvoice)
 // console.log("Create Invoice ",createInvoice)
@@ -482,8 +588,13 @@ $vm.checkDialog=false;
   var data = $vm.to_json(workbook);
   console.log("+++result+++")
   console.log(data)
+ var dataMap= _.map(data,(x)=>{
+
+x['isValidProd']=false;
+    return x;
+  })
 // ----------------------------------------------------
-var headerFile=_.map(core.headerFileGroup(data),(x)=>{
+var headerFile=_.map(core.headerFileGroup(dataMap),(x)=>{
 x['selected']=true;
 x['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
 x['isExist']=false;//validate server side

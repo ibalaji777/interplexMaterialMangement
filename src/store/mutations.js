@@ -41,7 +41,11 @@ if(payload.action=='saveProductConfig')
 	state.interplex.configProductsFormat=payload.data
 }
 
+if(payload.action=='saveQasForm2Config')
+{
+	state.interplex.configQasForm2Format=payload.data
 
+}
 
 }
 
@@ -79,9 +83,15 @@ state.interplex.qualityAssuranceFormOne.push(...payload)
 		// state.interplex.tempInvoice=payload
 Vue.set(state.interplex,'tempInvoice',payload)
 	},
-	selectedPartyNoItem(state,payload){
+	selectedPartNoItem(state,payload){
 
-state.interplex.selectedPartyNoItem=payload;
+state.interplex.selectedPartNoItem=payload;
+	}
+	,
+	setUser(state,payload){
+
+
+state.interplex.user=payload.user;
 	}
 
 

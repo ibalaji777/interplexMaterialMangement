@@ -1,13 +1,13 @@
 <template>
- <v-app>
+ <v-app :class="{bgRed:['index','branches','login'].includes($route.name)}">
   <router-view name="outer"></router-view>
   <v-app-bar
    app
    clipped-left
-   
+v-if="!['index','branches','login'].includes($route.name)"
    color="#ff0000"
   >
-   <v-app-bar-nav-icon v-if="['index','adminDashobard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
+   <v-app-bar-nav-icon v-if="['index','adminDashboard','operatorDashboard','verifierDashboard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
    </v-app-bar-nav-icon>
    <v-icon v-else @click="$router.go(-1)">fa-chevron-left</v-icon>
 
@@ -37,23 +37,6 @@
    </v-container>
   </v-main>
 
-  <div
-
-   style="position: absolute;
-    top: 4px;
-    left: 0px;cursor:pointer"
-  >
-   <div
-    style="background: orange;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 0px 15px 15px 0px;cursor:pointer"
-   >
-    <v-icon style="font-size: 14px;color:white">
-     fa-bars
-    </v-icon>
-   </div>
-  </div>
 
   
  </v-app>
@@ -206,5 +189,10 @@ html::-webkit-scrollbar {
  position: absolute;
  left: 50%;
  transform: translate(-50%, -50%);
+}
+
+.bgRed
+{
+  background:red;
 }
 </style>

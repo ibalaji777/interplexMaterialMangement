@@ -38,7 +38,7 @@ fileType:[
 			class:'interplexHeader'
 	
 		},
-		,
+		
 		{
 			text:'RM Code',
 			value:'rmcode',
@@ -169,7 +169,19 @@ users:[
 
 interplex:{
 	currentBranch:'',
-	selectedPartyNoItem:{},
+    user:{
+        name:'',
+        branch:'',
+        roletype:'operator',
+        username:'',
+        password:'',
+        email:'',
+        phone:'',
+         address:'',
+         status:'accepted'
+
+    },
+	selectedPartNoItem:{},
 	tempInvoice:{},//temprory
 	configProductsFormat:[
 
@@ -533,7 +545,7 @@ note:''
 			name:'invoice_date',//column name
 			value:'',//default value
 			show:true,
-			map:'',
+			map:'DATE_EXT',
 			mapFrom:'header',//header or product
 			default:true,
 			note:''
@@ -544,7 +556,7 @@ note:''
 			name:'invoice_qty',//column name
 			value:'',//default value
 			show:true,
-			map:'',
+			map:'invoiceQty',
 			mapFrom:'header',//header or product
 			default:true,
 			note:'No Need to Map'
@@ -576,7 +588,7 @@ note:''
 			name:'grn_date',//column name
 			value:'',//default value
 			show:true,
-			map:'',
+			map:'LAST_GR_DATE_EXT',
 			mapFrom:'header',//header or product
 			default:true,
 			note:''
@@ -621,10 +633,178 @@ note:''
 		},		
 		
 	],
+	configQasForm2Format:[
+
+			{
+			label:'Coil # Batch No',//input field label
+			name:'batch_no',//column name
+			value:'',//default value
+			show:true,
+			map:'BATCH',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		},
+		{
+			label:'Sup #(Lot NO)',//input field label
+			name:'lot_no',//column name
+			value:'',//default value
+			show:true,
+			map:'PONO',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		},
+		{
+			label:'Width ',//input field label
+			name:'width',//column name
+			value:'',//default value
+			show:true,
+			map:'QTY',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		},
+		{
+			label:'Width One',//input field label
+			name:'width_one',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		},
+		{
+			label:'Width Two',//input field label
+			name:'width_two',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		},		{
+			label:'Thick One',//input field label
+			name:'thick_one',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		},				
+		{
+			label:'Thick Two',//input field label
+			name:'thick_two',//column name
+			value:'',//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'',
+			validation:false,
+			rule:'',
+
+		}			
+		,				
+		{
+			label:'Validation',//input field label
+			name:'validation',//column name
+			value:'',//default value
+			show:false,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'For Overall Verification from qasform1',
+			validation:false,
+			rule:'width_sup_one <= width_one <= width_sup_two',
+
+		},
+
+							
+		{
+			label:'Indicator(Error)',//input field label
+			name:'error_status',//column name
+			value:false,//default value //false(error) or true(no error)
+			show:false,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'PreDefined configuration,No need to change',
+			validation:false,
+			rule:'',
+
+		},					
+	],
     masterBranches:[
+		{
+			name:'Chennai',
+			description:''
+		},
+		{
+			name:'Bangalore',
+			description:''
+		}
 ],
 	masterProducts:[],
-	masterUsers:[],
+	masterUsers:[
+        {
+            name:'operator',
+            branch:'',
+            roletype:'operator',
+            username:'operator',
+            password:'operator',
+            email:'',
+            phone:'',
+             address:'',
+             status:'accepted'
+
+        },
+        {
+            name:'approver',
+            branch:'',
+            roletype:'approver',
+            username:'approver',
+            password:'approver',
+            email:'',
+            phone:'',
+             address:'',
+             status:'accepted'
+
+        },
+        
+        {
+            name:'admin',
+            branch:'',
+            roletype:'admin',
+            username:'admin',
+            password:'admin',
+            email:'',
+            phone:'',
+             address:'',
+             status:'accepted'
+
+        }
+    ],
 	masterUploadTypes:[],
 	masterHeaderTypes:[],
 	qualityAssuranceFormOne:[],

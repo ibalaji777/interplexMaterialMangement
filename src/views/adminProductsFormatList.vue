@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+        <!-- {{$store.state.report.masterProducts}} -->
 <!-- eslint-disable -->
          <v-data-table
       :headers="$store.state.report.masterProducts"

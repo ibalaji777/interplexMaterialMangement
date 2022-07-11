@@ -11,7 +11,7 @@ Vue.use(Vuex);
 
 const vuexLocalStorage = new VuexPersist({
 	// strictMode:true,
-	key: '777777angalware777777',
+	key: '1',
 	storage:window.localStorage,
 	reducer: (state) =>{
 	

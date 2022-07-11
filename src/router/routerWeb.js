@@ -18,7 +18,7 @@ import verifierList from '../views/verifierList.vue'
 import verifierView from '../views/verifierView.vue'
 
 import adminMasterProductInsert from '../views/adminMasterProductInsert.vue'
-import adminDashobard from '../views/adminDashobard.vue'
+import adminDashboard from '../views/adminDashboard.vue'
 import adminDashboardList from '../views/adminDashboardList.vue'
 import adminDashboardView from '../views/adminDashboardView.vue'
 import adminQualityAssuranceHeader from '../views/adminMasterHeaderInsert.vue'
@@ -39,6 +39,8 @@ import photoCapture from '../views/photoCapture.vue'
 import nativePhotoCapture from '../views/nativePhotoCapture.vue'
 
 
+import qasForm2Config from '../views/qasForm2Config.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -51,15 +53,15 @@ const routes = [
 	//verifierList
 	//verifierView
 
-	//adminDashobard
-	//adminDashobardList
+	//adminDashboard
+	//adminDashboardList
 	//adminDashboardView
 	//adminDashboardOtherConfig
 
 	{
 		path: '/',
 		name: 'index',
-		component:adminMasterProductInsert 
+		component:branches 
 	},
 	{
 		path: '/photoCapture',
@@ -135,6 +137,12 @@ const routes = [
 
 
 //------------------------------------
+,
+	{
+		path: '/qasForm2Config',
+		name: 'qasForm2Config',
+		component:qasForm2Config 
+	},
 	{
 		path: '/operatorDashboard',
 		name: 'operatorDashboard',
@@ -175,8 +183,8 @@ const routes = [
 	},
 	{
 		path: '/adminDashboard',
-		name: 'adminDashobard',
-		component:adminDashobard 
+		name: 'adminDashboard',
+		component:adminDashboard 
 	},
 	
 	

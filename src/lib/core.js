@@ -7,7 +7,62 @@ export var defaultFields={
   supplierName:'Vendor Name',
   invoiceDate:'LAST_GR_DATE',
   invoiceNo:'Invoice No'
+  
 }
+
+
+export const dbFormate={
+
+
+  qasForm1:{
+    // id 
+    operator_id:'',
+    supplier_name:'',
+    invoice_no:'',
+    invoice_date:'',
+    invoice_qty:'',
+    ir:'',
+    // date
+    grn_no:'',
+    grn_date:'',
+    rmcode:'',//(part_no)
+    eds:'',
+    rm:'',
+    received_qty:'',
+    product_name:'',
+    form_format:'',
+    comment:'',
+    duedate:'',
+    observation_format:[],//(json)
+    header_format:[],//(json)
+    remarks:'',
+    status:'', //(approved or acceptedOnDeviation or ppap)
+    approved_by:'',
+      },
+
+qasform2:{
+  // id
+qas_form_one_id:'',//write backend
+rmcode:'',//part_no
+eds:'',
+supplier_name:'',
+qty:'',
+grn_no:'',
+grn_date:'',//date
+coil:'',
+coil_weight:'',
+width_one:'',
+width_two:'',
+thickness_one:'',//min
+thickness_two:'',//max
+lot_no:'',// supplier_coil:'',//(lot no)
+validation:''
+}
+
+}
+
+
+
 export function database($vm,action,payload={}){
 
   var prepareData={
@@ -48,6 +103,12 @@ if(action=='saveProductConfig')
 $vm.$store.commit('database',prepareData)
 }
 
+if(action=='saveQasForm2Config')
+{
+$vm.$store.commit('database',prepareData)
+}
+
+
 
 
 // *********************Get****************************
@@ -63,8 +124,14 @@ if(action=='getMasterHeaderConfig')
 {
   return _.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
 
- 
 }
+if(action=='getMasterQasForm2Config')
+{
+  return _.cloneDeep($vm.$store.state.interplex.configQasForm2Format);
+
+}
+
+
 
 if(action=='getMasterProductsTotal')
 {
@@ -200,6 +267,45 @@ if(action=='insertHeaderTypes')
 {
 console.log(payload.data)
 // return $vm.$store.state.interplex.masterBranches;
+}
+
+if(action=='login'){
+
+  var check_users=  _.filter($vm.$store.state.interplex.masterUsers,(eachUser)=>{
+    console.log('each user',eachUser)
+    return eachUser.username==prepareData.data.username&&eachUser.password==prepareData.data.password
+    
+      })
+    
+
+  console.log("username",prepareData.data.username)
+  console.log("password,",prepareData.data.password)
+  console.log($vm.$store.state.interplex.masterUsers)
+
+
+  if(check_users.length!=0){
+var user=check_users[0];
+    $vm.$store.commit('setUser',user);
+
+    if(user.roletype=='operator'){
+      $vm.$router.push({name:'operatorDashboard'})
+    }
+
+    if(user.roletype=='approver'){
+      $vm.$router.push({name:'verifierDashboard'})
+    }
+
+    if(user.roletype=='admin'){
+      $vm.$router.push({name:'adminDashboard'})
+    }
+
+  }
+  else{
+
+    $vm.$alert("User Not Found")
+  }
+
+
 
 }
 
@@ -241,19 +347,29 @@ export function observation($vm){
   }
 }
 
-export function headerConfigFormat($vm,uploadedFileObject){
+export function headerConfigFormat($vm,sapObject){
 
 var header=_.cloneDeep(database($vm,'getMasterHeaderConfig'))
+
+var productObject=database($vm,'getProductConfigValue',sapObject)
+
+ if(productObject.length==0){
+  productObject={}
+ }
+ else{
+  productObject=productObject[0]
+ }
+
 
 var header_result= _.map(header,(x)=>{
 
   if(x.mapFrom=='header'&&x.map!='')
   {
-  x['value']=(uploadedFileObject[x.map]||'')
+  x['value']=(sapObject[x.map]||'')
   }
   if(x.mapFrom=='product'&&x.map!='')
   {
-    x['value']=(uploadedFileObject[x.map]||'')
+    x['value']=(productObject[x.map]||'')
    
   }
   return x;
@@ -262,6 +378,104 @@ var header_result= _.map(header,(x)=>{
 
 // console.log("header result",header_result)
 return header_result;
+}
+
+
+
+export function productQasForm2ConfigSArray($vm,sapProductArray=[]){
+
+  return _.map(sapProductArray,(sapProduct)=>{
+
+    console.log('sapProduct',sapProduct)
+    console.log("====",productQasForm2ConfigSingle($vm,sapProduct))
+    return productQasForm2ConfigSingle($vm,sapProduct)
+  })
+}
+
+
+export function validateProductDataset($vm)
+{
+var object={}
+ _.map($vm.$store.state.interplex.selectedPartyNoItem.productConfigFormat,(product)=>{
+
+object[product.name]=onlyNumbers(product.value)?parseFloat(product.value):0;
+
+ })
+
+ return object
+
+}
+
+export function productQasForm2ConfigSingle($vm,sapObject={}){
+//sapObject sap
+//productObject db
+
+ var productFormat=$vm.$store.state.interplex.configQasForm2Format;
+ var productObject=database($vm,'getProductConfigValue',sapObject)
+ console.log("productFormat,",productFormat)
+ console.log("productObject",productObject)
+
+ if(productObject.length==0){
+  productObject={}
+ }
+ else{
+  productObject=productObject[0]
+ }
+  var object={}
+   _.map(productFormat,(format)=>{
+
+
+
+
+    console.log('formate',format)
+    if(format.name=='validation'){
+      object[format.name]=format.rule;
+    
+    }
+    if(format.name=='error_status'){
+      object[format.name]=format.value;
+    
+    }
+ if(!['validation','error_status'].includes(format.name)){
+  object[format.name]=format.value;
+  if(format.mapFrom=='product'&&format.map!=''){
+    object[format.name]=productObject[format.map]||''//key:name
+        }
+         if(format.mapFrom=='header'&&format.map!=''){
+      object[format.name]=sapObject[format.map]//key:name
+         }
+}
+// object[format.name]=productObject[format.map]||''//key:name
+// object[format.name+'_validation']=format.validation//key_validation:true/false  
+// object[format.name+'_rule']=format.rule//key_rule:''  
+// object[format.name+'_map']=format.map//key_map:''  
+// object[format.name+'_mapFrom']=format.mapFrom//key_mapFrom:''  
+
+//     if(format.mapFrom=='product'&&format.map!=''){
+// object[format.name]=productObject[format.map]||''//key:name
+// object[format.name+'_validation']=format.validation//key_validation:true/false  
+// object[format.name+'_rule']=format.rule//key_rule:''  
+// object[format.name+'_map']=format.map//key_map:''  
+// object[format.name+'_mapFrom']=format.mapFrom//key_mapFrom:''  
+// // object[format.name+'_mapFrom']=productObject[format.mapFrom]//key_mapFrom:'' 
+//  }
+
+//  if(format.mapFrom=='header'&&format.map!=''){
+//   object[format.name]=sapObject[format.map]//key:name
+//   object[format.name+'_validation']=format.validation//key_validation:true/false  
+//   object[format.name+'_rule']=format.rule//key_rule:''  
+//   object[format.name+'_map']=format.map//key_map:''  
+//   object[format.name+'_mapFrom']=format.mapFrom//key_mapFrom:''  
+//   // object[format.name+'_mapFrom']=productObject[format.mapFrom]//key_mapFrom:'' 
+//    }
+  
+// return object;
+
+})
+
+
+return object
+
 }
 
 export function productConfigFormat($vm,object){
@@ -306,8 +520,10 @@ export function createProductList($vm,array){
   //create header
  // create product form 
 return _.map(array,(x)=>{
+  // console.log('x',x)
 x['headerConfigFormat']=headerConfigFormat($vm,x)
 x['productConfigFormat']=productConfigFormat($vm,x)
+x['qasForm2']=productQasForm2ConfigSArray($vm,x.products)
 return x
 })
 
