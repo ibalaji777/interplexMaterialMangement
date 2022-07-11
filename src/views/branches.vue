@@ -16,7 +16,8 @@ export default {
     setBranch(branch){
 
         this.$store.commit('setBranch',branch)
-        this.$router.push({name:'login'})
+        this.$router.push({name:'userRole'})
+                // this.$router.push({name:'login'})
     }
  }
 }

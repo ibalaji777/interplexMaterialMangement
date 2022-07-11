@@ -34,6 +34,7 @@ export const dbFormate={
     form_format:'',
     comment:'',
     duedate:'',
+    observation_print_view:[],
     observation_format:[],//(json)
     header_format:[],//(json)
     remarks:'',

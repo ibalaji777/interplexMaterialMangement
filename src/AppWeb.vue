@@ -1,10 +1,12 @@
 <template>
- <v-app :class="{bgRed:['index','branches','login'].includes($route.name)}">
+ <v-app :class="{bgRed:['index','branches','login','userRole'].includes($route.name)}">
+
+<!-- <plugin-print></plugin-print> -->
   <router-view name="outer"></router-view>
   <v-app-bar
    app
    clipped-left
-v-if="!['index','branches','login'].includes($route.name)"
+v-if="!['index','branches','login','userRole'].includes($route.name)"
    color="#ff0000"
   >
    <v-app-bar-nav-icon v-if="['index','adminDashboard','operatorDashboard','verifierDashboard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
@@ -19,7 +21,7 @@ v-if="!['index','branches','login'].includes($route.name)"
     <img src="interplex.svg">
     </span
    >
-
+  <!-- this.$parent.someMethod(); -->
    <!--  -->
    <v-spacer></v-spacer>
    <div style="margin:0 5px" >
@@ -88,6 +90,7 @@ export default {
  watch: {
  },
  methods: {
+  
  },
 };
 </script>

@@ -279,12 +279,95 @@
 </div>
 </span>
 </div> -->
+<v-btn @click="configQasPrintViewDialog=true">
+    Quality Assurance Form
+</v-btn>
 <div style="display:flex;justify-content:flex-end;margin-top:25px">
 <v-btn outlined @click="clear" style=";margin-right:10px;">Reset</v-btn>
 <v-btn v-if="!isStateForUpdate" outlined @click="save" style="">Save</v-btn>
 <v-btn v-else  @click="update" outlined>Update</v-btn>
 </div>
 
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^create field setting dialog^^^^^^^^^^^^^^^^^^^^ -->
+ <v-dialog
+      v-model="configQasPrintViewDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="configQasPrintViewDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<v-btn @click="insertObservation">
+    <v-icon>fa-plus</v-icon>
+</v-btn>
+
+<h3 style="padding:0;margin:0">OBSERVATION</h3>
+
+<table class="observationTable">
+    <tr>
+        <td rowspan="2">SL</td>
+        <td colspan="4"> fsd</td>
+        <td colspan="2">df </td>
+        <td rowspan="2">REMARKS</td>
+    </tr>
+    <tr>
+        <td>DESCRIPTION</td>
+        <td>UNIT</td>
+        <td>MIN <br> SPEC</td>
+        <td>MAX<br>SPEC</td>
+        <td>SUPPLIER</td>
+        <td>IELPL/THIRD PARTY</td>
+       
+    </tr>
+    <tr v-for="(form,index) in insertForm.observation_print_view" :key="'printview'+index">
+        <td>{{index+1}}</td>
+        <td>
+            <v-text-field v-model="form.desc"></v-text-field>
+        </td>
+        <td>            <v-text-field v-model="form.unit"></v-text-field>
+</td>
+        <td>
+                        <v-text-field v-model="form.min_spec"></v-text-field>
+            
+
+        </td>
+        <td><v-text-field v-model="form.max_spec"></v-text-field></td>
+        <td>
+                        <v-text-field v-model="form.sup_one"></v-text-field>
+            <v-text-field v-model="form.sup_two"></v-text-field>
+
+
+
+        </td>
+        <td>
+                        <v-text-field v-model="form.ielpt_one"></v-text-field>
+            <v-text-field v-model="form.ielpt_two"></v-text-field>
+
+
+
+        </td>
+        <td>
+                                    <v-text-field v-model="form.remarks"></v-text-field>
+
+
+        </td>
+    </tr>
+</table>
+
+</div>
+      </v-card>
+    </v-dialog>
 
 
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^create field setting dialog^^^^^^^^^^^^^^^^^^^^ -->
@@ -380,7 +463,7 @@
 <v-icon @click="validationHelpDialog=true">fa-question-circle</v-icon>
 </div>
 
-<!-- <v-textfield></v-textfield> -->
+<!-- <v-text-field></v-text-field> -->
 
 <v-checkbox
       v-model="selectedFieldSetting.show"
@@ -669,10 +752,24 @@ rm:'',
 form_format:'',
 comment:'',
 skiplevel:0,
+observation_print_view:[],
 observation_format:core.database($vm,'getMasterProductConfig'),
 duedate:moment().format("YYYY-MM-DD")   
         }   
+,configQasPrintViewDialog:false,
+observation_print_view_format:{
+no:'',
+desc:'',
+unit:'',
+min_spec:'',
+max_spec:'',
+sup_one:'',
+sup_two:'',
+ielpt_one:'',
+ielpt_two:'',
+remarks:'',
 
+}
     }
 }
 
@@ -699,6 +796,10 @@ $vm.isStateForUpdate=true,
 }
     },
 methods:{
+    insertObservation(){
+var $vm=this;
+$vm.insertForm.observation_print_view.push((intialState($vm).observation_print_view_format))
+    },
     removeConfig(item,index){
         if(item.default){
 
@@ -770,4 +871,15 @@ createProductField(){
 </script>
 <style lang="scss">
   @import url('../assets/interplex.scss');  
+
+          .observationTable{
+
+width:100%;
+border-collapse: collapse;
+}
+.observationTable  td{
+border: 1px solid black;
+padding:5px
+}
+
 </style>

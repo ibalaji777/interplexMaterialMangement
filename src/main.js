@@ -89,7 +89,7 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 import VJsoneditor from 'v-jsoneditor'
 import date from './views/date.vue'
 Vue.use(VJsoneditor)
-
+import pluginPrint from './views/pluginPrint.vue'
 Vue.use(VueQuillEditor, /* { default global options } */)
 import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
@@ -100,6 +100,8 @@ import navbarWeb from './views/navbarWeb.vue'
 Vue.component('appWeb', appWeb);
 Vue.component('navbarWeb', navbarWeb);
 Vue.component('date', date);
+
+Vue.component('pluginPrint',pluginPrint)
 new Vue({
 	router:webRouter,
 	store: vuexstore,

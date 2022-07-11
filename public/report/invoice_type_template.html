@@ -1,0 +1,44 @@
+<html> 
+    <head>
+         <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>Angalware Report</title> <style>.ql-clipboard{position:absolute;top:-1000px}</style> </head> <body> <div id="app"> </div>
+            <script type="text/javascript" src="js/main.js">
+        </script>
+    <script>
+
+const {
+        ipcRenderer
+    } = require('electron')
+
+//     $angalware_report.route({
+// name:'angalware_template' 
+//        })
+
+$angalware_report.route({
+    name:'angalware_template_view',
+    params:{}});
+    $angalware_report.custom_template({
+    html:'<h2>hello world</h2>',
+    css:'',
+    js:''
+})
+    ipcRenderer.on('ping', (e, data) => {
+        // $angalware_report.insttall();
+        console.log(data)
+
+        if(data){
+
+$angalware_report.custom_template({
+    template_data:data.data_set,
+    html:data.html,
+    css:data.css,
+    js:data.js
+})
+$angalware_report.setStore({name:'set_template_data',data:data.data_set})
+
+
+    
+        }
+            })
+
+        </script>
+</body> </html>

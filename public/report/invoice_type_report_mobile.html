@@ -1,0 +1,40 @@
+<html> 
+    <head>
+         <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>Angalware Report</title> <style>.ql-clipboard{position:absolute;top:-1000px}</style> </head> <body> <div id="app"> </div>
+            <script type="text/javascript" src="js/main.js">
+        </script>
+    <script>
+function bindEvent(element, eventName, eventHandler) {
+            if (element.addEventListener) {
+                element.addEventListener(eventName, eventHandler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + eventName, eventHandler);
+            }
+        }
+
+
+//         $angalware_report.route({
+//     name:'angalware_template_view',
+//     params:{}});
+//     $angalware_report.custom_template({
+//     html:'<h2>hello world</h2>',
+//     css:'',
+//     js:''
+// })
+
+bindEvent(window, 'message', function (e) {
+    // console.log("-----report/preview.html----")
+    // console.log("----plugin engine---");
+    // console.log(e)
+    // console.log(e.data)
+           if(e.data){
+            var data = JSON.parse(e.data);
+            if(data.action=='set_barcode'){
+$angalware_report.setStore({name:'set_barcode_data',data:data.dataset})
+}
+           }
+        });    
+
+
+        </script>
+</body> </html>

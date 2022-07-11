@@ -1,0 +1,40 @@
+<html> 
+    <head>
+         <meta charset="UTF-8"> <meta name="viewport" content="width=device-width,initial-scale=1"> <meta http-equiv="X-UA-Compatible" content="ie=edge"> <title>Angalware Report</title> <style>.ql-clipboard{position:absolute;top:-1000px}</style> </head> <body> <div id="app"> </div>
+            <script type="text/javascript" src="js/main.js">
+        </script>
+    <script>
+
+const {
+        ipcRenderer
+    } = require('electron')
+
+    $angalware_report.route({
+name:'angalware_template' 
+       })
+
+    
+
+    ipcRenderer.on('ping', (e, data) => {
+
+console.log(data)
+
+$angalware_report.invoice_template({
+            template_data:data.template_data,
+            template_name:data.template_name
+        })
+
+            })
+        // $angalware_report.barcode_template({
+        //     template_data:[{name:'balaji'},{name:'vam'}],
+        //     template_name:'abc'
+        // })
+        // template(data)
+        // $angalware_report.invoice_template({
+        //     template_data:data.template_data,
+        //     template_name:data.template_name
+        // })
+        
+
+        </script>
+</body> </html>

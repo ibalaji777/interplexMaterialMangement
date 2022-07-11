@@ -1,0 +1,9 @@
+preview to invoice_type_template
+preview_mobile to invoice_type_template_mobile
+
+print to invoice_type_classic
+print_mobile to invoice_type_classic_mobile
+
+index to invoice_type_report
+
+index_mobile to invoice_type_report
