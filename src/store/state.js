@@ -11,74 +11,97 @@ report:{
 qasForm1:[
 	{
 		text:'Supplier Name',
-		value:'supplier_name'
+		value:'supplier_name',
+		class:'interplexHeader'
 
 	}	,
 	{
 		text:'invoice_no',
 		value:'invoice_no'
+		,class:'interplexHeader'
 
 	},	{
 		text:'invoice_date',
 		value:'invoice_date'
+		,class:'interplexHeader'
 
 	},	{
 		text:'invoice_qty',
 		value:'invoice_qty'
+		,class:'interplexHeader'
 
 	},	{
 		text:'ir',
 		value:'ir'
+		,class:'interplexHeader'
 
 	},	{
 		text:'grn_no',
 		value:'grn_no'
+		,class:'interplexHeader'
 
 	},	{
 		text:'grn_date',
 		value:'grn_date'
+		,class:'interplexHeader'
 
 	},	{
 		text:'eds',
 		value:'eds'
+		,class:'interplexHeader'
 
 	},	{
 		text:'rm',
 		value:'rm'
+		,class:'interplexHeader'
+
 
 	},	{
 		text:'received_qty',
 		value:'received_qty'
+		,class:'interplexHeader'
 
 	},	{
 		text:'product_name',
 		value:'product_name'
+		,class:'interplexHeader'
 
 	}
 	,	{
 		text:'form_format',
 		value:'form_format'
+		,class:'interplexHeader'
 
 	}
 	,	{
 		text:'remarks',
 		value:'remarks'
+		,class:'interplexHeader'
 
 	}
 	,	{
 		text:'status',
 		value:'status'
+		,class:'interplexHeader'
 
 	}
 	,
 	{
 		text:'User Type',
 		value:'roletype'
+		,class:'interplexHeader'
 
 	},
 		{
 		text:'approved_by',
 		value:'approved_by'
+		,class:'interplexHeader'
+
+	},
+	{
+		text:'action',
+		value:'action'
+		,class:'interplexHeader'
 
 	},
 
@@ -257,8 +280,8 @@ interplex:{
         password:'',
         email:'',
         phone:'',
-         address:'',
-         status:'accepted'
+        address:'',
+        status:'accepted'
 
     },
 	selectedPartNoItem:{},

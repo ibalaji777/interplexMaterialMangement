@@ -7,13 +7,13 @@
 <v-icon>fa-file</v-icon>
 </div>
 
-<div @click="addProduct" class="insertProduct">
+<div @click="$router.push({name:'approverList'})" class="insertProduct">
 <v-icon>fa-search</v-icon>
 </div>
 </div>
 <h3 style="margin-top:10px">Status</h3>
 <h5 style="text-align:right"><date @date="selected_date"></date></h5>
-
+<div>
     <div style="display:flex;margin-top:10px">
         <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right: 10px;
     height: 100px;
@@ -63,7 +63,7 @@
 
 </div>
 </div>
-
+</div>
 
   </div>
 </template>

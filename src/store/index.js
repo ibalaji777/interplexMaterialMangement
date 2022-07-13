@@ -11,25 +11,25 @@ Vue.use(Vuex);
 
 const vuexLocalStorage = new VuexPersist({
 	// strictMode:true,
-	key: '1',
-	storage:window.localStorage,
-	reducer: (state) =>{
-	
-return ({
+	key: '2key',
+	storage: window.localStorage,
+	reducer: (state) => {
 
-	interplex:{
-		qasForm1:state.interplex.qasForm1,
-		qasForm2:state.interplex.qasForm2,
-		configProductsFormat:state.interplex.configProductsFormat,
-		configHeaderFormat:state.interplex.configHeaderFormat,
-		masterBranches:state.interplex.masterBranches,
-		masterProducts:state.interplex.masterProducts,
-		// configProductsFormat:state.interplex.configProductsFormat,
+		return ({
+
+			interplex: {
+				qasForm1: state.interplex.qasForm1,
+				qasForm2: state.interplex.qasForm2,
+				configProductsFormat: state.interplex.configProductsFormat,
+				configHeaderFormat: state.interplex.configHeaderFormat,
+				masterBranches: state.interplex.masterBranches,
+				masterProducts: state.interplex.masterProducts,
+				// configProductsFormat:state.interplex.configProductsFormat,
+			}
+
+
+		})
 	}
-
-
-})
-}
 }
 );
 // vuex store
@@ -38,7 +38,7 @@ const store = new Vuex.Store({
 	mutations,
 	actions,
 	plugins: [vuexLocalStorage.plugin]
-  })
+})
 
 
 

@@ -31,8 +31,9 @@ Total Products
 <h3 style="margin-top:10px">Status</h3>
 <h5 style="text-align:right"><date @date="selected_date"></date></h5>
 
+<div>
     <div style="display:flex;margin-top:10px">
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right: 10px;
+        <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right: 10px;
     height: 100px;
     font-weight: 800;
     width: 50%;
@@ -47,7 +48,7 @@ Total Products
 </div>
     </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
+        <div @click="$router.push({name:'approverList',params: { status:'approved' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
            <div style="text-align:center">
             {{approverStatus.approved}}<br>
 
@@ -55,7 +56,7 @@ Total Products
             </div> 
 
 </div>
-   <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: darksalmon;">
+   <div @click="$router.push({name:'approverList',params: { status:'acceptedOnDeviation' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: darksalmon;">
            <div style="text-align:center">
             {{approverStatus.acceptedOnDeviation}}<br>
 
@@ -65,19 +66,20 @@ Total Products
 </div>
 </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
+        <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
             {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
-   <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
+   <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
             {{approverStatus.ppap}}<br>
             PPAP
             </div>
 
+</div>
 </div>
 </div>
 

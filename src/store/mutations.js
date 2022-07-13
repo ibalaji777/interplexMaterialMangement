@@ -91,8 +91,10 @@ state.interplex.selectedPartNoItem=payload;
 	setUser(state,payload){
 
 
-state.interplex.user=payload.user;
-	},
+var value=Object.assign(state.interplex.user,payload);
+Vue.set(state.interplex,'user',value)
+// state.interplex.user
+},
 qualityAssuranceFormOne(state,payload){
 state.interplex.qasForm1.push(payload)
 },

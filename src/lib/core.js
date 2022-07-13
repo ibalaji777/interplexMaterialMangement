@@ -312,6 +312,7 @@ if(action=='login'){
 
   if(check_users.length!=0){
 var user=check_users[0];
+console.log("++++logged user++++",user)
     $vm.$store.commit('setUser',user);
 
     if(user.roletype=='operator'){

@@ -1,5 +1,9 @@
 <template>
   <div>
+            <div>
+        <v-icon style="color:white" @click="$router.go(-1)">fa-arrow-left</v-icon>
+    </div>
+
     <div class="xyCenter_">
         <!-- <h3 style="text-align:center;color:black">Please Select Your Role</h3> -->
 <v-btn color="white" @click="userRole('operator')" outlined style="margin-top:20px;width:100%">OPERATOR</v-btn>

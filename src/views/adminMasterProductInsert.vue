@@ -279,7 +279,7 @@
 </div>
 </span>
 </div> -->
-<v-btn @click="configQasPrintViewDialog=true">
+<v-btn @click="configQasPrintViewDialog=true" outlined color="red" style="margin:10px 0">
     Quality Assurance Form
 </v-btn>
 <div style="display:flex;justify-content:flex-end;margin-top:25px">
@@ -308,17 +308,18 @@
         <v-divider></v-divider>
        <div style="padding:10px">
 
-<v-btn @click="insertObservation">
+<v-btn @click="insertObservation" outlined color="red">
     <v-icon>fa-plus</v-icon>
 </v-btn>
 
-<h3 style="padding:0;margin:0">OBSERVATION</h3>
+<h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
 
-<table class="observationTable">
+<div style="width:99vw;overflow:scroll">
+<table class="observationTable" style="width:100vw">
     <tr>
-        <td rowspan="2">SL</td>
-        <td colspan="4"> fsd</td>
-        <td colspan="2">df </td>
+        <td rowspan="2"></td>
+        <td colspan="4" style="text-align:center">SPEC/REQUIREMENT</td>
+        <td colspan="2" style="text-align:center">ACTUAL READING </td>
         <td rowspan="2">REMARKS</td>
     </tr>
     <tr>
@@ -364,7 +365,7 @@
         </td>
     </tr>
 </table>
-
+</div>
 </div>
       </v-card>
     </v-dialog>
@@ -462,9 +463,16 @@
 <div style="display:flex;justify-content:flex-end;padding:5px;">
 <v-icon @click="validationHelpDialog=true">fa-question-circle</v-icon>
 </div>
-
+        <div style="background: black;
+    color: white;
+    padding: 10px;
+    border-radius: 9px;">
+      <b> Name :{{selectedFieldSetting.name}}</b><br>
+      <b v-if="selectedFieldSetting.default">Field is Default</b> 
+      <b v-else>Not a Default Field</b> 
+</div>
 <!-- <v-text-field></v-text-field> -->
-
+<!-- {{}} -->
 <v-checkbox
       v-model="selectedFieldSetting.show"
       :label="'Show (Quality assurance)'"
@@ -822,6 +830,7 @@ $vm.insertForm=intialState($vm).insertForm
     save(){
         var $vm=this;
 var prepareData=_.cloneDeep($vm.insertForm);
+console.log("++++data++++",prepareData)
 // prepareData['observation_format']=$vm.productsFormat;
 
 if(prepareData.rmcode=='')

@@ -1,24 +1,65 @@
 <template>
     <div>
-        
+<!-- sss{{$store.state.interplex.user}} -->
 <!-- eslint-disable -->
+<div style="margin:10px 0">
+    <div v-if="isApprover">
+    <div style="display:flex">
+
+<v-btn outlined color="#ccb806" style="flex:1;margin:0 5px;" @click="markStaus('pending')">
+Pending
+</v-btn>
+<v-btn outlined color="green" style="flex:1;margin:0 5px" @click="markStaus('approved')">
+approved
+</v-btn>
+    </div>
+    <div style="display:flex;margin-top:3px">
+<v-btn outlined color="green" style="flex:1;margin:0 5px" @click="markStaus('acceptedOnDeviation')">
+accepted On Deviation
+</v-btn>
+    </div>
+    <div style="display:flex;margin-top:3px">
+<v-btn outlined color="red" style="flex:1;margin:0 5px" @click="markStaus('rejected')">
+rejected
+</v-btn>
+<v-btn outlined color="orange" style="flex:1;margin:0 5px" @click="markStaus('ppap')">
+ppap
+</v-btn>
+</div>
+    </div>
+        <v-text-field
+        style="margin-top:15px"
+        dense
+        outlined
+          v-model="search"
+          label="Search"
+           ></v-text-field>
+</div>
+<div style="height:50vh;overflow:scroll">
          <v-data-table
+         dense
+      v-model="selected"
       :headers="$store.state.report.qasForm1"
       :items="filterResult"
-      item-key="name"
+      item-key="id"
       class="elevation-1"
+      show-select
       :search="search"
+      @click:row="selectedQasReport"
         mobile-breakpoint="0"
  
     >
-      <template v-slot:top>
-        <v-text-field
-          v-model="search"
-          label="Search"
-          class="mx-4"
-        ></v-text-field>
-      </template>
      <template v-slot:item.action="{ item }">
+ 
+ <div style="display:flex;">
+ <v-icon
+ small
+         @click="editItem(item)"
+         style="margin-right:10px"
+ >
+    fa-eye
+ </v-icon>
+ 
       <v-icon
         small
         class="mr-2"
@@ -32,9 +73,10 @@
       >
         mdi-delete
       </v-icon>
+   </div> 
     </template>
     </v-data-table>
-
+</div>
 
     </div>
 </template>
@@ -44,8 +86,9 @@ import * as core from '../lib/core.js'
 export default {
     data(){
         return {
+            selected:[],
             search: '',
-      
+isApprover:false,      
              filterResult:[],
       }
     },
@@ -63,6 +106,13 @@ return core.database(this,'getApproverList',)
 
 var params=this.$route.params;
 
+
+if($vm.$store.state.interplex.user.roletype!='operator'){
+$vm.isApprover=true;
+
+}
+
+
 if(Object.prototype.hasOwnProperty.call(params, 'status')){
 
 
@@ -73,6 +123,22 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 
     },
     methods:{
+        selectedQasReport(value){
+            var $vm=this;
+            console.log("selected",value)
+
+
+        },
+        markStaus(markStatus){
+var $vm=this;
+if($vm.selected.length==0){
+
+    $vm.$alert("Please Select Atleast Single Item")
+}
+
+console.log("++++selected++++",$vm.selected)
+
+        },
         editItem(item){
 var $vm=this;
 $vm.$router.push({name:'adminCreateBranch',params: { item:item }})

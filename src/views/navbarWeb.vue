@@ -45,14 +45,15 @@
                     </v-list-item>
                 </v-list-group>
 
-                                <v-list-item  @click="$router.push({name:'index'})">
+
+            </div>
+                                            <v-list-item  @click="$router.push({name:'index'})">
                     <v-list-item-icon >
                         <v-icon>fa-exit</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>logout</v-list-item-title>
                 </v-list-item>
 
-            </div>
             <!-- <v-list-item @click="$router.push({ name: 'settings_nav' })">
                 <v-list-item-icon>
                     <v-icon>fa-cog</v-icon>

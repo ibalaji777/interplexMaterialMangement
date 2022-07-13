@@ -1,5 +1,9 @@
 <template>
   <div>
+
+        <div>
+        <v-icon style="color:white" @click="$router.go(-1)">fa-arrow-left</v-icon>
+    </div>
     <div class="xyCenter_">
 
 <input v-model="user.username" class="interInput" type="text" placeholder="USERNAME" style="margin-top:10px;">
