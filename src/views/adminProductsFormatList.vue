@@ -49,7 +49,12 @@ export default {
        
       }
     },
-  
+  async mounted() {
+    var $vm=this;
+
+await    $vm.$store.dispatch('getProducts')
+
+  },
     computed: {
      list(){
 
@@ -61,8 +66,14 @@ return core.database(this,'getMaseterProductList',)
 var $vm=this;
 $vm.$router.push({name:'adminMasterProductInsert',params: { item:item }})
         },
-        deleteItem(item){
 
+        deleteItem(item){
+var $vm=this;
+$vm.$confirm("Do You Want to delete?")
+.then(()=>{
+console.log(item)
+$vm.$store.dispatch('removeProduct',item.id)
+})
 return core.database(this,'deleteMasterBranch',{
     index:this.list.indexOf(item),
     item

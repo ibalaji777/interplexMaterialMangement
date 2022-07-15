@@ -47,7 +47,7 @@
 
 
             </div>
-                                            <v-list-item  @click="$router.push({name:'index'})">
+                                            <v-list-item  @click="$router.push({name:'index'});$store.dispatch('logout')">
                     <v-list-item-icon >
                         <v-icon>fa-exit</v-icon>
                     </v-list-item-icon>

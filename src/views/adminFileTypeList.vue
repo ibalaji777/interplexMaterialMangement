@@ -5,7 +5,7 @@
          <v-data-table
       :headers="$store.state.report.fileType"
       :items="list"
-      item-key="name"
+      item-key="id"
       class="elevation-1"
       :search="search"
         mobile-breakpoint="0"
@@ -56,17 +56,29 @@ export default {
 return core.database(this,'getFileTypeList',)
      }
     },
+
+    async mounted() {
+        var $vm=this;
+await  $vm.$store.dispatch('readUploadType')
+    },
     methods:{
         editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminCreateBranch',params: { item:item }})
+$vm.$router.push({name:'adminCreateFileType',params: { item:item }})
         },
         deleteItem(item){
 
-return core.database(this,'deleteMasterBranch',{
-    index:this.list.indexOf(item),
-    item
+var $vm=this;
+$vm.$confirm("Do You Want to delete?")
+.then(()=>{
+$vm.$store.dispatch('removeUploadType',item.id)
 })
+
+
+// return core.database(this,'deleteMasterBranch',{
+//     index:this.list.indexOf(item),
+//     item
+// })
         }
     }
 }

@@ -6,6 +6,7 @@
             </v-btn>
 
         </div>
+        <!-- {{$store.state.interplex.configHeaderFormat}} -->
 <h3 style="margin:10px 0">Header Config</h3>
 
 
@@ -178,9 +179,8 @@
             <v-btn
               dark
               text
-              @click="saveProductsFormat"
             >
-              SAVE
+
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
@@ -222,8 +222,9 @@
     </div>
 </template>
 <script>
-import * as core from '../lib/core.js'
 /*eslint-disable*/
+// import * as core from '../lib/core.js'
+
 var create_field={
 			label:'',//input field label
 			name:'',//column name
@@ -251,7 +252,7 @@ export function initialState($vm){
             default:false,
 			note:'',
 },
-configFormat:core.database($vm,'getMasterHeaderConfig'),
+configFormat:_.cloneDeep($vm.$store.state.interplex.configHeaderFormat),//core.database($vm,'getMasterHeaderConfig'),
         configDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field
@@ -266,12 +267,19 @@ export default {
 data(){
     return initialState(this)
 },
+async mounted(){
+var $vm=this;
+await $vm.$store.dispatch('readHeaderConfig')
+},
 methods:{
-    save(){
+async    save(){
         var $vm=this;
-        core.database(this,'saveHeaderConfig',this.configFormat)
-    $vm.$alert("Successfully Updated")
-
+ 
+if(await  $vm.$store.dispatch('updateHeaderConfig',$vm.configFormat)){
+$vm.$alert("Successfully Updated")
+return;
+}
+$vm.$alert("Something wrong")
     },
     removeConfig(item,index){
         var $vm=this;
@@ -309,12 +317,16 @@ $vm.$alert("New Field Created")
 }
 
 },
-// watch:{
-//     configFormat(){
+watch:{
+    "$store.state.interplex.configHeaderFormat":{
+handler(){
+var $vm=this    
+$vm.configFormat=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat)
+},
+deep:true
 
-//         this.$store.commit("updateProductsFormat",this.configFormat)
-//     }
-// }
+    }
+}
 
 }
 </script>

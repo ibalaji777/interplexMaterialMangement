@@ -49,11 +49,16 @@ export default {
        
       }
     },
-  
+async  mounted(){
+var $vm=this;
+
+$vm.$store.dispatch('getUsers')
+
+},
     computed: {
      list(){
-
-return core.database(this,'getUsersList',)
+var $vm=this;
+return $vm.$store.state.interplex.masterUsers;
      }
     },
     methods:{
@@ -62,11 +67,18 @@ var $vm=this;
 $vm.$router.push({name:'adminCreateUser',params: { item:item }})
         },
         deleteItem(item){
-
+            
+var $vm=this;
+$vm.$confirm("Do You Want to delete?")
+.then(()=>{
+console.log(item)
+$vm.$store.dispatch('removeUser',item.id)
+})
 return core.database(this,'deleteMasterBranch',{
     index:this.list.indexOf(item),
     item
 })
+        
         }
     }
 }

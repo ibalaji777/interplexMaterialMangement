@@ -47,7 +47,7 @@ $vm.isStateForUpdate=true,
     }
     ,methods:{
 
-        save(){
+async     save(){
 var $vm=this;
 if($vm.fileType.title=='')
 {
@@ -59,16 +59,23 @@ if($vm.fileType.name=='')
 $vm.$alert("Name Must Be Filled",'Error','error')
 return;
 }
-core.database(this,'insertUploadTypes',this.fileType)
-    $vm.$alert("Successfully Created")
+// core.database(this,'insertUploadTypes',this.fileType)
+
+if(await $vm.$store.dispatch('createUploadType',$vm.fileType)){
+$vm.$alert("Successfully Created")
 $vm.fileType=intialState().fileType
+return ;
+}
+
+$vm.$alert("Something Wrong")
 
         },
     update(){
         var $vm=this;
-        core.database(this,'updateUploadType',this.fileType)
-    $vm.$alert("Successfully Updated")
-    $vm.fileType=intialState().fileType
+   $vm.$store.dispatch('updateUploadType',$vm.fileType)
+  
+   $vm.$alert("Successfully Updated")
+    // $vm.fileType=intialState().fileType
     }
 
 },

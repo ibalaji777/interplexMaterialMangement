@@ -49,6 +49,8 @@ if(payload.action=='saveQasForm2Config')
 
 }
 
+
+
 const mutations = 
 {
 	navbarMenu(state,payload){
@@ -68,7 +70,7 @@ const mutations =
 		Vue.set(state,'productsFormat',payload)
 	},
 	setBranch(state,branch){
-		state.currentBranch=branch
+		state.interplex.currentBranch=branch
 	},
 	database(state,payload){
 console.log(state)
@@ -105,12 +107,42 @@ qualityAssuranceFormTwo(state,payload){
 	},
 				
 defaultValue(state,payload){
-
-
 	state.interplex.tempInvoice={}
 	state.interplex.qualityAssuranceFormOne=[]
+},
 
-}
+//api start here--------------------------
+setMasterBranches(state,payload){
+	console.log("++setMasterBranches+",payload)
+	Vue.set(state.interplex,'masterBranches',payload)
+},
+logout(state){
+
+	Vue.set(state.interplex.user,'username','')
+	Vue.set(state.interplex.user,'password','')
+	Vue.set(state.interplex.user,'name','')
+},
+setMasterUsers(state,users){
+	console.log("users",users)
+
+	Vue.set(state.interplex,'masterUsers',users)
+},
+
+setMasterProducts(state,products){
+
+	Vue.set(state.interplex,'masterProducts',products)
+},
+setMasterUploadType(state,uploadtypes){
+	Vue.set(state.interplex,'masterUploadTypes',uploadtypes)
+},
+setHeaderConfig(state,config){
+	Vue.set(state.interplex,'configHeaderFormat',config)
+
+},
+setQasForm2Config(state,config){
+	Vue.set(state.interplex,'configQasForm2Format',config)
+},
+
 
 };
 

@@ -19,11 +19,12 @@ import webRouter from './router/routerWeb';
 import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-default.css";
 Vue.use(VueToast);
-
-
-
-
 // console.log=()=>{}
+import axios from 'axios'
+axios.defaults.headers.common['branch']=vuexstore.state.interplex.currentBranch;
+axios.defaults.headers.common['username']=vuexstore.state.interplex.user.username;
+axios.defaults.headers.common['password']=vuexstore.state.interplex.user.password;
+axios.defaults.headers.common['roletype']=vuexstore.state.interplex.user.roletype;
 
 // -------------------desktop end--------------
 // -------------------mobile start------------

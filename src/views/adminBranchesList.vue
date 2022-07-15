@@ -49,7 +49,12 @@ export default {
        
       }
     },
-  
+async mounted(){
+var $vm=this;
+
+await $vm.$store.dispatch('branches')
+
+}  ,
     computed: {
      list(){
 
@@ -63,11 +68,21 @@ $vm.$router.push({name:'adminCreateBranch',params: { item:item }})
         },
         deleteItem(item){
 
-return core.database(this,'deleteMasterBranch',{
-    index:this.list.indexOf(item),
-    item
+var $vm=this;
+$vm.$confirm("Do You Want to delete?")
+.then(()=>{
+// console.log(item)
+$vm.$store.dispatch('removeBranch',item.id)
 })
-        }
+// return core.database(this,'deleteMasterBranch',{
+//     index:this.list.indexOf(item),
+//     item
+// })
+
+
+
+
+}
     }
 }
 </script>

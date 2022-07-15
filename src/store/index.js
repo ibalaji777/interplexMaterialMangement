@@ -18,12 +18,14 @@ const vuexLocalStorage = new VuexPersist({
 		return ({
 
 			interplex: {
+				user:state.interplex.user,
+				currentBranch:state.interplex.currentBranch,
 				qasForm1: state.interplex.qasForm1,
 				qasForm2: state.interplex.qasForm2,
-				configProductsFormat: state.interplex.configProductsFormat,
-				configHeaderFormat: state.interplex.configHeaderFormat,
-				masterBranches: state.interplex.masterBranches,
-				masterProducts: state.interplex.masterProducts,
+				// configProductsFormat: state.interplex.configProductsFormat,
+				// configHeaderFormat: state.interplex.configHeaderFormat,
+				// masterBranches: state.interplex.masterBranches,
+				// masterProducts: state.interplex.masterProducts,
 				// configProductsFormat:state.interplex.configProductsFormat,
 			}
 

@@ -23,7 +23,7 @@ import adminMasterProductInsert from '../views/adminMasterProductInsert.vue'
 import adminDashboard from '../views/adminDashboard.vue'
 import adminDashboardList from '../views/adminDashboardList.vue'
 import adminDashboardView from '../views/adminDashboardView.vue'
-import adminQualityAssuranceHeader from '../views/adminMasterHeaderInsert.vue'
+import defaultQasHeader from '../views/defaultQasHeader.vue'
 import adminDashboardOtherConfig from '../views/adminDashboardOtherConfig.vue'
 import adminCreateUser from '../views/adminCreateUser.vue'
 import adminCreateBranch from '../views/adminCreateBranch.vue' 
@@ -113,9 +113,9 @@ const routes = [
 		component:adminHeaderFormatList 
 	}
 ,{
-		path: '/adminQualityAssuranceHeader',
-		name: 'adminQualityAssuranceHeader',
-		component:adminQualityAssuranceHeader 
+		path: '/defaultQasHeader',
+		name: 'defaultQasHeader',
+		component:defaultQasHeader 
 	},
 	
 

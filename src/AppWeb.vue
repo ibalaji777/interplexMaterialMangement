@@ -43,7 +43,6 @@ v-if="!['index','branches','login','userRole'].includes($route.name)"
   
  </v-app>
 </template>
-
 <script>
 /*eslint-disable*/
 export default {

@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-import * as core from '../lib/core.js'
+// import * as core from '../lib/core.js'
 function intialState(){
     return {
 
@@ -51,22 +51,32 @@ $vm.isStateForUpdate=true,
     }
     ,methods:{
 
-        save(){
+        async save(){
 var $vm=this;
 if($vm.branch.name=='')
 {
 $vm.$alert("Branch Must Be Filled",'Error','error')
 return;
 }
-core.database(this,'insertMasterBranches',this.branch)
+
+if(await $vm.$store.dispatch('createBranch',$vm.branch)){
+// core.database(this,'insertMasterBranches',this.branch)
     $vm.$alert("Successfully Created")
 $vm.branch=intialState().branch
+return
+}
+
+$vm.$alert("Something wrong")
 
         },
     update(){
         var $vm=this;
-        core.database(this,'updateMasterBranches',this.branch)
-    $vm.$alert("Successfully Updated")
+$vm.$store.dispatch('updateBranch',$vm.branch);
+$vm.$alert("Successfully Updated")
+ 
+
+//     core.database(this,'updateMasterBranches',this.branch)
+    // $vm.$alert("Successfully Updated")
     }
 
 },

@@ -15,7 +15,11 @@
   </div>
 </template>
 <script>
+/*eslint-disable*/
 import * as core from '../lib/core.js'
+import axios from 'axios'
+
+
 export default {
   
   data(){
@@ -30,7 +34,7 @@ export default {
 
   methods:{
 
-login(){
+async login(){
 
 var $vm=this;
 
@@ -44,8 +48,35 @@ if($vm.password==''){
 $vm.$alert("Please Fill Password")
 return;
 }
-core.database($vm,'login',$vm.user)
 
+await $vm.$store.dispatch('login',$vm.user)
+var user =$vm.$store.state.interplex.user;
+console.log(user)
+if(user.username==''&&user.password==''){
+$vm.$alert("User Not Found")
+return 
+}
+
+axios.defaults.headers.common['branch']=$vm.$store.state.interplex.currentBranch;
+axios.defaults.headers.common['username']=$vm.$store.state.interplex.user.username;
+axios.defaults.headers.common['password']=$vm.$store.state.interplex.user.password;
+axios.defaults.headers.common['roletype']=$vm.$store.state.interplex.user.roletype;
+
+if(user.roletype=='operator'){
+                  $vm.$router.push({name:'operatorDashboard'})
+                  return ;
+                }
+            
+                if(user.roletype=='approver'){
+                  $vm.$router.push({name:'verifierDashboard'})
+                  return ;
+                }
+            
+                if(user.roletype=='admin'){
+                  $vm.$router.push({name:'adminDashboard'})
+                  return ;
+                }
+            
 
 }
 

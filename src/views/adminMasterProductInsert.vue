@@ -752,6 +752,8 @@ validationHelpDialog:false,
         selectedFieldSetting:create_field
         ,
         insertForm:{
+
+branch:'',
 product_name:'',
 supplier_name:'',
 rmcode:'',
@@ -827,29 +829,41 @@ $vm.insertForm=intialState($vm).insertForm
 })
 
 },
-    save(){
+async    save(){
         var $vm=this;
 var prepareData=_.cloneDeep($vm.insertForm);
-console.log("++++data++++",prepareData)
-// prepareData['observation_format']=$vm.productsFormat;
 
+prepareData['branch']=$vm.$store.state.interplex.currentBranch;
 if(prepareData.rmcode=='')
 {
 $vm.$alert("Part No Must Be Filled",'Error','error')
 return;
 }
 
-core.database(this,'insertMasterProduct',prepareData)
-   $vm.$alert("Successfully Created")
+var product=await $vm.$store.dispatch('createProduct',prepareData)
+
+if(product){ $vm.$alert("Successfully Created") 
+return
+}
+ 
+
+$vm.$alert("Something Wrong")
+
+
+
+
 $vm.insertForm=intialState($vm).insertForm
 
         
         console.log(prepareData)
     },
-    update(){
+async    update(){
         var $vm=this;
-        core.database(this,'updateMasterProduct',this.insertForm)
-    $vm.$alert("Successfully Updated")
+        // core.database(this,'updateMasterProduct',this.insertForm)
+ 
+ $vm.$store.dispatch('updateProduct',$vm.insertForm);
+ 
+ $vm.$alert("Successfully Updated")
     },
     selectFieldSettingfn(item){
 this.selectedFieldSetting=item

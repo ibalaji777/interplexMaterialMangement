@@ -84,7 +84,7 @@ $vm.isStateForUpdate=true,
 }
     },
     methods:{
-save(){
+async save(){
     var $vm=this;
 if($vm.user.name=='')
 {
@@ -106,17 +106,28 @@ return;
 }
 
 
+var isUserCreated=await $vm.$store.dispatch('createUser',this.user)
 
-core.database(this,'insertMasterUsers',this.user)
+if(isUserCreated)
+{
    $vm.$alert("Successfully Created")
 $vm.user=intialState().user
+return ;
+}
+   $vm.$alert("Something Went Wrong")
+
+// core.database(this,'insertMasterUsers',this.user)
+
 
 }
 ,
  update(){
         var $vm=this;
-        core.database(this,'updateMasterUser',this.user)
-    $vm.$alert("Successfully Updated")
+        // core.database(this,'updateMasterUser',this.user)
+
+$vm.$store.dispatch('updateUser',$vm.user)
+
+$vm.$alert("Successfully Updated")
     }
     },
     computed:{

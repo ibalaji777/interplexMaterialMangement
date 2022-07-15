@@ -251,7 +251,7 @@ export function initialState($vm){
             default:false,
 			note:'',
 },
-configFormat:core.database($vm,'getMasterQasForm2Config'),
+configFormat:_.cloneDeep($vm.$store.state.interplex.configQasForm2Format),//core.database($vm,'getMasterQasForm2Config'),
         configDialog:false,
         productFieldSettingDialog:false,
         selectedFieldSetting:create_field
@@ -265,6 +265,10 @@ export default {
 
 data(){
     return initialState(this)
+},
+async mounted(){
+var $vm=this;
+await $vm.$store.dispatch('readQasForm2Config')
 },
 methods:{
     save(){
