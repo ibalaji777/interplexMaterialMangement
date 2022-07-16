@@ -35,7 +35,7 @@ var invoiceUploadApi=api+'/invoiceupload'
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
-
+return result.data.data;
     console.log('result',result)
 }
 async function getQasForm2Config(context){

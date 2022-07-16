@@ -376,7 +376,7 @@ import * as core from '../lib/core.js'
 import { Camera, CameraResultType } from '@capacitor/camera';
 import moment from 'moment'
 import blobUtil,{base64StringToBlob} from 'blob-util'
-
+import { v4 as uuidv4 } from 'uuid';
 function b64toBlob(dataURI) {
     
     var byteString = atob(dataURI.split(',')[1]);
@@ -469,7 +469,7 @@ return result;
 }
   },
   methods:{
-    submit(){
+ async   submit(){
 var $vm=this;
 console.log("====submit====")
 console.log($vm.tempInvoice)
@@ -482,8 +482,8 @@ _.each($vm.tempInvoice, ( val, key ) => {
 var invoice={}
 console.log( key, val ); 
 
-
-var qasForm1Prod=_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
+const uuid=uuidv4()
+const qasForm1Prod=_.cloneDeep(_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key)));
 
 // // validation
 // _.map(qasForm1Prod,(product)=>{
@@ -494,9 +494,16 @@ var qasForm1Prod=_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref
     
 //     })
 
-
+invoice['qasForm1Prod']=_.map(qasForm1Prod,(x)=>{
+x['invoice_client_id']=uuid;
+return x;
+})
+//chec
 invoice['ref']=key;
-invoice['gallery']=val['gallery'];
+invoice['invoice_client_id']=uuid;;
+invoice['gallery']=_.map(val['gallery'],(x)=>{x['invoice_client_id']=uuid;
+return x;
+});
 invoice['remarks']=val['remarks'];
 
 invoice['operator_id']=$vm.$store.state.interplex.user.id||0;
@@ -535,8 +542,8 @@ _.map(headerData,(header)=>{
 
 invoice['qasForm1New']=_.map(qasForm1Prod,(product)=>{
 var object={};
-
-
+object['invoice_client_id']=product['invoice_client_id'];
+console.log(product['invoice_client_id'])
 _.map(product.headerConfigFormat,(header)=>{
     object[header.name]=header.value;
 })
@@ -546,39 +553,17 @@ _.map(product.headerConfigFormat,(header)=>{
 //some fiels lag 
    object['qasForm2New']=_.map(product.qasForm2,(qasform2)=>{
     // qasform2
-
-    return Object.assign(core.dbFormate.qasform2,qasform2)
+qasform2['invoice_client_id']=invoice['invoice_client_id'];
+    return qasform2
    });
 //Object.assign(core.dbFormate.qasform2)
 //asign default values 
-console.log($vm.$store.state.interplex.user)
-    return Object.assign(core.dbFormate.qasForm1,object,{operator_id:user_id}) ;
+// console.log($vm.$store.state.interplex.user)
+    return {...object,operator_id:user_id} ;
 
 })
 
 
-
-// invoice['supplier_name']='';
-// invoice['invoice_no']='';
-// invoice['invoice_date']='';
-// invoice['invoice_qty']='';
-// invoice['ir']='';
-// invoice['date']='';
-// invoice['grn_no']='';
-// invoice['grn_date']='';
-// invoice['rmcode']='';
-// invoice['eds']='';
-// invoice['rm']='';
-// invoice['received_qty']='';
-// invoice['product_name']='';
-// invoice['form_format']='';
-// invoice['comment']='';
-// invoice['duedate']='';
-// invoice['observation_format']='';
-// invoice['header_format']='';
-// invoice['remarks']='';
-// invoice['status']='';
-// invoice['approved_by']='';
 
 
 }
@@ -603,31 +588,54 @@ console.log($vm.$store.state.interplex.user)
 
 
 } );
-var formdata=new FormData()
 
+
+
+// $vm.$store.commit('defaultValue',{})
+$vm.$alert("Saved")
+
+// console.log("+++Invoices Gallery+++",blobInvoices)
+
+var result=await $vm.$store.dispatch('submitInvoice',invoices)
 var blobInvoices=_.map(invoices,(invoice)=>{
+  invoice['gallery']=  _.map(invoice.gallery,async (image)=>{
+    var formdata=new FormData()
+// image['invoice_client_id']=invoice['invoice_client_id'];
+image['invoice_table_id']=0;
+var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==image.invoice_client_id)   
+if(invoiceFilter.length!=0)
+image['invoice_table_id']=invoiceFilter[0].id
 
-  invoice['gallery']=  _.map(invoice.gallery,(image)=>{
-console.log("image",base64StringToBlob(btoa(image.src)))
-        image['file']=base64StringToBlob(btoa(image.src));
-formdata.append('file',b64toBlob(image.src))        
-        // files.push(image)
+// formdata.append('invoice_table_id',image['invoice_table_id'])
+formdata.append('invoice_table_id',image['invoice_table_id'])
+formdata.append('invoice_client_id',image['invoice_client_id'])
+formdata.append('invoice_no',invoice['invoice_no'])
+formdata.append('file_type',image['file_type'])
+
+formdata.append('file',base64toBlob((image.src).split(',')[1]))        
+
+await $vm.$store.dispatch('upload',formdata)
+
+
+// files.push(image)
         return image;
 
 
     })
 return invoice;
 })
+// _.map(blobInvoices,(rt)=>{
+//  rt['invoice_table_id']=0;
+// var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==rt.invoice_client_id)   
+// if(invoiceFilter.length!=0)
+// rt['invoice_table_id']=invoiceFilter[0].id
 
-// $vm.$store.commit('defaultValue',{})
-$vm.$alert("Saved")
+// })
+
+console.log("++++++invoices++++",invoices)
 
 
-
-$vm.$store.dispatch('upload',formdata)
-// $vm.$store.dispatch('submitInvoice',blobInvoices)
-console.log("++++++invoices++++",blobInvoices)
-    },
+},
 
 
     selectedPartNoItem(item,index){
