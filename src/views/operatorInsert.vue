@@ -375,6 +375,40 @@ var XLSX = require("xlsx");
 import * as core from '../lib/core.js'
 import { Camera, CameraResultType } from '@capacitor/camera';
 import moment from 'moment'
+import blobUtil,{base64StringToBlob} from 'blob-util'
+
+function b64toBlob(dataURI) {
+    
+    var byteString = atob(dataURI.split(',')[1]);
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: 'image/jpeg' });
+}
+function base64toBlob(base64Data, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytesLength = byteCharacters.length;
+    var slicesCount = Math.ceil(bytesLength / sliceSize);
+    var byteArrays = new Array(slicesCount);
+
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+        var begin = sliceIndex * sliceSize;
+        var end = Math.min(begin + sliceSize, bytesLength);
+
+        var bytes = new Array(end - begin);
+        for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+            bytes[i] = byteCharacters[offset].charCodeAt(0);
+        }
+        byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+}
+
 export default {
   data(){   
     return {
@@ -552,6 +586,7 @@ console.log($vm.$store.state.interplex.user)
     invoices.push(invoice)
 
 
+
 // _.map(invoices,(invoice)=>{
 // _.map(invoice.qasForm1New,(qasForm1)=>{
 // var id=core.randomInteger(1,1000)
@@ -568,11 +603,30 @@ console.log($vm.$store.state.interplex.user)
 
 
 } );
+var formdata=new FormData()
+
+var blobInvoices=_.map(invoices,(invoice)=>{
+
+  invoice['gallery']=  _.map(invoice.gallery,(image)=>{
+console.log("image",base64StringToBlob(btoa(image.src)))
+        image['file']=base64StringToBlob(btoa(image.src));
+formdata.append('file',b64toBlob(image.src))        
+        // files.push(image)
+        return image;
+
+
+    })
+return invoice;
+})
+
 // $vm.$store.commit('defaultValue',{})
 $vm.$alert("Saved")
 
-$vm.$store.dispatch('submitInvoice',invoices)
-console.log("++++++invoices++++",invoices)
+
+
+$vm.$store.dispatch('upload',formdata)
+// $vm.$store.dispatch('submitInvoice',blobInvoices)
+console.log("++++++invoices++++",blobInvoices)
     },
 
 

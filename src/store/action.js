@@ -31,6 +31,7 @@ var readQasform2Config=api+'/readqasform2config';
 var updateQasForm2ConfigApi=api+'/headerqasform2/update';
 var submitInvoiceApi=api+'/addInvoices';
 
+var invoiceUploadApi=api+'/invoiceupload'
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -231,7 +232,17 @@ async readQasForm2Config(context){
     await    getQasForm2Config(context)
     },
     
- 
+ async upload(context,payload){
+    console.log("++formdata++")
+console.log(Object.fromEntries(payload))
+    var upload=await axios.post(invoiceUploadApi,payload,{
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+    })
+
+console.log("upload",upload)
+ }
 
 }
 
