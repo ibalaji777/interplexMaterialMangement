@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Admin Dashboard</h3>
-  ddd  {{$store.state.interplex.currentBranch}}
+  Branch:&nbsp; {{$store.state.interplex.currentBranch}}
       <div style="display:flex;margin-top:10px">
 
 

@@ -374,7 +374,7 @@ var $vm=this;
     color:red !important;
 }
 .errorStatus{
-
+//error_status:true
     color:green !important
 }
 </style>

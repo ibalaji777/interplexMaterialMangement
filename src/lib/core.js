@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import _ from 'lodash'
 import moment from 'moment'
+import store from '../store/index.js'
 export var defaultFields={
 
   partNo:'OLMAT',
@@ -17,31 +18,32 @@ export const dbFormate={
 
   qasForm1:{
     // id 
-    operator_id:'',
+    operator_id:0,
     supplier_name:'',
     invoice_no:'',
-    invoice_date:'',
-    invoice_qty:'',
+    invoice_date:moment().format(store.state.dateFormat),
+    invoice_qty:0,
     ir:'',
     // date
     grn_no:'',
-    grn_date:'',
+    grn_date:moment().format(store.state.dateFormat),
     rmcode:'',//(part_no)
     eds:'',
     rm:'',
-    received_qty:'',
+    received_qty:0,
     product_name:'',
     form_format:'',
     comment:'',
-    duedate:'',
+    duedate:moment().format(store.state.dateFormat),
     observation_print_view:[],
     observation_format:[],//(json)
     header_format:[],//(json)
     remarks:'',
     status:'pending', //(pending ,approved or acceptedOnDeviation or ppap)
-    approved_by:'',
+    approved_by:0,
     roletype:'',
-    skiplevel_status:false
+    skiplevel_status:false,
+    date:moment().format(store.state.dateFormat)
       },
 
 qasform2:{

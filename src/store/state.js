@@ -1,6 +1,7 @@
 /*eslint-disable*/
 const state = {
  bgColor:'#ff0000',
+ dateFormat:"YYYY-MM-DD",
 	control:{
 		isNavbarHidden:false
 	}
@@ -272,7 +273,7 @@ interplex:{
 	qasForm1:[],//test
 	qasForm2:[],//test
     user:{
-		id:'',
+		id:0,
         name:'',
         branch:'',
         roletype:'operator',

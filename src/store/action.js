@@ -29,8 +29,14 @@ var updateHeaderConfigApi=api+'/headerconfig/update';
 
 var readQasform2Config=api+'/readqasform2config';
 var updateQasForm2ConfigApi=api+'/headerqasform2/update';
+var submitInvoiceApi=api+'/addInvoices';
 
+async function submitInvoice(context,invoices){
 
+    var result=await axios.post(submitInvoiceApi,{invoices})
+
+    console.log('result',result)
+}
 async function getQasForm2Config(context){
     var result = await axios.get(readQasform2Config)
     console.log("default qasform2 config",result.data )
@@ -92,6 +98,10 @@ async function getUsers(context){
 }
 
 const actions = {
+    async submitInvoice(context,payload){
+
+        return submitInvoice(context,payload)
+    },
     async updateHeaderConfig(context,payload){
 return await updateHeaderConfig(context,payload)
     },
@@ -217,8 +227,8 @@ context.commit('logout')
 async updateQasForm2Config(context,payload){
 return    updateQasForm2Config(context,payload)
 },
-async readQasForm2Config(context,payload){
-    await    getQasForm2Config(context,payload)
+async readQasForm2Config(context){
+    await    getQasForm2Config(context)
     },
     
  

@@ -465,29 +465,29 @@ invoice['ref']=key;
 invoice['gallery']=val['gallery'];
 invoice['remarks']=val['remarks'];
 
-
+invoice['operator_id']=$vm.$store.state.interplex.user.id||0;
 invoice['qasForm1Prod']=qasForm1Prod;//_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
 invoice['supplier_name']='';
 invoice['invoice_no']='';
-invoice['invoice_date']='';
-invoice['invoice_qty']='';
+invoice['invoice_date']=moment().format($vm.$store.state.dateFormat);
+invoice['invoice_qty']=0;
 invoice['ir']='';
-invoice['date']='';
+invoice['date']=moment().format($vm.$store.state.dateFormat);
 invoice['grn_no']='';
-invoice['grn_date']='';
+invoice['grn_date']=moment().format($vm.$store.state.dateFormat);
 invoice['rmcode']='';
 invoice['eds']='';
 invoice['rm']='';
-invoice['received_qty']='';
+invoice['received_qty']=0;
 invoice['product_name']='';
 invoice['form_format']='';
 invoice['comment']='';
-invoice['duedate']='';
-invoice['observation_format']='';
-invoice['header_format']='';
+invoice['duedate']=moment().format($vm.$store.state.dateFormat);
+invoice['observation_format']=[];
+invoice['header_format']=[];
 invoice['remarks']='';
 invoice['status']='';
-invoice['approved_by']='';
+invoice['approved_by']=0;
 
 if(qasForm1Prod.length!=0){
 // ***********************************
@@ -552,25 +552,27 @@ console.log($vm.$store.state.interplex.user)
     invoices.push(invoice)
 
 
-_.map(invoices,(invoice)=>{
-_.map(invoice.qasForm1New,(qasForm1)=>{
-var id=core.randomInteger(1,1000)
-qasForm1['id']=id;
-core.database($vm,'insertQasForm1',qasForm1)
-_.map(invoice.qasForm2New,(qasForm2)=>{
-var id=core.randomInteger(1,1000)
-qasForm2['id']=id;
-    core.database($vm,'insertQasForm2',qasForm2)
-})  
-})
+// _.map(invoices,(invoice)=>{
+// _.map(invoice.qasForm1New,(qasForm1)=>{
+// var id=core.randomInteger(1,1000)
+// qasForm1['id']=id;
+// core.database($vm,'insertQasForm1',qasForm1)
+// _.map(invoice.qasForm2New,(qasForm2)=>{
+// var id=core.randomInteger(1,1000)
+// qasForm2['id']=id;
+//     core.database($vm,'insertQasForm2',qasForm2)
+// })  
+// })
 
-})
+// })
 
 
 } );
-$vm.$store.commit('defaultValue',{})
+// $vm.$store.commit('defaultValue',{})
 $vm.$alert("Saved")
-console.log(invoices)
+
+$vm.$store.dispatch('submitInvoice',invoices)
+console.log("++++++invoices++++",invoices)
     },
 
 

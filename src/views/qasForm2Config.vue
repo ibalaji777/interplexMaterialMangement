@@ -10,7 +10,7 @@
 
 
 
-
+<!-- {{$store.state.interplex.configQasForm2Format}} -->
 <!-- pending qasform2 -->
 
 <div v-for="(productFormat , index) in configFormat" :key="'product'+index">
@@ -222,7 +222,7 @@
     </div>
 </template>
 <script>
-import * as core from '../lib/core.js'
+// import * as core from '../lib/core.js'
 /*eslint-disable*/
 var create_field={
 			label:'',//input field label
@@ -271,9 +271,11 @@ var $vm=this;
 await $vm.$store.dispatch('readQasForm2Config')
 },
 methods:{
-    save(){
+   async save(){
         var $vm=this;
-        core.database(this,'saveQasForm2Config',this.configFormat)
+
+     await $vm.$store.dispatch('updateQasForm2Config',$vm.configFormat)  
+        // core.database(this,'saveQasForm2Config',this.configFormat)
     $vm.$alert("Successfully Updated")
 
     },
@@ -319,6 +321,16 @@ $vm.$alert("New Field Created")
 //         this.$store.commit("updateProductsFormat",this.configFormat)
 //     }
 // }
+watch:{
+    "$store.state.interplex.configQasForm2Format":{
+handler(){
+var $vm=this    
+$vm.configFormat=_.cloneDeep($vm.$store.state.interplex.configQasForm2Format)
+},
+deep:true
+
+    }
+}
 
 }
 </script>

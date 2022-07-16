@@ -274,7 +274,7 @@ await $vm.$store.dispatch('readHeaderConfig')
 methods:{
 async    save(){
         var $vm=this;
- 
+
 if(await  $vm.$store.dispatch('updateHeaderConfig',$vm.configFormat)){
 $vm.$alert("Successfully Updated")
 return;
