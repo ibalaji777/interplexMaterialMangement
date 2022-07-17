@@ -301,6 +301,7 @@ map:{
 
 
 interplex:{
+	masterFileTypes:[],
 	currentBranch:'',
 	qasForm1:[],//test
 	qasForm2:[],//test

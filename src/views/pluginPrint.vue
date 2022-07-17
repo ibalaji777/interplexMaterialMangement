@@ -31,6 +31,7 @@
 // const format_page={};
 /* eslint-disable*/
 import * as printData from '../lib/printData.js'
+import * as core from '../lib/core.js'
 // import * as helper_utils from "../lib/utils";
 // import * as format_page from "../comman_medium/print_paper_data";
 //eslint-disable-next-line
@@ -157,13 +158,15 @@ if($vm.type){
 //         },
         //version 5.0.7  or above
 // --------------------------printer operation-------------------------
-//  print() {
-//      var view=element().pos_paper.contentDocument.getElementsByTagName("html")[0].innerHTML;
-//     // console.log(view)
+ print() {
+     var view=element().pos_paper.contentDocument.getElementsByTagName("html")[0].innerHTML;
+    // console.log(view)
+                window.frames["invoice_type_plugin"].focus();
+                window.frames["invoice_type_plugin"].contentWindow.print();
 
 //      console.log("invoice_type_plugin code")
 //             var $vm=this;
-//             if (helper_utils.isDeviceDetect()) {
+//             if (core.isDeviceDetect()) {
 //                 document.addEventListener(
 //                     "deviceready",
 //                     function() {
@@ -191,7 +194,7 @@ if($vm.type){
 //                 window.frames["invoice_type_plugin"].focus();
 //                 window.frames["invoice_type_plugin"].contentWindow.print();
 //             }
-//         },
+        },
 //  print(){
 //       if (helper_utils.isDeviceDetect()) {
 //                 document.addEventListener(

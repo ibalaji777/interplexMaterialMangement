@@ -37,6 +37,14 @@ var checkProductBatch=api+'/productbatch/check'
 var checkproductsbatch=api+'/checkproductsbatch'
 var getQasFormOneApi=api+'/readqasformonelist'
 var getQasFormSingleApi=api+'/readqasformonesingle'
+
+var qasFornOneUpdateApi=api+'/qasformone/update'
+var qasFormTwoUpdateApi=api+'/qasformtwo/update';
+
+var mediaDeleteApi=api+'/media/delete';
+
+var readFileTypesApi=api+'readfiletypes';
+
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -80,7 +88,7 @@ await getHeaderConfig(context)
 async function getUploadType(context){
     var result = await axios.get(readUploadType)
     
-    context.commit('setMasterUploadType',result.data)  
+    context.commit('setFileTypes',result.data)  
 
 }
 
@@ -280,6 +288,34 @@ async getQasFormOneSingle(context,invoice_table_id){
     console.log(result)
     return result.data;
 }         
+,
+async qasFornOneUpdate(context,payload){
+    var result=await axios.post(qasFornOneUpdateApi,payload)
+    console.log(result)
+    return result.data;
+
+},
+async qasFornOneUpdate(context,payload){
+    var result=await axios.post(qasFormTwoUpdateApi,{qasFormTwo:payload})
+    console.log(result)
+    return result.data;
+
+},
+async mediaDelete(context,id){
+    var result=await axios.post(mediaDeleteApi,{id})
+    console.log(result)
+    return result.data;
+
+},
+
+async fileTypes(context,payload){
+
+    var rt=await axios.get(readFileTypesApi)
+
+    context.commit('setFileTypes',rt.data)
+}
+
+
 
 
 }

@@ -133,7 +133,7 @@ setMasterProducts(state,products){
 	Vue.set(state.interplex,'masterProducts',products)
 },
 setMasterUploadType(state,uploadtypes){
-	Vue.set(state.interplex,'masterUploadTypes',uploadtypes)
+	Vue.set(state.interplex,'masterFileTypes',uploadtypes)
 },
 setHeaderConfig(state,config){
 	Vue.set(state.interplex,'configHeaderFormat',config)
@@ -145,6 +145,10 @@ setQasForm2Config(state,config){
 setQasFormOneList(state,list){
 	Vue.set(state.interplex,'qasForm1',list)
 },
+setFileTypes(state,list){
+
+	Vue.set(state.interplex,'masterFileTypes',list)
+}
 
 };
 

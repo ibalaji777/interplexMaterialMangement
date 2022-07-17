@@ -529,7 +529,7 @@ return object
 
 export function productConfigFormat($vm,object){
 
-  var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
+ var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
  var originalProduct=database($vm,'getProductConfigValue',object)
 
 //  console.log('productConfigFormat',productConfigFormat)
@@ -737,4 +737,40 @@ export function choose_date_type(action){
           to_date
       }
   }
-  
+
+  export  function isDeviceDetect() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+
+export function base64toBlob(base64Data, contentType) {
+  contentType = contentType || '';
+  var sliceSize = 1024;
+  var byteCharacters = atob(base64Data);
+  var bytesLength = byteCharacters.length;
+  var slicesCount = Math.ceil(bytesLength / sliceSize);
+  var byteArrays = new Array(slicesCount);
+
+  for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      var begin = sliceIndex * sliceSize;
+      var end = Math.min(begin + sliceSize, bytesLength);
+
+      var bytes = new Array(end - begin);
+      for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+          bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+  }
+  return new Blob(byteArrays, { type: contentType });
+}

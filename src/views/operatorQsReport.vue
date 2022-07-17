@@ -247,7 +247,7 @@ Total Capture:{{takePhoto.length}}
 {{image.file_type}}
 </span>
 </div>
-
+<v-icon @click="takePhoto.splice(index,1)">fa-trash</v-icon>
 </div>
 <!-- <div class="productItems">
 Items
@@ -258,6 +258,41 @@ Items
 </div>
 
 
+</div>
+      </v-card>
+    </v-dialog>
+<!--*******************file type******************* -->
+   <v-dialog
+      v-model="fileTypeDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>Choose File Type</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="fileTypeDialog = false"
+            >
+              Close
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+        <div v-if="$store.state.interplex.masterFileTypes.length==0">
+<div style="text-align:center;color:red;margin:15px0;">Result Not found</div>
+        </div>
+     <div class="interList" @click="selectGallery(item)" v-for="(item,index) in $store.state.interplex.masterFileTypes" :key="'FileType'+index">
+        {{item.name}}
+     </div>
 </div>
       </v-card>
     </v-dialog>
@@ -275,6 +310,9 @@ export default {
     data(){
 
         return {
+            fileTypeDialog:false,
+selected_gallery:0,
+
             qasForm2Dialog:false,//product list dialog
             galleryDialog:false,
             header:{ },
@@ -316,12 +354,28 @@ return ''
 
 },
     },
-    mounted(){
+  async  mounted(){
         var $vm=this;
         console.log("qs selectedPartNoItem")
 console.log($vm.$store.state.interplex.selectedPartNoItem)
-    },
+await $vm.$store.dispatch('readUploadType')
+},
     methods:{
+            selectGalleryType(index){
+var $vm=this;
+$vm.fileTypeDialog=true;
+$vm.selected_gallery=index;
+    },
+        selectGallery(item){
+var $vm=this;
+var selected_gallery=_.cloneDeep($vm.selected_gallery)
+if($vm.selected_gallery!==-1)
+{
+    this.takePhoto[selected_gallery].file_type=item.name;
+    $vm.selected_gallery=-1;
+    $vm.fileTypeDialog=false;
+}
+    },
         checkErrorStatus(event,index,product){
 var $vm=this;
 

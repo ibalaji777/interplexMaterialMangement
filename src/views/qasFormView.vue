@@ -1,12 +1,17 @@
 <template>
     <div>
 
-    <plugin-print  :invoice_data="invoice"></plugin-print>
+
+
+<v-btn @click="$refs.print.print()">print</v-btn>
+    <plugin-print ref="print"  :invoice_data="invoice"></plugin-print>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="red" style="color:white;margin:2px">Qas Form One</v-btn>
 <v-btn @click="selectForm='qasformtwo'" color="red" style="color:white;margin:2px">Qas Form two</v-btn>
 <v-btn @click="selectForm='media'" color="red" style="color:white;margin:2px">Media</v-btn>
+<v-btn @click="selectForm='edit'" color="red" style="color:white;margin:2px">Edit</v-btn>
+
 </div>
 
 <h3>Mark Status</h3>
@@ -32,6 +37,39 @@ PP
     </div>
 </div>
 
+
+
+<div v-if="selectForm=='edit'">
+OBSERVATION
+<div style="display:flex;">
+
+<div @click="qasForm1Dialog=true" class="insertProduct" style="margin-right:10px">
+<v-icon>fa-check</v-icon>
+</div>
+<div @click="qasForm2Dialog=true" class="insertProduct" style="margin-right:10px">
+<v-icon>fa-list</v-icon>
+</div>
+<div class="insertProduct" style="position:relative" @click="galleryDialog=true">
+<v-icon>fa-image</v-icon>
+<div v-if="(invoice.gallery.length+takePhoto.length)!=0" style="position: absolute;
+    top: -7px;
+    right: -7px;
+    background: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    color: antiquewhite;
+    font-size: 15px;
+">{{(invoice.gallery.length+takePhoto.length)}}
+
+</div>
+</div>
+</div>
+
+
+
+</div>
 
 <div v-if="selectForm=='qasformone'">
 
@@ -219,16 +257,287 @@ align-items: center;">
 <img style="max-width:500px" :src="item.src" alt="">
     </div>
 </div>
+<!-- *********************Gallery************************ -->
+       <v-dialog
+      v-model="galleryDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>
+            <v-icon               @click="galleryDialog = false">fa-times</v-icon>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+<v-btn @click="saveMedia" color="red" style="color:white">SAVE</v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<div @click="takePicture" class="insertProduct">
+<v-icon>fa-camera</v-icon>
+</div>
+<br>
+<div style="    background: #f13454;
+    padding: 9px;
+    color: white;
+    border-radius: 29px;
+    font-weight: 300;">
+Total Capture:{{invoice.gallery.length}}
+</div>
+<div class="productContainer">
+<!-- {{takePhoto}} -->
+<div v-for="(image,index) in invoice.gallery" :key="index+image" class="productItems" style="    display: flex;
+    justify-content: space-between;">
+<img :src="image.src" alt="" style="max-width:100px;max-height:100px">
+<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+    height: 40px;
+    border: 1px dashed #ffeb3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
++
+</span>
+<span style="
+    padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+{{image.file_type}}
+</span>
+</div>
+<v-icon @click="mediaDelete(image,index)" style="margin:0 5px">fa-trash</v-icon>
+
+</div>
+<div v-for="(image,index) in takePhoto" :key="index+'newphoto'" class="productItems" style="    display: flex;
+    justify-content: space-between;">
+<img :src="image.src" alt="" style="max-width:100px;max-height:100px">
+<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+    height: 40px;
+    border: 1px dashed #ffeb3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
++
+</span>
+<span style="
+    padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+{{image.file_type}}
+
+</span>
+
+</div>
+<v-icon @click="(takePhoto.splice(index,1))">fa-trash</v-icon>
+
+</div>
+
+
+<!-- <div class="productItems">
+Items
+</div>
+<div class="productItems">
+Items
+</div> -->
+</div>
+
+
+</div>
+      </v-card>
+    </v-dialog>
+
+<!-- *******************qasform2 product list dialog************************ -->
+ <v-dialog
+      v-model="qasForm2Dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="qasForm2Dialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn @click="saveQasFormTwo" color="red" style="color:white">save</v-btn>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<h3>QAS FORM LIST</h3>
+<div style="    height: 91vh;
+    overflow: scroll;
+">
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <!-- <th>cw/kg</th>
+                <th>w/mm</th>
+                <th>th/mm</th>
+                <th>Sup Coil#</th>
+                <th>Error</th> -->
+
+            </tr>
+<tr class="rowColor" v-for="(productFormat , index) in invoice.qasFormTwo" :key="'product'+index">
+    <td>{{index+1}}</td>
+<td>
+    <input  v-model="productFormat.batch_no" placeholder="coild # (Batch No)"  class="interInput"   type="text" >
+    <input v-model="productFormat.lot_no" placeholder="sup coil #(Lot No)"  class="interInput"   type="text" >
+    <input v-model="productFormat.width"  class="interInput"   type="text" placeholder="Width (W/KG)" >
+    <div style="display:flex">
+    
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_one"  class="interInput"   type="text" placeholder="Width One" >
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_two"  class="interInput"   type="text" placeholder="Width Two" >
     </div>
+        <div style="display:flex">
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_one"  class="interInput"   type="text" placeholder="Thick One" >
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_two" class="interInput"   type="text" placeholder="Thick Two" >
+    </div>
+</td>
+<td style="background:white;padding:9px">
+    <v-icon class="defaultErorr" :class="{errorStatus:productFormat.error_status}">fa-check</v-icon>
+</td>
+<!-- <td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td> -->
+
+      </tr>
+        </table>
+        </div>
+
+
+
+</div>
+      </v-card>
+    </v-dialog>
+
+<!-- qasForm1Dialog -->
+ <v-dialog
+      v-model="qasForm1Dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="qasForm1Dialog = false">fa-times</v-icon></v-toolbar-title>
+
+          <v-spacer></v-spacer>
+          <v-btn @click="saveQasFormOne" color="red" style="color:white">save</v-btn>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<div style="    height: 91vh;
+    overflow: scroll;
+">
+        <table style="width:100%">
+            <tr>
+                <th></th>
+                <!-- <th></th> -->
+            </tr>
+            <!-- selectedPartNoItem.productConfigFormat -->
+<tr  v-for="(productFormat , index) in invoice.qasFormOne.observation_format" :key="'product'+index">
+
+<td >
+  <span style="font-size:14px">{{productFormat.label}}</span>
+    <!-- @input="watchValue($event,productFormat)" -->
+    <input     class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+</td>
+<!-- <td style="padding:15px" >
+    <div style="text-align:center">
+    <v-icon v-if="productFormat.validation">fa-check</v-icon>
+    </div></td>  
+     -->
+          </tr>
+        </table>
+        </div>
+        <!-- <div v-for="(productFormat , index) in productsFormat" :key="'product'+index" >
+
+<div style="display:flex" v-if="productFormat.show">
+<span style="width:40%">{{productFormat.label}}</span>
+<input style="width:60%" class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+</div>
+
+
+</div> -->
+
+
+</div>
+      </v-card>
+    </v-dialog>
+
+<!--*******************file type******************* -->
+   <v-dialog
+      v-model="fileTypeDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>Choose File Type</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="fileTypeDialog = false"
+            >
+              Close
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+             <div v-if="$store.state.interplex.masterFileTypes.length==0">
+<div style="text-align:center;color:red;margin:15px0;">Result Not found</div>
+        </div>
+     <div class="interList" @click="selectGallery(item)" v-for="(item,index) in $store.state.interplex.masterFileTypes" :key="'FileType'+index">
+        {{item.name}}
+     </div>
+</div>
+      </v-card>
+    </v-dialog>
+
+
+
+    </div>
+   
 </template>
 <script>
 /*eslint-disable*/
-
+import * as core from '../lib/core.js'
 import * as config from '../lib/config.js'
 import _ from 'lodash'
+import { Camera, CameraResultType } from '@capacitor/camera';
 export default {
 data(){
     return {
+fileTypeDialog:false,
+selected_gallery:0,
+
+        takePhoto:[],
+        qasForm1Dialog:false,
+        qasForm2Dialog:false,
+        galleryDialog:false,
+
         item:{
             skiplevel_status:false,
         },
@@ -246,6 +555,8 @@ printViewMap:{},
 async mounted(){
     var $vm=this;
 
+
+await $vm.$store.dispatch('readUploadType')
 var params=$vm.$route.params
 
 if(params.item){
@@ -285,6 +596,83 @@ $vm.observation_print_view_format=qasformoneNew.observation_print_view_format||_
 }
 },
 methods:{
+    selectGalleryType(index){
+var $vm=this;
+$vm.fileTypeDialog=true;
+$vm.selected_gallery=index;
+    },
+        selectGallery(item){
+var $vm=this;
+var selected_gallery=_.cloneDeep($vm.selected_gallery)
+if($vm.selected_gallery!==-1)
+{
+    this.takePhoto[selected_gallery].file_type=item.name;
+    $vm.selected_gallery=-1;
+    $vm.fileTypeDialog=false;
+}
+    },
+    saveMedia(){
+var $vm=this;
+  _.map($vm.takePhoto,async (image)=>{
+    var formdata=new FormData()
+image['invoice_table_id']=$vm.invoice.qasFormOne.invoice_table_id;
+image['invoice_client_id']=$vm.invoice.qasFormOne.invoice_client_id;
+image['invoice_no']=$vm.invoice.qasFormOne.invoice_no;
+// formdata.append('invoice_table_id',image['invoice_table_id'])
+formdata.append('invoice_table_id',image['invoice_table_id'])
+formdata.append('invoice_client_id',image['invoice_client_id'])
+formdata.append('invoice_no',image['invoice_no'])
+formdata.append('file_type',image['file_type'])
+
+formdata.append('file',core.base64toBlob((image.src).split(',')[1]))        
+
+await $vm.$store.dispatch('upload',formdata)
+console.log("uploading....")
+return image;
+
+  })
+$vm.$alert("saved")
+    },
+async mediaDelete(item,index){
+var $vm=this;
+$vm.$confirm("Do You Want to delete?").then(async ()=>{
+await $vm.$store.dispatch('mediaDelete',item.id)
+$vm.invoice.gallery.splice(index,1)
+$vm.$alert("Deleted")
+})
+},    
+saveQasFormTwo(){
+var $vm=this;
+
+console.log($vm.invoice.qasFormTwo)
+$vm.$store.dispatch('qasFornOneUpdate',$vm.invoice.qasFormTwo)
+$vm.$alert("Saved")
+
+
+},
+    saveQasFormOne(){
+
+var $vm=this;
+console.log("+++++qasform1++++++")
+console.log($vm.invoice.qasFormOne)
+
+$vm.$store.dispatch('qasFornOneUpdate',$vm.invoice.qasFormOne)
+
+$vm.$alert("Saved")
+    },
+                 async takePicture() {
+            var $vm=this;
+  const image = await Camera.getPhoto({
+    quality: 100,
+    allowEditing: false,
+    resultType: CameraResultType.DataUrl,
+  });
+
+  // Here you get the image as result.
+  const theActualPicture = image.dataUrl;
+  console.log(theActualPicture)
+  $vm.takePhoto.push({src:theActualPicture,file_type:''})
+},
     status(status){
 var $vm=this;
 console.log(status)
