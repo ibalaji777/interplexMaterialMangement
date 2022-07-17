@@ -1,5 +1,6 @@
+import * as core from '../lib/config'
 
-var api="http://127.0.0.1:3333";
+var api=core.api;
 import axios from 'axios'
 /*eslint-disable*/
 
@@ -32,6 +33,10 @@ var updateQasForm2ConfigApi=api+'/headerqasform2/update';
 var submitInvoiceApi=api+'/addInvoices';
 
 var invoiceUploadApi=api+'/invoiceupload'
+var checkProductBatch=api+'/productbatch/check'
+var checkproductsbatch=api+'/checkproductsbatch'
+var getQasFormOneApi=api+'/readqasformonelist'
+var getQasFormSingleApi=api+'/readqasformonesingle'
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -242,7 +247,40 @@ console.log(Object.fromEntries(payload))
     })
 
 console.log("upload",upload)
- }
+ },
+//  async checkProductBatch(state,payload){
+
+// var result= await axios.post(checkProductBatch,{batch_no:payload})
+
+// return result;
+
+//  }
+
+async checkproductsbatch(state,payload){
+
+    var result= await axios.post(checkproductsbatch,{products:payload})
+    
+    return result.data;
+    
+     },
+
+async getQasFormOne(context){
+
+        var result= await axios.get(getQasFormOneApi)
+       
+        context.commit('setQasFormOneList',result.data)
+console.log(result)
+        // return  result;
+        
+         },
+
+async getQasFormOneSingle(context,invoice_table_id){
+
+    var result=await axios.post(getQasFormSingleApi,{invoice_table_id})
+    console.log(result)
+    return result.data;
+}         
+
 
 }
 

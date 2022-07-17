@@ -303,6 +303,60 @@ Items
 </div>
       </v-card>
     </v-dialog>
+
+
+    <!-- *********************checkdialog************************ -->
+    <v-dialog
+      v-model="checkDialogeEdit"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="checkDialogeEdit = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<div class="rowColor" v-for="(item,index) in checkHeaderBefore" :key="index+'invoice'">
+Vendor Name:{{item.supplier_name}}
+
+<div style="display:flex">
+        <div class="inputContainer">
+            Invoice No
+<input type="text" style="width:100%" class="interInput" v-model="item.invoice_no">
+</div>
+        <div class="inputContainer">
+            Invoice Date
+<input type="text" style="width:100%" class="interInput" v-model="item.invoice_date">
+</div>
+
+</div>
+
+<div style="display:flex">
+        <div class="inputContainer">
+            Grn No
+<input type="text" style="width:100%" class="interInput" v-model="item.grn_no">
+</div>
+
+        <div class="inputContainer">
+            Grn Date
+<input type="text" style="width:100%" class="interInput" v-model="item.grn_date">
+</div>
+</div>
+</div>
+       </div>
+      </v-card>
+    </v-dialog>
+
+
     <!-- *********************checkdialog************************ -->
     <v-dialog
       v-model="checkDialog"
@@ -336,7 +390,12 @@ Items
       label="Select"
     ></v-checkbox>
 
-    <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn>
+<v-btn color="red" style="color:white" @click="checkDialogeEdit=true">Edit</v-btn>
+<v-btn color="red" style="color:white" @click="checkBatch">check BAtch</v-btn>
+
+<v-btn color="red" style="color:white" @click="qasGroupOneCheckout">Submit </v-btn>
+
+    <!-- <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn> -->
 </div>
 <div class="checkContainer">
 <div v-for="(item,index) in checkHeaderBefore" :key="index+'invoice'">
@@ -344,14 +403,76 @@ Items
 <div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style="background: chartreuse;
     padding: 10px;
     border-radius: 10px;margin:3px;">
-   NAME:  {{item['Vendor Name']}}<br>
-   DATE: {{item["LAST_GR_DATE_EXT"]}}<br>
-   Part No: {{item["OLMAT"]}}<br>
+<div style="display:flex;justify-content:space-between">   NAME:  {{item['supplier_name']}}  <v-icon @click.prevent.stop="checkHeaderBefore.splice(index,1)">fa-trash</v-icon></div> <br>
+   DATE: {{item["invoice_date"]}}<br>
+   Part No: {{item["rmcode"]}}<br>
+   BATCH NO:{{item.batch_no}}
+   <br>
+   Weight:{{item.qty}}<br>
+   Invoice No:{{item['invoice_no']}}<br>
+   Grn NO:{{item['grn_no']}}<br>
+
+<div style="    display: flex;
+    justify-content: flex-end;">
+    <span v-if="item.isExist">Exist</span>
+    <span v-else>Not Exist</span>
+</div>
+</div>
+
+</div>
+</div>
+       </div>
+      </v-card>
+    </v-dialog>
+    <!-- *********************checkdialog************************ -->
+    <v-dialog
+      v-model="checkGroupQasOneDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="checkGroupQasOneDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+
+<div style="    padding: 0 17px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    /* background: lightgoldenrodyellow; */
+    border-radius: 5px;
+    border: 1px solid;
+    margin-bottom: 10px;">
+<v-checkbox
+      v-model="checkAllSelected"
+      label="Select"
+    ></v-checkbox>
+
+    <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn>
+</div>
+<div class="checkContainer">
+<div v-for="(item,index) in qasForm1Group" :key="index+'invoice'">
+
+<div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style="background: chartreuse;
+    padding: 10px;
+    border-radius: 10px;margin:3px;">
+   NAME:  {{item['supplier_name']}}<br>
+   DATE: {{item["date"]}}<br>
+   Part No: {{item["rmcode"]}}<br>
    TOTAL BATCH NOS:{{item.products.length}}
    <br>
    Weight:{{item.invoiceQty}}<br>
-   Invoice No:<br>
-   Grn NO:<br>
+   Invoice No:{{item.invoice_no}}<br>
+   Grn NO:{{item.grn_date}}<br>
 
 <div style="    display: flex;
     justify-content: flex-end;">
@@ -377,6 +498,9 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import moment from 'moment'
 import blobUtil,{base64StringToBlob} from 'blob-util'
 import { v4 as uuidv4 } from 'uuid';
+
+
+
 function b64toBlob(dataURI) {
     
     var byteString = atob(dataURI.split(',')[1]);
@@ -409,9 +533,52 @@ function base64toBlob(base64Data, contentType) {
     return new Blob(byteArrays, { type: contentType });
 }
 
-export default {
-  data(){   
+
+function initialState($vm){
+
     return {
+        qasForm1Group:[],
+checkGroupQasOneDialog:false,
+invoice:{
+
+ref:'',
+invoice_client_id:'',
+gallery:[],
+remarks:'',
+operator_id:0,
+qasForm1Prod:[],
+supplier_name:'',//vendorep
+invoice_no:'',
+invoice_date:moment().format($vm.$store.state.dateFormat),
+invoice_qty:0,
+ir:'',
+date:moment().format($vm.$store.state.dateFormat),
+grn_no:'',
+grn_date:moment().format($vm.$store.state.dateFormat),
+rmcode:'',
+eds:'',
+rm:'',
+received_qty:0,
+product_name:'',
+form_format:'',
+duedate:moment().format($vm.$store.state.dateFormat),
+observation_format:[],
+header_format:[],
+remarks:'',
+status:'',
+approved_by:0,
+//extras map
+batch_no:'',
+
+
+
+
+
+
+},
+
+
+checkDialogeEdit:false,
 checkAllSelected:true,
         checkHeaderBefore:[],
         checkDialog:false,
@@ -445,6 +612,13 @@ checkAllSelected:true,
         galleryDialog:false,
         headerFileDialog:false,
     }
+}
+
+
+
+export default {
+  data(){   
+    return initialState(this)
   },
   mounted(){
     var $vm=this;
@@ -469,6 +643,31 @@ return result;
 }
   },
   methods:{
+qasGroupOneCheckout(){
+var $vm=this;
+$vm.checkGroupQasOneDialog=true;
+
+
+$vm.qasForm1Group=_.map(core.headerFileGroup($vm.checkHeaderBefore),(x)=>{
+x['selected']=true;
+x['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
+x['isExist']=false;//validate server side
+// if(x['DATE']){
+//     var str=x['DATE'];
+//    x['DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+//        var str=x['DOMF'];
+//    x['DOMF_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+//        var str=x['LAST_GR_DATE'];
+//    x['LAST_GR_DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+// }
+return x;
+})
+
+console.log("qasform1group",$vm.qasForm1Group)
+
+
+},
+
  async   submit(){
 var $vm=this;
 console.log("====submit====")
@@ -526,7 +725,7 @@ invoice['comment']='';
 invoice['duedate']=moment().format($vm.$store.state.dateFormat);
 invoice['observation_format']=[];
 invoice['header_format']=[];
-invoice['remarks']='';
+// invoice['remarks']='';
 invoice['status']='';
 invoice['approved_by']=0;
 
@@ -594,8 +793,8 @@ qasform2['invoice_client_id']=invoice['invoice_client_id'];
 // $vm.$store.commit('defaultValue',{})
 $vm.$alert("Saved")
 
-// console.log("+++Invoices Gallery+++",blobInvoices)
-
+console.log("+++Invoices Gallery+++",invoices)
+// ----------------
 var result=await $vm.$store.dispatch('submitInvoice',invoices)
 var blobInvoices=_.map(invoices,(invoice)=>{
   invoice['gallery']=  _.map(invoice.gallery,async (image)=>{
@@ -624,6 +823,7 @@ await $vm.$store.dispatch('upload',formdata)
     })
 return invoice;
 })
+// -----------------
 // _.map(blobInvoices,(rt)=>{
 //  rt['invoice_table_id']=0;
 // var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==rt.invoice_client_id)   
@@ -644,15 +844,35 @@ console.log("++++++invoices++++",invoices)
         console.log(item)
 this.$store.commit('selectedPartNoItem',item)
     },
+
+async    checkBatch(){
+
+var $vm=this;
+
+// var res=await _.map($vm.checkHeaderBefore,async (product)=>{
+
+
+// product['isExist']=await $vm.$store.dispatch('checkProductBatch',  product['batch_no'])
+
+// return product;
+
+// })
+// console.log("res",res)
+var res=await $vm.$store.dispatch('checkproductsbatch',  $vm.checkHeaderBefore)
+$vm.checkHeaderBefore=res;
+  
+
+
+    },
     addToQualitFormOne(){
 var $vm=this;
-var checked=_.filter($vm.checkHeaderBefore,(x)=>(x.selected))
+var checked=_.filter($vm.qasForm1Group,(x)=>(x.selected))
 var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create header
 //create product form
 //create product list
 var main_list=core.createProductList($vm,checked);
-
+console.log("main list",main_list)
 //skiplevel check
 var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
 console.log("main product format",skiplevel)
@@ -699,21 +919,81 @@ $vm.checkDialog=false;
 x['isValidProd']=false;
     return x;
   })
-// ----------------------------------------------------
-var headerFile=_.map(core.headerFileGroup(dataMap),(x)=>{
-x['selected']=true;
-x['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
-x['isExist']=false;//validate server side
-if(x['DATE']){
+//need to add grn no and invoice no
+var createInvProducts=[];
+var headerFile=_.map(dataMap,(x)=>{
+
+var product={}    
+product['selected']=true;
+product['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
+product['isExist']=false;//validate server side
+// if(product['DATE']){
+// product['products']=[];
     var str=x['DATE'];
    x['DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
        var str=x['DOMF'];
-   x['DOMF_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+   product['DOMF_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
        var str=x['LAST_GR_DATE'];
    x['LAST_GR_DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
-}
-return x;
+
+
+
+
+product['products']=[];
+product['supplier_name']=$vm.$store.state.map.sapImport['supplier_name']!=''?x[$vm.$store.state.map.sapImport['supplier_name']]:'';
+product['invoice_no']=$vm.$store.state.map.sapImport['invoice_no']!=''?x[$vm.$store.state.map.sapImport['invoice_no']]:'';
+product['invoice_date']=$vm.$store.state.map.sapImport['invoice_date']!=''?x[$vm.$store.state.map.sapImport['invoice_date']]:'';
+product['qty']=$vm.$store.state.map.sapImport['qty']!=''?x[$vm.$store.state.map.sapImport['qty']]:'';
+product['invoice_qty']=$vm.$store.state.map.sapImport['invoice_qty']!=''?x[$vm.$store.state.map.sapImport['invoice_qty']]:'';
+product['invoice_date']=$vm.$store.state.map.sapImport['invoice_date']!=''?x[$vm.$store.state.map.sapImport['invoice_date']]:moment().format(store.state.dateFormat);
+product['ir']=$vm.$store.state.map.sapImport['ir']!=''?x[$vm.$store.state.map.sapImport['ir']]:'';
+product['date']=$vm.$store.state.map.sapImport['date']!=''?x[$vm.$store.state.map.sapImport['date']]:moment().format(store.state.dateFormat);
+product['grn_no']=$vm.$store.state.map.sapImport['grn_no']!=''?x[$vm.$store.state.map.sapImport['grn_no']]:'';
+product['grn_date']=$vm.$store.state.map.sapImport['grn_date']!=''?x[$vm.$store.state.map.sapImport['grn_date']]:moment().format(store.state.dateFormat);
+
+product['rmcode']=$vm.$store.state.map.sapImport['rmcode']!=''?x[$vm.$store.state.map.sapImport['rmcode']]:'';
+product['eds']=$vm.$store.state.map.sapImport['eds']!=''?x[$vm.$store.state.map.sapImport['eds']]:'';
+product['rm']=$vm.$store.state.map.sapImport['rm']!=''?x[$vm.$store.state.map.sapImport['rm']]:'';
+// product['received_qty']=x[$vm.$store.state.map.sapImport['grn_date']]||'';
+// product['product_name']=x[$vm.$store.state.map.sapImport['grn_date']]||'';
+product['form_format']=$vm.$store.state.map.sapImport['form_format']!=''?x[$vm.$store.state.map.sapImport['form_format']]:'';
+
+// product['duedate']=x[$vm.$store.state.map.sapImport['duedate']]||'';
+// product['remarks']=x[$vm.$store.state.map.sapImport['remarks']]||'';
+// product['status']=x[$vm.$store.state.map.sapImport['status']]||'';
+// product['approved_by']=x[$vm.$store.state.map.sapImport['approved_by']]||'';
+product['product_name']=$vm.$store.state.map.sapImport['product_name']!=''?x[$vm.$store.state.map.sapImport['product_name']]:'';
+product['batch_no']=$vm.$store.state.map.sapImport['batch_no']!=''?x[$vm.$store.state.map.sapImport['batch_no']]:'';
+// product['sap']=
+
+
+// return product;
+
+
+
+
+
+// createInvProducts.push(product)
+return { ...x,...product};
 })
+
+
+// ----------------------------------------------------
+// var headerFile=
+// _.map(core.headerFileGroup(dataMap),(x)=>{
+// x['selected']=true;
+// x['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
+// x['isExist']=false;//validate server side
+// if(x['DATE']){
+//     var str=x['DATE'];
+//    x['DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+//        var str=x['DOMF'];
+//    x['DOMF_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+//        var str=x['LAST_GR_DATE'];
+//    x['LAST_GR_DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
+// }
+// return x;
+// })
 
 // ----------------------------------------------------
 //   console.log(core.headerFileGroup(data))

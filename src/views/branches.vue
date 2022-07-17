@@ -15,7 +15,7 @@ export default {
 
  async mounted() {
     var $vm=this;
-$vm.$store.dispatch('branches')
+await $vm.$store.dispatch('branches')
  },
  methods:{
 

@@ -40,6 +40,7 @@ import adminFileTypeList from '../views/adminFileTypeList.vue'
 import photoCapture from '../views/photoCapture.vue'
 import nativePhotoCapture from '../views/nativePhotoCapture.vue'
 
+import qasFormView from '../views/qasFormView.vue'
 
 import qasForm2Config from '../views/qasForm2Config.vue'
 
@@ -69,6 +70,11 @@ const routes = [
 		path: '/photoCapture',
 		name: 'photoCapture',
 		component:photoCapture 
+	},
+	{
+		path: '/qasFormView',
+		name: 'qasFormView',
+		component:qasFormView 
 	},
 	{
 		path: '/nativePhotoCapture',

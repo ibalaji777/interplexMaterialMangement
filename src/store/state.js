@@ -266,13 +266,100 @@ users:[
 
 
 
+map:{
+	
+	sapImport:{
+
+		rmcode:'OLMAT',
+		supplier_name:'Vendor Name',
+		invoice_no:'invoice_no',
+		grn_no:'grn_no',
+		grn_date:'LAST_GR_DATE_EXT',
+		invoice_date:'DATE_EXT',
+		batch_no:'BATCH',
+		qty:'QTY',
+		date:'DATE_EXT'
+	
+	
+	  },
+
+	  observation_print_view_format:{
+		no:'',
+		desc:'',
+		unit:'',
+		min_spec:'',
+		max_spec:'',
+		sup_one:'',
+		sup_two:'',
+		ielpt_one:'',
+		ielpt_two:'',
+		remarks:'',
+		
+		}
+	
+},
 
 
 interplex:{
 	currentBranch:'',
 	qasForm1:[],//test
 	qasForm2:[],//test
-    user:{
+    observation_print_view_format:[//using
+		{
+			no:'',
+			desc:'width',
+			unit:'width_unit_org',
+			min_spec:'width_min_spec_org',
+			max_spec:'width_max_spec_org',
+			sup_one:'width_sup_one',
+			sup_two:'width_sup_two',
+			ielpt_one:'width_ielpl_one',
+			ielpt_two:'width_ielpl_two',
+			remarks:'',
+			
+			},
+			{
+				no:'',
+				desc:'thickness',
+				unit:'thickness_unit_org',
+				min_spec:'thickness_min_spec_org',
+				max_spec:'thickness_max_spec_org',
+				sup_one:'thickness_sup_one',
+				sup_two:'thickness_sup_two',
+				ielpt_one:'thickness_ielpl_one',
+				ielpt_two:'thickness_ielpl_two',
+				remarks:'',
+				
+				},
+				{
+					no:'',
+					desc:'hardness',
+					unit:'hardness_unit_org',
+					min_spec:'hardness_min_spec_org',
+					max_spec:'hardness_max_spec_org',
+					sup_one:'hardness_sup_one',
+					sup_two:'hardness_sup_two',
+					ielpt_one:'hardness_ielpl_one',
+					ielpt_two:'hardness_ielpl_two',
+					remarks:'',
+					
+					},
+					{
+						no:'',
+						desc:'elongation',
+						unit:'elongation_unit_org',
+						min_spec:'elongation_min_spec_org',
+						max_spec:'elongation_max_spec_org',
+						sup_one:'elongation_sup_one',
+						sup_two:'elongation_sup_two',
+						ielpt_one:'elongation_ielpl_one',
+						ielpt_two:'elongation_ielpl_two',
+						remarks:'',
+						
+						},
+									
+				],
+	user:{
 		id:0,
         name:'',
         branch:'',

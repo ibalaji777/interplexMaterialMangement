@@ -35,7 +35,7 @@ ppap
           label="Search"
            ></v-text-field>
 </div>
-<div style="height:50vh;overflow:scroll">
+<div >
          <v-data-table
          dense
       v-model="selected"
@@ -54,7 +54,7 @@ ppap
  <div style="display:flex;">
  <v-icon
  small
-         @click="editItem(item)"
+         @click="preview(item)"
          style="margin-right:10px"
  >
     fa-eye
@@ -99,9 +99,16 @@ isApprover:false,
 return core.database(this,'getApproverList',)
      }
     },
-    mounted(){
+    
+    async mounted(){
         var $vm=this;
+
+      await $vm.$store.dispatch('getQasFormOne')
+
       $vm.filterResult=$vm.list;
+
+
+
 
 
 var params=this.$route.params;
@@ -121,8 +128,19 @@ if(Object.prototype.hasOwnProperty.call(params, 'status')){
 $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 }
 
+
+
     },
     methods:{
+              async  preview(item){
+            var $vm=this;
+var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)
+
+$vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
+
+        },
+
+
         selectedQasReport(value){
             var $vm=this;
             console.log("selected",value)
@@ -139,9 +157,11 @@ if($vm.selected.length==0){
 console.log("++++selected++++",$vm.selected)
 
         },
-        editItem(item){
+async        editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminCreateBranch',params: { item:item }})
+console.log(item)
+await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id);
+// $vm.$router.push({name:'adminCreateBranch',params: { item:item }})
         },
         deleteItem(item){
 

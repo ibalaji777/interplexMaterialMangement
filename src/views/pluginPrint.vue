@@ -5,7 +5,7 @@
         <!-- <v-btn @click="print()" color="orange" style="color:white">Print</v-btn> -->
         <!-- <v-btn @click="barcode_label()" color="orange" style="color:white">Prepare Barcode</v-btn> -->
 
-hello world
+
         <iframe
 
             id="invoice_type_plugin"
@@ -30,7 +30,7 @@ hello world
 
 // const format_page={};
 /* eslint-disable*/
-
+import * as printData from '../lib/printData.js'
 // import * as helper_utils from "../lib/utils";
 // import * as format_page from "../comman_medium/print_paper_data";
 //eslint-disable-next-line
@@ -321,14 +321,18 @@ if($vm.type){
         printData(){
                      
                      var $vm=this
-
+// console.log("invoice data",$vm.invoice_data)
+var data=printData.printData($vm.invoice_data)
+console.log("print data",data)
 var prepare_data={}
 prepare_data['id']='';
 prepare_data['name']='';
-prepare_data['html']='<h1>balaji world</h1>';
-prepare_data['css']='';
+prepare_data['html']=printData.qasForm.html;
+prepare_data['css']=printData.qasForm.css;
 prepare_data['js']='';
- prepare_data['data_set']={}
+prepare_data['data_set']=printData.printData($vm.invoice_data)
+
+// printData.printData($vm.invoice_data)
 // prepare_data['data_set']=format_page.angalware_report_invoice_template(
 //                         $vm.invoice_data
 //                     );

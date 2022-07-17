@@ -142,7 +142,9 @@ setHeaderConfig(state,config){
 setQasForm2Config(state,config){
 	Vue.set(state.interplex,'configQasForm2Format',config)
 },
-
+setQasFormOneList(state,list){
+	Vue.set(state.interplex,'qasForm1',list)
+},
 
 };
 

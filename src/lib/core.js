@@ -2,6 +2,9 @@
 import _ from 'lodash'
 import moment from 'moment'
 import store from '../store/index.js'
+
+export const api="http://127.0.0.1:3333";
+
 export var defaultFields={
 
   partNo:'OLMAT',
@@ -12,6 +15,22 @@ export var defaultFields={
   
 }
 
+export var mapFormat={
+
+  sapImport:{
+
+    rmcode:'OLMAT',
+    supplier_name:'Vendor Name',
+    invoice_no:'invoice_no',
+    grn_no:'grn_no',
+    invoice_date:'LAST_GR_DATE',
+    batch_no:'BATCH'
+
+
+  }
+
+
+}
 
 export const dbFormate={
 
@@ -611,9 +630,10 @@ return _.map(groupBy(array, function (item) {
   return [item[defaultFields.partNo], item[defaultFields.supplierName],item[defaultFields.invoiceDate],item[defaultFields.invoiceNo]||''];
 }),(x)=>({
   total:x.length,
-  products:x,
   invoiceQty:_.sumBy(x,(xy)=>parseFloat(xy.QTY)),
-  ...x[0]
+  ...x[0],
+  products:x,
+
 }));
 }
 
