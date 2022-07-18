@@ -43,8 +43,9 @@ var qasFormTwoUpdateApi=api+'/qasformtwo/update';
 
 var mediaDeleteApi=api+'/media/delete';
 
-var readFileTypesApi=api+'readfiletypes';
+var readFileTypesApi=api+'/readfiletypes';
 
+var readOperatorFormsApi=api+'/readoperatorforms'
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -315,7 +316,13 @@ async fileTypes(context,payload){
     context.commit('setFileTypes',rt.data)
 }
 
+,
+async readOperatorForm(context,payload){
 
+var result=    await axios.post(readOperatorFormsApi,payload)
+context.commit('setQasFormOneList',result.data)
+console.log("get list",result)
+}
 
 
 }

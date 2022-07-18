@@ -70,6 +70,7 @@
 <script>
 /*eslint-disable*/
 import * as core from '../lib/core.js'
+import moment from 'moment'
 export default {
   data(){
     return {
@@ -77,6 +78,8 @@ export default {
       productInsertDialog:false,
         galleryDialog:false,
         headerFileDialog:false,
+        from_date:moment().format("YYYY-MM-DD"),
+        to_date:moment().format("YYYY-MM-DD")
     }
   },
   computed:{
@@ -86,9 +89,21 @@ return core.database(this,'getQasFormOne')
 },
 
   },
+  async mounted(){
+var $vm=this;
+
+$vm.$store.dispatch('readOperatorForm',{
+    id:1,
+    from_date:$vm.from_date,
+    to_date:$vm.to_date
+})
+
+  },
   methods:{
     selected_date(date){
 console.log(date)
+this.from_date=date.from_date
+this.to_date=date.to_date
     },
     addProduct(){
         var $vm=this;

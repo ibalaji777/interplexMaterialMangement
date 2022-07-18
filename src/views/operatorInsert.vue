@@ -726,7 +726,7 @@ invoice['duedate']=moment().format($vm.$store.state.dateFormat);
 invoice['observation_format']=[];
 invoice['header_format']=[];
 // invoice['remarks']='';
-invoice['status']='';
+invoice['status']='pending';
 invoice['approved_by']=0;
 
 if(qasForm1Prod.length!=0){
@@ -741,6 +741,7 @@ _.map(headerData,(header)=>{
 
 invoice['qasForm1New']=_.map(qasForm1Prod,(product)=>{
 var object={};
+// object['status']='pending'
 object['invoice_client_id']=product['invoice_client_id'];
 console.log(product['invoice_client_id'])
 _.map(product.headerConfigFormat,(header)=>{
