@@ -20,7 +20,7 @@
 </div>
 
 
-      <div @click="headerFileDialog=true" class="insertProduct" style="margin-top:10px;height:100px;width:33.33%">
+      <div @click="$router.push({name:'adminProductsFormatList'})" class="insertProduct" style="margin-top:10px;height:100px;width:33.33%">
            <div style="text-align:center">
             {{masterProductsTotal}}<br>
 Total Products 

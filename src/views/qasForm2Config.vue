@@ -30,7 +30,36 @@
 <v-btn @click="save" outlined style="margin-top:10px;">Save</v-btn>
 </div>
 
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^rules dialog^^^^^^^^^^^^^^^^^^^^ -->
+ <v-dialog
+      v-model="rulesDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="rulesDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
 
+<b>QasForm 2</b>
+<template  v-for="(item,index) in configFormat"  >
+<div class="rowColor2" :key="'item'+index" style="margin:5px;padding:10px" v-if="!['validation','error_status'].includes(item.name)">
+    {{item.name}}
+    </div>
+</template>
+
+</div>
+      </v-card>
+    </v-dialog>
 
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^create field setting dialog^^^^^^^^^^^^^^^^^^^^ -->
  <v-dialog
@@ -125,21 +154,28 @@
       <b v-if="selectedFieldSetting.default">Field is Default</b> 
       <b v-else>Not a Default Field</b> 
 </div>
+
+<div style="margin-top:20px">
+<b>Do You Want to show in application?</b>
 <v-checkbox
+dense
       v-model="selectedFieldSetting.show"
-      :label="'Show (In Quality assurance Form)'"
     ></v-checkbox>
+<b>Where You Want to map value from?</b>    
 <select v-model="selectedFieldSetting.mapFrom" class="interInput" >
 <option  v-for="(item,index) in mapTypes" :key="''+index" :value="item">{{item}}</option>
-
 </select>
+<b>Which value You Want to Map?</b>
 <input  class="interInput" v-model="selectedFieldSetting.map" type="text" placeholder="Map" >
 <br>
+<b>Write Validation Rule If You want
+    <v-icon small @click="rulesDialog=true">fa-question-circle </v-icon>
+</b>
+<input   class="interInput" v-model="selectedFieldSetting.rule" type="text" placeholder="Rule" >
 
 <div style="font-size:18px;color:red;margin-top:10px">
     Note:</div><b> {{selectedFieldSetting.note}}</b>
-
-<!-- <input v-if="selectedFieldSetting.validation"  class="interInput" v-model="selectedFieldSetting.rule" type="text" placeholder="Rule" > -->
+</div>
 
 
 
@@ -239,6 +275,7 @@ var create_field={
 export function initialState($vm){
 
     return{
+        rulesDialog:false,
        mapTypes:['header','product'],
         createFieldSettingDialog:false,
         createField:{

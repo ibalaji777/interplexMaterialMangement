@@ -17,13 +17,21 @@
 <div class="productContainer">
 
 <div :class="{skiplevel:item.skiplevel_status}"  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
-   NAME:  {{item['Vendor Name']}}<br>
+   <!-- NAME:  {{item['Vendor Name']}}<br>
    DATE: {{item["LAST_GR_DATE_EXT"]}}<br>
    Part NO: {{item["OLMAT"]}}<br>
-   Weight:{{item.invoiceQty}}<br>
+   Weight:{{item.invoiceQty}}<br> -->
    <!-- <v-text-field v-model="item['Vendor Name']"></v-text-field> -->
-   Invoice No:<br>
-   Grn NO:<br>
+   <!-- Invoice No:<br>
+   Grn NO:<br> -->
+   NAME:  {{item['supplier_name']}}<br>
+   DATE: {{item["date"]}}<br>
+   Part No: {{item["rmcode"]}}<br>
+   TOTAL BATCH NOS:{{item.products.length}}
+   <br>
+   Weight:{{item.invoiceQty}}<br>
+   Invoice No:{{item.invoice_no}}<br>
+   Grn NO:{{item.grn_date}}<br>
 
 
 </div>
@@ -61,13 +69,24 @@ Items
 </div> -->
 
 <div style="margin-top:15px;display:flex;align-items:flex-end;justify-content:flex-end">
-<v-btn  style="position: absolute;
+
+
+<div  style="position: absolute;
     bottom: 25px;
-    background: linear-gradient(45deg, red, #c50303);
-    color: white !important;
-" outlined @click="submit">
-    Submit To Approval
+" outlined >
+<v-btn style="    background: linear-gradient(45deg, red, #c50303);
+    color: white !important;margin-right:5px" @click="clear" >
+    Clear
 </v-btn>
+    <v-btn
+    style="    background: linear-gradient(45deg, red, #c50303);
+    color: white !important;
+"
+    @click="submit">
+    Submit To Approval
+    </v-btn>
+
+</div>
 </div>
 <!-- --------------------------product insert dialog------------------- -->
    <v-dialog
@@ -324,9 +343,25 @@ Items
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
+Edit Sap<br>
 
 <div class="rowColor" v-for="(item,index) in checkHeaderBefore" :key="index+'invoice'">
-Vendor Name:{{item.supplier_name}}
+<div style="padding:5px">
+<div>
+    <span>Vendor Name:</span>
+    <span>{{item.supplier_name}}</span>
+</div>
+
+<div>
+    <span>Rmcode:</span>
+    <span>{{item.rmcode}}</span>
+</div>
+<div>
+    <span>Batch:</span>
+    <span>{{item.batch_no}}</span>
+</div>
+</div>
+<!-- Batch:{{item.batch_no}} -->
 
 <div style="display:flex">
         <div class="inputContainer">
@@ -377,24 +412,27 @@ Vendor Name:{{item.supplier_name}}
         <v-divider></v-divider>
        <div style="padding:10px">
 
-<div style="    padding: 0 17px;
+<div style="  
+background: crimson;
+    padding: 0px 17px;
     justify-content: space-between;
     display: flex;
     align-items: center;
-    /* background: lightgoldenrodyellow; */
-    border-radius: 5px;
     border: 1px solid;
-    margin-bottom: 10px;">
-<v-checkbox
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 13px;">
+<!-- <v-checkbox
       v-model="checkAllSelected"
       label="Select"
-    ></v-checkbox>
+    ></v-checkbox> -->
 
-<v-btn color="red" style="color:white" @click="checkDialogeEdit=true">Edit</v-btn>
-<v-btn color="red" style="color:white" @click="checkBatch">check BAtch</v-btn>
+<div style="display:flex;flex-direction:column;width:100%">
+<v-btn color="red" style="color:white;width:100%;margin:2px;" @click="checkDialogeEdit=true">Edit</v-btn>
+<v-btn color="red" style="color:white;width:100%;margin:2px;" @click="checkBatch">check BAtch</v-btn>
 
-<v-btn color="red" style="color:white" @click="qasGroupOneCheckout">Submit </v-btn>
-
+<v-btn color="red" style="color:white;width:100%;margin:2px;" @click="qasGroupOneCheckout">Submit </v-btn>
+</div>
     <!-- <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn> -->
 </div>
 <div class="checkContainer">
@@ -643,6 +681,11 @@ return result;
 }
   },
   methods:{
+    clear(){
+var $vm=this;
+$vm.$store.commit('defaultValue')
+
+    },
 qasGroupOneCheckout(){
 var $vm=this;
 $vm.checkGroupQasOneDialog=true;
@@ -652,6 +695,7 @@ $vm.qasForm1Group=_.map(core.headerFileGroup($vm.checkHeaderBefore),(x)=>{
 x['selected']=true;
 x['ref']=x[core.defaultFields.supplierName]+x[core.defaultFields.invoiceDate]+(x[core.defaultFields.invoiceNo]||'');
 x['isExist']=false;//validate server side
+x['supplier_name']=x[core.defaultFields.supplierName]
 // if(x['DATE']){
 //     var str=x['DATE'];
 //    x['DATE_EXT']=(str).toString().substring(0,4)+'-'+(str).toString().substring(4,6)+'-'+(str).toString().substring(6,8);
@@ -879,7 +923,9 @@ var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
 console.log("main product format",skiplevel)
 $vm.$store.commit('addToQualitFormOne',_.cloneDeep(skiplevel))
 $vm.$store.commit('tempInvoice',createInvoice)
-// console.log("Create Invoice ",createInvoice)
+
+console.log("Skip level",_.cloneDeep(skiplevel))
+console.log("Create Invoice ",createInvoice)
 
 $vm.checkDialog=false;
         $vm.fileTypeDialog=false;
@@ -998,9 +1044,17 @@ return { ...x,...product};
 
 // ----------------------------------------------------
 //   console.log(core.headerFileGroup(data))
-    console.log(headerFile)
-    $vm.checkHeaderBefore=headerFile||[]
-},
+    console.log("++++header file++++",headerFile)
+    // $vm.checkHeaderBefore=headerFile||[]
+//  $vm.checkBatch()
+async function checkBatch(){
+var res=await $vm.$store.dispatch('checkproductsbatch',headerFile)
+$vm.checkHeaderBefore=res;
+}
+
+checkBatch()
+ 
+ },
 
      to_json(workbook) {
         var $vm=this;
@@ -1053,6 +1107,7 @@ $vm.productInsertDialog=true
   },
   watch:{
 
+ 
     checkAllSelected(){
 var $vm=this;
         $vm.checkHeaderBefor=_.map($vm.checkHeaderBefor,(x)=>{

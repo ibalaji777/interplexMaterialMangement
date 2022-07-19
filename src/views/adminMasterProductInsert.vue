@@ -336,31 +336,140 @@
         <td>
             <v-text-field v-model="form.desc"></v-text-field>
         </td>
-        <td>            <v-text-field v-model="form.unit"></v-text-field>
+   
+        <td>    
+            <!-- {{observation_format_columns}} -->
+         <!-- {{form.unit}} -->
+                 <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+v-model="form.unit"
+  item-text="name"
+  item-value="name"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+                    <!-- <v-text-field v-model="form.unit"></v-text-field> -->
 </td>
         <td>
-                        <v-text-field v-model="form.min_spec"></v-text-field>
+
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.min_spec"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+                        <!-- <v-text-field v-model="form.min_spec"></v-text-field> -->
             
 
         </td>
-        <td><v-text-field v-model="form.max_spec"></v-text-field></td>
         <td>
-                        <v-text-field v-model="form.sup_one"></v-text-field>
-            <v-text-field v-model="form.sup_two"></v-text-field>
+                           <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.max_spec"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+            <!-- <v-text-field v-model="form.max_spec"></v-text-field></td> -->
+        <td>
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.sup_one"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.sup_two"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+
+                        <!-- <v-text-field v-model="form.sup_one"></v-text-field> -->
+            <!-- <v-text-field v-model="form.sup_two"></v-text-field> -->
 
 
 
         </td>
         <td>
+
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.ielpt_one"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.ielpt_two"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+<!-- 
                         <v-text-field v-model="form.ielpt_one"></v-text-field>
-            <v-text-field v-model="form.ielpt_two"></v-text-field>
+            <v-text-field v-model="form.ielpt_two"></v-text-field> -->
 
 
 
         </td>
         <td>
-                                    <v-text-field v-model="form.remarks"></v-text-field>
+                      
+                                     <v-combobox   :return-object="false"
 
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.remarks"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+                                    <!-- <v-text-field v-model="form.remarks"></v-text-field> -->
+<v-icon @click="insertForm.observation_print_view.splice(index,1)">fa-trash</v-icon>
 
         </td>
     </tr>
@@ -788,9 +897,35 @@ export default {
 data(){
 return intialState(this)
 },
-        mounted(){
+
+computed:{
+
+observation_format_columns(){
+var $vm=this;
+return [
+{name:'supplier_name'},
+{name:'supplier_name'},
+{name:'product_name'},
+{name:'rmcode'},
+{name:'eds'},
+{name:'rm'},
+{name:'skiplevel'},
+{name:'form_format'},
+{name:'duedate'},
+..._.cloneDeep($vm.$store.state.interplex.configProductsFormat)]
+
+
+}
+
+},
+async        mounted(){
         var $vm=this;
 // isStateForUpdate:false,
+
+
+var result=await $vm.$store.dispatch('getProductConfig')
+$vm.insertForm.observation_format=result;
+
 
 var params=this.$route.params;
 if(Object.prototype.hasOwnProperty.call(params, 'item')){
@@ -806,6 +941,8 @@ $vm.isStateForUpdate=true,
 }
     },
 methods:{
+ 
+  
     insertObservation(){
 var $vm=this;
 $vm.insertForm.observation_print_view.push((intialState($vm).observation_print_view_format))
@@ -873,8 +1010,12 @@ this.productFieldSettingDialog=true;
         var $vm=this;
         // $vm.$alert('Saved','success','success')
         // this.$store.commit("updateProductsFormat",this.insertForm.observation_format)
-  core.database(this,'saveProductConfig',this.insertForm.observation_format)
-    $vm.$alert("Successfully Updated")
+//   core.database(this,'saveProductConfig',this.insertForm.observation_format)
+   
+   $vm.$store.dispatch('updateProductConfig',$vm.insertForm.observation_format)
+   
+   
+   $vm.$alert("Config Updated")
     },
 createProductField(){
 

@@ -72,3 +72,11 @@ transform: translate(-50%,-50%);
 .rowColor:nth-child(odd) {
     background-color: lightcoral;
 }
+
+.rowColor2:nth-child(even) {
+    background-color: #295629;
+    color: white;
+}
+.rowColor2:nth-child(odd) {
+    background-color: lightcoral;
+}

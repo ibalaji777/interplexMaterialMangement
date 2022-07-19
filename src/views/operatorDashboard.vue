@@ -92,7 +92,7 @@ return core.database(this,'getQasFormOne')
   async mounted(){
 var $vm=this;
 
-$vm.$store.dispatch('readOperatorForm',{
+await $vm.$store.dispatch('readOperatorForm',{
     id:1,
     from_date:$vm.from_date,
     to_date:$vm.to_date
@@ -109,6 +109,39 @@ this.to_date=date.to_date
         var $vm=this;
 $vm.productInsertDialog=true
     }
+  },
+  
+  watch:{
+       from_date:{
+handler(){
+        var $vm=this;
+        console.log("watch date changes....")
+$vm.$store.dispatch('readOperatorForm',{
+    id:1,
+    from_date:$vm.from_date,
+    to_date:$vm.to_date
+})
+
+},
+deep:true
+
+    },
+to_date:{
+handler(){
+    var $vm=this;
+            console.log("watch date changes....")
+
+$vm.$store.dispatch('readOperatorForm',{
+    id:1,
+    from_date:$vm.from_date,
+    to_date:$vm.to_date
+})
+
+},
+deep:true
+
+    },
+
   }
 }
 

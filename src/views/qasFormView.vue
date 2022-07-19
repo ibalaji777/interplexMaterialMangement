@@ -3,8 +3,8 @@
 
 
 
-<v-btn @click="$refs.print.print()">print</v-btn>
-    <plugin-print ref="print"  :invoice_data="invoice"></plugin-print>
+<v-btn color="red" style="color:white" @click="$refs.print.print()">print</v-btn>
+    <plugin-print ref="print" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="red" style="color:white;margin:2px">Qas Form One</v-btn>
@@ -16,23 +16,23 @@
 
 <h3>Mark Status</h3>
 
-<div v-if="item.skiplevel_status" style="    border: 1px solid black;
+<div  style="    border: 1px solid black;
     display: flex;
     justify-content: space-around;
     padding: 10px;
     margin:10px 0;
 ">
 
-    <div @click="status('approved')" class="statusCard">
+    <div @click="updateFormStatus('approved')" class="statusCard">
 AC
     </div>
-    <div @click="status('acceptedOnDeviation')" class="statusCard">
+    <div @click="updateFormStatus('acceptedOnDeviation')" class="statusCard">
 ACD
     </div>
-    <div @click="status('rejected')" class="statusCard">
+    <div @click="updateFormStatus('rejected')" class="statusCard">
 Rej
     </div>
-    <div @click="status('ppap')" class="statusCard">
+    <div @click="updateFormStatus('ppap')" class="statusCard">
 PP
     </div>
 </div>
@@ -578,7 +578,7 @@ return image;
 }
 
 
-await _.map(qasformoneNew.observation_format,(view)=>{
+await _.map($vm.invoice.qasFormOne.observation_format,(view)=>{
 
 $vm.printViewMap[view.name]=view.value
 
@@ -591,11 +591,33 @@ $vm.headerViewMap[view.name]=view.value
 })
 
 
+console.log("OBSERVATION PRINT VIEW",$vm.invoice.qasFormOne.observation_print_view)
 
-$vm.observation_print_view_format=qasformoneNew.observation_print_view_format||_.cloneDeep($vm.$store.state.interplex.observation_print_view_format)
+if(typeof $vm.invoice.qasFormOne.observation_print_view=='object')
+{
+    if($vm.invoice.qasFormOne.observation_print_view.length!=0){
+    $vm.observation_print_view_format=$vm.invoice.qasFormOne.observation_print_view 
+
+    return;
+    }
+    $vm.observation_print_view_format=_.cloneDeep($vm.$store.state.interplex.observation_print_view_format)
 }
+
+}
+
+console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+async     updateFormStatus(status){
+var $vm=this;
+await $vm.$store.dispatch('qasFormUpdateStatus',{
+id:$vm.invoice.qasFormOne.id,
+status,
+})
+
+$vm.$alert("updated")
+
+    },
     selectGalleryType(index){
 var $vm=this;
 $vm.fileTypeDialog=true;

@@ -11,7 +11,7 @@ v-if="!['index','branches','login','userRole'].includes($route.name)"
   >
    <v-app-bar-nav-icon v-if="['index','adminDashboard','operatorDashboard','verifierDashboard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
    </v-app-bar-nav-icon>
-   <v-icon v-else @click="$router.go(-1)">fa-chevron-left</v-icon>
+   <v-icon v-else @click="back">fa-chevron-left</v-icon>
 
    <span
     style=" display:flex;   color: aliceblue;
@@ -89,7 +89,17 @@ export default {
  watch: {
  },
  methods: {
-  
+  back(){
+    var $vm=this;
+//     if($vm.$route.name=='qasFormView'){
+// $vm.$router.push({name:'approverList'})
+// return ;
+//     }
+
+    
+        $vm.$router.go(-1)
+
+  }
  },
 };
 </script>

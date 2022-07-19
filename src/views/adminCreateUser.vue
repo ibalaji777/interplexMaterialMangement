@@ -1,8 +1,10 @@
 <template>
     <div>
         <div style="display:flex;flex-direction:column">
+<label>Name(*)</label>
 <input class="interInput" v-model="user.name"  type="text" placeholder="Name(*)" >
 
+<label>Branch</label>
 <input v-if="branches.length==0" class="interInput" v-model="user.branch"  type="text" placeholder="Branch(*)" >
 
 <select v-else v-model="user.branch" class="interInput" >
@@ -11,14 +13,20 @@
 </select>
 
 <!-- <input class="interInput" v-model="user.roleType" type="text" placeholder="Role" > -->
+<label>Role Type</label>
 <select v-model="user.roletype" class="interInput" >
 <option  v-for="(item,index) in userRoles" :key="''+index" :value="item.value">{{item.name}}</option>
 
 </select>
+<label>Username</label>
 <input class="interInput" v-model="user.username" type="text" placeholder="Username(*)" >
+<label>Password</label>
 <input class="interInput" v-model="user.password" type="text" placeholder="Password(*)" >
+<label>Email</label>
 <input class="interInput" v-model="user.email" type="text" placeholder="Email" >
+<label>Phone</label>
 <input class="interInput" v-model="user.phone" type="text" placeholder="Phone" >
+<label>Address</label>
 <input class="interInput" v-model="user.address" type="text" placeholder="address" >
 <div style="display:flex;justify-content:flex-end;margin-top:10px">
 <v-btn v-if="!isStateForUpdate" style="margin-top:10px" @click="save" outlined>Save</v-btn>
@@ -32,7 +40,7 @@
 </template>
 <script>
 import  * as core from '../lib/core.js'
-
+import _ from 'lodash'
 function intialState(){
     return {
                 userRoles:[
@@ -74,7 +82,7 @@ export default {
         mounted(){
         var $vm=this;
 // isStateForUpdate:false,
-
+$vm.user.branch=_.cloneDeep($vm.$store.state.interplex.currentBranch)
 var params=this.$route.params;
 if(Object.prototype.hasOwnProperty.call(params, 'item')){
 $vm.isStateForUpdate=true,

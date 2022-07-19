@@ -23,6 +23,8 @@
 <input class="interInput" v-model="header['eds']" type="text" placeholder="EDS/QIP#" >
 <input class="interInput" v-model="header['rm']" type="text" placeholder="RM" >
 </div> -->
+
+<div style="font-size:13px">{{header['label']}}</div>
 <div > 
 <input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" >
 

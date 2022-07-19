@@ -1,14 +1,15 @@
-
+/*eslint-disable*/
 import _  from 'lodash'
 import * as config from '../lib/config.js'
 import store from '../store/index.js' 
+import * as core from '../lib/core.js'
 export  function printData(invoice){
 
     console.log("iinvoice data")
     console.log(invoice)
 var observation_format_object={};
 var headerFormFill={}
-var observation_print_view_format=invoice.qasFormOne.observation_print_view_format||_.cloneDeep(store.state.interplex.observation_print_view_format)
+var observation_print_view_format=core.getObservationPrintView(invoice.qasFormOne.observation_print_view)
 
 
  _.map(invoice.qasFormOne.observation_format,(item)=>{
@@ -24,8 +25,10 @@ _.map(invoice.qasFormOne.header_format,(view)=>{
     headerFormFill[view.name]=view.value
 })
 
-console.log("observation_format_object")
-console.log(observation_format_object)
+core.qasFormOneFill(observation_print_view_format)
+// console.log("observation_format_object")
+
+// console.log(observation_format_object)
 var qasFormOneFill=_.map(observation_print_view_format,(view)=>{
 console.log("view.min_spec",view.min_spec,observation_format_object[view.min_spec])
     var object={

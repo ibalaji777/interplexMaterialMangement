@@ -46,6 +46,9 @@ var mediaDeleteApi=api+'/media/delete';
 var readFileTypesApi=api+'/readfiletypes';
 
 var readOperatorFormsApi=api+'/readoperatorforms'
+var qasFormUpdateStatusApi=api+'/qasformstatus/update'
+var getProductConfigApi=api+'/productformat/read';
+var updateProductConfigApi=api+'/productformat/update';
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -278,7 +281,7 @@ async getQasFormOne(context){
         var result= await axios.get(getQasFormOneApi)
        
         context.commit('setQasFormOneList',result.data)
-console.log(result)
+console.log("approverList",result)
         // return  result;
         
          },
@@ -318,11 +321,29 @@ async fileTypes(context,payload){
 
 ,
 async readOperatorForm(context,payload){
-
+    context.commit('setQasFormOneList',[])
 var result=    await axios.post(readOperatorFormsApi,payload)
 context.commit('setQasFormOneList',result.data)
 console.log("get list",result)
-}
+},
+async qasFormUpdateStatus(context,payload){
+
+    var  result=await axios.post(qasFormUpdateStatusApi,payload)
+    console.log(result)
+},
+
+async getProductConfig(context){
+    var result=await axios.get(getProductConfigApi);
+    console.log("++productconfig+",result)
+    context.commit('readProductConfig',result.data)
+return result.data
+},
+
+async updateProductConfig(context,productFormat){
+    var result=await axios.post(updateProductConfigApi,{config:productFormat});
+
+  await   getProductConfig(context)
+},
 
 
 }

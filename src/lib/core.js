@@ -11,7 +11,7 @@ export var defaultFields={
   supplierName:'Vendor Name',
   invoiceDate:'LAST_GR_DATE',
   invoiceDateEXT:'LAST_GR_DATE_EXT',
-  invoiceNo:'Invoice No'
+  invoiceNo:'invoice_no'
   
 }
 
@@ -773,4 +773,22 @@ export function base64toBlob(base64Data, contentType) {
       byteArrays[sliceIndex] = new Uint8Array(bytes);
   }
   return new Blob(byteArrays, { type: contentType });
+}
+
+export function getObservationPrintView(printView){
+ var result=_.cloneDeep(store.state.interplex.observation_print_view_format)
+  if(typeof printView=='object')
+      if(printView.length!=0) result=printView 
+
+      
+return result;
+}
+
+export function qasFormOneFill(printView){
+
+_.map(printView,(x)=>{
+
+  console.log("x=>",x)
+})
+
 }

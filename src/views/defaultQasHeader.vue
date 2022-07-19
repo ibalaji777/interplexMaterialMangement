@@ -126,17 +126,22 @@
       <b v-if="selectedFieldSetting.default">Field is Default</b> 
       <b v-else>Not a Default Field</b> 
 </div>
+
+<div style="margin-top:20px">
+<b>Do You Want to show in application?</b>
 <v-checkbox
+dense
       v-model="selectedFieldSetting.show"
-      :label="'Show (In Quality assurance Form)'"
     ></v-checkbox>
+<b>Where You Want to map value from?</b>        
 <select v-model="selectedFieldSetting.mapFrom" class="interInput" >
 <option  v-for="(item,index) in mapTypes" :key="''+index" :value="item">{{item}}</option>
 
 </select>
+<b>Which value You Want to Map?</b>
 <input  class="interInput" v-model="selectedFieldSetting.map" type="text" placeholder="Map" >
 <br>
-
+</div>
 <div style="font-size:18px;color:red;margin-top:10px">
     Note:</div><b> {{selectedFieldSetting.note}}</b>
 

@@ -60,13 +60,13 @@ ppap
     fa-eye
  </v-icon>
  
-      <v-icon
+      <!-- <v-icon
         small
         class="mr-2"
         @click="editItem(item)"
       >
         mdi-pencil
-      </v-icon>
+      </v-icon> -->
       <v-icon
         small
         @click="deleteItem(item)"
@@ -135,7 +135,8 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
               async  preview(item){
             var $vm=this;
 var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)
-
+console.log("result qasformsingle")
+console.log(result)
 $vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
 
         },

@@ -99,6 +99,13 @@ qasForm1:[
 		,class:'interplexHeader'
 
 	},
+
+	{
+		text:'rmcode',
+		value:'rmcode'
+		,class:'interplexHeader'
+
+	},
 	{
 		text:'action',
 		value:'action'

@@ -12,7 +12,18 @@
 
 export default {
     
+async mounted(){
+var $vm=this;
+// ---------------------setup config------------------------------------
+await $vm.$store.dispatch('readHeaderConfig')
+await $vm.$store.dispatch('getProductConfig')
+await $vm.$store.dispatch('readQasForm2Config')
+await $vm.$store.dispatch('getProducts')
+// ---------------------------------------------------------
 
+
+
+}
 
 }
 </script>
