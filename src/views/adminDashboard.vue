@@ -13,14 +13,20 @@
 <v-icon>fa-file</v-icon>
 </div> -->
 
-<div @click="$router.push({name:'adminDashboardList'})" class="insertProduct">
+<div @click="$router.push({name:'dashboardList'})" class="insertProduct">
 <v-icon>fa-search</v-icon>
 </div>
 
 </div>
 
 
-      <div @click="$router.push({name:'adminProductsFormatList'})" class="insertProduct" style="margin-top:10px;height:100px;width:33.33%">
+      <div @click="$router.push({name:'adminProductsFormatList'})" class="insertProduct" style="    margin-top: 10px;
+    height: 100px;
+    width: 33.33%;
+    background: white;
+    border: none;
+    box-shadow: 5px 3px 15px -6px;
+    border: 2px solid;">
            <div style="text-align:center">
             {{masterProductsTotal}}<br>
 Total Products 
@@ -67,14 +73,14 @@ Total Products
 </div>
 </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
+        <div @click="$router.push({name:'approverList',params: { status:'rejected' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
             {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
-   <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
+   <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
             {{approverStatus.ppap}}<br>
             PPAP
@@ -85,7 +91,10 @@ Total Products
 </div>
 
 <h3 style="margin-top:10px">Users</h3>
-    <div style="display:flex;margin-top:10px">
+    <div
+    
+    @click="goToUserList('admin')"
+     style="display:flex;margin-top:10px">
         <div  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
         {{users.admin}}<br>
@@ -93,13 +102,13 @@ Total Products
             </div>
 
 </div>
-      <div  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
+      <div     @click="goToUserList('operator')"  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
  {{users.operator}}<br>
         Operator                </div>
 
 </div>
-   <div  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
+   <div     @click="goToUserList('approver')"  class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:33.33%">
            <div style="text-align:center">
  {{users.approver}}<br>
             approver 
@@ -176,12 +185,38 @@ Total Products
         <v-divider></v-divider>
        <div style="padding:10px">
 <div>
-  <div @click="$router.push({name:'adminCreateUser'})" class="interList" >Create User</div>
-  <div @click="$router.push({name:'adminMasterProductInsert'})" class="interList">Create Product&Quality Assurance </div>
-  <div @click="$router.push({name:'adminCreateBranch'})" class="interList">Create Branches </div>
-  <div @click="$router.push({name:'adminCreateFileType'})" class="interList">Create Upload Types </div>
-  <div @click="$router.push({name:'defaultQasHeader'})" class="interList">Create Header & Config</div>
-    <div @click="$router.push({name:'qasForm2Config'})" class="interList">QAS Form 2 Product & Config</div>
+  <div @click="$router.push({name:'createUser'})" class="interList" >
+    <v-icon>
+        mdi-plus
+    </v-icon>
+    Create User</div>
+  <div @click="$router.push({name:'createProduct'})" class="interList">
+        <v-icon>
+        mdi-plus
+    </v-icon>
+    Create Product&Quality Assurance </div>
+  <div @click="$router.push({name:'createBranch'})" class="interList">
+        <v-icon>
+        mdi-plus
+    </v-icon>
+    Create Branches </div>
+  <div @click="$router.push({name:'createFileType'})" class="interList">
+        <v-icon>
+        mdi-plus
+    </v-icon>
+    Create Upload Types </div>
+  <div @click="$router.push({name:'qasFormOneConfigHeader'})" class="interList">
+          <v-icon>
+        mdi-cog
+    </v-icon>
+
+    Create Header & Config</div>
+    <div @click="$router.push({name:'qasForm2Config'})" class="interList">
+                  <v-icon>
+        mdi-cog
+    </v-icon>
+
+        QAS Form 2 Product & Config</div>
 </div>
 
 </div>
@@ -227,6 +262,10 @@ return core.database(this,'getQasFormOne')
 
   },
   methods:{
+    goToUserList(role){
+        var $vm=this;
+$vm.$router.push({name:'userList',params:{action:role}})
+    },
     addProduct(){
         var $vm=this;
 $vm.productInsertDialog=true

@@ -40,7 +40,8 @@ import {
 	faPencilAlt,
 	faEdit,
 	faCubes,
-	faQuestionCircle
+	faQuestionCircle,
+	faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(
@@ -68,6 +69,7 @@ library.add(
 );
 library.add(
 	faBolt,
+	faSignOutAlt,
 	faShoppingBasket,
 	faUnderline,
 	faParagraph,

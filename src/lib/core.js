@@ -732,6 +732,8 @@ export function choose_date_type(action){
       to_date=moment().subtract(1, 'month').endOf('month').format("YYYY-MM-DD");
       }
   
+
+      store.commit('set_date',{action,from_date,to_date})
       return {
           from_date,
           to_date

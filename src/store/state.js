@@ -1,7 +1,13 @@
 /*eslint-disable*/
+import moment from 'moment'
 const state = {
  bgColor:'#ff0000',
  dateFormat:"YYYY-MM-DD",
+date:{
+action:'today',
+from_date:moment().format("YYYY-MM-DD"),
+to_date:moment().format("YYYY-MM-DD")
+},
 	control:{
 		isNavbarHidden:false
 	}
@@ -11,103 +17,109 @@ report:{
 
 qasForm1:[
 	{
-		text:'Supplier Name',
+		text:'SUPPLIER NAME',
 		value:'supplier_name',
 		class:'interplexHeader'
 
 	}	,
 	{
-		text:'invoice_no',
+		text:'INVOICE NO',
 		value:'invoice_no'
 		,class:'interplexHeader'
 
 	},	{
-		text:'invoice_date',
+		text:'INVOICE DATE',
 		value:'invoice_date'
 		,class:'interplexHeader'
 
 	},	{
-		text:'invoice_qty',
+		text:'INVOICE QTY',
 		value:'invoice_qty'
 		,class:'interplexHeader'
 
 	},	{
-		text:'ir',
+		text:'IR',
 		value:'ir'
 		,class:'interplexHeader'
 
 	},	{
-		text:'grn_no',
+		text:'GRN NO',
 		value:'grn_no'
 		,class:'interplexHeader'
 
 	},	{
-		text:'grn_date',
+		text:'GRN DATE',
 		value:'grn_date'
 		,class:'interplexHeader'
 
 	},	{
-		text:'eds',
+		text:'EDS',
 		value:'eds'
 		,class:'interplexHeader'
 
 	},	{
-		text:'rm',
+		text:'RM',
 		value:'rm'
 		,class:'interplexHeader'
 
 
 	},	{
-		text:'received_qty',
+		text:'RECEIVED QTY',
 		value:'received_qty'
 		,class:'interplexHeader'
 
 	},	{
-		text:'product_name',
+		text:'PRODUCT NAME',
 		value:'product_name'
 		,class:'interplexHeader'
 
 	}
 	,	{
-		text:'form_format',
+		text:'FORM FORMAT',
 		value:'form_format'
 		,class:'interplexHeader'
 
 	}
 	,	{
-		text:'remarks',
+		text:'REMARKS',
 		value:'remarks'
 		,class:'interplexHeader'
 
 	}
 	,	{
-		text:'status',
+		text:'STATUS',
 		value:'status'
 		,class:'interplexHeader'
 
 	}
 	,
+	// {
+	// 	text:'ACCEPTED TYPE',
+	// 	value:'roletype'
+	// 	,class:'interplexHeader'
+
+	// },
 	{
-		text:'User Type',
-		value:'roletype'
+		text:'OPERATOR  NAME',
+		value:'operator_name'
 		,class:'interplexHeader'
 
 	},
 		{
-		text:'approved_by',
-		value:'approved_by'
+		text:'APPROVED BY',
+		value:'approver_name'
 		,class:'interplexHeader'
 
 	},
 
 	{
-		text:'rmcode',
+		text:'RM CODE',
 		value:'rmcode'
 		,class:'interplexHeader'
 
 	},
 	{
-		text:'action',
+		text:'ACTION',
 		value:'action'
 		,class:'interplexHeader'
 

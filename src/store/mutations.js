@@ -153,6 +153,11 @@ readProductConfig(state,payload){
 
 	Vue.set(state.interplex,'configProductsFormat',payload)
 
+},set_date(state,payload){
+
+	state.date.action=payload.action
+	state.date.from_date=payload.from_date
+	state.date.to_date=payload.to_date
 }
 
 };

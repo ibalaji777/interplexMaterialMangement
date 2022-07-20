@@ -14,6 +14,7 @@
 
 </div>
 
+
 <h3>Mark Status</h3>
 
 <div  style="    border: 1px solid black;
@@ -527,6 +528,10 @@ import * as core from '../lib/core.js'
 import * as config from '../lib/config.js'
 import _ from 'lodash'
 import { Camera, CameraResultType } from '@capacitor/camera';
+
+// import 'reveal.js/dist/reveal.css'
+
+
 export default {
 data(){
     return {

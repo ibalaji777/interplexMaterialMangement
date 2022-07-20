@@ -48,14 +48,14 @@
 </div>
 </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
+        <div @click="$router.push({name:'approverList',params: { status:'rejected' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
             {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
-   <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
+   <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
             {{approverStatus.ppap}}<br>
             PPAP
@@ -93,9 +93,9 @@ return core.database(this,'getQasFormOne')
 var $vm=this;
 
 await $vm.$store.dispatch('readOperatorForm',{
-    id:1,
-    from_date:$vm.from_date,
-    to_date:$vm.to_date
+    id:$vm.$store.state.interplex.user.id,
+    from_date:$vm.$store.state.date.from_date,
+    to_date:$vm.$store.state.date.to_date
 })
 
   },
@@ -112,35 +112,35 @@ $vm.productInsertDialog=true
   },
   
   watch:{
-       from_date:{
+       "$store.state.date":{
 handler(){
         var $vm=this;
         console.log("watch date changes....")
 $vm.$store.dispatch('readOperatorForm',{
-    id:1,
-    from_date:$vm.from_date,
-    to_date:$vm.to_date
+    id:$vm.$store.state.interplex.user.id,
+    from_date:$vm.$store.state.date.from_date,
+    to_date:$vm.$store.state.date.to_date
 })
 
 },
 deep:true
 
     },
-to_date:{
-handler(){
-    var $vm=this;
-            console.log("watch date changes....")
+// to_date:{
+// handler(){
+//     var $vm=this;
+//             console.log("watch date changes....")
 
-$vm.$store.dispatch('readOperatorForm',{
-    id:1,
-    from_date:$vm.from_date,
-    to_date:$vm.to_date
-})
+// $vm.$store.dispatch('readOperatorForm',{
+//     id:1,
+//     from_date:$vm.from_date,
+//     to_date:$vm.to_date
+// })
 
-},
-deep:true
+// },
+// deep:true
 
-    },
+//     },
 
   }
 }

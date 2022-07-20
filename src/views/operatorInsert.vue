@@ -717,7 +717,7 @@ var $vm=this;
 console.log("====submit====")
 console.log($vm.tempInvoice)
 var invoices=[];
-var user_id=1;
+var user_id=$vm.$store.state.interplex.user.id;
 var invoice_no_validate=true;
 
 

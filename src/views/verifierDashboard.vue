@@ -9,7 +9,7 @@
 <v-icon>fa-file</v-icon>
 </div> -->
 
-<div @click="$router.push({name:'adminDashboardList'})" class="insertProduct">
+<div @click="$router.push({name:'dashboardList'})" class="insertProduct">
 <v-icon>fa-search</v-icon>
 </div>
 
@@ -17,8 +17,8 @@
 
 
 
-<h3 style="margin-top:10px">Status</h3>
-<h5 style="text-align:right"><date @date="selected_date"></date></h5>
+<h3 style="margin-top:20px">Status</h3>
+<h5 style="margin-top:20px;text-align:right"><date @date="selected_date"></date></h5>
 
 <div>
     <div style="display:flex;margin-top:10px">
@@ -55,14 +55,14 @@
 </div>
 </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
+        <div @click="$router.push({name:'approverList',params: { status:'rejected' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
            <div style="text-align:center">
             {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
-   <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
+   <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
            <div style="text-align:center">
             {{approverStatus.ppap}}<br>
             PPAP
@@ -144,8 +144,8 @@
 <div>
   <div @click="$router.push({name:'adminCreateUser'})" class="interList" >Create User</div>
   <div @click="$router.push({name:'adminMasterProductInsert'})" class="interList">Create Product&Quality Assurance </div>
-  <div @click="$router.push({name:'adminCreateBranch'})" class="interList">Create Branches </div>
-  <div @click="$router.push({name:'adminCreateFileType'})" class="interList">Create Upload Types </div>
+  <div @click="$router.push({name:'createBranch'})" class="interList">Create Branches </div>
+  <div @click="$router.push({name:'createFileType'})" class="interList">Create Upload Types </div>
   <div @click="$router.push({name:'adminQualityAssuranceHeader'})" class="interList">Create Header & Config</div>
     <div @click="$router.push({name:'qasForm2Config'})" class="interList">QAS Form 2 Product & Config</div>
 </div>

@@ -52,13 +52,41 @@ export default {
 async  mounted(){
 var $vm=this;
 
-$vm.$store.dispatch('getUsers')
+
+
+
+await $vm.$store.dispatch('getUsers')
+
+
+
 
 },
     computed: {
      list(){
 var $vm=this;
+
+if($vm.$store.state.interplex.user.roletype=='admin')
+{
+if($vm.$route.params.action=='admin')    
+return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='admin');
+if($vm.$route.params.action=='approver')    
+return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='approver');
+if($vm.$route.params.action=='operator')    
+return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='operator');
 return $vm.$store.state.interplex.masterUsers;
+}
+if($vm.$store.state.interplex.user.roletype=='approver')
+{
+if($vm.$route.params.action=='approver')    
+return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='approver');
+if($vm.$route.params.action=='operator')    
+return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='operator');
+return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype!='admin');
+}
+
+return [];
+
+
      }
     },
     methods:{

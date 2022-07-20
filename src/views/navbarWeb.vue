@@ -49,7 +49,7 @@
             </div>
                                             <v-list-item  @click="$router.push({name:'index'});$store.dispatch('logout')">
                     <v-list-item-icon >
-                        <v-icon>fa-exit</v-icon>
+                        <v-icon>fa-sign-out-alt</v-icon>
                     </v-list-item-icon>
                     <v-list-item-title>logout</v-list-item-title>
                 </v-list-item>
@@ -242,7 +242,147 @@ export default {
         ]
     }),
     computed: {},
-    methods: {}
+   async mounted(){
+var $vm=this;
+
+
+
+$vm.navbarSetup()
+
+    },
+    methods: {
+
+navbarSetup(){
+    var $vm=this;
+    if($vm.$store.state.interplex.user.roletype=='operator'){
+$vm.items=[
+            {
+                title: "Dashboard",
+                icon: "fa-home",
+                action: "operatorDashboard",
+                submenu: false
+            },
+                        {
+                title: "Submit Status",
+                icon: "fa-history",
+                action: "approverList",
+                submenu: false
+            },
+]
+}
+
+if($vm.$store.state.interplex.user.roletype=='approver'){
+$vm.items=[
+            {
+                title: "Dashboard",
+                icon: "fa-home",
+                action: "verifierDashboard",
+                submenu: false
+            },
+                        {
+                title: "Submit Status",
+                icon: "fa-history",
+                action: "approverList",
+                submenu: false
+            },
+            {
+                title: "Create QasForm & Config",
+                icon: "fa-plus",
+                action: "createProduct",
+                submenu: false
+            },
+            {
+                title: "Create Users",
+                icon: "fa-user",
+                action: "createUser",
+                submenu: false
+            },
+            
+            {
+                title: "Upload Types",
+                icon: "fa-upload",
+                action: "createFileType",
+                submenu: false
+            },
+              {
+                title: "Header Config",
+                icon: "mdi-page-layout-header",
+                action: "qasFormOneConfigHeader",
+                submenu: false
+            },
+           {
+                title: "Qas Form 2 Config",
+                icon: "mdi-form-select",
+                action: "qasForm2Config",
+                submenu: false
+            },
+]
+}
+if($vm.$store.state.interplex.user.roletype=='approver'){
+$vm.items=[
+            {
+                title: "Dashboard",
+                icon: "fa-home",
+                action: "adminDashboard",
+                submenu: false
+            },
+                        {
+                title: "Submit Status",
+                icon: "fa-history",
+                action: "approverList",
+                submenu: false
+            },
+            {
+                title: "Create QasForm & Config",
+                icon: "fa-plus",
+                action: "createProduct",
+                submenu: false
+            },
+            {
+                title: "Create Users",
+                icon: "fa-user",
+                action: "createUser",
+                submenu: false
+            },
+            
+            {
+                title: "Upload Types",
+                icon: "fa-upload",
+                action: "createFileType",
+                submenu: false
+            },
+              {
+                title: "Header Config",
+                icon: "mdi-page-layout-header",
+                action: "qasFormOneConfigHeader",
+                submenu: false
+            },
+           {
+                title: "Qas Form 2 Config",
+                icon: "mdi-form-select",
+                action: "qasForm2Config",
+                submenu: false
+            },
+]
+}
+}
+
+    },
+    watch:{
+
+        "$route.name":{
+
+handler(){
+    var $vm=this;
+$vm.navbarSetup()
+
+},
+deep:true
+
+        }
+    }
+
+
 };
 </script>
 <style lang="scss" scoped>

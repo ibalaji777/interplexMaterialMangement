@@ -2,53 +2,123 @@
     <div>
 <!-- sss{{$store.state.interplex.user}} -->
 <!-- eslint-disable -->
+
+<div v-if="filterResult.length==0" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+
+<div style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+<img style="max-width:175px" src="empty.png" alt="">
+<div><b>Result Not found</b></div>
+
+</div>
+</div>
+<div v-if="filterResult.length!=0">
 <div style="margin:10px 0">
-    <div v-if="isApprover">
+    <div v-if="isApprover" style="background: #323a3a;
+    padding: 10px;
+    border-radius: 6px;
+    border: 2px solid red;">
     <div style="display:flex">
 
-<v-btn outlined color="#ccb806" style="flex:1;margin:0 5px;" @click="markStaus('pending')">
+<v-btn outlined color="white" style="flex:1;margin:0 5px;" @click="markStaus('pending')">
 Pending
 </v-btn>
-<v-btn outlined color="green" style="flex:1;margin:0 5px" @click="markStaus('approved')">
+<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('approved')">
 approved
 </v-btn>
     </div>
     <div style="display:flex;margin-top:3px">
-<v-btn outlined color="green" style="flex:1;margin:0 5px" @click="markStaus('acceptedOnDeviation')">
+<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('acceptedOnDeviation')">
 accepted On Deviation
 </v-btn>
     </div>
     <div style="display:flex;margin-top:3px">
-<v-btn outlined color="red" style="flex:1;margin:0 5px" @click="markStaus('rejected')">
+<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('rejected')">
 rejected
 </v-btn>
-<v-btn outlined color="orange" style="flex:1;margin:0 5px" @click="markStaus('ppap')">
+<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('ppap')">
 ppap
 </v-btn>
 </div>
     </div>
-        <v-text-field
+       
+</div>
+
+     <v-text-field
         style="margin-top:15px"
         dense
         outlined
           v-model="search"
           label="Search"
            ></v-text-field>
-</div>
-<div >
+
          <v-data-table
          dense
       v-model="selected"
       :headers="$store.state.report.qasForm1"
       :items="filterResult"
       item-key="id"
-      class="elevation-1"
+      class="interListRow"
       show-select
+      item-class="interListRow"
       :search="search"
       @click:row="selectedQasReport"
         mobile-breakpoint="0"
  
     >
+
+     <template v-slot:item.invoice_date="{ item }">
+{{item.invoice_date|formatDate}}
+     </template>
+
+     <template v-slot:item.grn_date="{ item }">
+{{item.grn_date|formatDate}}
+     </template>
+
+     <template v-slot:item.supplier_name="{ item }">
+{{item.supplier_name||"-"}}
+     </template>
+     <template v-slot:item.grn_no="{ item }">
+{{item.grn_no||"-"}}
+     </template>     <template v-slot:item.rm="{ item }">
+{{item.rm||"-"}}
+     </template>
+          <template v-slot:item.rmcode="{ item }">
+{{item.rmcode||"-"}}
+     </template>
+          <template v-slot:item.eds="{ item }">
+{{item.eds||"-"}}
+     </template>
+     <template v-slot:item.form_format="{ item }">
+{{item.form_formate||"-"}}
+     </template>
+     <template v-slot:item.remarks="{ item }">
+{{item.remarks||"-"}}
+     </template>
+<template v-slot:item.product_name="{ item }">
+{{item.product_name||"-"}}
+     </template>
+     
+     <template v-slot:item.usertype="{ item }">
+{{item.usertype||"-"}}
+     </template>
+     <template v-slot:item.operator_name="{ item }">
+{{item.operator_name||"-"}}
+     </template>
+     
+     <template v-slot:item.approver_name="{ item }">
+{{item.approver_name||"-"}}
+     </template>
+     
+
+
+<template v-slot:item.invoice_no="{ item }">
+{{item.invoice_no||"-"}}
+     </template>
+
+     <template v-slot:item.ir="{ item }">
+{{item.ir||'-'}}
+     </template>
+
      <template v-slot:item.action="{ item }">
  
  <div style="display:flex;">
@@ -76,13 +146,23 @@ ppap
    </div> 
     </template>
     </v-data-table>
+
+    
 </div>
 
     </div>
 </template>
 <script>
 /*eslint-disable*/
+import moment from 'moment'
+import Vue from 'vue';
 import * as core from '../lib/core.js'
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format("YYYY-MM-DD")
+  }
+})
+
 export default {
     data(){
         return {
@@ -95,17 +175,17 @@ isApprover:false,
   
     computed: {
      list(){
-
-return core.database(this,'getApproverList',)
+var $vm=this;
+return $vm.$store.state.interplex.qasForm1;
      }
     },
     
     async mounted(){
         var $vm=this;
 
-      await $vm.$store.dispatch('getQasFormOne')
+      await $vm.$store.dispatch('getQasFormOneUserBasedList')
 
-      $vm.filterResult=$vm.list;
+      $vm.filterResult=$vm.list||[];
 
 
 
@@ -148,12 +228,28 @@ $vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
 
 
         },
-        markStaus(markStatus){
+      async   markStaus(markStatus){
 var $vm=this;
 if($vm.selected.length==0){
 
     $vm.$alert("Please Select Atleast Single Item")
 }
+
+await _.map($vm.selected,async (qasFormOne)=>{
+
+
+await $vm.$store.dispatch('qasFormUpdateStatus',{
+        id:qasFormOne.id,
+        status:markStatus
+    }
+)
+
+      await $vm.$store.dispatch('getQasFormOneUserBasedList')
+      $vm.filterResult=$vm.list||[];
+
+$vm.$alert("Status Marked")
+$vm.selected=[]
+})
 
 console.log("++++selected++++",$vm.selected)
 
@@ -162,7 +258,7 @@ async        editItem(item){
 var $vm=this;
 console.log(item)
 await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id);
-// $vm.$router.push({name:'adminCreateBranch',params: { item:item }})
+// $vm.$router.push({name:'createBranch',params: { item:item }})
         },
         deleteItem(item){
 
@@ -176,4 +272,7 @@ return core.database(this,'deleteMasterBranch',{
 </script>
 <style lang="scss">
     
+    // .interListRow tr{
+    //     background: red !important;
+    // }
 </style>

@@ -50,21 +50,16 @@ transform: translate(-50%,-50%);
 
 .interList{
     background: blanchedalmond;
-    padding: 5px;
+    padding: 14px;
     font-weight: 500;
-    margin: 1px;
+    margin: 25px 0;
     cursor: pointer;
+    font-weight: 400;
     -moz-user-select: none;
-    -khtml-user-select: none;
     -webkit-user-select: none;
- 
-    /*
-      Introduced in Internet Explorer 10.
-      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-    */
     -ms-user-select: none;
+    border-radius: 13px;
     user-select: none;
- 
 }
 .rowColor:nth-child(even) {
     background-color: Lightgreen;
@@ -79,4 +74,20 @@ transform: translate(-50%,-50%);
 }
 .rowColor2:nth-child(odd) {
     background-color: lightcoral;
+}
+
+.interListRow thead tr {
+    background-color: #33ff5e;
+    color: white;
+}
+.interListRow  th ,
+.interListRow  td {
+
+    width: 80px;
+}
+.interListRow tbody tr:nth-child(even) {
+    background-color: #ff6868;
+    color: white;
+}
+.interListRow tbody tr:nth-child(odd) {
 }

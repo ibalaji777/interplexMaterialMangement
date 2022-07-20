@@ -38,12 +38,12 @@ async login(){
 
 var $vm=this;
 
-if($vm.username==''){
+if($vm.user.username==''){
 
 $vm.$alert("Please Fill Username")
 return;
 }
-if($vm.password==''){
+if($vm.user.password==''){
 
 $vm.$alert("Please Fill Password")
 return;

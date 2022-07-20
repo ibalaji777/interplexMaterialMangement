@@ -36,6 +36,7 @@ var invoiceUploadApi=api+'/invoiceupload'
 var checkProductBatch=api+'/productbatch/check'
 var checkproductsbatch=api+'/checkproductsbatch'
 var getQasFormOneApi=api+'/readqasformonelist'
+var getQasFormOneUserApi=api+'/getqasformnneuser'
 var getQasFormSingleApi=api+'/readqasformonesingle'
 
 var qasFornOneUpdateApi=api+'/qasformone/update'
@@ -285,6 +286,29 @@ console.log("approverList",result)
         // return  result;
         
          },
+
+    async getQasFormOneUserBasedList(context){
+var result=[]
+var user=context.state.interplex.user;
+var from_date=context.state.date.from_date;
+var to_date=context.state.date.to_date;
+
+result= await axios.post(getQasFormOneUserApi,
+    {
+    roletype:user.roletype||'',
+    id:user.id||0,
+    from_date,
+    to_date})
+
+//  var result= await axios.get(getQasFormOneApi)
+           
+            context.commit('setQasFormOneList',result.data||[])
+    console.log("approverList",result)
+            // return  result;
+            
+             },
+    
+
 
 async getQasFormOneSingle(context,invoice_table_id){
 

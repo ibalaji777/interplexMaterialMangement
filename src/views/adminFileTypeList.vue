@@ -64,7 +64,7 @@ await  $vm.$store.dispatch('readUploadType')
     methods:{
         editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminCreateFileType',params: { item:item }})
+$vm.$router.push({name:'createFileType',params: { item:item }})
         },
         deleteItem(item){
 

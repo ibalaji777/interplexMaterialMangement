@@ -19,18 +19,18 @@ import verifierView from '../views/verifierView.vue'
 import approverList from '../views/approverList.vue'
 
 
-import adminMasterProductInsert from '../views/adminMasterProductInsert.vue'
+import createProduct from '../views/createProduct.vue'
 import adminDashboard from '../views/adminDashboard.vue'
-import adminDashboardList from '../views/adminDashboardList.vue'
+import dashboardList from '../views/dashboardList.vue'
 import adminDashboardView from '../views/adminDashboardView.vue'
-import defaultQasHeader from '../views/defaultQasHeader.vue'
+import qasFormOneConfigHeader from '../views/qasFormOneConfigHeader.vue'
 import adminDashboardOtherConfig from '../views/adminDashboardOtherConfig.vue'
-import adminCreateUser from '../views/adminCreateUser.vue'
-import adminCreateBranch from '../views/adminCreateBranch.vue' 
-import adminCreateFileType from '../views/adminCreateFileTypes.vue' 
+import createUser from '../views/createUser.vue'
+import createBranch from '../views/createBranch.vue' 
+import createFileType from '../views/createFileType.vue' 
 
 
-import adminUsersList from '../views/adminUsersList.vue'
+import userList from '../views/userList.vue'
 import adminProductsFormatList from '../views/adminProductsFormatList.vue'
 import adminBranchesList from '../views/adminBranchesList.vue' 
 import adminHeaderFormatList from '../views/adminHeaderFormatList.vue' 
@@ -57,7 +57,7 @@ const routes = [
 	//verifierView
 
 	//adminDashboard
-	//adminDashboardList
+	//dashboardList
 	//adminDashboardView
 	//adminDashboardOtherConfig
 
@@ -82,18 +82,18 @@ const routes = [
 		component:nativePhotoCapture 
 	},
 	{
-		path: '/adminMasterProductInsert',
-		name: 'adminMasterProductInsert',
-		component:adminMasterProductInsert 
+		path: '/createProduct',
+		name: 'createProduct',
+		component:createProduct 
 	}
 
 	,
 
 
 	{
-		path: '/adminUsersList',
-		name: 'adminUsersList',
-		component:adminUsersList 
+		path: '/userList',
+		name: 'userList',
+		component:userList 
 	},
 	{
 		path: '/adminProductsFormatList',
@@ -119,9 +119,9 @@ const routes = [
 		component:adminHeaderFormatList 
 	}
 ,{
-		path: '/defaultQasHeader',
-		name: 'defaultQasHeader',
-		component:defaultQasHeader 
+		path: '/qasFormOneConfigHeader',
+		name: 'qasFormOneConfigHeader',
+		component:qasFormOneConfigHeader 
 	},
 	
 
@@ -204,26 +204,26 @@ const routes = [
 	
 
 	{
-		path: '/adminCreateFileType',
-		name: 'adminCreateFileType',
-		component:adminCreateFileType 
+		path: '/createFileType',
+		name: 'createFileType',
+		component:createFileType 
 	},
 
 	{
-		path: '/adminCreateBranch',
-		name: 'adminCreateBranch',
-		component:adminCreateBranch 
+		path: '/createBranch',
+		name: 'createBranch',
+		component:createBranch 
 	},
 	{
-		path: '/adminCreateUser',
-		name: 'adminCreateUser',
-		component:adminCreateUser 
+		path: '/createUser',
+		name: 'createUser',
+		component:createUser 
 	},
 
 	{
-		path: '/adminDashboardList',
-		name: 'adminDashboardList',
-		component:adminDashboardList 
+		path: '/dashboardList',
+		name: 'dashboardList',
+		component:dashboardList 
 	},
 	{
 		path: '/adminDashboardView',
@@ -241,5 +241,20 @@ const routes = [
 const router = new VueRouter({
 	routes,
 });
+
+// function isAuthenticated(){
+
+// if(store.state.interplex.username!=''&&store.state.interplex.password!='') return true;
+// return false;
+// }
+// router.beforeEach((to, from, next) => {
+
+	
+
+// 	if (to.name !== 'login' && !isAuthenticated()) next({ name: 'login' })
+// 	else next()
+//   })
+
+
 
 export default router;

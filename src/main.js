@@ -10,6 +10,8 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 // import store from '../src/store/store';
 // import VueStash from 'vue-stash';
+import 'reveal.js/dist/reveal.css'
+
 import VueSimpleAlert from 'vue-simple-alert';
 import isElectron from 'is-electron';
 // -------------------desktop start------------

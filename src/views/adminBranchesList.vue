@@ -64,7 +64,7 @@ return core.database(this,'getBranchesList',)
     methods:{
         editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminCreateBranch',params: { item:item }})
+$vm.$router.push({name:'createBranch',params: { item:item }})
         },
         deleteItem(item){
 

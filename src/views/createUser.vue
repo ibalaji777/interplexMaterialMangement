@@ -82,6 +82,20 @@ export default {
         mounted(){
         var $vm=this;
 // isStateForUpdate:false,
+if($vm.$store.state.interplex.user.roletype!='admin'){
+
+          $vm.userRoles=[
+            {
+            name:'Operator',
+            value:'operator'
+        },
+           {
+            name:'Approver ',
+            value:'approver'
+        }
+        ]
+}
+
 $vm.user.branch=_.cloneDeep($vm.$store.state.interplex.currentBranch)
 var params=this.$route.params;
 if(Object.prototype.hasOwnProperty.call(params, 'item')){
