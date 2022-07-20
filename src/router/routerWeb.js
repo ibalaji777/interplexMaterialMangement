@@ -3,7 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '../store/index';
 import AppWeb from '../AppWeb.vue'
-
+import startapp from '../views/startapp.vue'
 import branches from '../views/branches.vue'
 import login from '../views/login.vue'
 import userRole from '../views/userRole.vue'
@@ -60,7 +60,11 @@ const routes = [
 	//dashboardList
 	//adminDashboardView
 	//adminDashboardOtherConfig
-
+	{
+		path: '/startapp',
+		name: 'startapp',
+		component:startapp 
+	},
 	{
 		path: '/',
 		name: 'index',
@@ -247,13 +251,14 @@ const router = new VueRouter({
 // if(store.state.interplex.username!=''&&store.state.interplex.password!='') return true;
 // return false;
 // }
-// router.beforeEach((to, from, next) => {
+ router.beforeEach((to, from, next) => {
 
-	
 
-// 	if (to.name !== 'login' && !isAuthenticated()) next({ name: 'login' })
-// 	else next()
-//   })
+    console.log(to.name)
+
+	// if (to.name !== 'login' && !isAuthenticated()) next({ name: 'login' })
+	 next()
+  })
 
 
 

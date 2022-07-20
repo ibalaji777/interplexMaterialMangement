@@ -779,7 +779,7 @@ export function base64toBlob(base64Data, contentType) {
 
 export function getObservationPrintView(printView){
  var result=_.cloneDeep(store.state.interplex.observation_print_view_format)
-  if(typeof printView=='object')
+  if(typeof printView=='object'&&printView!==null)
       if(printView.length!=0) result=printView 
 
       

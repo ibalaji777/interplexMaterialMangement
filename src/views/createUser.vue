@@ -39,7 +39,7 @@
     </div>
 </template>
 <script>
-import  * as core from '../lib/core.js'
+// import  * as core from '../lib/core.js'
 import _ from 'lodash'
 function intialState(){
     return {
@@ -82,6 +82,7 @@ export default {
         mounted(){
         var $vm=this;
 // isStateForUpdate:false,
+console.log($vm.$store.state.interplex.user.roletype)
 if($vm.$store.state.interplex.user.roletype!='admin'){
 
           $vm.userRoles=[
@@ -154,8 +155,8 @@ $vm.$alert("Successfully Updated")
     },
     computed:{
          branches(){
-
-return core.database(this,'getBranchesList',)
+var $vm=this;
+return $vm.$store.state.interplex.masterBranches
      },
     },
 }

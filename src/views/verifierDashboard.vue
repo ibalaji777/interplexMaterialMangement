@@ -8,6 +8,9 @@
         <!-- <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-file</v-icon>
 </div> -->
+                <div @click="addDialog=true" class="insertProduct" style="margin-right:10px">
+<v-icon>fa-plus</v-icon>
+</div>
 
 <div @click="$router.push({name:'dashboardList'})" class="insertProduct">
 <v-icon>fa-search</v-icon>
@@ -122,7 +125,6 @@
       </v-card>
     </v-dialog> -->
 
-    
  <v-dialog
       v-model="addDialog"
       fullscreen
@@ -142,18 +144,43 @@
         <v-divider></v-divider>
        <div style="padding:10px">
 <div>
-  <div @click="$router.push({name:'adminCreateUser'})" class="interList" >Create User</div>
-  <div @click="$router.push({name:'adminMasterProductInsert'})" class="interList">Create Product&Quality Assurance </div>
-  <div @click="$router.push({name:'createBranch'})" class="interList">Create Branches </div>
-  <div @click="$router.push({name:'createFileType'})" class="interList">Create Upload Types </div>
-  <div @click="$router.push({name:'adminQualityAssuranceHeader'})" class="interList">Create Header & Config</div>
-    <div @click="$router.push({name:'qasForm2Config'})" class="interList">QAS Form 2 Product & Config</div>
+  <div @click="$router.push({name:'createUser'})" class="interList" >
+    <v-icon>
+        mdi-plus
+    </v-icon>
+    Create User</div>
+  <div @click="$router.push({name:'createProduct'})" class="interList">
+        <v-icon>
+        mdi-plus
+    </v-icon>
+    Create Product&Quality Assurance </div>
+  <div @click="$router.push({name:'createBranch'})" class="interList">
+        <v-icon>
+        mdi-plus
+    </v-icon>
+    Create Branches </div>
+  <div @click="$router.push({name:'createFileType'})" class="interList">
+        <v-icon>
+        mdi-plus
+    </v-icon>
+    Create Upload Types </div>
+  <div @click="$router.push({name:'qasFormOneConfigHeader'})" class="interList">
+          <v-icon>
+        mdi-cog
+    </v-icon>
+
+    Create Header & Config</div>
+    <div @click="$router.push({name:'qasForm2Config'})" class="interList">
+                  <v-icon>
+        mdi-cog
+    </v-icon>
+
+        QAS Form 2 Product & Config</div>
 </div>
 
 </div>
       </v-card>
     </v-dialog>
-
 
 
   </div>

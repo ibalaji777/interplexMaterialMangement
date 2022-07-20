@@ -22,7 +22,7 @@
     justify-content: space-around;
     padding: 10px;
     margin:10px 0;
-">
+" v-if="isApprover">
 
     <div @click="updateFormStatus('approved')" class="statusCard">
 AC
@@ -535,6 +535,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 export default {
 data(){
     return {
+isApprover:false,
 fileTypeDialog:false,
 selected_gallery:0,
 
@@ -560,7 +561,8 @@ printViewMap:{},
 async mounted(){
     var $vm=this;
 
-
+if(['approver','admin'].includes($vm.$state.interplex.user.roletype))
+$vm.isApprover=true;
 await $vm.$store.dispatch('readUploadType')
 var params=$vm.$route.params
 
@@ -596,9 +598,9 @@ $vm.headerViewMap[view.name]=view.value
 })
 
 
+console.log("OBSERVATION PRINT VIEW",typeof $vm.invoice.qasFormOne.observation_print_view)
 console.log("OBSERVATION PRINT VIEW",$vm.invoice.qasFormOne.observation_print_view)
-
-if(typeof $vm.invoice.qasFormOne.observation_print_view=='object')
+if(typeof $vm.invoice.qasFormOne.observation_print_view=='object'&&$vm.invoice.qasFormOne.observation_print_view!==null)
 {
     if($vm.invoice.qasFormOne.observation_print_view.length!=0){
     $vm.observation_print_view_format=$vm.invoice.qasFormOne.observation_print_view 

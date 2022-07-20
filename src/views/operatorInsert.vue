@@ -134,7 +134,7 @@ Items
 </div>
       </v-card>
     </v-dialog>
-   <v-dialog
+   <!-- <v-dialog
       v-model="headerFileDialog"
       fullscreen
       hide-overlay
@@ -178,7 +178,7 @@ Items
 </div>
 </div>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
 
 <!-- *********************Gallery************************ -->
        <v-dialog
@@ -490,12 +490,12 @@ background: crimson;
     border-radius: 5px;
     border: 1px solid;
     margin-bottom: 10px;">
-<v-checkbox
+<!-- <v-checkbox
       v-model="checkAllSelected"
       label="Select"
-    ></v-checkbox>
+    ></v-checkbox> -->
 
-    <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn>
+    <v-btn @click="addToQualitFormOne" color="red" style="width:100%;color:white">Add</v-btn>
 </div>
 <div class="checkContainer">
 <div v-for="(item,index) in qasForm1Group" :key="index+'invoice'">
@@ -878,7 +878,7 @@ return invoice;
 // })
 
 console.log("++++++invoices++++",invoices)
-
+ $vm.clear()
 
 },
 
@@ -911,6 +911,10 @@ $vm.checkHeaderBefore=res;
     },
     addToQualitFormOne(){
 var $vm=this;
+
+$vm.headerFileDialog=false;
+$vm.checkGroupQasOneDialog=false;
+
 var checked=_.filter($vm.qasForm1Group,(x)=>(x.selected))
 var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create header

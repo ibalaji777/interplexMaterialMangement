@@ -17,6 +17,8 @@
     padding: 10px;
     border-radius: 6px;
     border: 2px solid red;">
+
+    
     <div style="display:flex">
 
 <v-btn outlined color="white" style="flex:1;margin:0 5px;" @click="markStaus('pending')">
@@ -42,7 +44,7 @@ ppap
     </div>
        
 </div>
-
+<h5 style="text-align:right"><date ></date></h5>
      <v-text-field
         style="margin-top:15px"
         dense
