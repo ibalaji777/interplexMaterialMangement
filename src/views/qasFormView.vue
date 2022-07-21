@@ -3,8 +3,13 @@
 
 
 
-<v-btn color="red" style="color:white" @click="$refs.print.print()">print</v-btn>
-    <plugin-print ref="print" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print>
+<div style="display:flex;flex-direction:column;margin:10px;">
+
+<v-btn color="red" style="color:white;margin:2px;" @click="$refs.print.print()">print</v-btn>
+<v-btn color="red" style="color:white;margin:2px;" @click="$refs.barcodeLabelPrint.print()">print Barcode Label</v-btn>
+</div>
+<barcodeLabelPrint style="height:0;overflow:hidden"  :invoice_data="invoice" ref="barcodeLabelPrint"></barcodeLabelPrint>
+<plugin-print ref="print" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="red" style="color:white;margin:2px">Qas Form One</v-btn>
@@ -98,24 +103,24 @@ OBSERVATION
 
 <table class="invoiceHeader">
     <tr>
-        <td>SUPPLIER: {{headerViewMap.supplier_name}}</td>
-        <td>IR# :{{headerViewMap.ir}}</td>
-        <td>R/M CODE: {{headerViewMap.rmcode}}</td>
+        <td>SUPPLIER: {{printData.headerFormFill.supplier_name}}</td>
+        <td>IR# :{{printData.headerFormFill.ir}}</td>
+        <td>R/M CODE: {{printData.headerFormFill.rmcode}}</td>
     </tr>
     <tr>
-        <td>INVOICE/ DC #:{{headerViewMap.invoice_no}}</td>
-        <td>DATE{{headerViewMap.date}}</td>
-        <td>EDS/QP#:{{headerViewMap.eds}}</td>
+        <td>INVOICE/ DC #:{{printData.headerFormFill.invoice_no}}</td>
+        <td>DATE{{printData.headerFormFill.date}}</td>
+        <td>EDS/QP#:{{printData.headerFormFill.eds}}</td>
     </tr>
     <tr>
-        <td>INVOICE/DC DATE:{{headerViewMap.invoice_date}}</td>
-        <td>GRN NO:{{headerViewMap.grn_no}}</td>
-        <td>R/M:{{headerViewMap.rm}} </td>
+        <td>INVOICE/DC DATE:{{printData.headerFormFill.invoice_date}}</td>
+        <td>GRN NO:{{printData.headerFormFill.grn_no}}</td>
+        <td>R/M:{{printData.headerFormFill.rm}} </td>
     </tr>
     <tr>
-        <td>INVOICE QTY</td>
-        <td>GRN DATE</td>
-        <td>RECEIVED QTY</td>
+        <td>INVOICE QTY:{{printData.headerFormFill.invoice_qty}}</td>
+        <td>GRN DATE:{{printData.headerFormFill.grn_date}}</td>
+        <td>RECEIVED QTY:{{printData.headerFormFill.received_qty}}</td>
     </tr>
 </table>
 
@@ -139,7 +144,7 @@ OBSERVATION
        
     </tr>
 
-    <tr v-for="(printview,index) in observation_print_view_format" :key='"form"+index'
+    <tr v-for="(printview,index) in printData.qasFormOneFill" :key='"form"+index'
     >
 <td>
     {{index+1}}
@@ -148,25 +153,25 @@ OBSERVATION
     {{printview.desc}}
 </td>
 <td>
-    {{map(printview.unit)}}
+    {{printview.unit}}
 </td>
 <td>
-    {{map(printview.min_spec)}}
+    {{printview.min_spec}}
 </td>
 <td>
-    {{map(printview.max_spec)}}
+    {{printview.max_spec}}
 </td>
 
 <td>
-    {{map(printview.sup_one)}}
-    {{map(printview.sup_two)}}
+    {{printview.sup_one}}
+    {{printview.sup_two}}
 </td>
 <td>
-    {{map(printview.ielpt_one)}}
-    {{map(printview.iellpt_two)}}
+    {{printview.ielpt_one}}
+    {{printview.ielpt_two}}
 </td>
 <td>
-    {{map(printview.remarks)}}
+    {{printview.remarks}}
 </td>
 
 
@@ -197,9 +202,11 @@ justify-content: space-around;">
 justify-content: space-evenly;
 height: 6vh;
 align-items: center;">
-    <div>Inspected By: <span></span> </div>
+    <div>Inspected By:{{printData.operator_name}} <span>
+        
+        </span> </div>
     <div>DEVIATION REQUEST #</div>
-    <div>Approved By</div>
+    <div>Approved By:{{printData.approver_name}}</div>
 </div>
 </div>
 <div v-if="selectForm=='qasformtwo'">
@@ -524,6 +531,7 @@ Items
 </template>
 <script>
 /*eslint-disable*/
+import * as printData from '../lib/printData.js'
 import * as core from '../lib/core.js'
 import * as config from '../lib/config.js'
 import _ from 'lodash'
@@ -538,6 +546,17 @@ data(){
 isApprover:false,
 fileTypeDialog:false,
 selected_gallery:0,
+
+printData:{
+logo:'',
+    headerFormFill:'',
+    qasFormOneFill:{},
+    qasFormTwoFill:[],
+    operator_name:'',
+    approver_name:'',
+    gallery:[],
+
+},
 
         takePhoto:[],
         qasForm1Dialog:false,
@@ -561,7 +580,7 @@ printViewMap:{},
 async mounted(){
     var $vm=this;
 
-if(['approver','admin'].includes($vm.$state.interplex.user.roletype))
+if(['approver','admin'].includes($vm.$store.state.interplex.user.roletype))
 $vm.isApprover=true;
 await $vm.$store.dispatch('readUploadType')
 var params=$vm.$route.params
@@ -573,6 +592,8 @@ if(params.item){
 console.log(params)
 
 if(params.invoice)
+$vm.printData=printData.printData(params.invoice)
+
 $vm.invoice={
 
 qasFormOne:params.invoice.qasFormOne||[],
@@ -584,7 +605,7 @@ return image;
 })
 }
 
-
+$vm.printData=printData.printData($vm.invoice)
 await _.map($vm.invoice.qasFormOne.observation_format,(view)=>{
 
 $vm.printViewMap[view.name]=view.value
@@ -597,31 +618,50 @@ $vm.headerViewMap[view.name]=view.value
 
 })
 
+$vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFormOne.observation_print_view)
 
-console.log("OBSERVATION PRINT VIEW",typeof $vm.invoice.qasFormOne.observation_print_view)
-console.log("OBSERVATION PRINT VIEW",$vm.invoice.qasFormOne.observation_print_view)
-if(typeof $vm.invoice.qasFormOne.observation_print_view=='object'&&$vm.invoice.qasFormOne.observation_print_view!==null)
-{
-    if($vm.invoice.qasFormOne.observation_print_view.length!=0){
-    $vm.observation_print_view_format=$vm.invoice.qasFormOne.observation_print_view 
+// console.log("OBSERVATION PRINT VIEW",typeof $vm.invoice.qasFormOne.observation_print_view)
+// console.log("OBSERVATION PRINT VIEW",$vm.invoice.qasFormOne.observation_print_view)
+// if(typeof $vm.invoice.qasFormOne.observation_print_view=='object'&&$vm.invoice.qasFormOne.observation_print_view!==null)
+// {
+//     if($vm.invoice.qasFormOne.observation_print_view.length!=0){
+//     $vm.observation_print_view_format=$vm.invoice.qasFormOne.observation_print_view 
 
-    return;
-    }
-    $vm.observation_print_view_format=_.cloneDeep($vm.$store.state.interplex.observation_print_view_format)
-}
+//     return;
+//     }
+//     $vm.observation_print_view_format=_.cloneDeep($vm.$store.state.interplex.observation_print_view_format)
+// }
 
 }
 
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+
+
 async     updateFormStatus(status){
 var $vm=this;
 await $vm.$store.dispatch('qasFormUpdateStatus',{
 id:$vm.invoice.qasFormOne.id,
+approved_by:$vm.$store.state.interplex.user.id,
 status,
 })
 
+var result=await $vm.$store.dispatch('getQasFormOneSingle',$vm.invoice.qasFormOne.invoice_table_id)
+console.log("result qasformsingle")
+console.log(result)
+$vm.invoice={
+
+qasFormOne:$vm.invoice.qasFormOne||[],
+qasFormTwo:$vm.invoice.qasFormTwo||[],
+gallery:_.map($vm.invoice.gallery||[],(image)=>{
+
+image['src']=config.api+'/uploads/'+image.full_name;
+return image;
+})
+}
+
+$vm.printData=printData.printData($vm.invoice)
 $vm.$alert("updated")
 
     },

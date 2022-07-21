@@ -785,6 +785,8 @@ _.map(headerData,(header)=>{
 
 invoice['qasForm1New']=_.map(qasForm1Prod,(product)=>{
 var object={};
+object['batch']='';
+
 // object['status']='pending'
 object['invoice_client_id']=product['invoice_client_id'];
 console.log(product['invoice_client_id'])
@@ -800,6 +802,10 @@ _.map(product.headerConfigFormat,(header)=>{
 qasform2['invoice_client_id']=invoice['invoice_client_id'];
     return qasform2
    });
+
+if(product.qasForm2.length!=0){
+   object['batch']=product.qasForm2[0]['batch_no'];
+   }
 //Object.assign(core.dbFormate.qasform2)
 //asign default values 
 // console.log($vm.$store.state.interplex.user)

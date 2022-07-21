@@ -242,6 +242,7 @@ await _.map($vm.selected,async (qasFormOne)=>{
 
 await $vm.$store.dispatch('qasFormUpdateStatus',{
         id:qasFormOne.id,
+        approved_by:$vm.$store.state.interplex.user.id,
         status:markStatus
     }
 )

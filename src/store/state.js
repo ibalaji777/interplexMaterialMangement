@@ -3,6 +3,68 @@ import moment from 'moment'
 const state = {
  bgColor:'#ff0000',
  dateFormat:"YYYY-MM-DD",
+ barcodeLabel:{
+html:`
+<div style="text-align:center">{{supplier_name}}</div>
+<div style="width:100%;padding:0 10px">
+<table style="width:100%">
+<tr>
+<td>
+INVOICE NO:{{invoice_no}}<br>
+RM CODE:{{rmcode}}<br>
+IR:{{ir}}<br>
+GRN NO:{{grn_no}}<br>
+Batch:{{batch}}<br>
+</td>
+<td >
+<div style="text-align:right">
+<img id="qr1" src="{{angal_qrcode_op ir 'qr1' '{"width":50,"height":50}'}}"> </td>
+</div>
+</tr>
+
+
+</table>
+</div>
+`,
+css:'.red{color:red}',
+dataset:[{supplier_name:'Abc',invoice_no:'01',ir:'02'}]
+
+
+ },
+ barcode:{
+	pageSetup:{
+
+		page:{
+			labelSheetSize:'custom',//
+			margin_type: 'custom',
+			outline: false,
+			layout: 'auto',
+			labelType: 'Linear', //linear or page
+			style_type: 'mm',//-in/mm/px
+			labels_per_page: 30,
+			iswidth: true,
+			width: '80',//-
+			isheight: false,
+			height: '25',//-
+			marginTop: '0',//-
+			marginLeft: '0',//-
+			marginRight: '0',//-
+			marginBottom: '0',//-
+			},
+			label:{
+				text_wrap: false,
+				style_type: 'mm',
+				width: '80',
+				height: '25',
+				marginRight: '.125',
+				marginBottom: '0',
+				isEnableLabelOverflow:true,
+				
+			}
+
+	}
+
+ },
 date:{
 action:'today',
 from_date:moment().format("YYYY-MM-DD"),
@@ -115,6 +177,13 @@ qasForm1:[
 	{
 		text:'RM CODE',
 		value:'rmcode'
+		,class:'interplexHeader'
+
+	},
+	
+	{
+		text:'Batch',
+		value:'batch'
 		,class:'interplexHeader'
 
 	},

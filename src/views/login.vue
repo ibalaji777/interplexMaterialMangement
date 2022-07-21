@@ -57,7 +57,7 @@ $vm.$alert("User Not Found")
 return 
 }
 
-axios.defaults.headers.common['branch']=$vm.$store.state.interplex.currentBranch;
+axios.defaults.headers.common['branch']=$vm.$store.state.interplex.user.branch;
 axios.defaults.headers.common['username']=$vm.$store.state.interplex.user.username;
 axios.defaults.headers.common['password']=$vm.$store.state.interplex.user.password;
 axios.defaults.headers.common['roletype']=$vm.$store.state.interplex.user.roletype;

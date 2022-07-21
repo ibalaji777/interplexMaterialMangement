@@ -12,9 +12,9 @@ var headerFormFill={}
 var observation_print_view_format=core.getObservationPrintView(invoice.qasFormOne.observation_print_view)
 
 
- _.map(invoice.qasFormOne.observation_format,(item)=>{
-    observation_format_object[item.name]=item.value
-})
+//  _.map(invoice.qasFormOne.observation_format,(item)=>{
+//     observation_format_object[item.name]=item.value||''
+// })
 
 var gallery=_.map(invoice.gallery,(item)=>{
      item['src']=config.api+'/uploads/'+item.full_name;
@@ -25,27 +25,39 @@ _.map(invoice.qasFormOne.header_format,(view)=>{
     headerFormFill[view.name]=view.value
 })
 
-core.qasFormOneFill(observation_print_view_format)
 // console.log("observation_format_object")
 
 // console.log(observation_format_object)
-var qasFormOneFill=_.map(observation_print_view_format,(view)=>{
-console.log("view.min_spec",view.min_spec,observation_format_object[view.min_spec])
-    var object={
- desc:view.desc,
- unit:observation_format_object[view.unit]||'',
-  min_spec:observation_format_object[view.min_spec]||'',
- max_spec:observation_format_object[view.max_spec]|'',
- sup_one:observation_format_object[view.sup_one]||'',
- sup_two:observation_format_object[view.sup_two]||'',
- ielpt_one:observation_format_object[view.ielpt_one]||'',
- ielpt_two:observation_format_object[view.ielpt_two]||'',
- remarks:observation_format_object[view.remarks]||'',
-
+var qasFormOneFill=core.qasFormOneFill(observation_print_view_format,invoice.qasFormOne.observation_format)
+var approver_name=''
+var operator_name='';
+if(invoice.qasFormOne.operator_name!=''&&invoice.qasFormOne.operator_name!==null)
+{
+    operator_name=invoice.qasFormOne.operator_name
 }
-return object;
 
-})
+
+if(invoice.qasFormOne.approver_name!=''&&invoice.qasFormOne.approver_name!==null)
+{
+    approver_name=invoice.qasFormOne.approver_name
+}
+    // =_.map(observation_print_view_format,(view)=>{
+// console.log("view.min_spec",view.min_spec,observation_format_object[view.min_spec])
+//     var object={
+//  desc:view.desc,
+//  unit:observation_format_object[view.unit]||'',
+//   min_spec:observation_format_object[view.min_spec]||'',
+//  max_spec:observation_format_object[view.max_spec]|'',
+//  sup_one:observation_format_object[view.sup_one]||'',
+//  sup_two:observation_format_object[view.sup_two]||'',
+//  ielpt_one:observation_format_object[view.ielpt_one]||'',
+//  ielpt_two:observation_format_object[view.ielpt_two]||'',
+//  remarks:observation_format_object[view.remarks]||'',
+
+// }
+// return object;
+
+// })
 
 var qasFormTwoFill=invoice.qasFormTwo||[];
 
@@ -57,6 +69,8 @@ return {
     headerFormFill,
     qasFormOneFill,
     qasFormTwoFill,
+    operator_name,
+    approver_name,
     gallery,
 
 
@@ -66,6 +80,29 @@ return {
 
 }
 
+
+export function barcodeLabel(invoice){
+var prepareData={};
+
+prepareData['invoice_no']=invoice.qasFormOne.invoice_no||''
+prepareData['invoice_date']=invoice.qasFormOne.invoice_date||''
+prepareData['invoice_qty']=invoice.qasFormOne.invoice_qty||''
+prepareData['ir']=invoice.qasFormOne.ir||''
+prepareData['grn_no']=invoice.qasFormOne.grn_no||''
+prepareData['grn_date']=invoice.qasFormOne.grn_date||''
+prepareData['rmcode']=invoice.qasFormOne.rmcode||''
+prepareData['eds']=invoice.qasFormOne.eds||''
+prepareData['rm']=invoice.qasFormOne.rm||''
+prepareData['product_name']=invoice.qasFormOne.product_name||''
+prepareData['form_format']=invoice.qasFormOne.form_format||''
+prepareData['duedate']=invoice.qasFormOne.duedate||''
+prepareData['status']=invoice.qasFormOne.status||''
+prepareData['approved_by']=invoice.qasFormOne.approved_by||''
+prepareData['skiplevel_status']=invoice.qasFormOne.skiplevel_status||''
+prepareData['batch']=invoice.qasFormOne.batch||''
+
+return prepareData;
+}
 
 export var qasForm={
 
@@ -112,9 +149,9 @@ left: 50%;">SkipLevel</div>
     <td>R/M:{{headerFormFill.rm}} </td>
 </tr>
 <tr>
-    <td>INVOICE QTY</td>
-    <td>GRN DATE</td>
-    <td>RECEIVED QTY</td>
+    <td>INVOICE QTY:{{headerFormFill.invoice_qty}}</td>
+    <td>GRN DATE:{{headerFormFill.grn_date}}</td>
+    <td>RECEIVED QTY:{{headerFormFill.received_qty}}</td>
 </tr>
 </table>
 
@@ -162,7 +199,7 @@ left: 50%;">SkipLevel</div>
 </td>
 <td>
 {{this.ielpt_one}}
-{{this.iellpt_two}}
+{{this.ielpt_two}}
 </td>
 <td>
 {{this.remarks}}
@@ -198,9 +235,13 @@ justify-content: space-around;">
 justify-content: space-evenly;
 height: 6vh;
 align-items: center;">
-<div>Inspected By: <span></span> </div>
+<div>Inspected By: <span>
+{{operator_name}}
+</span> </div>
 <div>DEVIATION REQUEST #</div>
-<div>Approved By</div>
+<div>Approved By
+{{approver_name}}
+</div>
 </div>
 </div>
 

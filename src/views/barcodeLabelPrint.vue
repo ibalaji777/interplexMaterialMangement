@@ -8,14 +8,14 @@
 
         <iframe
 
-            id="invoice_type_plugin"
-            :src="'./report/invoice_type_template_mobile.html'"
+            id="barcodeLabelPlugin"
+            :src="'./barcode/mobileBarcodeLabel.html'"
             style="height:99vh;background:white;width:100%"
 
             nodeintegration
         ></iframe>
 
-<!-- <div             id="invoice_type_plugin"></div> -->
+<!-- <div             id="barcodeLabelPlugin"></div> -->
       
 
         <!-- <div class="window" v-if="loader">
@@ -46,7 +46,7 @@ const path = require("path");
 // const { dialog } = require("electron").remote;
 function element() {
     return {
-        pos_paper: document.getElementById("invoice_type_plugin")
+        pos_paper: document.getElementById("barcodeLabelPlugin")
     };
 }
 export default {
@@ -151,20 +151,22 @@ if($vm.type){
 //                     false
 //                 );
 //             } else {
-//                 window.frames["invoice_type_plugin"].focus();
-//                 window.frames["invoice_type_plugin"].contentWindow.print();
+//                 window.frames["barcodeLabelPlugin"].focus();
+//                 window.frames["barcodeLabelPlugin"].contentWindow.print();
 //             }
 
 //         },
         //version 5.0.7  or above
 // --------------------------printer operation-------------------------
  print() {
+    var $vm=this;
+            $vm.printData()
      var view=element().pos_paper.contentDocument.getElementsByTagName("html")[0].innerHTML;
     // console.log(view)
-                window.frames["invoice_type_plugin"].focus();
-                window.frames["invoice_type_plugin"].contentWindow.print();
+                window.frames["barcodeLabelPlugin"].focus();
+                window.frames["barcodeLabelPlugin"].contentWindow.print();
 
-//      console.log("invoice_type_plugin code")
+//      console.log("barcodeLabelPlugin code")
 //             var $vm=this;
 //             if (core.isDeviceDetect()) {
 //                 document.addEventListener(
@@ -191,8 +193,8 @@ if($vm.type){
 //                     false
 //                 );
 //             } else {
-//                 window.frames["invoice_type_plugin"].focus();
-//                 window.frames["invoice_type_plugin"].contentWindow.print();
+//                 window.frames["barcodeLabelPlugin"].focus();
+//                 window.frames["barcodeLabelPlugin"].contentWindow.print();
 //             }
         },
 //  print(){
@@ -324,16 +326,22 @@ if($vm.type){
         printData(){
                      
                      var $vm=this
-console.log("print data ",printData.printData($vm.invoice_data))
-var data=printData.printData($vm.invoice_data)
-console.log("print data",data)
+console.log("+++++++++barcodelabel+++++++++ ",$vm.invoice_data,printData.barcodeLabel($vm.invoice_data))
+// var data=printData.printData($vm.invoice_data)
+// console.log("print data",data)
 var prepare_data={}
-prepare_data['id']='';
-prepare_data['name']='';
-prepare_data['html']=printData.qasForm.html;
-prepare_data['css']=printData.qasForm.css;
+prepare_data['pageSetup']={
+    page:$vm.$store.state.barcode.pageSetup.page,
+    label:$vm.$store.state.barcode.pageSetup.label,
+};
+// prepare_data['name']=$vm.$store.state.barcodeLabel.html;
+prepare_data['html']=$vm.$store.state.barcodeLabel.html;
+prepare_data['css']=$vm.$store.state.barcodeLabel.css;
 prepare_data['js']='';
-prepare_data['data_set']=printData.printData($vm.invoice_data)
+prepare_data['data_set']=[printData.barcodeLabel($vm.invoice_data)]
+
+// $vm.$store.state.barcodeLabel.dataset;
+// printData.printData($vm.invoice_data)
 
 // printData.printData($vm.invoice_data)
 // prepare_data['data_set']=format_page.angalware_report_invoice_template(

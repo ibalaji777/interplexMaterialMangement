@@ -786,11 +786,40 @@ export function getObservationPrintView(printView){
 return result;
 }
 
-export function qasFormOneFill(printView){
 
-_.map(printView,(x)=>{
+export function setDefaultValue(data,defaultValue=''){
 
-  console.log("x=>",x)
+if(data==''||data==0) return defaultValue
+return  data
+
+
+}
+export function qasFormOneFill(printView,observation_format){
+var  observation_format_object={}
+  _.map(observation_format,(item)=>{
+    observation_format_object[item.name]=item.value||''
 })
 
+return _.map(printView,(view)=>{
+
+  var object={
+    desc:view.desc,
+    unit:observation_format_object[view.unit]||'',
+     min_spec:observation_format_object[view.min_spec]||'',
+    max_spec:observation_format_object[view.max_spec]||'',
+    sup_one:observation_format_object[view.sup_one]||'',
+    sup_two:observation_format_object[view.sup_two]||'',
+    ielpt_one:observation_format_object[view.ielpt_one]||'',
+    ielpt_two:observation_format_object[view.ielpt_two]||'',
+    remarks:observation_format_object[view.remarks]||'',
+   
+   }
+   return object;
+   
+})
+
+// _.map(observation_print_view_format,(view)=>{
+//   console.log("view.min_spec",view.min_spec,observation_format_object[view.min_spec])
+    
+//   })
 }

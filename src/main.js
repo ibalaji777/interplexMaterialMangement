@@ -23,7 +23,7 @@ import "vue-toast-notification/dist/theme-default.css";
 Vue.use(VueToast);
 // console.log=()=>{}
 import axios from 'axios'
-axios.defaults.headers.common['branch']=vuexstore.state.interplex.currentBranch;
+axios.defaults.headers.common['branch']=vuexstore.state.interplex.user.branch||'';
 axios.defaults.headers.common['username']=vuexstore.state.interplex.user.username;
 axios.defaults.headers.common['password']=vuexstore.state.interplex.user.password;
 axios.defaults.headers.common['roletype']=vuexstore.state.interplex.user.roletype;
@@ -91,6 +91,7 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 //json editor----------------------------
 import VJsoneditor from 'v-jsoneditor'
 import date from './views/date.vue'
+import barcodeLabelPrint from './views/barcodeLabelPrint.vue'
 Vue.use(VJsoneditor)
 import pluginPrint from './views/pluginPrint.vue'
 Vue.use(VueQuillEditor, /* { default global options } */)
@@ -103,6 +104,7 @@ import navbarWeb from './views/navbarWeb.vue'
 Vue.component('appWeb', appWeb);
 Vue.component('navbarWeb', navbarWeb);
 Vue.component('date', date);
+Vue.component('barcodeLabelPrint', barcodeLabelPrint);
 
 Vue.component('pluginPrint',pluginPrint)
 new Vue({
