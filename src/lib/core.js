@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import moment from 'moment'
 import store from '../store/index.js'
+import { v4 as uuidv4 } from 'uuid';
 
 export const api="http://127.0.0.1:3333";
 
@@ -486,12 +487,12 @@ export function productQasForm2ConfigSingle($vm,sapObject={}){
     
     }
  if(!['validation','error_status'].includes(format.name)){
-  object[format.name]=format.value;
+  object[format.name]=format.value||0;
   if(format.mapFrom=='product'&&format.map!=''){
-    object[format.name]=productObject[format.map]||''//key:name
+    object[format.name]=productObject[format.map]||0//key:name
         }
          if(format.mapFrom=='header'&&format.map!=''){
-      object[format.name]=sapObject[format.map]//key:name
+      object[format.name]=sapObject[format.map]||0//key:name
          }
 }
 // object[format.name]=productObject[format.map]||''//key:name
@@ -639,17 +640,22 @@ return _.map(groupBy(array, function (item) {
 
 
 export function skiplevel($vm,array){
-console.log("sk array",array)
+  console.log("already grouped array",array)
+
   var groupSkipLevel=_.map(groupBy(array, function (item) {
-    return [item[defaultFields.partNo]];
+    console.log(defaultFields.supplierName,[item[defaultFields.supplierName],item[defaultFields.partNo]].join(),item)
+    return [item[defaultFields.supplierName],item[defaultFields.partNo]];
   }),(x)=>{
 
     return {
+      skuid:uuidv4(),
+      skref:x[0][defaultFields.supplierName]+x[0][defaultFields.partNo],
       partNo:x[0][defaultFields.partNo],
       skipLevelProducts:x
       };
   });
 
+  console.log("sk array",groupSkipLevel)
   
 //sort by date
 var groupSkipLevelsort=_.map(groupSkipLevel,(skiplevel)=>{
@@ -659,7 +665,7 @@ var groupSkipLevelsort=_.map(groupSkipLevel,(skiplevel)=>{
   skiplevel['skipLevelCount']=0
 var originalProduct=database($vm,'getProductConfigValue',partNo);
 if(originalProduct.length!=0){
-  skiplevel['skipLevelCount']=parseFloat(originalProduct[0].skiplevel||0);
+  skiplevel['skipLevelCount']=parseFloat(originalProduct[0].skiplevel||0)||0;
  
 } 
  
@@ -668,23 +674,32 @@ return skiplevel
 })
 //part no check
 var markSkipLevelsort=_.map(groupSkipLevelsort,(markSkipLevel)=>{
-var skipLevel=markSkipLevel['skiplevelCount'];  
-var skiplevelEnd=skipLevel-1;
- (markSkipLevel.skipLevelProducts).forEach((value,index)=>{
+console.log("++++marked skiplevel+++",markSkipLevel)
+
+var givenSkipLevel=markSkipLevel['skipLevelCount'];  
+console.log("skipLevel",givenSkipLevel+1)
+
+var ignoreSkipLevelEnd=givenSkipLevel+1
+console.log("products",markSkipLevel.skipLevelProducts)
+ markSkipLevel.skipLevelProducts.forEach((value,index)=>{
+  value['skuid']=markSkipLevel.skuid;
   value['skiplevel_status']=true;
-  if(index==0||skiplevelEnd==index){
-value['skiplevel_status']=false;
-  }
-      if(skipLevel==0){
-                  value['skiplevel_status']=false;
-      }
-return value
+  value['sk_index']=index;
+  value['sk_order']=(index)+"/"+givenSkipLevel;
+
+
+if(givenSkipLevel==0||index==0||ignoreSkipLevelEnd<=index){
+  value['skiplevel_status']=false;
+  value['sk_order']="";
+}
+//       // }
+// return value
 })
 
 return markSkipLevel
 })
 
-var skipLevelResult=[];
+  var skipLevelResult=[];
 
 (markSkipLevelsort).forEach(element => {
 console.log("el=>",element)

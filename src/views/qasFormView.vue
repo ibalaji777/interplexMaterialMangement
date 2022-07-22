@@ -84,7 +84,13 @@ OBSERVATION
     transform: translate(-50%,-50%) rotate(-45deg);
     font-size: 46px;
     top: 50%;
-    left: 50%;">SkipLevel</div>
+    left: 50%;">
+    <div style="text-align:center">
+        {{invoice.qasFormOne.sk_order}}
+
+    <br>
+    SKIP LEVEL</div>
+    </div>
 <div style="border:1px solid black;height:10vh;position: relative;">
 
     <div style="display:flex;height: 100%;width:100%;">
@@ -218,7 +224,10 @@ align-items: center;">
     transform: translate(-50%,-50%) rotate(-45deg);
     font-size: 46px;
     top: 50%;
-    left: 50%;" v-if="item.skiplevel_status">SkipLevel</div>
+    left: 50%;" v-if="item.skiplevel_status">
+        {{invoice.qasFormOne.sk_order}}
+
+    SKIP LEVEL</div>
 
     <div style="border:1px solid black;height:10vh;position: relative;">
 
@@ -248,7 +257,7 @@ align-items: center;">
 <tr v-for="(item,index) in invoice.qasFormTwo" :key="index+'d'">
         <td>{{index+1}}</td>
         <td>{{item.batch_no}}</td>
-        <td>{{item.qty}}</td>
+        <td>{{item.wiight}}</td>
         <td>{{item.width_one}}-{{item.width_two}}</td>
         <td>{{item.thickness_one}}-{{item.thickness_two}}</td>
         <td>{{item.lot_no}}</td>

@@ -1,5 +1,7 @@
 <template>
   <div>
+
+    <pre>{{$store.state.interplex.configQasForm2Format}}</pre>
     <div style="display:flex">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-file</v-icon>
@@ -13,7 +15,8 @@
     color: white;
     padding: 5px;
     margin-top: 17px;
-    text-align: center;">Invoice with Products</h3>
+    text-align: center;">
+    Invoice with Products</h3>
 <div class="productContainer">
 
 <div :class="{skiplevel:item.skiplevel_status}"  v-for="(item,index) in getQualityAssuranceFormOne" @click="selectedPartNoItem(item,index);$router.push({name:'operatorQsReport'})" class="productItems" :key="index+'qsform2'">
@@ -31,8 +34,8 @@
    <br>
    Weight:{{item.invoiceQty}}<br>
    Invoice No:{{item.invoice_no}}<br>
-   Grn NO:{{item.grn_date}}<br>
-
+   Grn Date:{{item.grn_date}}<br>
+   SkipLevel:{{item.sk_order}}<br>
 
 </div>
 <!-- <div class="productItems">
@@ -666,8 +669,9 @@ export default {
 getQualityAssuranceFormOne:{
 
 get(){
-var result=core.database(this,'getQualityAssuranceFormOne')
-console.log("===getQualityAssuranceFormOne===",result)
+    var $vm=this;
+var result=$vm.$store.state.interplex.qualityAssuranceFormOne;   //core.database(this,'getQualityAssuranceFormOne')
+// console.log("===getQualityAssuranceFormOne===",result)
 return  result;
     },
     set(value){
@@ -707,15 +711,15 @@ x['supplier_name']=x[core.defaultFields.supplierName]
 return x;
 })
 
-console.log("qasform1group",$vm.qasForm1Group)
+// console.log("qasform1group",$vm.qasForm1Group)
 
 
 },
 
  async   submit(){
 var $vm=this;
-console.log("====submit====")
-console.log($vm.tempInvoice)
+// console.log("====submit====")
+// console.log($vm.tempInvoice)
 var invoices=[];
 var user_id=$vm.$store.state.interplex.user.id;
 var invoice_no_validate=true;
@@ -723,11 +727,12 @@ var invoice_no_validate=true;
 
 _.each($vm.tempInvoice, ( val, key ) => { 
 var invoice={}
-console.log( key, val ); 
+// console.log( key, val ); 
 
 const uuid=uuidv4()
 const qasForm1Prod=_.cloneDeep(_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key)));
 
+// console.log("qasformone+++",qasForm1Prod)
 // // validation
 // _.map(qasForm1Prod,(product)=>{
 // if(product.invoice_no==''){
@@ -776,7 +781,7 @@ invoice['approved_by']=0;
 if(qasForm1Prod.length!=0){
 // ***********************************
 var headerData=qasForm1Prod[0].headerConfigFormat
-console.log("++++header++++",headerData)
+// console.log("++++header++++",headerData)
 _.map(headerData,(header)=>{
     invoice[header.name]=header.value;
    })
@@ -785,11 +790,15 @@ _.map(headerData,(header)=>{
 
 invoice['qasForm1New']=_.map(qasForm1Prod,(product)=>{
 var object={};
-object['batch']='';
 
+console.log("product",product)
+object['batch']='';
+object['skiplevel_status']=product.skiplevel_status;
+object['sk_index']=product.sk_index;
+object['sk_order']=product.sk_order;
 // object['status']='pending'
 object['invoice_client_id']=product['invoice_client_id'];
-console.log(product['invoice_client_id'])
+// console.log(product['invoice_client_id'])
 _.map(product.headerConfigFormat,(header)=>{
     object[header.name]=header.value;
 })
@@ -883,7 +892,7 @@ return invoice;
 
 // })
 
-console.log("++++++invoices++++",invoices)
+// console.log("++++++invoices++++",invoices)
  $vm.clear()
 
 },
@@ -891,8 +900,8 @@ console.log("++++++invoices++++",invoices)
 
     selectedPartNoItem(item,index){
         var $vm=this;
-        console.log("selected item")
-        console.log(item)
+        // console.log("selected item")
+        // console.log(item)
 this.$store.commit('selectedPartNoItem',item)
     },
 
@@ -927,15 +936,15 @@ var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create product form
 //create product list
 var main_list=core.createProductList($vm,checked);
-console.log("main list",main_list)
+// console.log("main list",main_list)
 //skiplevel check
 var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
-console.log("main product format",skiplevel)
+console.log("++skiplevel+++",skiplevel)
 $vm.$store.commit('addToQualitFormOne',_.cloneDeep(skiplevel))
 $vm.$store.commit('tempInvoice',createInvoice)
 
-console.log("Skip level",_.cloneDeep(skiplevel))
-console.log("Create Invoice ",createInvoice)
+// console.log("Skip level",_.cloneDeep(skiplevel))
+// console.log("Create Invoice ",createInvoice)
 
 $vm.checkDialog=false;
         $vm.fileTypeDialog=false;
@@ -969,8 +978,8 @@ $vm.checkDialog=false;
 
   var firstSheet = workbook.SheetNames[0];
   var data = $vm.to_json(workbook);
-  console.log("+++result+++")
-  console.log(data)
+//   console.log("+++result+++")
+//   console.log(data)
  var dataMap= _.map(data,(x)=>{
 
 x['isValidProd']=false;
@@ -1054,7 +1063,7 @@ return { ...x,...product};
 
 // ----------------------------------------------------
 //   console.log(core.headerFileGroup(data))
-    console.log("++++header file++++",headerFile)
+    // console.log("++++header file++++",headerFile)
     // $vm.checkHeaderBefore=headerFile||[]
 //  $vm.checkBatch()
 async function checkBatch(){
@@ -1111,7 +1120,7 @@ $vm.productInsertDialog=true
 
   // Here you get the image as result.
   const theActualPicture = image.dataUrl;
-  console.log(theActualPicture)
+//   console.log(theActualPicture)
   $vm.takePhoto.push({src:theActualPicture,file_type:''})
 }
   },
@@ -1123,7 +1132,7 @@ var $vm=this;
         $vm.checkHeaderBefor=_.map($vm.checkHeaderBefor,(x)=>{
 x['selected']=$vm.checkAllSelected
 
-console.log(x['selected'])
+// console.log(x['selected'])
         })
 
         },

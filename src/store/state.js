@@ -188,6 +188,18 @@ qasForm1:[
 
 	},
 	{
+		text:'Skiplevel Status',
+		value:'skiplevel_status'
+		,class:'interplexHeader'
+
+	},
+	{
+		text:'Skiplevel Order',
+		value:'sk_order'
+		,class:'interplexHeader'
+
+	},
+	{
 		text:'ACTION',
 		value:'action'
 		,class:'interplexHeader'
@@ -942,8 +954,8 @@ note:''
 
 		},
 		{
-			label:'Width ',//input field label
-			name:'width',//column name
+			label:'Weight In Kg',//input field label
+			name:'weight',//column name
 			value:'',//default value
 			show:true,
 			map:'QTY',

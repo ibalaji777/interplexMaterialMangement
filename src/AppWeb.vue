@@ -205,6 +205,10 @@ html::-webkit-scrollbar {
 
 .bgRed
 {
-  background:red;
+  // background:red;
+  // background: rose-petals.svg
+  background-image: url('/rose-petals.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 </style>
