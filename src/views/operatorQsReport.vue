@@ -287,7 +287,7 @@ Width Two
 
 <td >
   <span style="font-size:14px">{{productFormat.label}}</span>
-    <input    class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+    <input    class="interInput"  :disabled="productFormat.disable" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
 </td>
 <!-- <td style="padding:15px" >
     <div style="text-align:center">

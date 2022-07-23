@@ -927,27 +927,10 @@ return _.map(printView,(view)=>{
 export const getFiscalYearTimestamps = () => {
   const startMonthName = "July";
   const endMonthName = "June";
-  if (moment().quarter() == 4) {
-    return {
-      current: {
-        start: moment().month(startMonthName).startOf('month'),
-        end: moment().add(1, 'year').month(endMonthName).endOf('month')
-      },
-      last: {
-        start: moment().subtract(1, 'year').month(startMonthName).startOf('month'),
-        end: moment().month(endMonthName).endOf('month')
-      }
-    };
-  } else {
-    return {
-      current: {
-        start: moment().subtract(1, 'year').month(startMonthName).startOf('month'),
-        end: moment().month(endMonthName).endOf('month')
-      },
-      last: {
-        start: moment().subtract(2, 'year').month(startMonthName).startOf('month'),
-        end: moment().subtract(1, 'year').month(endMonthName).endOf('month')
-      }
-    };
+  if(moment().format('M')>=6){
+
+    return "FY-"+moment().add(1,"years").format('YY')+"-"+moment().format("MM")
+
   }
+  return "FY-"+moment().format("YY")+"-"+moment().format("MM")
 };
