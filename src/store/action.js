@@ -13,6 +13,8 @@ var readProducts=api+'/readproducts'
 var removeProduct=api+'/product/remove'
 var updateProduct=api+'/product/update'
 
+var findeProductApi=api+'/product/find'
+
 var createBranch=api+'/branch/create'
 var readBranchs=api+'/readbranch'
 var removeBranch=api+'/branch/remove'
@@ -335,6 +337,16 @@ async mediaDelete(context,id){
     return result.data;
 
 },
+
+
+async findProduct(context,rmcode){
+    var result=await axios.post(findeProductApi,{rmcode})
+    console.log(result)
+    return result.data;
+
+},
+
+
 
 async fileTypes(context,payload){
 

@@ -932,7 +932,7 @@ $vm.checkHeaderBefore=res;
 
 
     },
-    addToQualitFormOne(){
+async    addToQualitFormOne(){
 var $vm=this;
 
 $vm.headerFileDialog=false;
@@ -943,10 +943,10 @@ var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create header
 //create product form
 //create product list
-var main_list=core.createProductList($vm,checked);
+var main_list=await core.createProductList($vm,checked);
 console.log("++++main product list+++++",main_list)
 //skiplevel check
-var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
+var skiplevel=await core.skiplevel($vm,_.cloneDeep(main_list))
 console.log("++skiplevel+++",skiplevel)
 $vm.$store.commit('addToQualitFormOne',_.cloneDeep(skiplevel))
 $vm.$store.commit('tempInvoice',createInvoice)

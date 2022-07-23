@@ -91,6 +91,17 @@ export function randomInteger(min, max) {
 }
 
 
+export async function getProductConfig(rmcode){
+
+
+
+  return await store.dispatch('findProduct',rmcode)
+  
+  // _.filter($vm.$store.state.interplex.masterProducts,(x)=>x['rmcode']==prepareData.data[defaultFields.partNo]);
+
+
+}
+
 export function database($vm,action,payload={}){
 
   var prepareData={
@@ -432,13 +443,13 @@ return header_result;
 
 
 
-export function productQasForm2ConfigSArray($vm,sapProductArray=[]){
+export  function productQasForm2ConfigSArray($vm,sapProductArray=[]){
 
-  return _.map(sapProductArray,(sapProduct)=>{
+  return  _.map(sapProductArray, (sapProduct)=>{
 
     // console.log('sapProduct',sapProduct)
     // console.log("====",productQasForm2ConfigSingle($vm,sapProduct))
-    return productQasForm2ConfigSingle($vm,sapProduct)
+    return    productQasForm2ConfigSingle($vm,sapProduct)
   })
 }
 
@@ -498,12 +509,14 @@ object[product.name]=validateExpressionNumber(product.value)
 
 }
 
-export function productQasForm2ConfigSingle($vm,sapObject={}){
+export  function productQasForm2ConfigSingle($vm,sapObject={}){
 //sapObject sap
 //productObject db
 
  var productFormat=$vm.$store.state.interplex.configQasForm2Format;
- var productObject=database($vm,'getProductConfigValue',sapObject)
+ var productObject=getProductConfig(sapObject.rmcode)
+//  database($vm,'getProductConfigValue',sapObject)
+ //database($vm,'getProductConfigValue',sapObject)
 //  console.log("productFormat,",productFormat)
 //  console.log("productObject",productObject)
 
@@ -648,17 +661,17 @@ return originalProduct[0].observation_format||[];
      return productConfigFormat;
      }
 
-export function createProductList($vm,array){
+export async function createProductList($vm,array){
 
   //create header
  // create product form 
-return _.map(array,(x)=>{
+return _.map(array, (x)=>{
   // console.log('x',x)
 x['headerConfigFormat']=headerConfigFormat($vm,x)
 x['productConfigFormat']=getProduct($vm,x).productConfigFormat;
 x['observation_print_view']=getProduct($vm,x).observation_print_view;
 //productConfigFormat($vm,x)
-x['qasForm2']=productQasForm2ConfigSArray($vm,x.products)
+x['qasForm2']= productQasForm2ConfigSArray($vm,x.products)
 return x
 })
 
