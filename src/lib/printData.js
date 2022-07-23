@@ -316,7 +316,7 @@ SKIP LEVEL</div>
         <td>{{this.batch_no}}</td>
         <td>{{this.weight}}</td>
         <td>{{this.width_one}}-{{this.width_two}}</td>
-        <td>{{this.thickness_one}}-{{this.thickness_two}}</td>
+        <td>{{this.thick_one}}-{{this.thick_two}}</td>
         <td>{{this.lot_no}}</td>
 
 </tr>

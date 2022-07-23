@@ -64,7 +64,7 @@ return core.database(this,'getMaseterProductList',)
     methods:{
         editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminMasterProductInsert',params: { item:item }})
+$vm.$router.push({name:'createProduct',params: { item:item }})
         },
 
         deleteItem(item){

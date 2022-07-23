@@ -39,7 +39,7 @@ var getQasFormOneApi=api+'/readqasformonelist'
 var getQasFormOneUserApi=api+'/getqasformnneuser'
 var getQasFormSingleApi=api+'/readqasformonesingle'
 
-var qasFornOneUpdateApi=api+'/qasformone/update'
+var qasFormOneUpdateApi=api+'/qasformone/update'
 var qasFormTwoUpdateApi=api+'/qasformtwo/update';
 
 var mediaDeleteApi=api+'/media/delete';
@@ -317,13 +317,13 @@ async getQasFormOneSingle(context,invoice_table_id){
     return result.data;
 }         
 ,
-async qasFornOneUpdate(context,payload){
-    var result=await axios.post(qasFornOneUpdateApi,payload)
+async qasFormOneUpdate(context,payload){
+    var result=await axios.post(qasFormOneUpdateApi,payload)
     console.log(result)
     return result.data;
 
 },
-async qasFornOneUpdate(context,payload){
+async qasFormTwoUpdate(context,payload){
     var result=await axios.post(qasFormTwoUpdateApi,{qasFormTwo:payload})
     console.log(result)
     return result.data;

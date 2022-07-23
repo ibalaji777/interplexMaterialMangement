@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <pre>{{$store.state.interplex.configQasForm2Format}}</pre>
+    <!-- <pre>{{$store.state.interplex.configQasForm2Format}}</pre> -->
     <div style="display:flex">
         <div @click="headerFileDialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-file</v-icon>
@@ -441,9 +441,13 @@ background: crimson;
 <div class="checkContainer">
 <div v-for="(item,index) in checkHeaderBefore" :key="index+'invoice'">
 
-<div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style="background: chartreuse;
+<div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style="
+   background: chartreuse;
     padding: 10px;
-    border-radius: 10px;margin:3px;">
+    border-radius: 10px;
+    margin: 10px;
+
+    font-weight: 700;">
 <div style="display:flex;justify-content:space-between">   NAME:  {{item['supplier_name']}}  <v-icon @click.prevent.stop="checkHeaderBefore.splice(index,1)">fa-trash</v-icon></div> <br>
    DATE: {{item["invoice_date"]}}<br>
    Part No: {{item["rmcode"]}}<br>
@@ -503,9 +507,13 @@ background: crimson;
 <div class="checkContainer">
 <div v-for="(item,index) in qasForm1Group" :key="index+'invoice'">
 
-<div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style="background: chartreuse;
+<div @click="item.selected=!item.selected" :class="{selectedInvoice:item.selected}" style=" 
+   background: chartreuse;
     padding: 10px;
-    border-radius: 10px;margin:3px;">
+    border-radius: 10px;
+    margin: 10px;
+
+    font-weight: 700;">
    NAME:  {{item['supplier_name']}}<br>
    DATE: {{item["date"]}}<br>
    Part No: {{item["rmcode"]}}<br>
@@ -515,11 +523,11 @@ background: crimson;
    Invoice No:{{item.invoice_no}}<br>
    Grn NO:{{item.grn_date}}<br>
 
-<div style="    display: flex;
+<!-- <div style="    display: flex;
     justify-content: flex-end;">
     <span v-if="item.isExist">Exist</span>
     <span v-else>Not Exist</span>
-</div>
+</div> -->
 </div>
 
 </div>
@@ -936,7 +944,7 @@ var createInvoice=core.createInvoice(_.cloneDeep(checked));
 //create product form
 //create product list
 var main_list=core.createProductList($vm,checked);
-// console.log("main list",main_list)
+console.log("++++main product list+++++",main_list)
 //skiplevel check
 var skiplevel=core.skiplevel($vm,_.cloneDeep(main_list))
 console.log("++skiplevel+++",skiplevel)

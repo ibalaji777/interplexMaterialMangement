@@ -257,9 +257,9 @@ align-items: center;">
 <tr v-for="(item,index) in invoice.qasFormTwo" :key="index+'d'">
         <td>{{index+1}}</td>
         <td>{{item.batch_no}}</td>
-        <td>{{item.wiight}}</td>
+        <td>{{item.weight}}</td>
         <td>{{item.width_one}}-{{item.width_two}}</td>
-        <td>{{item.thickness_one}}-{{item.thickness_two}}</td>
+        <td>{{item.thick_one}}-{{item.thick_two}}</td>
         <td>{{item.lot_no}}</td>
 
 </tr>
@@ -406,7 +406,7 @@ Items
 <td>
     <input  v-model="productFormat.batch_no" placeholder="coild # (Batch No)"  class="interInput"   type="text" >
     <input v-model="productFormat.lot_no" placeholder="sup coil #(Lot No)"  class="interInput"   type="text" >
-    <input v-model="productFormat.width"  class="interInput"   type="text" placeholder="Width (W/KG)" >
+    <input v-model="productFormat.weight"  class="interInput"   type="text" placeholder="Width (W/KG)" >
     <div style="display:flex">
     
     <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_one"  class="interInput"   type="text" placeholder="Width One" >
@@ -545,6 +545,8 @@ import * as core from '../lib/core.js'
 import * as config from '../lib/config.js'
 import _ from 'lodash'
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { create, all } from 'mathjs'
+const math = create(all,  {})
 
 // import 'reveal.js/dist/reveal.css'
 
@@ -647,7 +649,24 @@ console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
 
+        checkErrorStatus(event,index,product){
+var $vm=this;
 
+var scope=core.validateProductArrayDataset($vm,$vm.invoice.qasFormOne.observation_format);
+console.log("scope =>",scope)
+scope['width_one']=core.onlyNumbers(product['width_one'])?parseFloat(product['width_one']):0
+scope['width_two']=core.onlyNumbers(product['width_two'])?parseFloat(product['width_two']):0
+scope['thick_one']=core.onlyNumbers(product['thickness_one'])?parseFloat(product['thickness_one']):0
+scope['thick_two']=core.onlyNumbers(product['thickness_one'])?parseFloat(product['thickness_one']):0
+
+if(product.validation!=''){
+console.log(math.evaluate(product.validation,scope))
+product.error_status=math.evaluate(product.validation,scope) 
+
+}else
+console.log("validatiion failed please add validation")
+
+        },
 async     updateFormStatus(status){
 var $vm=this;
 await $vm.$store.dispatch('qasFormUpdateStatus',{
@@ -723,7 +742,7 @@ saveQasFormTwo(){
 var $vm=this;
 
 console.log($vm.invoice.qasFormTwo)
-$vm.$store.dispatch('qasFornOneUpdate',$vm.invoice.qasFormTwo)
+$vm.$store.dispatch('qasFormTwoUpdate',$vm.invoice.qasFormTwo)
 $vm.$alert("Saved")
 
 
@@ -734,7 +753,7 @@ var $vm=this;
 console.log("+++++qasform1++++++")
 console.log($vm.invoice.qasFormOne)
 
-$vm.$store.dispatch('qasFornOneUpdate',$vm.invoice.qasFormOne)
+$vm.$store.dispatch('qasFormOneUpdate',$vm.invoice.qasFormOne)
 
 $vm.$alert("Saved")
     },

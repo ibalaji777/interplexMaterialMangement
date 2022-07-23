@@ -511,6 +511,12 @@ v-model="form.remarks"
       :label="'Show (Quality assurance)'"
     ></v-checkbox>
 
+<v-checkbox
+      v-model="createField.disable"
+      :label="'Disable (Field cannot update)'"
+    ></v-checkbox>
+
+
 <input  class="interInput" v-model="createField.headerMap" type="text" placeholder="Header File Map" >
 
 <br>
@@ -586,6 +592,11 @@ v-model="form.remarks"
       v-model="selectedFieldSetting.show"
       :label="'Show (Quality assurance)'"
     ></v-checkbox>
+<v-checkbox
+      v-model="selectedFieldSetting.disable"
+      :label="'Disable (Field cannot update)'"
+    ></v-checkbox>
+
 
 <input  class="interInput" v-model="selectedFieldSetting.headerMap" type="text" placeholder="Header File Map" >
 
@@ -831,6 +842,8 @@ var create_field={
     name:'',//column name
     value:'',//default value
     show:false,
+        disable:false,
+
     headerMap:'',//map name from header file put into,
     validation:false,
     rule:'',
@@ -848,6 +861,7 @@ function intialState($vm){
     name:'',//column name
     value:'',//default value
     show:false,
+    disable:false,
     headerMap:'',//map name from header file put into,
     validation:false,
     rule:'',

@@ -443,12 +443,54 @@ export function productQasForm2ConfigSArray($vm,sapProductArray=[]){
 }
 
 
-export function validateProductDataset($vm)
-{
-var object={}
- _.map($vm.$store.state.interplex.selectedPartyNoItem.productConfigFormat,(product)=>{
+export function arrayToObj(array){
 
-object[product.name]=onlyNumbers(product.value)?parseFloat(product.value):0;
+  return _.reduce(array, function(result, value, key) {
+    result[value['name']]=value['value']||''
+    return result;
+  }, {});
+    
+
+
+}
+
+function validateExpressionNumber(value){
+
+  if(!onlyNumbers(value)||value==''||value==0)
+ return NaN; 
+
+return  parseFloat(value);
+
+}
+
+
+export function validateProductObjDataset($vm,productObj)
+{
+
+  var objectKeys=Object.keys(productObj)
+var object={}
+var rt= _.map(objectKeys,(key)=>{
+  object[key]=validateExpressionNumber(productObj[key])
+  
+  // onlyNumbers(productObj[key])?parseFloat(productObj[key]):NaN;
+
+  // return  productObj
+ })
+//  console.log("validation",rt)
+return object
+
+
+}
+export function validateProductArrayDataset($vm,product_observation)
+{
+
+  console.log("product observation",product_observation)
+var object={}
+ _.map(product_observation,(product)=>{
+console.log("observation fields=>",product)
+object[product.name]=validateExpressionNumber(product.value)
+  
+// onlyNumbers(product.value)?parseFloat(product.value):NaN;
 
  })
 
@@ -487,12 +529,12 @@ export function productQasForm2ConfigSingle($vm,sapObject={}){
     
     }
  if(!['validation','error_status'].includes(format.name)){
-  object[format.name]=format.value||0;
+  object[format.name]=format.value||'';
   if(format.mapFrom=='product'&&format.map!=''){
-    object[format.name]=productObject[format.map]||0//key:name
+    object[format.name]=productObject[format.map]||''//key:name
         }
          if(format.mapFrom=='header'&&format.map!=''){
-      object[format.name]=sapObject[format.map]||0//key:name
+      object[format.name]=sapObject[format.map]||''//key:name
          }
 }
 // object[format.name]=productObject[format.map]||''//key:name
@@ -563,7 +605,48 @@ return originalProduct[0].observation_format||[];
   
   return productConfigFormat;
   }
-  
+  export function getProduct($vm,object){
+
+    var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
+    var originalProduct=database($vm,'getProductConfigValue',object)
+   
+   //  console.log('productConfigFormat',productConfigFormat)
+   //  console.log("originalProduct",originalProduct)
+    if(originalProduct.length==0){
+   
+     return {
+      productConfigFormat,
+      observation_print_view:[],
+
+     }
+    }
+   return {
+    productConfigFormat:originalProduct[0].observation_format,
+    observation_print_view:originalProduct[0].observation_print_view
+  };
+   
+     //apply default value from  product part not
+     // _.map(productConfigFormat,(x)=>{
+   
+     //   if(x.mapFrom=='header')
+     //   {
+     //   x['value']=(object[x.map]||'')
+     //   }
+     //   if(x.mapFrom=='product')
+     //   {
+     //     x['value']=(object[x.map]||'')
+        
+     //   }
+     //   if(x.map=='')
+     //   {
+     //     x['value']=(object['value']||'')
+       
+     //   }
+     
+     // })
+     
+     return productConfigFormat;
+     }
 
 export function createProductList($vm,array){
 
@@ -572,7 +655,9 @@ export function createProductList($vm,array){
 return _.map(array,(x)=>{
   // console.log('x',x)
 x['headerConfigFormat']=headerConfigFormat($vm,x)
-x['productConfigFormat']=productConfigFormat($vm,x)
+x['productConfigFormat']=getProduct($vm,x).productConfigFormat;
+x['observation_print_view']=getProduct($vm,x).observation_print_view;
+//productConfigFormat($vm,x)
 x['qasForm2']=productQasForm2ConfigSArray($vm,x.products)
 return x
 })
@@ -838,3 +923,31 @@ return _.map(printView,(view)=>{
     
 //   })
 }
+
+export const getFiscalYearTimestamps = () => {
+  const startMonthName = "July";
+  const endMonthName = "June";
+  if (moment().quarter() == 4) {
+    return {
+      current: {
+        start: moment().month(startMonthName).startOf('month'),
+        end: moment().add(1, 'year').month(endMonthName).endOf('month')
+      },
+      last: {
+        start: moment().subtract(1, 'year').month(startMonthName).startOf('month'),
+        end: moment().month(endMonthName).endOf('month')
+      }
+    };
+  } else {
+    return {
+      current: {
+        start: moment().subtract(1, 'year').month(startMonthName).startOf('month'),
+        end: moment().month(endMonthName).endOf('month')
+      },
+      last: {
+        start: moment().subtract(2, 'year').month(startMonthName).startOf('month'),
+        end: moment().subtract(1, 'year').month(endMonthName).endOf('month')
+      }
+    };
+  }
+};
