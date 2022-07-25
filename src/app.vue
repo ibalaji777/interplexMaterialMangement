@@ -9,20 +9,35 @@
 </template>
 
 <script>
-
+/*eslint-disable */
 export default {
     
 async mounted(){
 var $vm=this;
-// ---------------------setup config------------------------------------
-await $vm.$store.dispatch('readHeaderConfig')
-await $vm.$store.dispatch('getProductConfig')
-await $vm.$store.dispatch('readQasForm2Config')
-await $vm.$store.dispatch('getProducts')
-// ---------------------------------------------------------
 
+},
+watch:{
 
+    "$route.name":{
 
+      async  handler(){
+console.log("watching routes...",this.$route.name)
+            var $vm=this;
+     console.log(await  $vm.$store.dispatch('startUserIfNotExist'))
+     if(['login','index','userRole'].includes($vm.$route.name))
+            {
+                $vm.$store.commit('closeNavbarMenu')
+            }
+            if($vm.$route.name=='index'){
+
+              if(!await  $vm.$store.dispatch('startUserIfNotExist')){
+                $vm.$router.push({name:'startapp'})
+              }
+            }
+
+            
+        }
+    }
 }
 
 }

@@ -92,7 +92,7 @@ return [];
     methods:{
         editItem(item){
 var $vm=this;
-$vm.$router.push({name:'adminCreateUser',params: { item:item }})
+$vm.$router.push({name:'createUser',params: { item:item }})
         },
         deleteItem(item){
             

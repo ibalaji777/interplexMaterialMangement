@@ -53,6 +53,11 @@ if(payload.action=='saveQasForm2Config')
 
 const mutations = 
 {
+
+	closeNavbarMenu(state,payload){
+		state.control.isNavbarHidden=false
+	},
+
 	navbarMenu(state,payload){
 
 		state.control.isNavbarHidden=!state.control.isNavbarHidden

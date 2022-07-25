@@ -1,0 +1,117 @@
+<html> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width,initial-scale=1"> <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+        <title>Angalware Report</title> 
+        <style>.ql-clipboard{position:absolute;top:-1000px}</style> 
+    </head> 
+    <body> 
+
+        <!-- <button class="print_none" onclick="pageSetup()">setup page config</button>
+        <button class="print_none" onclick="renderBarcodeLabel()">dataset and html</button>
+        <button class="print_none" onclick="barcodePrintPreview()">Update Print view</button> -->
+
+            <div id="app"> </div> 
+            <script type="text/javascript" src="js/main.js"></script>
+        
+        <script>
+const {
+        ipcRenderer
+    } = require('electron')
+            
+//  function bindEvent(element, eventName, eventHandler) {
+//             if (element.addEventListener) {
+//                 element.addEventListener(eventName, eventHandler, false);
+//             } else if (element.attachEvent) {
+//                 element.attachEvent('on' + eventName, eventHandler);
+//             }
+//         }
+ipcRenderer.on('ping', (e, data) => {
+        // bindEvent(window, 'message', function (e) {
+    // console.log("-----report/preview.html----")
+    // console.log("----plugin engine---");
+    // console.log(e)
+    // console.log(e.data)
+        //    if(e.data){
+            // var data = JSON.parse(e.data);
+
+            if(data){
+         $angalware_report.barcodePageSetup(data.pageSetup.page,data.pageSetup.label)
+        //  $angalware_report.barcodePageSetup(page,label)
+           }
+        renderBarcodeLabel(data.html,data.css,data.data_set)
+        //  $angalware_report.barcodePageSetup(page,label)
+
+// $angalware_report.setStore({name:'set_template_data',data:data.data_set})
+        // }
+
+        });
+
+
+//             function pageSetup(){
+	// var	page= {
+	// 			labelSheetSize:'custom',//
+	// 			margin_type: 'custom',
+	// 			outline: false,
+	// 			layout: 'auto',
+	// 			labelType: 'Linear', //linear or page
+	// 			style_type: 'mm',//-in/mm/px
+	// 			labels_per_page: 30,
+	// 			iswidth: true,
+	// 			width: '80',//-
+	// 			isheight: false,
+	// 			height: '25',//-
+	// 			marginTop: '0',//-
+	// 			marginLeft: '0',//-
+	// 			marginRight: '0',//-
+	// 			marginBottom: '0',//-
+	// 			...page
+	// 		}
+// var			label= {
+				// text_wrap: false,
+				// style_type: 'mm',
+				// width: '80',
+				// height: '25',
+				// marginRight: '.125',
+				// marginBottom: '0',
+				// isEnableLabelOverflow:true,
+				// ...label
+// 			} 
+// $angalware_report.barcodePageSetup(page,label)
+//         }
+
+
+   async function renderBarcodeLabel(html,css,dataset){
+// var html="<b>dfdfdf{{name}}</b>"
+// var css="b{color:red}"
+// var dataset=[{name:'balaji'},{name:'444balaji'},{name:'ba77aji'}]
+await $angalware_report.renderBarcodeLabel(html,css,dataset)
+document.getElementById('printRender').click()
+
+// setTimeout(async ()=>{
+//   await  $angalware_report.renderBarcodeLabel(html,css,dataset)
+
+// },500) 
+setTimeout(async ()=>{
+
+    document.getElementById('printRender').click()
+},500) 
+
+
+    }
+    setInterval(()=>{
+        document.getElementById('printRender').click()
+
+        },500)
+    // function barcodePrintPreview(){
+    //     $angalware_report.barcodePrintPreview()
+
+    //     setInterval(()=>{
+    //         $angalware_report.barcodePrintPreview()
+    //     },500)
+    // }
+        </script>
+        
+        </body> 
+        
+        </html>

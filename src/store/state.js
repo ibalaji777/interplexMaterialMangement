@@ -100,7 +100,7 @@ qasForm1:[
 		,class:'interplexHeader'
 
 	},	{
-		text:'IR',
+		text:'IR No',
 		value:'ir'
 		,class:'interplexHeader'
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  >
     <h3>Admin Dashboard</h3>
   Branch:&nbsp; {{$store.state.interplex.currentBranch}}
       <div style="display:flex;margin-top:10px">

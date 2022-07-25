@@ -1,4 +1,4 @@
-package com.angalware.mobile;
+package com.interplex.mobile;
 
 import com.getcapacitor.BridgeActivity;
 

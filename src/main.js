@@ -93,7 +93,8 @@ import VJsoneditor from 'v-jsoneditor'
 import date from './views/date.vue'
 import barcodeLabelPrint from './views/barcodeLabelPrint.vue'
 Vue.use(VJsoneditor)
-import pluginPrint from './views/pluginPrint.vue'
+import pluginPrintMobile from './views/pluginPrintMobile.vue'
+import pluginPrintDesktop from './views/pluginPrintDesktop.vue'
 Vue.use(VueQuillEditor, /* { default global options } */)
 import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
@@ -106,7 +107,8 @@ Vue.component('navbarWeb', navbarWeb);
 Vue.component('date', date);
 Vue.component('barcodeLabelPrint', barcodeLabelPrint);
 
-Vue.component('pluginPrint',pluginPrint)
+Vue.component('pluginPrintMobile',pluginPrintMobile)
+Vue.component('pluginPrintDesktop',pluginPrintDesktop)
 new Vue({
 	router:webRouter,
 	store: vuexstore,

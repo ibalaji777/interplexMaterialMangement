@@ -161,39 +161,39 @@ if($vm.type){
  print() {
      var view=element().pos_paper.contentDocument.getElementsByTagName("html")[0].innerHTML;
     // console.log(view)
+                // window.frames["invoice_type_plugin"].focus();
+                // window.frames["invoice_type_plugin"].contentWindow.print();
+
+     console.log("invoice_type_plugin code")
+            var $vm=this;
+            if (core.isDeviceDetect()) {
+                document.addEventListener(
+                    "deviceready",
+                    function() {
+                        
+       cordova.plugins.pdf.htmlToPDF({
+          data: view,
+          type: "share"
+        },
+          () => { 
+    //         //   ----------------------------------base64---------------------------------
+    // cordova.plugins.pdf.htmlToPDF({data: view,type: "base64"},
+    //       (base64) => { 
+    //                       window.plugins.socialsharing.share(null, 'angalware_inv_'+new Date().valueOf()+'', 'data:application/pdf;base64,'+base64+'', null)        },
+    //      (error) => console.log('error:', error));
+    // // ------------------------------------------------base64--------------------------
+},
+
+         (error) => console.log('error:', error)
+   );
+
+                    },
+                    false
+                );
+            } else {
                 window.frames["invoice_type_plugin"].focus();
                 window.frames["invoice_type_plugin"].contentWindow.print();
-
-//      console.log("invoice_type_plugin code")
-//             var $vm=this;
-//             if (core.isDeviceDetect()) {
-//                 document.addEventListener(
-//                     "deviceready",
-//                     function() {
-                        
-//        cordova.plugins.pdf.htmlToPDF({
-//           data: view,
-//           type: "share"
-//         },
-//           () => { 
-//     //         //   ----------------------------------base64---------------------------------
-//     // cordova.plugins.pdf.htmlToPDF({data: view,type: "base64"},
-//     //       (base64) => { 
-//     //                       window.plugins.socialsharing.share(null, 'angalware_inv_'+new Date().valueOf()+'', 'data:application/pdf;base64,'+base64+'', null)        },
-//     //      (error) => console.log('error:', error));
-//     // // ------------------------------------------------base64--------------------------
-// },
-
-//          (error) => console.log('error:', error)
-//    );
-
-//                     },
-//                     false
-//                 );
-//             } else {
-//                 window.frames["invoice_type_plugin"].focus();
-//                 window.frames["invoice_type_plugin"].contentWindow.print();
-//             }
+            }
         },
 //  print(){
 //       if (helper_utils.isDeviceDetect()) {

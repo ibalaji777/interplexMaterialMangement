@@ -1,0 +1,174 @@
+<template>
+    <div>
+        <div style="padding:5px">
+            <v-icon @click="$router.push({name:'approverList'})">fa-times</v-icon>
+        </div>
+         <div class="sample-background">
+      <!-- this background simulates the camera view -->
+    </div>
+    <div class="container">
+      <div class="barcode-scanner--area--container">
+        <div class="relative">
+          <p>Aim your camera at a barcode</p>
+        </div>
+        <div class="square surround-cover">
+          <div class="barcode-scanner--area--outer surround-cover">
+            <div class="barcode-scanner--area--inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</template>
+<script>
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+
+
+export default {
+    methods:{
+              async  preview(ir){
+            var $vm=this;
+var result=await $vm.$store.dispatch('getQasOne',ir)
+console.log("result qasformsingle")
+console.log(result)
+$vm.$router.push({name:'qasFormView',params:{invoice:result.invoice}})
+
+        },
+
+    },
+mounted(){
+var $vm=this;
+    const prepare = () => {
+  BarcodeScanner.prepare();
+};
+
+const startScan = async () => {
+  BarcodeScanner.hideBackground();
+  const result = await BarcodeScanner.startScan();
+  if (result.hasContent) {
+    console.log(result.content);
+    var ir=result.content
+    $vm.preview(ir)
+ stopScan();
+  }
+};
+
+const stopScan = () => {
+  BarcodeScanner.showBackground();
+  BarcodeScanner.stopScan();
+};
+
+const askUser = () => {
+  prepare();
+
+  const c = confirm('Do you want to scan a barcode?');
+
+  if (c) {
+    startScan();
+  } else {
+    stopScan();
+  }
+};
+
+askUser();
+}    
+}
+</script>
+<style lang="scss">
+    * {
+        box-sizing: border-box;
+      }
+      p {
+        color: #fff;
+        font-family: sans-serif;
+        text-align: center;
+        font-weight: 600;
+      }
+    //   html,
+    //   body,
+    //   .container {
+    //     width: 100%;
+    //     height: 100%;
+    //     overflow: hidden;
+    //   }
+      .container {
+        display: flex;
+      }
+      .relative {
+        position: relative;
+        z-index: 1;
+      }
+      .square {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: 0.3s;
+      }
+      .square:after {
+        content: '';
+        top: 0;
+        display: block;
+        padding-bottom: 100%;
+      }
+      .square > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      .surround-cover {
+        box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.5);
+      }
+      .barcode-scanner--area--container {
+        width: 80%;
+        max-width: min(500px, 80vh);
+        margin: auto;
+      }
+      .barcode-scanner--area--outer {
+        display: flex;
+        border-radius: 1em;
+      }
+      .barcode-scanner--area--inner {
+        width: 100%;
+        margin: 1rem;
+        border: 2px solid #fff;
+        box-shadow: 0px 0px 2px 1px rgb(0 0 0 / 0.5),
+          inset 0px 0px 2px 1px rgb(0 0 0 / 0.5);
+        border-radius: 1rem;
+      }
+
+      .sample-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        // background: linear-gradient(45deg, #673ab7, transparent);
+        // background: url("./mockup.jpg");
+        background-position: 45% 50%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        animation: shake 5s infinite;
+      }
+      @keyframes shake {
+        0% {
+          transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        20% {
+          transform: translate(5px, 5px) rotate(-1deg) scale(1.05);
+        }
+        40% {
+          transform: translate(5px, 5px) rotate(-2deg) scale(1.07);
+        }
+        60% {
+          transform: translate(2px, 2px) rotate(0deg) scale(1.04);
+        }
+        80% {
+          transform: translate(-1px, -1px) rotate(-2deg) scale(1.05);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+      }
+</style>

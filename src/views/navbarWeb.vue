@@ -8,7 +8,7 @@
     >
         <v-list nav>
             <v-divider></v-divider>
-
+<!-- {{$store.state.control.isNavbarHidden}} -->
             <div v-for="navLink in items" :key="navLink.title">
                 <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">
                     <v-list-item-icon >
@@ -254,6 +254,7 @@ $vm.navbarSetup()
 
 navbarSetup(){
     var $vm=this;
+    $vm.items=[];
     if($vm.$store.state.interplex.user.roletype=='operator'){
 $vm.items=[
             {
@@ -318,7 +319,7 @@ $vm.items=[
             },
 ]
 }
-if($vm.$store.state.interplex.user.roletype=='approver'){
+if($vm.$store.state.interplex.user.roletype=='admin'){
 $vm.items=[
             {
                 title: "Dashboard",
@@ -370,14 +371,18 @@ $vm.items=[
     },
     watch:{
 
-        "$route.name":{
+        "$route":{
 
-handler(){
+handler(to,from){
     var $vm=this;
+    console.log("watch route working....")
+        console.log($vm.$store.state.interplex.user,"++++")
+
 $vm.navbarSetup()
 
 },
-deep:true
+deep:true,
+immediate:true
 
         }
     }

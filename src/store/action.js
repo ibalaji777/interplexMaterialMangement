@@ -1,6 +1,6 @@
 import * as core from '../lib/config'
 
-var api=core.api;
+var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
 
@@ -52,6 +52,11 @@ var readOperatorFormsApi=api+'/readoperatorforms'
 var qasFormUpdateStatusApi=api+'/qasformstatus/update'
 var getProductConfigApi=api+'/productformat/read';
 var updateProductConfigApi=api+'/productformat/update';
+
+var startUserIfNotExistApi=api+'/startusersiFnotexist';
+
+var  getQasOneApi=api+'/getqasoneir';
+
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -380,8 +385,19 @@ async updateProductConfig(context,productFormat){
 
   await   getProductConfig(context)
 },
+async startUserIfNotExist(context,payload){
+    var result=await axios.get(startUserIfNotExistApi);
 
+    return result.data
+    
+},
+async getQasOne(context,ir){
+    var result=await axios.post(getQasOneApi,{ir});
 
+     console.log('__++',result)
+    return result.data
+    
+}
 }
 
 export default actions;

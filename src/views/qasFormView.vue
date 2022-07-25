@@ -1,15 +1,32 @@
 <template>
     <div>
+        <div>
+<!-- {{$isElectron}} -->
+<v-btn @click="print()" color="red" style="color:red;margin-right:5px">
+<v-icon color="white">
+     fa-print
+</v-icon>
+</v-btn>
 
-
-
+<v-btn @click="pdf()" color="red" style="margin-right:5px">
+<v-icon color="white" >
+mdi-file-pdf
+</v-icon>
+</v-btn>
+<v-btn @click="printLabel()" color="red" style="margin-right:5px">
+<v-icon color="white">
+mdi-qrcode
+</v-icon>
+</v-btn>
+</div>
 <div style="display:flex;flex-direction:column;margin:10px;">
 
-<v-btn color="red" style="color:white;margin:2px;" @click="$refs.print.print()">print</v-btn>
-<v-btn color="red" style="color:white;margin:2px;" @click="$refs.barcodeLabelPrint.print()">print Barcode Label</v-btn>
+<!-- <v-btn color="red" style="color:white;margin:2px;" @click="$refs.print.print()">print</v-btn> -->
+<!-- <v-btn color="red" style="color:white;margin:2px;" @click="$refs.barcodeLabelPrint.print()">print Barcode Label</v-btn> -->
 </div>
 <barcodeLabelPrint style="height:0;overflow:hidden"  :invoice_data="invoice" ref="barcodeLabelPrint"></barcodeLabelPrint>
-<plugin-print ref="print" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print>
+<plugin-print-desktop v-if="$isElectron" ref="printDesktop" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print-desktop>
+<plugin-print-mobile v-else ref="printMobile" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print-mobile>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="red" style="color:white;margin:2px">Qas Form One</v-btn>
@@ -79,7 +96,7 @@ OBSERVATION
 
 <div v-if="selectForm=='qasformone'">
 
-    <div v-if="item.skiplevel_status" style="    color: grey;
+    <div v-if="invoice.qasFormOne.skiplevel_status" style="    color: grey;
     position: absolute;
     transform: translate(-50%,-50%) rotate(-45deg);
     font-size: 46px;
@@ -110,7 +127,7 @@ OBSERVATION
 <table class="invoiceHeader">
     <tr>
         <td>SUPPLIER: {{printData.headerFormFill.supplier_name}}</td>
-        <td>IR# :{{printData.headerFormFill.ir}}</td>
+        <td>IR# :{{invoice.qasFormOne.ir}}</td>
         <td>R/M CODE: {{printData.headerFormFill.rmcode}}</td>
     </tr>
     <tr>
@@ -224,7 +241,7 @@ align-items: center;">
     transform: translate(-50%,-50%) rotate(-45deg);
     font-size: 46px;
     top: 50%;
-    left: 50%;" v-if="item.skiplevel_status">
+    left: 50%;" v-if="invoice.qasFormOne.skiplevel_status">
         {{invoice.qasFormOne.sk_order}}
 
     SKIP LEVEL</div>
@@ -602,7 +619,9 @@ if(params.item){
     console.log("params")
 console.log(params)
 
-if(params.invoice)
+
+}
+if(params.invoice){
 $vm.printData=printData.printData(params.invoice)
 
 $vm.invoice={
@@ -644,10 +663,32 @@ $vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFo
 // }
 
 }
-
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+printLabel(){
+var $vm=this;
+$vm.$refs.barcodeLabelPrint.print()
+},
+    print(){
+        var $vm=this;
+if($vm.$isElectron){
+    $vm.$refs.printDesktop.print()
+}
+else{
+        $vm.$refs.printMobile.print()
+}
+    },
+    pdf(){
+        var $vm=this;
+if($vm.$isElectron){
+    $vm.$refs.printDesktop.toPdf()
+}
+else{
+        $vm.$refs.printMobile.print()
+}
+
+    },
 
         checkErrorStatus(event,index,product){
 var $vm=this;

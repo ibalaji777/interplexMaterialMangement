@@ -3,6 +3,12 @@
 <!-- sss{{$store.state.interplex.user}} -->
 <!-- eslint-disable -->
 
+<div style="padding:15px;">
+
+<v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode
+</v-icon>
+</div>
+
 <div v-if="filterResult.length==0" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
 
 <div style="display:flex;flex-direction:column;justify-content:center;align-items:center">
@@ -216,12 +222,18 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
     methods:{
               async  preview(item){
             var $vm=this;
-var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)
+// var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)
+// console.log("result qasformsingle")
+// console.log(result)
+// $vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
+
+var result=await $vm.$store.dispatch('getQasOne',item.ir)
 console.log("result qasformsingle")
 console.log(result)
-$vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
+$vm.$router.push({name:'qasFormView',params:{invoice:result.invoice}})
 
-        },
+
+},
 
 
         selectedQasReport(value){

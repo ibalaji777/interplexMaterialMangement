@@ -74,12 +74,13 @@
 /*eslint-disable*/
 import * as core from '../lib/core.js'
 import axios from 'axios'
-
+import * as config from '../lib/config.js'
 
 export default {
   
   data(){
     return{
+        api:'',
         createUserDialog:false,
 
   user:{
@@ -100,6 +101,13 @@ export default {
   },
 
   methods:{
+    setApi(){
+var $vm=this;
+
+config.setApi($vm.api)
+$vm.$alert("Saved")
+
+    },
 async save(){
     var $vm=this;
 if($vm.user.name=='')

@@ -6,7 +6,7 @@
   <v-app-bar
    app
    clipped-left
-v-if="!['index','branches','login','userRole','startapp'].includes($route.name)"
+v-if="!['qrScan','index','branches','login','userRole','startapp'].includes($route.name)"
    color="#ff0000"
   >
    <v-app-bar-nav-icon v-if="['index','adminDashboard','operatorDashboard','verifierDashboard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
@@ -21,9 +21,12 @@ v-if="!['index','branches','login','userRole','startapp'].includes($route.name)"
     <img src="interplex.svg">
     </span
    >
+
+
   <!-- this.$parent.someMethod(); -->
    <!--  -->
    <v-spacer></v-spacer>
+   <v-icon ref="sync" @click="load" style="color:white">fa-sync</v-icon>
    <div style="margin:0 5px" >
    </div>
   </v-app-bar>
@@ -32,9 +35,9 @@ v-if="!['index','branches','login','userRole','startapp'].includes($route.name)"
   <v-main>
    <v-container
     fluid
-
+style="width:100%"
    >
-    <router-view></router-view>
+    <router-view style="width:100%"></router-view>
     
    </v-container>
   </v-main>
@@ -82,13 +85,37 @@ export default {
    { title: "sender", icon: "dashboard", action: "sender" },
   ],
  }),
- mounted() {
+async mounted() {
   var $vm = this;
+// ---------------------setup config------------------------------------
+$vm.load();
+// ---------------------------------------------------------
 
+              if(!await  $vm.$store.dispatch('startUserIfNotExist')){
+                $vm.$router.push({name:'startapp'})
+              }
+
+$vm.$store.commit('closeNavbarMenu')
  },
  watch: {
  },
  methods: {
+  async load(){
+  var $vm=this;
+
+
+  // ---------------------setup config------------------------------------
+await $vm.$store.dispatch('readHeaderConfig')
+await $vm.$store.dispatch('getProductConfig')
+await $vm.$store.dispatch('readQasForm2Config')
+await $vm.$store.dispatch('getProducts')
+   await $vm.$store.dispatch('getQasFormOneUserBasedList')
+
+ 
+// ---------------------------------------------------------
+
+},
+
   back(){
     var $vm=this;
 //     if($vm.$route.name=='qasFormView'){
@@ -210,5 +237,8 @@ html::-webkit-scrollbar {
   background-image: url('/rose-petals.svg');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.theme--light.v-application{
+  // background: none  !important;;
 }
 </style>

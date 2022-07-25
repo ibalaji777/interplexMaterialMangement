@@ -4,7 +4,7 @@ import moment from 'moment'
 import store from '../store/index.js'
 import { v4 as uuidv4 } from 'uuid';
 
-export const api="http://127.0.0.1:3333";
+export const api="https://f237-2402-3a80-133b-8b42-a1cc-2d34-1f64-c56f.in.ngrok.io";
 
 export var defaultFields={
 

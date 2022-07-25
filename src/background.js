@@ -3,13 +3,13 @@
 import Vue from 'vue';
 // const Vue =require('vue').default;
 // const backend =require('../backend/index')
-import backend from '../backend/index.js'
+// import backend from '../backend/index.js'
 // import dbserver from '../backend_db/server.js'
 // const { app, BrowserWindow,ipcMain,protocol } = require('electron');
 import { app, protocol, BrowserWindow,ipcMain,dialog } from 'electron'
-import server from '../backend_resource/server.js'
+// import server from '../backend_resource/server.js'
 //seted2
-import googleDrive from '../google drive/index.js'
+// import googleDrive from '../google drive/index.js'
 const schedule = require('node-schedule');
 // const { dialog } = require("electron").remote;
 // const {
@@ -161,7 +161,7 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ frame:false, width: 800, height: 600, webPreferences: {
+  win = new BrowserWindow({ frame:true, width: 800, height: 600, webPreferences: {
     webSecurity:false,
     nodeIntegration: true,
     plugins: true,
@@ -365,9 +365,9 @@ function createChildWindow() {
   
 }
   
-ipcMain.on("openGoogleDriveAuthWindow", (event, arg) => {
-  createChildWindow();
+// ipcMain.on("openGoogleDriveAuthWindow", (event, arg) => {
+//   createChildWindow();
 
  
-});
+// });
   

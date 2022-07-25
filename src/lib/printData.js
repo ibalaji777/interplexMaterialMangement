@@ -80,7 +80,8 @@ return {
     gallery,
     skiplevel_status,
     sk_index,
-    sk_order
+    sk_order,
+    invoice
 
 
 }
@@ -153,7 +154,7 @@ SKIP LEVEL</div>
 <table class="invoiceHeader">
 <tr>
     <td>SUPPLIER: {{headerFormFill.supplier_name}}</td>
-    <td>IR# :{{headerFormFill.ir}}</td>
+    <td>IR# :{{invoice.qasFormOne.ir}}</td>
     <td>R/M CODE: {{headerFormFill.rmcode}}</td>
 </tr>
 <tr>
