@@ -4,7 +4,7 @@
 <!-- eslint-disable -->
          <v-data-table
       :headers="$store.state.report.users"
-      :items="list"
+      :items="filter"
       item-key="name"
       class="elevation-1"
       :search="search"
@@ -46,27 +46,33 @@ export default {
         return {
             search: '',
       
-       
+filter:[],       
       }
     },
 async  mounted(){
 var $vm=this;
 
 
+if($vm.$store.state.interplex.user.roletype=='admin')
+$vm.filter=$vm.list()
+if($vm.$store.state.interplex.user.roletype=='approver')
+$vm.filter=_.filter($vm.list(),(x)=>x.roletype!='admin')
+if($vm.$store.state.interplex.user.roletype=='operator')
+$vm.filter=[]
 
 
-await $vm.$store.dispatch('getUsers')
+var ret=await $vm.$store.dispatch('getUsers')
 
-
+console.log("++ret++",ret)
 
 
 },
     computed: {
      list(){
 var $vm=this;
-
-if($vm.$store.state.interplex.user.roletype=='admin')
-{
+// console.log("users list filter",$vm.$route.params.action)
+// console.log("user type",$vm.$store.state.interplex.user.roletype)
+    if($vm.$route.params.action!=""){
 if($vm.$route.params.action=='admin')    
 return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='admin');
 if($vm.$route.params.action=='approver')    
@@ -75,16 +81,8 @@ if($vm.$route.params.action=='operator')
 return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='operator');
 return $vm.$store.state.interplex.masterUsers;
 }
-if($vm.$store.state.interplex.user.roletype=='approver')
-{
-if($vm.$route.params.action=='approver')    
-return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='approver');
-if($vm.$route.params.action=='operator')    
-return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype=='operator');
-return _.filter($vm.$store.state.interplex.masterUsers,(user)=>user.roletype!='admin');
-}
 
-return [];
+return $vm.$store.state.interplex.masterUsers;
 
 
      }

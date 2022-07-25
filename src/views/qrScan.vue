@@ -21,10 +21,13 @@ Html5Qrcode.getCameras().then(devices => {
 if (devices && devices.length) {
 const qrCodeSuccessCallback =async (decodedText, decodedResult) => {
     /* handle success */
-var result=await $vm.$store.dispatch('getQasOne',decodedText)
+
+var result=await $vm.$store.dispatch('getQasOne',item.ir)
 console.log("result qasformsingle")
 console.log(result)
 $vm.$router.push({name:'qasFormView',params:{invoice:result.invoice}})
+
+// $vm.$router.push({name:'qasFormView',params:{invoice:result.invoice}})
 
 
 

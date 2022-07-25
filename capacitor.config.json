@@ -1,6 +1,6 @@
 {
  "appId": "com.interplex.mobile",
- "appName": "angalware",
+ "appName": "QCheck",
  "webDir": "dist",
  "bundledWebRuntime": false,
  "plugins": {

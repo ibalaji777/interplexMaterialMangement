@@ -38,7 +38,7 @@ var invoiceUploadApi=api+'/invoiceupload'
 var checkProductBatch=api+'/productbatch/check'
 var checkproductsbatch=api+'/checkproductsbatch'
 var getQasFormOneApi=api+'/readqasformonelist'
-var getQasFormOneUserApi=api+'/getqasformnneuser'
+var approverListApi=api+'/approverlist'
 var getQasFormSingleApi=api+'/readqasformonesingle'
 
 var qasFormOneUpdateApi=api+'/qasformone/update'
@@ -120,7 +120,9 @@ async function getBranches(context){
 
 async function getUsers(context){
     var result = await axios.get(getBranchUsers)
-    context.commit('setMasterUsers',result.data.data)  
+    context.commit('setMasterUsers',result.data)  
+
+    return result.data
 }
 
 const actions = {
@@ -229,8 +231,8 @@ async login(context,payload){
            
  
             },
-async  getUsers(context){
-    await getUsers(context)
+  getUsers(context){
+   return  getUsers(context)
 
 },
 async  createUser(context,user){
@@ -294,13 +296,14 @@ console.log("approverList",result)
         
          },
 
-    async getQasFormOneUserBasedList(context){
+    async approverList(context){
+//approverList for admin or operator or approver
 var result=[]
 var user=context.state.interplex.user;
 var from_date=context.state.date.from_date;
 var to_date=context.state.date.to_date;
 
-result= await axios.post(getQasFormOneUserApi,
+result= await axios.post(approverListApi,
     {
     roletype:user.roletype||'',
     id:user.id||0,

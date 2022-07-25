@@ -11,6 +11,10 @@
 <v-icon>fa-search</v-icon>
 </div>
 </div>
+ <br>
+      Branch:&nbsp; {{$store.state.interplex.user.branch}}- Role&nbsp; {{$store.state.interplex.user.roletype}}
+
+<br>
 <h3 style="margin-top:10px">Status</h3>
 <h5 style="text-align:right"><date @date="selected_date"></date></h5>
 <div>

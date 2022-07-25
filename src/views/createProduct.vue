@@ -984,7 +984,7 @@ async    save(){
         var $vm=this;
 var prepareData=_.cloneDeep($vm.insertForm);
 
-prepareData['branch']=$vm.$store.state.interplex.currentBranch;
+prepareData['branch']=$vm.$store.state.interplex.user.branch;
 if(prepareData.rmcode=='')
 {
 $vm.$alert("Part No Must Be Filled",'Error','error')

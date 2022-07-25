@@ -1,6 +1,8 @@
 <template>
   <div>
     <h3>Approver Dashboard</h3>
+      Branch:&nbsp; {{$store.state.interplex.user.branch}}- Role&nbsp; {{$store.state.interplex.user.roletype}}
+
       <div style="display:flex;margin-top:10px">
 
 

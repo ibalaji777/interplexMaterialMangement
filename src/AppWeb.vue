@@ -48,6 +48,10 @@ style="width:100%"
 </template>
 <script>
 /*eslint-disable*/
+import * as config from './lib/config.js'
+const { io } = require("socket.io-client");
+
+const socket = io(config.getApi());
 export default {
  props: {
   source: String,
@@ -96,6 +100,33 @@ $vm.load();
               }
 
 $vm.$store.commit('closeNavbarMenu')
+
+   socket.on('invoice_add',async (data) => {
+   await $vm.$store.dispatch('approverList')
+        socket.emit('test', { my: 'data' })
+      })
+   socket.on('newUserCreated',async (data) => {
+    console.log("newUserCreated",data)
+if($vm.$store.state.interplex.user.roletype!='operator')
+{
+await $vm.$store.dispatch('getUsers')
+}
+
+ })
+
+   socket.on('productCreated',async (data) => {
+    console.log("productCreated",data)
+// if($vm.$store.state.interplex.user.roletype!='operator')
+// {
+await    $vm.$store.dispatch('getProducts')
+
+// }
+
+ })
+
+
+
+
  },
  watch: {
  },
@@ -109,7 +140,6 @@ await $vm.$store.dispatch('readHeaderConfig')
 await $vm.$store.dispatch('getProductConfig')
 await $vm.$store.dispatch('readQasForm2Config')
 await $vm.$store.dispatch('getProducts')
-   await $vm.$store.dispatch('getQasFormOneUserBasedList')
 
  
 // ---------------------------------------------------------

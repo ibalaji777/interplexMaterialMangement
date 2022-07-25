@@ -1,7 +1,7 @@
 <template>
   <div  >
     <h3>Admin Dashboard</h3>
-  Branch:&nbsp; {{$store.state.interplex.currentBranch}}
+  Branch:&nbsp; {{$store.state.interplex.user.branch}}- Role&nbsp; {{$store.state.interplex.user.roletype}}
       <div style="display:flex;margin-top:10px">
 
 
@@ -90,7 +90,7 @@ Total Products
 </div>
 </div>
 
-<h3 style="margin-top:10px">Users</h3>
+<h3 style="margin-top:10px">Users in {{$store.state.interplex.user.branch}}</h3>
     <div
     
     @click="goToUserList('admin')"
@@ -245,6 +245,11 @@ export default {
         galleryDialog:false,
         headerFileDialog:false,
     }
+  },
+async  mounted(){
+var $vm=this;
+await $vm.$store.dispatch('getUsers')
+
   },
   computed:{
 masterProductsTotal(){

@@ -20,10 +20,11 @@ watch:{
 
     "$route.name":{
 
-      async  handler(){
+        handler(){
 console.log("watching routes...",this.$route.name)
             var $vm=this;
-     console.log(await  $vm.$store.dispatch('startUserIfNotExist'))
+async function startApp(){
+console.log(await  $vm.$store.dispatch('startUserIfNotExist'))
      if(['login','index','userRole'].includes($vm.$route.name))
             {
                 $vm.$store.commit('closeNavbarMenu')
@@ -34,6 +35,9 @@ console.log("watching routes...",this.$route.name)
                 $vm.$router.push({name:'startapp'})
               }
             }
+
+}
+startApp()
 
             
         }

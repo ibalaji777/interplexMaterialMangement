@@ -191,7 +191,7 @@ return $vm.$store.state.interplex.qasForm1;
     async mounted(){
         var $vm=this;
 
-      await $vm.$store.dispatch('getQasFormOneUserBasedList')
+      await $vm.$store.dispatch('approverList')
 
       $vm.filterResult=$vm.list||[];
 
@@ -222,15 +222,15 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
     methods:{
               async  preview(item){
             var $vm=this;
-// var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)
-// console.log("result qasformsingle")
-// console.log(result)
-// $vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
-
-var result=await $vm.$store.dispatch('getQasOne',item.ir)
+var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)
 console.log("result qasformsingle")
 console.log(result)
-$vm.$router.push({name:'qasFormView',params:{invoice:result.invoice}})
+$vm.$router.push({name:'qasFormView',params:{item,invoice:result.invoice}})
+
+// var result=await $vm.$store.dispatch('getQasOne',item.ir)
+// console.log("result qasformsingle")
+// console.log(result)
+// $vm.$router.push({name:'qasFormView',params:{invoice:result.invoice}})
 
 
 },
@@ -259,7 +259,7 @@ await $vm.$store.dispatch('qasFormUpdateStatus',{
     }
 )
 
-      await $vm.$store.dispatch('getQasFormOneUserBasedList')
+      await $vm.$store.dispatch('approverList')
       $vm.filterResult=$vm.list||[];
 
 $vm.$alert("Status Marked")
