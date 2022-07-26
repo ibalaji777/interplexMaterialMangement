@@ -20,6 +20,7 @@ const vuexLocalStorage = new VuexPersist({
 			interplex: {
 				user:state.interplex.user,
 				currentBranch:state.interplex.currentBranch,
+				currentRoleType:state.interplex.currentRoleType,
 				// qasForm1: state.interplex.qasForm1,
 				// qasForm2: state.interplex.qasForm2,
 				// configProductsFormat: state.interplex.configProductsFormat,

@@ -403,6 +403,7 @@ map:{
 interplex:{
 	masterFileTypes:[],
 	currentBranch:'',
+	currentRoleType:'',
 	qasForm1:[],//test
 	qasForm2:[],//test
     observation_print_view_format:[//using
@@ -1061,48 +1062,7 @@ interplex:{
 		}
 ],
 	masterProducts:[],
-	masterUsers:[
-        {
-			id:1,
-			name:'operator',
-            branch:'',
-            roletype:'operator',
-            username:'operator',
-            password:'operator',
-            email:'',
-            phone:'',
-             address:'',
-             status:'accepted'
-
-        },
-        {
-			id:2,
-            name:'approver',
-            branch:'',
-            roletype:'approver',
-            username:'approver',
-            password:'approver',
-            email:'',
-            phone:'',
-             address:'',
-             status:'accepted'
-
-        },
-        
-        {
-			id:3,
-            name:'admin',
-            branch:'',
-            roletype:'admin',
-            username:'admin',
-            password:'admin',
-            email:'',
-            phone:'',
-             address:'',
-             status:'accepted'
-
-        }
-    ],
+	masterUsers:[ ],
 	masterUploadTypes:[],
 	masterHeaderTypes:[],
 	qualityAssuranceFormOne:[],

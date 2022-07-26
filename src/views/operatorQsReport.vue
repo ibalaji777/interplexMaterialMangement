@@ -432,6 +432,7 @@ export default {
 
         return {
             qasForm1New:{},
+            qasHeaderNew:{},
             fileTypeDialog:false,
 selected_gallery:0,
 qasForm1NewDialog:false,
@@ -502,6 +503,18 @@ $vm.qasForm1New['width_sup_one']=singleBatchProduct.width_one;
 $vm.qasForm1New['width_sup_two']=singleBatchProduct.width_two;
 $vm.qasForm1New['thickness_sup_one']=singleBatchProduct.thick_one;
 $vm.qasForm1New['thickness_sup_two']=singleBatchProduct.thick_two;
+var weight=_.sumBy($vm.selectedPartNoItem.qasForm2,(qas2)=>parseFloat(qas2.weight))
+
+$vm.selectedPartNoItem.headerConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.headerConfigFormat),(headerObj)=>{
+
+if(headerObj.name=='invoice_qty'||headerObj.name=='received_qty')
+{
+    headerObj.value=parseFloat(weight||0);
+}
+return headerObj;
+})
+
+
 $vm.submitQasForm1new()
 
 }

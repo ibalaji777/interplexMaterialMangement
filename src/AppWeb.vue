@@ -116,14 +116,23 @@ await $vm.$store.dispatch('getUsers')
 
    socket.on('productCreated',async (data) => {
     console.log("productCreated",data)
-// if($vm.$store.state.interplex.user.roletype!='operator')
-// {
+if($vm.$store.state.interplex.user.roletype!='operator')
+{
 await    $vm.$store.dispatch('getProducts')
 
-// }
+}
 
  })
+ 
+   socket.on('userRemoved',async (data) => {
+    console.log("userRemoved",data)
+if($vm.$store.state.interplex.user.roletype!='operator')
+{
+await    $vm.$store.dispatch('getUsers')
 
+}
+
+ })
 
 
 

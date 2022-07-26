@@ -49,9 +49,13 @@ $vm.$alert("Please Fill Password")
 return;
 }
 
-await $vm.$store.dispatch('login',$vm.user)
+await $vm.$store.dispatch('login',{
+    ...$vm.user,
+    branch:$vm.$store.state.interplex.currentBranch,
+    roletype:$vm.$store.state.interplex.currentRoleType
+    })
 var user =$vm.$store.state.interplex.user;
-console.log(user)
+console.log("user==",user)
 if(user.username==''&&user.password==''){
 $vm.$alert("User Not Found")
 return 

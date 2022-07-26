@@ -20,7 +20,8 @@ methods:{
 
     userRole(role){
         var $vm=this;
-        $vm.$router.push({name:'login',params:{roletype:role}})
+        $vm.$store.commit("setRoleType",role)
+        $vm.$router.push({name:'login'})
     }
 }
 }

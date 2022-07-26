@@ -77,6 +77,10 @@ const mutations =
 	setBranch(state,branch){
 		state.interplex.currentBranch=branch
 	},
+	setRoleType(state,roletype){
+		state.interplex.currentRoleType=roletype
+	},
+	
 	database(state,payload){
 console.log(state)
 database(state,payload)

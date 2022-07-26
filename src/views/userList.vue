@@ -1,6 +1,7 @@
 <template>
     <div>
-        
+        <!-- params{{$route.params.action}} -->
+        <!-- {{$store.state.interplex.masterUsers}} -->
 <!-- eslint-disable -->
          <v-data-table
       :headers="$store.state.report.users"
@@ -51,19 +52,8 @@ filter:[],
     },
 async  mounted(){
 var $vm=this;
+$vm.prepareList()
 
-
-if($vm.$store.state.interplex.user.roletype=='admin')
-$vm.filter=$vm.list()
-if($vm.$store.state.interplex.user.roletype=='approver')
-$vm.filter=_.filter($vm.list(),(x)=>x.roletype!='admin')
-if($vm.$store.state.interplex.user.roletype=='operator')
-$vm.filter=[]
-
-
-var ret=await $vm.$store.dispatch('getUsers')
-
-console.log("++ret++",ret)
 
 
 },
@@ -88,6 +78,21 @@ return $vm.$store.state.interplex.masterUsers;
      }
     },
     methods:{
+async prepareList(){
+    var $vm=this
+    var ret=await $vm.$store.dispatch('getUsers')
+console.log("++ret++",ret)
+
+
+if($vm.$store.state.interplex.user.roletype=="admin")
+$vm.filter=$vm.list
+if($vm.$store.state.interplex.user.roletype=='approver')
+$vm.filter=_.filter($vm.list,(x)=>x.roletype!='admin')
+if($vm.$store.state.interplex.user.roletype=='operator')
+$vm.filter=[]
+
+},
+
         editItem(item){
 var $vm=this;
 $vm.$router.push({name:'createUser',params: { item:item }})
@@ -99,6 +104,8 @@ $vm.$confirm("Do You Want to delete?")
 .then(()=>{
 console.log(item)
 $vm.$store.dispatch('removeUser',item.id)
+$vm.prepareList()
+
 })
 return core.database(this,'deleteMasterBranch',{
     index:this.list.indexOf(item),

@@ -6,7 +6,7 @@ import axios from 'axios'
 
 var createUser=api+'/user/create'
 var getBranchUsers=api+'/getusers';
-var removeUser=api+'/user/remove'
+var removeUserApi=api+'/user/remove'
 var updateUser=api+'/user/update'
 var createProduct=api+'/product/create'
 var readProducts=api+'/readproducts'
@@ -120,6 +120,7 @@ async function getBranches(context){
 
 async function getUsers(context){
     var result = await axios.get(getBranchUsers)
+    console.log("updated master users...")
     context.commit('setMasterUsers',result.data)  
 
     return result.data
@@ -200,7 +201,7 @@ context.commit('setMasterBranches',result.data)
     }
 ,
 async removeUser(context,id){
-    var result = await axios.post(removeUser,{id})
+    var result = await axios.post(removeUserApi,{id})
    await getUsers(context)
 },
 async removeProduct(context,id){
