@@ -947,3 +947,45 @@ export const getFiscalYearTimestamps = () => {
   }
   return "FY-"+moment().format("YY")+"-"+moment().format("MM")
 };
+
+export function setQasHeader(qasOne,headerArray){
+
+ 
+
+
+  _.map(headerArray,(x)=>{
+
+    if(['invoice_no',
+    'invoice_date',
+    'invoice_qty',
+    'ir',
+    'grn_no',
+    'grn_date',
+  'rmcode',
+'eds',
+'received_qty','invoice_qty'].includes(x.name))
+{
+  qasOne[x.name]=x.value;
+}
+return x;
+  })
+return qasOne;
+
+
+
+// return  {
+//     supplier_name:_.filter(array,(x)=>x.name=='supplier_name')[0]||'',
+//     product_name:_.filter(array,(x)=>x.name=='product_name')[0]||'',
+//     invoice_no:_.filter(array,(x)=>x.name=='invoice_no')[0]||'',
+//     invoice_date:_.filter(array,(x)=>x.name=='invoice_date')[0]||'',
+//     invoice_qty:_.filter(array,(x)=>x.name=='invoice_qty')[0]||'',
+//     ir:_.filter(array,(x)=>x.name=='ir')[0]||'',
+//     grn_no:_.filter(array,(x)=>x.name=='grn_no')[0]||'',
+//     grn_date:_.filter(array,(x)=>x.name=='grn_date')[0]||'',
+//     rmcode:_.filter(array,(x)=>x.name=='rmcode')[0]||'',
+//     eds:_.filter(array,(x)=>x.name=='eds')[0]||'',
+//     received_qty:_.filter(array,(x)=>x.name=='received_qty')[0]||'',
+//     // eds:_.filter(array,(x)=>x.name=='eds')[0]||'',
+//   }
+
+}

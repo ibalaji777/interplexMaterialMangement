@@ -3,6 +3,7 @@ import _  from 'lodash'
 import * as config from '../lib/config.js'
 import store from '../store/index.js' 
 import * as core from '../lib/core.js'
+import moment from 'moment'
 export  function printData(invoice){
 
     console.log("iinvoice data")
@@ -10,10 +11,12 @@ export  function printData(invoice){
 var observation_format_object={};
 
 var skiplevel_status=invoice.qasFormOne.skiplevel_status
+var date=moment(invoice.qasFormOne.date).format(store.state.dateFormat)
 var sk_index=invoice.qasFormOne.sk_index
 var sk_order=invoice.qasFormOne.sk_order
 var qasFormOne=invoice.qasFormOne
 var headerFormFill={}
+
 var observation_print_view_format=core.getObservationPrintView(invoice.qasFormOne.observation_print_view)
 
 
@@ -81,7 +84,8 @@ return {
     skiplevel_status,
     sk_index,
     sk_order,
-    invoice
+    invoice,
+    date
 
 
 }
@@ -159,7 +163,7 @@ SKIP LEVEL</div>
 </tr>
 <tr>
     <td>INVOICE/ DC #:{{headerFormFill.invoice_no}}</td>
-    <td>DATE{{headerFormFill.date}}</td>
+    <td>DATE{{date}}</td>
     <td>EDS/QP#:{{headerFormFill.eds}}</td>
 </tr>
 <tr>

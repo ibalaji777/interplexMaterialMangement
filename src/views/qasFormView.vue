@@ -37,6 +37,8 @@ mdi-qrcode
 </div>
 
 
+
+
 <h3>Mark Status</h3>
 
 <div  style="    border: 1px solid black;
@@ -63,12 +65,36 @@ PP
 
 
 <div v-if="selectForm=='edit'">
+<div style="    display: flex;
+    flex-wrap: wrap;">
+<div style="width:32.5%;margin:1px" v-for="(header,index) in invoice.qasFormOne.header_format" :key="'header'+index">
+
+<div style="font-size:13px">{{header['label']}}</div>
+<div > 
+<input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" >
+
+</div>
+
+
+</div>
+</div>
+
 OBSERVATION
 <div style="display:flex;">
 
 <div @click="qasForm1Dialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-check</v-icon>
 </div>
+</div>
+<div style="display:flex;justify-content:flex-end;margin:10px">
+<v-btn color="primary" @click="saveQasFormOne">Save </v-btn>
+</div>
+Qas Form
+<div style="display:flex;">
+
+<!-- <div @click="qasForm1Dialog=true" class="insertProduct" style="margin-right:10px">
+<v-icon>fa-check</v-icon>
+</div> -->
 <div @click="qasForm2Dialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-list</v-icon>
 </div>
@@ -132,7 +158,7 @@ OBSERVATION
     </tr>
     <tr>
         <td>INVOICE/ DC #:{{printData.headerFormFill.invoice_no}}</td>
-        <td>DATE{{printData.headerFormFill.date}}</td>
+        <td>DATE{{invoice.qasFormOne.date|date}}</td>
         <td>EDS/QP#:{{printData.headerFormFill.eds}}</td>
     </tr>
     <tr>
@@ -468,7 +494,7 @@ Items
           <v-toolbar-title><v-icon @click="qasForm1Dialog = false">fa-times</v-icon></v-toolbar-title>
 
           <v-spacer></v-spacer>
-          <v-btn @click="saveQasFormOne" color="red" style="color:white">save</v-btn>
+          <!-- <v-btn @click="saveQasFormOne" color="red" style="color:white">save</v-btn> -->
           <v-toolbar-items>
           </v-toolbar-items>
         </v-toolbar>
@@ -666,6 +692,13 @@ $vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFo
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+    saveHeader(){
+var $vm=this;
+$vm.$store.dispatch('qasFormHeaderUpdate',$vm.invoice.qasFormOne.header_format)
+$vm.$alert("Saved")
+
+
+    },
 printLabel(){
 var $vm=this;
 $vm.$refs.barcodeLabelPrint.print()
@@ -717,8 +750,8 @@ status,
 })
 
 var result=await $vm.$store.dispatch('getQasFormOneSingle',$vm.invoice.qasFormOne.invoice_table_id)
-console.log("result qasformsingle")
-console.log(result)
+// console.log("result qasformsingle")
+// console.log(result)
 $vm.invoice={
 
 qasFormOne:$vm.invoice.qasFormOne||[],
@@ -794,7 +827,11 @@ var $vm=this;
 console.log("+++++qasform1++++++")
 console.log($vm.invoice.qasFormOne)
 
-$vm.$store.dispatch('qasFormOneUpdate',$vm.invoice.qasFormOne)
+var qasfomrone=core.setQasHeader($vm.invoice.qasFormOne,$vm.invoice.qasFormOne.header_format)
+
+// {...$vm.invoice.qasFormOne,...core.getQasHeader($vm.invoice.qasFormOne.header_format)}
+console.log("qasformone",qasfomrone)
+$vm.$store.dispatch('qasFormOneUpdate',qasfomrone)
 
 $vm.$alert("Saved")
     },

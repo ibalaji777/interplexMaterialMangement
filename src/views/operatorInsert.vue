@@ -15,7 +15,7 @@
 </div> -->
         </div>
         <h3
-            style="background: red;
+            style="background:#3b4679;
     color: white;
     padding: 5px;
     margin-top: 17px;
@@ -346,7 +346,7 @@ Items
                         Choose Header File
                     </h3>
                     <div
-                        style="  margin-top: 10px;padding: 10px;display: flex;background: red;justify-content:space-between"
+                        style="  margin-top: 10px;padding: 10px;display: flex;background: #db3967;justify-content:space-between"
                     >
                         <input
                             type="file"
@@ -454,6 +454,7 @@ Items
             v-model="checkDialog"
             fullscreen
             hide-overlay
+            persistent
             transition="dialog-bottom-transition"
         >
             <v-card>
@@ -470,7 +471,7 @@ Items
                 <div style="padding:10px">
                     <div
                         style="  
-background: crimson;
+background: #555160;
     padding: 0px 17px;
     justify-content: space-between;
     display: flex;
@@ -486,28 +487,35 @@ background: crimson;
     ></v-checkbox> -->
 
                         <div
-                            style="display:flex;flex-direction:column;width:100%"
+                            style="display:flex;width:100%"
                         >
                             <v-btn
                                 color="red"
-                                style="color:white;width:100%;margin:2px;"
+                                style="color:white;width:33%;margin:2px;"
                                 @click="checkDialogeEdit = true"
-                                >Edit</v-btn
+                                >
+                                
+                                 <v-icon>mdi-pencil</v-icon>
+                                </v-btn
                             >
                             <v-btn
                                 color="red"
-                                style="color:white;width:100%;margin:2px;"
+                                style="color:white;width:33%;margin:2px;"
                                 @click="checkBatch"
-                                >check BAtch</v-btn
-                            >
+                                >
+                             <v-icon>mdi-check-all</v-icon>
 
+                                
+                                </v-btn
+                            >
                             <v-btn
                                 color="red"
-                                style="color:white;width:100%;margin:2px;"
+                                style="color:white;width:33%;margin:2px;"
                                 @click="qasGroupOneCheckout"
                                 >Submit
                             </v-btn>
-                        </div>
+                                </div>
+                    
                         <!-- <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn> -->
                     </div>
                     <div class="checkContainer">
@@ -585,7 +593,6 @@ background: crimson;
     align-items: center;
     /* background: lightgoldenrodyellow; */
     border-radius: 5px;
-    border: 1px solid;
     margin-bottom: 10px;"
                     >
                         <!-- <v-checkbox
@@ -779,10 +786,28 @@ export default {
         },
         qasGroupOneCheckout() {
             var $vm = this;
-            $vm.checkGroupQasOneDialog = true;
+          
+var selected=_.filter($vm.checkHeaderBefore,(x)=>x.selected);          
+if(selected.length==0){
+   
+   $vm.$alert("select Atlease One Item")
+   return;
+}
+var checkBatch=false
+_.map(selected,(x)=>{
+    if(x.isExist){ checkBatch=x.isExist
+return;
+    }
+})
+if(checkBatch){
+$vm.$alert("Batch No Already Exist")
+    return;
+}   
+  $vm.checkGroupQasOneDialog = true;
+
 
             $vm.qasForm1Group = _.map(
-                core.headerFileGroup($vm.checkHeaderBefore),
+                core.headerFileGroup(selected),
                 x => {
                     x["selected"] = true;
                     x["ref"] =
@@ -948,11 +973,26 @@ export default {
 
             // $vm.$store.commit('defaultValue',{})
             $vm.$alert("Saved");
-
+//---------------------------------------------------
             console.log("+++Invoices Gallery+++", invoices);
             // ----------------
-            var result = await $vm.$store.dispatch("submitInvoice", invoices);
-            var blobInvoices = _.map(invoices, invoice => {
+
+var new_invoices=_.map(invoices,(invoice)=>{
+
+invoice.qasForm1New= _.map(invoice.qasForm1New,(qsform1)=>{
+
+var qasformone=core.setQasHeader(qsform1,qsform1.header_format)
+return qasformone
+
+})
+return invoice
+})
+
+console.log(new_invoices)
+
+
+            var result = await $vm.$store.dispatch("submitInvoice", new_invoices);
+            var blobInvoices = _.map(new_invoices, invoice => {
                 invoice["gallery"] = _.map(invoice.gallery, async image => {
                     var formdata = new FormData();
                     // image['invoice_client_id']=invoice['invoice_client_id'];

@@ -6,35 +6,12 @@
     flex-wrap: wrap;">
 <div style="width:32.5%;margin:1px" v-for="(header,index) in selectedPartNoItem.headerConfigFormat" :key="'header'+index">
 
-<!-- <input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" > -->
-
-<!-- <div style="display:flex;" v-if="['supplier_name','invoice_no','invoice_date'].includes(header.name)">
-<input class="interInput" v-model="header['supplier_name']" type="text" placeholder="Supplier" >
-<input class="interInput" v-model="header['invoice_no']" type="text" placeholder="Invoice" >
-<input class="interInput" v-model="header['invoice_date']" type="text" placeholder="Invoice Date" >
-</div>
-<div style="display:flex;" v-if="['ir','grn_no','grn_date'].includes(header.name)">
-<input class="interInput" v-model="header['ir']" type="text" placeholder="Ir" >
-<input class="interInput" v-model="header['grn_date']" type="text" placeholder="Date" >
-<input class="interInput" v-model="header['grn_no']" type="text" placeholder="Grn No" >
-</div>
-<div style="display:flex;" v-if="['rmcode','eds','rm'].includes(header.name)">
-<input class="interInput" v-model="header['rmcode']" type="text" placeholder="R/m Code" >
-<input class="interInput" v-model="header['eds']" type="text" placeholder="EDS/QIP#" >
-<input class="interInput" v-model="header['rm']" type="text" placeholder="RM" >
-</div> -->
-
 <div style="font-size:13px">{{header['label']}}</div>
 <div > 
 <input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" >
 
 </div>
 
-<!-- <div style="display:flex;">
-<input class="interInput" v-model="header.invoice_qty" type="text" placeholder="INVOICE QTY" >
-<input class="interInput" v-model="header.received_qty" type="text" placeholder="RECEIVED QTY" >
-
-</div> -->
 
 </div>
 </div>

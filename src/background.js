@@ -146,7 +146,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 Vue.config.devtools = process.env.NODE_ENV === 'development'
 app.on('ready',()=>{
 
-  app.setAppUserModelId("com.angalware.invoice")
+  app.setAppUserModelId("com.interplex.qc")
   
 
 });

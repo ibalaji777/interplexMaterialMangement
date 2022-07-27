@@ -1,15 +1,35 @@
 <template>
- <v-app :class="{bgRed:['index','branches','login','userRole','startapp'].includes($route.name)}">
-
-<!-- <plugin-print></plugin-print> -->
+ <v-app
+  :class="{
+   bgRed: ['index', 'branches', 'login', 'userRole', 'startapp'].includes(
+    $route.name
+   ),
+  }"
+ >
+  <!-- <plugin-print></plugin-print> -->
   <router-view name="outer"></router-view>
   <v-app-bar
    app
    clipped-left
-v-if="!['qrScan','index','branches','login','userRole','startapp'].includes($route.name)"
-   color="#ff0000"
+   v-if="
+    !['qrScan', 'index', 'branches', 'login', 'userRole', 'startapp'].includes(
+     $route.name
+    )
+   "
+   class="bgApp"
   >
-   <v-app-bar-nav-icon v-if="['index','adminDashboard','operatorDashboard','verifierDashboard'].includes($route.name)" style="color:white" @click="$store.commit('navbarMenu', {})">
+   <v-app-bar-nav-icon
+    v-if="
+     [
+      'index',
+      'adminDashboard',
+      'operatorDashboard',
+      'verifierDashboard',
+     ].includes($route.name)
+    "
+    style="color:white"
+    @click="$store.commit('navbarMenu', {})"
+   >
    </v-app-bar-nav-icon>
    <v-icon v-else @click="back">fa-chevron-left</v-icon>
 
@@ -17,38 +37,27 @@ v-if="!['qrScan','index','branches','login','userRole','startapp'].includes($rou
     style=" display:flex;   color: aliceblue;
   "
     class="title ml-3 mr-5"
-    > 
-    <img src="interplex.svg">
-    </span
    >
+    <img src="interplex.svg" />
+   </span>
 
-
-  <!-- this.$parent.someMethod(); -->
+   <!-- this.$parent.someMethod(); -->
    <!--  -->
    <v-spacer></v-spacer>
    <v-icon ref="sync" @click="load" style="color:white">fa-sync</v-icon>
-   <div style="margin:0 5px" >
-   </div>
+   <div style="margin:0 5px"></div>
   </v-app-bar>
-  <navbar-web
-   ></navbar-web>
+  <navbar-web></navbar-web>
   <v-main>
-   <v-container
-    fluid
-style="width:100%"
-   >
+   <v-container fluid style="width:100%">
     <router-view style="width:100%"></router-view>
-    
    </v-container>
   </v-main>
-
-
-  
  </v-app>
 </template>
 <script>
 /*eslint-disable*/
-import * as config from './lib/config.js'
+import * as config from "./lib/config.js";
 const { io } = require("socket.io-client");
 
 const socket = io(config.getApi());
@@ -89,83 +98,66 @@ export default {
    { title: "sender", icon: "dashboard", action: "sender" },
   ],
  }),
-async mounted() {
+ async mounted() {
   var $vm = this;
-// ---------------------setup config------------------------------------
-$vm.load();
-// ---------------------------------------------------------
-
-              if(!await  $vm.$store.dispatch('startUserIfNotExist')){
-                $vm.$router.push({name:'startapp'})
-              }
-
-$vm.$store.commit('closeNavbarMenu')
-
-   socket.on('invoice_add',async (data) => {
-   await $vm.$store.dispatch('approverList')
-        socket.emit('test', { my: 'data' })
-      })
-   socket.on('newUserCreated',async (data) => {
-    console.log("newUserCreated",data)
-if($vm.$store.state.interplex.user.roletype!='operator')
-{
-await $vm.$store.dispatch('getUsers')
-}
-
- })
-
-   socket.on('productCreated',async (data) => {
-    console.log("productCreated",data)
-if($vm.$store.state.interplex.user.roletype!='operator')
-{
-await    $vm.$store.dispatch('getProducts')
-
-}
-
- })
- 
-   socket.on('userRemoved',async (data) => {
-    console.log("userRemoved",data)
-if($vm.$store.state.interplex.user.roletype!='operator')
-{
-await    $vm.$store.dispatch('getUsers')
-
-}
-
- })
-
-
-
- },
- watch: {
- },
- methods: {
-  async load(){
-  var $vm=this;
-
-
   // ---------------------setup config------------------------------------
-await $vm.$store.dispatch('readHeaderConfig')
-await $vm.$store.dispatch('getProductConfig')
-await $vm.$store.dispatch('readQasForm2Config')
-await $vm.$store.dispatch('getProducts')
+  $vm.load();
+  // ---------------------------------------------------------
 
- 
-// ---------------------------------------------------------
-
-},
-
-  back(){
-    var $vm=this;
-//     if($vm.$route.name=='qasFormView'){
-// $vm.$router.push({name:'approverList'})
-// return ;
-//     }
-
-    
-        $vm.$router.go(-1)
-
+  if (!(await $vm.$store.dispatch("startUserIfNotExist"))) {
+   $vm.$router.push({ name: "startapp" });
   }
+
+  $vm.$store.commit("closeNavbarMenu");
+
+  socket.on("invoice_add", async (data) => {
+   await $vm.$store.dispatch("approverList");
+   socket.emit("test", { my: "data" });
+  });
+  socket.on("newUserCreated", async (data) => {
+   console.log("newUserCreated", data);
+   if ($vm.$store.state.interplex.user.roletype != "operator") {
+    await $vm.$store.dispatch("getUsers");
+   }
+  });
+
+  socket.on("productCreated", async (data) => {
+   console.log("productCreated", data);
+   if ($vm.$store.state.interplex.user.roletype != "operator") {
+    await $vm.$store.dispatch("getProducts");
+   }
+  });
+
+  socket.on("userRemoved", async (data) => {
+   console.log("userRemoved", data);
+   if ($vm.$store.state.interplex.user.roletype != "operator") {
+    await $vm.$store.dispatch("getUsers");
+   }
+  });
+ },
+ watch: {},
+ methods: {
+  async load() {
+   var $vm = this;
+
+   // ---------------------setup config------------------------------------
+   await $vm.$store.dispatch("readHeaderConfig");
+   await $vm.$store.dispatch("getProductConfig");
+   await $vm.$store.dispatch("readQasForm2Config");
+   await $vm.$store.dispatch("getProducts");
+
+   // ---------------------------------------------------------
+  },
+
+  back() {
+   var $vm = this;
+   //     if($vm.$route.name=='qasFormView'){
+   // $vm.$router.push({name:'approverList'})
+   // return ;
+   //     }
+
+   $vm.$router.go(-1);
+  },
  },
 };
 </script>
@@ -269,15 +261,23 @@ html::-webkit-scrollbar {
  transform: translate(-50%, -50%);
 }
 
-.bgRed
-{
-  // background:red;
-  // background: rose-petals.svg
-  background-image: url('/rose-petals.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
+.bgRed {
+ // background:red;
+ // background: rose-petals.svg
+ background-image: url("/rose-petals.svg");
+ background-repeat: no-repeat;
+ background-size: cover;
 }
-.theme--light.v-application{
-  // background: none  !important;;
+.theme--light.v-application {
+ // background: none  !important;;
+}
+.bgApp {
+ background: rgb(219, 57, 103); 
+ background: linear-gradient(
+  291deg,
+  rgba(219, 57, 103, 1) 0%,
+  rgba(231, 72, 103, 1) 35%,
+  rgb(159 18 18) 100%
+ );
 }
 </style>

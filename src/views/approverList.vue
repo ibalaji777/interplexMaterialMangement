@@ -2,7 +2,7 @@
     <div>
 <!-- sss{{$store.state.interplex.user}} -->
 <!-- eslint-disable -->
-
+<!-- {{$store.state.interplex.qasForm1}} -->
 <div style="padding:15px;">
 
 <v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode
@@ -63,7 +63,7 @@ ppap
          dense
       v-model="selected"
       :headers="$store.state.report.qasForm1"
-      :items="filterResult"
+      :items="$store.state.interplex.qasForm1"
       item-key="id"
       class="interListRow"
       show-select
@@ -276,11 +276,20 @@ await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id);
 // $vm.$router.push({name:'createBranch',params: { item:item }})
         },
         deleteItem(item){
+var $vm=this;
 
-return core.database(this,'deleteMasterBranch',{
-    index:this.list.indexOf(item),
-    item
+$vm.$confirm("Do You Want To Delete?")
+.then(async ()=>{
+await $vm.$store.dispatch('deleteQasFormOne',item)
+      await $vm.$store.dispatch('approverList')
+
+      $vm.filterResult=$vm.$store.state.interplex.qasForm1;
+
 })
+// return core.database(this,'deleteQasFormOne',{
+//     index:this.list.indexOf(item),
+//     item
+// })
         }
     }
 }

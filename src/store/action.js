@@ -43,7 +43,7 @@ var getQasFormSingleApi=api+'/readqasformonesingle'
 
 var qasFormOneUpdateApi=api+'/qasformone/update'
 var qasFormTwoUpdateApi=api+'/qasformtwo/update';
-
+var deleteQasFormOneApi=api+'/deleteqasformone'
 var mediaDeleteApi=api+'/media/delete';
 
 var readFileTypesApi=api+'/readfiletypes';
@@ -56,6 +56,8 @@ var updateProductConfigApi=api+'/productformat/update';
 var startUserIfNotExistApi=api+'/startusersiFnotexist';
 
 var  getQasOneApi=api+'/getqasoneir';
+
+var qasFormHeaderUpdateApi="qasheaderupdate"
 
 async function submitInvoice(context,invoices){
 
@@ -401,7 +403,20 @@ async getQasOne(context,ir){
      console.log('__++',result)
     return result.data
     
+},
+async qasFormHeaderUpdate(context,header){
+
+    var result=await axios.post(qasFormHeaderUpdateApi,{header});
+    return result.data
 }
+,
+async deleteQasFormOne(context,item){
+
+    var result=await axios.post(deleteQasFormOneApi,{invoice_table_id:item.invoice_table_id});
+await    approverList(context)
+    return result.data
+}
+
 }
 
 export default actions;

@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import moment from 'moment'
 const state = {
- bgColor:'#ff0000',
+ bgColor:'#db3967',
  dateFormat:"YYYY-MM-DD",
  barcodeLabel:{
 html:`

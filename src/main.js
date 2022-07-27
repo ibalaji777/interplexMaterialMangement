@@ -109,6 +109,13 @@ Vue.component('barcodeLabelPrint', barcodeLabelPrint);
 
 Vue.component('pluginPrintMobile',pluginPrintMobile)
 Vue.component('pluginPrintDesktop',pluginPrintDesktop)
+
+Vue.filter('date', function (value) {
+    if (!value) return ''
+    // value = value.toString()
+    return moment(value).format(vuexstore.state.dateFormat)
+  })
+
 new Vue({
 	router:webRouter,
 	store: vuexstore,

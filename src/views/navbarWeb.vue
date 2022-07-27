@@ -3,8 +3,8 @@
         v-model="$store.state.control.isNavbarHidden"
         fixed
         app
-        color="#ff0000"
-        style="color:white"
+        class="bgApp"
+         style="color:white"
     >
         <v-list nav>
             <v-divider></v-divider>
@@ -12,9 +12,9 @@
             <div v-for="navLink in items" :key="navLink.title">
                 <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">
                     <v-list-item-icon >
-                        <v-icon>{{ navLink.icon }}</v-icon>
+                        <v-icon style="color:white">{{ navLink.icon }}</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>{{ navLink.title }}</v-list-item-title>
+                    <v-list-item-title style="color:white">{{ navLink.title }}</v-list-item-title>
                 </v-list-item>
 
                 <v-list-group
@@ -29,7 +29,7 @@
                             }}</v-icon>
                         </v-list-item-icon>
                         <v-list-item-content>
-                            <v-list-item-title>{{
+                            <v-list-item-title style="color:white">{{
                                 navLink.title
                             }}</v-list-item-title>
                         </v-list-item-content>
@@ -49,9 +49,9 @@
             </div>
                                             <v-list-item  @click="$router.push({name:'index'});$store.dispatch('logout')">
                     <v-list-item-icon >
-                        <v-icon>fa-sign-out-alt</v-icon>
+                        <v-icon style="color:white">fa-sign-out-alt</v-icon>
                     </v-list-item-icon>
-                    <v-list-item-title>logout</v-list-item-title>
+                    <v-list-item-title style="color:white">logout</v-list-item-title>
                 </v-list-item>
 
             <!-- <v-list-item @click="$router.push({ name: 'settings_nav' })">

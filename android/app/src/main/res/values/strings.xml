@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">angalware</string>
-    <string name="title_activity_main">angalware</string>
+    <string name="app_name">QC</string>
+    <string name="title_activity_main">QC</string>
     <string name="package_name">com.interplex.mobile</string>
     <string name="custom_url_scheme">com.interplex.mobile</string>
 </resources>

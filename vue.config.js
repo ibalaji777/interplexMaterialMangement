@@ -27,7 +27,7 @@ module.exports = {
           "target": [
             "nsis"
           ],
-          icon: './public/icon.ico',
+          icon: './public/interplex.png',
           "requestedExecutionLevel": "requireAdministrator",
           "publish": [{
             "provider": "generic",
