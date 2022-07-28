@@ -94,17 +94,15 @@ Items
                 outlined
             >
                 <v-btn
-                    style="    background: linear-gradient(45deg, red, #c50303);
-    color: white !important;margin-right:5px"
+                class="interBtn"
                     @click="clear"
                 >
                     Clear
                 </v-btn>
                 <v-btn
-                    style="    background: linear-gradient(45deg, red, #c50303);
-    color: white !important;
-"
                     @click="submit"
+                                    class="interBtn"
+
                 >
                     Submit To Approval
                 </v-btn>
@@ -342,11 +340,12 @@ Items
     transform: translateY(-50%);
     width: 100%;"
                 >
-                    <h3 style="text-align:center;">
-                        Choose Header File
+                    <h3 style="text-align:center;" class="interColor" >
+                        CHOOSE SAP FILE
                     </h3>
                     <div
-                        style="  margin-top: 10px;padding: 10px;display: flex;background: #db3967;justify-content:space-between"
+                     
+                        style="background:beige;  margin-top: 10px;padding: 10px;display: flex;justify-content:space-between"
                     >
                         <input
                             type="file"

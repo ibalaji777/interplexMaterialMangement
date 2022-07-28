@@ -19,13 +19,7 @@
 <h5 style="text-align:right"><date @date="selected_date"></date></h5>
 <div>
     <div style="display:flex;margin-top:10px">
-        <div @click="$router.push({name:'approverList',params: { status:'pending' }})" class="insertProduct" style="margin-right: 10px;
-    height: 100px;
-    font-weight: 800;
-    width: 50%;
-    background: brown;
-    width: 100%;
-    color: wheat;">
+        <div  @click="$router.push({name:'approverList',params: { status:'pending' }})" class="pendingCard" style="margin-right: 10px;">
            <div style="text-align:center">
             {{approverStatus.pending}}<br>
             Pending
@@ -34,7 +28,7 @@
 </div>
     </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="$router.push({name:'approverList',params: { status:'approved' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: cadetblue;">
+        <div @click="$router.push({name:'approverList',params: { status:'approved' }})" class="approved" style="margin-right:10px;">
            <div style="text-align:center">
             {{approverStatus.approved}}<br>
 
@@ -42,7 +36,7 @@
             </div> 
 
 </div>
-   <div @click="$router.push({name:'approverList',params: { status:'acceptedOnDeviation' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: darksalmon;">
+   <div @click="$router.push({name:'approverList',params: { status:'acceptedOnDeviation' }})" class="acceptedOnDeviation" style="margin-right:10px;">
            <div style="text-align:center">
             {{approverStatus.acceptedOnDeviation}}<br>
 
@@ -52,14 +46,14 @@
 </div>
 </div>
     <div style="display:flex;margin-top:10px">
-        <div @click="$router.push({name:'approverList',params: { status:'rejected' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: chocolate;">
+        <div @click="$router.push({name:'approverList',params: { status:'rejected' }})" class="acceptedOnDeviation" style="margin-right:10px;">
            <div style="text-align:center">
             {{approverStatus.rejected}}<br>
             Rejected
             </div>
 
 </div>
-   <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="insertProduct" style="margin-right:10px;height:100px;font-weight:800;width:50%;background: khaki;">
+   <div @click="$router.push({name:'approverList',params: { status:'ppap' }})" class="approved" style="margin-right:10px;">
            <div style="text-align:center">
             {{approverStatus.ppap}}<br>
             PPAP

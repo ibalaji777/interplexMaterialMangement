@@ -28,7 +28,7 @@ module.exports = {
             "nsis"
           ],
           icon: './public/interplex.png',
-          "requestedExecutionLevel": "requireAdministrator",
+          // "requestedExecutionLevel": "requireAdministrator",
           "publish": [{
             "provider": "generic",
             "url": "https://angalware.com/dist/download/"

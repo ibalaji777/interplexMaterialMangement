@@ -1,0 +1,4 @@
+Software licence agreement: Provided by angalware
+A software licence is an authorization by the owners of a software product allowing a customer to use the product. In the software industry, products are usually licensed rather than sold―people who pay to use the software rarely “own” it outright. Rather, they purchase a licence to use the product subject to certain conditions.
+
+In addition to governing the use of software, a software licence agreement also govern the rules around the product’s redistribution.

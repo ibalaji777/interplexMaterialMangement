@@ -1,11 +1,12 @@
 <template>
  <v-app
   :class="{
-   bgRed: ['index', 'branches', 'login', 'userRole', 'startapp'].includes(
+   bgStartScreen: ['index', 'branches', 'login', 'userRole', 'startapp'].includes(
     $route.name
    ),
   }"
  >
+<!-- <img src="/wavetop.svg" alt=""> -->
   <!-- <plugin-print></plugin-print> -->
   <router-view name="outer"></router-view>
   <v-app-bar
@@ -31,7 +32,7 @@
     @click="$store.commit('navbarMenu', {})"
    >
    </v-app-bar-nav-icon>
-   <v-icon v-else @click="back">fa-chevron-left</v-icon>
+   <v-icon style="color:white" color="white" v-else @click="back">mdi-arrow-left</v-icon>
 
    <span
     style=" display:flex;   color: aliceblue;
@@ -161,7 +162,11 @@ export default {
  },
 };
 </script>
+<style lang="scss">
+@import url('./assets/interplex.scss');  
+</style>
 <style lang="scss" scoped>
+
 .navbar {
  position: fixed;
  width: 100%;
@@ -261,23 +266,19 @@ html::-webkit-scrollbar {
  transform: translate(-50%, -50%);
 }
 
-.bgRed {
- // background:red;
- // background: rose-petals.svg
- background-image: url("/rose-petals.svg");
- background-repeat: no-repeat;
- background-size: cover;
+.bgStartScreen {
+ background:#061f5c;
 }
 .theme--light.v-application {
  // background: none  !important;;
 }
 .bgApp {
- background: rgb(219, 57, 103); 
+ background: #061f5c; 
  background: linear-gradient(
   291deg,
-  rgba(219, 57, 103, 1) 0%,
-  rgba(231, 72, 103, 1) 35%,
-  rgb(159 18 18) 100%
+  #061f5c 0%,
+  #061f5c 35%,
+  #061f5c 100%
  );
 }
 </style>

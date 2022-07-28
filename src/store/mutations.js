@@ -66,6 +66,12 @@ const mutations =
 		console.log("add",payload)
 		state.interplex.configProductsFormat.push(payload)
 	},
+
+	setPreFieldFormat(state,payload){
+		console.log("add",payload)
+		state.interplex.configProductsFormat=payload
+	},
+
 	removeProductsFormat(state,index){
 
 		state.productsFormat.splice(index,1)

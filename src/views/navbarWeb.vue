@@ -5,6 +5,7 @@
         app
         class="bgApp"
          style="color:white"
+         temporary
     >
         <v-list nav>
             <v-divider></v-divider>

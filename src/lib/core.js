@@ -4,7 +4,7 @@ import moment from 'moment'
 import store from '../store/index.js'
 import { v4 as uuidv4 } from 'uuid';
 
-export const api="https://f237-2402-3a80-133b-8b42-a1cc-2d34-1f64-c56f.in.ngrok.io";
+// export const api="https://f237-2402-3a80-133b-8b42-a1cc-2d34-1f64-c56f.in.ngrok.io";
 
 export var defaultFields={
 
@@ -726,7 +726,8 @@ export function headerFileGroup(array){
 // console.log(result);
 
 return _.map(groupBy(array, function (item) {
-  return [item[defaultFields.partNo], item[defaultFields.supplierName],item[defaultFields.invoiceDate],item[defaultFields.invoiceNo]||''];
+  // item[defaultFields.invoiceDate]
+  return [item[defaultFields.partNo], item[defaultFields.supplierName],item[defaultFields.invoiceNo]||''];
 }),(x)=>({
   total:x.length,
   invoiceQty:_.sumBy(x,(xy)=>parseFloat(xy.QTY)),
@@ -741,7 +742,7 @@ export function skiplevel($vm,array){
   console.log("already grouped array",array)
 
   var groupSkipLevel=_.map(groupBy(array, function (item) {
-    console.log(defaultFields.supplierName,[item[defaultFields.supplierName],item[defaultFields.partNo]].join(),item)
+    // console.log(defaultFields.supplierName,[item[defaultFields.supplierName],item[defaultFields.partNo]].join(),item)
     return [item[defaultFields.supplierName],item[defaultFields.partNo]];
   }),(x)=>{
 

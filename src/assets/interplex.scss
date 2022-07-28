@@ -1,3 +1,7 @@
+*{
+font-family:sans-serif;
+
+}
 .interInput{
 background: beige;
 border-radius:0 !important;
@@ -91,3 +95,50 @@ transform: translate(-50%,-50%);
 }
 .interListRow tbody tr:nth-child(odd) {
 }
+
+.pendingCard{
+
+    height: 100px;
+    font-weight: 800;
+    background: #30204e;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.acceptedOnDeviation{
+    margin-right: 10px;
+    height: 100px;
+    font-weight: 800;
+    width: 50%;
+    color: white;
+    background: #312e3e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.approved{
+    margin-right: 10px;
+    height: 100px;
+    font-weight: 800;
+    color: white;
+    width: 50%;
+    background: #4b4962;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.interBtn{
+    background: #061f5c !important;
+    color:white !important;
+    margin:3px; 
+
+}
+.interBg{
+  background: #061f5c !important;  
+}
+.interColor{
+    color: #061f5c !important;  
+  }

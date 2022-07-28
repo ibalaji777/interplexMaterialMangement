@@ -787,7 +787,8 @@ Rules For Validation<br>
         </v-toolbar>
         <v-divider></v-divider>
         <div style="padding:10px">
-<v-btn outlined @click="createFieldSettingDialog=true">Create Field</v-btn>
+<v-btn outlined @click="createFieldSettingDialog=true" style="margin-right:15px">Create Field</v-btn>
+<v-btn outlined @click="preFields">Pre Fields</v-btn>
 </div>
 
        <div style="padding:10px;height: 85vh;
@@ -835,7 +836,7 @@ Rules For Validation<br>
 <script>
 /*eslint-disable*/
 import  * as core from '../lib/core.js'
-
+import state from '../store/state'
 import moment from 'moment'
 var create_field={
     label:'',//input field label
@@ -1035,6 +1036,13 @@ createProductField(){
 
     this.$store.commit('addProductsFormat',this.createField)
     this.insertForm.observation_format.push(this.createField)
+    $vm.$alert("added")
+},
+preFields(){
+    var $vm=this;
+this.$store.commit('setPreFieldFormat',state.interplex.configProductsFormat)
+    this.insertForm.observation_format=state.interplex.configProductsFormat
+$vm.$alert("added")
 }
 
 },
