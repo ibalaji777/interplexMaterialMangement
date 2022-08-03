@@ -317,53 +317,89 @@
 
 <h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
 <div style="display:flex;margin:10px 0">
-<v-btn @click="qasFormSetup='config'" style="margin-right:5px" color="primary">
-config
+
+
+<v-btn @click="tableColumnSetupDialog=true" color="primary">
+Table Column Setup
 </v-btn>
-<v-btn @click="qasFormSetup='input'" color="primary">
-Input
-</v-btn>
+
+
 </div>
-<div v-show="qasFormSetup=='config'" style="width:99vw;overflow:scroll">
-
-<v-btn style="margin:5px" color="primary" @click="createQasRowInputDialog=true">
-Create New Row
-</v-btn>
 
 
-
-
-
+<div style="height:78vh;overflow:scroll">
 <table  class="observationTable" style="width:100vw">
-    <tr>
-        <td rowspan="2"></td>
-        <td colspan="4" style="text-align:center">SPEC/REQUIREMENT</td>
-        <td colspan="2" style="text-align:center">ACTUAL READING </td>
-        <td rowspan="2">REMARKS</td>
-    </tr>
-    <tr>
-        <td>DESCRIPTION</td>
-        <td>UNIT</td>
-        <td>MIN <br> SPEC</td>
-        <td>MAX<br>SPEC</td>
-        <td>SUPPLIER</td>
-        <td>IEIPL/THIRD PARTY</td>
-       
-    </tr>
-    <draggable handle=".drag" tag="tbody" v-model="insertForm.observation_print_view">
+    <tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
+        <td :colspan="getColspan(item.name)" :rowspan="getRowspan(item.name)" v-for="(item,index_sub) in form.column" :key="'inde'+index_sub">
+<!-- {{item}}
+{{item.name}} -->
+           <div >
+           <div v-if="getIndex(item.name)!=-1">
+<div     style="display:flex;width:250px;justify-content:space-between">
+            {{insertForm.observation_format[getIndex(item.name)].label}}
+            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
+</div>
 
+
+<!-- {{form[key]}} -->
+<!-- {{getColspan(form[key])}} -->
+<!-- {{insertForm.observation_format[getIndex(form[key])].colspan}} -->
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(iten.name))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(item.name)].disable"></v-switch>
+</div>
+
+<v-text-field outlined v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(item.name)].value"></v-text-field>
+<!-- {{insertForm.observation_format[getIndex(item.name)].name}} -->
+   
+</div>
+<div v-else>
+    <div     style="display:flex;width:250px;justify-content:space-between">
+<div></div>
+            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
+</div>
+
+Not Found 
+</div>
+</div>
+        </td>
+    </tr>
+        <draggable handle=".drag" tag="tbody" v-model="insertForm.observation_print_view">
     <tr v-for="(form,index) in insertForm.observation_print_view" :key="'printview'+index">
-        <td v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
-<div v-if="key=='no'">            
+        <td :colspan="getColspan(form[key])" :rowspan="getRowspan(form[key])" v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
 
-<v-icon class="drag" style="cursor:move;font-size:50px">mdi-drag-horizontal</v-icon>            
-           {{index+1}}
+           <div v-if="key=='no'">            
+ 
+{{index+1}}<br>
+<!-- {{}} -->
+<div style="display:flex;justify-content:space-evenly"><v-icon style="font-size:50px" class="drag">mdi-drag-horizontal</v-icon>
+<v-icon @click="removeTableRow(index)" style="font-size:25px;color:red" class="drag">fa-trash</v-icon>
+</div>
+
+
            </div>
+           <div v-else>
+           <div v-if="getIndex(form[key])!=-1">
+<div     style="display:flex;width:250px;justify-content:space-between">
+            {{insertForm.observation_format[getIndex(form[key])].label}}
+            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
+</div>
 
-<div>
-   <v-combobox   :return-object="false"
 
-                             :items="observation_format_columns"
+<!-- {{form[key]}} -->
+<!-- {{getColspan(form[key])}} -->
+<!-- {{insertForm.observation_format[getIndex(form[key])].colspan}} -->
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form[key]))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form[key])].disable"></v-switch>
+</div>
+
+<v-text-field outlined v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form[key])].value"></v-text-field>
+<!-- {{insertForm.observation_format[getIndex(form[key])].name}} -->
+
+<v-combobox   :return-object="false"
+
+                             :items="insertForm.observation_format[getIndex(form[key])]"
   dense
 
 v-model="form[key]"
@@ -373,65 +409,120 @@ v-model="form[key]"
   hide-selected
   small-chips
 ></v-combobox>
-     </div>
-        </td>
-    </tr>
-    </draggable>
-</table>
-</div>
 
-<div v-show="qasFormSetup=='input'" style="width:99vw;overflow:scroll">
-<table  class="observationTable" style="width:100vw">
-    <tr>
-        <td rowspan="2"></td>
-        <td colspan="4" style="text-align:center">SPEC/REQUIREMENT</td>
-        <td colspan="2" style="text-align:center">ACTUAL READING </td>
-        <td rowspan="2">REMARKS</td>
-    </tr>
-    <tr>
-        <td>DESCRIPTION</td>
-        <td>UNIT</td>
-        <td>MIN <br> SPEC</td>
-        <td>MAX<br>SPEC</td>
-        <td>SUPPLIER</td>
-        <td>IEIPL/THIRD PARTY</td>
-       
-    </tr>
-    <tr v-for="(form,index) in insertForm.observation_print_view" :key="'printview'+index">
-        <td :colspan="getColspan(form[key])" :rowspan="getRowspan(form[key])" v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
-
-           <div v-if="key=='no'">            
- 
-{{index+1}}
-
-           </div>
-           <div v-else>
-            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
-
-           <div v-if="getIndex(form[key])!=-1">
-{{insertForm.observation_format[getIndex(form[key])].name}}
-
-<!-- {{form[key]}} -->
-{{getColspan(form[key])}}
-{{insertForm.observation_format[getIndex(form[key])].colspan}}
-<div style="display:flex;width:250px;justify-content:space-around">
-    <v-icon @click="selectQasEdiable(getIndex(form[key]))">fa-cog</v-icon>
-<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form[key])].disable"></v-switch>
-</div>
-
-<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form[key])].value"></v-text-field>
 </div>
 <div v-else>
+    <div     style="display:flex;width:250px;justify-content:space-between">
+<div></div>
+            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
+</div>
+
 Not Found 
 </div>
 </div>
         </td>
     </tr>
+        </draggable>
 </table>
 </div>
 </div>
       </v-card>
     </v-dialog>
+<!-- tableColumnSetupDialog -->
+ <v-dialog
+      v-model="tableColumnSetupDialog"
+      persistent
+fullscreen
+    >
+    
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Table Config</span>
+        </v-card-title>
+        <v-card-text>
+            <div>
+
+            <!-- <div> -->
+<span class="text-h5">Table Header </span>
+<v-text-field v-model="headerColumnName" label="Create  Column">
+</v-text-field> <br>
+<!-- <table  class="observationTable" style="width:100vw">
+    <tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
+<td @click="selectedHeaderRow=index">{{index+1}}<br>
+<v-icon @click="removeHeaderRow(index)">fa-trash</v-icon>
+</td>
+<td :colspan="getColspan(form[key])" :rowspan="getRowspan(form[key])" v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
+            </tr>
+        </table> -->
+
+
+<span class="text-h5">Table Header Sort</span>
+<v-text-field v-model="createColumnName" label="Create  Column">
+</v-text-field> <br>
+<v-btn color="primary" @click="createHeaderColumn" style="margin:15px 0">Submit</v-btn>
+ <table style="border:1px solid black;width:100%;border-collapse: collapse;margin:10px 0">
+    
+                                       <draggable
+                                            :list="insertForm.table_header_setup"
+                                            style="
+                     margin-top:10px "
+                     tag="tr"
+                                            ghost-class="ghost"
+                                            group="product"
+                                            @start="dragging = true"
+                                            @end="dragging = false"
+                                        >
+        
+<td style="margin-right:10px;padding:5px;border:1px solid black" v-for="(item,index) in insertForm.table_header_setup" :key="'table_header'+index">
+{{item}}&nbsp; <v-icon @click="removeTableHeader">fa-trash</v-icon>
+</td>
+                                       </draggable>
+</table>
+
+<!-- {{$store.state.map.}} -->
+
+
+</div>
+
+        <!-- <div>
+<span class="text-h5">Create New Table Column</span>
+<v-text-field v-model="createNewTableColumnName" label="Create  Column">
+</v-text-field> <br>
+<v-btn color="primary" @click="createHeaderColumn" style="margin:15px 0">Submit</v-btn>
+ <table style="border:1px solid black;width:100%;border-collapse: collapse;margin:10px 0">
+    
+                                       <draggable
+                                            :list="insertForm.table_header_setup"
+                                            style="
+                     margin-top:10px "
+                     tag="tr"
+                                            ghost-class="ghost"
+                                            group="product"
+                                            @start="dragging = true"
+                                            @end="dragging = false"
+                                        >
+        
+<td style="margin-right:10px;padding:5px;border:1px solid black" v-for="(item,index) in insertForm.table_header_setup" :key="'table_header'+index">
+{{item}}&nbsp; <v-icon @click="removeTableHeader">fa-trash</v-icon>
+</td>
+                                       </draggable>
+</table>
+</div> -->
+
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="tableColumnSetupDialog = false"
+          >
+            Close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
 <!-- create qas row dialog -->
 
  <v-dialog
@@ -919,9 +1010,13 @@ var create_field={
 note:'' 
     
 }
-function intialState($vm){
+function initialState($vm){
     return {
+createColumnName:'',
+selectedHeaderRow:-1,
+headerColumnName:'',
 rowName:'',
+tableColumnSetupDialog:false,
 createQasRowInputDialog:false,
 qasEdiableDialog:false,
 delay: 1000,
@@ -959,6 +1054,9 @@ rm:'',
 form_format:'',
 comment:'',
 skiplevel:0,
+table_header_setup:['no','desc','unit','min_spec','max_spec','sup_min','sup_max','ieipl_min','ieipl_max','remarks'],
+defaultInsertForm:{},
+observation_header_print_view:[],
 observation_print_view:[],
 observation_format:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),//core.database($vm,'getMasterProductConfig'),
 duedate:moment().format("YYYY-MM-DD")   
@@ -983,7 +1081,7 @@ remarks:'',
 export default {
 
 data(){
-return intialState(this)
+return initialState(this)
 },
 
 computed:{
@@ -1065,6 +1163,12 @@ if($vm.insertForm.observation_print_view.length==0){
 $vm.insertForm.observation_print_view=$vm.$store.state.interplex.observation_print_view_format
 }
 $vm.insertForm.observation_format=$vm.$store.state.interplex.configProductsFormat
+if(_.isEmpty($vm.insertForm.defaultInsertForm)){
+$vm.insertForm.defaultInsertForm=$vm.$store.state.map.observation_print_view_format
+}
+if(_.isEmpty($vm.insertForm.observation_header_print_view)){
+$vm.insertForm.observation_header_print_view=$vm.$store.state.interplex.observation_header_print_view_format
+}
 
 var params=this.$route.params;
 if(Object.prototype.hasOwnProperty.call(params, 'item')){
@@ -1080,10 +1184,54 @@ $vm.isStateForUpdate=true,
 }
     },
 methods:{
+    removeTableRow(index){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove")
+.then(()=>{
+ $vm.insertForm.observation_format.splice(index,1)
+
+})
+    },
+    removeHeaderRow(index){
+var $vm=this;
+$vm.$confrm("Do You Want to Remove")
+.then(()=>{
+ $vm.insertForm.observation_header_print_view.splice(index,1)
+
+})
+$vm.selectedHeaderRow=-1;
+    },
+    removeTableHeader(){
+var $vm=this;
+$vm.$confirm("Do You Want To Delete?").then(()=>{
+$vm.insertForm.table_header_setup.splice(index,1)
+})
+},
+    createHeaderColumn(){
+var $vm=this;
+if($vm.createColumnName==''){
+    $vm.$alert("Please Enter Value")
+    return;
+}
+$vm.insertForm.table_header_setup.push($vm.createColumnName)
+
+$vm.insertForm.observation_print_view=_.map($vm.insertForm.observation_print_view,(value)=>{
+
+if(!value.hasOwnProperty($vm.createColumnName)){
+value[$vm.createColumnName]=""
+}
+return value;
+})
+
+    },
 removeTable(index,key){
 var $vm=this;
+$vm.$confirm("Do You Want To Delete?").then(()=>{
+
+
 delete $vm.insertForm.observation_print_view[index][key]
 $vm.$alert("removed")
+})
     },
     insertRow(){
 var $vm=this;
@@ -1119,7 +1267,7 @@ $vm.qasEditableIndex=index;
   },
     insertObservation(){
 var $vm=this;
-$vm.insertForm.observation_print_view.push((intialState($vm).observation_print_view_format))
+$vm.insertForm.observation_print_view.push((initialState($vm).observation_print_view_format))
     },
     removeConfig(item,index){
         if(item.default){
@@ -1135,7 +1283,7 @@ clear(){
 var $vm=this;
 $vm.$confirm("Do you want to reset ?",'warning','warning')
 .then(()=>{
-$vm.insertForm=intialState($vm).insertForm
+$vm.insertForm=initialState($vm).insertForm
 
 })
 
@@ -1163,7 +1311,7 @@ $vm.$alert("Something Wrong")
 
 
 
-$vm.insertForm=intialState($vm).insertForm
+$vm.insertForm=initialState($vm).insertForm
 
         
         console.log(prepareData)

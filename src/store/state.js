@@ -436,7 +436,73 @@ interplex:{
 	currentRoleType:'',
 	qasForm1:[],//test
 	qasForm2:[],//test
-    observation_print_view_format:[{
+	observation_header_print_view_format:[
+	{
+		column:[
+			{
+				name:'sl_header'
+			},
+			{
+				name:'spec_req_header'
+			},
+			{
+				name:'act_read_header'
+			},
+			{
+				name:'remarks_header'
+			}
+
+		]
+	},
+	{
+		column:[
+			{
+				name:'desc_header'
+			},
+			{
+				name:'unit_header'
+			},
+			{
+				name:'min_spec_header'
+			},
+			{
+				name:'max_spec_header'
+			}
+			,
+			{
+				name:'supplier_header'
+			},
+			{
+				name:'ieipl_header'
+			},
+		]
+
+	}
+	
+	
+	
+		// {
+		// 	no1:'sl_header',
+		// 	desc:'spec_req_header',
+		// 	unit:'act_read_header',
+		// 	min_spec:'remarks_header',
+		
+		// 	},
+
+		// 	{
+		// 		no1:'desc_header',
+		// 		desc:'unit_header',
+		// 		unit:'min_spec_header',
+		// 		min_spec:'max_spec_header',
+		// 		max_spec:'supplier_header',
+		// 		sup_min:'ieipl_header',
+				
+		// 		},
+		
+	],
+    observation_print_view_format:[
+		
+		{
 		no:'',
 		desc:'width',
 		unit:'width_unit_org',
@@ -760,6 +826,192 @@ interplex:{
 	selectedPartNoItem:{},
 	tempInvoice:{},//temprory
 	configProductsFormat:[
+
+		{
+			label:'SL',//input field label
+			name:'sl_header',//column name
+			value:'SL #',//default value
+			show:true,
+			disable:false,
+			validationStatus:false,
+			
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,rowspan:2,
+			default:true,
+			note:'' 
+			},
+			{
+				label:'SPEC/REQUIRMENT',//input field label
+				name:'spec_req_header',//column name
+				value:'SPEC/REQUIRMENT',//default value
+				show:true,
+				disable:false,
+				validationStatus:false,
+				
+				headerMap:'',  validation:false,
+				rule:'',colspan:4,rowspan:1,
+				default:true,
+				note:'' 
+				},
+				{
+					label:'ACTUAL READING',//input field label
+					name:'act_read_header',//column name
+					value:'ACTUAL READING',//default value
+					show:true,
+					disable:false,
+					validationStatus:false,
+					
+					headerMap:'',  validation:false,
+					rule:'',colspan:4,rowspan:1,
+					default:true,
+					note:'' 
+					},
+					{
+						label:'REMARKS',//input field label
+						name:'remarks_header',//column name
+						value:'REMARKS',//default value
+						show:true,
+						disable:false,
+						validationStatus:false,
+						
+						headerMap:'',  validation:false,
+						rule:'',colspan:1,rowspan:2,
+						default:true,
+						note:'' 
+						},
+						
+
+
+// ------------------------
+
+{
+	label:'Description',//input field label
+	name:'desc_header',//column name
+	value:'Description',//default value
+	show:true,
+	disable:false,
+	validationStatus:false,
+	
+	headerMap:'',  validation:false,
+	rule:'',colspan:1,rowspan:1,
+	default:true,
+	note:'' 
+	},
+	{
+		label:'UNIT',//input field label
+		name:'unit_header',//column name
+		value:'UNIT',//default value
+		show:true,
+		disable:false,
+		validationStatus:false,
+		
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,rowspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'Min. Spec.',//input field label
+			name:'min_spec_header',//column name
+			value:'Min. Spec.',//default value
+			show:true,
+			disable:false,
+			validationStatus:false,
+			
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,rowspan:1,
+			default:true,
+			note:'' 
+			},
+			{
+				label:'Max. Spec.',//input field label
+				name:'max_spec_header',//column name
+				value:'Max. spec.',//default value
+				show:true,
+				disable:false,
+				validationStatus:false,
+				
+				headerMap:'',  validation:false,
+				rule:'',colspan:1,rowspan:1,
+				default:true,
+				note:'' 
+				},
+				{
+					label:'Supplier',//input field label
+					name:'supplier_header',//column name
+					value:'Supplier',//default value
+					show:true,
+					disable:false,
+					validationStatus:false,
+					
+					headerMap:'',  validation:false,
+					rule:'',colspan:2,rowspan:1,
+					default:true,
+					note:'' 
+					},
+
+
+					{
+						label:'IEIPL/THIRD PARTY',//input field label
+						name:'ieipl_header',//column name
+						value:'IEIPL/THIRD PARTY',//default value
+						show:true,
+						disable:false,
+						validationStatus:false,
+						
+						headerMap:'',  validation:false,
+						rule:'',colspan:2,rowspan:1,
+						default:true,
+						note:'' 
+						},
+	
+	
+// -------------------------
+
+									
+		{
+			label:'WIDTH',//input field label
+			name:'width',//column name
+			value:'',//default value
+			show:true,
+			disable:false,
+			validationStatus:false,
+			
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,rowspan:1,
+			default:true,
+			note:'' 
+			},
+			
+		{
+			label:'WIDTH',//input field label
+			name:'width',//column name
+			value:'',//default value
+			show:true,
+			disable:false,
+			validationStatus:false,
+			
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,rowspan:1,
+			default:true,
+			note:'' 
+			},
+			
+		{
+			label:'WIDTH',//input field label
+			name:'width',//column name
+			value:'',//default value
+			show:true,
+			disable:false,
+			validationStatus:false,
+			
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,rowspan:1,
+			default:true,
+			note:'' 
+			},
+
+
 
 		{
 			label:'WIDTH',//input field label
