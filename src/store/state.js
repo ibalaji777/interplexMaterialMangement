@@ -389,14 +389,44 @@ map:{
 		unit:'',
 		min_spec:'',
 		max_spec:'',
-		sup_one:'',
-		sup_two:'',
-		ielpt_one:'',
-		ielpt_two:'',
+		sup_min:'',
+		sup_max:'',
+		ieipl_min:'',
+		ieipl_max:'',
 		remarks:'',
-		
-		}
 	
+		},
+		postfix_observation_print_view_format:{
+			no:'',
+			desc:'',
+			unit:'_unit_org',
+			min_spec:'_min_spec_org',
+			max_spec:'_max_spec_org',
+			sup_min:'_sup_min',
+			sup_max:'_sup_max',
+			ieipl_min:'_ieipl_min',
+			ieipl_max:'_ieipl_max',
+			remarks:'_remarks',
+	
+			
+			},
+//note it must contain all the fields in interplex.productConfigFormat
+productConfig:{
+				label:'',//input field label
+				name:'',//column name
+				value:'',//default value
+				show:true,
+				disable:false,
+				validationStatus:false,
+				headerMap:'',  
+				validation:false,
+				rule:'',colspan:1,
+				default:true,
+				note:'' 
+				},
+	
+	
+		
 },
 
 

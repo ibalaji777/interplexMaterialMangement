@@ -646,6 +646,42 @@ Not Found
 </div>
       </v-card>
     </v-dialog>
+<!-- create qas row dialog -->
+
+ <v-dialog
+      v-model="createQasRowInputDialog"
+      persistent
+      max-width="600px"
+    >
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Create New Row</span>
+        </v-card-title>
+        <v-card-text>
+ 
+<v-text-field hint="avioid White space and Enter small letter" v-model="rowName" label="Name"></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="createQasRowInputDialog = false"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="insertRow"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
 <!-- qas form input config  dialog-->
  <v-dialog
       v-model="qasEdiableDialog"
@@ -1092,6 +1128,7 @@ note:''
 }
 function intialState($vm){
     return {
+rowName:'',
 createQasRowInputDialog:false,
 qasEdiableDialog:false,
 delay: 1000,
@@ -1227,6 +1264,31 @@ $vm.isStateForUpdate=true,
 }
     },
 methods:{
+    insertRow(){
+var $vm=this;
+var map={}
+var postfix=$vm.$store.state.map.postfix_observation_print_view_format
+var observation_print_view_format=_.cloneDeep($vm.$store.state.map.observation_print_view_format)
+//******************** 1.create observation format****************
+var rows=[];
+//create fields produt config format
+_.forEach(postfix,(value,key)=>{
+    //create input format
+var obj=_.cloneDeep($vm.$store.state.map.productConfig)
+obj['name']=$vm.rowName+value;
+map[key]=obj.name;
+rows.push(obj)
+})
+$vm.insertForm.observation_format.push(...rows)
+//****************2.create observation format print view**********
+
+
+console.log(map)
+$vm.insertForm.observation_print_view.push(map)
+
+$vm.createQasRowInputDialog=false;
+$vm.$alert("New Row Created")
+    },
  selectQasEdiable(index)
   {
 var $vm=this;
