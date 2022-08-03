@@ -8,9 +8,9 @@
 
 <!-- <img src="/search.gif" alt=""> -->
 
-<h3 style="color:white;text-align:center">
+<!-- <h3 style="color:white;text-align:center">
     Better Quality Makes Better Product
-</h3>
+</h3> -->
 
         <!-- <h3 style="text-align:center;color:black">Please Select Your Role</h3> -->
 <v-btn color="white" @click="userRole('operator')" outlined style="margin-top:20px;width:100%">OPERATOR</v-btn>

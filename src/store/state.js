@@ -406,61 +406,314 @@ interplex:{
 	currentRoleType:'',
 	qasForm1:[],//test
 	qasForm2:[],//test
-    observation_print_view_format:[//using
+    observation_print_view_format:[{
+		no:'',
+		desc:'width',
+		unit:'width_unit_org',
+		min_spec:'width_min_spec_org',
+		max_spec:'width_max_spec_org',
+		sup_min:'width_sup_min',
+		sup_max:'width_sup_max',
+		ieipl_min:'width_ieipl_min',
+		ieipl_max:'width_ieipl_max',
+		remarks:'width_remarks',
+		
+		},
 		{
-			no:'',
-			desc:'width',
-			unit:'width_unit_org',
-			min_spec:'width_min_spec_org',
-			max_spec:'width_max_spec_org',
-			sup_one:'width_sup_one',
-			sup_two:'width_sup_two',
-			ielpt_one:'width_ielpl_one',
-			ielpt_two:'width_ielpl_two',
-			remarks:'',
-			
-			},
-			{
-				no:'',
-				desc:'thickness',
-				unit:'thickness_unit_org',
-				min_spec:'thickness_min_spec_org',
-				max_spec:'thickness_max_spec_org',
-				sup_one:'thickness_sup_one',
-				sup_two:'thickness_sup_two',
-				ielpt_one:'thickness_ielpl_one',
-				ielpt_two:'thickness_ielpl_two',
-				remarks:'',
-				
-				},
-				{
-					no:'',
-					desc:'hardness',
-					unit:'hardness_unit_org',
-					min_spec:'hardness_min_spec_org',
-					max_spec:'hardness_max_spec_org',
-					sup_one:'hardness_sup_one',
-					sup_two:'hardness_sup_two',
-					ielpt_one:'hardness_ielpl_one',
-					ielpt_two:'hardness_ielpl_two',
-					remarks:'',
-					
-					},
-					{
-						no:'',
-						desc:'elongation',
-						unit:'elongation_unit_org',
-						min_spec:'elongation_min_spec_org',
-						max_spec:'elongation_max_spec_org',
-						sup_one:'elongation_sup_one',
-						sup_two:'elongation_sup_two',
-						ielpt_one:'elongation_ielpl_one',
-						ielpt_two:'elongation_ielpl_two',
-						remarks:'',
-						
-						},
-									
-				],
+		no:'',
+		desc:'thickness',
+		unit:'thickness_unit_org',
+		min_spec:'thickness_min_spec_org',
+		max_spec:'thickness_max_spec_org',
+		sup_min:'thickness_sup_min',
+		sup_max:'thickness_sup_max',
+		ieipl_min:'thickness_ieipl_min',
+		ieipl_max:'thickness_ieipl_max',
+		remarks:'thickness_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'hardness',
+		unit:'hardness_unit_org',
+		min_spec:'hardness_min_spec_org',
+		max_spec:'hardness_max_spec_org',
+		sup_min:'hardness_sup_min',
+		sup_max:'hardness_sup_max',
+		ieipl_min:'hardness_ieipl_min',
+		ieipl_max:'hardness_ieipl_max',
+		remarks:'hardness_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'elongation',
+		unit:'elongation_unit_org',
+		min_spec:'elongation_min_spec_org',
+		max_spec:'elongation_max_spec_org',
+		sup_min:'elongation_sup_min',
+		sup_max:'elongation_sup_max',
+		ieipl_min:'elongation_ieipl_min',
+		ieipl_max:'elongation_ieipl_max',
+		remarks:'elongation_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'tensile_str',
+		unit:'tensile_str_unit_org',
+		min_spec:'tensile_str_min_spec_org',
+		max_spec:'tensile_str_max_spec_org',
+		sup_min:'tensile_str_sup_min',
+		sup_max:'tensile_str_sup_max',
+		ieipl_min:'tensile_str_ieipl_min',
+		ieipl_max:'tensile_str_ieipl_max',
+		remarks:'tensile_str_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'yield_str',
+		unit:'yield_str_unit_org',
+		min_spec:'yield_str_min_spec_org',
+		max_spec:'yield_str_max_spec_org',
+		sup_min:'yield_str_sup_min',
+		sup_max:'yield_str_sup_max',
+		ieipl_min:'yield_str_ieipl_min',
+		ieipl_max:'yield_str_ieipl_max',
+		remarks:'yield_str_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'cu',
+		unit:'cu_unit_org',
+		min_spec:'cu_min_spec_org',
+		max_spec:'cu_max_spec_org',
+		sup_min:'cu_sup_min',
+		sup_max:'cu_sup_max',
+		ieipl_min:'cu_ieipl_min',
+		ieipl_max:'cu_ieipl_max',
+		remarks:'cu_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'pb',
+		unit:'pb_unit_org',
+		min_spec:'pb_min_spec_org',
+		max_spec:'pb_max_spec_org',
+		sup_min:'pb_sup_min',
+		sup_max:'pb_sup_max',
+		ieipl_min:'pb_ieipl_min',
+		ieipl_max:'pb_ieipl_max',
+		remarks:'pb_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'fe',
+		unit:'fe_unit_org',
+		min_spec:'fe_min_spec_org',
+		max_spec:'fe_max_spec_org',
+		sup_min:'fe_sup_min',
+		sup_max:'fe_sup_max',
+		ieipl_min:'fe_ieipl_min',
+		ieipl_max:'fe_ieipl_max',
+		remarks:'fe_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'sn',
+		unit:'sn_unit_org',
+		min_spec:'sn_min_spec_org',
+		max_spec:'sn_max_spec_org',
+		sup_min:'sn_sup_min',
+		sup_max:'sn_sup_max',
+		ieipl_min:'sn_ieipl_min',
+		ieipl_max:'sn_ieipl_max',
+		remarks:'sn_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'zn',
+		unit:'zn_unit_org',
+		min_spec:'zn_min_spec_org',
+		max_spec:'zn_max_spec_org',
+		sup_min:'zn_sup_min',
+		sup_max:'zn_sup_max',
+		ieipl_min:'zn_ieipl_min',
+		ieipl_max:'zn_ieipl_max',
+		remarks:'zn_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'p',
+		unit:'p_unit_org',
+		min_spec:'p_min_spec_org',
+		max_spec:'p_max_spec_org',
+		sup_min:'p_sup_min',
+		sup_max:'p_sup_max',
+		ieipl_min:'p_ieipl_min',
+		ieipl_max:'p_ieipl_max',
+		remarks:'p_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'pre_plating_details',
+		unit:'pre_plating_details_unit_org',
+		min_spec:'pre_plating_details_min_spec_org',
+		max_spec:'pre_plating_details_max_spec_org',
+		sup_min:'pre_plating_details_sup_min',
+		sup_max:'pre_plating_details_sup_max',
+		ieipl_min:'pre_plating_details_ieipl_min',
+		ieipl_max:'pre_plating_details_ieipl_max',
+		remarks:'pre_plating_details_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'slitting_burr',
+		unit:'slitting_burr_unit_org',
+		min_spec:'slitting_burr_min_spec_org',
+		max_spec:'slitting_burr_max_spec_org',
+		sup_min:'slitting_burr_sup_min',
+		sup_max:'slitting_burr_sup_max',
+		ieipl_min:'slitting_burr_ieipl_min',
+		ieipl_max:'slitting_burr_ieipl_max',
+		remarks:'slitting_burr_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'twist',
+		unit:'twist_unit_org',
+		min_spec:'twist_min_spec_org',
+		max_spec:'twist_max_spec_org',
+		sup_min:'twist_sup_min',
+		sup_max:'twist_sup_max',
+		ieipl_min:'twist_ieipl_min',
+		ieipl_max:'twist_ieipl_max',
+		remarks:'twist_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'camber',
+		unit:'camber_unit_org',
+		min_spec:'camber_min_spec_org',
+		max_spec:'camber_max_spec_org',
+		sup_min:'camber_sup_min',
+		sup_max:'camber_sup_max',
+		ieipl_min:'camber_ieipl_min',
+		ieipl_max:'camber_ieipl_max',
+		remarks:'camber_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'surface_finish',
+		unit:'surface_finish_unit_org',
+		min_spec:'surface_finish_min_spec_org',
+		max_spec:'surface_finish_max_spec_org',
+		sup_min:'surface_finish_sup_min',
+		sup_max:'surface_finish_sup_max',
+		ieipl_min:'surface_finish_ieipl_min',
+		ieipl_max:'surface_finish_ieipl_max',
+		remarks:'surface_finish_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'ther_conduct',
+		unit:'ther_conduct_unit_org',
+		min_spec:'ther_conduct_min_spec_org',
+		max_spec:'ther_conduct_max_spec_org',
+		sup_min:'ther_conduct_sup_min',
+		sup_max:'ther_conduct_sup_max',
+		ieipl_min:'ther_conduct_ieipl_min',
+		ieipl_max:'ther_conduct_ieipl_max',
+		remarks:'ther_conduct_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'density',
+		unit:'density_unit_org',
+		min_spec:'density_min_spec_org',
+		max_spec:'density_max_spec_org',
+		sup_min:'density_sup_min',
+		sup_max:'density_sup_max',
+		ieipl_min:'density_ieipl_min',
+		ieipl_max:'density_ieipl_max',
+		remarks:'density_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'coil_weight',
+		unit:'coil_weight_unit_org',
+		min_spec:'coil_weight_min_spec_org',
+		max_spec:'coil_weight_max_spec_org',
+		sup_min:'coil_weight_sup_min',
+		sup_max:'coil_weight_sup_max',
+		ieipl_min:'coil_weight_ieipl_min',
+		ieipl_max:'coil_weight_ieipl_max',
+		remarks:'coil_weight_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'coil_300mm_900mm',
+		unit:'coil_300mm_900mm_unit_org',
+		min_spec:'coil_300mm_900mm_min_spec_org',
+		max_spec:'coil_300mm_900mm_max_spec_org',
+		sup_min:'coil_300mm_900mm_sup_min',
+		sup_max:'coil_300mm_900mm_sup_max',
+		ieipl_min:'coil_300mm_900mm_ieipl_min',
+		ieipl_max:'coil_300mm_900mm_ieipl_max',
+		remarks:'coil_300mm_900mm_remarks',
+		
+		
+		},
+		{
+		no:'',
+		desc:'next_due',
+		unit:'next_due_unit_org',
+		min_spec:'next_due_min_spec_org',
+		max_spec:'next_due_max_spec_org',
+		sup_min:'next_due_sup_min',
+		sup_max:'next_due_sup_max',
+		ieipl_min:'next_due_ieipl_min',
+		ieipl_max:'next_due_ieipl_max',
+		remarks:'next_due_remarks',
+		
+		
+		},
+		],
 	user:{
 		id:0,
         name:'',
@@ -479,2775 +732,3034 @@ interplex:{
 	configProductsFormat:[
 
 		{
-			label:'WIDTH UNIT',//input field label
-			name:'width_unit_org',//column name
+			label:'WIDTH',//input field label
+			name:'width',//column name
 			value:'',//default value
 			show:true,
-			disable:false,validationStatus:false,
+			disable:false,
+			validationStatus:false,
 			
 			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			},
+
 		{
-			label:'WIDTH MIN',//input field label
-			name:'width_min_spec_org',//column name
-			value:'2',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'', 
-			 validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'WIDTH MAX',//input field label
-			name:'width_max_spec_org',//column name
-			value:'5',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			// width_min_spec_org <= width_sup_one and width_sup_one <= width_max_spec_org
-			label:'WIDTH SUP ONE',//input field label
-			name:'width_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'' 
-		},
-		{
-			label:'WIDTH SUP TWO',//input field label
-			name:'width_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'WIDTH IELPL ONE',//input field label
-			name:'width_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'WIDTH IELPL TWO',//input field label
-			name:'width_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'WIDTH REMARKS',//input field label
-			name:'width_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS UNIT',//input field label
-			name:'thickness_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS MIN SPEC',//input field label
-			name:'thickness_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS MAX SPEC',//input field label
-			name:'thickness_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS SUP ONE',//input field label
-			name:'thickness_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS SUP TWO',//input field label
-			name:'thickness_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS IELPL ONE',//input field label
-			name:'thickness_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS IELPL TWO',//input field label
-			name:'thickness_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'THICKNESS REMARKS',//input field label
-			name:'thickness_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'HARDNESS UNIT',//input field label
-			name:'hardness_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'HARDNESS MIN SPEC',//input field label
-			name:'hardness_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'HARDNEWSS MAX SPEC',//input field label
-			name:'hardness_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'HARDNESS SUP ONE',//input field label
-			name:'hardness_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'HARDNEWSS SUP TWO',//input field label
-			name:'hardness_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		},
-		{
-			label:'HARDNESS IELPL ONE',//input field label
-			name:'hardness_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'HARNDESS IELPL TWO',//input field label
-			name:'hardness_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'HARDNESS REMARKS',//input field label
-			name:'hardness_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'ELONGATION UNIT',//input field label
-			name:'elongation_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'ELONGATION MIN SPEC',//input field label
-			name:'elongation_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'ELONGATION MAX SPEC',//input field label
-			name:'elongation_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'ELONGATION SUP ONE',//input field label
-			name:'elongation_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-	rule:'',
-	default:true,
-	note:'' 
-		}
-		,
-		{
-			label:'ELONGATION UNIT',//input field label
-			name:'elongation_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'WIDTH UNIT',//input field label
+		name:'width_unit_org',//column name
+		value:'',//default value
+		show:true,
+		disable:false,validationStatus:false,
+		
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'ELONGATION MIN SPEC',//input field label
-			name:'elongation_min_spec_org',//column name
-			value:'',//default value
+		label:'WIDTH MIN',//input field label
+		name:'width_min_spec_org',//column name
+		value:'2',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'', 
+		validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'WIDTH MAX',//input field label
+		name:'width_max_spec_org',//column name
+		value:'5',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		// width_min_spec_org <= width_sup_min and width_sup_min <= width_max_spec_org
+		label:'WIDTH SUP MIN',//input field label
+		name:'width_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'WIDTH SUP MAX',//input field label
+		name:'width_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'WIDTH IEIPL MIN',//input field label
+		name:'width_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'WIDTH IEIPL MAX',//input field label
+		name:'width_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'WIDTH REMARKS',//input field label
+		name:'width_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'THICKNESS',//input field label
+			name:'thickness',//column name
+			value:'THICKNESS',//default value
+			show:true,
+			disable:false,
+			validationStatus:false,
+			
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			},
+
+		{
+		label:'THICKNESS UNIT',//input field label
+		name:'thickness_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS MIN SPEC',//input field label
+		name:'thickness_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS MAX SPEC',//input field label
+		name:'thickness_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS SUP MIN',//input field label
+		name:'thickness_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS SUP MAX',//input field label
+		name:'thickness_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS IEIPL MIN',//input field label
+		name:'thickness_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS IEIPL MAX',//input field label
+		name:'thickness_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THICKNESS REMARKS',//input field label
+		name:'thickness_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'HARDNESS',//input field label
+			name:'hardness',//column name
+			value:'HARDNESS',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-		rule:'',
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			},
+			
+		{
+		label:'HARDNESS UNIT',//input field label
+		name:'hardness_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'ELONGATION MAX SPEC',//input field label
-			name:'elongation_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'HARDNESS MIN SPEC',//input field label
+		name:'hardness_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'ELONGATION SUP ONE',//input field label
-			name:'elongation_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'HARDNESS MAX SPEC',//input field label
+		name:'hardness_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'ELONGATION SUP TWO',//input field label
-			name:'elongation_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'HARDNESS SUP MIN',//input field label
+		name:'hardness_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'ELONGATION IELPL ONE',//input field label
-			name:'elongation_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'HARDNESS SUP MAX',//input field label
+		name:'hardness_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'HARDNESS IEIPL MIN',//input field label
+		name:'hardness_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'ELONGATION IELPL TWO',//input field label
-			name:'elongation_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'HARNDESS IEIPL MAX',//input field label
+		name:'hardness_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'ELONGATION REMARKS',//input field label
-			name:'elongation_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'HARDNESS REMARKS',//input field label
+		name:'hardness_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'TENSILE STR UNIT',//input field label
-			name:'tensile_str_unit_org',//column name
+			label:'ELONGATION',//input field label
+			name:'elongation',//column name
 			value:'',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-		rule:'',
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+	
+		,
+		{
+		label:'ELONGATION UNIT',//input field label
+		name:'elongation_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'TENSILE STR MIN SPEC',//input field label
-			name:'tensile_str_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION MIN SPEC',//input field label
+		name:'elongation_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'TENSILE STR MAX SPEC',//input field label
-			name:'tensile_str_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION MAX SPEC',//input field label
+		name:'elongation_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'TENSILE STR SUP ONE',//input field label
-			name:'tensile_str_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION SUP MIN',//input field label
+		name:'elongation_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'TENSILE STR UNIT',//input field label
-			name:'tensile_str_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION UNIT',//input field label
+		name:'elongation_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'TENSILE STR MIN SPEC',//input field label
-			name:'tensile_str_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION MIN SPEC',//input field label
+		name:'elongation_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'TENSILE STR MAX SPEC',//input field label
-			name:'tensile_str_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION MAX SPEC',//input field label
+		name:'elongation_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'TENSILE STR SUP ONE',//input field label
-			name:'tensile_str_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'ELONGATION SUP MIN',//input field label
+		name:'elongation_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'TENSILE STR SUP TWO',//input field label
-			name:'tensile_str_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'ELONGATION SUP MAX',//input field label
+		name:'elongation_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'TENSILE STR IELPL ONE',//input field label
-			name:'tensile_str_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'ELONGATION IEIPL MIN',//input field label
+		name:'elongation_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'TENSILE STR IELPL TWO',//input field label
-			name:'tensile_str_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'ELONGATION IEIPL MAX',//input field label
+		name:'elongation_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'TENSILE STR REMARKS',//input field label
-			name:'tensile_str_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'ELONGATION REMARKS',//input field label
+		name:'elongation_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'YEILD STR UNIT',//input field label
-			name:'yield_str_unit_org',//column name
-			value:'',//default value
+			label:'TENSILE STR',//input field label
+			name:'tensile_str',//column name
+			value:'TENSILE STR',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-		rule:'',
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'TENSILE STR UNIT',//input field label
+		name:'tensile_str_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'YEILD STR MIN SPEC',//input field label
-			name:'yield_str_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR MIN SPEC',//input field label
+		name:'tensile_str_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'YEILD STR MAX SPEC',//input field label
-			name:'yield_str_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR MAX SPEC',//input field label
+		name:'tensile_str_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'YEILD STR SUP ONE',//input field label
-			name:'yield_str_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR SUP MIN',//input field label
+		name:'tensile_str_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'YEILD STR UNIT',//input field label
-			name:'yield_str_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR UNIT',//input field label
+		name:'tensile_str_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'YEILD STR MIN SPEC',//input field label
-			name:'yield_str_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR MIN SPEC',//input field label
+		name:'tensile_str_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'YEILD STR MAX SPEC',//input field label
-			name:'yield_str_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR MAX SPEC',//input field label
+		name:'tensile_str_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'YEILD STR SUP ONE',//input field label
-			name:'yield_str_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'TENSILE STR SUP MIN',//input field label
+		name:'tensile_str_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'YEILD STR SUP TWO',//input field label
-			name:'yield_str_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'TENSILE STR SUP MAX',//input field label
+		name:'tensile_str_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'YEILD STR IELPL ONE',//input field label
-			name:'yield_str_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'TENSILE STR IEIPL MIN',//input field label
+		name:'tensile_str_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'YEILD STR IELPL TWO',//input field label
-			name:'yield_str_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'TENSILE STR IEIPL MAX',//input field label
+		name:'tensile_str_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'YEILD STR REMARKS',//input field label
-			name:'yield_str_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'TENSILE STR REMARKS',//input field label
+		name:'tensile_str_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'CU + SN + P UNIT',//input field label
-			name:'cu_sn_p_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR UNIT',//input field label
+		name:'yield_str_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'CU + SN + P MIN SPEC',//input field label
-			name:'cu_sn_p_min_spec_org',//column name
-			value:'',//default value
+			label:'YIELD STR',//input field label
+			name:'yield_str',//column name
+			value:'YIELD STR',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-		rule:'',
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		{
+		label:'YIELD STR MIN SPEC',//input field label
+		name:'yield_str_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'CU + SN + P MAX SPEC',//input field label
-			name:'cu_sn_p_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR MAX SPEC',//input field label
+		name:'yield_str_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'CU + SN + P SUP ONE',//input field label
-			name:'cu_sn_p_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR SUP MIN',//input field label
+		name:'yield_str_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'CU + SN + P UNIT',//input field label
-			name:'cu_sn_p_unit_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR UNIT',//input field label
+		name:'yield_str_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'CU + SN + P MIN SPEC',//input field label
-			name:'cu_sn_p_min_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR MIN SPEC',//input field label
+		name:'yield_str_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'CU + SN + P MAX SPEC',//input field label
-			name:'cu_sn_p_max_spec_org',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR MAX SPEC',//input field label
+		name:'yield_str_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'CU + SN + P SUP ONE',//input field label
-			name:'cu_sn_p_sup_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'YIELD STR SUP MIN',//input field label
+		name:'yield_str_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'CU + SN + P SUP TWO',//input field label
-			name:'cu_sn_p_sup_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'YIELD STR SUP MAX',//input field label
+		name:'yield_str_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-			label:'CU + SN + P IELPL ONE',//input field label
-			name:'cu_sn_p_ielpl_one',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'YIELD STR IEIPL MIN',//input field label
+		name:'yield_str_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'CU + SN + P IELPL TWO',//input field label
-			name:'cu_sn_p_ielpl_two',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:true,
-		rule:'',
+		label:'YIELD STR IEIPL MAX',//input field label
+		name:'yield_str_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		}
 		,
 		{
-			label:'CU + SN + P REMARKS',//input field label
-			name:'cu_sn_p_remarks',//column name
-			value:'',//default value
-			show:true,disable:false,validationStatus:false,
-			headerMap:'',  validation:false,
-		rule:'',
+		label:'YIELD STR REMARKS',//input field label
+		name:'yield_str_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
 		default:true,
 		note:'' 
 		},
 		{
-    label:'pb UNIT',//input field label
-    name:'pb_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'pb MIN SPEC',//input field label
-    name:'pb_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'pb MAX SPEC',//input field label
-    name:'pb_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'pb SUP ONE',//input field label
-    name:'pb_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'pb UNIT',//input field label
-    name:'pb_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'pb MIN SPEC',//input field label
-    name:'pb_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'pb MAX SPEC',//input field label
-    name:'pb_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'pb SUP ONE',//input field label
-    name:'pb_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'pb SUP TWO',//input field label
-    name:'pb_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'pb IELPL ONE',//input field label
-    name:'pb_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'pb IELPL TWO',//input field label
-    name:'pb_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'pb REMARKS',//input field label
-    name:'pb_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PB UNIT',//input field label
-    name:'pb_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PB MIN SPEC',//input field label
-    name:'pb_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PB MAX SPEC',//input field label
-    name:'pb_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PB SUP ONE',//input field label
-    name:'pb_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PB UNIT',//input field label
-    name:'pb_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PB MIN SPEC',//input field label
-    name:'pb_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PB MAX SPEC',//input field label
-    name:'pb_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PB SUP ONE',//input field label
-    name:'pb_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PB SUP TWO',//input field label
-    name:'pb_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PB IELPL ONE',//input field label
-    name:'pb_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PB IELPL TWO',//input field label
-    name:'pb_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PB REMARKS',//input field label
-    name:'pb_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'FE UNIT',//input field label
-    name:'fe_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'FE MIN SPEC',//input field label
-    name:'fe_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'FE MAX SPEC',//input field label
-    name:'fe_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'FE SUP ONE',//input field label
-    name:'fe_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'FE UNIT',//input field label
-    name:'fe_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'FE MIN SPEC',//input field label
-    name:'fe_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'FE MAX SPEC',//input field label
-    name:'fe_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'FE SUP ONE',//input field label
-    name:'fe_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'FE SUP TWO',//input field label
-    name:'fe_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'FE IELPL ONE',//input field label
-    name:'fe_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'FE IELPL TWO',//input field label
-    name:'fe_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'FE REMARKS',//input field label
-    name:'fe_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SN UNIT',//input field label
-    name:'sn_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SN MIN SPEC',//input field label
-    name:'sn_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SN MAX SPEC',//input field label
-    name:'sn_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SN SUP ONE',//input field label
-    name:'sn_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SN UNIT',//input field label
-    name:'sn_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SN MIN SPEC',//input field label
-    name:'sn_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SN MAX SPEC',//input field label
-    name:'sn_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SN SUP ONE',//input field label
-    name:'sn_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SN SUP TWO',//input field label
-    name:'sn_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SN IELPL ONE',//input field label
-    name:'sn_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SN IELPL TWO',//input field label
-    name:'sn_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SN REMARKS',//input field label
-    name:'sn_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'ZN UNIT',//input field label
-    name:'zn_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'ZN MIN SPEC',//input field label
-    name:'zn_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'ZN MAX SPEC',//input field label
-    name:'zn_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'ZN SUP ONE',//input field label
-    name:'zn_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'ZN UNIT',//input field label
-    name:'zn_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'ZN MIN SPEC',//input field label
-    name:'zn_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'ZN MAX SPEC',//input field label
-    name:'zn_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'ZN SUP ONE',//input field label
-    name:'zn_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'ZN SUP TWO',//input field label
-    name:'zn_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'ZN IELPL ONE',//input field label
-    name:'zn_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'ZN IELPL TWO',//input field label
-    name:'zn_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'ZN REMARKS',//input field label
-    name:'zn_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'P UNIT',//input field label
-    name:'p_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'P MIN SPEC',//input field label
-    name:'p_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'P MAX SPEC',//input field label
-    name:'p_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'P SUP ONE',//input field label
-    name:'p_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'P UNIT',//input field label
-    name:'p_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'P MIN SPEC',//input field label
-    name:'p_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'P MAX SPEC',//input field label
-    name:'p_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'P SUP ONE',//input field label
-    name:'p_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'P SUP TWO',//input field label
-    name:'p_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'P IELPL ONE',//input field label
-    name:'p_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'P IELPL TWO',//input field label
-    name:'p_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'P REMARKS',//input field label
-    name:'p_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PRE PLATING DETAILS UNIT',//input field label
-    name:'pre_plating_details_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PRE PLATING DETAILS MIN SPEC',//input field label
-    name:'pre_plating_details_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PRE PLATING DETAILS MAX SPEC',//input field label
-    name:'pre_plating_details_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PRE PLATING DETAILS SUP ONE',//input field label
-    name:'pre_plating_details_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PRE PLATING DETAILS UNIT',//input field label
-    name:'pre_plating_details_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PRE PLATING DETAILS MIN SPEC',//input field label
-    name:'pre_plating_details_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PRE PLATING DETAILS MAX SPEC',//input field label
-    name:'pre_plating_details_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PRE PLATING DETAILS SUP ONE',//input field label
-    name:'pre_plating_details_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PRE PLATING DETAILS SUP TWO',//input field label
-    name:'pre_plating_details_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'PRE PLATING DETAILS IELPL ONE',//input field label
-    name:'pre_plating_details_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PRE PLATING DETAILS IELPL TWO',//input field label
-    name:'pre_plating_details_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'PRE PLATING DETAILS REMARKS',//input field label
-    name:'pre_plating_details_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SLITTING BURR UNIT',//input field label
-    name:'elongation_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SLITTING BURR MIN SPEC',//input field label
-    name:'elongation_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SLITTING BURR MAX SPEC',//input field label
-    name:'elongation_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SLITTING BURR SUP ONE',//input field label
-    name:'elongation_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SLITTING BURR UNIT',//input field label
-    name:'elongation_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SLITTING BURR MIN SPEC',//input field label
-    name:'slitting_burr_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SLITTING BURR MAX SPEC',//input field label
-    name:'elongation_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SLITTING BURR SUP ONE',//input field label
-    name:'elongation_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SLITTING BURR SUP TWO',//input field label
-    name:'elongation_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SLITTING BURR IELPL ONE',//input field label
-    name:'elongation_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SLITTING BURR IELPL TWO',//input field label
-    name:'elongation_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SLITTING BURR REMARKS',//input field label
-    name:'elongation_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'TWIST UNIT',//input field label
-    name:'twist_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'TWIST MIN SPEC',//input field label
-    name:'twist_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'TWIST MAX SPEC',//input field label
-    name:'twist_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'TWIST SUP ONE',//input field label
-    name:'twist_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'TWIST UNIT',//input field label
-    name:'twist_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'TWIST MIN SPEC',//input field label
-    name:'twist_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'TWIST MAX SPEC',//input field label
-    name:'twist_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'TWIST SUP ONE',//input field label
-    name:'twist_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'TWIST SUP TWO',//input field label
-    name:'twist_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'TWIST IELPL ONE',//input field label
-    name:'twist_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'TWIST IELPL TWO',//input field label
-    name:'twist_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'TWIST REMARKS',//input field label
-    name:'twist_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'CAMBER UNIT',//input field label
-    name:'camber_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'CAMBER MIN SPEC',//input field label
-    name:'camber_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'CAMBER MAX SPEC',//input field label
-    name:'camber_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'CAMBER SUP ONE',//input field label
-    name:'camber_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'CAMBER UNIT',//input field label
-    name:'camber_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'CAMBER MIN SPEC',//input field label
-    name:'camber_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'CAMBER MAX SPEC',//input field label
-    name:'camber_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'CAMBER SUP ONE',//input field label
-    name:'camber_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'CAMBER SUP TWO',//input field label
-    name:'camber_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'CAMBER IELPL ONE',//input field label
-    name:'camber_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'CAMBER IELPL TWO',//input field label
-    name:'camber_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'CAMBER REMARKS',//input field label
-    name:'camber_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SURFACE  FINISH UNIT',//input field label
-    name:'surface_finish_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SURFACE  FINISH MIN SPEC',//input field label
-    name:'surface_finish_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SURFACE  FINISH MAX SPEC',//input field label
-    name:'surface_finish_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SURFACE  FINISH SUP ONE',//input field label
-    name:'surface_finish_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SURFACE  FINISH UNIT',//input field label
-    name:'surface_finish_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SURFACE  FINISH MIN SPEC',//input field label
-    name:'surface_finish_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SURFACE  FINISH MAX SPEC',//input field label
-    name:'surface_finish_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SURFACE  FINISH SUP ONE',//input field label
-    name:'surface_finish_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SURFACE  FINISH SUP TWO',//input field label
-    name:'surface_finish_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'SURFACE  FINISH IELPL ONE',//input field label
-    name:'surface_finish_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SURFACE  FINISH IELPL TWO',//input field label
-    name:'surface_finish_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'SURFACE  FINISH REMARKS',//input field label
-    name:'surface_finish_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'THER CONDUCT UNIT',//input field label
-    name:'ther_conduct_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'THER CONDUCT MIN SPEC',//input field label
-    name:'ther_conduct_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'THER CONDUCT MAX SPEC',//input field label
-    name:'ther_conduct_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'THER CONDUCT SUP ONE',//input field label
-    name:'ther_conduct_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'THER CONDUCT UNIT',//input field label
-    name:'ther_conduct_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'THER CONDUCT MIN SPEC',//input field label
-    name:'ther_conduct_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'THER CONDUCT MAX SPEC',//input field label
-    name:'ther_conduct_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'THER CONDUCT SUP ONE',//input field label
-    name:'ther_conduct_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'THER CONDUCT SUP TWO',//input field label
-    name:'ther_conduct_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'THER CONDUCT IELPL ONE',//input field label
-    name:'ther_conduct_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'THER CONDUCT IELPL TWO',//input field label
-    name:'ther_conduct_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'THER CONDUCT REMARKS',//input field label
-    name:'ther_conduct_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'DENSITY UNIT',//input field label
-    name:'density_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'DENSITY MIN SPEC',//input field label
-    name:'density_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'DENSITY MAX SPEC',//input field label
-    name:'density_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'DENSITY SUP ONE',//input field label
-    name:'density_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'DENSITY UNIT',//input field label
-    name:'density_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'DENSITY MIN SPEC',//input field label
-    name:'density_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'DENSITY MAX SPEC',//input field label
-    name:'density_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'DENSITY SUP ONE',//input field label
-    name:'density_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'DENSITY SUP TWO',//input field label
-    name:'density_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'DENSITY IELPL ONE',//input field label
-    name:'density_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'DENSITY IELPL TWO',//input field label
-    name:'density_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'DENSITY REMARKS',//input field label
-    name:'density_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL WEIGHT UNIT',//input field label
-    name:'coil_weight_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL WEIGHT MIN SPEC',//input field label
-    name:'coil_weight_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL WEIGHT MAX SPEC',//input field label
-    name:'coil_weight_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL WEIGHT SUP ONE',//input field label
-    name:'coil_weight_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL WEIGHT UNIT',//input field label
-    name:'coil_weight_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL WEIGHT MIN SPEC',//input field label
-    name:'coil_weight_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL WEIGHT MAX SPEC',//input field label
-    name:'coil_weight_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL WEIGHT SUP ONE',//input field label
-    name:'coil_weight_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL WEIGHT SUP TWO',//input field label
-    name:'coil_weight_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL WEIGHT IELPL ONE',//input field label
-    name:'coil_weight_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL WEIGHT IELPL TWO',//input field label
-    name:'coil_weight_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL WEIGHT REMARKS',//input field label
-    name:'coil_weight_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL  ID:300MM OD:900MM UNIT',//input field label
-    name:'coil_300mm_900mm_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL  ID:300MM OD:900MM MIN SPEC',//input field label
-    name:'coil_300mm_900mm_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL  ID:300MM OD:900MM MAX SPEC',//input field label
-    name:'coil_300mm_900mm_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL  ID:300MM OD:900MM SUP ONE',//input field label
-    name:'coil_300mm_900mm_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL  ID:300MM OD:900MM UNIT',//input field label
-    name:'coil_300mm_900mm_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL  ID:300MM OD:900MM MIN SPEC',//input field label
-    name:'coil_300mm_900mm_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL  ID:300MM OD:900MM MAX SPEC',//input field label
-    name:'coil_300mm_900mm_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL  ID:300MM OD:900MM SUP ONE',//input field label
-    name:'coil_300mm_900mm_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL  ID:300MM OD:900MM SUP TWO',//input field label
-    name:'coil_300mm_900mm_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'COIL  ID:300MM OD:900MM IELPL ONE',//input field label
-    name:'coil_300mm_900mm_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL  ID:300MM OD:900MM IELPL TWO',//input field label
-    name:'coil_300mm_900mm_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'COIL  ID:300MM OD:900MM REMARKS',//input field label
-    name:'coil_300mm_900mm_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'NEXT DUE UNIT',//input field label
-    name:'next_due_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'NEXT DUE MIN SPEC',//input field label
-    name:'next_due_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'NEXT DUE MAX SPEC',//input field label
-    name:'next_due_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'NEXT DUE SUP ONE',//input field label
-    name:'next_due_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'NEXT DUE UNIT',//input field label
-    name:'next_due_unit_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'NEXT DUE MIN SPEC',//input field label
-    name:'next_due_min_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'NEXT DUE MAX SPEC',//input field label
-    name:'next_due_max_spec_org',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'NEXT DUE SUP ONE',//input field label
-    name:'next_due_sup_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'NEXT DUE SUP TWO',//input field label
-    name:'next_due_sup_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-},
-{
-    label:'NEXT DUE IELPL ONE',//input field label
-    name:'next_due_ielpl_one',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'NEXT DUE IELPL TWO',//input field label
-    name:'next_due_ielpl_two',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:true,
-rule:'',
-default:true,
-note:'' 
-}
-,
-{
-    label:'NEXT DUE REMARKS',//input field label
-    name:'next_due_remarks',//column name
-    value:'',//default value
-    show:true,disable:false,validationStatus:false,
-    headerMap:'',  validation:false,
-rule:'',
-default:true,
-note:'' 
-}
-	],
+			label:'CU',//input field label
+			name:'cu',//column name
+			value:'CU',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		{
+		label:'CU  UNIT',//input field label
+		name:'cu_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CU  MIN SPEC',//input field label
+		name:'cu_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CU  MAX SPEC',//input field label
+		name:'cu_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CU  SUP MIN',//input field label
+		name:'cu_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CU  UNIT',//input field label
+		name:'cu_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CU  MIN SPEC',//input field label
+		name:'cu_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CU  MAX SPEC',//input field label
+		name:'cu_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CU SUP MIN',//input field label
+		name:'cu_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CU SUP MAX',//input field label
+		name:'cu_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CU IEIPL MIN',//input field label
+		name:'cu_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CU  IEIPL MAX',//input field label
+		name:'cu_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CU  REMARKS',//input field label
+		name:'cu_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'PB',//input field label
+			name:'pb',//column name
+			value:'PB',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'pb UNIT',//input field label
+		name:'pb_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'pb MIN SPEC',//input field label
+		name:'pb_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'pb MAX SPEC',//input field label
+		name:'pb_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'pb SUP MIN',//input field label
+		name:'pb_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'pb UNIT',//input field label
+		name:'pb_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'pb MIN SPEC',//input field label
+		name:'pb_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'pb MAX SPEC',//input field label
+		name:'pb_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'pb SUP MIN',//input field label
+		name:'pb_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'pb SUP MAX',//input field label
+		name:'pb_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'pb IEIPL MIN',//input field label
+		name:'pb_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'pb IEIPL MAX',//input field label
+		name:'pb_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'pb REMARKS',//input field label
+		name:'pb_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PB UNIT',//input field label
+		name:'pb_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PB MIN SPEC',//input field label
+		name:'pb_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PB MAX SPEC',//input field label
+		name:'pb_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PB SUP MIN',//input field label
+		name:'pb_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PB UNIT',//input field label
+		name:'pb_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PB MIN SPEC',//input field label
+		name:'pb_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PB MAX SPEC',//input field label
+		name:'pb_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PB SUP MIN',//input field label
+		name:'pb_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PB SUP MAX',//input field label
+		name:'pb_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PB IEIPL MIN',//input field label
+		name:'pb_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PB IEIPL MAX',//input field label
+		name:'pb_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PB REMARKS',//input field label
+		name:'pb_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'FE',//input field label
+			name:'fe',//column name
+			value:'FE',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			},
+		{
+		label:'FE UNIT',//input field label
+		name:'fe_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'FE MIN SPEC',//input field label
+		name:'fe_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'FE MAX SPEC',//input field label
+		name:'fe_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'FE SUP MIN',//input field label
+		name:'fe_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'FE UNIT',//input field label
+		name:'fe_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'FE MIN SPEC',//input field label
+		name:'fe_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'FE MAX SPEC',//input field label
+		name:'fe_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'FE SUP MIN',//input field label
+		name:'fe_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'FE SUP MAX',//input field label
+		name:'fe_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'FE IEIPL MIN',//input field label
+		name:'fe_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'FE IEIPL MAX',//input field label
+		name:'fe_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'FE REMARKS',//input field label
+		name:'fe_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'SN',//input field label
+			name:'sn',//column name
+			value:'SN',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+	,
+		{
+		label:'SN UNIT',//input field label
+		name:'sn_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SN MIN SPEC',//input field label
+		name:'sn_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SN MAX SPEC',//input field label
+		name:'sn_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SN SUP MIN',//input field label
+		name:'sn_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SN UNIT',//input field label
+		name:'sn_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SN MIN SPEC',//input field label
+		name:'sn_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SN MAX SPEC',//input field label
+		name:'sn_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SN SUP MIN',//input field label
+		name:'sn_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SN SUP MAX',//input field label
+		name:'sn_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SN IEIPL MIN',//input field label
+		name:'sn_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SN IEIPL MAX',//input field label
+		name:'sn_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SN REMARKS',//input field label
+		name:'sn_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'ZN',//input field label
+			name:'zn',//column name
+			value:'ZN',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'ZN UNIT',//input field label
+		name:'zn_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'ZN MIN SPEC',//input field label
+		name:'zn_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'ZN MAX SPEC',//input field label
+		name:'zn_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'ZN SUP MIN',//input field label
+		name:'zn_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'ZN UNIT',//input field label
+		name:'zn_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'ZN MIN SPEC',//input field label
+		name:'zn_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'ZN MAX SPEC',//input field label
+		name:'zn_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'ZN SUP MIN',//input field label
+		name:'zn_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'ZN SUP MAX',//input field label
+		name:'zn_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'ZN IEIPL MIN',//input field label
+		name:'zn_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'ZN IEIPL MAX',//input field label
+		name:'zn_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'ZN REMARKS',//input field label
+		name:'zn_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'P',//input field label
+			name:'p',//column name
+			value:'P',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		{
+		label:'P UNIT',//input field label
+		name:'p_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'P MIN SPEC',//input field label
+		name:'p_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'P MAX SPEC',//input field label
+		name:'p_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'P SUP MIN',//input field label
+		name:'p_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'P UNIT',//input field label
+		name:'p_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'P MIN SPEC',//input field label
+		name:'p_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'P MAX SPEC',//input field label
+		name:'p_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'P SUP MIN',//input field label
+		name:'p_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'P SUP MAX',//input field label
+		name:'p_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'P IEIPL MIN',//input field label
+		name:'p_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'P IEIPL MAX',//input field label
+		name:'p_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'P REMARKS',//input field label
+		name:'p_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'PRE PLATING DETAILS',//input field label
+			name:'pre_plating_details',//column name
+			value:'PRE PLATING DETAILS',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'PRE PLATING DETAILS UNIT',//input field label
+		name:'pre_plating_details_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PRE PLATING DETAILS MIN SPEC',//input field label
+		name:'pre_plating_details_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PRE PLATING DETAILS MAX SPEC',//input field label
+		name:'pre_plating_details_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PRE PLATING DETAILS SUP MIN',//input field label
+		name:'pre_plating_details_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PRE PLATING DETAILS UNIT',//input field label
+		name:'pre_plating_details_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PRE PLATING DETAILS MIN SPEC',//input field label
+		name:'pre_plating_details_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PRE PLATING DETAILS MAX SPEC',//input field label
+		name:'pre_plating_details_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PRE PLATING DETAILS SUP MIN',//input field label
+		name:'pre_plating_details_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PRE PLATING DETAILS SUP MAX',//input field label
+		name:'pre_plating_details_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'PRE PLATING DETAILS IEIPL MIN',//input field label
+		name:'pre_plating_details_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PRE PLATING DETAILS IEIPL MAX',//input field label
+		name:'pre_plating_details_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'PRE PLATING DETAILS REMARKS',//input field label
+		name:'pre_plating_details_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'SLITTING BURR',//input field label
+			name:'slitting_burr',//column name
+			value:'SLITTING BURR',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'SLITTING BURR UNIT',//input field label
+		name:'slitting_burr_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SLITTING BURR MIN SPEC',//input field label
+		name:'slitting_burr_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SLITTING BURR MAX SPEC',//input field label
+		name:'slitting_burr_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SLITTING BURR SUP MIN',//input field label
+		name:'slitting_burr_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SLITTING BURR UNIT',//input field label
+		name:'slitting_burr_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SLITTING BURR MIN SPEC',//input field label
+		name:'slitting_burr_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SLITTING BURR MAX SPEC',//input field label
+		name:'slitting_burr_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SLITTING BURR SUP MIN',//input field label
+		name:'slitting_burr_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SLITTING BURR SUP MAX',//input field label
+		name:'slitting_burr_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SLITTING BURR IEIPL MIN',//input field label
+		name:'slitting_burr_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SLITTING BURR IEIPL MAX',//input field label
+		name:'slitting_burr_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SLITTING BURR REMARKS',//input field label
+		name:'slitting_burr_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'TWIST',//input field label
+			name:'twist',//column name
+			value:'TWIST',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		{
+		label:'TWIST UNIT',//input field label
+		name:'twist_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'TWIST MIN SPEC',//input field label
+		name:'twist_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'TWIST MAX SPEC',//input field label
+		name:'twist_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'TWIST SUP MIN',//input field label
+		name:'twist_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'TWIST UNIT',//input field label
+		name:'twist_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'TWIST MIN SPEC',//input field label
+		name:'twist_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'TWIST MAX SPEC',//input field label
+		name:'twist_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'TWIST SUP MIN',//input field label
+		name:'twist_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'TWIST SUP MAX',//input field label
+		name:'twist_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'TWIST IEIPL MIN',//input field label
+		name:'twist_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'TWIST IEIPL MAX',//input field label
+		name:'twist_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'TWIST REMARKS',//input field label
+		name:'twist_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'CAMBER',//input field label
+			name:'camber',//column name
+			value:'CAMBER',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'CAMBER UNIT',//input field label
+		name:'camber_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CAMBER MIN SPEC',//input field label
+		name:'camber_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CAMBER MAX SPEC',//input field label
+		name:'camber_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CAMBER SUP MIN',//input field label
+		name:'camber_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CAMBER UNIT',//input field label
+		name:'camber_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CAMBER MIN SPEC',//input field label
+		name:'camber_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CAMBER MAX SPEC',//input field label
+		name:'camber_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CAMBER SUP MIN',//input field label
+		name:'camber_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CAMBER SUP MAX',//input field label
+		name:'camber_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'CAMBER IEIPL MIN',//input field label
+		name:'camber_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CAMBER IEIPL MAX',//input field label
+		name:'camber_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'CAMBER REMARKS',//input field label
+		name:'camber_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'SURFACE FINISH',//input field label
+			name:'surface_finish',//column name
+			value:'SURFACE FINISH',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'SURFACE  FINISH UNIT',//input field label
+		name:'surface_finish_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SURFACE  FINISH MIN SPEC',//input field label
+		name:'surface_finish_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SURFACE  FINISH MAX SPEC',//input field label
+		name:'surface_finish_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SURFACE  FINISH SUP MIN',//input field label
+		name:'surface_finish_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SURFACE  FINISH UNIT',//input field label
+		name:'surface_finish_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SURFACE  FINISH MIN SPEC',//input field label
+		name:'surface_finish_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SURFACE  FINISH MAX SPEC',//input field label
+		name:'surface_finish_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SURFACE  FINISH SUP MIN',//input field label
+		name:'surface_finish_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SURFACE  FINISH SUP MAX',//input field label
+		name:'surface_finish_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'SURFACE  FINISH IEIPL MIN',//input field label
+		name:'surface_finish_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SURFACE  FINISH IEIPL MAX',//input field label
+		name:'surface_finish_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'SURFACE  FINISH REMARKS',//input field label
+		name:'surface_finish_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'THER CONDUCT',//input field label
+			name:'ther_conduct',//column name
+			value:'THER CONDUCT',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'THER CONDUCT UNIT',//input field label
+		name:'ther_conduct_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'THER CONDUCT MIN SPEC',//input field label
+		name:'ther_conduct_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'THER CONDUCT MAX SPEC',//input field label
+		name:'ther_conduct_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'THER CONDUCT SUP MIN',//input field label
+		name:'ther_conduct_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'THER CONDUCT UNIT',//input field label
+		name:'ther_conduct_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THER CONDUCT MIN SPEC',//input field label
+		name:'ther_conduct_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THER CONDUCT MAX SPEC',//input field label
+		name:'ther_conduct_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THER CONDUCT SUP MIN',//input field label
+		name:'ther_conduct_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THER CONDUCT SUP MAX',//input field label
+		name:'ther_conduct_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'THER CONDUCT IEIPL MIN',//input field label
+		name:'ther_conduct_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'THER CONDUCT IEIPL MAX',//input field label
+		name:'ther_conduct_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'THER CONDUCT REMARKS',//input field label
+		name:'ther_conduct_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'DENSITY',//input field label
+			name:'density',//column name
+			value:'DENSITY',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+	
+		{
+		label:'DENSITY UNIT',//input field label
+		name:'density_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'DENSITY MIN SPEC',//input field label
+		name:'density_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'DENSITY MAX SPEC',//input field label
+		name:'density_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'DENSITY SUP MIN',//input field label
+		name:'density_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'DENSITY UNIT',//input field label
+		name:'density_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'DENSITY MIN SPEC',//input field label
+		name:'density_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'DENSITY MAX SPEC',//input field label
+		name:'density_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'DENSITY SUP MIN',//input field label
+		name:'density_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'DENSITY SUP MAX',//input field label
+		name:'density_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'DENSITY IEIPL MIN',//input field label
+		name:'density_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'DENSITY IEIPL MAX',//input field label
+		name:'density_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'DENSITY REMARKS',//input field label
+		name:'density_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'COIL WEIGHT',//input field label
+			name:'coil_weight',//column name
+			value:'COIL WEIGHT',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		{
+		label:'COIL WEIGHT UNIT',//input field label
+		name:'coil_weight_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL WEIGHT MIN SPEC',//input field label
+		name:'coil_weight_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL WEIGHT MAX SPEC',//input field label
+		name:'coil_weight_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL WEIGHT SUP MIN',//input field label
+		name:'coil_weight_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL WEIGHT UNIT',//input field label
+		name:'coil_weight_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL WEIGHT MIN SPEC',//input field label
+		name:'coil_weight_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL WEIGHT MAX SPEC',//input field label
+		name:'coil_weight_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL WEIGHT SUP MIN',//input field label
+		name:'coil_weight_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL WEIGHT SUP MAX',//input field label
+		name:'coil_weight_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL WEIGHT IEIPL MIN',//input field label
+		name:'coil_weight_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL WEIGHT IEIPL MAX',//input field label
+		name:'coil_weight_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL WEIGHT REMARKS',//input field label
+		name:'coil_weight_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'COIL',//input field label
+			name:'coil_300mm_900mm',//column name
+			value:'COIL',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL ID:300MIN OD:900MAX ',//input field label
+		name:'coil_300mm_900mm_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL ID:300MIN OD:900MAX',//input field label
+		name:'coil_300mm_900mm_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'COIL ID:300MIN OD:900MM IEIPL MIN',//input field label
+		name:'coil_300mm_900mm_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL ID:300MIN OD:900MM IEIPL MAX',//input field label
+		name:'coil_300mm_900mm_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'COIL ID:300MIN OD:900MM REMARKS',//input field label
+		name:'coil_300mm_900mm_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+			label:'Next Due For third party validation',//input field label
+			name:'next_due',//column name
+			value:'Next Due For third party validation',//default value
+			show:true,disable:false,validationStatus:false,
+			headerMap:'',  validation:false,
+			rule:'',colspan:1,
+			default:true,
+			note:'' 
+			}
+			,
+		{
+		label:'NEXT DUE UNIT',//input field label
+		name:'next_due_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'NEXT DUE MIN SPEC',//input field label
+		name:'next_due_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'NEXT DUE MAX SPEC',//input field label
+		name:'next_due_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'NEXT DUE SUP MIN',//input field label
+		name:'next_due_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'NEXT DUE UNIT',//input field label
+		name:'next_due_unit_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'NEXT DUE MIN SPEC',//input field label
+		name:'next_due_min_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'NEXT DUE MAX SPEC',//input field label
+		name:'next_due_max_spec_org',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'NEXT DUE SUP MIN',//input field label
+		name:'next_due_sup_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'NEXT DUE SUP MAX',//input field label
+		name:'next_due_sup_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		},
+		{
+		label:'NEXT DUE IEIPL MIN',//input field label
+		name:'next_due_ieipl_min',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'NEXT DUE IEIPL MAX',//input field label
+		name:'next_due_ieipl_max',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:true,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		,
+		{
+		label:'NEXT DUE REMARKS',//input field label
+		name:'next_due_remarks',//column name
+		value:'',//default value
+		show:true,disable:false,validationStatus:false,
+		headerMap:'',  validation:false,
+		rule:'',colspan:1,
+		default:true,
+		note:'' 
+		}
+		],
 	configHeaderFormat:[
 
 		{
-			label:'Supplier Name',//input field label
+			label:'SUPPLIER',//input field label
 			name:'supplier_name',//column name
 			value:'',//default value
 			show:true,
@@ -3257,7 +3769,7 @@ note:''
 			note:''
 		},
 		{
-			label:'Product Name',//input field label
+			label:'PRODUCT NAME',//input field label
 			name:'product_name',//column name
 			value:'',//default value
 			show:true,
@@ -3270,7 +3782,7 @@ note:''
 	
 
 		{
-			label:'Invoice No',//input field label
+			label:'INVOICE / DC #',//input field label
 			name:'invoice_no',//column name
 			value:'',//default value
 			show:true,
@@ -3281,7 +3793,7 @@ note:''
 
 		},
 		{
-			label:'Invoice Date',//input field label
+			label:'INVOICE / DC DATE',//input field label
 			name:'invoice_date',//column name
 			value:'',//default value
 			show:true,
@@ -3292,7 +3804,7 @@ note:''
 
 		},
 		{
-			label:'Invoice Qty',//input field label
+			label:'INVOICE QTY',//input field label
 			name:'invoice_qty',//column name
 			value:'',//default value
 			show:true,
@@ -3302,8 +3814,9 @@ note:''
 			note:'No Need to Map'
 
 		},
+
 		{
-			label:'ir',//input field label
+			label:'IR #',//input field label
 			name:'ir',//column name
 			value:'',//default value
 			show:true,
@@ -3313,7 +3826,7 @@ note:''
 			note:''
 		},
 		{
-			label:'grn_no',//input field label
+			label:'GRN NO',//input field label
 			name:'grn_no',//column name
 			value:'',//default value
 			show:true,
@@ -3324,7 +3837,7 @@ note:''
 
 		},
 		{
-			label:'grn_date',//input field label
+			label:'GRN DATE',//input field label
 			name:'grn_date',//column name
 			value:'',//default value
 			show:true,
@@ -3334,7 +3847,7 @@ note:''
 			note:''
 		},
 		{
-			label:'rmcode',//input field label
+			label:'R/M CODE',//input field label
 			name:'rmcode',//column name
 			value:'',//default value
 			show:true,
@@ -3343,7 +3856,7 @@ note:''
 			default:true,
 			note:''
 		},		{
-			label:'eds',//input field label
+			label:'EDS /Q /P #',//input field label
 			name:'eds',//column name
 			value:'',//default value
 			show:true,
@@ -3351,8 +3864,19 @@ note:''
 			mapFrom:'header',//header or product
 			default:true,
 			note:''
-		},		{
-			label:'rm',//input field label
+		},		
+		{
+			label:'DATE',//input field label
+			name:'DATE',//column name
+			value:moment().format("YYYY-MM-DD"),//default value
+			show:true,
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
+		},
+{
+			label:'R/M',//input field label
 			name:'rm',//column name
 			value:'',//default value
 			show:true,
@@ -3361,7 +3885,7 @@ note:''
 			default:true,
 			note:''
 		},		{
-			label:'received_qty',//input field label
+			label:'RECEIVED QTY',//input field label
 			name:'received_qty',//column name
 			value:'',//default value
 			show:true,
@@ -3375,7 +3899,7 @@ note:''
 	],
 	configQasForm2Format:[
 
-			{
+		{
 			label:'Coil # Batch No',//input field label
 			name:'batch_no',//column name
 			value:'',//default value
@@ -3415,8 +3939,8 @@ note:''
 
 		},
 		{
-			label:'Width One',//input field label
-			name:'width_one',//column name
+			label:'Width Min',//input field label
+			name:'width_min',//column name
 			value:'',//default value
 			show:true,
 			map:'',
@@ -3428,8 +3952,8 @@ note:''
 
 		},
 		{
-			label:'Width Two',//input field label
-			name:'width_two',//column name
+			label:'Width Max',//input field label
+			name:'width_max',//column name
 			value:'',//default value
 			show:true,
 			map:'',
@@ -3440,8 +3964,8 @@ note:''
 			rule:'',
 
 		},		{
-			label:'Thick One',//input field label
-			name:'thick_one',//column name
+			label:'Thick Min',//input field label
+			name:'thick_min',//column name
 			value:'',//default value
 			show:true,
 			map:'',
@@ -3453,8 +3977,8 @@ note:''
 
 		},				
 		{
-			label:'Thick Two',//input field label
-			name:'thick_two',//column name
+			label:'Thick Max',//input field label
+			name:'thick_max',//column name
 			value:'',//default value
 			show:true,
 			map:'',
@@ -3476,7 +4000,7 @@ note:''
 			default:true,
 			note:'For Overall Verification from qasform1',
 			validation:false,
-			rule:'width_sup_one <= width_one <= width_sup_two',
+			rule:'width_sup_min <= width_min <= width_sup_max',
 
 		},
 

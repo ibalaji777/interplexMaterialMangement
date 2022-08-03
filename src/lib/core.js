@@ -990,3 +990,169 @@ return qasOne;
 //   }
 
 }
+
+
+const defaultInvoice={
+  qasForm1Prod:[],
+  ref:'',
+  invoice_client_id:'',
+  gallery:[],
+  remarks:'',
+  operator_id:store.state.interplex.user.id || 0,
+  supplier_name:'',
+  invoice_no:'',
+  invoice_date:'',
+  invoice_qty:0,
+  ir:'',
+  date : moment().format(store.state.dateFormat),
+  grn_no : "",
+  grn_date : moment().format(store.state.dateFormat),
+  rmcode : "",
+  eds : "",
+  rm : "",
+  received_qty : 0,
+  product_name : "",
+  form_format : "",
+  comment : "",
+  duedate : moment().format(store.state.dateFormat),
+  observation_format : [],
+  header_format : [],
+  status : "pending",
+  approved_by : 0,
+  qasForm1New:[],
+}
+
+
+export function setHeaderConfigData(headerData,invoice){
+ return _.map(headerData, header => {
+    invoice[header.name] = header.value;
+    return header;
+});
+
+}
+
+export async function  submit($vm) {
+   var invoices = [];
+  var user_id = $vm.$store.state.interplex.user.id;
+   _.each($vm.tempInvoice, (val, key) => {
+//*********set defualt invoice format and uniquie id for each invoice**********************
+    var invoice = defaultInvoice;
+       const uuid = uuidv4();
+      const qasForm1Prod = _.cloneDeep(
+          _.filter(
+              $vm.getQualityAssuranceFormOne,
+              product => product.ref == key
+          )
+      );
+ 
+//***************************Asign invoice Values here**********************
+  
+      invoice["qasForm1Prod"] = _.map(qasForm1Prod,x => ({...x,invoice_client_id:uuid}));
+      invoice["ref"] = key;
+      invoice["invoice_client_id"] = uuid;
+      invoice["gallery"] = _.map(val["gallery"], x => ({...x,invoice_client_id:uuid}));
+      invoice["remarks"] = val["remarks"];
+
+      if (qasForm1Prod.length != 0) {
+//********************set Header config into invoice****************************
+          var headerData = qasForm1Prod[0].headerConfigFormat;
+          invoice=setQasHeader(invoice,headerData)
+          // invoice=setHeaderConfigData(headerData,invoice)
+//********************Create QASForm1 config into invoice****************************
+invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
+              var object = {};
+              object["batch"] = "";
+              object["skiplevel_status"] = product.skiplevel_status;
+              object["sk_index"] = product.sk_index;
+              object["sk_order"] = product.sk_order;
+              object["invoice_client_id"] =uuid;
+              object["observation_format"] =
+              product.productConfigFormat;
+              object["header_format"] = product.headerConfigFormat;
+              object=setQasHeader(object,product.headerConfigFormat)
+              // object=setHeaderConfigData(product.headerConfigFormat,object)
+
+//********************Create QASForm2 config into invoice****************************
+              object["qasForm2New"] = _.map(
+                  product.qasForm2,
+                  qasform2 => {
+                      qasform2["invoice_client_id"] =invoice["invoice_client_id"];
+                      return qasform2;
+                  }
+              );
+              return { ...object, operator_id: user_id };
+          });
+      }
+
+      invoices.push(invoice);
+
+  });
+
+  $vm.$alert("Saved");
+//---------------------------------------------------
+  console.log("+++Invoices Gallery+++", invoices);
+ // ----------------
+
+var new_invoices=_.map(invoices,(invoice)=>{
+
+invoice.qasForm1New= _.map(invoice.qasForm1New,(qsform1)=>{
+
+var qasformone=setQasHeader(qsform1,qsform1.header_format)
+return qasformone
+
+})
+return invoice
+})
+
+console.log(new_invoices)
+
+
+  var result = await $vm.$store.dispatch("submitInvoice", new_invoices);
+  var blobInvoices = _.map(new_invoices, invoice => {
+      invoice["gallery"] = _.map(invoice.gallery, async image => {
+          var formdata = new FormData();
+          // image['invoice_client_id']=invoice['invoice_client_id'];
+          image["invoice_table_id"] = 0;
+          var invoiceFilter = _.filter(
+              result,
+              ob => ob.invoice_client_id == image.invoice_client_id
+          );
+          if (invoiceFilter.length != 0)
+              image["invoice_table_id"] = invoiceFilter[0].id;
+
+          // formdata.append('invoice_table_id',image['invoice_table_id'])
+          formdata.append(
+              "invoice_table_id",
+              image["invoice_table_id"]
+          );
+          formdata.append(
+              "invoice_client_id",
+              image["invoice_client_id"]
+          );
+          formdata.append("invoice_no", invoice["invoice_no"]);
+          formdata.append("file_type", image["file_type"]);
+
+          formdata.append(
+              "file",
+              base64toBlob(image.src.split(",")[1])
+          );
+
+          await $vm.$store.dispatch("upload", formdata);
+
+          // files.push(image)
+          return image;
+      });
+      return invoice;
+  });
+  // -----------------
+  // _.map(blobInvoices,(rt)=>{
+  //  rt['invoice_table_id']=0;
+  // var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==rt.invoice_client_id)
+  // if(invoiceFilter.length!=0)
+  // rt['invoice_table_id']=invoiceFilter[0].id
+
+  // })
+
+  // console.log("++++++invoices++++",invoices)
+  $vm.clear();
+}

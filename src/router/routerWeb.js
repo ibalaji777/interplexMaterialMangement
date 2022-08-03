@@ -64,7 +64,7 @@ const routes = [
 	{
 		path: '/',
 		name: 'index',
-		component:branches 
+		component:branches
 	},
 	{
 		path: '/qrScan',

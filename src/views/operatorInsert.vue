@@ -377,8 +377,151 @@ Items
                 </v-toolbar>
                 <v-divider></v-divider>
                 <div style="padding:10px">
-                    Edit Sap<br />
+                <h3 style="text-align:center">Edit Sap</h3>
 
+<!-- <div>
+selected Products{{selectedCheckHeaderBefore.length}}dd
+        <div style="background:orange;padding:10px;width:100%">
+
+<div style="display:flex">
+ <v-checkbox
+      v-model="checkProduct.isInvoice_no"
+
+    ></v-checkbox>
+<v-text-field
+            label="Invoice No"
+            placeholder="Invoice no"
+       v-model="checkProduct.invoice_no"
+           
+            outlined
+            dense
+          ></v-text-field>
+</div>
+<div style="display:flex">
+
+ <v-checkbox
+      v-model="checkProduct.isGrn_no"
+
+    ></v-checkbox>
+<v-text-field
+            label="Grn No"
+            placeholder="Grn No"
+       v-model="checkProduct.grn_no"
+       
+            outlined
+                        dense
+          ></v-text-field>
+</div>
+<div style="display:flex">
+
+ <v-checkbox
+      v-model="checkProduct.isGrn_date"
+
+    ></v-checkbox>
+          <v-text-field
+            label="Grn Date"
+            placeholder="Grn Date"
+       v-model="checkProduct.grn_date"
+       
+                        dense
+            outlined
+          ></v-text-field>
+</div>
+<div style="display:flex">
+
+ <v-checkbox
+      v-model="checkProduct.isIr"
+
+    ></v-checkbox>
+          <v-text-field
+            label="Ir"
+       v-model="checkProduct.ir"
+                        dense
+            placeholder="ir"
+            outlined
+          ></v-text-field>
+</div>
+<div style="display:flex">
+ <v-checkbox
+      v-model="checkProduct.isRmcode"
+
+    ></v-checkbox>
+
+          <v-text-field
+            label="rmcode"
+       v-model="checkProduct.rmcode"
+                        dense
+            placeholder="rmcode"
+            outlined
+          ></v-text-field>
+</div>
+<div style="display:flex">
+
+ <v-checkbox
+      v-model="checkProduct.isEds"
+
+    ></v-checkbox>
+  <v-text-field
+            label="eds"
+       v-model="checkProduct.eds"
+                        dense
+            placeholder="eds"
+            outlined
+          ></v-text-field>
+</div>
+ <div style="display:flex">
+   <v-checkbox
+      v-model="checkProduct.isRm"
+
+    ></v-checkbox>
+ 
+  <v-text-field
+            label="rm"
+       v-model="checkProduct.rm"
+                        dense
+            placeholder="rm"
+            outlined
+          ></v-text-field>
+          </div>
+          <div style="display:flex">
+
+   <v-checkbox
+      v-model="checkProduct.isDate"
+
+    ></v-checkbox>
+
+            <v-text-field
+            label="Date"
+       v-model="checkProduct.date"
+                        dense
+            placeholder="date"
+            outlined
+          ></v-text-field>
+          </div>
+<div style="display:flex">
+
+   <v-checkbox
+      v-model="checkProduct.isWeight"
+
+    ></v-checkbox>
+  <v-text-field
+        v-model="checkProduct.weight"
+            label="weight"
+                        dense
+            placeholder="weight"
+            outlined
+          ></v-text-field>
+</div>
+          <label for="">It Applies all Selected</label>
+
+
+<br>
+       <v-btn>submit</v-btn>
+     </div>  
+        </div>
+         -->
+        
+        
                     <div
                         class="rowColor"
                         v-for="(item, index) in checkHeaderBefore"
@@ -468,6 +611,9 @@ Items
                 </v-toolbar>
                 <v-divider></v-divider>
                 <div style="padding:10px">
+
+<h3 style=""> SAP PRODUCTS </h3>
+
                     <div
                         style="  
 background: #555160;
@@ -489,7 +635,7 @@ background: #555160;
                             style="display:flex;width:100%"
                         >
                             <v-btn
-                                color="red"
+                                color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
                                 @click="checkDialogeEdit = true"
                                 >
@@ -498,7 +644,7 @@ background: #555160;
                                 </v-btn
                             >
                             <v-btn
-                                color="red"
+                                color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
                                 @click="checkBatch"
                                 >
@@ -508,7 +654,7 @@ background: #555160;
                                 </v-btn
                             >
                             <v-btn
-                                color="red"
+                                color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
                                 @click="qasGroupOneCheckout"
                                 >Submit
@@ -526,10 +672,10 @@ background: #555160;
                                 @click="item.selected = !item.selected"
                                 :class="{ selectedInvoice: item.selected }"
                                 style="
-   background: chartreuse;
+   background: #5d5f83;
     padding: 10px;
     border-radius: 10px;
-    margin: 10px;
+    margin: 10px;color:white
 
     font-weight: 700;"
                             >
@@ -687,6 +833,28 @@ function base64toBlob(base64Data, contentType) {
 
 function initialState($vm) {
     return {
+
+checkProduct:{
+invoice_no:'',
+isInvoice_no:true,
+grn_no:'',
+isGrn_no:true,
+grn_date:'',
+isGrn_date:false,
+ir:'',
+isIr:true,
+rmcode:'',
+isRmcode:true,
+eds:'',
+isEds:true,
+rm:'',
+isRm:true,
+date:'',
+isDate:false,
+weight:'',
+isWeight:false,
+},
+
         qasForm1Group: [],
         checkGroupQasOneDialog: false,
         invoice: {
@@ -761,6 +929,10 @@ export default {
         // $vm.headerFileUploader()
     },
     computed: {
+        selectedCheckHeaderBefore(){
+var $vm=this
+return _.filter($vm.checkHeaderBefore,(x)=>x.selected)
+        },
         getQualityAssuranceFormOne: {
             get() {
                 var $vm = this;
@@ -829,8 +1001,10 @@ $vm.$alert("Batch No Already Exist")
 
             // console.log("qasform1group",$vm.qasForm1Group)
         },
-
-        async submit() {
+        async submit(){
+            core.submit(this)
+        },
+        async submit_() {
             var $vm = this;
             // console.log("====submit====")
             // console.log($vm.tempInvoice)

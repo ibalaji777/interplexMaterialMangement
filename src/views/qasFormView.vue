@@ -2,18 +2,18 @@
     <div>
         <div>
 <!-- {{$isElectron}} -->
-<v-btn @click="print()" color="red" style="color:red;margin-right:5px">
+<v-btn @click="print()" color="#2f5489" style="color:red;margin-right:5px">
 <v-icon color="white">
      fa-print
 </v-icon>
 </v-btn>
 
-<v-btn @click="pdf()" color="red" style="margin-right:5px">
+<v-btn @click="pdf()" color="#2f5489 " style="margin-right:5px">
 <v-icon color="white" >
 mdi-file-pdf
 </v-icon>
 </v-btn>
-<v-btn @click="printLabel()" color="red" style="margin-right:5px">
+<v-btn @click="printLabel()" color="#2f5489 " style="margin-right:5px">
 <v-icon color="white">
 mdi-qrcode
 </v-icon>
@@ -29,10 +29,10 @@ mdi-qrcode
 <plugin-print-mobile v-else ref="printMobile" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print-mobile>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
-<v-btn @click="selectForm='qasformone'" color="red" style="color:white;margin:2px">Qas Form One</v-btn>
-<v-btn @click="selectForm='qasformtwo'" color="red" style="color:white;margin:2px">Qas Form two</v-btn>
-<v-btn @click="selectForm='media'" color="red" style="color:white;margin:2px">Media</v-btn>
-<v-btn @click="selectForm='edit'" color="red" style="color:white;margin:2px">Edit</v-btn>
+<v-btn @click="selectForm='qasformone'" color="#2f5489 " style="color:white;margin:2px">Qas Form One</v-btn>
+<v-btn @click="selectForm='qasformtwo'" color="#2f5489 " style="color:white;margin:2px">Qas Form two</v-btn>
+<v-btn @click="selectForm='media'" color="#2f5489 " style="color:white;margin:2px">Media</v-btn>
+<v-btn @click="selectForm='edit'" color="#2f5489 " style="color:white;margin:2px">Edit</v-btn>
 
 </div>
 
@@ -48,16 +48,16 @@ mdi-qrcode
     margin:10px 0;
 " v-if="isApprover">
 
-    <div @click="updateFormStatus('approved')" class="statusCard">
+    <div style="background:green" @click="updateFormStatus('approved')" class="statusCard">
 AC
     </div>
-    <div @click="updateFormStatus('acceptedOnDeviation')" class="statusCard">
+    <div  style="background:yellow;color:black" @click="updateFormStatus('acceptedOnDeviation')" class="statusCard">
 ACD
     </div>
-    <div @click="updateFormStatus('rejected')" class="statusCard">
+    <div  style="background:red" @click="updateFormStatus('rejected')" class="statusCard">
 Rej
     </div>
-    <div @click="updateFormStatus('ppap')" class="statusCard">
+    <div  style="background:blue" @click="updateFormStatus('ppap')" class="statusCard">
 PP
     </div>
 </div>

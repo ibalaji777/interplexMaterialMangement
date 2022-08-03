@@ -99,23 +99,23 @@ Weight (W/KG)
     <div style="display:flex">
 
 <div style="width:100%;display:flex;flex-direction:column;margin:2px">
-Width One   
-    <input style="" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_one"  class="interInput"   type="text" placeholder="Width One" >
+Width Min   
+    <input style="" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_min"  class="interInput"   type="text" placeholder="Width Min" >
     </div>
 <div style="width:100%;display:flex;flex-direction:column;margin:2px">
 
-Width Two 
-    <input style="width:100%" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_two"  class="interInput"   type="text" placeholder="Width Two" >
+Width Max 
+    <input style="width:100%" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_max"  class="interInput"   type="text" placeholder="Width Max" >
     </div>
     </div>
         <div style="display:flex">
  <div style="width:100%;display:flex;flex-direction:column;margin:2px">
-           Thick One
-    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_one"  class="interInput"   type="text" placeholder="Thick One" >
+           Thick Min
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_min"  class="interInput"   type="text" placeholder="Thick Min" >
  </div>
 <div style="width:100%;display:flex;flex-direction:column;margin:2px">
-           Thick Two 
-    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_two" class="interInput"   type="text" placeholder="Thick Two" >
+           Thick Max 
+    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_max" class="interInput"   type="text" placeholder="Thick Max" >
 </div>
     </div>
 </td>

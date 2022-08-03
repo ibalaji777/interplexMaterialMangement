@@ -102,6 +102,10 @@ Vue.component('draggable',()=>import('vuedraggable'))
 Vue.config.productionTip = true;
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
+import debounce from 'v-debounce'
+
+Vue.use(debounce)
+
 Vue.component('appWeb', appWeb);
 Vue.component('navbarWeb', navbarWeb);
 Vue.component('date', date);

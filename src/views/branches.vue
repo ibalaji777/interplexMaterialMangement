@@ -7,7 +7,7 @@
             <div style="text-align:center">
                 <img src="interplex.svg">
 </div>
-            <h2 style="text-align:center;color:white">Check Incoming Quality</h2>
+            <h2 style="text-align:center;color:white">Check Incoming Inspection</h2>
             <!-- {{$store.state.interplex.user}} -->
             <!-- {{$store.state.interplex.masterBranches}} -->
             <v-btn
