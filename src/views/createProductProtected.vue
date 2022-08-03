@@ -293,7 +293,6 @@
       v-model="configQasPrintViewDialog"
       fullscreen
       hide-overlay
-      persistent
       transition="dialog-bottom-transition"
     >
       <v-card>
@@ -353,27 +352,159 @@ Create New Row
     <draggable handle=".drag" tag="tbody" v-model="insertForm.observation_print_view">
 
     <tr v-for="(form,index) in insertForm.observation_print_view" :key="'printview'+index">
-        <td v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
-<div v-if="key=='no'">            
-
+        <td>
 <v-icon class="drag" style="cursor:move;font-size:50px">mdi-drag-horizontal</v-icon>            
-           {{index+1}}
-           </div>
-
-<div>
+            {{index+1}}</td>
+        <td>
+           
    <v-combobox   :return-object="false"
 
                              :items="observation_format_columns"
   dense
 
-v-model="form[key]"
+v-model="form.desc"
   item-text="name"
   item-value="name"
    clearable
   hide-selected
   small-chips
 ></v-combobox>
-     </div>
+        </td>
+   
+        <td>    
+            <!-- {{observation_format_columns}} -->
+         <!-- {{form.unit}} -->
+                 <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+v-model="form.unit"
+  item-text="name"
+  item-value="name"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+                    <!-- <v-text-field v-model="form.unit"></v-text-field> -->
+</td>
+        <td>
+
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.min_spec"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+                        <!-- <v-text-field v-model="form.min_spec"></v-text-field> -->
+            
+
+        </td>
+        <td>
+                           <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.max_spec"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+            <!-- <v-text-field v-model="form.max_spec"></v-text-field></td> -->
+        <td>
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.sup_min"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.sup_max"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+
+                        <!-- <v-text-field v-model="form.sup_min"></v-text-field> -->
+            <!-- <v-text-field v-model="form.sup_max"></v-text-field> -->
+
+
+
+        </td>
+        <td>
+
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.ieipl_min"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+               <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.ieipl_max"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+<!-- 
+                        <v-text-field v-model="form.ieipl_min"></v-text-field>
+            <v-text-field v-model="form.ieipl_max"></v-text-field> -->
+
+
+
+        </td>
+        <td>
+                      
+                                     <v-combobox   :return-object="false"
+
+                             :items="observation_format_columns"
+  dense
+
+  item-text="name"
+  item-value="name"
+v-model="form.remarks"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+                                    <!-- <v-text-field v-model="form.remarks"></v-text-field> -->
+<v-icon @click="insertForm.observation_print_view.splice(index,1)">fa-trash</v-icon>
+
         </td>
     </tr>
     </draggable>
@@ -398,33 +529,120 @@ v-model="form[key]"
        
     </tr>
     <tr v-for="(form,index) in insertForm.observation_print_view" :key="'printview'+index">
-        <td :colspan="getColspan(form[key])" :rowspan="getRowspan(form[key])" v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
-
-           <div v-if="key=='no'">            
- 
-{{index+1}}
-
-           </div>
-           <div v-else>
-            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
-
-           <div v-if="getIndex(form[key])!=-1">
-{{insertForm.observation_format[getIndex(form[key])].name}}
-
-<!-- {{form[key]}} -->
-{{getColspan(form[key])}}
-{{insertForm.observation_format[getIndex(form[key])].colspan}}
+        <td>{{index+1}}</td>
+        <td>
+<div v-if="getIndex(form.desc)!=-1">
+{{insertForm.observation_format[getIndex(form.desc)].name}}
 <div style="display:flex;width:250px;justify-content:space-around">
-    <v-icon @click="selectQasEdiable(getIndex(form[key]))">fa-cog</v-icon>
-<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form[key])].disable"></v-switch>
+    <v-icon @click="selectQasEdiable(getIndex(form.desc))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.desc)].disable"></v-switch>
 </div>
 
-<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form[key])].value"></v-text-field>
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.desc)].value"></v-text-field>
 </div>
 <div v-else>
 Not Found 
 </div>
+        </td>
+   
+        <td>    
+<div v-if="getIndex(form.unit)!=-1">
+{{insertForm.observation_format[getIndex(form.unit)].name}}
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form.unit))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.unit)].disable"></v-switch>
 </div>
+
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.unit)].value"></v-text-field>
+</div>
+<div v-else>
+Not Found 
+</div>
+                    <!-- <v-text-field v-model="form.unit"></v-text-field> -->
+</td>
+        <td>
+
+<div v-if="getIndex(form.min_spec)!=-1">
+{{insertForm.observation_format[getIndex(form.min_spec)].name}}
+
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form.min_spec))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.min_spec)].disable"></v-switch>
+</div>
+
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.min_spec)].value"></v-text-field>
+</div>
+<div v-else>
+Not Found 
+</div>
+            
+
+        </td>
+        <td>
+
+<div v-if="getIndex(form.max_spec)!=-1">
+{{insertForm.observation_format[getIndex(form.max_spec)].name}}
+
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form.max_spec))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.max_spec)].disable"></v-switch>
+</div>
+
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.max_spec)].value"></v-text-field>
+</div>
+<div v-else>
+Not Found 
+</div>
+  
+        <td>
+
+<div v-if="getIndex(form.sup_min)!=-1">
+{{insertForm.observation_format[getIndex(form.sup_min)].name}}
+
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form.sup_min))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.sup_min)].disable"></v-switch>
+</div>
+
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.sup_min)].value"></v-text-field>
+</div>
+<div v-else>
+Not Found 
+</div>
+  
+        </td>
+        <td>
+
+<div v-if="getIndex(form.ieipl_min)!=-1">
+{{insertForm.observation_format[getIndex(form.ieipl_min)].name}}
+
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form.ieipl_min))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.ieipl_min)].disable"></v-switch>
+</div>
+
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.ieipl_min)].value"></v-text-field>
+</div>
+<div v-else>
+Not Found 
+</div>
+          </td>
+        <td>
+   
+<div v-if="getIndex(form.remarks)!=-1">
+{{insertForm.observation_format[getIndex(form.remarks)].name}}
+
+<div style="display:flex;width:250px;justify-content:space-around">
+    <v-icon @click="selectQasEdiable(getIndex(form.remarks))">fa-cog</v-icon>
+<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form.remarks)].disable"></v-switch>
+</div>
+
+<v-text-field v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form.remarks)].value"></v-text-field>
+</div>
+<div v-else>
+Not Found 
+</div>
+  
         </td>
     </tr>
 </table>
@@ -488,8 +706,7 @@ Not Found
 </div>
 
 
-{{insertForm.observation_format[qasEditableIndex]}}
-
+<!-- {{insertForm.observation_format[qasEditableIndex].name}} -->
 
 
 <div v-if="!insertForm.observation_format[qasEditableIndex].default">
@@ -505,12 +722,6 @@ Not Found
 <v-text-field label="SAP Map" v-model="insertForm.observation_format[qasEditableIndex].headerMap"></v-text-field>
 
 <v-text-field label="Default Value" v-model="insertForm.observation_format[qasEditableIndex].value"></v-text-field>
-
-<label for="">For Merge Cell</label>
-
-<v-text-field label="ColSpan" v-model="insertForm.observation_format[qasEditableIndex].colspan"></v-text-field>
-<v-text-field label="RowSpan" v-model="insertForm.observation_format[qasEditableIndex].rowspan"></v-text-field>
-
 
 <v-switch label="Validation" v-model="insertForm.observation_format[qasEditableIndex].validation">
 </v-switch>
@@ -987,29 +1198,6 @@ return intialState(this)
 },
 
 computed:{
-getColspan(){
-var $vm=this;
-return (key)=>{
-
-if($vm.getIndex(key)==-1)
-return 1;
-
-return $vm.insertForm.observation_format[$vm.getIndex(key)].colspan
-}
-
-},
-getRowspan(){
-var $vm=this;
-return (key)=>{
-
-if($vm.getIndex(key)==-1)
-return 1;
-
-return $vm.insertForm.observation_format[$vm.getIndex(key)].rowspan
-}
-
-},
-
 getIndex(){
 var $vm=this;
 return (name)=>{
@@ -1080,11 +1268,6 @@ $vm.isStateForUpdate=true,
 }
     },
 methods:{
-removeTable(index,key){
-var $vm=this;
-delete $vm.insertForm.observation_print_view[index][key]
-$vm.$alert("removed")
-    },
     insertRow(){
 var $vm=this;
 var map={}

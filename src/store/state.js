@@ -770,7 +770,7 @@ interplex:{
 			validationStatus:false,
 			
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			},
@@ -783,7 +783,7 @@ interplex:{
 		disable:false,validationStatus:false,
 		
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -794,7 +794,7 @@ interplex:{
 		show:true,disable:false,validationStatus:false,
 		headerMap:'', 
 		validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -804,7 +804,7 @@ interplex:{
 		value:'5',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -815,7 +815,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -825,7 +825,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -835,7 +835,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -845,7 +845,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -855,7 +855,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -868,7 +868,7 @@ interplex:{
 			validationStatus:false,
 			
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			},
@@ -879,7 +879,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -889,7 +889,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -899,7 +899,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -909,7 +909,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -919,7 +919,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -929,7 +929,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -939,7 +939,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -949,7 +949,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -959,7 +959,7 @@ interplex:{
 			value:'HARDNESS',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			},
@@ -970,7 +970,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -980,7 +980,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -990,7 +990,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1000,7 +1000,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1010,7 +1010,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1020,7 +1020,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1031,7 +1031,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1042,7 +1042,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1052,7 +1052,7 @@ interplex:{
 			value:'',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -1064,7 +1064,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1075,7 +1075,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1086,7 +1086,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1097,7 +1097,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1108,7 +1108,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1118,7 +1118,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1128,7 +1128,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1138,7 +1138,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1148,7 +1148,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1158,7 +1158,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1169,7 +1169,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1180,7 +1180,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1190,7 +1190,7 @@ interplex:{
 			value:'TENSILE STR',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -1202,7 +1202,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1213,7 +1213,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1224,7 +1224,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1235,7 +1235,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1246,7 +1246,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1256,7 +1256,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1266,7 +1266,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1276,7 +1276,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1286,7 +1286,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1296,7 +1296,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1307,7 +1307,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1318,7 +1318,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1328,7 +1328,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1339,7 +1339,7 @@ interplex:{
 			value:'YIELD STR',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -1350,7 +1350,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1361,7 +1361,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1372,7 +1372,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1383,7 +1383,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1393,7 +1393,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1403,7 +1403,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1413,7 +1413,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1423,7 +1423,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1433,7 +1433,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1444,7 +1444,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1455,7 +1455,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1465,7 +1465,7 @@ interplex:{
 			value:'CU',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -1476,7 +1476,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1487,7 +1487,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1498,7 +1498,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1509,7 +1509,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1520,7 +1520,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1530,7 +1530,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1540,7 +1540,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1550,7 +1550,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1560,7 +1560,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1570,7 +1570,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1581,7 +1581,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1592,7 +1592,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1602,7 +1602,7 @@ interplex:{
 			value:'PB',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -1614,7 +1614,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1625,7 +1625,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1636,7 +1636,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1647,7 +1647,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1658,7 +1658,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1668,7 +1668,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1678,7 +1678,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1688,7 +1688,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1698,7 +1698,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1708,7 +1708,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1719,7 +1719,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1730,7 +1730,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1740,7 +1740,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1751,7 +1751,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1762,7 +1762,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1773,7 +1773,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1784,7 +1784,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1794,7 +1794,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1804,7 +1804,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1814,7 +1814,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1824,7 +1824,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1834,7 +1834,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1845,7 +1845,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1856,7 +1856,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1866,7 +1866,7 @@ interplex:{
 			value:'FE',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			},
@@ -1876,7 +1876,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1887,7 +1887,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1898,7 +1898,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1909,7 +1909,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1920,7 +1920,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1930,7 +1930,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1940,7 +1940,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1950,7 +1950,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1960,7 +1960,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -1970,7 +1970,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1981,7 +1981,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -1992,7 +1992,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2002,7 +2002,7 @@ interplex:{
 			value:'SN',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2013,7 +2013,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2024,7 +2024,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2035,7 +2035,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2046,7 +2046,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2057,7 +2057,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2067,7 +2067,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2077,7 +2077,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2087,7 +2087,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2097,7 +2097,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2107,7 +2107,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2118,7 +2118,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2129,7 +2129,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2139,7 +2139,7 @@ interplex:{
 			value:'ZN',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2151,7 +2151,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2162,7 +2162,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2173,7 +2173,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2184,7 +2184,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2195,7 +2195,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2205,7 +2205,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2215,7 +2215,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2225,7 +2225,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2235,7 +2235,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2245,7 +2245,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2256,7 +2256,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2267,7 +2267,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2277,7 +2277,7 @@ interplex:{
 			value:'P',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2288,7 +2288,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2299,7 +2299,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2310,7 +2310,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2321,7 +2321,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2332,7 +2332,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2342,7 +2342,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2352,7 +2352,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2362,7 +2362,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2372,7 +2372,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2382,7 +2382,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2393,7 +2393,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2404,7 +2404,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2414,7 +2414,7 @@ interplex:{
 			value:'PRE PLATING DETAILS',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2426,7 +2426,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2437,7 +2437,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2448,7 +2448,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2459,7 +2459,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2470,7 +2470,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2480,7 +2480,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2490,7 +2490,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2500,7 +2500,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2510,7 +2510,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2520,7 +2520,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2531,7 +2531,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2542,7 +2542,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2552,7 +2552,7 @@ interplex:{
 			value:'SLITTING BURR',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2564,7 +2564,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2575,7 +2575,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2586,7 +2586,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2597,7 +2597,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2608,7 +2608,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2618,7 +2618,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2628,7 +2628,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2638,7 +2638,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2648,7 +2648,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2658,7 +2658,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2669,7 +2669,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2680,7 +2680,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2690,7 +2690,7 @@ interplex:{
 			value:'TWIST',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2701,7 +2701,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2712,7 +2712,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2723,7 +2723,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2734,7 +2734,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2745,7 +2745,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2755,7 +2755,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2765,7 +2765,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2775,7 +2775,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2785,7 +2785,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2795,7 +2795,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2806,7 +2806,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2817,7 +2817,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2827,7 +2827,7 @@ interplex:{
 			value:'CAMBER',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2839,7 +2839,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2850,7 +2850,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2861,7 +2861,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2872,7 +2872,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2883,7 +2883,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2893,7 +2893,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2903,7 +2903,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2913,7 +2913,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2923,7 +2923,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2933,7 +2933,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2944,7 +2944,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2955,7 +2955,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -2965,7 +2965,7 @@ interplex:{
 			value:'SURFACE FINISH',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -2977,7 +2977,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2988,7 +2988,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -2999,7 +2999,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3010,7 +3010,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3021,7 +3021,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3031,7 +3031,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3041,7 +3041,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3051,7 +3051,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3061,7 +3061,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3071,7 +3071,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3082,7 +3082,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3093,7 +3093,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3103,7 +3103,7 @@ interplex:{
 			value:'THER CONDUCT',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -3115,7 +3115,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3126,7 +3126,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3137,7 +3137,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3148,7 +3148,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3159,7 +3159,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3169,7 +3169,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3179,7 +3179,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3189,7 +3189,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3199,7 +3199,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3209,7 +3209,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3220,7 +3220,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3231,7 +3231,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3241,7 +3241,7 @@ interplex:{
 			value:'DENSITY',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -3253,7 +3253,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3264,7 +3264,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3275,7 +3275,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3286,7 +3286,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3297,7 +3297,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3307,7 +3307,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3317,7 +3317,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3327,7 +3327,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3337,7 +3337,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3347,7 +3347,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3358,7 +3358,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3369,7 +3369,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3379,7 +3379,7 @@ interplex:{
 			value:'COIL WEIGHT',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -3390,7 +3390,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3401,7 +3401,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3412,7 +3412,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3423,7 +3423,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3434,7 +3434,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3444,7 +3444,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3454,7 +3454,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3464,7 +3464,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3474,7 +3474,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3484,7 +3484,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3495,7 +3495,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3506,7 +3506,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3516,7 +3516,7 @@ interplex:{
 			value:'COIL',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -3528,7 +3528,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3539,7 +3539,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3550,7 +3550,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3561,7 +3561,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3572,7 +3572,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3582,7 +3582,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3592,7 +3592,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3602,7 +3602,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3612,7 +3612,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3622,7 +3622,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3633,7 +3633,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3644,7 +3644,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3654,7 +3654,7 @@ interplex:{
 			value:'Next Due For third party validation',//default value
 			show:true,disable:false,validationStatus:false,
 			headerMap:'',  validation:false,
-			rule:'',colspan:1,
+			rule:'',colspan:1,rowspan:1,
 			default:true,
 			note:'' 
 			}
@@ -3665,7 +3665,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3676,7 +3676,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3687,7 +3687,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3698,7 +3698,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3709,7 +3709,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3719,7 +3719,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3729,7 +3729,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3739,7 +3739,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3749,7 +3749,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		},
@@ -3759,7 +3759,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3770,7 +3770,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:true,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
@@ -3781,7 +3781,7 @@ interplex:{
 		value:'',//default value
 		show:true,disable:false,validationStatus:false,
 		headerMap:'',  validation:false,
-		rule:'',colspan:1,
+		rule:'',colspan:1,rowspan:1,
 		default:true,
 		note:'' 
 		}
