@@ -279,7 +279,7 @@
 </div>
 </span>
 </div> -->
-<v-btn @click="configQasPrintViewDialog=true" outlined color="red" style="margin:10px 0">
+<v-btn  :loading="qasLoader" @click="openQasDialog" outlined color="red" style="margin:10px 0">
     Quality Assurance Form
 </v-btn>
 <div style="display:flex;justify-content:flex-end;margin-top:25px">
@@ -311,15 +311,17 @@
         <v-divider></v-divider>
        <div style="padding:10px">
 
-<v-btn @click="insertObservation" outlined color="red">
+<!-- <v-btn @click="insertObservation" outlined color="red">
     <v-icon>fa-plus</v-icon>
-</v-btn>
+</v-btn> -->
 
 <h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
 <div style="display:flex;margin:10px 0">
 
-
-<v-btn @click="tableColumnSetupDialog=true" color="primary">
+<v-btn style="margin:10px" @click="createQasRowInputDialog=true" color="primary">
+Create Column Setup
+</v-btn>
+<v-btn style="margin:10px" @click="tableColumnSetupDialog=true" color="primary">
 Table Column Setup
 </v-btn>
 
@@ -329,28 +331,28 @@ Table Column Setup
 
 <div style="height:78vh;overflow:scroll">
 <table  class="observationTable" style="width:100vw">
-    <tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
-        <td :colspan="getColspan(item.name)" :rowspan="getRowspan(item.name)" v-for="(item,index_sub) in form.column" :key="'inde'+index_sub">
-<!-- {{item}}
-{{item.name}} -->
+<tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
+<td :colspan="getColspan(item.name)" :rowspan="getRowspan(item.name)" v-for="(item,index_sub) in form.column" :key="'inde'+index_sub">
            <div >
            <div v-if="getIndex(item.name)!=-1">
 <div     style="display:flex;width:250px;justify-content:space-between">
             {{insertForm.observation_format[getIndex(item.name)].label}}
-            <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
+            <v-icon @click="removeTable(index,item.name)">fa-trash</v-icon>
 </div>
-
-
-<!-- {{form[key]}} -->
-<!-- {{getColspan(form[key])}} -->
-<!-- {{insertForm.observation_format[getIndex(form[key])].colspan}} -->
-<div style="display:flex;width:250px;justify-content:space-around">
-    <v-icon @click="selectQasEdiable(getIndex(iten.name))">fa-cog</v-icon>
-<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(item.name)].disable"></v-switch>
+<div style="display:flex;width:250px;justify-content:space-between;padding:10px 0">
+    <v-icon @click="selectQasEditable(getIndex(item.name))">fa-cog</v-icon>
+<div>
+<!-- {{insertForm.observation_format[getIndex(item.name)]}}
+{{item.name}}
+{{getIndex(item.name)}}
+{{isKeyExist(form[item.name],'merge')}} -->
+<v-icon :class="{redColor:isKeyExist(getIndex(item.name),'merge')}" style="margin:2px">mdi-table-merge-cells</v-icon>
+<!-- <v-icon  :class="{redColor:isKeyExist(getIndex(item.name),'sapHeader')}" style="margin:2px">mdi-magnify-scan</v-icon>
+<v-icon :class="{redColor:isKeyExist(getIndex(item.name),'exp')}">fa-calculator</v-icon> -->
+</div>
 </div>
 
 <v-text-field outlined v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(item.name)].value"></v-text-field>
-<!-- {{insertForm.observation_format[getIndex(item.name)].name}} -->
    
 </div>
 <div v-else>
@@ -366,17 +368,15 @@ Not Found
     </tr>
         <draggable handle=".drag" tag="tbody" v-model="insertForm.observation_print_view">
     <tr v-for="(form,index) in insertForm.observation_print_view" :key="'printview'+index">
-        <td :colspan="getColspan(form[key])" :rowspan="getRowspan(form[key])" v-for="(key,index_sub) in Object.keys(form)" :key="'inde'+index_sub">
+        <td :colspan="getColspan(form[key])" :rowspan="getRowspan(form[key])" v-for="(key,index_sub) in tableOrder(Object.keys(form))" :key="'inde'+index_sub">
 
            <div v-if="key=='no'">            
- 
 {{index+1}}<br>
 <!-- {{}} -->
 <div style="display:flex;justify-content:space-evenly"><v-icon style="font-size:50px" class="drag">mdi-drag-horizontal</v-icon>
 <v-icon @click="removeTableRow(index)" style="font-size:25px;color:red" class="drag">fa-trash</v-icon>
+<v-icon @click="selectedRow=index;selectedRowDialog=true" style="font-size:25px;color:red" class="drag">fa-plus</v-icon>
 </div>
-
-
            </div>
            <div v-else>
            <div v-if="getIndex(form[key])!=-1">
@@ -384,22 +384,21 @@ Not Found
             {{insertForm.observation_format[getIndex(form[key])].label}}
             <v-icon @click="removeTable(index,key)">fa-trash</v-icon>
 </div>
+<div style="display:flex;width:250px;justify-content:space-between;padding:15px 0">
+    <v-icon @click="selectQasEditable(getIndex(form[key]))">fa-cog</v-icon>
+<!-- <v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form[key])].disable"></v-switch> -->
+<div>
 
-
-<!-- {{form[key]}} -->
-<!-- {{getColspan(form[key])}} -->
-<!-- {{insertForm.observation_format[getIndex(form[key])].colspan}} -->
-<div style="display:flex;width:250px;justify-content:space-around">
-    <v-icon @click="selectQasEdiable(getIndex(form[key]))">fa-cog</v-icon>
-<v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form[key])].disable"></v-switch>
+<v-icon :class="{redColor:insertForm.observation_format[getIndex(form[key])].editable}" @click="insertForm.observation_format[getIndex(form[key])].editable=!insertForm.observation_format[getIndex(form[key])].editable" style="margin:2px">mdi-account-edit</v-icon>
+<v-icon :class="{redColor:isKeyExist(getIndex(form[key]),'merge')}" style="margin:2px">mdi-table-merge-cells</v-icon>
+<v-icon  :class="{redColor:isKeyExist(getIndex(form[key]),'sapHeader')}" style="margin:2px">mdi-magnify-scan</v-icon>
+<v-icon :class="{redColor:isKeyExist(getIndex(form[key]),'exp')}">fa-calculator</v-icon>
+</div>
 </div>
 
 <v-text-field outlined v-debounce="delay" label="value" v-model.lazy="insertForm.observation_format[getIndex(form[key])].value"></v-text-field>
-<!-- {{insertForm.observation_format[getIndex(form[key])].name}} -->
-
 <v-combobox   :return-object="false"
-
-                             :items="insertForm.observation_format[getIndex(form[key])]"
+ :items="insertForm.observation_format"
   dense
 
 v-model="form[key]"
@@ -418,6 +417,22 @@ v-model="form[key]"
 </div>
 
 Not Found 
+
+<v-combobox   :return-object="false"
+
+:items="insertForm.observation_format"
+  dense
+
+v-model="form[key]"
+  item-text="name"
+  item-value="name"
+   clearable
+  hide-selected
+  small-chips
+></v-combobox>
+
+<br>
+{{form[key]}}
 </div>
 </div>
         </td>
@@ -436,16 +451,26 @@ fullscreen
     >
     
       <v-card>
+                <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="tableColumnSetupDialog = false"
+          >
+            Close
+          </v-btn>
+        </v-card-actions>
+
         <v-card-title>
-          <span class="text-h5">Table Config</span>
         </v-card-title>
         <v-card-text>
             <div>
 
             <!-- <div> -->
-<span class="text-h5">Table Header </span>
+<!-- <span class="text-h5">Table Header </span>
 <v-text-field v-model="headerColumnName" label="Create  Column">
-</v-text-field> <br>
+</v-text-field> <br> -->
 <!-- <table  class="observationTable" style="width:100vw">
     <tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
 <td @click="selectedHeaderRow=index">{{index+1}}<br>
@@ -474,11 +499,13 @@ fullscreen
                                         >
         
 <td style="margin-right:10px;padding:5px;border:1px solid black" v-for="(item,index) in insertForm.table_header_setup" :key="'table_header'+index">
-{{item}}&nbsp; <v-icon @click="removeTableHeader">fa-trash</v-icon>
+{{item}}&nbsp; <v-icon @click="removeTableHeader(index)">fa-trash</v-icon>
 </td>
                                        </draggable>
 </table>
 
+Note<br>
+<b>It Create New Column each  and every row if does not Exist.</b>
 <!-- {{$store.state.map.}} -->
 
 
@@ -510,35 +537,82 @@ fullscreen
 </div> -->
 
         </v-card-text>
-        <v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
+
+<!-- selectedRowDialog-->
+
+ <v-dialog
+      v-model="selectedRowDialog"
+      persistent
+fullscreen
+    >
+      <v-card>
+                <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
             color="blue darken-1"
             text
-            @click="tableColumnSetupDialog = false"
+            @click="selectedRowDialog = false"
           >
             Close
           </v-btn>
         </v-card-actions>
+
+        <v-card-title>
+          <span class="text-h5">Create New Column row in {{selectedRow+1}}</span>
+        </v-card-title>
+        <v-card-text>
+ <v-text-field hint="whithout whitespace" outlined v-debounce="delay" label="Name" v-model.lazy="createRowName"></v-text-field>
+
+<div style="text-align:center;margin:10px; 0">
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="addTableRow"
+          >
+            Save
+          </v-btn>
+</div>
+Note:<br>
+it only visible specific row where you added.
+ <br>
+  <table style="border:1px solid black;width:100%;border-collapse: collapse;margin:10px 0">
+    
+                                       <draggable
+                                            :list="insertForm.table_header_setup"
+                                            style="
+                     margin-top:10px "
+                     tag="tr"
+                                            ghost-class="ghost"
+                                            group="product"
+                                            @start="dragging = true"
+                                            @end="dragging = false"
+                                        >
+        
+<td style="margin-right:10px;padding:5px;border:1px solid black" v-for="(item,index) in insertForm.table_header_setup" :key="'table_header'+index">
+{{item}}&nbsp; <v-icon @click="removeTableHeader(index)">fa-trash</v-icon>
+</td>
+                                       </draggable>
+</table>
+
+<!-- <v-text-field  v-model="createRowName" label="Name"></v-text-field> -->
+        </v-card-text>
       </v-card>
     </v-dialog>
+
 
 <!-- create qas row dialog -->
 
  <v-dialog
       v-model="createQasRowInputDialog"
       persistent
-      max-width="600px"
+fullscreen
     >
       <v-card>
-        <v-card-title>
-          <span class="text-h5">Create New Row</span>
-        </v-card-title>
-        <v-card-text>
- 
-<v-text-field hint="avioid White space and Enter small letter" v-model="rowName" label="Name"></v-text-field>
-        </v-card-text>
-        <v-card-actions>
+               <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
             color="blue darken-1"
@@ -547,14 +621,56 @@ fullscreen
           >
             Close
           </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="insertRow"
-          >
-            Save
-          </v-btn>
         </v-card-actions>
+ 
+        <v-card-title>
+          <span class="text-h5">Create New Row</span>
+        </v-card-title>
+        <v-card-text>
+ 
+<v-text-field hint="Avoid White space and Enter small letter" v-model="rowName" label="Name"></v-text-field>
+<div style="display:flex;">
+<v-text-field label="Key" dense style="margin:2px" v-model="postfix.key"></v-text-field>
+<v-text-field label="Value" dense style="margin:2px" v-model="postfix.value"></v-text-field>
+<v-btn style="margin:2px" @click="createPostfix" color="primary"
+>Submit</v-btn>
+</div>
+<table style="width:100%;border-collapse:collapse">
+<tr v-for="(value,key,index) in insertForm.postfix_observation_print_view_format" :key="index+'postfix'">
+<td>
+    <v-icon @click="removePostfix(key)">fa-trash</v-icon>
+</td>
+    <td style="border:1px solid black">
+{{key}}
+    </td>
+<td style="border:1px solid black">
+<v-text-field dense label="mask" v-model="insertForm.postfix_observation_print_view_format[key]"></v-text-field>
+<!-- {{insertForm.postfix_observation_print_view_format[key]}} -->
+    </td>
+</tr>
+</table>
+
+<h3> Table Order</h3>
+  <table style="border:1px solid black;width:100%;border-collapse: collapse;margin:10px 0">
+    
+                                       <draggable
+                                            :list="insertForm.table_header_setup"
+                                            style="
+                     margin-top:10px "
+                     tag="tr"
+                                            ghost-class="ghost"
+                                            group="product"
+                                            @start="dragging = true"
+                                            @end="dragging = false"
+                                        >
+        
+<td style="margin-right:10px;padding:5px;border:1px solid black" v-for="(item,index) in insertForm.table_header_setup" :key="'table_header'+index">
+{{item}}&nbsp; <v-icon @click="removeTableHeader(index)">fa-trash</v-icon>
+</td>
+                                       </draggable>
+</table>
+
+         </v-card-text>
       </v-card>
     </v-dialog>
 
@@ -570,8 +686,15 @@ fullscreen
           <span class="text-h5">Input Config</span>
         </v-card-title>
         <v-card-text>
+
  
 <div v-if="qasEditableIndex!=-1">
+<!-- {{insertForm.observation_format[qasEditableIndex]}} -->
+<v-icon @click="editFieldSetting(qasEditableIndex,'editable')" :class="{redColor:insertForm.observation_format[qasEditableIndex].editable}"  style="margin:2px">mdi-account-edit</v-icon>
+<v-icon @click="editFieldSetting(qasEditableIndex,'merge')" :class="{redColor:isKeyExist(qasEditableIndex,'merge')}" style="margin:2px">mdi-table-merge-cells</v-icon>
+<v-icon @click="editFieldSetting(qasEditableIndex,'sapHeader')" :class="{redColor:isKeyExist(qasEditableIndex,'sapHeader')}" style="margin:2px">mdi-magnify-scan</v-icon>
+<v-icon @click="editFieldSetting(qasEditableIndex,'exp')" :class="{redColor:isKeyExist(qasEditableIndex,'exp')}">fa-calculator</v-icon>
+
 <div >
 <b>Label:{{insertForm.observation_format[qasEditableIndex].label}}</b><br>
 <b>Name:{{insertForm.observation_format[qasEditableIndex].name}}</b><br>
@@ -579,39 +702,39 @@ fullscreen
 </div>
 
 
-{{insertForm.observation_format[qasEditableIndex]}}
+
 
 
 
 <div v-if="!insertForm.observation_format[qasEditableIndex].default">
 <v-text-field label="Label" v-model="insertForm.observation_format[qasEditableIndex].label"></v-text-field>
 <v-text-field label="Name" v-model="insertForm.observation_format[qasEditableIndex].name"></v-text-field>
-<!-- {{insertForm.observation_format[qasEditableIndex].label}}<br> -->
 </div>
 
-<v-switch label="Disable Input" v-model="insertForm.observation_format[qasEditableIndex].disable">
-</v-switch>
+<div v-if="isKeyExist(qasEditableIndex,'sapHeader')">
+<v-text-field label="SAP Map" v-model="insertForm.observation_format[qasEditableIndex].sapHeader"></v-text-field>
+</div>
 
-
-<v-text-field label="SAP Map" v-model="insertForm.observation_format[qasEditableIndex].headerMap"></v-text-field>
-
-<v-text-field label="Default Value" v-model="insertForm.observation_format[qasEditableIndex].value"></v-text-field>
-
+<div v-if="isKeyExist(qasEditableIndex,'merge')">
 <label for="">For Merge Cell</label>
+<v-text-field label="ColSpan" v-model="insertForm.observation_format[qasEditableIndex].merge.colspan"></v-text-field>
+<v-text-field label="RowSpan" v-model="insertForm.observation_format[qasEditableIndex].merge.rowspan"></v-text-field>
+</div>
+<div v-if="isKeyExist(qasEditableIndex,'exp')">
 
-<v-text-field label="ColSpan" v-model="insertForm.observation_format[qasEditableIndex].colspan"></v-text-field>
-<v-text-field label="RowSpan" v-model="insertForm.observation_format[qasEditableIndex].rowspan"></v-text-field>
+<v-textarea   label="Write Rule" v-model="insertForm.observation_format[qasEditableIndex].exp.rule">
 
+</v-textarea> 
 
-<v-switch label="Validation" v-model="insertForm.observation_format[qasEditableIndex].validation">
-</v-switch>
+<v-text-field   label="Success" v-model="insertForm.observation_format[qasEditableIndex].exp.success">
+</v-text-field> 
+<v-text-field   label="Failure" v-model="insertForm.observation_format[qasEditableIndex].exp.failure">
 
-<v-textarea   label="Write Rule" v-model="insertForm.observation_format[qasEditableIndex].rule">
+</v-text-field> 
 
-</v-textarea>
 Note:<br>
-{{insertForm.observation_format[qasEditableIndex].note}}
-
+{{insertForm.observation_format[qasEditableIndex].exp.note}}
+</div>
 
 </div>
 
@@ -1011,7 +1134,15 @@ note:''
     
 }
 function initialState($vm){
-    return {
+return {
+postfix:{
+key:'',
+value:''
+},
+qasLoader:false,
+selectedRowDialog:false,
+selectedRow:-1,
+createRowName:'',
 createColumnName:'',
 selectedHeaderRow:-1,
 headerColumnName:'',
@@ -1019,7 +1150,7 @@ rowName:'',
 tableColumnSetupDialog:false,
 createQasRowInputDialog:false,
 qasEdiableDialog:false,
-delay: 1000,
+delay: 1600,
 qasEditableIndex:-1,
 qasFormSetup:'config',//config or input
 isStateForUpdate:false,
@@ -1055,7 +1186,7 @@ form_format:'',
 comment:'',
 skiplevel:0,
 table_header_setup:['no','desc','unit','min_spec','max_spec','sup_min','sup_max','ieipl_min','ieipl_max','remarks'],
-defaultInsertForm:{},
+postfix_observation_print_view_format:{},
 observation_header_print_view:[],
 observation_print_view:[],
 observation_format:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),//core.database($vm,'getMasterProductConfig'),
@@ -1085,25 +1216,40 @@ return initialState(this)
 },
 
 computed:{
+tableOrder(){
+    var $vm=this;
+return (array)=>{
+return core.tableOrder($vm.insertForm.table_header_setup,array)
+}
+},
+isKeyExist(){
+var $vm=this;
+return (index,isObjectKeyExist)=>{
+
+    // console.log("check",key,isObjectKeyExist,index,$vm.insertForm.observation_format[index]) 
+if(index==-1) return false;
+return _.has($vm.insertForm.observation_format[index],isObjectKeyExist)
+
+}
+
+},
 getColspan(){
 var $vm=this;
 return (key)=>{
-
 if($vm.getIndex(key)==-1)
 return 1;
+return core.merge($vm.insertForm.observation_format[$vm.getIndex(key)]).colspan
 
-return $vm.insertForm.observation_format[$vm.getIndex(key)].colspan
 }
 
 },
 getRowspan(){
 var $vm=this;
 return (key)=>{
-
 if($vm.getIndex(key)==-1)
 return 1;
+return core.merge($vm.insertForm.observation_format[$vm.getIndex(key)]).rowspan
 
-return $vm.insertForm.observation_format[$vm.getIndex(key)].rowspan
 }
 
 },
@@ -1163,8 +1309,8 @@ if($vm.insertForm.observation_print_view.length==0){
 $vm.insertForm.observation_print_view=$vm.$store.state.interplex.observation_print_view_format
 }
 $vm.insertForm.observation_format=$vm.$store.state.interplex.configProductsFormat
-if(_.isEmpty($vm.insertForm.defaultInsertForm)){
-$vm.insertForm.defaultInsertForm=$vm.$store.state.map.observation_print_view_format
+if(_.isEmpty($vm.insertForm.postfix_observation_print_view_format)){
+$vm.insertForm.postfix_observation_print_view_format=$vm.$store.state.map.postfix_observation_print_view_format
 }
 if(_.isEmpty($vm.insertForm.observation_header_print_view)){
 $vm.insertForm.observation_header_print_view=$vm.$store.state.interplex.observation_header_print_view_format
@@ -1184,11 +1330,109 @@ $vm.isStateForUpdate=true,
 }
     },
 methods:{
+    removePostfix(key){
+        var $vm=this;
+ $vm.$confirm("Do You want to delete?")
+.then(()=>{
+$vm.$delete($vm.insertForm.postfix_observation_print_view_format,key)
+})
+    },
+    createPostfix(){
+var $vm=this;
+if($vm.postfix.key=='')
+{
+    $vm.$alert("Input must be filled")
+    return;
+}
+if($vm.postfix.value=='')
+{
+    $vm.$alert("Input must be filled")
+
+    return;
+}
+
+$vm.$set($vm.insertForm.postfix_observation_print_view_format,$vm.postfix.key,$vm.postfix.value)
+    },
+    editFieldSetting(index,action){
+var $vm=this;
+console.log("field=>",index,action)
+if(action=='editable')
+{
+$vm.insertForm.observation_format[index].editable=!$vm.insertForm.observation_format[index].editable
+}
+
+if(action=='merge')
+{
+if(_.has($vm.insertForm.observation_format[index],'merge'))
+$vm.$delete($vm.insertForm.observation_format[index],'merge')
+else
+$vm.$set($vm.insertForm.observation_format[index],'merge',{
+colspan:1,
+rowspan:1    
+})
+
+}
+if(action=='sapHeader')
+{
+if(_.has($vm.insertForm.observation_format[index],'sapHeader'))
+$vm.$delete($vm.insertForm.observation_format[index],'sapHeader')
+else
+$vm.$set($vm.insertForm.observation_format[index],'sapHeader','')
+
+}
+if(action=='exp')
+{
+ if(_.has($vm.insertForm.observation_format[index],'exp'))
+$vm.$delete($vm.insertForm.observation_format[index],'exp')
+else
+$vm.$set($vm.insertForm.observation_format[index],'exp',
+{
+rule:'',
+success:'',
+failure:'',
+status:false,
+note:'For Actual Value "_default_"'
+
+})
+
+}
+
+
+},
+    openQasDialog()
+    {
+        var $vm=this;
+$vm.qasLoader=true
+setTimeout(() => {
+$vm.configQasPrintViewDialog=true;
+
+}, 50);
+
+setTimeout(() => {
+    $vm.qasLoader=false;
+}, 2000);
+    },
+    addTableRow(){
+var $vm=this;
+if($vm.createRowName=='')
+{
+    $vm.$alert("Please Fill the Field")
+    return 
+}
+$vm.insertForm.table_header_setup.push($vm.createRowName)
+$vm.$set($vm.insertForm.observation_print_view[$vm.selectedRow],$vm.createRowName,'')
+
+$vm.$alert("added (Please Check Table Order)")
+$vm.createRowName=''
+
+    },
     removeTableRow(index){
 var $vm=this;
 $vm.$confirm("Do You Want to Remove")
 .then(()=>{
- $vm.insertForm.observation_format.splice(index,1)
+    $vm.$delete($vm.insertForm.observation_print_view,index)
+//  $vm.insertForm.observation_format.splice(index,1)
+    // console.log(index,$vm.insertForm.observation_format)
 
 })
     },
@@ -1201,9 +1445,15 @@ $vm.$confrm("Do You Want to Remove")
 })
 $vm.selectedHeaderRow=-1;
     },
-    removeTableHeader(){
+    removeTableHeader(index){
 var $vm=this;
 $vm.$confirm("Do You Want To Delete?").then(()=>{
+
+ $vm.insertForm.observation_print_view=_.map($vm.insertForm.observation_print_view,(x)=>{
+if(_.has(x,$vm.insertForm.table_header_setup[index]))
+$vm.$delete(x,$vm.insertForm.table_header_setup[index])
+return x;
+})
 $vm.insertForm.table_header_setup.splice(index,1)
 })
 },
@@ -1226,18 +1476,17 @@ return value;
     },
 removeTable(index,key){
 var $vm=this;
+console.log("remove=>",index,key)
 $vm.$confirm("Do You Want To Delete?").then(()=>{
-
-
-delete $vm.insertForm.observation_print_view[index][key]
+$vm.$delete($vm.insertForm.observation_print_view[index],key)
 $vm.$alert("removed")
 })
     },
     insertRow(){
 var $vm=this;
 var map={}
-var postfix=$vm.$store.state.map.postfix_observation_print_view_format
-var observation_print_view_format=_.cloneDeep($vm.$store.state.map.observation_print_view_format)
+var postfix=this.insertForm.postfix_observation_print_view_format;
+
 //******************** 1.create observation format****************
 var rows=[];
 //create fields produt config format
@@ -1258,7 +1507,7 @@ $vm.insertForm.observation_print_view.push(map)
 $vm.createQasRowInputDialog=false;
 $vm.$alert("New Row Created")
     },
- selectQasEdiable(index)
+ selectQasEditable(index)
   {
 var $vm=this;
 
@@ -1374,5 +1623,8 @@ border-collapse: collapse;
 border: 1px solid black;
 padding:5px
 }
+.redColor{
+color:red !important
 
+}
 </style>

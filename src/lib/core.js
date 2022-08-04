@@ -1156,3 +1156,33 @@ console.log(new_invoices)
   // console.log("++++++invoices++++",invoices)
   $vm.clear();
 }
+export function colspan(field){
+if(field.hasOwnProperty('merge')) return  field.merge.colspan
+return 1;
+}
+export function rowspan(field){
+  if(field.hasOwnProperty('merge')) return  field.merge.rowspan
+  return 1;
+  }
+  export function merge(field){
+return{
+  colspan:colspan(field),
+  rowspan:rowspan(field)
+}
+
+  }
+
+
+  export function  tableOrder(original=[],existOrder=[]){
+var result=[]
+
+_.map(original,(value)=>{
+    if(_.some(existOrder,(x)=>x==value)){
+result.push(value)
+    }
+  })
+
+  return result;
+
+
+  }

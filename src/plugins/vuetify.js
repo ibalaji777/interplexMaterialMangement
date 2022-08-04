@@ -65,7 +65,8 @@ library.add(
 	faBell,
 	faPlug,
 	faShoppingBasket,
-	faTasks
+	faTasks,
+	
 );
 library.add(
 	faBolt,
