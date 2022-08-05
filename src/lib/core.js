@@ -90,7 +90,10 @@ export function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export async function findProductPartNo(rmcode){
+  return await store.dispatch('findProduct',rmcode)
 
+}
 export async function getProductConfig(rmcode){
 
 
@@ -618,24 +621,30 @@ return originalProduct[0].observation_format||[];
   
   return productConfigFormat;
   }
-  export function getProduct($vm,object){
 
-    var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
-    var originalProduct=database($vm,'getProductConfigValue',object)
+
+
+  export async function getProduct($vm,object){
+
+    // var productConfigFormat=_.cloneDeep(database($vm,'getMasterProductConfig'))
+    // var originalProduct=database($vm,'getProductConfigValue',object)
    
    //  console.log('productConfigFormat',productConfigFormat)
-   //  console.log("originalProduct",originalProduct)
-    if(originalProduct.length==0){
+    console.log("Sap map+>",object)
+   
+   var product=await findProductPartNo(object[defaultFields.partNo])||[]
+  //  console.log("ob+++>",product)
+   if(product.length==0){
    
      return {
-      productConfigFormat,
+      productConfigFormat:[],
       observation_print_view:[],
 
      }
     }
    return {
-    productConfigFormat:originalProduct[0].observation_format,
-    observation_print_view:originalProduct[0].observation_print_view
+    productConfigFormat:product[0].observation_format,
+    observation_print_view:product[0].observation_print_view
   };
    
      //apply default value from  product part not
@@ -665,15 +674,17 @@ export async function createProductList($vm,array){
 
   //create header
  // create product form 
-return _.map(array, (x)=>{
+return await Promise.all(_.map(array,async (x)=>{
   // console.log('x',x)
+var product=await getProduct($vm,x)
 x['headerConfigFormat']=headerConfigFormat($vm,x)
-x['productConfigFormat']=getProduct($vm,x).productConfigFormat;
-x['observation_print_view']=getProduct($vm,x).observation_print_view;
+x['productConfigFormat']=product.productConfigFormat;
+
+x['observation_print_view']=product.observation_print_view;
 //productConfigFormat($vm,x)
 x['qasForm2']= productQasForm2ConfigSArray($vm,x.products)
 return x
-})
+}))
 
 }
 export function createInvoice(array){

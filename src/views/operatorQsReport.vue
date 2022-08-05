@@ -65,7 +65,8 @@ OBSERVATION
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-<h3>QAS FORM LIST</h3>
+<h3>QAS FORM 2</h3>
+<!-- {{selectedPartNoItem}} -->
 <div style="    height: 88vh;
     overflow: scroll;
 ">
@@ -171,9 +172,9 @@ Width Max
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-<h3>QAS FORM LIST</h3>
+<h3>QAS FORM One</h3>
 <!-- {{qasForm1New}} -->
-
+<!-- {{selectedPartNoItem.observation_print_view}} -->
 <div  style="    padding: 10px 20px;
     margin: 8px;
 " class="rowColor" v-for="(form,index) in selectedPartNoItem.observation_print_view" :key="index+'form'">
@@ -260,11 +261,21 @@ Width Max
                 <th></th>
                 <!-- <th></th> -->
             </tr>
+<h3>QAS FORM INPUTS</h3>
+<!--note: productConfigFormat is observation_format-->
+<!-- {{selectedPartNoItem}} -->
 <tr  v-for="(productFormat , index) in selectedPartNoItem.productConfigFormat" :key="'product'+index">
 
 <td >
-  <span style="font-size:14px">{{productFormat.label}}</span>
-    <input    class="interInput"  :disabled="productFormat.disable" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+  <!-- <span style="font-size:14px">{{productFormat.label}}</span> -->
+    <!-- <input     class="interInput"  :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" > -->
+{{productFormat}}
+<div v-if="productFormat.label!=''">
+<v-text-field dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.label"></v-text-field>
+</div>
+<div v-else>
+<v-text-field dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.name"></v-text-field>
+</div>
 </td>
 <!-- <td style="padding:15px" >
     <div style="text-align:center">

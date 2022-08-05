@@ -1216,8 +1216,7 @@ console.log(new_invoices)
 
         selectedPartNoItem(item, index) {
             var $vm = this;
-            // console.log("selected item")
-            // console.log(item)
+            console.log("selected item=>",item)
             this.$store.commit("selectedPartNoItem", item);
         },
 
