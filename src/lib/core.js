@@ -628,6 +628,11 @@ export function sapMap(observation_format,sapObject){
 
     if(_.has(obj,'sapHeader')){
       obj.value=sapObject[obj['sapHeader']]||''
+      //  if(sapObject[obj['sapHeader']]){
+      //   store.commit('setSapLog',{key:sapObject[defaultFields.partNo]+obj['sapHeader'],value:'Found'})
+      // return; 
+      // }
+      // store.commit('setSapLog',{key:sapObject[defaultFields.partNo]+obj['sapHeader'],value:'Not Found'})
 
     }
     return obj

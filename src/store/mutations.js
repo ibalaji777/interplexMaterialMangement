@@ -173,7 +173,13 @@ readProductConfig(state,payload){
 	state.date.action=payload.action
 	state.date.from_date=payload.from_date
 	state.date.to_date=payload.to_date
-}
+},
+setSapLog(state,payload){
+	state.sapLogs[payload.key]=payload.value
+},
+clearSapLog(state){
+	state.sapLogs={}
+},
 
 };
 

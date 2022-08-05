@@ -269,13 +269,16 @@ Width Max
 <td >
   <!-- <span style="font-size:14px">{{productFormat.label}}</span> -->
     <!-- <input     class="interInput"  :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" > -->
-{{productFormat}}
-<div v-if="productFormat.label!=''">
-<v-text-field dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.label"></v-text-field>
-</div>
-<div v-else>
-<v-text-field dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.name"></v-text-field>
-</div>
+<!-- {{productFormat}} -->
+ <!-- SAP MAP -->
+ <div style="display:flex;align-items:baseline" v-if="productFormat.sapHeader">
+ <div>   <v-icon style="color:green" :class="{isRed:productFormat.value==''}">mdi-magnify-scan</v-icon></div>
+<v-text-field style="margin-right:2px"  dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.label+'('+productFormat.name+')'"></v-text-field>
+<div><b>Key: "{{productFormat.sapHeader}}"&nbsp;{{productFormat.value==''?'Not Found':'Found'}}</b></div>
+
+ </div>
+ <!-- SAP WITHOUT MAP -->
+<v-text-field v-else  dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.label+'('+productFormat.name+')'"></v-text-field>
 </td>
 <!-- <td style="padding:15px" >
     <div style="text-align:center">
@@ -512,7 +515,10 @@ $vm.submitQasForm1new()
 }
 },
     methods:{
+checkSapLog(key){
 
+return 'Please Check key "'+key+'" if value not found'
+},
 submitQasForm1Array(){
 var $vm=this;
 
@@ -656,5 +662,8 @@ console.log(math.evaluate(productFormat.rule,scope))
 .errorStatus{
 //error_status:true
     color:green !important
+}
+.isRed{
+    color:red !important
 }
 </style>
