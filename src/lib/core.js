@@ -622,7 +622,17 @@ return originalProduct[0].observation_format||[];
   return productConfigFormat;
   }
 
+export function sapMap(observation_format,sapObject){
 
+  return _.map(observation_format,(obj)=>{
+
+    if(_.has(obj,'sapHeader')){
+      obj.value=sapObject[obj['sapHeader']]||''
+
+    }
+    return obj
+  })
+}
 
   export async function getProduct($vm,object){
 
@@ -642,8 +652,9 @@ return originalProduct[0].observation_format||[];
 
      }
     }
+    var observation_format=sapMap(product[0].observation_format,object)
    return {
-    productConfigFormat:product[0].observation_format,
+    productConfigFormat:observation_format,
     observation_print_view:product[0].observation_print_view
   };
    
