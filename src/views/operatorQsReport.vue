@@ -164,8 +164,11 @@ Width Max
         >
           <v-toolbar-title><v-icon @click="qasForm1NewDialog = false">fa-times</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn @click="submitQasForm1new" style="color:white" text>
+          <!-- <v-btn @click="submitQasForm1new" style="color:white" text>
             OK
+          </v-btn> -->
+          <v-btn :loading="qasFormOneValidateLoader" @click="validateQasFormOne" style="color:white" text>
+            validate
           </v-btn>
           <v-toolbar-items>
           </v-toolbar-items>
@@ -534,6 +537,7 @@ export default {
     data(){
 
         return {
+            qasFormOneValidateLoader:false,
             qasFormOneUi:[],
             qasForm1New:{},
             qasHeaderNew:{},
@@ -683,6 +687,52 @@ return x;
 
 },
 
+checkQasOneRules(){
+var $vm=this;
+//Observationformat array to object for scope
+var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
+var scope=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+
+$vm.selectedPartNoItem.productConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.productConfigFormat),(ob_format)=>{
+
+if(ob_format.exp){
+console.log("exp_>",scope,ob_format.exp.rule,math.evaluate(ob_format.exp.rule,scope))
+if(ob_format.exp.rule!=''){
+ if(math.evaluate(ob_format.exp.rule,scope)){
+if(ob_format.exp.success=='_default_'){
+ob_format.value=math.evaluate(ob_format.exp.rule,scope);
+// $vm.$set()
+ob_format.exp.status=true;
+}
+else
+ob_format.value=ob_format.exp.success;
+        }
+        else{
+if(ob_format.exp.failure=='_default_')
+{ob_format.value=math.evaluate(ob_format.exp.rule,scope);
+ob_format.exp.status=false;
+}
+else
+ob_format.value=ob_format.exp.failure;
+  }
+
+    }
+    }
+return ob_format;    
+})
+
+
+
+},
+
+validateQasFormOne(){
+var $vm=this;
+$vm.qasFormOneValidateLoader=true;
+$vm.checkQasOneRules()
+setTimeout(() => {
+    $vm.qasFormOneValidateLoader=false
+}, 1000);
+},
 
 submitQasForm1new(){
 var $vm=this;

@@ -2109,8 +2109,8 @@ export default {
                 else
                     $vm.$set($vm.insertForm.observation_format[index], "exp", {
                         rule: "",
-                        success: "",
-                        failure: "",
+                        success: "",//_default_
+                        failure: "",//_default_
                         status: false,
                         note: 'For Actual Value "_default_"'
                     });
