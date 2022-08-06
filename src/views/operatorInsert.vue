@@ -352,7 +352,7 @@ Items
                             id="docpicker"
                             accept=".txt,.csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
                         />
-                        <v-btn @click="headerFileUploader">check</v-btn>
+                        <v-btn style="color:white" color="rgb(48, 32, 78)" @click="headerFileUploader">check</v-btn>
                     </div>
                 </div>
             </v-card>
@@ -634,7 +634,15 @@ background: #555160;
                         <div
                             style="display:flex;width:100%"
                         >
-                            <v-btn
+
+
+                          <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+
+                                    <v-btn
+    v-bind="attrs"
+          v-on="on"
+
                                 color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
                                 @click="checkDialogeEdit = true"
@@ -643,7 +651,17 @@ background: #555160;
                                  <v-icon>mdi-pencil</v-icon>
                                 </v-btn
                             >
+
+      </template>
+      <span>Edit Sap File</span>
+    </v-tooltip>
+                              <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+
                             <v-btn
+    v-bind="attrs"
+          v-on="on"
+                            
                                 color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
                                 @click="checkBatch"
@@ -653,12 +671,28 @@ background: #555160;
                                 
                                 </v-btn
                             >
+
+      </template>
+                <span>Check Batch Exist or not</span>
+
+    </v-tooltip>
+                              <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+
                             <v-btn
+    v-bind="attrs"
+          v-on="on"
                                 color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
                                 @click="qasGroupOneCheckout"
                                 >Submit
                             </v-btn>
+      </template>
+    <span>Prepare Below List if correct</span>
+
+
+    </v-tooltip>
+
                                 </div>
                     
                         <!-- <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn> -->
@@ -747,7 +781,7 @@ background: #555160;
 
                         <v-btn
                             @click="addToQualitFormOne"
-                            color="red"
+                            color="rgb(48, 32, 78)"
                             style="width:100%;color:white"
                             >Add</v-btn
                         >
@@ -761,8 +795,9 @@ background: #555160;
                                 @click="item.selected = !item.selected"
                                 :class="{ selectedInvoice: item.selected }"
                                 style=" 
-   background: chartreuse;
+   background: rgb(93, 95, 131);
     padding: 10px;
+    color:white;
     border-radius: 10px;
     margin: 10px;
 

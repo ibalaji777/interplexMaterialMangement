@@ -181,8 +181,128 @@ Width Max
 <div style="background: white;
     padding: 6px 15px;
     border-radius: 24px;
+    box-shadow: 4px 9px burlywood;" class="flex-row-container">
+
+
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qasFormOneUi.one" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
+<div v-if="ui.name=='no'">
+NO:{{index+1}}
+</div>
+
+
+ <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
+
+<div v-if="ui.name=='desc'">
+   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+<div v-else>
+    <div>
+   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+</div>
+
+</div>
+
+</div>
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qasFormOneUi.two" :key="'form_'+index_sub" :style="{width:ui.width+'%'}">
+<div v-if="ui.name=='no'">
+NO:{{index+1}}
+</div>
+
+
+ <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
+
+<div v-if="ui.name=='desc'">
+   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+<div v-else>
+<div v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable" style="height:85px">
+
+    <h4> {{ui.label}}:  </h4>
+    <v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+    </v-text-field>
+ </div>
+<div v-else>
+   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div >
+
+</div>
+
+
+<!-- <div class="flex-row-item"  v-for="(key,index_sub) in Object.keys(form)" :key="'form'+index_sub">
+<div v-if="key=='no'">
+NO:{{index+1}}
+</div>
+<div v-if="key=='desc'&&getIndex(form[key])!=-1">
+<span v-if="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value!=''">
+    {{selectedPartNoItem.productConfigFormat[getIndex(form[key])].label+'('+key+')'}}
+    <v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value" outlined dense >
+    </v-text-field>
+</span>
+<span v-else>
+    {{selectedPartNoItem.productConfigFormat[getIndex(form[key])].label+'('+key+')'}}
+    <v-text-field  style="margin:5px" :disabled="true"   outlined dense >
+    </v-text-field>
+    </span>
+</div>
+
+<div v-if="!['no','desc'].includes(key)&&getIndex(form[key])!=-1">
+
+{{selectedPartNoItem.productConfigFormat[getIndex(form[key])].label+'('+key+')'}}
+<v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value" outlined dense >
+</v-text-field>
+<v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable" v-else  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value" outlined dense >
+</v-text-field>
+
+</div>
+</div> -->
+</div>
+     </div>  </div>
+      </v-card>
+    </v-dialog>
+
+ <!-- <v-dialog
+      v-model="qasForm1NewDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="qasForm1NewDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn @click="submitQasForm1new" style="color:white" text>
+            OK
+          </v-btn>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<h3>QAS FORM One</h3>
+<div  style="    padding: 10px 20px;
+    margin: 8px;
+" class="rowColor" v-for="(form,index) in selectedPartNoItem.observation_print_view" :key="index+'form'">
+<div style="background: white;
+    padding: 6px 15px;
+    border-radius: 24px;
     box-shadow: 4px 9px burlywood;">
-    <!-- {{qasForm1New}} -->
 <b>{{index+1}}.{{form.desc}}</b><br>
 <b>{{qasForm1New[form.unit]}}</b><br>
 <div style="display:flex;justify-content:space-around">
@@ -192,19 +312,13 @@ Width Max
 </div>
 <div style="">
     <div style="">
-    <!-- <label>Min Spec</label> -->
-    <!-- <v-text-field label="Min Spec"></v-text-field> -->
     </div><br>
 <div style="display:flex;width:100%;height:30px">
-    <!-- <label>Min Spec</label> -->
-    <!-- {{form.sup_one}}
-    {{form.sup_two}} -->
     <v-text-field outlined color="white" style="margin:4px" dense v-model="qasForm1New[form.sup_one]" label="Min Spec"></v-text-field>
     <v-text-field outlined color="white" style="margin:4px" dense v-model="qasForm1New[form.sup_two]" label="Max Spec"></v-text-field>
     </div>
 <br>
 <div style="display:flex;width:100;height:30px">
-    <!-- <label>Min Spec</label> -->
     <v-text-field outlined dense color="white" style="margin:4px" v-model="qasForm1New[form.ielpt_one]" label="Ielpt One"></v-text-field>
     <v-text-field outlined dense color="white" style="margin:4px" v-model="qasForm1New[form.ielpt_two]" label="Ielpt Two"></v-text-field>
     
@@ -214,7 +328,6 @@ Width Max
         <v-text-field outlined dense v-model="qasForm1New[form.remarks]" label="Remark"></v-text-field>
         </div>
 <div>
-    <!-- <v-text-field></v-text-field> -->
 </div>
 
 </div>
@@ -230,8 +343,7 @@ Width Max
 
 </div>
       </v-card>
-    </v-dialog>
-
+    </v-dialog> -->
 
  <v-dialog
       v-model="productFormatDialog"
@@ -422,6 +534,7 @@ export default {
     data(){
 
         return {
+            qasFormOneUi:[],
             qasForm1New:{},
             qasHeaderNew:{},
             fileTypeDialog:false,
@@ -438,6 +551,15 @@ qasForm1NewDialog:false,
         }
     },
     computed:{
+                getIndex() {
+            var $vm = this;
+            return name => {
+                return _.findIndex($vm.selectedPartNoItem.productConfigFormat, x => {
+                    return x.name == name;
+                });
+            };
+        },
+
         selectedPartNoItem(){
 
 return this.$store.state.interplex.selectedPartNoItem||{};
@@ -469,8 +591,15 @@ return ''
 
 },
     },
+    created(){
+        var $vm=this;
+$vm.qasFormOneUi=_.cloneDeep($vm.$store.state.interplex.qasFormOneUI);
+
+    },
   async  mounted(){
         var $vm=this;
+
+
         // console.log("qs selectedPartNoItem")
 // console.log($vm.$store.state.interplex.selectedPartNoItem)
 await $vm.$store.dispatch('readUploadType')
@@ -665,5 +794,20 @@ console.log(math.evaluate(productFormat.rule,scope))
 }
 .isRed{
     color:red !important
+}
+.flex-row-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    // align-items: center;
+    // justify-content: center;
+}
+.flex-row-container > .flex-row-item {
+    flex: 1 1 50%; /*grow | shrink | basis */
+    // height: 70px;
+}
+
+.flex-row-item {
+//   border: 1px solid #f76707;
 }
 </style>

@@ -1,6 +1,9 @@
 /*eslint-disable*/
 import moment from 'moment'
 const state = {
+	sapLogs:{
+
+	},
  bgColor:'#30204e',
  dateFormat:"YYYY-MM-DD",
  barcodeLabel:{
@@ -431,7 +434,67 @@ productConfig:{
 
 
 interplex:{
+	qasFormOneUI:
+		{
+			one:[
+			{
+				label:'No',
+				name:'no',
+				width:'50'
+			},
+			{
+				label:'Description',
+				name:'desc',//key of observation format
+				width:'50'
+			},
+			{
+				label:'Width Min',
+				name:'min_spec',
+				width:'50'
+			},
+			{
+				label:'Width Max',
+				name:'max_spec',
+				width:'50'
+			}
+		],
+			two:[
+				{
+					label:'Width Min',
+					name:'sup_min',
+					width:'50'
+				},
+				{
+					label:'Width Max',
+					name:'sup_max',
+					width:'50'
+				},
+				{
+					label:'Ieipl Min',
+					name:'ieipl_min',
+					width:'50'
+				},
+				{
+					label:'Ieipl Max',
+					name:'ieipl_max',
+					width:'50'
+				},
+				{
+					label:'Remarks',
+					name:'remarks',
+					width:'100'
+				}
+			]
+		}
+	,
+	qasFormTwoUI:
+		{
+			one:[],
+			two:[]
+		}
+	,
 	masterFileTypes:[],
+	
 	currentBranch:'',
 	currentRoleType:'',
 	qasForm1:[],//test
