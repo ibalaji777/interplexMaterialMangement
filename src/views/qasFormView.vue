@@ -177,13 +177,13 @@ Qas Form
 <h3 style="padding:0;margin:0">OBSERVATION</h3>
 
 <table class="observationTable">
-    <tr>
+    <!-- <tr>
         <td rowspan="2">SL</td>
         <td colspan="4" style="text-align:center">SPEC/REQUIREMENT</td>
         <td colspan="2" style="text-align:center">ACTUAL READING </td>
         <td rowspan="2">REMARKS</td>
-    </tr>
-    <tr>
+    </tr> -->
+    <!-- <tr>
         <td>DESCRIPTION</td>
         <td>UNIT</td>
         <td>MIN <br> SPEC</td>
@@ -191,9 +191,26 @@ Qas Form
         <td>SUPPLIER</td>
         <td>IELPL/THIRD PARTY</td>
        
-    </tr>
+    </tr> -->
+<tr v-for="(header,index) in printData.renderQas1Header" :key="index+'headerform1'">
 
-    <tr v-for="(printview,index) in printData.qasFormOneFill" :key='"form"+index'
+<td :colspan="col.merge.colspan" :rowspan="col.merge.rowspan" v-for="(col,sub_index) in header" :key="'sub_index'+sub_index">
+{{
+    col.value
+}}
+</td>
+</tr>
+<tr v-for="(header,index) in printData.renderQas1Body" :key="index+'bodyform1'">
+
+<td :colspan="col.merge.colspan" :rowspan="col.merge.rowspan" v-for="(col,sub_index) in header" :key="'sub_index'+sub_index">
+{{
+    col.value
+}}
+</td>
+</tr>
+
+
+    <!-- <tr v-for="(printview,index) in printData.qasFormOneFill" :key='"form"+index'
     >
 <td>
     {{index+1}}
@@ -224,7 +241,7 @@ Qas Form
 </td>
 
 
-    </tr>
+    </tr> -->
 </table>
 
 

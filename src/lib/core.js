@@ -648,8 +648,11 @@ export function sapMap(observation_format,sapObject){
     console.log("Sap map+>",object)
    
    var product=await findProductPartNo(object[defaultFields.partNo])||[]
-  //  console.log("ob+++>",product)
-   if(product.length==0){
+
+// x['headerConfigFormat']=product.headerConfigFormat=header_result;
+
+
+if(product.length==0){
    
      return {
       productConfigFormat:[],
@@ -657,17 +660,40 @@ export function sapMap(observation_format,sapObject){
       observation2_print_view:[],
       productConfigFormat2:[], 
       qas_form_one_ui:{},
-      qas_form_two_ui:{}
+      qas_form_two_ui:{},
+      headerConfigFormat:[]
     }
     }
     var observation_format=sapMap(product[0].observation_format,object)
-   return {
+
+    var header=_.cloneDeep(database($vm,'getMasterHeaderConfig'))
+
+    //  console.log("ob+++>",product)
+    
+    
+    var header_result= _.map(header,(x)=>{
+    
+      if(x.mapFrom=='header'&&x.map!='')
+      {
+      x['value']=(object[x.map]||'')
+      }
+      if(x.mapFrom=='product'&&x.map!='')
+      {
+        x['value']=(product[0][x.map]||'')
+       
+      }
+      return x;
+    
+    })
+    
+    return {
     productConfigFormat:observation_format,
     observation_print_view:product[0].observation_print_view,
     observation2_print_view:product[0].observation2_print_view,
     productConfigFormat2:product[0].observation2_format,
     qas_form_one_ui:product[0].qas_form_one_ui,
-    qas_form_two_ui:product[0].qas_form_two_ui
+    qas_form_two_ui:product[0].qas_form_two_ui,
+    headerConfigFormat:header_result
 
   };
    
@@ -731,7 +757,11 @@ export async function createProductList($vm,array){
 return await Promise.all(_.map(array,async (x)=>{
   // console.log('x',x)
 var product=await getProduct($vm,x)
-x['headerConfigFormat']=headerConfigFormat($vm,x)
+x['headerConfigFormat']=product.headerConfigFormat;
+
+// headerConfigFormat($vm,x)
+
+
 x['productConfigFormat']=product.productConfigFormat;
 x['observation_print_view']=product.observation_print_view;
 
@@ -1038,10 +1068,13 @@ export function setQasHeader(qasOne,headerArray){
     'grn_no',
     'grn_date',
   'rmcode',
+  'rm',
 'eds',
+'product_name',
+// 'form_format',
 'received_qty','invoice_qty'].includes(x.name))
 {
-  qasOne[x.name]=x.value;
+  qasOne[x.name]=x.value||'';
 }
 return x;
   })
@@ -1135,6 +1168,7 @@ export async function  submit($vm) {
           // invoice=setHeaderConfigData(headerData,invoice)
 //********************Create QASForm1 config into invoice****************************
 invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
+  console.log("product++",product)
               var object = {};
               object["batch"] = "";
               object["skiplevel_status"] = product.skiplevel_status;
@@ -1145,6 +1179,22 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
               product.productConfigFormat;
               object["header_format"] = product.headerConfigFormat;
               object=setQasHeader(object,product.headerConfigFormat)
+              object['qas_form_one_values']=_.reduce(product.productConfigFormat,
+                (result,value,key)=>{
+                  // console.log("qas_form_one_values",key,value)
+                  result[value.name]=value.value
+                  return result;
+
+              },{})
+              object['qas_form_one_validation']=_.reduce(product.productConfigFormat,
+                (result,value,key)=>{
+                  // console.log("qas_form_one_values",key,value)
+                  if(value.exp)
+                  result[value.name]=value.exp.rule
+                  return result;
+
+              },{})
+
               // object=setHeaderConfigData(product.headerConfigFormat,object)
 
 //********************Create QASForm2 config into invoice****************************
@@ -1152,6 +1202,24 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
                   product.qasForm2,
                   qasform2 => {
                       qasform2["invoice_client_id"] =invoice["invoice_client_id"];
+                      qasform2=setQasHeader(qasform2,product.headerConfigFormat)
+                      qasform2['qas_form_two_values']=_.reduce(product.productConfigFormat2,
+                        (result,value,key)=>{
+                          // console.log("qas_form_one_values",key,value)
+                          result[value.name]=value.value
+                          return result;
+        
+                      },{})
+        
+                      qasform2['qas_form_two_validation']=_.reduce(product.productConfigFormat2,
+                        (result,value,key)=>{
+                          // console.log("qas_form_one_values",key,value)
+                          if(value.exp)
+                          result[value.name]=value.exp.rule
+                          return result;
+        
+                      },{})
+
                       return qasform2;
                   }
               );
@@ -1258,6 +1326,88 @@ result.push(value)
   })
 
   return result;
+
+
+  }
+
+
+
+  export function observationTableHeader(format,printView)
+  {
+
+return _.map(printView,(x)=>{
+
+  return _.map(x.column,(col)=>{
+
+var  header=_.find(format,(data)=>data.name==col.name)
+if(header)
+    return  {...header,
+    merge:{
+      colspan:header.merge?header.merge.colspan:1,
+      rowspan:header.merge?header.merge.rowspan:1
+    }
+    } 
+
+    return {
+    name:col.header,
+    value:'',
+    merge:{
+      colspan:1,
+      rowspan:1,
+    }
+
+
+    }
+  })
+})
+  }
+
+
+  export function observationTableBody(order,format,printView)
+  {
+
+    var count=0;
+return _.map(printView,(x)=>{
+  count++
+
+  var torder=tableOrder(Object.keys(x),order)
+
+  return _.map(torder,(col ,key)=>{
+    console.log("c",col,"k",key)
+
+    var column=x[col]
+    var  header=_.find(format,(data)=>data.name==column)
+if(header)
+    return  {...header,
+    merge:{
+      colspan:header.merge?header.merge.colspan:1,
+      rowspan:header.merge?header.merge.rowspan:1
+    }
+    } 
+
+    if(col=='no'){
+    return {
+    name:'no',
+    value:count,
+    merge:{
+      colspan:1,
+      rowspan:1,
+    }
+  }
+}
+
+  
+  return {
+    name:'',
+    value:'Not Found',
+    merge:{
+      colspan:1,
+      rowspan:1,
+    }
+    }
+  })
+
+})
 
 
   }

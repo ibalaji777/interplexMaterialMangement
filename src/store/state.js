@@ -984,6 +984,7 @@ value:'',//default value
 default:true,
 editable:true,
 },
+
 {
 	label:'Sup Coil',//input field label
 	name:'lot_no',//column name
