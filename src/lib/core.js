@@ -654,13 +654,21 @@ export function sapMap(observation_format,sapObject){
      return {
       productConfigFormat:[],
       observation_print_view:[],
-
-     }
+      observation2_print_view:[],
+      productConfigFormat2:[], 
+      qas_form_one_ui:{},
+      qas_form_two_ui:{}
+    }
     }
     var observation_format=sapMap(product[0].observation_format,object)
    return {
     productConfigFormat:observation_format,
-    observation_print_view:product[0].observation_print_view
+    observation_print_view:product[0].observation_print_view,
+    observation2_print_view:product[0].observation2_print_view,
+    productConfigFormat2:product[0].observation2_format,
+    qas_form_one_ui:product[0].qas_form_one_ui,
+    qas_form_two_ui:product[0].qas_form_two_ui
+
   };
    
      //apply default value from  product part not
@@ -686,6 +694,36 @@ export function sapMap(observation_format,sapObject){
      return productConfigFormat;
      }
 
+     export function setQasForm2(products,productConfigFormat2){
+
+
+return  _.map(products,(sapObject)=>{
+console.log("sap products..",sapObject)
+
+_.map(productConfigFormat2,(x)=>{
+
+if(x.name!='validation'){
+  sapObject[x.name]=x.value||'';
+
+  if(x.sapHeader){
+    sapObject[x.name]=sapObject[x.sapHeader]||''
+  }
+}
+else{
+  if(x.exp){
+    sapObject['validation']=false;
+  }
+
+}
+
+})
+
+return sapObject
+  })
+
+
+}
+
 export async function createProductList($vm,array){
 
   //create header
@@ -695,10 +733,19 @@ return await Promise.all(_.map(array,async (x)=>{
 var product=await getProduct($vm,x)
 x['headerConfigFormat']=headerConfigFormat($vm,x)
 x['productConfigFormat']=product.productConfigFormat;
-
 x['observation_print_view']=product.observation_print_view;
+
+x['observation2_print_view']=product.observation2_print_view;
+x['productConfigFormat2']=product.productConfigFormat2;
+x['qas_form_one_ui']=product.qas_form_one_ui;
+x['qas_form_two_ui']=product.qas_form_two_ui;
+// x['products']=setQasForm2(x.products,productConfigFormat2);
+
+
 //productConfigFormat($vm,x)
-x['qasForm2']= productQasForm2ConfigSArray($vm,x.products)
+x['qasForm2']= setQasForm2(x.products,x.productConfigFormat2);
+
+// productQasForm2ConfigSArray($vm,x.products)
 return x
 }))
 
@@ -763,6 +810,7 @@ return _.map(groupBy(array, function (item) {
 
 }));
 }
+
 
 
 export function skiplevel($vm,array){

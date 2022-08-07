@@ -310,9 +310,19 @@
             @click="openQasDialog"
             outlined
             color="red"
+            style="margin:10px 10px"
+        >
+            Quality Assurance Form One
+        </v-btn>
+
+        <v-btn
+            :loading="qas2Loader"
+            @click="openQasTwoDialog"
+            outlined
+            color="red"
             style="margin:10px 0"
         >
-            Quality Assurance Form
+            Quality Assurance Form Two
         </v-btn>
         <div style="display:flex;justify-content:flex-end;margin-top:25px">
             <v-btn outlined @click="clear" style=";margin-right:10px;"
@@ -324,7 +334,7 @@
             <v-btn v-else @click="update" outlined>Update</v-btn>
         </div>
 
-        <!-- ^^^^^^^^^^^^^^^^^^^^^^^^create field setting dialog^^^^^^^^^^^^^^^^^^^^ -->
+        <!-- ^^^^^^^^^^^^^^^^^^^^^^^^qas form 1^^^^^^^^^^^^^^^^^^^^ -->
         <v-dialog
             v-model="configQasPrintViewDialog"
             fullscreen
@@ -695,6 +705,367 @@
                 </div>
             </v-card>
         </v-dialog>
+        <!-- ^^^^^^^^^^^^^^^^^^^^^^^^qas form 2^^^^^^^^^^^^^^^^^^^^ -->
+          <v-dialog
+            v-model="configQas2PrintViewDialog"
+            fullscreen
+            hide-overlay
+            persistent
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar dark :color="$store.state.bgColor">
+                    <span>Create Qas Form </span>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-title
+                        ><v-icon @click="configQas2PrintViewDialog = false"
+                            >fa-times</v-icon
+                        ></v-toolbar-title
+                    >
+
+                    <v-toolbar-items> </v-toolbar-items>
+                </v-toolbar>
+                <v-divider></v-divider>
+                <div style="padding:10px">
+
+                    <h3 style="padding:0;margin:10px 0">Product List Group Format</h3>
+
+header{{insertForm.observation2_header_print_view}}<br>
+print view{{insertForm.observation2_print_view}}<br>
+ob2 format{{insertForm.observation2_format}}<br>
+
+                    <div style="height:78vh;overflow:scroll">
+                        <table class="observationTable" style="width:100vw">
+                            <tr
+                                v-for="(form,
+                                index) in insertForm.observation2_header_print_view"
+                                :key="'printv' + index"
+                            >
+                                <td
+                                    :colspan="getColspan2(item.name)"
+                                    :rowspan="getRowspan2(item.name)"
+                                    v-for="(item, index_sub) in form.column"
+                                    :key="'inde' + index_sub"
+                                >
+                                       <div v-if="item.name == 'no'">
+                                            {{ index + 1 }}<br />
+                                       </div>
+                                    <div v-else>
+                                        <div>
+                                        {{item.name}}<br>
+                                        {{getIndex2(item.name)}}
+                                        <div v-if="getIndex2(item.name) != -1">
+                                            <div
+                                                style="display:flex;width:250px;justify-content:space-between"
+                                            >
+                                                {{
+                                                    insertForm
+                                                        .observation2_format[
+                                                        getIndex2(item.name)
+                                                    ].label
+                                                }}
+                                                <v-icon
+                                                    @click="
+                                                        removeTable(
+                                                            index,
+                                                            item.name
+                                                        )
+                                                    "
+                                                    >fa-trash</v-icon
+                                                >
+                                            </div>
+                                            <div
+                                                style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
+                                            >
+                                                <v-icon
+                                                    @click="
+                                                        selectQas2Editable(
+                                                            getIndex2(item.name)
+                                                        )
+                                                    "
+                                                    >fa-cog</v-icon
+                                                >
+                                                <div>
+                                                    <!-- {{insertForm.observation2_format[getIndex2(item.name)]}}
+{{item.name}}
+{{getIndex2(item.name)}}
+{{isKeyExist2(form[item.name],'merge')}} -->
+                                                    <v-icon
+                                                        :class="{
+                                                            redColor: isKeyExist2(
+                                                                getIndex2(
+                                                                    item.name
+                                                                ),
+                                                                'merge'
+                                                            )
+                                                        }"
+                                                        style="margin:2px"
+                                                        >mdi-table-merge-cells</v-icon
+                                                    >
+                                                    <!-- <v-icon  :class="{redColor:isKeyExist2(getIndex2(item.name),'sapHeader')}" style="margin:2px">mdi-magnify-scan</v-icon>
+<v-icon :class="{redColor:isKeyExist2(getIndex2(item.name),'exp')}">fa-calculator</v-icon> -->
+                                                </div>
+                                            </div>
+
+                                            <v-text-field
+                                                outlined
+                                                v-debounce="delay"
+                                                label="value"
+                                                v-model.lazy="
+                                                    insertForm
+                                                        .observation2_format[
+                                                        getIndex2(item.name)
+                                                    ].value
+                                                "
+                                            ></v-text-field>
+                                        </div>
+                                        <div v-else>
+                                            Header
+                                            <div
+                                                style="display:flex;width:250px;justify-content:space-between"
+                                            >
+                                                <div></div>
+                                                <v-icon
+                                                    @click="
+                                                        removeTable2(index, key)
+                                                    "
+                                                    >fa-trash</v-icon
+                                                >
+                                            </div>
+
+                                            Not Found
+                                        </div>
+                                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                                   <draggable
+                                :list="insertForm.observation2_print_view"
+                                style="
+                     margin-top:10px "
+                                tag="tr"
+                                ghost-class="ghost"
+                                group="product"
+                                @start="dragging = true"
+                                @end="dragging = false"
+                            >   
+
+                                    <td
+
+                                       v-for="(column,
+                                    index) in insertForm.observation2_print_view"
+                                    :key="'pri' + index"
+
+                                        :colspan="getColspan2(column)"
+                                        :rowspan="getRowspan2(column)"
+                                     >
+                                     <!-- {{column}} -->
+                              
+                                        <div v-if="column.name == 'no'">
+                                            {{ index + 1 }}<br />
+                                            <!-- {{}} -->
+                                            <div
+                                                style="display:flex;justify-content:space-evenly"
+                                            >
+                                                <v-icon
+                                                    style="font-size:50px"
+                                                    class="drag"
+                                                    >mdi-drag-horizontal</v-icon
+                                                >
+                                                <v-icon
+                                                    @click="
+                                                        selectedRow2 = index;
+                                                        selectedRowDialog2 = true;
+                                                    "
+                                                    style="font-size:25px;color:red"
+                                                    class="drag"
+                                                    >fa-plus</v-icon
+                                                >
+                                            </div>
+                                        </div>
+                                        <div v-else>
+                                            <div
+                                                v-if="getIndex2(column.name) != -1"
+                                            >
+                                                <div
+                                                    style="display:flex;width:250px;justify-content:space-between"
+                                                >
+                                                    {{
+                                                        insertForm
+                                                            .observation2_format[
+                                                            getIndex2(column.name)
+                                                        ].label
+                                                    }}
+                                                    <v-icon
+                                                        @click="
+                                                            removeTable2(
+                                                                index,
+                                                                column.name
+                                                            )
+                                                        "
+                                                        >fa-trash</v-icon
+                                                    >
+                                                </div>
+                                                <div
+                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
+                                                >
+                                                    <v-icon
+                                                        @click="
+                                                            selectQas2Editable(
+                                                                getIndex2(
+                                                                    column.name
+                                                                )
+                                                            )
+                                                        "
+                                                        >fa-cog</v-icon
+                                                    >
+                                                    <!-- <v-switch label="Input Disable" v-model="insertForm.observation2_format[getIndex2(column.name)].disable"></v-switch> -->
+                                                    <div>
+                                                        <v-icon
+                                                            :class="{
+                                                                redColor:
+                                                                    insertForm
+                                                                        .observation2_format[
+                                                                        getIndex2(
+                                                                            column.name
+                                                                        )
+                                                                    ].editable
+                                                            }"
+                                                            @click="
+                                                                insertForm.observation2_format[
+                                                                    getIndex2(
+                                                                      column.name
+                                                                    )
+                                                                ].editable = !insertForm
+                                                                    .observation2_format[
+                                                                    getIndex2(
+                                                                        column.name
+                                                                    )
+                                                                ].editable
+                                                            "
+                                                            style="margin:2px"
+                                                            >mdi-account-edit</v-icon
+                                                        >
+                                                        <v-icon
+                                                            :class="{
+                                                                redColor: isKeyExist2(
+                                                                    getIndex2(
+                                                                        column.name
+                                                                    ),
+                                                                    'merge'
+                                                                )
+                                                            }"
+                                                            style="margin:2px"
+                                                            >mdi-table-merge-cells</v-icon
+                                                        >
+                                                        <v-icon
+                                                            :class="{
+                                                                redColor: isKeyExist2(
+                                                                    getIndex2(
+                                                                        column.name
+                                                                    ),
+                                                                    'sapHeader'
+                                                                )
+                                                            }"
+                                                            style="margin:2px"
+                                                            >mdi-magnify-scan</v-icon
+                                                        >
+                                                        <v-icon
+                                                            :class="{
+                                                                redColor: isKeyExist2(
+                                                                    getIndex2(
+                                                                        column.name
+                                                                    ),
+                                                                    'exp'
+                                                                )
+                                                            }"
+                                                            >fa-calculator</v-icon
+                                                        >
+                                                    </div>
+                                                </div>
+
+                                                <v-text-field
+                                                    outlined
+                                                    v-debounce="delay"
+                                                    label="value"
+                                                    v-model.lazy="
+                                                        insertForm
+                                                            .observation2_format[
+                                                            getIndex2(column.name)
+                                                        ].value
+                                                    "
+                                                ></v-text-field>
+                                                <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation2_format
+                                                    "
+                                                    dense
+                                                    v-model="column.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                ></v-combobox>
+                                                                                                <v-icon
+                                                    style="font-size:50px"
+                                                    class="drag"
+                                                    >mdi-drag-horizontal</v-icon
+                                                >
+                                            
+                                                
+                                            </div>
+                                            <div v-else>
+                                                <div
+                                                    style="display:flex;width:250px;justify-content:space-between"
+                                                >
+                                                    <div></div>
+                                                    <v-icon
+                                                        @click="
+                                                            removeTable2(
+                                                                index,
+                                                                column.name
+                                                            )
+                                                        "
+                                                        >fa-trash</v-icon
+                                                    >
+                                                </div>
+
+                                                Not Found
+<!-- {{insertForm.observation2_format}} -->
+                                                <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation2_format
+                                                    "
+                                                    dense
+                                                    v-model="column.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                ></v-combobox>
+
+                                                <br />
+                                                {{ column.name }}<br>
+
+<v-btn text @click="createQas2Field(column.name)">
+                                                <v-icon>fa-plus</v-icon>
+                                                </v-btn>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                   </draggable>
+                        </table>
+                    </div>
+                </div>
+            </v-card>
+        </v-dialog>
+
+
         <!-- tableColumnSetupDialog -->
         <v-dialog v-model="tableColumnSetupDialog" persistent fullscreen>
             <v-card>
@@ -801,6 +1172,46 @@
             </v-card>
         </v-dialog>
 
+        <!-- qas form 2-->
+
+        <v-dialog v-model="selectedRowDialog2" persistent fullscreen>
+            <v-card>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="selectedRowDialog2 = false"
+                    >
+                        Close
+                    </v-btn>
+                </v-card-actions>
+
+                <v-card-title>
+                    <span class="text-h5"
+                        >Create New Column row in {{ selectedRow2 + 1 }}</span
+                    >
+                </v-card-title>
+                <v-card-text>
+                    <v-text-field
+                        hint="whithout whitespace"
+                        outlined
+                        v-debounce="delay"
+                        label="Name"
+                        v-model.lazy="createRowName2"
+                    ></v-text-field>
+
+                    <div style="text-align:center;margin:10px; 0">
+                        <v-btn color="blue darken-1" text @click="addTable2Row">
+                            Save
+                        </v-btn>
+                    </div>
+                    Note:<br />
+                    it only visible specific row where you added.
+
+                </v-card-text>
+            </v-card>
+        </v-dialog>
         <!-- selectedRowDialog-->
 
         <v-dialog v-model="selectedRowDialog" persistent fullscreen>
@@ -1003,6 +1414,193 @@
                 </v-card-text>
             </v-card>
         </v-dialog>
+        <!-- qas form input config  dialog-->
+<v-dialog v-model="qas2EdiableDialog" persistent max-width="600px">
+            <v-card>
+                <v-card-title>
+                    <span class="text-h5">Input Config</span>
+                </v-card-title>
+                <v-card-text>
+                    <div v-if="qas2EditableIndex != -1">
+                        <!-- {{insertForm.observation2_format[qas2EditableIndex]}} -->
+                        <v-icon
+                            @click="
+                                editFieldSetting2(qas2EditableIndex, 'editable')
+                            "
+                            :class="{
+                                redColor:
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].editable
+                            }"
+                            style="margin:2px"
+                            >mdi-account-edit</v-icon
+                        >
+                        <v-icon
+                            @click="editFieldSetting2(qas2EditableIndex, 'merge')"
+                            :class="{
+                                redColor: isKeyExist2(qas2EditableIndex, 'merge')
+                            }"
+                            style="margin:2px"
+                            >mdi-table-merge-cells</v-icon
+                        >
+                        <v-icon
+                            @click="
+                                editFieldSetting2(qas2EditableIndex, 'sapHeader')
+                            "
+                            :class="{
+                                redColor: isKeyExist2(
+                                    qas2EditableIndex,
+                                    'sapHeader'
+                                )
+                            }"
+                            style="margin:2px"
+                            >mdi-magnify-scan</v-icon
+                        >
+                        <v-icon
+                            @click="editFieldSetting2(qas2EditableIndex, 'exp')"
+                            :class="{
+                                redColor: isKeyExist2(qas2EditableIndex, 'exp')
+                            }"
+                            >fa-calculator</v-icon
+                        >
+
+                        <div>
+                            <b
+                                >Label:{{
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].label
+                                }}</b
+                            ><br />
+                            <b
+                                >Name:{{
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].name
+                                }}</b
+                            ><br />
+                            <b
+                                >Default :{{
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].default
+                                }}</b
+                            >
+                        </div>
+
+                        <div
+                            v-if="
+                                !insertForm.observation2_format[qas2EditableIndex]
+                                    .default
+                            "
+                        >
+                            <v-text-field
+                                label="Label"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].label
+                                "
+                            ></v-text-field>
+                            <v-text-field
+                                label="Name"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].name
+                                "
+                            ></v-text-field>
+                        </div>
+
+                        <div v-if="isKeyExist2(qas2EditableIndex, 'sapHeader')">
+                            <v-text-field
+                                label="SAP Map"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].sapHeader
+                                "
+                            ></v-text-field>
+                        </div>
+
+                        <div v-if="isKeyExist2(qas2EditableIndex, 'merge')">
+                            <label for="">For Merge Cell</label>
+                            <v-text-field
+                                label="ColSpan"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].merge.colspan
+                                "
+                            ></v-text-field>
+                            <v-text-field
+                                label="RowSpan"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].merge.rowspan
+                                "
+                            ></v-text-field>
+                        </div>
+                        <div v-if="isKeyExist2(qas2EditableIndex, 'exp')">
+                            <v-textarea
+                                label="Write Rule"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].exp.rule
+                                "
+                            >
+                            </v-textarea>
+
+                            <v-text-field
+                                label="Success"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].exp.success
+                                "
+                            >
+                            </v-text-field>
+                            <v-text-field
+                                label="Failure"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].exp.failure
+                                "
+                            >
+                            </v-text-field>
+
+                            Note:<br />
+                            {{
+                                insertForm.observation2_format[qas2EditableIndex]
+                                    .exp.note
+                            }}
+                        </div>
+                    </div>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="qas2EdiableDialog = false"
+                    >
+                        Close
+                    </v-btn>
+                    <!-- <v-btn
+            color="blue darken-1"
+            text
+            @click="qas2EdiableDialog = false"
+          >
+            Save
+          </v-btn> -->
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
 
         <!-- qas form input config  dialog-->
         <v-dialog v-model="qasEdiableDialog" persistent max-width="600px">
@@ -1190,6 +1788,7 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
 
         <!-- ^^^^^^^^^^^^^^^^^^^^^^^^create field setting dialog^^^^^^^^^^^^^^^^^^^^ -->
         <v-dialog
@@ -1832,18 +2431,25 @@ function initialState($vm) {
             key: "",
             value: ""
         },
+        qas2Loader: false,
         qasLoader: false,
         selectedRowDialog: false,
+        selectedRowDialog2:false,
         selectedRow: -1,
+        selectedRow2: -1,
         createRowName: "",
+        createRowName2: "",
         createColumnName: "",
         selectedHeaderRow: -1,
         headerColumnName: "",
         rowName: "",
         tableColumnSetupDialog: false,
+
         createQasRowInputDialog: false,
+        qas2EdiableDialog: false,
         qasEdiableDialog: false,
         delay: 1600,
+                qas2EditableIndex: -1,
         qasEditableIndex: -1,
         qasFormSetup: "config", //config or input
         isStateForUpdate: false,
@@ -1876,6 +2482,8 @@ function initialState($vm) {
             form_format: "",
             comment: "",
             skiplevel: 0,
+            qas_form_one_ui:{},//new
+            qas_form_two_ui:{},//new
             table_header_format: [
                 "no",
                 "desc",
@@ -1890,14 +2498,21 @@ function initialState($vm) {
             ],
             postfix_observation_print_view_format: {},
             observation_header_print_view: [],
+            observation2_header_print_view: [],//new
             observation_print_view: [],
+            observation2_print_view:[],//new
             observation_format: _.cloneDeep(
                 $vm.$store.state.interplex.configProductsFormat
             ), //core.database($vm,'getMasterProductConfig'),
+                        observation2_format: _.cloneDeep(
+                $vm.$store.state.interplex.configProductsFormat2
+            ), //core.database($vm,'getMasterProductConfig'),
+
             other: {},
             duedate: moment().format("YYYY-MM-DD")
         },
         configQasPrintViewDialog: false,
+        configQas2PrintViewDialog: false,
         observation_print_view_format: {
             no: "",
             desc: "",
@@ -1939,7 +2554,19 @@ export default {
                 );
             };
         },
-        getColspan() {
+        isKeyExist2() {
+            var $vm = this;
+            return (index, isObjectKeyExist) => {
+                // console.log("check",key,isObjectKeyExist,index,$vm.insertForm.observation_format[index])
+                if (index == -1) return false;
+                return _.has(
+                    $vm.insertForm.observation2_format[index],
+                    isObjectKeyExist
+                );
+            };
+        },
+
+getColspan() {
             var $vm = this;
             return key => {
                 if ($vm.getIndex(key) == -1) return 1;
@@ -1958,6 +2585,25 @@ export default {
             };
         },
 
+getColspan2() {
+            var $vm = this;
+            return key => {
+                if ($vm.getIndex(key) == -1) return 1;
+                return core.merge(
+                    $vm.insertForm.observation2_format[$vm.getIndex(key)]
+                ).colspan;
+            };
+        },
+        getRowspan2() {
+            var $vm = this;
+            return key => {
+                if ($vm.getIndex(key) == -1) return 1;
+                return core.merge(
+                    $vm.insertForm.observation2_format[$vm.getIndex(key)]
+                ).rowspan;
+            };
+        },
+
         getIndex() {
             var $vm = this;
             return name => {
@@ -1966,6 +2612,15 @@ export default {
                 });
             };
         },
+                getIndex2() {
+            var $vm = this;
+            return name => {
+                return _.findIndex($vm.insertForm.observation2_format, x => {
+                    return x.name == name;
+                });
+            };
+        },
+
         getProduct() {
             var $vm = this;
             return name => {
@@ -1984,21 +2639,21 @@ export default {
                 return { isExist: false };
             };
         },
-        observation_format_columns() {
-            var $vm = this;
-            return [
-                { name: "supplier_name" },
-                { name: "supplier_name" },
-                { name: "product_name" },
-                { name: "rmcode" },
-                { name: "eds" },
-                { name: "rm" },
-                { name: "skiplevel" },
-                { name: "form_format" },
-                { name: "duedate" },
-                ..._.cloneDeep($vm.$store.state.interplex.configProductsFormat)
-            ];
-        }
+        // observation_format_columns() {
+        //     var $vm = this;
+        //     return [
+        //         { name: "supplier_name" },
+        //         { name: "supplier_name" },
+        //         { name: "product_name" },
+        //         { name: "rmcode" },
+        //         { name: "eds" },
+        //         { name: "rm" },
+        //         { name: "skiplevel" },
+        //         { name: "form_format" },
+        //         { name: "duedate" },
+        //         ..._.cloneDeep($vm.$store.state.interplex.configProductsFormat)
+        //     ];
+        // }
     },
     async mounted() {
         var $vm = this;
@@ -2011,8 +2666,20 @@ export default {
             $vm.insertForm.observation_print_view =
                 _.cloneDeep($vm.$store.state.interplex.observation_print_view_format);
         }
-        $vm.insertForm.observation_format =
-            _.cloneDeep($vm.$store.state.interplex.configProductsFormat);
+        if ($vm.insertForm.observation2_print_view.length == 0) {
+            // $vm.insertForm.observation2_print_view =
+            //     _.cloneDeep($vm.$store.state.interplex.observation2_print_view_format);
+            $vm.$set($vm.insertForm,'observation2_print_view',_.cloneDeep($vm.$store.state.interplex.observation2_print_view_format))
+
+}
+            $vm.$set($vm.insertForm,'observation2_format',_.cloneDeep($vm.$store.state.interplex.configProductsFormat2))
+
+        // $vm.insertForm.observation2_format =
+            // _.cloneDeep($vm.$store.state.interplex.configProductsFormat2);
+                    // console.log("product config format2",$vm.$store.state.interplex.configProductsFormat2)
+
+        // $vm.insertForm.observation_format =
+        //     _.cloneDeep($vm.$store.state.interplex.configProductsFormat);
         if (_.isEmpty($vm.insertForm.postfix_observation_print_view_format)) {
             $vm.insertForm.postfix_observation_print_view_format =
                 _.cloneDeep($vm.$store.state.map.postfix_observation_print_view_format);
@@ -2021,6 +2688,16 @@ export default {
             $vm.insertForm.observation_header_print_view =
                 _.cloneDeep($vm.$store.state.interplex.observation_header_print_view_format);
         }
+
+        if (_.isEmpty($vm.insertForm.observation2_header_print_view)) {
+            // $vm.insertForm.observation2_header_print_view =
+            //     _.cloneDeep($vm.$store.state.interplex.observation2_header_print_view_format);
+       $vm.$set($vm.insertForm,'observation2_header_print_view',_.cloneDeep($vm.$store.state.interplex.observation2_header_print_view_format))
+       console.log("observation2_header_print_view",_.cloneDeep($vm.$store.state.interplex.observation2_header_print_view_format))
+        }
+
+        
+   console.log("inserform1:",$vm.insertForm)
 
         var params = this.$route.params;
         if (Object.prototype.hasOwnProperty.call(params, "item")) {
@@ -2032,8 +2709,24 @@ export default {
             // $vm.$set($vm,'productsFormat',params.item.observation_format)
             // $vm.insertForm.observation_format=params.item.observation_format
         }
-    },
+   console.log("inserform:2",$vm.insertForm)
+   },
     methods: {
+        createQas2Field(name){
+var $vm=this;
+
+if(!_.find($vm.insertForm.observation2_format,'name',name))
+{
+    $vm.$alert("Already Exist")
+    return;
+}
+$vm.insertForm.observation2_format.push({
+ label:'',//input field label
+name,//column name
+value:'',//default value
+default:true,   
+})
+        },
         removePostfix(key) {
             var $vm = this;
             $vm.$confirm("Do You want to delete?").then(() => {
@@ -2116,6 +2809,72 @@ export default {
                     });
             }
         },
+                editFieldSetting2(index, action) {
+            var $vm = this;
+            console.log("field=>", index, action);
+            if (action == "editable") {
+                $vm.insertForm.observation2_format[index].editable = !$vm
+                    .insertForm.observation2_format[index].editable;
+            }
+
+            if (action == "merge") {
+                if (_.has($vm.insertForm.observation2_format[index], "merge"))
+                    $vm.$delete(
+                        $vm.insertForm.observation2_format[index],
+                        "merge"
+                    );
+                else
+                    $vm.$set(
+                        $vm.insertForm.observation2_format[index],
+                        "merge",
+                        {
+                            colspan: 1,
+                            rowspan: 1
+                        }
+                    );
+            }
+            if (action == "sapHeader") {
+                if (
+                    _.has($vm.insertForm.observation2_format[index], "sapHeader")
+                )
+                    $vm.$delete(
+                        $vm.insertForm.observation2_format[index],
+                        "sapHeader"
+                    );
+                else
+                    $vm.$set(
+                        $vm.insertForm.observation2_format[index],
+                        "sapHeader",
+                        ""
+                    );
+            }
+            if (action == "exp") {
+                if (_.has($vm.insertForm.observation2_format[index], "exp"))
+                    $vm.$delete(
+                        $vm.insertForm.observation2_format[index],
+                        "exp"
+                    );
+                else
+                    $vm.$set($vm.insertForm.observation2_format[index], "exp", {
+                        rule: "",
+                        success: "",//_default_
+                        failure: "",//_default_
+                        status: false,
+                        note: 'For Actual Value "_default_"'
+                    });
+            }
+        },
+        openQasTwoDialog() {
+            var $vm = this;
+            $vm.qas2Loader = true;
+            setTimeout(() => {
+                $vm.configQas2PrintViewDialog = true;
+            }, 50);
+
+            setTimeout(() => {
+                $vm.qas2Loader = false;
+            }, 2000);
+        },
         openQasDialog() {
             var $vm = this;
             $vm.qasLoader = true;
@@ -2143,10 +2902,35 @@ export default {
             $vm.$alert("added (Please Check Table Order)");
             $vm.createRowName = "";
         },
+                addTable2Row() {
+            var $vm = this;
+            if ($vm.createRowName2 == "") {
+                $vm.$alert("Please Fill the Field");
+                return;
+            }
+$vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
+            // $vm.$set(
+            //     $vm.insertForm.observation2_print_view[$vm.selectedRow2],
+            //     $vm.createRowName2,
+            //     ""
+            // );
+
+
+            $vm.$alert("added (Please Check Table Order)");
+            $vm.createRowName = "";
+        },
         removeTableRow(index) {
             var $vm = this;
             $vm.$confirm("Do You Want to Remove").then(() => {
                 $vm.$delete($vm.insertForm.observation_print_view, index);
+                //  $vm.insertForm.observation_format.splice(index,1)
+                // console.log(index,$vm.insertForm.observation_format)
+            });
+        },
+                removeTable2Row(index) {
+            var $vm = this;
+            $vm.$confirm("Do You Want to Remove").then(() => {
+                $vm.$delete($vm.insertForm.observation2_print_view, index);
                 //  $vm.insertForm.observation_format.splice(index,1)
                 // console.log(index,$vm.insertForm.observation_format)
             });
@@ -2193,7 +2977,16 @@ export default {
                 }
             );
         },
-        removeTable(index, key) {
+        removeTable2(index, key) {
+            var $vm = this;
+            console.log("remove=>", index, key);
+            $vm.$confirm("Do You Want To Delete?").then(() => {
+                // $vm.$delete($vm.insertForm.observation2_print_view[index], key);
+
+                $vm.$alert("removed");
+            });
+        },
+                removeTable(index, key) {
             var $vm = this;
             console.log("remove=>", index, key);
             $vm.$confirm("Do You Want To Delete?").then(() => {
@@ -2230,6 +3023,12 @@ export default {
 
             $vm.qasEdiableDialog = true;
             $vm.qasEditableIndex = index;
+        },
+                selectQas2Editable(index) {
+            var $vm = this;
+
+            $vm.qas2EdiableDialog = true;
+            $vm.qas2EditableIndex = index;
         },
         insertObservation() {
             var $vm = this;

@@ -47,7 +47,7 @@ OBSERVATION
 <v-textarea v-model="remarks" style="margin-top:10px" outlined label="Remarks"></v-textarea>
 
 <!-- *******************qasform2 product list dialog************************ -->
- <v-dialog
+ <!-- <v-dialog
       v-model="qasForm2Dialog"
       fullscreen
       hide-overlay
@@ -66,7 +66,6 @@ OBSERVATION
         <v-divider></v-divider>
        <div style="padding:10px">
 <h3>QAS FORM 2</h3>
-<!-- {{selectedPartNoItem}} -->
 <div style="    height: 88vh;
     overflow: scroll;
 ">
@@ -75,12 +74,7 @@ OBSERVATION
                 <th></th>
                 <th></th>
                 <th></th>
-                <!-- <th>cw/kg</th>
-                <th>w/mm</th>
-                <th>th/mm</th>
-                <th>Sup Coil#</th>
-                <th>Error</th> -->
-
+              
             </tr>
 <tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
     <td>{{index+1}}</td>
@@ -132,6 +126,100 @@ Width Max
     height: 50px;
     text-align: center;">
     <v-icon class="defaultErorr" :class="{errorStatus:productFormat.error_status}">fa-check</v-icon>
+    </div>
+    </div>
+</td>
+
+      </tr>
+        </table>
+        </div>
+
+
+
+</div>
+      </v-card>
+    </v-dialog> -->
+<!-- *******************qasform2 product list dialog************************ -->
+ <v-dialog
+      v-model="qasForm2Dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="qasForm2Dialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn text @click="Qas2Validate">Validate</v-btn>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<h3>QAS FORM 2 new</h3>
+<!-- {{selectedPartNoItem}} -->
+<div style="    height: 88vh;
+    overflow: scroll;
+">
+{{selectedPartNoItem.qasForm2}}
+        <table style="width:100%">
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <!-- <th>cw/kg</th>
+                <th>w/mm</th>
+                <th>th/mm</th>
+                <th>Sup Coil#</th>
+                <th>Error</th> -->
+
+            </tr>
+<tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
+    <td>{{index+1}}</td>
+<td>
+<div  class="flex-row-container">
+<!-- {{observation2_format_print_view}} -->
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.one" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
+<div  style="height:86px;padding:10px">
+     <h4> {{ui.label}}:{{productFormat[ui.name]}}  </h4>
+
+</div>
+</div> 
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.two" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
+<!-- {{ui.name}}
+{{ui.width}}
+{{getIndex2(ui.name)}} -->
+<!-- gg{{selectedPartNoItem.productConfigFormat2}} -->
+<div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
+     <h4> {{ui.label}}:  </h4>
+    <v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field>
+
+</div>
+</div> 
+
+</div>
+</td>
+<td style="background:#929ed6;padding:0 9px">
+    <div style="text-align:center">
+    <div style="  
+    display:inline-block;
+      background: white;
+    padding: 5px;
+    border-radius: 50%;
+    width: 50px;
+    line-height: 42px;
+    height: 50px;
+    text-align: center;">
+    <div v-if="getIndex2('validation')!=-1">
+<div v-if="selectedPartNoItem.productConfigFormat2[getIndex2('validation')].exp"></div>
+    <v-icon class="defaultErorr" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
+    </div>
     </div>
     </div>
 </td>
@@ -188,7 +276,7 @@ Width Max
 
 
 
-<div  class="flex-row-item"  v-for="(ui,index_sub) in qasFormOneUi.one" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_one_ui.one" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
 <div v-if="ui.name=='no'">
 NO:{{index+1}}
 </div>
@@ -210,7 +298,7 @@ NO:{{index+1}}
 </div>
 
 </div>
-<div  class="flex-row-item"  v-for="(ui,index_sub) in qasFormOneUi.two" :key="'form_'+index_sub" :style="{width:ui.width+'%'}">
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_one_ui.two" :key="'form_'+index_sub" :style="{width:ui.width+'%'}">
 <div v-if="ui.name=='no'">
 NO:{{index+1}}
 </div>
@@ -538,7 +626,7 @@ export default {
 
         return {
             qasFormOneValidateLoader:false,
-            qasFormOneUi:[],
+            qas_form_one_ui:[],
             qasForm1New:{},
             qasHeaderNew:{},
             fileTypeDialog:false,
@@ -555,6 +643,24 @@ qasForm1NewDialog:false,
         }
     },
     computed:{
+
+    observation2_format_print_view(){
+var $vm=this;
+return  _.reduce($vm.selectedPartNoItem.observation2_print_view, function(result, value, key) {
+    result[value.name]=value.name||''
+    // console.log("check--",key,value)
+    return result;
+  }, {});
+
+    },
+                    getIndex2() {
+            var $vm = this;
+            return name => {
+                return _.findIndex($vm.selectedPartNoItem.productConfigFormat2, x => {
+                    return x.name == name;
+                });
+            };
+        },
                 getIndex() {
             var $vm = this;
             return name => {
@@ -597,7 +703,10 @@ return ''
     },
     created(){
         var $vm=this;
-$vm.qasFormOneUi=_.cloneDeep($vm.$store.state.interplex.qasFormOneUI);
+$vm.qas_form_one_ui=_.cloneDeep($vm.$store.state.interplex.qas_form_one_ui);
+$vm.qas_form_two_ui=_.cloneDeep($vm.$store.state.interplex.qas_form_two_ui);
+
+
 
     },
   async  mounted(){
@@ -615,39 +724,114 @@ console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
 watch:{
 
 
-"selectedPartNoItem.qasForm2":{
-    handler(value){
-        var $vm=this;
-        console.log('value...',value)
+// "selectedPartNoItem.qasForm2":{
+//     handler(value){
+//         var $vm=this;
+//         console.log('value...',value)
 
-if(value.length!=0){
+// if(value.length!=0){
 
-var singleBatchProduct=value[0]
-$vm.qasForm1New['width_sup_one']=singleBatchProduct.width_one;
-$vm.qasForm1New['width_sup_two']=singleBatchProduct.width_two;
-$vm.qasForm1New['thickness_sup_one']=singleBatchProduct.thick_one;
-$vm.qasForm1New['thickness_sup_two']=singleBatchProduct.thick_two;
-var weight=_.sumBy($vm.selectedPartNoItem.qasForm2,(qas2)=>parseFloat(qas2.weight))
+// var singleBatchProduct=value[0]
+// $vm.qasForm1New['width_sup_one']=singleBatchProduct.width_one;
+// $vm.qasForm1New['width_sup_two']=singleBatchProduct.width_two;
+// $vm.qasForm1New['thickness_sup_one']=singleBatchProduct.thick_one;
+// $vm.qasForm1New['thickness_sup_two']=singleBatchProduct.thick_two;
+// var weight=_.sumBy($vm.selectedPartNoItem.qasForm2,(qas2)=>parseFloat(qas2.weight))
 
-$vm.selectedPartNoItem.headerConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.headerConfigFormat),(headerObj)=>{
+// $vm.selectedPartNoItem.headerConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.headerConfigFormat),(headerObj)=>{
 
-if(headerObj.name=='invoice_qty'||headerObj.name=='received_qty')
-{
-    headerObj.value=parseFloat(weight||0);
+// if(headerObj.name=='invoice_qty'||headerObj.name=='received_qty')
+// {
+//     headerObj.value=parseFloat(weight||0);
+// }
+// return headerObj;
+// })
+
+
+// $vm.submitQasForm1new()
+
+// }
+
+//     },
+//     deep:true
+// }
+},
+    methods:{
+        Qas2Validate(){
+var $vm=this;
+
+$vm.checkQas2Rules()
+        },
+checkQas2Rules(){
+    var $vm=this;
+//Observationformat array to object for scope
+var scope={}
+var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
+scope['QasOne']=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+
+// var observation2_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat2)
+//Observationformat array to object for scope
+
+_.map($vm.selectedPartNoItem.qasForm2,(product)=>{
+
+scope['QasTwo']=core.validateProductObjDataset($vm,_.cloneDeep(product));
+
+
+return _.map($vm.selectedPartNoItem.productConfigFormat2,(ob_format)=>{
+
+// console.log("scope",scope)
+if(ob_format.exp){
+ob_format.value=product[ob_format.name]||NaN
+
+if(ob_format.exp.rule!=''){
+    console.log("scope",scope,ob_format.exp.rule)
+console.log("exp_>",math.evaluate(ob_format.exp.rule,scope))
+
+var evaluate=math.evaluate(ob_format.exp.rule,scope);
+console.log("evaluate",ob_format)
+ if(evaluate){
+if(ob_format.exp.success=='_default_'){
+
+// ob_format.value=evaluate
+product[ob_format.name]=evaluate
+// $vm.$set()
+ob_format.exp.status=true;
 }
-return headerObj;
+else
+{
+ob_format.value=ob_format.exp.success;
+ product[ob_format.name]=ob_format.exp.success;
+
+}}
+ else{
+if(ob_format.exp.failure=='_default_')
+{
+    // ob_format.value=evaluate;
+ob_format.exp.status=false;
+product[ob_format.name]=evaluate;//math.evaluate(ob_format.exp.rule,scope);
+}
+else{
+ob_format.value=ob_format.exp.failure;
+product[ob_format.name]=ob_format.exp.failure;
+}
+
+}
+
+    }
+    }
+
+// return product;
 })
 
 
-$vm.submitQasForm1new()
 
-}
 
-    },
-    deep:true
-}
+return ob_format;    
+})
+
+
 },
-    methods:{
+
 checkSapLog(key){
 
 return 'Please Check key "'+key+'" if value not found'
@@ -705,15 +889,18 @@ ob_format.value=math.evaluate(ob_format.exp.rule,scope);
 ob_format.exp.status=true;
 }
 else
+{
 ob_format.value=ob_format.exp.success;
-        }
+}
+}
         else{
 if(ob_format.exp.failure=='_default_')
 {ob_format.value=math.evaluate(ob_format.exp.rule,scope);
 ob_format.exp.status=false;
 }
-else
+else{
 ob_format.value=ob_format.exp.failure;
+}
   }
 
     }
@@ -820,12 +1007,12 @@ var $vm=this;
             // console.log(event.target.value)
             // console.log(productFormat)
 // console.log( core.observation($vm).scope)
-console.log(productFormat.rule)
-if(productFormat.validation&&core.onlyNumbers(productFormat.value)){
-var scope=core.validateProductArrayDataset($vm,$vm.selectedPartNoItem.productConfigFormat); //core.observation($vm).scope
-scope[productFormat.name]=parseFloat(productFormat.value)       
-console.log(math.evaluate(productFormat.rule,scope))
-}
+// console.log(productFormat.rule)
+// if(productFormat.validation&&core.onlyNumbers(productFormat.value)){
+// var scope=core.validateProductArrayDataset($vm,$vm.selectedPartNoItem.productConfigFormat); //core.observation($vm).scope
+// scope[productFormat.name]=parseFloat(productFormat.value)       
+// console.log(math.evaluate(productFormat.rule,scope))
+// }
 
         }
     }
@@ -847,13 +1034,13 @@ console.log(math.evaluate(productFormat.rule,scope))
 }
 .flex-row-container {
 
-    display: flex;
-    flex-wrap: wrap;
+    display: flex !important;
+    flex-wrap: wrap !important;
     // align-items: center;
     // justify-content: center;
 }
 .flex-row-container > .flex-row-item {
-    flex: 1 1 50%; /*grow | shrink | basis */
+    // flex: 1 1 50%; /*grow | shrink | basis */
     // height: 70px;
 }
 

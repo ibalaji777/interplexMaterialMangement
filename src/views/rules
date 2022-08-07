@@ -1,0 +1,1 @@
+QasOne.width_min_spec_org  <=  QasTwo.width_min and QasOne.width_max_spec_org  > =  QasTwo.width_min

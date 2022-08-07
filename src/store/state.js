@@ -429,12 +429,12 @@ productConfig:{
 				},
 	
 	
-		
+	
 },
 
 
 interplex:{
-	qasFormOneUI:
+	qas_form_one_ui:
 		{
 			one:[
 			{
@@ -487,10 +487,52 @@ interplex:{
 			]
 		}
 	,
-	qasFormTwoUI:
+	qas_form_two_ui:
 		{
-			one:[],
-			two:[]
+			one:[
+				
+			],
+			two:[
+				{
+					label:'Coil # (Batch No)	',
+					name:'batch_no',//key of observation format
+					width:'100'
+				},
+				{
+					label:'Sup Coil #(Lot No)',
+					name:'lot_no',
+					width:'100'
+				},
+				{
+					label:'Weight',
+					name:'weight',
+					width:'100'
+				},
+				{
+					label:'Width Min',
+					name:'width_min',
+					width:'50'
+				}
+,
+{
+	label:'Width Max',
+	name:'width_max',
+	width:'50'
+},
+
+{
+	label:'Thickness Min',
+	name:'thick_min',
+	width:'50'
+}
+,
+{
+label:'Thickeness Max',
+name:'thick_max',
+width:'50'
+}
+
+			]
 		}
 	,
 	masterFileTypes:[],
@@ -499,6 +541,22 @@ interplex:{
 	currentRoleType:'',
 	qasForm1:[],//test
 	qasForm2:[],//test
+	observation2_header_print_view_format:[
+		{
+			column:[
+				{name:'no'},
+				{name:'batch_no'},//coil
+				{name:'lot_no'},//sup_coil
+{name:'weight'},
+{name:'width_min'},
+{name:'width_max'},
+{name:'thick_min'},
+{name:'thick_max'},
+{name:'validation'},		
+	
+			]
+		}
+	],	
 	observation_header_print_view_format:[
 	{
 		column:[
@@ -562,6 +620,36 @@ interplex:{
 				
 		// 		},
 		
+	],
+	observation2_print_view_format:[
+		
+		{
+			name:'no'
+		},
+		{
+			name:'batch_no'
+		},
+		{
+			name:'lot_no'
+		},
+		{
+			name:'weight'
+		},
+		{
+			name:'width_min'
+		},
+		{
+			name:'width_max'
+		},
+		{
+			name:'thick_min'
+		},
+		{
+			name:'thick_max'
+		},
+		{
+			name:'validation'
+		},
 	],
     observation_print_view_format:[
 		
@@ -888,7 +976,81 @@ interplex:{
     },
 	selectedPartNoItem:{},
 	tempInvoice:{},//temprory
-	configProductsFormat:[	{
+	configProductsFormat2:[
+{
+label:'Coil',//input field label
+name:'batch_no',//column name
+value:'',//default value
+default:true,
+editable:true,
+},
+{
+	label:'Sup Coil',//input field label
+	name:'lot_no',//column name
+	value:'',//default value
+	default:true,
+	editable:true,
+	},
+	{
+		label:'Heat No',//input field label
+		name:'heat_no',//column name
+		value:'',//default value
+		default:true,
+		editable:true,
+		},
+{
+label:'Weight',//input field label
+name:'weight',//column name
+value:'',//default value
+default:true,
+editable:true,
+},
+{
+label:'Width Min',//input field label
+name:'width_min',//column name
+value:'',//default value
+default:true,
+editable:true,
+},
+{
+label:'Width Max',//input field label
+name:'width_max',//column name
+value:'',//default value
+default:true,
+editable:true,
+},
+{
+label:'Thickness Min',//input field label
+name:'thick_min',//column name
+value:'',//default value
+default:true,
+editable:true,
+},
+{
+	label:'Thicknewss Max',//input field label
+	name:'thick_max',//column name
+	value:'',//default value
+	default:true,
+	editable:true,
+	},
+	
+{
+	label:'Validation',//input field label
+	name:'validation',//column name
+	value:'',//default value
+	default:true,
+	editable:true,
+	exp:{
+		rule: "",
+		success: "_default_",//_default_
+		failure: "_default_",//_default_
+		status: false,
+		note: 'For Actual Value "_default_"'	
+	}
+	},
+	],
+	configProductsFormat:[	
+		{
 		label:'SL',//input field label
 		name:'sl_header',//column name
 		value:'SL #',//default value
