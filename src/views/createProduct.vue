@@ -2321,6 +2321,7 @@ ob2 format{{insertForm.observation2_format}}<br>
 
         <v-dialog
             v-model="productSettingDialog"
+            persistent
             fullscreen
             hide-overlay
             transition="dialog-bottom-transition"
@@ -2334,9 +2335,9 @@ ob2 format{{insertForm.observation2_format}}<br>
                     >
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
-                        <v-btn dark text @click="saveProductsFormat">
+                        <!-- <v-btn dark text @click="saveProductsFormat">
                             SAVE
-                        </v-btn>
+                        </v-btn> -->
                     </v-toolbar-items>
                 </v-toolbar>
                 <v-divider></v-divider>
@@ -2347,7 +2348,7 @@ ob2 format{{insertForm.observation2_format}}<br>
                         style="margin-right:15px"
                         >Create Field</v-btn
                     >
-                    <v-btn outlined @click="preFields">Pre Fields</v-btn>
+                    <!-- <v-btn outlined @click="preFields">Pre Fields</v-btn> -->
                 </div>
 
                 <div
@@ -2370,6 +2371,7 @@ ob2 format{{insertForm.observation2_format}}<br>
                             index) in insertForm.observation_format"
                             :key="'product' + index"
                         >
+                        {{index+1}}
                             <v-icon style="margin:0 5px" class="handle"
                                 >fa-arrows-alt</v-icon
                             >
@@ -2456,16 +2458,11 @@ function initialState($vm) {
         modal: false,
         createFieldSettingDialog: false,
         createField: {
-            label: "", //input field label
-            name: "", //column name
-            value: "", //default value
-            show: false,
-            disable: false,
-            headerMap: "", //map name from header file put into,
-            validation: false,
-            rule: "",
-            default: false,
-            note: ""
+	label:'',//input field label
+	name:'',//column name
+	value:'',//default value
+	default:true,
+	editable:true,
         },
         // productsFormat:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),
         validationHelpDialog: false,
@@ -2994,6 +2991,13 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
                 $vm.$alert("removed");
             });
         },
+        validate_observation_format(field){
+var $vm=this;
+
+if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==field.name)!=-1)
+    $vm.insertForm.observation_format.push(field);
+
+        },
         insertRow() {
             var $vm = this;
             var map = {};
@@ -3009,7 +3013,9 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
                 map[key] = obj.name;
                 rows.push(obj);
             });
-            $vm.insertForm.observation_format.push(...rows);
+
+this.validate_observation_format(...rows)
+            // $vm.insertForm.observation_format.push(...rows);
             //****************2.create observation format print view**********
 
             console.log(map);
@@ -3037,6 +3043,7 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
             );
         },
         removeConfig(item, index) {
+            var $vm=this;
             if (item.default) {
                 $vm.$alert("Cannot Delete Default Field", "Error", "error");
 
@@ -3105,7 +3112,8 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
         },
         createProductField() {
             this.$store.commit("addProductsFormat", this.createField);
-            this.insertForm.observation_format.push(this.createField);
+          this.validate_observation_format(this.createField)
+        //   this.insertForm.observation_format.push(this.createField);
             $vm.$alert("added");
         },
         preFields() {

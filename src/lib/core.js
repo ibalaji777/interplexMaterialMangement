@@ -1176,12 +1176,12 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
               object["sk_order"] = product.sk_order;
               object["invoice_client_id"] =uuid;
               object["observation_format"] =
-              product.productConfigFormat;
+              // product.productConfigFormat;
               object["header_format"] = product.headerConfigFormat;
               object=setQasHeader(object,product.headerConfigFormat)
               object['qas_form_one_values']=_.reduce(product.productConfigFormat,
                 (result,value,key)=>{
-                  // console.log("qas_form_one_values",key,value)
+                  console.log("qas_form_one_values",value.name,value.value)
                   result[value.name]=value.value
                   return result;
 
@@ -1331,6 +1331,15 @@ result.push(value)
   }
 
 
+export function   setObservationFormat(ob_format,qas_forn_one_values){
+
+return  _.map(ob_format,(x)=>{
+
+    x.value=qas_forn_one_values[x.name]||''
+return x;
+  })
+
+  }
 
   export function observationTableHeader(format,printView)
   {
@@ -1373,7 +1382,7 @@ return _.map(printView,(x)=>{
   var torder=tableOrder(Object.keys(x),order)
 
   return _.map(torder,(col ,key)=>{
-    console.log("c",col,"k",key)
+    // console.log("c",col,"k",key)
 
     var column=x[col]
     var  header=_.find(format,(data)=>data.name==column)

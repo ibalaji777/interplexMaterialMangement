@@ -19,8 +19,8 @@ var headerFormFill={}
 
 // console.log("observation header print view")
 // console.log(core.observationTableHeader($vm.invoice.qasFormOne.observation_format,$vm.invoice.qasFormOne.observation_header_print_view))
-
-var renderQas1Header=core.observationTableHeader(invoice.qasFormOne.observation_format,invoice.qasFormOne.observation_header_print_view)
+var setSavedValues=core.setObservationFormat(invoice.qasFormOne.observation_format,invoice.qasFormOne.qas_form_one_values)
+var renderQas1Header=core.observationTableHeader(setSavedValues,invoice.qasFormOne.observation_header_print_view)
 var renderQas1Body=core.observationTableBody(invoice.qasFormOne.table_header_format,invoice.qasFormOne.observation_format,invoice.qasFormOne.observation_print_view)
 console.log("renderQas1Body_______",renderQas1Body)
 
