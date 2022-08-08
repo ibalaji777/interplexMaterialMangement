@@ -95,6 +95,10 @@ Qas Form
 <!-- <div @click="qasForm1Dialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-check</v-icon>
 </div> -->
+<div @click="qasForm1NewDialog=true" class="insertProduct" style="margin-right:10px">
+<v-icon>fa-list</v-icon>
+</div>
+
 <div @click="qasForm2Dialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-list</v-icon>
 </div>
@@ -449,6 +453,104 @@ Items
       </v-card>
     </v-dialog>
 
+<!-- qas form one dialog -->
+ <v-dialog
+      v-model="qasForm1NewDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="qasForm1NewDialog = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+
+          <v-btn :loading="qasFormOneValidateLoader" @click="validateQasFormOne" style="color:white" text>
+            validate
+          </v-btn>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+       <div style="padding:10px">
+<h3>QAS FORM One</h3>
+<div  style="    padding: 10px 20px;
+    margin: 8px;
+" class="rowColor" v-for="(form,index) in invoice.qasFormOne.observation_print_view" :key="index+'form'">
+<div style="background: white;
+    padding: 6px 15px;
+    border-radius: 24px;
+    box-shadow: 4px 9px burlywood;" class="flex-row-container">
+
+
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_one_ui.one" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
+<div v-if="ui.name=='no'">
+NO:{{index+1}}
+</div>
+
+
+ <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
+
+<div v-if="ui.name=='desc'">
+   <h4> {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+<div v-else>
+    <div>
+   <h4> {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+</div>
+
+</div>
+
+</div>
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_one_ui.two" :key="'form_'+index_sub" :style="{width:ui.width+'%'}">
+<div v-if="ui.name=='no'">
+NO:{{index+1}}
+</div>
+
+
+ <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
+
+<div v-if="ui.name=='desc'">
+   <h4> {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+<div v-else>
+<div v-if="invoice.qasFormOne.observation_format[getIndex(form[ui.name])].editable" style="height:85px">
+
+    <h4> {{ui.label}}:  </h4>
+    <v-text-field  style="margin:5px" :disabled="!invoice.qasFormOne.observation_format[getIndex(form[ui.name])].editable"  v-model="invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value" outlined dense >
+    </v-text-field>
+ </div>
+<div v-else>
+   <h4> {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}</h4>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div >
+
+</div>
+
+
+</div>
+     </div>  </div>
+      </v-card>
+    </v-dialog>
+
+
+
 <!-- *******************qasform2 product list dialog************************ -->
  <v-dialog
       v-model="qasForm2Dialog"
@@ -473,16 +575,76 @@ Items
 <div style="    height: 91vh;
     overflow: scroll;
 ">
-        <table>
+
+        <table style="width:100%">
             <tr>
                 <th></th>
                 <th></th>
                 <th></th>
-                <!-- <th>cw/kg</th>
-                <th>w/mm</th>
-                <th>th/mm</th>
-                <th>Sup Coil#</th>
-                <th>Error</th> -->
+            
+
+            </tr>
+<tr class="rowColor" v-for="(productFormat , index) in invoice.qasFormTwo" :key="'product'+index">
+    <td>{{index+1}}</td>
+<td>
+<div  class="flex-row-container">
+<!-- {{observation2_format_print_view}} -->
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.one" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
+<div  style="height:86px;padding:10px">
+     <h4> {{ui.label}}:{{productFormat[ui.name]}}  </h4>
+
+</div>
+</div> 
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.two" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
+<!-- {{ui.name}}
+{{ui.width}}
+{{getIndex2(ui.name)}} -->
+<!-- gg{{invoice.qasFormOne.observation2_format}} -->
+<div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
+     <h4> {{ui.label}}:  </h4>
+    <v-text-field  style="margin:5px" :disabled="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field>
+
+</div>
+</div> 
+
+</div>
+</td>
+<td style="background:#929ed6;padding:0 9px">
+    <div style="text-align:center">
+    <div style="  
+    display:inline-block;
+      background: white;
+    padding: 5px;
+    border-radius: 50%;
+    width: 50px;
+    line-height: 42px;
+    height: 50px;
+    text-align: center;">
+    <div v-if="getIndex2('validation')!=-1">
+<div v-if="invoice.qasFormOne.observation2_format[getIndex2('validation')].exp"></div>
+    <v-icon class="defaultErorr" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
+    </div>
+    </div>
+    </div>
+</td>
+<!-- <td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td>
+<td><input  class="interInput"   type="text" ></td> -->
+
+      </tr>
+        </table>
+
+
+        <!-- <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
 
             </tr>
 <tr class="rowColor" v-for="(productFormat , index) in invoice.qasFormTwo" :key="'product'+index">
@@ -504,14 +666,11 @@ Items
 <td style="background:white;padding:9px">
     <v-icon class="defaultErorr" :class="{errorStatus:productFormat.error_status}">fa-check</v-icon>
 </td>
-<!-- <td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td>
-<td><input  class="interInput"   type="text" ></td> -->
 
       </tr>
-        </table>
+        </table> -->
+
+
         </div>
 
 
@@ -550,7 +709,7 @@ Items
                 <th></th>
                 <!-- <th></th> -->
             </tr>
-            <!-- selectedPartNoItem.productConfigFormat -->
+            <!-- invoice.qasFormOne.observation_format -->
 <tr  v-for="(productFormat , index) in invoice.qasFormOne.observation_format" :key="'product'+index">
 
 <td >
@@ -638,6 +797,9 @@ const math = create(all,  {})
 export default {
 data(){
     return {
+        qasForm1NewDialog:false,
+            qas_form_two_ui:{},
+            qas_form_one_ui:{},
 isApprover:false,
 fileTypeDialog:false,
 selected_gallery:0,
@@ -672,6 +834,28 @@ printViewMap:{},
         observation_print_view_format:[]
     }
 }    ,
+computed:{
+    getIndex(){
+    var $vm=this;
+return (name)=>{
+        return _.findIndex($vm.invoice.qasFormOne.observation_format,(x)=>(x.name==name))
+
+}}
+,
+getIndex2(){
+    var $vm=this;
+return (name)=>{
+        return _.findIndex($vm.invoice.qasFormOne.observation2_format,(x)=>(x.name==name))
+
+}}
+
+
+},
+created(){
+var $vm=this;
+
+
+},
 async mounted(){
     var $vm=this;
 
@@ -700,6 +884,18 @@ gallery:_.map(params.invoice.gallery||[],(image)=>{
 image['src']=config.api+'/uploads/'+image.full_name;
 return image;
 })
+}
+$vm.qas_form_one_ui=$vm.$store.state.interplex.qas_form_one_ui
+$vm.qas_form_two_ui=$vm.$store.state.interplex.qas_form_two_ui
+
+if(!_.isEmpty($vm.invoice.qasFormOne.qas_form_one_ui))
+{
+    $vm.qas_form_one_ui=$vm.invoice.qasFormOne.qas_form_one_ui
+}
+
+if(!_.isEmpty($vm.invoice.qasFormTwo.qas_form_one_ui))
+{
+    $vm.qas_form_two_ui=$vm.invoice.qasFormOne.qas_form_two_ui
 }
 
 $vm.printData=printData.printData($vm.invoice)
@@ -733,6 +929,9 @@ $vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFo
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+    validateQasFormOne(){
+var $vm=this;
+    },
     saveHeader(){
 var $vm=this;
 $vm.$store.dispatch('qasFormHeaderUpdate',$vm.invoice.qasFormOne.header_format)
