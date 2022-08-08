@@ -544,15 +544,13 @@ width:'50'
 	observation2_header_print_view_format:[
 		{
 			column:[
-				{name:'no'},
-				{name:'batch_no'},//coil
-				{name:'lot_no'},//sup_coil
-{name:'weight'},
-{name:'width_min'},
-{name:'width_max'},
-{name:'thick_min'},
-{name:'thick_max'},
-{name:'validation'},		
+				{name:'header_no'},
+
+{name:'header_batch_no'},//coil
+{name:'header_weight'},
+{name:'header_width'},
+{name:'header_thick'},
+{name:'header_lot_no'},//sup_coil
 	
 			]
 		}
@@ -646,10 +644,7 @@ width:'50'
 		},
 		{
 			name:'thick_max'
-		},
-		{
-			name:'validation'
-		},
+		}
 	],
     observation_print_view_format:[
 		
@@ -977,6 +972,69 @@ width:'50'
 	selectedPartNoItem:{},
 	tempInvoice:{},//temprory
 	configProductsFormat2:[
+	
+		{
+			label:'Sl',//input field label
+			name:'header_no',//column name
+			value:'SL',//default value
+			default:true,
+			editable:true,
+			},
+		{
+			label:'Coil',//input field label
+			name:'header_batch_no',//column name
+			value:'',//default value
+			default:true,
+			editable:true,
+			},
+			
+			
+			{
+				label:'Sup Coil',//input field label
+				name:'header_lot_no',//column name
+				value:'',//default value
+				default:true,
+				editable:true,
+				},
+				{
+					label:'Supplier Coil #',//input field label
+					name:'header_heat_no',//column name
+					value:'',//default value
+					default:true,
+					editable:true,
+					},
+			{
+			label:'Weight',//input field label
+			name:'header_weight',//column name
+			value:'',//default value
+			sapHeader:'invoiceQty',
+			default:true,
+			editable:true,
+			},
+			{
+			label:'Width',//input field label
+			name:'header_width',//column name
+			value:'Width In mm',//default value
+			default:true,
+			editable:true,
+			merge:{
+				colspan:2,
+				rowspan:1
+			}
+			},
+			{
+			label:'Thickness',//input field label
+			name:'header_thick',//column name
+			value:'Thickness MM',//default value
+			default:true,
+			editable:true,
+			merge:{
+				colspan:2,
+				rowspan:1
+			}
+			},
+
+
 {
 label:'Coil',//input field label
 name:'batch_no',//column name
@@ -1003,6 +1061,7 @@ editable:true,
 label:'Weight',//input field label
 name:'weight',//column name
 value:'',//default value
+sapHeader:'invoiceQty',
 default:true,
 editable:true,
 },
@@ -1028,7 +1087,7 @@ default:true,
 editable:true,
 },
 {
-	label:'Thicknewss Max',//input field label
+	label:'Thickness Max',//input field label
 	name:'thick_max',//column name
 	value:'',//default value
 	default:true,

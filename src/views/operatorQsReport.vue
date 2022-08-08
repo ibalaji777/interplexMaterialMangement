@@ -164,7 +164,7 @@ Width Max
 <div style="    height: 88vh;
     overflow: scroll;
 ">
-{{selectedPartNoItem.qasForm2}}
+<!-- {{selectedPartNoItem.qasForm2}} -->
         <table style="width:100%">
             <tr>
                 <th></th>

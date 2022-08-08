@@ -24,9 +24,10 @@ mdi-qrcode
 <!-- <v-btn color="red" style="color:white;margin:2px;" @click="$refs.print.print()">print</v-btn> -->
 <!-- <v-btn color="red" style="color:white;margin:2px;" @click="$refs.barcodeLabelPrint.print()">print Barcode Label</v-btn> -->
 </div>
+<!-- style="height:0;overflow:hidden" -->
 <barcodeLabelPrint style="height:0;overflow:hidden"  :invoice_data="invoice" ref="barcodeLabelPrint"></barcodeLabelPrint>
-<plugin-print-desktop v-if="$isElectron" ref="printDesktop" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print-desktop>
-<plugin-print-mobile v-else ref="printMobile" style="height:0;overflow:hidden" :invoice_data="invoice"></plugin-print-mobile>
+<plugin-print-desktop v-if="$isElectron" ref="printDesktop"  :invoice_data="invoice"></plugin-print-desktop>
+<plugin-print-mobile v-else ref="printMobile"  :invoice_data="invoice"></plugin-print-mobile>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="#2f5489 " style="color:white;margin:2px">Qas Form One</v-btn>
@@ -61,7 +62,6 @@ Rej
 PP
     </div>
 </div>
-
 
 
 <div v-if="selectForm=='edit'">
@@ -306,15 +306,39 @@ align-items: center;">
 </div>
 
 <table class="qasform2class">
-    <tr>
+    <!-- <tr>
         <td>s/n</td>
         <td>Coil #</td>
         <td>Coil Weight in kg</td>
         <td>Width in mm</td>
         <td>Thickness in mm</td>
         <td>Supplier coil #</td>
-    </tr>
-<tr v-for="(item,index) in invoice.qasFormTwo" :key="index+'d'">
+    </tr> -->
+ <tr v-for="(header,index) in printData.renderQas2Header" :key="index+'headerform1'">
+
+<td :colspan="col.merge.colspan" :rowspan="col.merge.rowspan" v-for="(col,sub_index) in header" :key="'sub_index'+sub_index">
+<div v-if="col.value==''">
+{{col.name}}
+</div>
+<div v-else>
+{{
+    col.value
+}}
+</div>
+</td>
+
+</tr>
+<tr v-for="(item,index) in printData.renderQas2Body" :key="'qas2'+index">
+
+<td v-for="(col,sub_index) in item" :key="'qas2'+sub_index">
+<div style="min-height:15px">
+{{col.value}}
+<!-- {{col.name}} -->
+</div>
+</td>
+</tr>
+
+<!-- <tr v-for="(item,index) in invoice.qasFormTwo" :key="index+'d'">
         <td>{{index+1}}</td>
         <td>{{item.batch_no}}</td>
         <td>{{item.weight}}</td>
@@ -322,7 +346,7 @@ align-items: center;">
         <td>{{item.thick_one}}-{{item.thick_two}}</td>
         <td>{{item.lot_no}}</td>
 
-</tr>
+</tr> -->
 
 </table>
 

@@ -730,9 +730,9 @@
 
                     <h3 style="padding:0;margin:10px 0">Product List Group Format</h3>
 
-header{{insertForm.observation2_header_print_view}}<br>
+<!-- header{{insertForm.observation2_header_print_view}}<br>
 print view{{insertForm.observation2_print_view}}<br>
-ob2 format{{insertForm.observation2_format}}<br>
+ob2 format{{insertForm.observation2_format}}<br> -->
 
                     <div style="height:78vh;overflow:scroll">
                         <table class="observationTable" style="width:100vw">
@@ -747,13 +747,10 @@ ob2 format{{insertForm.observation2_format}}<br>
                                     v-for="(item, index_sub) in form.column"
                                     :key="'inde' + index_sub"
                                 >
-                                       <div v-if="item.name == 'no'">
-                                            {{ index + 1 }}<br />
-                                       </div>
-                                    <div v-else>
+                                    <div >
                                         <div>
                                         {{item.name}}<br>
-                                        {{getIndex2(item.name)}}
+                                        <!-- {{getIndex2(item.name)}} -->
                                         <div v-if="getIndex2(item.name) != -1">
                                             <div
                                                 style="display:flex;width:250px;justify-content:space-between"
@@ -2585,18 +2582,18 @@ getColspan() {
 getColspan2() {
             var $vm = this;
             return key => {
-                if ($vm.getIndex(key) == -1) return 1;
+                if ($vm.getIndex2(key) == -1) return 1;
                 return core.merge(
-                    $vm.insertForm.observation2_format[$vm.getIndex(key)]
+                    $vm.insertForm.observation2_format[$vm.getIndex2(key)]
                 ).colspan;
             };
         },
         getRowspan2() {
             var $vm = this;
             return key => {
-                if ($vm.getIndex(key) == -1) return 1;
+                if ($vm.getIndex2(key) == -1) return 1;
                 return core.merge(
-                    $vm.insertForm.observation2_format[$vm.getIndex(key)]
+                    $vm.insertForm.observation2_format[$vm.getIndex2(key)]
                 ).rowspan;
             };
         },

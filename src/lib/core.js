@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import _ from 'lodash'
+import _, { result } from 'lodash'
 import moment from 'moment'
 import store from '../store/index.js'
 import { v4 as uuidv4 } from 'uuid';
@@ -744,6 +744,7 @@ else{
 
 })
 
+console.log("qasform2",sapObject)
 return sapObject
   })
 
@@ -1420,3 +1421,80 @@ if(header)
 
 
   }
+
+
+export  function observation2TableBody(ob_form,ob_view,qasFormTwo){
+
+
+  var format=[];
+0.
+  var results=[]
+
+  _.map(ob_view,(x)=>{
+
+    format.push(x.name)
+  })
+
+var new_format=_.map(format,(name)=>{
+
+var check=_.find(ob_form,(x)=>x.name==name)
+
+if(check)
+  return { ...check,
+  merge:{
+    colspan:check.merge?check.merge.colspan:1,
+    rowspan:check.merge?check.merge.rowspan:1,
+  }
+  }
+
+  return {
+
+    name,
+    label:'not found',
+    value:'not found'+'('+name+')',
+    merge:{
+      colspan:1,
+      rowspan:1
+    }
+  }
+
+})
+
+
+_.forEach(_.cloneDeep(qasFormTwo),(x,index)=>{
+var row=[]
+console.log('++',x,index)
+_.map(_.cloneDeep(new_format),(input)=>{
+
+  input.value=x.qas_form_two_values[input.name]
+
+
+  if(input.name=='no'){
+      input.value=index+1;
+    
+    }
+  
+  
+  row.push(input)
+})
+
+
+results.push(row)
+// })
+// var count=0;
+// results= _.map(_.cloneDeep(results),(row)=>{
+// count++
+// return  _.map(row,(col)=>{
+//  console.log(count)
+//     if(col.name=='no'){
+//       col.value=count;
+    
+//     }
+//   return col;
+//   })
+
+})
+console.log("checking",format,new_format,results)
+
+return results;
+}
