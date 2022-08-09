@@ -383,7 +383,7 @@
                         </v-btn>
                     </div>
 
-                    <div style="height:78vh;overflow:scroll">
+                    <div style="height:69vh;overflow:scroll">
                         <table class="observationTable" style="width:100vw">
                             <tr
                                 v-for="(form,
