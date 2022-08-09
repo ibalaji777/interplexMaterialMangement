@@ -177,10 +177,12 @@ Width Max
                 <th>Error</th> -->
 
             </tr>
+
 <tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
     <td>{{index+1}}</td>
 <td>
 <div  class="flex-row-container">
+    {{productFormat}}
 <!-- {{observation2_format_print_view}} -->
 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.one" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">

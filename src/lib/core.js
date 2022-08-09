@@ -1207,7 +1207,7 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
                       qasform2['qas_form_two_values']=_.reduce(product.productConfigFormat2,
                         (result,value,key)=>{
                           // console.log("qas_form_one_values",key,value)
-                          result[value.name]=value.value
+                          result[value.name]=qasform2[value.name]//value.value
                           return result;
         
                       },{})

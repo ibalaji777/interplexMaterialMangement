@@ -43,7 +43,7 @@ var getQasFormSingleApi=api+'/readqasformonesingle'
 
 var qasFormOneUpdateApi=api+'/qasformone/update'
 var qasFormTwoUpdateApi=api+'/qasformtwo/update';
-var deleteQasFormOneApi=api+'/deleteqasformone'
+var deleteQasFormOneApi=api+'/qasformone/delete'
 var mediaDeleteApi=api+'/media/delete';
 
 var readFileTypesApi=api+'/readfiletypes';
@@ -54,7 +54,7 @@ var getProductConfigApi=api+'/productformat/read';
 var updateProductConfigApi=api+'/productformat/update';
 
 var startUserIfNotExistApi=api+'/startusersiFnotexist';
-
+var productBatchCheckApi=api+'/product_batch/check'
 var  getQasOneApi=api+'/getqasoneir';
 
 var qasFormHeaderUpdateApi="qasheaderupdate"
@@ -411,11 +411,18 @@ async qasFormHeaderUpdate(context,header){
 }
 ,
 async deleteQasFormOne(context,item){
-
+console.log("delete action",item)
     var result=await axios.post(deleteQasFormOneApi,{invoice_table_id:item.invoice_table_id});
 await    approverList(context)
     return result.data
-}
+},
+async productBatchCheck(context,rmcode){
+
+        var result=await axios.post(productBatchCheckApi,{rmcode});
+        return result.data
+    },
+    
+
 
 }
 

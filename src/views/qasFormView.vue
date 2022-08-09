@@ -797,6 +797,7 @@ const math = create(all,  {})
 export default {
 data(){
     return {
+        qasFormOneValidateLoader:false,
         qasForm1NewDialog:false,
             qas_form_two_ui:{},
             qas_form_one_ui:{},

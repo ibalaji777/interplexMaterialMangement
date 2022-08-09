@@ -628,11 +628,9 @@ width:'50'
 			name:'batch_no'
 		},
 		{
-			name:'lot_no'
-		},
-		{
 			name:'weight'
 		},
+	
 		{
 			name:'width_min'
 		},
@@ -644,7 +642,11 @@ width:'50'
 		},
 		{
 			name:'thick_max'
-		}
+		},
+		{
+			name:'lot_no'
+		},
+
 	],
     observation_print_view_format:[
 		
@@ -981,9 +983,9 @@ width:'50'
 			editable:true,
 			},
 		{
-			label:'Coil',//input field label
+			label:'Coil #',//input field label
 			name:'header_batch_no',//column name
-			value:'',//default value
+			value:'Coil #',//default value
 			default:true,
 			editable:true,
 			},
@@ -992,21 +994,21 @@ width:'50'
 			{
 				label:'Sup Coil',//input field label
 				name:'header_lot_no',//column name
-				value:'',//default value
+				value:'Sup Coil',//default value
 				default:true,
 				editable:true,
 				},
 				{
 					label:'Supplier Coil #',//input field label
 					name:'header_heat_no',//column name
-					value:'',//default value
+					value:'Supplier Coil #',//default value
 					default:true,
 					editable:true,
 					},
 			{
 			label:'Weight',//input field label
 			name:'header_weight',//column name
-			value:'',//default value
+			value:'Weight',//default value
 			sapHeader:'invoiceQty',
 			default:true,
 			editable:true,
@@ -1207,7 +1209,7 @@ editable:true,
 		{
 		  "label": "WIDTH",
 		  "name": "width",
-		  "value": "",
+		  "value": "WIDTH",
 		  "default": true,
 		  "editable": true
 		},
@@ -1396,7 +1398,7 @@ editable:true,
 		{
 		  "label": "ELONGATION",
 		  "name": "elongation",
-		  "value": "",
+		  "value": "ELONGATION",
 		  "default": true,
 		  "editable": true
 		},

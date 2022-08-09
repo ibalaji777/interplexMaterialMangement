@@ -763,7 +763,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 }}
                                                 <v-icon
                                                     @click="
-                                                        removeTable(
+                                                        removeObservationHeaderPrintView2(
                                                             index,
                                                             item.name
                                                         )
@@ -824,7 +824,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 <div></div>
                                                 <v-icon
                                                     @click="
-                                                        removeTable2(index, key)
+                                                        removeObsrevationPrintView2(index, key)
                                                     "
                                                     >fa-trash</v-icon
                                                 >
@@ -895,7 +895,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     }}
                                                     <v-icon
                                                         @click="
-                                                            removeTable2(
+                                                            removeObsrevationPrintView2(
                                                                 index,
                                                                 column.name
                                                             )
@@ -1020,7 +1020,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     <div></div>
                                                     <v-icon
                                                         @click="
-                                                            removeTable2(
+                                                            removeObsrevationPrintView2(
                                                                 index,
                                                                 column.name
                                                             )
@@ -2923,9 +2923,10 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
         },
                 removeTable2Row(index) {
             var $vm = this;
+
             $vm.$confirm("Do You Want to Remove").then(() => {
                 $vm.$delete($vm.insertForm.observation2_print_view, index);
-                //  $vm.insertForm.observation_format.splice(index,1)
+                //  $vm.insertForm.observation2_format.splice(index,1)
                 // console.log(index,$vm.insertForm.observation_format)
             });
         },
@@ -2971,11 +2972,23 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
                 }
             );
         },
-        removeTable2(index, key) {
+        removeObservationHeaderPrintView2(index, key) {
             var $vm = this;
             console.log("remove=>", index, key);
             $vm.$confirm("Do You Want To Delete?").then(() => {
                 // $vm.$delete($vm.insertForm.observation2_print_view[index], key);
+                $vm.insertForm.observation2_header_print_view.splice(index,1)
+
+                $vm.$alert("removed");
+            });
+        },
+
+        removeObsrevationPrintView2(index, key) {
+            var $vm = this;
+            console.log("remove=>", index, key);
+            $vm.$confirm("Do You Want To Delete?").then(() => {
+                // $vm.$delete($vm.insertForm.observation2_print_view[index], key);
+                $vm.insertForm.observation2_print_view.splice(index,1)
 
                 $vm.$alert("removed");
             });
@@ -3065,6 +3078,12 @@ this.validate_observation_format(...rows)
                 $vm.$alert("Part No Must Be Filled", "Error", "error");
                 return;
             }
+var checkBatch=await $vm.$store.dispatch('productBatchCheck',prepareData.rmcode)
+if(checkBatch)
+{
+$vm.$alert("Product Already Exist")
+    return 
+}
 
             var product = await $vm.$store.dispatch(
                 "createProduct",
