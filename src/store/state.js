@@ -231,45 +231,51 @@ fileType:[
 
 	masterProducts:[
 		{
-			text:'Product Name',
+			text:'# Product Name',
 			value:'product_name',
 			class:'interplexHeader'
 	
 		},
 		{
-			text:'Supplier',
+			text:'# Supplier',
 			value:'supplier_name',
 			class:'interplexHeader'
 	
 		},
 		
 		{
-			text:'RM Code',
+			text:'# RM Code',
 			value:'rmcode',
 			class:'interplexHeader'
 	
 		},
 		{
-			text:'EDS',
+			text:'# EDS',
 			value:'eds',
 			class:'interplexHeader'
 	
 		},
 		{
-			text:'RM',
+			text:'# RM',
 			value:'rm',
 			class:'interplexHeader'
 	
 		},
 		{
-			text:'due Date',
+			text:'# Due Date',
 			value:'duedate',
 			class:'interplexHeader'
 	
 		},
 		{
-			text:'skiplevel',
+			text:'# skiplevel',
 			value:'skiplevel',
+			class:'interplexHeader'
+	
+		},
+		{
+			text:'# Form Format',
+			value:'form_format',
 			class:'interplexHeader'
 	
 		},
@@ -415,17 +421,22 @@ map:{
 			},
 //note it must contain all the fields in interplex.productConfigFormat
 productConfig:{
-				label:'',//input field label
-				name:'',//column name
-				value:'',//default value
-				show:true,
-				disable:false,
-				validationStatus:false,
-				headerMap:'',  
-				validation:false,
-				rule:'',colspan:1,
-				default:true,
-				note:'' 
+	"label": "",
+	"name": "",
+	"value": "",
+	"default": false,
+	"editable": true,
+				// label:'',//input field label
+				// name:'',//column name
+				// value:'',//default value
+				// show:true,
+				// disable:false,
+				// validationStatus:false,
+				// headerMap:'',  
+				// validation:false,
+				// rule:'',colspan:1,
+				// default:true,
+				// note:'' 
 				},
 	
 	

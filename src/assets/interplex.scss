@@ -142,3 +142,33 @@ transform: translate(-50%,-50%);
 .interColor{
     color: #061f5c !important;  
   }
+
+  
+  .interListRow2 thead tr,
+  .interListRow2 thead td{
+    background-color: #52a463;
+    color: white;
+
+  } 
+  .interListRow2 tbody tr:nth-child(even) {
+    background-color: #b66c6c;
+    color: white;
+}
+.interListRow2 tbody tr:nth-child(odd) {
+    background-color: beige;
+    color: black;
+   
+}
+
+.interListRow2 tbody tr:nth-child(even):hover,
+.interListRow2 tbody td:nth-child(even):hover {
+    background-color: lightgrey !important;
+    color: black !important;
+   
+}
+.interListRow2 tbody tr:nth-child(odd):hover,
+.interListRow2 tbody td:nth-child(odd):hover {
+    background-color: lightgrey !important;
+    color: black !important;
+   
+}

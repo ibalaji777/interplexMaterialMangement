@@ -1,10 +1,5 @@
 <template>
     <div>
-        <div style="display:flex;justify-content:flex-end">
-            <v-btn @click="productSettingDialog = true" outlined>
-                config
-            </v-btn>
-        </div>
         <h3 style="margin:10px 0">
             Product Format & Quality assurance Setting
         </h3>
@@ -114,8 +109,7 @@
             </v-dialog>
         </div>
 
-        <!-- <div v-for="(productFormat , index) in insertForm.observation_format" :key="'product'+index">
-
+<!-- <div v-for="(productFormat , index) in insertForm.observation_format" :key="'product'+index">
 <div style="display:flex">
 <span style="width:40%">{{productFormat.label}}</span>
 <input style="width:60%" class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" ><v-icon @click="selectFieldSettingfn(productFormat)" style="margin:0 5px">fa-cog</v-icon>
@@ -359,21 +353,32 @@
                     <!-- <v-btn @click="insertObservation" outlined color="red">
     <v-icon>fa-plus</v-icon>
 </v-btn> -->
+        <div style="display:flex;justify-content:flex-end">
+            <v-btn @click="productSettingDialog = true" outlined>
+                config
+            </v-btn>
+        </div>
+
 
                     <h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
                     <div style="display:flex;margin:10px 0">
                         <v-btn
+                        outlined
                             style="margin:10px"
                             @click="createQasRowInputDialog = true"
                             color="primary"
                         >
+                        <v-icon style="margin-righ:5px">mdi-table-row-plus-after</v-icon>
                             Create Row
                         </v-btn>
-                        <v-btn
+                        <v-btn outlined
                             style="margin:10px"
                             @click="tableColumnSetupDialog = true"
                             color="primary"
                         >
+                                                <v-icon style="margin-righ:5px">                        mdi-table-column-plus-after
+</v-icon>
+
                             Create Column
                         </v-btn>
                     </div>
@@ -404,7 +409,7 @@
                                                 }}
                                                 <v-icon
                                                     @click="
-                                                        removeTable(
+                                                        removeObservationHeaderPrintView(
                                                             index,
                                                             item.name
                                                         )
@@ -1305,12 +1310,14 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <div style="text-align:center;margin:10px 0">
                         <v-btn @click="insertRow" color="primary">sumbit</v-btn>
                     </div>
-                    <div style="    display: flex;
+                    <div style="    
     justify-content: space-around;
     margin: 5px 39px;
     border-radius: 15px;
     border: 1px solid black;
     padding: 11px;">
+    Create Row Setup (For Add New Column)<br>
+    <div style="display: flex;">
                         <v-text-field
                             label="Key"
                             dense
@@ -1329,6 +1336,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             color="primary"
                             >Submit</v-btn
                         >
+                        </div>
                     </div>
                     <h3 style="padding: 20px 0;">Create Row For Below Colums</h3>
                     <table style="width:100%;border-collapse:collapse">
@@ -1348,7 +1356,8 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             </td>
                             <td style="padding:10px;border:1px solid black">
                                 <div
-                                    style="display:flex"
+                                    style="display:flex;
+    justify-content: space-between;"
                                     v-if="!['no', 'desc'].includes(key)"
                                 >
                                     <div style="display:flex;justify-content:space-between">
@@ -1360,9 +1369,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                             ]
                                         }}</div
                                     >
-                                    <div>
+                                    <div style="height:37px">
                                     <v-text-field
                                         dense
+                                        outlined
                                         label="mask"
                                         v-model="
                                             insertForm
@@ -2315,7 +2325,118 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 </div>
             </v-card>
         </v-dialog>
+        <v-dialog
+            v-model="observation2_format_dialog"
+            persistent
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar dark :color="$store.state.bgColor">
+                    <v-toolbar-title
+                        ><v-icon @click="observation2_format_dialog = false"
+                            >fa-times</v-icon
+                        ></v-toolbar-title
+                    >
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <!-- <v-btn dark text @click="saveProductsFormat">
+                            SAVE
+                        </v-btn> -->
+                    </v-toolbar-items>
+                </v-toolbar>
+                <v-divider></v-divider>
+                <div style="padding:10px">
+                    <h3>Qaulity Assurance Form Two Dataset</h3>
+              <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+                  
+                   <v-text-field dense text label="Name(*)" v-model="createDataset.name"></v-text-field>
 
+                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+
+                   <div style="display:flex;justify-content:center">
+                   <v-btn text @click="createObservation2Format">create</v-btn>
+                   </div>
+                    <!-- <v-btn
+                        outlined
+                        @click="createFieldSettingDialog = true"
+                        style="margin-right:15px"
+                        >Create Field</v-btn
+                    > -->
+                </div>
+
+                <div
+                    style="padding:10px;height: 85vh;
+    overflow: scroll;"
+                >
+                <table  class="obFormatTable">
+                    <draggable
+                        :list="insertForm.observation2_format"
+                        tag="tbody"
+                        handle=".handle"
+                        style="
+                     margin-top:10px "
+                        ghost-class="ghost"
+                        group="product"
+                        @start="dragging = true"
+                        @end="dragging = false"
+                    >
+                        <tr
+                            style="display:flex;"
+                            v-for="(productFormat,
+                            index) in insertForm.observation2_format"
+                            :key="'product' + index"
+                        >
+                        <td>
+                        {{index+1}}
+                            <v-icon style="margin:0 5px" class="handle"
+                                >fa-arrows-alt</v-icon
+                            >
+                            </td>
+                            <td >
+                            <input
+                                class="interInput"
+                                v-model="productFormat.label"
+                                type="text"
+                                placeholder="Label"
+                            />
+                            </td>
+                            <td>
+                            <input
+                                class="interInput"
+                                v-model="productFormat.name"
+                                type="text"
+                                placeholder="Name"
+                            />
+                            </td>
+                            <td>
+                                                        <input
+                                class="interInput"
+                                v-model="productFormat.value"
+                                type="text"
+                                placeholder="value"
+                            />
+
+                 </td> 
+                 
+                 <td>
+                    <v-icon @click="selectQas2Editable(index)">fa-cog</v-icon>
+                 </td>
+                 <td>
+                            <v-icon
+                                @click="removeConfig(productFormat, index)"
+                                style="margin:0 5px"
+                                >fa-times</v-icon
+                            >
+                            </td>
+                        </tr>
+                    </draggable>
+</table>
+
+                </div>
+            </v-card>
+        </v-dialog>
         <v-dialog
             v-model="productSettingDialog"
             persistent
@@ -2339,12 +2460,21 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 </v-toolbar>
                 <v-divider></v-divider>
                 <div style="padding:10px">
-                    <v-btn
+                   <h3>Dataset For Qas Form One</h3>
+  <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+                  
+                   <v-text-field dense text label="Name" v-model="createDataset.name"></v-text-field>
+
+                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <div style="display:flex;justify-content:center">
+                   <v-btn text @click="createObservationFormat">create</v-btn>
+                   </div>
+                    <!-- <v-btn
                         outlined
                         @click="createFieldSettingDialog = true"
                         style="margin-right:15px"
                         >Create Field</v-btn
-                    >
+                    > -->
                     <!-- <v-btn outlined @click="preFields">Pre Fields</v-btn> -->
                 </div>
 
@@ -2352,8 +2482,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     style="padding:10px;height: 85vh;
     overflow: scroll;"
                 >
+                <table  class="obFormatTable">
                     <draggable
                         :list="insertForm.observation_format"
+                        tag="tbody"
                         handle=".handle"
                         style="
                      margin-top:10px "
@@ -2362,36 +2494,55 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         @start="dragging = true"
                         @end="dragging = false"
                     >
-                        <div
+                        <tr
                             style="display:flex;"
                             v-for="(productFormat,
                             index) in insertForm.observation_format"
                             :key="'product' + index"
                         >
+                        <td>
                         {{index+1}}
                             <v-icon style="margin:0 5px" class="handle"
                                 >fa-arrows-alt</v-icon
                             >
+                            </td>
+                            <td >
                             <input
                                 class="interInput"
                                 v-model="productFormat.label"
                                 type="text"
                                 placeholder="Label"
                             />
+                            </td>
+                            <td>
                             <input
                                 class="interInput"
                                 v-model="productFormat.name"
                                 type="text"
                                 placeholder="Name"
                             />
+                            </td>
+                            <td>
+                                                        <input
+                                class="interInput"
+                                v-model="productFormat.value"
+                                type="text"
+                                placeholder="value"
+                            />
+                 </td>
+                                 <td>
+                    <v-icon @click="selectQasEditable(index)">fa-cog</v-icon>
+                 </td>
+                  <td>
                             <v-icon
                                 @click="removeConfig(productFormat, index)"
                                 style="margin:0 5px"
                                 >fa-times</v-icon
                             >
-                        </div>
+                            </td>
+                        </tr>
                     </draggable>
-
+</table>
                     <!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
     <div style="display:flex">
         <v-icon>fa-arrows</v-icon>
@@ -2426,6 +2577,15 @@ var create_field = {
 };
 function initialState($vm) {
     return {
+        createDataset:{
+label:'',
+name:'',
+value:''
+        },
+        observation2_format_dialog:false,
+        // observation2FormatName:'',
+
+        // observationFormatName:'',
         postfix: {
             key: "",
             value: ""
@@ -2706,6 +2866,14 @@ getColspan2() {
    console.log("inserform:2",$vm.insertForm)
    },
     methods: {
+obFormat(field){
+    var $vm=this;
+var obj=$vm.$store.state.map.productConfig
+
+return {
+...obj,...field
+}
+},
         createQas2Field(name){
 var $vm=this;
 
@@ -2863,7 +3031,7 @@ default:true,
             $vm.qas2Loader = true;
             setTimeout(() => {
                 $vm.configQas2PrintViewDialog = true;
-            }, 50);
+            }, 800);
 
             setTimeout(() => {
                 $vm.qas2Loader = false;
@@ -2972,6 +3140,16 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
                 }
             );
         },
+                removeObservationHeaderPrintView(index,name){
+var $vm=this;
+
+            $vm.$confirm("Do You Want To Delete?").then(() => {
+                $vm.insertForm.observation_header_print_view.splice(index,1)
+
+                $vm.$alert("removed");
+            });
+
+        },
         removeObservationHeaderPrintView2(index, key) {
             var $vm = this;
             console.log("remove=>", index, key);
@@ -3004,13 +3182,20 @@ $vm.insertForm.observation2_print_view.push({name: $vm.createRowName2})
         validate_observation_format(field){
 var $vm=this;
 
-if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==field.name)!=-1)
-    $vm.insertForm.observation_format.push(field);
+// if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==field.name)!=-1)
+//     $vm.insertForm.observation_format.push(field);
 
         },
         insertRow() {
             var $vm = this;
             var map = {};
+            if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.rowName)!=-1)
+            {
+
+$vm.$alert("Column Already Exist Please Try Other Name")
+return;
+            }
+
             var postfix = this.insertForm.postfix_observation_print_view_format;
 
             //******************** 1.create observation format****************
@@ -3018,13 +3203,15 @@ if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==field.name)!=-1)
             //create fields produt config format
             _.forEach(postfix, (value, key) => {
                 //create input format
+                //double check below column
                 var obj = _.cloneDeep($vm.$store.state.map.productConfig);
                 obj["name"] = $vm.rowName + value;
                 map[key] = obj.name;
                 rows.push(obj);
             });
+    $vm.insertForm.observation_format.push(...rows);
 
-this.validate_observation_format(...rows)
+// this.validate_observation_format(...rows)
             // $vm.insertForm.observation_format.push(...rows);
             //****************2.create observation format print view**********
 
@@ -3127,9 +3314,44 @@ $vm.$alert("Product Already Exist")
             $vm.$alert("Config Updated");
         },
         createProductField() {
-            this.$store.commit("addProductsFormat", this.createField);
-          this.validate_observation_format(this.createField)
-        //   this.insertForm.observation_format.push(this.createField);
+            var $vm=this;
+      if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.rowName)!=-1)
+            {
+
+$vm.$alert("Column Already Exist Please Try Other Name")
+return;
+            }
+    $vm.insertForm.observation_format.push($vm.createField);
+            $vm.$alert("added");
+        },
+                createObservationFormat() {
+            var $vm=this;
+     if($vm.createDataset.name==''){
+        $vm.$alert("Name Must Be Filled");
+        return;
+     }
+     if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.observationFormatName)!=-1)
+            {
+
+$vm.$alert("Column Already Exist Please Try Other Name")
+return;
+            }
+    $vm.insertForm.observation_format.push($vm.obFormat($vm.createDataset));
+            $vm.$alert("added");
+        },
+               createObservation2Format() {
+            var $vm=this;
+             if($vm.createDataset.name==''){
+        $vm.$alert("Name Must Be Filled");
+        return;
+     }
+      if(_.findIndex($vm.insertForm.observation2_format,(x)=>x.name==$vm.observationFormatName)!=-1)
+            {
+
+$vm.$alert("Column Already Exist Please Try Other Name")
+return;
+            }
+    $vm.insertForm.observation2_format.push($vm.obFormat($vm.createDataset));
             $vm.$alert("added");
         },
         preFields() {
@@ -3164,5 +3386,12 @@ $vm.$alert("Product Already Exist")
 }
 .redColor {
     color: red !important;
+}
+.obFormatTable{
+    width:100%;
+
+}
+.obFormatTable td{
+    padding:5px;
 }
 </style>

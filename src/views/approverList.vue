@@ -66,8 +66,9 @@ ppap
       :items="$store.state.interplex.qasForm1"
       item-key="id"
       class="interListRow"
+            item-class="interListRow"
+
       show-select
-      item-class="interListRow"
       :search="search"
       @click:row="selectedQasReport"
         mobile-breakpoint="0"
