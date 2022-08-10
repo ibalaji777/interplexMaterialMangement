@@ -160,11 +160,11 @@ SKIP LEVEL</div>
 
 </div>
 {{/if}}
-<div style="border:1px solid black;height:10vh;position: relative;">
+<div style="border:1px solid black;height:6vh;position: relative;">
 
 <div style="display:flex;height: 100%;width:100%;">
     <div style="display:flex;flex:1;flex-direction: column;">
-        <img style="max-width: 145px;
+        <img style="max-width: 120px;
         position: absolute;
         top: -42px;left: 10px;"
          src="{{logo}}" alt="">
@@ -199,10 +199,10 @@ SKIP LEVEL</div>
 </table>
 
 <!-- <v-btn @click="addObservationFormat">fa-plus</v-btn> -->
-<h3 style="padding:0;margin:0">OBSERVATION</h3>
+<h5 style="padding:0;margin:2px">OBSERVATION</h5>
 
 
-<table class="observationTable">
+<table class="observationTable" >
 
 
 {{#each renderQas1Header}}
@@ -233,7 +233,7 @@ SKIP LEVEL</div>
 </table>
 
 
-<div style="display:flex;position: relative;height:20vh;margin-top:10px">
+<div style="display:flex;position: relative;height:10vh;margin-top:10px">
 
 <div style="position:absolute;top:10px;">
     Comment
@@ -268,7 +268,7 @@ align-items: center;">
 
 <div class="pageBreak"></div>
 
-<div  class="pageTwo" style="min-height:70vh;position:relative">
+<div  class="pageTwo" style="margin:10px 0;min-height:70vh;position:relative">
 
 {{#if this.skiplevel_status}} 
     <div  style="    color: grey;
@@ -375,6 +375,7 @@ css:`
 
     width:100%;
     border-collapse: collapse;
+    font-size:14px;
 }
 .invoiceHeader  td{
     border: 1px solid black;
@@ -385,6 +386,7 @@ css:`
 
 width:100%;
 border-collapse: collapse;
+font-size: 13px;
 }
 .observationTable  td{
 border: 1px solid black;

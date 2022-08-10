@@ -1037,7 +1037,8 @@ $vm.$alert("Batch No Already Exist")
             // console.log("qasform1group",$vm.qasForm1Group)
         },
         async submit(){
-            core.submit(this)
+            // core.submit(this)
+                        core.submit_new(this)
         },
         async submit_() {
             var $vm = this;
