@@ -4,7 +4,8 @@ import * as config from '../lib/config.js'
 import store from '../store/index.js' 
 import * as core from '../lib/core.js'
 import moment from 'moment'
-export  function printData(invoice){
+export  function printData(invoice_){
+    var invoice=_.cloneDeep(invoice_)
 
     console.log("iinvoice data")
     console.log(invoice)

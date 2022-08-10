@@ -1169,7 +1169,7 @@ export async function  submit($vm) {
           // invoice=setHeaderConfigData(headerData,invoice)
 //********************Create QASForm1 config into invoice****************************
 invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
-  console.log("product++",product)
+  // console.log("product++",product)
               var object = {};
               object["batch"] = "";
               object["skiplevel_status"] = product.skiplevel_status;
@@ -1182,7 +1182,7 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
               object=setQasHeader(object,product.headerConfigFormat)
               object['qas_form_one_values']=_.reduce(product.productConfigFormat,
                 (result,value,key)=>{
-                  console.log("qas_form_one_values",value.name,value.value)
+                  // console.log("qas_form_one_values",value.name,value.value)
                   result[value.name]=value.value
                   return result;
 
@@ -1202,6 +1202,7 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
               object["qasForm2New"] = _.map(
                   product.qasForm2,
                   qasform2 => {
+                    
                       qasform2["invoice_client_id"] =invoice["invoice_client_id"];
                       qasform2=setQasHeader(qasform2,product.headerConfigFormat)
                       qasform2['qas_form_two_values']=_.reduce(product.productConfigFormat2,
@@ -1221,7 +1222,7 @@ invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
         
                       },{})
 
-                      return qasform2;
+                      return {...qasform2,...qasform2.qas_form_two_values};
                   }
               );
               return { ...object, operator_id: user_id };
@@ -1427,7 +1428,7 @@ export  function observation2TableBody(ob_form,ob_view,qasFormTwo){
 
 
   var format=[];
-0.
+
   var results=[]
 
   _.map(ob_view,(x)=>{

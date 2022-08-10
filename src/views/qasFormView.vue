@@ -87,7 +87,7 @@ OBSERVATION
 </div>
 </div>
 <div style="display:flex;justify-content:flex-end;margin:10px">
-<v-btn color="primary" @click="saveQasFormOne">Save </v-btn>
+<!-- <v-btn color="primary" @click="saveQasFormOne">Save </v-btn> -->
 </div>
 Qas Form
 <div style="display:flex;">
@@ -120,7 +120,11 @@ Qas Form
 </div>
 </div>
 
-
+<div style="display:flex;justify-content:flex-end;padding:10px">
+<v-btn color="primary" @click="saveEditedForm">
+    Update
+</v-btn>
+</div>
 
 </div>
 
@@ -379,7 +383,7 @@ align-items: center;">
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-<v-btn @click="saveMedia" color="red" style="color:white">SAVE</v-btn>
+<!-- <v-btn @click="saveMedia" color="red" style="color:white">SAVE</v-btn> -->
           </v-toolbar-items>
         </v-toolbar>
 
@@ -476,7 +480,8 @@ Items
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-<h3>QAS FORM One</h3>
+        {{invoice.qasFormOne.observation_format}}
+<h3>QAS FORM ONE</h3>
 <div  style="    padding: 10px 20px;
     margin: 8px;
 " class="rowColor" v-for="(form,index) in invoice.qasFormOne.observation_print_view" :key="index+'form'">
@@ -524,7 +529,7 @@ NO:{{index+1}}
 <div v-else>
 <div v-if="invoice.qasFormOne.observation_format[getIndex(form[ui.name])].editable" style="height:85px">
 
-    <h4> {{ui.label}}:  </h4>
+    <h4>write {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}  </h4>
     <v-text-field  style="margin:5px" :disabled="!invoice.qasFormOne.observation_format[getIndex(form[ui.name])].editable"  v-model="invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
  </div>
@@ -575,7 +580,7 @@ NO:{{index+1}}
 <div style="    height: 91vh;
     overflow: scroll;
 ">
-
+{{invoice.qasFormTwo}}
         <table style="width:100%">
             <tr>
                 <th></th>
@@ -603,7 +608,7 @@ NO:{{index+1}}
 {{getIndex2(ui.name)}} -->
 <!-- gg{{invoice.qasFormOne.observation2_format}} -->
 <div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
-     <h4> {{ui.label}}:  </h4>
+     <h4> write{{ui.label}}:{{productFormat[ui.name]}}  </h4>
     <v-text-field  style="margin:5px" :disabled="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
     </v-text-field>
 
@@ -875,17 +880,37 @@ console.log(params)
 }
 if(params.invoice){
 $vm.printData=printData.printData(params.invoice)
+// var invoice=_.cloneDeep({
+// qasFormOne:params.invoice.qasFormOne||[],
+// qasFormTwo:params.invoice.qasFormTwo||[],
+// gallery:_.map(params.invoice.gallery||[],(image)=>{
 
-$vm.invoice={
-
-qasFormOne:params.invoice.qasFormOne||[],
-qasFormTwo:params.invoice.qasFormTwo||[],
-gallery:_.map(params.invoice.gallery||[],(image)=>{
+// image['src']=config.api+'/uploads/'+image.full_name;
+// return image;
+// })
+// })
+var gallery=_.map(params.invoice.gallery||[],(image)=>{
 
 image['src']=config.api+'/uploads/'+image.full_name;
 return image;
 })
-}
+
+// $vm.$set($vm,"invoice",invoice)
+$vm.$set($vm.invoice,"qasFormOne",params.invoice.qasFormOne)
+$vm.$set($vm.invoice,"qasFormTwo",params.invoice.qasFormTwo)
+$vm.$set($vm.invoice.qasFormOne,"observation_format",params.invoice.qasFormOne.observation_format)
+$vm.$set($vm.invoice.qasFormOne,"observation2_format",params.invoice.qasFormOne.observation2_format)
+$vm.$set($vm.invoice,"gallery",gallery)
+// $vm.invoice={
+
+// qasFormOne:params.invoice.qasFormOne||[],
+// qasFormTwo:params.invoice.qasFormTwo||[],
+// gallery:_.map(params.invoice.gallery||[],(image)=>{
+
+// image['src']=config.api+'/uploads/'+image.full_name;
+// return image;
+// })
+// }
 $vm.qas_form_one_ui=$vm.$store.state.interplex.qas_form_one_ui
 $vm.qas_form_two_ui=$vm.$store.state.interplex.qas_form_two_ui
 
@@ -930,6 +955,82 @@ $vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFo
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+
+async saveEditedForm(){
+var $vm=this;
+
+
+//header
+var header=_.cloneDeep($vm.invoice.qasFormOne.header_format);
+
+var qasFormOne={}
+var header_columns=_.reduce(_.cloneDeep(header),(result,obj,key)=>{
+       if([
+    'invoice_no',
+    'invoice_date',
+    'invoice_qty',
+    'ir',
+    'grn_no',
+    'grn_date',
+    'rmcode',
+    'rm',
+    'eds',
+    'product_name'
+].includes(obj.name))
+       result[obj.name]=obj.value;
+    return result;
+},{})
+
+var header_columns2=_.reduce(_.cloneDeep(header),(result,obj,key)=>{
+       if([
+    'invoice_no',
+
+
+    'grn_no',
+    'grn_date',
+    'rmcode',
+    'eds',
+].includes(obj.name))
+       result[obj.name]=obj.value;
+    return result;
+},{})
+
+qasFormOne={...header_columns}
+// console.log("$vm.invoice.qasFormOne.observation_format")
+// console.log($vm.invoice.qasFormOne.observation_format)
+var qas_form_one_values=_.reduce(_.cloneDeep($vm.invoice.qasFormOne.observation_format),(result,obj,key)=>{
+    
+    result[obj.name]=obj.value;
+    return result;
+},{})
+qasFormOne['id']=$vm.invoice.qasFormOne.id;
+qasFormOne['qas_form_one_values']=qas_form_one_values;
+qasFormOne['header_format']=header;
+
+var qasFormTwo=_.map(_.cloneDeep($vm.invoice.qasFormTwo),(qasform)=>{
+   
+ qasform['qas_form_two_values']=_.reduce(_.cloneDeep($vm.invoice.qasFormOne.observation2_format),(result,obj,key)=>{
+    result[obj.name]=qasform[obj.name]||obj.value;
+    return result;
+},{})
+
+return {...qasform,...header_columns2};
+})
+
+console.log("-----save-------")
+// console.log("header",header)
+console.log("qasFormOne",qasFormOne)
+console.log("qasFormTwo",qasFormTwo)
+
+await $vm.$store.dispatch('updateQasForm',{
+    qasFormOne,
+    qasFormTwo
+})
+$vm.saveMedia()
+
+
+},
+
     validateQasFormOne(){
 var $vm=this;
     },

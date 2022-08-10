@@ -57,8 +57,8 @@ var startUserIfNotExistApi=api+'/startusersiFnotexist';
 var productBatchCheckApi=api+'/product_batch/check'
 var  getQasOneApi=api+'/getqasoneir';
 
-var qasFormHeaderUpdateApi="qasheaderupdate"
-
+var qasFormHeaderUpdateApi=api+"qasheaderupdate"
+var updateQasFormApi=api+'/qasforms/update'
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
@@ -422,6 +422,14 @@ async productBatchCheck(context,rmcode){
         return result.data
     },
     
+    async updateQasForm(context,{qasFormOne,qasFormTwo}){
+console.log("descrut",qasFormOne,qasFormTwo)
+        var result=await axios.post(updateQasFormApi,{qasFormOne,qasFormTwo});
+        return result.data
+    },
+    
+
+
 
 
 }
