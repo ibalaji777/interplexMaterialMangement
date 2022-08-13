@@ -675,8 +675,12 @@ if(product.length==0){
     
       if(x.mapFrom=='header'&&x.map!='')
       {
+
       x['value']=(object[x.map]||'')
-      }
+    
+    }
+
+
       if(x.mapFrom=='product'&&x.map!='')
       {
         x['value']=(product[0][x.map]||'')

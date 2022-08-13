@@ -11,6 +11,18 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 // import store from '../src/store/store';
 // import VueStash from 'vue-stash';
 import 'reveal.js/dist/reveal.css'
+// import VueCodemirror from 'vue-codemirror'
+
+// require styles
+// import 'codemirror/lib/codemirror.css'
+// import 'codemirror'
+// require more codemirror resource...
+
+// you can set default global options and events when use
+// Vue.use(VueCodemirror,{ 
+//   options: { theme: 'base16-dark'},
+// //   events: ['scroll', ...]
+// } )
 
 import VueSimpleAlert from 'vue-simple-alert';
 import isElectron from 'is-electron';
@@ -103,7 +115,7 @@ Vue.config.productionTip = true;
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
 import debounce from 'v-debounce'
-
+import codeEditor from './views/codeEditor.vue'
 Vue.use(debounce)
 
 Vue.component('appWeb', appWeb);
@@ -113,6 +125,8 @@ Vue.component('barcodeLabelPrint', barcodeLabelPrint);
 
 Vue.component('pluginPrintMobile',pluginPrintMobile)
 Vue.component('pluginPrintDesktop',pluginPrintDesktop)
+
+Vue.component('codeEditor',codeEditor)
 
 Vue.filter('date', function (value) {
     if (!value) return ''
