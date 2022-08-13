@@ -106,8 +106,8 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 import VJsoneditor from 'v-jsoneditor'
 import date from './views/date.vue'
 import barcodeLabelPrint from './views/barcodeLabelPrint.vue'
-import labelPrint from './views/labelPrint.vue'
-
+import labelPrintMobile from './views/labelPrintMobile.vue'
+import labelPrintDesktop from './views/labelPrintDesktop.vue'
 Vue.use(VJsoneditor)
 import pluginPrintMobile from './views/pluginPrintMobile.vue'
 import pluginPrintDesktop from './views/pluginPrintDesktop.vue'
@@ -127,7 +127,9 @@ Vue.component('navbarWeb', navbarWeb);
 Vue.component('date', date);
 Vue.component('barcodeLabelPrint', barcodeLabelPrint);
 
-Vue.component('labelPrint', labelPrint);
+Vue.component('labelPrintMobile', labelPrintMobile);
+Vue.component('labelPrintDesktop', labelPrintDesktop);
+
 
 
 Vue.component('pluginPrintMobile',pluginPrintMobile)

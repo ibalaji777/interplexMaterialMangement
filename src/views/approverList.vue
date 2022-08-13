@@ -3,11 +3,37 @@
 <!-- sss{{$store.state.interplex.user}} -->
 <!-- eslint-disable -->
 <!-- {{$store.state.interplex.qasForm1}} -->
-<div style="padding:15px;">
+
+<label-print-desktop v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
+<label-print-mobile  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
+<div style="padding:15px;    padding: 15px;
+    justify-content: space-between;
+    display: flex;
+">
 
 <v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode
 </v-icon>
+
+<v-btn text @click="generateLabel">
+    create Label
+</v-btn>
+
+<v-btn @click="labelPrint()" color="#2f5489" style="color:red;margin-right:5px">
+<v-icon color="white">
+     fa-print
+</v-icon>
+</v-btn>
+
+
+<v-btn @click="labelPdf()" color="#2f5489 " style="margin-right:5px">
+<v-icon color="white" >
+mdi-file-pdf
+</v-icon>
+</v-btn>
+
 </div>
+
+
 
 <div v-if="filterResult.length==0" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
 
@@ -177,7 +203,17 @@ export default {
         return {
             selected:[],
             search: '',
-isApprover:false,      
+isApprover:false,    
+        barcodeLabel:{
+            pageSetup:{
+page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
+    label:_.cloneDeep(this.$store.state.barcode.pageSetup.label),
+            },
+            html:_.cloneDeep(this.$store.state.barcodeLabel.html),
+            css:_.cloneDeep(this.$store.state.barcodeLabel.css),
+            js:'',
+            data_set:[{},{}]//{label props},{}.{}
+        },  
              filterResult:[],
       }
     },
@@ -221,6 +257,53 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 
     },
     methods:{
+            labelPrint(){
+        var $vm=this;
+        if($vm.selected.length==0){
+$vm.$alert("Please Select Item to create label")
+    return;
+}
+if($vm.$isElectron){
+    $vm.$refs.labelPrintDesktop.print()
+}
+else{
+        $vm.$refs.labelPrintMobile.print()
+}
+    },
+    labelPdf(){
+        var $vm=this;
+        if($vm.selected.length==0){
+$vm.$alert("Please Select Item to create label")
+    return;
+}
+if($vm.$isElectron){
+    $vm.$refs.labelPrintDesktop.toPdf()
+}
+else{
+        $vm.$refs.labelPrintMobile.print()
+}
+
+    },
+
+        generateLabel(){
+var $vm=this;
+if($vm.selected.length==0){
+$vm.$alert("Please Select Item to create label")
+    return;
+}
+$vm.barcodeLabel.data_set=_.map($vm.selected,(formone)=>{
+var label={}
+console.log("formone",formone)
+    _.map(formone.header_format,(Property)=>{
+console.log('prop',Property)
+        label[Property.name]=Property.value
+
+    })
+    return label
+
+})
+
+        },
               async  preview(item){
             var $vm=this;
 var result=await $vm.$store.dispatch('getQasFormOneSingle',item.invoice_table_id)

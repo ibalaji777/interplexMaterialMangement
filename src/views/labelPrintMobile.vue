@@ -1,6 +1,6 @@
 <template>
     <div>
-
+<!-- {{invoice_data.data_set}} -->
         <iframe
 
             id="barcodeLabelPlugin"
