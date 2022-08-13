@@ -666,7 +666,8 @@ if(product.length==0){
     }
     var observation_format=sapMap(product[0].observation_format,object)
 
-    var header=_.cloneDeep(database($vm,'getMasterHeaderConfig'))
+    var header=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
+    //_.cloneDeep(database($vm,'getMasterHeaderConfig'))
 
     //  console.log("ob+++>",product)
     

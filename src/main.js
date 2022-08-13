@@ -11,18 +11,20 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 // import store from '../src/store/store';
 // import VueStash from 'vue-stash';
 import 'reveal.js/dist/reveal.css'
-// import VueCodemirror from 'vue-codemirror'
+// require lib
+import VueCodeMirror from 'vue-codemirror'
 
 // require styles
-// import 'codemirror/lib/codemirror.css'
-// import 'codemirror'
+import './assets/codemiror.scss'
+import './assets/dark.scss'
+ 
 // require more codemirror resource...
-
+ 
 // you can set default global options and events when use
-// Vue.use(VueCodemirror,{ 
-//   options: { theme: 'base16-dark'},
-// //   events: ['scroll', ...]
-// } )
+Vue.use(VueCodeMirror, /* { 
+  options: { theme: 'base16-dark', ... },
+  events: ['scroll', ...]
+} */)
 
 import VueSimpleAlert from 'vue-simple-alert';
 import isElectron from 'is-electron';
@@ -104,6 +106,8 @@ import 'quill/dist/quill.bubble.css' // for bubble theme
 import VJsoneditor from 'v-jsoneditor'
 import date from './views/date.vue'
 import barcodeLabelPrint from './views/barcodeLabelPrint.vue'
+import labelPrint from './views/labelPrint.vue'
+
 Vue.use(VJsoneditor)
 import pluginPrintMobile from './views/pluginPrintMobile.vue'
 import pluginPrintDesktop from './views/pluginPrintDesktop.vue'
@@ -122,6 +126,9 @@ Vue.component('appWeb', appWeb);
 Vue.component('navbarWeb', navbarWeb);
 Vue.component('date', date);
 Vue.component('barcodeLabelPrint', barcodeLabelPrint);
+
+Vue.component('labelPrint', labelPrint);
+
 
 Vue.component('pluginPrintMobile',pluginPrintMobile)
 Vue.component('pluginPrintDesktop',pluginPrintDesktop)

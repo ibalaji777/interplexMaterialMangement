@@ -445,6 +445,72 @@ productConfig:{
 
 
 interplex:{
+	header_form_gui:{
+		one:[],
+		two:[
+			{
+				label:'SUPPLIER :',
+				name:'supplier_name',
+				width:'33'
+			},
+			{
+				label:'IR #:',
+				name:'ir',
+				width:'33'
+			},
+			{
+				label:'R/M CODE:',
+				name:'rmcode',
+				width:'33'
+			},
+			{
+				label:'INVOICE/DC #:',
+				name:'invoice_no',
+				width:'33'
+			},
+			{
+				label:'DATE:',
+				name:'date',//need to check
+				width:'33'
+			},
+			{
+				label:'EDS /QIP #:',
+				name:'eds',
+				width:'33'
+			},
+			{
+				label:'INVOICE /DC DATE:',
+				name:'invoice_date',
+				width:'33'
+			},
+			{
+				label:'GRN NO:',
+				name:'grn_no',
+				width:'33'
+			},
+			{
+				label:'R/M:',
+				name:'rm',
+				width:'33'
+			},
+			{
+				label:'INVOICE QTY:',
+				name:'invoice_qty',
+				width:'33'
+			},
+			{
+				label:'GRN NO:',
+				name:'grn_no',
+				width:'33'
+			},
+			{
+				label:'RECEIVED QTY:',
+				name:'received_qty',
+				width:'33'
+			},
+		]
+
+	},
 	qas_form_one_ui:
 		{
 			one:[
@@ -2607,144 +2673,169 @@ editable:true,
 	configHeaderFormat:[
 
 		{
-			label:'SUPPLIER',//input field label
-			name:'supplier_name',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
+		  label:'SUPPLIER',//input field label
+		  name:'supplier_name',//column name
+		  value:'',//default value
+		  show:true,
+		  map:'',
+		  input_type:'text',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
 		},
 		{
-			label:'PRODUCT NAME',//input field label
-			name:'product_name',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
+		  label:'PRODUCT NAME',//input field label
+		  name:'product_name',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
 
-		},
-	
-
-		{
-			label:'INVOICE / DC #',//input field label
-			name:'invoice_no',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
-
-		},
-		{
-			label:'INVOICE / DC DATE',//input field label
-			name:'invoice_date',//column name
-			value:'',//default value
-			show:true,
-			map:'DATE_EXT',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
-
-		},
-		{
-			label:'INVOICE QTY',//input field label
-			name:'invoice_qty',//column name
-			value:'',//default value
-			show:true,
-			map:'invoiceQty',
-			mapFrom:'header',//header or product
-			default:true,
-			note:'No Need to Map'
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
 
 		},
 
+
 		{
-			label:'IR #',//input field label
-			name:'ir',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
-		},
-		{
-			label:'GRN NO',//input field label
-			name:'grn_no',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
+		  label:'INVOICE / DC #',//input field label
+		  name:'invoice_no',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
 
 		},
 		{
-			label:'GRN DATE',//input field label
-			name:'grn_date',//column name
-			value:'',//default value
-			show:true,
-			map:'LAST_GR_DATE_EXT',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
+		  label:'INVOICE / DC DATE',//input field label
+		  name:'invoice_date',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'DATE_EXT',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+
 		},
 		{
-			label:'R/M CODE',//input field label
-			name:'rmcode',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
+		  label:'INVOICE QTY',//input field label
+		  name:'invoice_qty',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'number',
+
+		  map:'invoiceQty',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:'No Need to Map'
+
+		},
+
+		{
+		  label:'IR #',//input field label
+		  name:'ir',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+		},
+		{
+		  label:'GRN NO',//input field label
+		  name:'grn_no',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+
+		},
+		{
+		  label:'GRN DATE',//input field label
+		  name:'grn_date',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'LAST_GR_DATE_EXT',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+		},
+		{
+		  label:'R/M CODE',//input field label
+		  name:'rmcode',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
 		},		{
-			label:'EDS /Q /P #',//input field label
-			name:'eds',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
-		},		
-		{
-			label:'DATE',//input field label
-			name:'DATE',//column name
-			value:moment().format("YYYY-MM-DD"),//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
-		},
-{
-			label:'R/M',//input field label
-			name:'rm',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:''
-		},		{
-			label:'RECEIVED QTY',//input field label
-			name:'received_qty',//column name
-			value:'',//default value
-			show:true,
-			map:'',
-			mapFrom:'header',//header or product
-			default:true,
-			note:'No Need to Map'
+		  label:'EDS /Q /P #',//input field label
+		  name:'eds',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
 
-		},		
-		
-	],
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+		},
+		{
+		  label:'DATE',//input field label
+		  name:'date',//column name
+		  value:moment().format("YYYY-MM-DD"),//default value
+		  show:true,
+		  input_type:'date',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+		},
+	{
+		  label:'R/M',//input field label
+		  name:'rm',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'text',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:''
+		},		{
+		  label:'RECEIVED QTY',//input field label
+		  name:'received_qty',//column name
+		  value:'',//default value
+		  show:true,
+		  input_type:'number',
+
+		  map:'',
+		  mapFrom:'header',//header or product
+		  default:true,
+		  note:'No Need to Map'
+
+		},
+
+	  ],
 	configQasForm2Format:[
 
 		{

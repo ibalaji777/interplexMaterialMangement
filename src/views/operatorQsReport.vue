@@ -4,16 +4,83 @@
 <br>
 <div style="    display: flex;
     flex-wrap: wrap;">
-<div style="width:32.5%;margin:1px" v-for="(header,index) in selectedPartNoItem.headerConfigFormat" :key="'header'+index">
-<!-- {{header.name}} -->
-<div style="font-size:13px">{{header['label']}}</div>
-<div > 
-<input class="interInput" v-model="header['value']" type="text" :placeholder="header.label" >
+    <!-- {{$store.state.interplex.configHeaderFormat}} -->
+
+
+
+<div style="display:flex;flex-wrap:wrap"  :key="'headergui'">
+<div  class="flex-row-item"  v-for="(ui,index_sub) in header_form_gui.two" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
+<div v-if="getIndexHeader(ui.name)!=-1" >
+     
+    <!-- <v-text-field  style="margin:5px"   v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value" outlined dense >
+    </v-text-field> -->
+<div style="height: 45px;margin:2px 3px;"
+       > 
+ <!-- <div style="margin-right:2px" v-if="header.map!=''">   <v-icon style="color:green" :class="{isRed:header.value==''}">mdi-magnify-scan</v-icon></div> -->
+<div v-if="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type!='date'">
+<!-- without map value -->
+<v-text-field 
+style="width:100%"
+v-if="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].map==''"
+ :label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label"  :type="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :placeholder="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
+</v-text-field>
+<!-- with map value added icon -->
+
+<v-text-field 
+v-else
+style="width:100%"
+ append-icon="mdi-magnify-scan"
+:label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label"  :type="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :placeholder="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
+</v-text-field>
 
 </div>
+<div v-else>
+    <v-text-field  @click="headerDateShow = true" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
+</v-text-field>
+<date-picker  @close="headerDateShow = false"
+             v-if="headerDateShow"
+             v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"
+             :format="formatDate"
+             ></date-picker>
+</div>
+</div>
+
+</div>
+</div> 
 
 
 </div>
+<!-- <div style="width:32.5%;margin:1px"  v-for="(header,index) in selectedPartNoItem.headerConfigFormat" :key="'header'+index">
+<div style="    height: 45px;
+    align-items: baseline;
+"> 
+<div v-if="header.input_type!='date'">
+<v-text-field 
+style="width:100%"
+v-if="header.map==''"
+ :label="header.label"  :type="header.input_type" dense outlined v-model="header['value']"  :placeholder="header.label" >
+</v-text-field>
+
+<v-text-field 
+v-else
+style="width:100%"
+
+ append-icon="mdi-magnify-scan"
+:label="header.label"  :type="header.input_type" dense outlined v-model="header['value']"  :placeholder="header.label" >
+</v-text-field>
+
+</div>
+<div v-else>
+    <v-text-field  @click="headerDateShow = true" dense outlined v-model="header['value']"  :placeholder="header.label" >
+</v-text-field>
+<date-picker  @close="headerDateShow = false"
+             v-if="headerDateShow"
+             v-model="header.value"
+             :format="formatDate"
+             ></date-picker>
+</div>
+</div>
+</div> -->
 </div>
 OBSERVATION
 <div style="display:flex;">
@@ -159,7 +226,7 @@ Width Max
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-<h3>QAS FORM 2 new</h3>
+<h3>QAS FORM TWO</h3>
 <!-- {{selectedPartNoItem}} -->
 <div style="    height: 88vh;
     overflow: scroll;
@@ -182,7 +249,7 @@ Width Max
     <td>{{index+1}}</td>
 <td>
 <div  class="flex-row-container">
-    {{productFormat}}
+    <!-- {{productFormat}} -->
 <!-- {{observation2_format_print_view}} -->
 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.one" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
@@ -265,7 +332,7 @@ Width Max
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-<h3>QAS FORM One</h3>
+<h3>QAS FORM ONE</h3>
 <!-- {{qasForm1New}} -->
 <!-- {{selectedPartNoItem.observation_print_view}} -->
 <div  style="    padding: 10px 20px;
@@ -287,12 +354,12 @@ NO:{{index+1}}
  <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
 
 <div v-if="ui.name=='desc'">
-   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+    {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}
 
 </div>
 <div v-else>
     <div>
-   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+    {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}
 
 </div>
 </div>
@@ -301,23 +368,31 @@ NO:{{index+1}}
 
 </div>
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_one_ui.two" :key="'form_'+index_sub" :style="{width:ui.width+'%'}">
+        <!-- <div style="background:lightgrey"> -->
+
 <div v-if="ui.name=='no'">
 NO:{{index+1}}
 </div>
-
-
  <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
-
 <div v-if="ui.name=='desc'">
-   <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
+   {{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}
+</div>
+
+<div v-else>
+<div v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable" style="height:45px">
+
+    <!-- <h4> {{ui.label}}:  </h4> -->
+    <!-- normal -->
+    <v-text-field v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+    </v-text-field>
+    <div  v-else>
+    
+        <v-text-field v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp"   append-icon="fa-calculator" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+    </v-text-field>
+        <v-text-field v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+    </v-text-field>
 
 </div>
-<div v-else>
-<div v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable" style="height:85px">
-
-    <h4> {{ui.label}}:  </h4>
-    <v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
-    </v-text-field>
  </div>
 <div v-else>
    <h4> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</h4>
@@ -618,8 +693,9 @@ Items
 </template>
 <script>
 /*eslint-disable*/
+import moment from 'moment'
 import * as core from '../lib/core'
-import { create, all } from 'mathjs'
+import { create, all, string } from 'mathjs'
 const math = create(all,  {})
 import { Camera, CameraResultType } from '@capacitor/camera';
 export default {
@@ -627,6 +703,8 @@ export default {
     data(){
 
         return {
+            header_form_gui:[],
+            headerDateShow:false,
             qasFormOneValidateLoader:false,
             qas_form_one_ui:[],
             qasForm1New:{},
@@ -654,6 +732,15 @@ return  _.reduce($vm.selectedPartNoItem.observation2_print_view, function(result
     return result;
   }, {});
 
+    },
+    getIndexHeader(){
+var $vm=this;
+return (name)=>{
+    return _.findIndex($vm.selectedPartNoItem.headerConfigFormat, x => {
+                    return x.name == name;
+                });
+           
+}
     },
                     getIndex2() {
             var $vm = this;
@@ -719,12 +806,28 @@ $vm.qas_form_two_ui=_.cloneDeep($vm.$store.state.interplex.qas_form_two_ui);
 // console.log($vm.$store.state.interplex.selectedPartNoItem)
 await $vm.$store.dispatch('readUploadType')
 
+$vm.header_form_gui=_.cloneDeep($vm.$store.state.interplex.header_form_gui);
 $vm.qasForm1New=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
 
 console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
 },
 watch:{
 
+// "selectedPartNoItem.headerConfigFormat":{
+// handler(){
+//     var $vm=this;
+// _.map($vm.selectedPartNoItem.headerConfigFormat,(input)=>{
+
+// if(input.input_type=='date'){
+
+//     input.value=moment(String(input.input_type||'')).format("YYYY-MM-DD")
+// }
+// })
+
+// },
+// deep:true,
+
+// }
 
 // "selectedPartNoItem.qasForm2":{
 //     handler(value){
@@ -759,6 +862,9 @@ watch:{
 // }
 },
     methods:{
+        formatDate (date) {
+  return moment(date).format("YYYY-MM-DD")
+},
         Qas2Validate(){
 var $vm=this;
 
