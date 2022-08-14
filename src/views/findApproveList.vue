@@ -13,50 +13,6 @@
 
 <v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode-scan
 </v-icon>
-<!-- 
-<v-btn  color="#2f5489"  @click="generateLabel" style="color:white">
-    Make Label
-</v-btn>
-
-</div> -->
-<!-- <div style="display:flex;justify-content:space-evenly">
-    <v-btn @click="labelPrint()" color="#2f5489" style="color:white;margin-right:5px">
-    <span style="margin-right:5px">Label Print</span>
-<!-- <v-icon color="white">
-     fa-print
-</v-icon> -->
-<!-- </v-btn> -->
-
-
-<!-- <v-btn @click="labelPdf()" color="#2f5489 " style="color:white;margin-right:5px">
-    <span style="margin-right:5px">Label Pdf</span>
-
-<v-icon color="white" >
-mdi-file-pdf
-</v-icon>
-</v-btn>
-  -->
-
-</div>
-
-
-<div v-if="filterResult.length==0" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
-
-<div style="display:flex;flex-direction:column;justify-content:center;align-items:center">
-<img style="max-width:175px" src="empty.png" alt="">
-<div><b>Result Not found</b></div>
-
-</div>
-</div>
-<div v-if="filterResult.length!=0">
-<div style="margin:10px 0">
-    <div v-if="isApprover" style="
-    padding: 10px;
-    border-radius: 6px;
-">
-
-    <!-- <v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode-scan
-</v-icon> -->
 
 
 </div>
@@ -113,48 +69,58 @@ Rej
     <div  style="background:blue"  @click="markStaus('ppap')" class="statusCard">
 PP
     </div>
-    </div>
-    </div>
-</div>
-    <!-- <div style="display:flex">
 
-<v-btn outlined color="white" style="flex:1;margin:0 5px;" @click="markStaus('pending')">
+<!-- <v-btn outlined  style="flex:1;margin:0 5px;" @click="markStaus('pending')">
 Pending
 </v-btn>
-<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('approved')">
+<v-btn outlined  style="flex:1;margin:0 5px" @click="markStaus('approved')">
 approved
 </v-btn>
-    </div> -->
+    </div>
     <div style="display:flex;margin-top:3px">
-<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('acceptedOnDeviation')">
+<v-btn outlined  style="flex:1;margin:0 5px" @click="markStaus('acceptedOnDeviation')">
 accepted On Deviation
 </v-btn>
     </div>
     <div style="display:flex;margin-top:3px">
-<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('rejected')">
+<v-btn outlined  style="flex:1;margin:0 5px" @click="markStaus('rejected')">
 rejected
 </v-btn>
-<v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('ppap')">
+<v-btn outlined  style="flex:1;margin:0 5px" @click="markStaus('ppap')">
 ppap
-</v-btn>
+</v-btn> -->
 </div>
     </div>
        
 </div>
-<h5 style="text-align:right"><date ></date></h5>
+<div style="display:flex;margin-top:15px">
+<v-select
+v-model="findByKey"
+:items="$store.state.interplex.configHeaderFormat"
+ item-text="label"
+ item-value="name"
+ label="Find By"
+ style="margin:5px;"
+>
+
+</v-select>
+
      <v-text-field
-        style="margin-top:15px"
+        style="margin:5px"
         dense
         outlined
           v-model="search"
           label="Search"
            ></v-text-field>
-
+           <v-btn color="primary" style="color:white" @click="findArray">
+            Submit
+           </v-btn>
+</div>
          <v-data-table
          dense
       v-model="selected"
       :headers="$store.state.report.qasForm1"
-      :items="approverListOrder"
+      :items="foundList"
       item-key="id"
       class="interListRow"
             item-class="interListRow"
@@ -266,7 +232,9 @@ Vue.filter('formatDate', function(value) {
 export default {
     data(){
         return {
+            foundList:[],
             selected:[],
+            findByKey:'',
             search: '',
 isApprover:false,    
         barcodeLabel:{
@@ -327,6 +295,15 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 
     },
     methods:{
+async        findArray(){
+var $vm=this;
+
+$vm.foundList=await $vm.$store.dispatch("findQasForm",{
+    key:$vm.findByKey,
+    value:$vm.search
+})
+
+},
             labelPrint(){
         var $vm=this;
         if($vm.selected.length==0){

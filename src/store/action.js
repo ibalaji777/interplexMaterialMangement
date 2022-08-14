@@ -3,7 +3,7 @@ import * as core from '../lib/config'
 var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
-
+var findQasFormApi=api+'/find_qas_form';
 var labelSettingReadApi=api+'/labelsetting/read';
 var labelSettingSaveApi=api+'/labelsetting/save';
 var createUser=api+'/user/create'
@@ -445,7 +445,14 @@ console.log("descrut",qasFormOne,qasFormTwo)
                         return result.data
                     },
 
+async findQasForm(context,payload){
+var result=await axios.post(findQasFormApi,payload);
+    // context.commit("setLabelSetting",result.data)
+return result.data
+},
 
+
+                    
 }
 
 export default actions;

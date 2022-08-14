@@ -43,7 +43,10 @@ import nativePhotoCapture from '../views/nativePhotoCapture.vue'
 
 import qasFormView from '../views/qasFormView.vue'
 
+import findApproveList from '../views/findApproveList.vue'
+
 import qasForm2Config from '../views/qasForm2Config.vue'
+
 import qrScan from '../views/qrScan.vue'
 Vue.use(VueRouter);
 
@@ -68,10 +71,16 @@ const routes = [
 		component:branches
 	},
 	{
+		path: '/findApproveList',
+		name: 'findApproveList',
+		component:findApproveList 
+	},
+	{
 		path: '/qrScan',
 		name: 'qrScan',
 		component:qrScan 
 	},
+
 
 	
 	{

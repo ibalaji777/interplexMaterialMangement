@@ -270,6 +270,12 @@ $vm.items=[
                 action: "approverList",
                 submenu: false
             },
+                      {
+                title: "Find",
+                icon: "fa-search",
+                action: "findApproveList",
+                submenu: false
+            },
 ]
 }
 
@@ -331,7 +337,12 @@ $vm.items=[
                 action: "labelSetting",
                 submenu: false
             },
-
+                      {
+                title: "Find",
+                icon: "fa-search",
+                action: "findApproveList",
+                submenu: false
+            },
 
 ]
 }
@@ -384,6 +395,12 @@ $vm.items=[
                 title: "Label Setting",
                 icon: "mdi-qrcode",
                 action: "labelSetting",
+                submenu: false
+            },
+                                  {
+                title: "Find",
+                icon: "fa-search",
+                action: "findApproveList",
                 submenu: false
             },
 
