@@ -1,11 +1,13 @@
 <template>
     <div>
-        <div style="display:flex;justify-content:space-between">
+        <h5 style="text-align:center">Make Inspection Form</h5>
+
+        <div style="background:#b9c5de;padding:10px;display:flex;justify-content:space-evenly">
+
 <!-- {{$isElectron}} -->
 <!-- {{barcodeLabel}} -->
 <v-btn @click="print()" color="#2f5489" style="color:white;margin-right:5px">
 <span style="margin-right:5px">
-Inspection
 </span>
 <v-icon color="white">
      fa-print
@@ -15,16 +17,19 @@ Inspection
 <v-btn @click="pdf()" color="#2f5489 " style="color:white;margin-right:5px">
 <span style="margin-right:5px">
 
-Inspection
 </span>
 <v-icon color="white" >
 mdi-file-pdf
 </v-icon>
 </v-btn>
+        </div>
+<h5 style="text-align:center">Make Inspection Label</h5>
+
+
+        <div style="background:#b9c5de;padding:10px;display:flex;justify-content:space-evenly">
 <v-btn @click="labelPrint()" color="#2f5489 " style="color:white;margin-right:5px">
     <span style="margin-right:5px">
 
-Label 
     </span>
 <v-icon color="white">
      fa-print
@@ -34,7 +39,6 @@ Label
 <v-btn @click="labelPdf()" color="#2f5489 " style="color:white;margin-right:5px">
     <span style="margin-right:5px">
 
-Label 
     </span>
 <v-icon color="white">
      mdi-file-pdf

@@ -351,6 +351,7 @@ Items
                             type="file"
                             id="docpicker"
                             accept=".txt,.csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+                            multiple
                         />
                         <v-btn style="color:white" color="rgb(48, 32, 78)" @click="headerFileUploader">check</v-btn>
                     </div>
@@ -635,7 +636,6 @@ background: #555160;
                             style="display:flex;width:100%"
                         >
 
-
                           <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
 
@@ -644,7 +644,26 @@ background: #555160;
           v-on="on"
 
                                 color="#5d5f83"
-                                style="color:white;width:33%;margin:2px;"
+                                style="color:white;width:25%;margin:2px;"
+                                @click="checkHeaderBefore = []"
+                                >
+                                
+<v-icon>fa-trash</v-icon>
+                                </v-btn
+                            >
+
+      </template>
+      <span>Clear</span>
+    </v-tooltip>
+                          <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+
+                                    <v-btn
+    v-bind="attrs"
+          v-on="on"
+
+                                color="#5d5f83"
+                                style="color:white;width:25%;margin:2px;"
                                 @click="checkDialogeEdit = true"
                                 >
                                 
@@ -663,7 +682,7 @@ background: #555160;
           v-on="on"
                             
                                 color="#5d5f83"
-                                style="color:white;width:33%;margin:2px;"
+                                style="color:white;width:25%;margin:2px;"
                                 @click="checkBatch"
                                 >
                              <v-icon>mdi-check-all</v-icon>
@@ -683,9 +702,9 @@ background: #555160;
     v-bind="attrs"
           v-on="on"
                                 color="#5d5f83"
-                                style="color:white;width:33%;margin:2px;"
+                                style="color:white;width:25%;margin:2px;"
                                 @click="qasGroupOneCheckout"
-                                >Submit
+                                >Ok
                             </v-btn>
       </template>
     <span>Prepare Below List if correct</span>
@@ -1303,18 +1322,25 @@ console.log(new_invoices)
             var $vm = this;
             $vm.checkDialog = true;
             var file = document.getElementById("docpicker");
-            var f = file.files[0];
+            var f = file.files;//[0]
+            var filesContent=[]
+            Object.keys(f).forEach(i=>{
+
+            console.log("fff",f)
 
             if (f) {
                 var r = new FileReader();
                 r.onload = e => {
+                    filesContent.push(e.target.result)
                     var contents = $vm.processExcel(e.target.result);
                     //   console.log(contents)
                 };
-                r.readAsBinaryString(f);
+                r.readAsBinaryString(f[i]);
             } else {
                 console.log("Failed to load file");
             }
+                        })
+
         },
         processExcel(data) {
             var $vm = this;
@@ -1473,7 +1499,9 @@ console.log(new_invoices)
                     "checkproductsbatch",
                     headerFile
                 );
-                $vm.checkHeaderBefore = res;
+                $vm.checkHeaderBefore.push(...res);
+                                // $vm.checkHeaderBefore = res;
+
             }
 
             checkBatch();

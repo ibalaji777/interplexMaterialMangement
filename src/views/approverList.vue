@@ -18,24 +18,26 @@
     Make Label
 </v-btn>
 
-<v-btn @click="labelPrint()" color="#2f5489" style="color:white;margin-right:5px">
-    <span style="margin-right:5px">Label</span>
-<v-icon color="white">
+</div>
+<div style="display:flex;justify-content:space-evenly">
+    <v-btn @click="labelPrint()" color="#2f5489" style="color:white;margin-right:5px">
+    <span style="margin-right:5px">Label Print</span>
+<!-- <v-icon color="white">
      fa-print
-</v-icon>
+</v-icon> -->
 </v-btn>
 
 
 <v-btn @click="labelPdf()" color="#2f5489 " style="color:white;margin-right:5px">
-    <span style="margin-right:5px">Label</span>
+    <span style="margin-right:5px">Label Pdf</span>
 
 <v-icon color="white" >
 mdi-file-pdf
 </v-icon>
 </v-btn>
 
-</div>
 
+</div>
 
 
 <div v-if="filterResult.length==0" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
@@ -92,7 +94,7 @@ ppap
          dense
       v-model="selected"
       :headers="$store.state.report.qasForm1"
-      :items="$store.state.interplex.qasForm1"
+      :items="approverListOrder"
       item-key="id"
       class="interListRow"
             item-class="interListRow"
@@ -222,6 +224,11 @@ page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
     },
   
     computed: {
+        approverListOrder(){
+var $vm=this;
+return _.orderBy($vm.$store.state.interplex.qasForm1,'id','asc')
+
+        },
      list(){
 var $vm=this;
 return $vm.$store.state.interplex.qasForm1;

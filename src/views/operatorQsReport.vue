@@ -924,12 +924,16 @@ var scope={}
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
 scope['QasOne']=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
+scope['QasTwo']=$vm.selectedPartNoItem.productConfigFormat2
+
 // var observation2_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat2)
 //Observationformat array to object for scope
 
+console.log("++++++++scope++++++++")
+console.log(scope,'QasTwoEach')
 _.map($vm.selectedPartNoItem.qasForm2,(product)=>{
 
-scope['QasTwo']=core.validateProductObjDataset($vm,_.cloneDeep(product));
+scope['QasTwoEach']=core.validateProductObjDataset($vm,_.cloneDeep(product));
 
 
 return _.map($vm.selectedPartNoItem.productConfigFormat2,(ob_format)=>{
@@ -1028,9 +1032,18 @@ return x;
 
 checkQasOneRules(){
 var $vm=this;
+var scope={}
 //Observationformat array to object for scope
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
-var scope=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+
+// var scope=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
+scope['QasOne']=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+
+scope['QasTwo']=$vm.selectedPartNoItem.productConfigFormat2
+
+console.log("++++++++scope++++++++")
+console.log(scope)
 
 $vm.selectedPartNoItem.productConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.productConfigFormat),(ob_format)=>{
 
