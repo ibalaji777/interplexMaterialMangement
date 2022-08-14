@@ -1,10 +1,10 @@
 <template>
     <div>
-        <!-- {{render_data.duedays}} -->
+        <!-- {{invoice_data.duedays}} -->
         <!-- {{url}}
-        {{render_data.sales}} -->
+        {{invoice_data.sales}} -->
         <!-- {{$store.state.control.print_paper_setup.paper_setup}} -->
-      <!-- {{render_data.sales}} -->
+      <!-- {{invoice_data.sales}} -->
          <!-- pdf viewer
                         <webview
                  id="pdf_viewer"
@@ -32,6 +32,7 @@
 
 <script>
 /*eslint-disable*/
+import * as printData from '../lib/printData.js'
 //eslint-disable-next-line
 // const html2canvas = require("html2canvas");
 //eslint-disable-next-line
@@ -39,7 +40,7 @@ import { jsPDF } from "jspdf";
 //eslint-disable-next-line
 const fs = require('fs')
 // eslint-disable-next-line
-const path = require('path')
+// const path = require('path')
 //eslint-disable-next-line
 // const {app, BrowserWindow} = require('electron')
 
@@ -51,7 +52,7 @@ function element() {
 }
 export default {
     
-    props:['url','render_data'],
+    props:['invoice_data'],
     data(){
 
         return{
@@ -59,7 +60,7 @@ export default {
         }
     }
 ,mounted(){
-console.log(this.url)
+// console.log(this.url)
 // var pdf_viewer=document.getElementById("pdf_viewer");
 //   pdf_viewer.addEventListener("dom-ready",()=>{
 
@@ -70,10 +71,35 @@ this.print_paper_init();
 this.print_paper_watch();
 }
 ,methods:{
+     printData(){
+                     
+                     var $vm=this
+console.log("print data ",printData.printData($vm.invoice_data))
+var data=printData.printData($vm.invoice_data)
+console.log("print data",data)
+var prepare_data={}
+prepare_data['id']='';
+prepare_data['name']='';
+prepare_data['html']=printData.qasForm.html;
+prepare_data['css']=printData.qasForm.css;
+prepare_data['js']='';
+prepare_data['data_set']=printData.printData($vm.invoice_data)
+
+// printData.printData($vm.invoice_data)
+// prepare_data['data_set']=format_page.angalware_report_invoice_template(
+//                         $vm.invoice_data
+//                     );
+
+return prepare_data;
+        },
             pdf_generation(action) {
-                alert("triggered")
+                // alert("triggered")
             if (action == "native") {
-                console.log("pdf generate started")
+            import('electron')
+    .then((electron) => {
+   const { dialog } = electron.remote;
+
+                // console.log("pdf generate started")
                 element().pos_paper.printToPDF(
                     {
                         // marginsType: 0,
@@ -102,6 +128,8 @@ dialog.showSaveDialog({
                         }
            
                 });
+
+    })
             }
         },
 //     pdf_generation(action){
@@ -206,11 +234,11 @@ var load_page=() => {
 
 
 
-                // webview.openDevTools();
+                webview.openDevTools();
                 // $vm.print_paper_setup["sales"] = $vm.sales;
                 // });
                 try {
-                    webview.send("ping", $vm.render_data);
+                    webview.send("ping", $vm.printData());
                 } catch (error) {
                     console.log("");
                 }
@@ -226,7 +254,7 @@ var load_page=() => {
             // $vm.print_paper_setup["sales"] = $vm.sales;
 
             try {
-                webview.send("ping", $vm.render_data);
+                webview.send("ping", $vm.printData());
             } catch (error) {
                 console.log("");
             }
@@ -235,7 +263,7 @@ var load_page=() => {
 
 },
 watch:{
-    render_data:{
+    invoice_data:{
         handler(){
 this.print_paper_watch();
 

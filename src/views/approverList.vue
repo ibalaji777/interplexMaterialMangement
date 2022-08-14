@@ -260,7 +260,7 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
             labelPrint(){
         var $vm=this;
         if($vm.selected.length==0){
-$vm.$alert("Please Select Item to create label")
+$vm.$alert("Please Select Atleast Single Item to create label")
     return;
 }
 if($vm.$isElectron){
@@ -273,7 +273,8 @@ else{
     labelPdf(){
         var $vm=this;
         if($vm.selected.length==0){
-$vm.$alert("Please Select Item to create label")
+$vm.$alert("Please Select Atleast Single Item to create label")
+
     return;
 }
 if($vm.$isElectron){
@@ -293,9 +294,9 @@ $vm.$alert("Please Select Item to create label")
 }
 $vm.barcodeLabel.data_set=_.map($vm.selected,(formone)=>{
 var label={}
-console.log("formone",formone)
+// console.log("formone",formone)
     _.map(formone.header_format,(Property)=>{
-console.log('prop',Property)
+// console.log('prop',Property)
         label[Property.name]=Property.value
 
     })

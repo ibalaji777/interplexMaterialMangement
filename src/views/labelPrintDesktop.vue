@@ -1,19 +1,6 @@
 <template>
     <div>
-        <!-- {{render_data.duedays}} -->
-        <!-- {{url}}
-        {{render_data.sales}} -->
-        <!-- {{$store.state.control.print_paper_setup.paper_setup}} -->
-      <!-- {{render_data.sales}} -->
-         <!-- pdf viewer
-                        <webview
-                 id="pdf_viewer"
-                       src="file:///static/pdf_viewer/viewer.html"
-                       style="height:100vh;"
-                        nodeintegration
-                    ></webview> -->
-            <!-- {{url}} -->
-            {{invoice_data}}
+            <!-- {{invoice_data}} -->
 
          <webview
                  
@@ -44,7 +31,7 @@ const fs = require('fs')
 //eslint-disable-next-line
 // const {app, BrowserWindow} = require('electron')
 
-const { dialog } = require("electron").remote;
+// const { dialog } = require("electron").remote;
 function element() {
     return {
         pos_paper: document.getElementById("paper")
@@ -60,13 +47,6 @@ export default {
         }
     }
 ,mounted(){
-// console.log(this.url)
-// var pdf_viewer=document.getElementById("pdf_viewer");
-//   pdf_viewer.addEventListener("dom-ready",()=>{
-
-// pdf_viewer.openDevTools();
-
-//   } );
 this.print_paper_init();
 this.print_paper_watch();
 }
@@ -74,6 +54,10 @@ this.print_paper_watch();
             pdf_generation(action) {
                 // alert("triggered")
             if (action == "native") {
+                           import('electron')
+    .then((electron) => {
+   const { dialog } = electron.remote;
+
                 console.log("pdf generate started")
                 element().pos_paper.printToPDF(
                     {
@@ -103,36 +87,9 @@ dialog.showSaveDialog({
                         }
            
                 });
-            }
+           
+    })}
         },
-//     pdf_generation(action){
-//     if(action=='native'){
-//                     element().pos_paper.printToPDF({
-//         // pageSize: {
-//         //     width: round(webview.clientWidth * MICRON),
-//         //     height: round(webview.clientHeight * MICRON)
-//         // },
-//         marginsType: 1,
-//         printBackground: true,
-//         printSelectionOnly:false
-//     }, (error, data) => {
-//         if (error) { throw error }
-//         console.log('data', data)
-// // console.log(path)
-//  let filePath = dialog.showSaveDialog();
-//  console.log(filePath)
-//         fs.writeFile(`${filePath}.pdf`, data, (error) => {
-//             if (error) { throw error }
-//             //  var file = new Blob([data], {type: 'application/pdf'});
-//     //    var fileURL = URL.createObjectURL(file);
-//     //    window.open(fileURL);
-
-//             console.log('Write PDF successfully.')
-//         })
-//     })
-
-//     }
-// },
         openPDF(){
   element().pos_paper.printToPDF({
         marginsType: 1,
@@ -150,80 +107,10 @@ dialog.showSaveDialog({
 
 this.pdf_generation('native')
 
-//             element().pos_paper.printToPDF({
-//         // pageSize: {
-//         //     width: round(webview.clientWidth * MICRON),
-//         //     height: round(webview.clientHeight * MICRON)
-//         // },
-//         marginsType: 1,
-//         printBackground: false,
-//     }, (error, data) => {
-//         if (error) { throw error }
-//         console.log('data', data)
-// // console.log(path)
-//  let filePath = dialog.showSaveDialog();
-//  console.log(filePath)
-//         fs.writeFile(`${filePath}.pdf`, data, (error) => {
-//             if (error) { throw error }
-//             //  var file = new Blob([data], {type: 'application/pdf'});
-//     //    var fileURL = URL.createObjectURL(file);
-//     //    window.open(fileURL);
-
-//             console.log('Write PDF successfully.')
-//         })
-//     })
-            // ---------------------
-//          element().pos_paper.capturePage(function (ph) {
-//   var pr = ph.toDataURL();
-//   console.log(pr)
-//         var doc = new jsPDF({
-//                         orientation: "portrait"
-//                     });
-//                     var img = pr;
-
-//                     const imgProps = doc.getImageProperties(img);
-//                     const pdfWidth = doc.internal.pageSize.getWidth();
-//                     const pdfHeight =
-//                         (imgProps.height * pdfWidth) / imgProps.width;
-
-//                     // window.open(img);
-//                     doc.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
-//                     doc.save("Test.pdf");
-              
-// });
-// ----------------------------------------
-            // console.log("topdfcaptured");
-            // html2canvas(element().pos_paper, {
-            //     // onrendered: function(canvas) {
-            //     //     console.log("are you working");
-            //     //     // var img = canvas.toDataURL();
-            //     //     // window.open(img);
-            //     // }
-            // })
-            //     .then(canvas => {
-            //         //   console.log("are you working");
-            //         var doc = new jsPDF({
-            //             orientation: "landscape"
-            //         });
-            //         var img = canvas.toDataURL("image/png");
-
-            //         const imgProps = doc.getImageProperties(img);
-            //         const pdfWidth = doc.internal.pageSize.getWidth();
-            //         const pdfHeight =
-            //             (imgProps.height * pdfWidth) / imgProps.width;
-
-            //         window.open(img);
-            //         doc.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
-            //         doc.save("Test.pdf");
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     });
         },
 // version 5.0.0 above
         print(){
     var $vm=this;
-    // if($vm.$store.state.control.device.selected_device!=''){
   var webview = element().pos_paper; // document.getElementById("paper");
 
          webview.print(
@@ -246,29 +133,7 @@ this.pdf_generation('native')
     // }
 
 },
-// print(){
-//     var $vm=this;
-//     if($vm.$store.state.control.device.selected_device!=''){
-//   var webview = element().pos_paper; // document.getElementById("paper");
 
-//          webview.print(
-//                     {
-//                         silent: !$vm.$store.state.control.print_paper_setup.showPrintDialog,
-//                         printBackground: true,
-//                         deviceName: $vm.$store.state.control.device.selected_device
-//                     },
-//                     (success, errorType) => {
-//                         if (!success)
-//                             console.log("not working print" + errorType);
-//                     }
-//                 );
-//     }
-//     else{
-
-//         $vm.$alert("Please Select Device",'Failed','error')
-//     }
-
-// },
         print_paper_init() {
             var $vm = this;
  
