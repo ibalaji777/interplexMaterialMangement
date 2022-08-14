@@ -4,6 +4,8 @@ var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
 
+var labelSettingReadApi=api+'/labelsetting/read';
+var labelSettingSaveApi=api+'/labelsetting/save';
 var createUser=api+'/user/create'
 var getBranchUsers=api+'/getusers';
 var removeUserApi=api+'/user/remove'
@@ -427,9 +429,21 @@ console.log("descrut",qasFormOne,qasFormTwo)
         var result=await axios.post(updateQasFormApi,{qasFormOne,qasFormTwo});
         return result.data
     },
-    
 
 
+    async labelSettingSave(context,config){
+                var result=await axios.post(labelSettingSaveApi,{config});
+                if(!_.isEmpty(result.data))
+                context.commit("setLabelSetting",result.data)
+
+                return result.data
+            },
+            async labelSettingRead(context){
+                        var result=await axios.get(labelSettingReadApi);
+                        if(!_.isEmpty(result.data))
+                         context.commit("setLabelSetting",result.data)
+                        return result.data
+                    },
 
 
 }

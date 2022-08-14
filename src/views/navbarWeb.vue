@@ -318,6 +318,21 @@ $vm.items=[
                 action: "qasForm2Config",
                 submenu: false
             },
+                    {
+                title: "Label Setting",
+                icon: "fa-history",
+                action: "labelSetting",
+                submenu: false
+            },
+                                  {
+                title: "Label Setting",
+                icon: "mdi-qrcode",
+
+                action: "labelSetting",
+                submenu: false
+            },
+
+
 ]
 }
 if($vm.$store.state.interplex.user.roletype=='admin'){
@@ -365,6 +380,13 @@ $vm.items=[
                 action: "qasForm2Config",
                 submenu: false
             },
+                                  {
+                title: "Label Setting",
+                icon: "mdi-qrcode",
+                action: "labelSetting",
+                submenu: false
+            },
+
 ]
 }
 }

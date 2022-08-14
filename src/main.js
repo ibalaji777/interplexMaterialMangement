@@ -119,7 +119,7 @@ Vue.config.productionTip = true;
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
 import debounce from 'v-debounce'
-import codeEditor from './views/codeEditor.vue'
+import labelSetting from './views/labelSetting.vue'
 Vue.use(debounce)
 
 Vue.component('appWeb', appWeb);
@@ -135,7 +135,7 @@ Vue.component('labelPrintDesktop', labelPrintDesktop);
 Vue.component('pluginPrintMobile',pluginPrintMobile)
 Vue.component('pluginPrintDesktop',pluginPrintDesktop)
 
-Vue.component('codeEditor',codeEditor)
+Vue.component('labelSetting',labelSetting)
 
 Vue.filter('date', function (value) {
     if (!value) return ''

@@ -11,21 +11,24 @@
     display: flex;
 ">
 
-<v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode
+<v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode-scan
 </v-icon>
 
-<v-btn text @click="generateLabel">
-    create Label
+<v-btn  color="#2f5489"  @click="generateLabel" style="color:white">
+    Make Label
 </v-btn>
 
-<v-btn @click="labelPrint()" color="#2f5489" style="color:red;margin-right:5px">
+<v-btn @click="labelPrint()" color="#2f5489" style="color:white;margin-right:5px">
+    <span style="margin-right:5px">Label</span>
 <v-icon color="white">
      fa-print
 </v-icon>
 </v-btn>
 
 
-<v-btn @click="labelPdf()" color="#2f5489 " style="margin-right:5px">
+<v-btn @click="labelPdf()" color="#2f5489 " style="color:white;margin-right:5px">
+    <span style="margin-right:5px">Label</span>
+
 <v-icon color="white" >
 mdi-file-pdf
 </v-icon>

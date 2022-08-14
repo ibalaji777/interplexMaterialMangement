@@ -59,7 +59,7 @@ dataset:[{supplier_name:'Abc',invoice_no:'01',ir:'02'}]
 				style_type: 'mm',
 				width: '80',
 				height: '25',
-				marginRight: '.125',
+				marginRight: '0',
 				marginBottom: '0',
 				isEnableLabelOverflow:true,
 				

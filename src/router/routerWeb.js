@@ -29,7 +29,7 @@ import createUser from '../views/createUser.vue'
 import createBranch from '../views/createBranch.vue' 
 import createFileType from '../views/createFileType.vue' 
 
-import codeEditor from '../views/codeEditor.vue'
+import labelSetting from '../views/labelSetting.vue'
 
 import userList from '../views/userList.vue'
 import adminProductsFormatList from '../views/adminProductsFormatList.vue'
@@ -249,9 +249,9 @@ const routes = [
 		component:adminDashboardOtherConfig 
 	},
 	{
-		path: '/codeEditor',
-		name: 'codeEditor',
-		component:codeEditor 
+		path: '/labelSetting',
+		name: 'labelSetting',
+		component:labelSetting 
 	},
 ];
 

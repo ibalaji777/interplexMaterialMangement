@@ -697,6 +697,55 @@ import moment from 'moment'
 import * as core from '../lib/core'
 import { create, all, string } from 'mathjs'
 const math = create(all,  {})
+
+
+
+// create a function
+function minBy(array, key) {
+  return _.minBy(array,(x)=>parseFloat(x[key]||0))
+}
+function maxBy(array, key) {
+  return _.maxBy(array,(x)=>parseFloat(x[key]||0))
+}
+
+function sumBy(array, key) {
+  return _.sumBy(array,(x)=>parseFloat(x[key]||0))
+}
+function meanBy(array, key) {
+  return _.meanBy(array,(x)=>parseFloat(x[key]||0))
+}
+// attach a transform function to the function addIt
+minBy.transform = function (array,key) {
+   return minBy(array,key)
+}
+// attach a transform function to the function addIt
+maxBy.transform = function (array,key) {
+   return maxBy(array,key)
+}
+// attach a transform function to the function addIt
+sumBy.transform = function(array,key) {
+   return sumBy(array,key)
+}
+// attach a transform function to the function addIt
+meanBy.transform = function (array,key) {
+   return meanBy(array,key)
+
+}
+
+// import the function into math.js
+math.import({
+minBy: minBy,
+maxBy: maxBy,
+sumBy: sumBy,
+meanBy: meanBy,
+})
+
+
+// console.log("qas report")
+// alert("work")
+// console.log('2+4=' + math.evaluate('addIt(2, 4)'))
+
+
 import { Camera, CameraResultType } from '@capacitor/camera';
 export default {
 
@@ -800,8 +849,6 @@ $vm.qas_form_two_ui=_.cloneDeep($vm.$store.state.interplex.qas_form_two_ui);
     },
   async  mounted(){
         var $vm=this;
-
-
         // console.log("qs selectedPartNoItem")
 // console.log($vm.$store.state.interplex.selectedPartNoItem)
 await $vm.$store.dispatch('readUploadType')

@@ -180,9 +180,16 @@ setSapLog(state,payload){
 clearSapLog(state){
 	state.sapLogs={}
 },
+setLabelSetting(state,payload){
+	console.log("payload")
+	console.log(payload)
+	state.barcode.pageSetup.page=payload.config.pageSetup.page
+	state.barcode.pageSetup.label=payload.config.pageSetup.label
+	state.barcodeLabel.html=payload.config.html||""
+	state.barcodeLabel.css=payload.config.css||""
+	state.barcodeLabel.js=payload.config.js||""
+}
 
-};
-
-
+}
 
 export default mutations;

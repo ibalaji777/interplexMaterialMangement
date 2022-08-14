@@ -48,10 +48,12 @@
 <v-switch v-model="barcodeLabel.pageSetup.label.isEnableLabelOverflow" label="Overflow">
 </v-switch>
 
+<v-btn color="primary" style="color:white" @click="saveData">Save</v-btn>
 
 <h4 style="text-align:center">Preview</h4>
+<label-print-desktop v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
+<label-print-mobile  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 
-<labelPrint   :invoice_data="barcodeLabel" ref="barcodeLabelPrint"></labelPrint>
   <!-- <codemirror ref="myCm"
               :value="code" 
               :options="cmOptions"
@@ -123,6 +125,11 @@ page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
     }
   },
   methods: {
+    saveData(){
+        var $vm=this;
+        $vm.$alert("saved")
+        $vm.$store.dispatch('labelSettingSave',$vm.barcodeLabel)
+    },
     onCmReady(cm) {
       console.log('the editor is readied!', cm)
     },

@@ -135,6 +135,10 @@ export default {
     await $vm.$store.dispatch("getUsers");
    }
   });
+
+
+
+
  },
  watch: {},
  methods: {
@@ -146,6 +150,7 @@ export default {
    await $vm.$store.dispatch("getProductConfig");
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
+   await $vm.$store.dispatch("labelSettingRead");
 
    // ---------------------------------------------------------
   },
