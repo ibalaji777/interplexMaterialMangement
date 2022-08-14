@@ -29,14 +29,16 @@ const {
 ipcRenderer.on('ping', (e, data) => {
         // bindEvent(window, 'message', function (e) {
     // console.log("-----report/preview.html----")
-    // console.log("----plugin engine---");
+    console.log("----plugin engine---");
     // console.log(e)
-    // console.log(e.data)
+    console.log(e.data)
         //    if(e.data){
             // var data = JSON.parse(e.data);
 
             if(data){
+                if(data.pageSetup){
          $angalware_report.barcodePageSetup(data.pageSetup.page,data.pageSetup.label)
+                }
         //  $angalware_report.barcodePageSetup(page,label)
            }
         renderBarcodeLabel(data.html,data.css,data.data_set)
@@ -86,7 +88,7 @@ ipcRenderer.on('ping', (e, data) => {
 // var css="b{color:red}"
 // var dataset=[{name:'balaji'},{name:'444balaji'},{name:'ba77aji'}]
 await $angalware_report.renderBarcodeLabel(html,css,dataset)
-document.getElementById('printRender').click()
+// document.getElementById('printRender').click()
 
 // setTimeout(async ()=>{
 //   await  $angalware_report.renderBarcodeLabel(html,css,dataset)

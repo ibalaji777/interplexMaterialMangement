@@ -37,9 +37,9 @@
 //eslint-disable-next-line
 import { jsPDF } from "jspdf";
 //eslint-disable-next-line
-// const fs = require('fs')
+const fs = require('fs')
 // eslint-disable-next-line
-// const path = require('path')
+const path = require('path')
 //eslint-disable-next-line
 // const {app, BrowserWindow} = require('electron')
 
@@ -84,16 +84,16 @@ this.print_paper_watch();
                 )
                 .then((data)=>{
 
-// dialog.showSaveDialog({
-//     title:'Save Pdf '
-// }).then(result=>{
-//     var filePath=result.filePath;                       
-//                         fs.writeFile(`${filePath}.pdf`, data, error => {
-//                             if (error) {
-//                                 throw error;
-//                             }
-//                         });
-//                         })
+dialog.showSaveDialog({
+    title:'Save Pdf '
+}).then(result=>{
+    var filePath=result.filePath;                       
+                        fs.writeFile(`${filePath}.pdf`, data, error => {
+                            if (error) {
+                                throw error;
+                            }
+                        });
+                        })
 
                 })
                 .catch(error=>{
@@ -148,76 +148,6 @@ this.print_paper_watch();
         toPdf() {
 
 this.pdf_generation('native')
-
-//             element().pos_paper.printToPDF({
-//         // pageSize: {
-//         //     width: round(webview.clientWidth * MICRON),
-//         //     height: round(webview.clientHeight * MICRON)
-//         // },
-//         marginsType: 1,
-//         printBackground: false,
-//     }, (error, data) => {
-//         if (error) { throw error }
-//         console.log('data', data)
-// // console.log(path)
-//  let filePath = dialog.showSaveDialog();
-//  console.log(filePath)
-//         fs.writeFile(`${filePath}.pdf`, data, (error) => {
-//             if (error) { throw error }
-//             //  var file = new Blob([data], {type: 'application/pdf'});
-//     //    var fileURL = URL.createObjectURL(file);
-//     //    window.open(fileURL);
-
-//             console.log('Write PDF successfully.')
-//         })
-//     })
-            // ---------------------
-//          element().pos_paper.capturePage(function (ph) {
-//   var pr = ph.toDataURL();
-//   console.log(pr)
-//         var doc = new jsPDF({
-//                         orientation: "portrait"
-//                     });
-//                     var img = pr;
-
-//                     const imgProps = doc.getImageProperties(img);
-//                     const pdfWidth = doc.internal.pageSize.getWidth();
-//                     const pdfHeight =
-//                         (imgProps.height * pdfWidth) / imgProps.width;
-
-//                     // window.open(img);
-//                     doc.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
-//                     doc.save("Test.pdf");
-              
-// });
-// ----------------------------------------
-            // console.log("topdfcaptured");
-            // html2canvas(element().pos_paper, {
-            //     // onrendered: function(canvas) {
-            //     //     console.log("are you working");
-            //     //     // var img = canvas.toDataURL();
-            //     //     // window.open(img);
-            //     // }
-            // })
-            //     .then(canvas => {
-            //         //   console.log("are you working");
-            //         var doc = new jsPDF({
-            //             orientation: "landscape"
-            //         });
-            //         var img = canvas.toDataURL("image/png");
-
-            //         const imgProps = doc.getImageProperties(img);
-            //         const pdfWidth = doc.internal.pageSize.getWidth();
-            //         const pdfHeight =
-            //             (imgProps.height * pdfWidth) / imgProps.width;
-
-            //         window.open(img);
-            //         doc.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
-            //         doc.save("Test.pdf");
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     });
         },
 // version 5.0.0 above
         print(){

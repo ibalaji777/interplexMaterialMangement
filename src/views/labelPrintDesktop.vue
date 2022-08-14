@@ -38,13 +38,13 @@ const html2canvas = require("html2canvas");
 //eslint-disable-next-line
 import { jsPDF } from "jspdf";
 //eslint-disable-next-line
-// const fs = require('fs')
+const fs = require('fs')
 //eslint-disable-next-line
 // const path = require('path')
 //eslint-disable-next-line
 // const {app, BrowserWindow} = require('electron')
 
-// const { dialog } = require("electron").remote;
+const { dialog } = require("electron").remote;
 function element() {
     return {
         pos_paper: document.getElementById("paper")
@@ -85,22 +85,22 @@ this.print_paper_watch();
                 )
                 .then((data)=>{
 
-// dialog.showSaveDialog({
-//     title:'Save Pdf '
-// }).then(result=>{
-//     var filePath=result.filePath;                       
-//                         fs.writeFile(`${filePath}.pdf`, data, error => {
-//                             if (error) {
-//                                 throw error;
-//                             }
-//                         });
-//                         })
+dialog.showSaveDialog({
+    title:'Save Pdf '
+}).then(result=>{
+    var filePath=result.filePath;                       
+                        fs.writeFile(`${filePath}.pdf`, data, error => {
+                            if (error) {
+                                throw error;
+                            }
+                        });
+                        })
 
-//                 })
-//                 .catch(error=>{
-//                                  if (error) {
-//                             throw error;
-//                         }
+                })
+                .catch(error=>{
+                                 if (error) {
+                            throw error;
+                        }
            
                 });
             }
@@ -277,7 +277,7 @@ var load_page=() => {
 
 
 
-                // webview.openDevTools();
+                webview.openDevTools();
                 // $vm.print_paper_setup["sales"] = $vm.sales;
                 // });
                 try {
@@ -295,7 +295,7 @@ var load_page=() => {
             var webview = element().pos_paper; //document.getElementById("paper");
 
             // $vm.print_paper_setup["sales"] = $vm.sales;
-xx
+
             try {
                 webview.send("ping", $vm.invoice_data);
             } catch (error) {
@@ -306,7 +306,7 @@ xx
 
 },
 watch:{
-    render_data:{
+    invoice_data:{
         handler(){
 this.print_paper_watch();
 
