@@ -72,8 +72,7 @@ this.print_paper_watch();
 }
 ,methods:{
      printData(){
-                     
-                     var $vm=this
+var $vm=this
 console.log("print data ",printData.printData($vm.invoice_data))
 var data=printData.printData($vm.invoice_data)
 console.log("print data",data)

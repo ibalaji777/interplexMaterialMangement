@@ -1,21 +1,44 @@
 <template>
     <div>
-        <div>
+        <div style="display:flex;justify-content:space-between">
 <!-- {{$isElectron}} -->
-<v-btn @click="print()" color="#2f5489" style="color:red;margin-right:5px">
+<!-- {{barcodeLabel}} -->
+<v-btn @click="print()" color="#2f5489" style="color:white;margin-right:5px">
+<span style="margin-right:5px">
+Inspection
+</span>
 <v-icon color="white">
      fa-print
 </v-icon>
 </v-btn>
 
-<v-btn @click="pdf()" color="#2f5489 " style="margin-right:5px">
+<v-btn @click="pdf()" color="#2f5489 " style="color:white;margin-right:5px">
+<span style="margin-right:5px">
+
+Inspection
+</span>
 <v-icon color="white" >
 mdi-file-pdf
 </v-icon>
 </v-btn>
-<v-btn @click="printLabel()" color="#2f5489 " style="margin-right:5px">
+<v-btn @click="labelPrint()" color="#2f5489 " style="color:white;margin-right:5px">
+    <span style="margin-right:5px">
+
+Label 
+    </span>
 <v-icon color="white">
-mdi-qrcode
+     fa-print
+
+</v-icon>
+</v-btn>
+<v-btn @click="labelPdf()" color="#2f5489 " style="color:white;margin-right:5px">
+    <span style="margin-right:5px">
+
+Label 
+    </span>
+<v-icon color="white">
+     mdi-file-pdf
+
 </v-icon>
 </v-btn>
 </div>
@@ -25,7 +48,10 @@ mdi-qrcode
 <!-- <v-btn color="red" style="color:white;margin:2px;" @click="$refs.barcodeLabelPrint.print()">print Barcode Label</v-btn> -->
 </div>
 <!-- style="height:0;overflow:hidden" -->
-<barcodeLabelPrint style="height:0;overflow:hidden"  :invoice_data="invoice" ref="barcodeLabelPrint"></barcodeLabelPrint>
+<!-- <barcodeLabelPrint style="height:0;overflow:hidden"  :invoice_data="invoice" ref="barcodeLabelPrint"></barcodeLabelPrint> -->
+<label-print-desktop v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
+<label-print-mobile  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
+
 <plugin-print-desktop v-if="$isElectron" ref="printDesktop"  :invoice_data="invoice"></plugin-print-desktop>
 <plugin-print-mobile v-else ref="printMobile"  :invoice_data="invoice"></plugin-print-mobile>
 <!-- {{headerViewMap}} -->
@@ -802,6 +828,16 @@ const math = create(all,  {})
 export default {
 data(){
     return {
+         barcodeLabel:{
+            pageSetup:{
+page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
+label:_.cloneDeep(this.$store.state.barcode.pageSetup.label),
+            },
+            html:_.cloneDeep(this.$store.state.barcodeLabel.html),
+            css:_.cloneDeep(this.$store.state.barcodeLabel.css),
+            js:'',
+            data_set:[{},{}]//{label props},{}.{}
+        },
         qasFormOneValidateLoader:false,
         qasForm1NewDialog:false,
             qas_form_two_ui:{},
@@ -818,6 +854,7 @@ logo:'',
     operator_name:'',
     approver_name:'',
     gallery:[],
+   
 
 },
 
@@ -901,6 +938,17 @@ $vm.$set($vm.invoice,"qasFormTwo",params.invoice.qasFormTwo)
 $vm.$set($vm.invoice.qasFormOne,"observation_format",params.invoice.qasFormOne.observation_format)
 $vm.$set($vm.invoice.qasFormOne,"observation2_format",params.invoice.qasFormOne.observation2_format)
 $vm.$set($vm.invoice,"gallery",gallery)
+
+
+var label={}
+// console.log("formone",formone)
+    _.map($vm.invoice.qasFormOne.header_format,(Property)=>{
+// console.log('prop',Property)
+        label[Property.name]=Property.value
+
+    })
+
+$vm.barcodeLabel.data_set=[{...label}]
 // $vm.invoice={
 
 // qasFormOne:params.invoice.qasFormOne||[],
@@ -955,6 +1003,27 @@ $vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFo
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+            labelPrint(){
+        var $vm=this;
+
+if($vm.$isElectron){
+    $vm.$refs.labelPrintDesktop.print()
+}
+else{
+        $vm.$refs.labelPrintMobile.print()
+}
+    },
+    labelPdf(){
+        var $vm=this;
+
+if($vm.$isElectron){
+    $vm.$refs.labelPrintDesktop.toPdf()
+}
+else{
+        $vm.$refs.labelPrintMobile.print()
+}
+
+    },
 
 async saveEditedForm(){
 var $vm=this;
