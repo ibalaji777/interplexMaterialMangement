@@ -170,7 +170,7 @@ Width Max
     <input style="width:100%" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_max"  class="interInput"   type="text" placeholder="Width Max" >
     </div>
     </div>
-        <div style="display:flex">
+        <div style="display:flex"> 
  <div style="width:100%;display:flex;flex-direction:column;margin:2px">
            Thick Min
     <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_min"  class="interInput"   type="text" placeholder="Thick Min" >
@@ -359,7 +359,8 @@ NO:{{index+1}}
 </div>
 <div v-else>
     <div>
-    {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}
+   <span style="margin-right:5px"> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</span> <v-icon  v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp">fa-calculator</v-icon>
+
 
 </div>
 </div>
@@ -380,7 +381,6 @@ NO:{{index+1}}
 
 <div v-else>
 <div v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable" style="height:45px">
-
     <!-- <h4> {{ui.label}}:  </h4> -->
     <!-- normal -->
     <v-text-field v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
@@ -695,17 +695,29 @@ Items
 /*eslint-disable*/
 import moment from 'moment'
 import * as core from '../lib/core'
+import _ from 'lodash'
 import { create, all, string } from 'mathjs'
 const math = create(all,  {})
 
 
 
 // create a function
+
+function NumberObj(obj){
+  return core.validateNumberObj(obj)
+}
+function NumberArray(array){
+  return _.map(array,(obj)=>{
+    return core.validateNumberObj(obj)
+  })
+}
+
+
 function minBy(array, key) {
-  return _.minBy(array,(x)=>parseFloat(x[key]||0))
+  return _.minBy(array,(x)=>parseFloat(x[key]||0))[key]
 }
 function maxBy(array, key) {
-  return _.maxBy(array,(x)=>parseFloat(x[key]||0))
+  return _.maxBy(array,(x)=>parseFloat(x[key]||0))[key]
 }
 
 function sumBy(array, key) {
@@ -714,6 +726,17 @@ function sumBy(array, key) {
 function meanBy(array, key) {
   return _.meanBy(array,(x)=>parseFloat(x[key]||0))
 }
+
+
+// attach a transform function to the function addIt
+NumberObj.transform = function (obj) {
+   return NumberObj(obj)
+}
+// attach a transform function to the function addIt
+NumberArray.transform = function (obj) {
+   return NumberArray(obj)
+}
+
 // attach a transform function to the function addIt
 minBy.transform = function (array,key) {
    return minBy(array,key)
@@ -738,6 +761,8 @@ minBy: minBy,
 maxBy: maxBy,
 sumBy: sumBy,
 meanBy: meanBy,
+NumberObj,
+NumberArray
 })
 
 
@@ -922,9 +947,13 @@ checkQas2Rules(){
 //Observationformat array to object for scope
 var scope={}
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
-scope['QasOne']=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+scope['QasOne']=observation_format;
+//core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
-scope['QasTwo']=$vm.selectedPartNoItem.productConfigFormat2
+scope['QasTwo']=$vm.selectedPartNoItem.qasForm2
+// _.map($vm.selectedPartNoItem.qasForm2,(obj)=>{
+//     return core.validateProductObjDataset($vm,_.cloneDeep(obj))
+// })
 
 // var observation2_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat2)
 //Observationformat array to object for scope
@@ -933,13 +962,16 @@ console.log("++++++++scope++++++++")
 console.log(scope,'QasTwoEach')
 _.map($vm.selectedPartNoItem.qasForm2,(product)=>{
 
-scope['QasTwoEach']=core.validateProductObjDataset($vm,_.cloneDeep(product));
+scope['QasTwoEach']=product;
+//core.validateProductObjDataset($vm,_.cloneDeep(product));
+console.log("scope",scope)
 
-
-return _.map($vm.selectedPartNoItem.productConfigFormat2,(ob_format)=>{
+var which_feild_have_rule=_.cloneDeep($vm.selectedPartNoItem.productConfigFormat2);
+return _.map(which_feild_have_rule,(ob_format)=>{
 
 // console.log("scope",scope)
 if(ob_format.exp){
+    console.log("exp",ob_format)
 ob_format.value=product[ob_format.name]||NaN
 
 if(ob_format.exp.rule!=''){
@@ -1035,12 +1067,16 @@ var $vm=this;
 var scope={}
 //Observationformat array to object for scope
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
-
 // var scope=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
-scope['QasOne']=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
+scope['QasOne']=observation_format
+//core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
-scope['QasTwo']=$vm.selectedPartNoItem.productConfigFormat2
+scope['QasTwo']=$vm.selectedPartNoItem.qasForm2;
+// _.map($vm.selectedPartNoItem.qasForm2,(obj)=>{
+//     return core.validateProductObjDataset($vm,_.cloneDeep(obj))
+// })
+//$vm.selectedPartNoItem.qasForm2
 
 console.log("++++++++scope++++++++")
 console.log(scope)
@@ -1048,6 +1084,7 @@ console.log(scope)
 $vm.selectedPartNoItem.productConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.productConfigFormat),(ob_format)=>{
 
 if(ob_format.exp){
+console.log(ob_format.exp.rule)
 console.log("exp_>",scope,ob_format.exp.rule,math.evaluate(ob_format.exp.rule,scope))
 if(ob_format.exp.rule!=''){
  if(math.evaluate(ob_format.exp.rule,scope)){

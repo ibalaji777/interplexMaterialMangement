@@ -53,11 +53,11 @@ mdi-file-pdf
 </div>
 <!-- style="height:0;overflow:hidden" -->
 <!-- <barcodeLabelPrint style="height:0;overflow:hidden"  :invoice_data="invoice" ref="barcodeLabelPrint"></barcodeLabelPrint> -->
-<label-print-desktop v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
-<label-print-mobile  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
+<label-print-desktop style="height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
+<label-print-mobile style="height:0;overflow:hidden"  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 
-<plugin-print-desktop v-if="$isElectron" ref="printDesktop"  :invoice_data="invoice"></plugin-print-desktop>
-<plugin-print-mobile v-else ref="printMobile"  :invoice_data="invoice"></plugin-print-mobile>
+<plugin-print-desktop style="height:0;overflow:hidden" v-if="$isElectron" ref="printDesktop"  :invoice_data="invoice"></plugin-print-desktop>
+<plugin-print-mobile style="height:0;overflow:hidden" v-else ref="printMobile"  :invoice_data="invoice"></plugin-print-mobile>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="#2f5489 " style="color:white;margin:2px">Qas Form One</v-btn>
@@ -502,15 +502,15 @@ Items
           <v-toolbar-title><v-icon @click="qasForm1NewDialog = false">fa-times</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
 
-          <v-btn :loading="qasFormOneValidateLoader" @click="validateQasFormOne" style="color:white" text>
+          <!-- <v-btn :loading="qasFormOneValidateLoader" @click="validateQasFormOne" style="color:white" text>
             validate
-          </v-btn>
+          </v-btn> -->
           <v-toolbar-items>
           </v-toolbar-items>
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-        {{invoice.qasFormOne.observation_format}}
+        <!-- {{invoice.qasFormOne.observation_format}} -->
 <h3>QAS FORM ONE</h3>
 <div  style="    padding: 10px 20px;
     margin: 8px;
@@ -600,7 +600,7 @@ NO:{{index+1}}
         >
           <v-toolbar-title><v-icon @click="qasForm2Dialog = false">fa-times</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn @click="saveQasFormTwo" color="red" style="color:white">save</v-btn>
+          <!-- <v-btn @click="saveQasFormTwo" color="red" style="color:white">save</v-btn> -->
           <v-toolbar-items>
           </v-toolbar-items>
         </v-toolbar>
@@ -610,7 +610,7 @@ NO:{{index+1}}
 <div style="    height: 91vh;
     overflow: scroll;
 ">
-{{invoice.qasFormTwo}}
+<!-- {{invoice.qasFormTwo}} -->
         <table style="width:100%">
             <tr>
                 <th></th>
@@ -648,7 +648,7 @@ NO:{{index+1}}
 </div>
 </td>
 <td style="background:#929ed6;padding:0 9px">
-    <div style="text-align:center">
+    <!-- <div style="text-align:center">
     <div style="  
     display:inline-block;
       background: white;
@@ -663,7 +663,7 @@ NO:{{index+1}}
     <v-icon class="defaultErorr" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
     </div>
     </div>
-    </div>
+    </div> -->
 </td>
 <!-- <td><input  class="interInput"   type="text" ></td>
 <td><input  class="interInput"   type="text" ></td>
@@ -1138,24 +1138,24 @@ else{
 
     },
 
-        checkErrorStatus(event,index,product){
-var $vm=this;
+//         checkErrorStatus(event,index,product){
+// var $vm=this;
 
-var scope=core.validateProductArrayDataset($vm,$vm.invoice.qasFormOne.observation_format);
-console.log("scope =>",scope)
-scope['width_one']=core.onlyNumbers(product['width_one'])?parseFloat(product['width_one']):0
-scope['width_two']=core.onlyNumbers(product['width_two'])?parseFloat(product['width_two']):0
-scope['thick_one']=core.onlyNumbers(product['thickness_one'])?parseFloat(product['thickness_one']):0
-scope['thick_two']=core.onlyNumbers(product['thickness_one'])?parseFloat(product['thickness_one']):0
+// var scope=core.validateProductArrayDataset($vm,$vm.invoice.qasFormOne.observation_format);
+// console.log("scope =>",scope)
+// scope['width_one']=core.onlyNumbers(product['width_one'])?parseFloat(product['width_one']):0
+// scope['width_two']=core.onlyNumbers(product['width_two'])?parseFloat(product['width_two']):0
+// scope['thick_one']=core.onlyNumbers(product['thickness_one'])?parseFloat(product['thickness_one']):0
+// scope['thick_two']=core.onlyNumbers(product['thickness_one'])?parseFloat(product['thickness_one']):0
 
-if(product.validation!=''){
-console.log(math.evaluate(product.validation,scope))
-product.error_status=math.evaluate(product.validation,scope) 
+// if(product.validation!=''){
+// console.log(math.evaluate(product.validation,scope))
+// product.error_status=math.evaluate(product.validation,scope) 
 
-}else
-console.log("validatiion failed please add validation")
+// }else
+// console.log("validatiion failed please add validation")
 
-        },
+//         },
 async     updateFormStatus(status){
 var $vm=this;
 await $vm.$store.dispatch('qasFormUpdateStatus',{

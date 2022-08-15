@@ -478,6 +478,23 @@ return  parseFloat(value);
 }
 
 
+export function validateNumberObj(productObj)
+{
+
+  var objectKeys=Object.keys(productObj)
+var object={}
+var rt= _.map(objectKeys,(key)=>{
+  object[key]=validateExpressionNumber(productObj[key])
+  
+  // onlyNumbers(productObj[key])?parseFloat(productObj[key]):NaN;
+
+  // return  productObj
+ })
+//  console.log("validation",rt)
+return object
+
+
+}
 export function validateProductObjDataset($vm,productObj)
 {
 
