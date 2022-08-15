@@ -3,6 +3,10 @@ import * as core from '../lib/config'
 var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
+var headerConfigGetApi=api+'/headerconfig/read';
+var headerConfigSetApi=api+'/headerconfig/save';
+
+
 var findQasFormApi=api+'/find_qas_form';
 var labelSettingReadApi=api+'/labelsetting/read';
 var labelSettingSaveApi=api+'/labelsetting/save';
@@ -85,12 +89,7 @@ async function updateQasForm2Config(context,config){
 }
 
 
-async function getHeaderConfig(context){
-    var result = await axios.get(readHeaderConfig)
-    console.log("default header config",result.data )
-    context.commit('setHeaderConfig',result.data)  
 
-}
 
 async function updateHeaderConfig(context,config){
     var result = await axios.post(updateHeaderConfigApi,{config})
@@ -451,6 +450,15 @@ var result=await axios.post(findQasFormApi,payload);
 return result.data
 },
 
+
+async getHeaderConfig(context,payload){
+    var result=await axios.get(headerConfigGetApi);
+    return result.data
+    },
+    async setHeaderConfig(context,config){
+        var result=await axios.post(headerConfigSetApi,{config});
+        return result.data
+        },
 
                     
 }

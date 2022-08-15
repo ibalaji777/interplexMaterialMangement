@@ -146,11 +146,12 @@ export default {
    var $vm = this;
 
    // ---------------------setup config------------------------------------
-   await $vm.$store.dispatch("readHeaderConfig");
    await $vm.$store.dispatch("getProductConfig");
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
    await $vm.$store.dispatch("labelSettingRead");
+  //  await $vm.$store.dispatch("getHeaderConfig");
+
 
    // ---------------------------------------------------------
   },

@@ -128,10 +128,10 @@
 </div>
 
 <div style="margin-top:20px">
-<b>Do You Want to show in application?</b>
+<b>Do You Want to show in PRINT/PDF?</b>
 <v-checkbox
 dense
-      v-model="selectedFieldSetting.show"
+      v-model="selectedFieldSetting.showPrint"
     ></v-checkbox>
 <b>Where You Want to map value from?</b>        
 <select v-model="selectedFieldSetting.mapFrom" class="interInput" >
@@ -252,6 +252,7 @@ export function initialState($vm){
 			name:'',//column name
 			value:'',//default value
 			show:false,
+    		  showPrint:true,
 			map:'',
 			mapFrom:'header',//header or product
             default:false,
@@ -274,13 +275,19 @@ data(){
 },
 async mounted(){
 var $vm=this;
-await $vm.$store.dispatch('readHeaderConfig')
+
+var getConfig=await $vm.$store.dispatch("getHeaderConfig")
+if(!_.isEmpty(getConfig)){
+$vm.configFormat=getConfig.config;
+ }
+
 },
 methods:{
 async    save(){
         var $vm=this;
+if(await  $vm.$store.dispatch('setHeaderConfig',$vm.configFormat)){
 
-if(await  $vm.$store.dispatch('updateHeaderConfig',$vm.configFormat)){
+// if(await  $vm.$store.dispatch('updateHeaderConfig',$vm.configFormat)){
 $vm.$alert("Successfully Updated")
 return;
 }

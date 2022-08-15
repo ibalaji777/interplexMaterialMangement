@@ -2677,6 +2677,7 @@ editable:true,
 		  name:'supplier_name',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  map:'',
 		  input_type:'text',
 		  mapFrom:'header',//header or product
@@ -2688,6 +2689,7 @@ editable:true,
 		  name:'product_name',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2703,6 +2705,7 @@ editable:true,
 		  name:'invoice_no',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2716,6 +2719,7 @@ editable:true,
 		  name:'invoice_date',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'DATE_EXT',
@@ -2729,6 +2733,7 @@ editable:true,
 		  name:'invoice_qty',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'number',
 
 		  map:'invoiceQty',
@@ -2743,6 +2748,7 @@ editable:true,
 		  name:'ir',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2755,6 +2761,7 @@ editable:true,
 		  name:'grn_no',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2768,6 +2775,7 @@ editable:true,
 		  name:'grn_date',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'LAST_GR_DATE_EXT',
@@ -2780,6 +2788,7 @@ editable:true,
 		  name:'rmcode',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2791,6 +2800,7 @@ editable:true,
 		  name:'eds',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2803,6 +2813,7 @@ editable:true,
 		  name:'date',//column name
 		  value:moment().format("YYYY-MM-DD"),//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'date',
 
 		  map:'',
@@ -2815,6 +2826,7 @@ editable:true,
 		  name:'rm',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'text',
 
 		  map:'',
@@ -2826,6 +2838,7 @@ editable:true,
 		  name:'received_qty',//column name
 		  value:'',//default value
 		  show:true,
+		  showPrint:true,
 		  input_type:'number',
 
 		  map:'',
@@ -2833,8 +2846,20 @@ editable:true,
 		  default:true,
 		  note:'No Need to Map'
 
-		},
-
+		}
+		,		{
+			label:'SHELF LIFE',//input field label
+			name:'shelf_life',//column name
+			value:'',//default value
+			show:true,
+			showPrint:true,
+			input_type:'text',
+			map:'',
+			mapFrom:'header',//header or product
+			default:true,
+			note:'No Need to Map'
+  
+		  },
 	  ],
 	configQasForm2Format:[
 
