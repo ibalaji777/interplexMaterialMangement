@@ -626,8 +626,8 @@ NO:{{index+1}}
 <!-- {{observation2_format_print_view}} -->
 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.one" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
-<div  style="height:86px;padding:10px">
-     <h4> {{ui.label}}:{{productFormat[ui.name]}}  </h4>
+<div  style="height:86px;padding:10px" v-if="getIndex2(ui.name)!=-1">
+     <h4 style="margin-right:5px"> {{ui.label}}:{{productFormat[ui.name]}}<v-icon  v-if="selectedPartNoItem.productConfigFormat[ui.name].exp">fa-calculator</v-icon>  </h4>
 
 </div>
 </div> 
@@ -639,9 +639,17 @@ NO:{{index+1}}
 <!-- gg{{invoice.qasFormOne.observation2_format}} -->
 <div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
      <h4> write{{ui.label}}:{{productFormat[ui.name]}}  </h4>
-    <v-text-field  style="margin:5px" :disabled="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
-    </v-text-field>
+         <!-- <v-text-field v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field> -->
 
+    <v-text-field  v-if="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].exp&&!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].sapHeader" style="margin:5px" :disabled="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field>
+  <div  v-else>
+        <v-text-field append-icon="fa-calculator" v-if="invoice.qasFormOne.observation2_format[getIndex2(ui.name)].exp" style="margin:5px" :disabled="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field>
+     <v-text-field append-icon="mdi-magnify-scan"   v-if="invoice.qasFormOne.observation2_format[getIndex2(ui.name)].sapHeader" style="margin:5px" :disabled="!invoice.qasFormOne.observation2_format[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field>
+</div>
 </div>
 </div> 
 

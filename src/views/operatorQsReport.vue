@@ -266,9 +266,16 @@ Width Max
 <!-- gg{{selectedPartNoItem.productConfigFormat2}} -->
 <div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
      <h4> {{ui.label}}:  </h4>
-    <v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
-    </v-text-field>
 
+    <v-text-field v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
+    </v-text-field>
+    <div  v-else>
+    
+        <v-text-field v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+    </v-text-field>
+        <v-text-field v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
+    </v-text-field>
+    </div>
 </div>
 </div> 
 
@@ -358,7 +365,7 @@ NO:{{index+1}}
 
 </div>
 <div v-else>
-    <div>
+    <div v-if="getIndex(form[ui.name])!=-1">
    <span style="margin-right:5px"> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</span> <v-icon  v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp">fa-calculator</v-icon>
 
 
@@ -990,9 +997,16 @@ ob_format.exp.status=true;
 }
 else
 {
+       if(ob_format.exp.success==''){
+ob_format.exp.status=true;
+
+    }
+ else{
 ob_format.value=ob_format.exp.success;
  product[ob_format.name]=ob_format.exp.success;
+ ob_format.exp.status=true;
 
+ }
 }}
  else{
 if(ob_format.exp.failure=='_default_')
@@ -1002,9 +1016,16 @@ ob_format.exp.status=false;
 product[ob_format.name]=evaluate;//math.evaluate(ob_format.exp.rule,scope);
 }
 else{
+    if(ob_format.exp.failure==''){
+ob_format.exp.status=false;
+
+    }
+    else{
 ob_format.value=ob_format.exp.failure;
 product[ob_format.name]=ob_format.exp.failure;
-}
+ob_format.exp.status=false;
+
+    }}
 
 }
 
@@ -1090,12 +1111,18 @@ if(ob_format.exp.rule!=''){
  if(math.evaluate(ob_format.exp.rule,scope)){
 if(ob_format.exp.success=='_default_'){
 ob_format.value=math.evaluate(ob_format.exp.rule,scope);
-// $vm.$set()
 ob_format.exp.status=true;
 }
 else
 {
+           if(ob_format.exp.success==''){
+ob_format.exp.status=true;
+
+    }
+else{
 ob_format.value=ob_format.exp.success;
+ob_format.exp.status=true;
+}
 }
 }
         else{
@@ -1104,7 +1131,16 @@ if(ob_format.exp.failure=='_default_')
 ob_format.exp.status=false;
 }
 else{
+
+   if(ob_format.exp.failure==''){
+ob_format.exp.status=false;
+
+    }
+ else{
 ob_format.value=ob_format.exp.failure;
+ob_format.exp.status=false;
+
+ }
 }
   }
 

@@ -731,14 +731,16 @@
                     <v-toolbar-items> </v-toolbar-items>
                 </v-toolbar>
                 <v-divider></v-divider>
-                <div style="padding:10px">
+                <div style="padding:10px;position:relative">
 
                     <h3 style="padding:0;margin:10px 0">Product List Group Format</h3>
 
 <!-- header{{insertForm.observation2_header_print_view}}<br>
 print view{{insertForm.observation2_print_view}}<br>
 ob2 format{{insertForm.observation2_format}}<br> -->
-
+            <v-btn style="position:absolute;top:15px;right:10px" @click="product2SettingDialog = true" outlined>
+                config
+            </v-btn>
                     <div style="height:78vh;overflow:scroll">
                         <table class="observationTable" style="width:100vw">
                             <tr
@@ -2555,6 +2557,126 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 </div>
             </v-card>
         </v-dialog>
+
+<v-dialog
+            v-model="product2SettingDialog"
+            persistent
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar dark :color="$store.state.bgColor">
+                    <v-toolbar-title
+                        ><v-icon @click="product2SettingDialog = false"
+                            >fa-times</v-icon
+                        ></v-toolbar-title
+                    >
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <!-- <v-btn dark text @click="saveProductsFormat">
+                            SAVE
+                        </v-btn> -->
+                    </v-toolbar-items>
+                </v-toolbar>
+                <v-divider></v-divider>
+                <div style="padding:10px">
+                   <h3>Dataset For Qas Form Two</h3>
+  <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+                  
+                   <v-text-field dense text label="Name" v-model="createDataset.name"></v-text-field>
+
+                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <div style="display:flex;justify-content:center">
+                   <v-btn text @click="createObservation2Format">create</v-btn>
+                   </div>
+                    <!-- <v-btn
+                        outlined
+                        @click="createFieldSettingDialog = true"
+                        style="margin-right:15px"
+                        >Create Field</v-btn
+                    > -->
+                    <!-- <v-btn outlined @click="preFields">Pre Fields</v-btn> -->
+                </div>
+
+                <div
+                    style="padding:10px;height: 85vh;
+    overflow: scroll;"
+                >
+                <table  class="obFormatTable">
+                    <draggable
+                        :list="insertForm.observation2_format"
+                        tag="tbody"
+                        handle=".handle"
+                        style="
+                     margin-top:10px "
+                        ghost-class="ghost"
+                        group="product"
+                        @start="dragging = true"
+                        @end="dragging = false"
+                    >
+                        <tr
+                            style="display:flex;"
+                            v-for="(productFormat,
+                            index) in insertForm.observation2_format"
+                            :key="'product' + index"
+                        >
+                        <td>
+                        {{index+1}}
+                            <v-icon style="margin:0 5px" class="handle"
+                                >fa-arrows-alt</v-icon
+                            >
+                            </td>
+                            <td >
+                            <input
+                                class="interInput"
+                                v-model="productFormat.label"
+                                type="text"
+                                placeholder="Label"
+                            />
+                            </td>
+                            <td>
+                            <input
+                                class="interInput"
+                                v-model="productFormat.name"
+                                type="text"
+                                placeholder="Name"
+                            />
+                            </td>
+                            <td>
+                                                        <input
+                                class="interInput"
+                                v-model="productFormat.value"
+                                type="text"
+                                placeholder="value"
+                            />
+                 </td>
+                                 <td>
+                    <v-icon @click="selectQas2Editable(index)">fa-cog</v-icon>
+                 </td>
+                  <td>
+                            <v-icon
+                                @click="remove2Config(productFormat, index)"
+                                style="margin:0 5px"
+                                >fa-times</v-icon
+                            >
+                            </td>
+                        </tr>
+                    </draggable>
+</table>
+                    <!-- <div style="margin-top:10px;" v-for="(productFormat,index) in $store.state.productsFormat" :key="index+'index'">
+    <div style="display:flex">
+        <v-icon>fa-arrows</v-icon>
+    <input class="interInput" v-model="productFormat.label" type="text" placeholder="Label" >
+<input class="interInput" v-model="productFormat.name" type="text" placeholder="Name" >
+        <v-icon>fa-times</v-icon>
+    </div>
+
+</div> -->
+                </div>
+            </v-card>
+        </v-dialog>
+
     </div>
 </template>
 <script>
@@ -2624,6 +2746,7 @@ value:''
         // productsFormat:_.cloneDeep($vm.$store.state.interplex.configProductsFormat),
         validationHelpDialog: false,
         productSettingDialog: false,
+        product2SettingDialog:false,
         productFieldSettingDialog: false,
         selectedFieldSetting: create_field,
         insertForm: {
@@ -3247,6 +3370,15 @@ return;
                 return;
             }
             this.insertForm.observation_format.splice(index, 1);
+        },
+                remove2Config(item, index) {
+            var $vm=this;
+            if (item.default) {
+                $vm.$alert("Cannot Delete Default Field", "Error", "error");
+
+                return;
+            }
+            this.insertForm.observation2_format.splice(index, 1);
         },
         clear() {
             var $vm = this;

@@ -499,8 +499,8 @@ interplex:{
 				width:'33'
 			},
 			{
-				label:'GRN NO:',
-				name:'grn_no',
+				label:'GRN Date:',
+				name:'grn_date',
 				width:'33'
 			},
 			{
