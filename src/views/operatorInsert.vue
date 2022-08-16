@@ -108,6 +108,193 @@ Items
                 </v-btn>
             </div>
         </div>
+
+
+        <v-dialog
+            v-model="fileDialog"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar dark :color="$store.state.bgColor">
+                    <v-toolbar-title>Edit Files</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn dark text @click="fileDialog = false">
+                            Close
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+
+                <v-divider></v-divider>
+                <div style="padding:10px">
+
+<h4>Edit By Files </h4>
+<div  v-for="(key,index) in Object.keys(totalImportedFiles)" :key="'file'+index">
+<!-- {{key}} -->
+
+
+<v-card :class="{bgBlue:key==selectImportedFile}" @click="selectImportedFile=key" style="padding:10px;margin:5px;">
+    {{totalImportedFiles[key][0].supplier_name}}</v-card>
+
+
+</div>
+
+<div v-if="selectImportedFile!=''">
+<div style="display:flex;flex-wrap:wrap">
+
+<div style="display:flex">
+<v-text-field
+dense
+
+v-model="importUpdateFields.product_name"
+label="Product Name"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('product_name')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+<div style="display:flex">
+
+<v-text-field
+dense
+v-model="importUpdateFields.invoice_no"
+label="Invoice No"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('invoice_no')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+<date-picker  @close="invoice_dateDialog = false"
+             v-if="invoice_dateDialog"
+             v-model="importUpdateFields.invoice_date"
+             :format="formatDate"
+             ></date-picker>
+
+<v-text-field @click="invoice_dateDialog=true"
+dense
+v-model="importUpdateFields.invoice_date"
+label="Invoice Date"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('invoice_date')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+
+<v-text-field
+dense
+v-model="importUpdateFields.grn_no"
+label="Grn NO"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('grn_no')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+
+<date-picker  @close="grnDateDialog = false"
+             v-if="grnDateDialog"
+             v-model="importUpdateFields.grn_date"
+             :format="formatDate"
+             ></date-picker>
+<v-text-field
+dense
+@click="grnDateDialog=true"
+v-model="importUpdateFields.grn_date"
+label="Grn Date"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('grn_date')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+
+<v-text-field
+dense
+v-model="importUpdateFields.rmcode"
+label="Rm Code"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('rmcode')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+
+<v-text-field
+dense
+v-model="importUpdateFields.eds"
+label="Eds"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('eds')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+
+<v-text-field
+dense
+v-model="importUpdateFields.rm"
+label="Rm"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('rm')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+<div style="display:flex">
+
+<date-picker  @close="currentDateDialog = false"
+             v-if="currentDateDialog"
+             v-model="importUpdateFields.date"
+             :format="formatDate"
+             ></date-picker>
+<v-text-field
+@click="currentDateDialog=true"
+
+dense
+v-model="importUpdateFields.date"
+label="Date"
+>
+</v-text-field>
+<v-btn @click="importBulkEdit('date')" style="margin-left:5px" small fab color="primary">Ok</v-btn>
+</div>
+
+
+</div>    
+
+<div>
+
+    Total Selected Items:{{importFileListUpdate.length}}
+</div>
+
+<div v-for="(item,index) in importFileListUpdate" :key="'checkimport'+index">
+
+<v-card  @click="item.selected=!item.selected" :class="{bgSelected:item.selected}" style="padding:10px;margin:5px">
+Product Name:    {{item.product_name}}<br>
+Supplier Name:    {{item.supplier_name}}<br>
+Part No:    {{item.rmcode}}<br>
+Invoice No:    {{item.invoice_no}}<br>
+Invoice Date:    {{item.invoice_date}}<br>
+Grn No:    {{item.grn_no}}<br>
+Grn Date:    {{item.grn_date}}<br>
+Eds:    {{item.eds}}<br>
+Rm:    {{item.rm}}<br>
+Date:    {{item.date}}<br>
+
+selected:{{item.selected}}
+</v-card>
+</div>
+</div>
+
+
+
+
+                </div>
+            </v-card>
+        </v-dialog>
+
+
         <!-- --------------------------product insert dialog------------------- -->
         <v-dialog
             v-model="productInsertDialog"
@@ -350,7 +537,7 @@ Items
                         <input
                             type="file"
                             id="docpicker"
-                            accept=".txt,.csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+                            accept=".dat,.txt,.csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
                             multiple
                         />
                         <v-btn style="color:white" color="rgb(48, 32, 78)" @click="headerFileUploader">check</v-btn>
@@ -613,7 +800,7 @@ selected Products{{selectedCheckHeaderBefore.length}}dd
                 <v-divider></v-divider>
                 <div style="padding:10px">
 
-<h3 style=""> SAP PRODUCTS </h3>
+<h3 style=""> SAP PRODUCTS  (Supplier Name + Part No + Invoice NO) </h3>
 
                     <div
                         style="  
@@ -644,7 +831,7 @@ background: #555160;
           v-on="on"
 
                                 color="#5d5f83"
-                                style="color:white;width:25%;margin:2px;"
+                                style="color:white;width:33%;margin:2px;"
                                 @click="checkHeaderBefore = []"
                                 >
                                 
@@ -655,7 +842,7 @@ background: #555160;
       </template>
       <span>Clear</span>
     </v-tooltip>
-                          <v-tooltip bottom>
+                          <!-- <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
 
                                     <v-btn
@@ -673,7 +860,7 @@ background: #555160;
 
       </template>
       <span>Edit Sap File</span>
-    </v-tooltip>
+    </v-tooltip> -->
                               <v-tooltip bottom>
       <template v-slot:activator="{ on, attrs }">
 
@@ -682,7 +869,7 @@ background: #555160;
           v-on="on"
                             
                                 color="#5d5f83"
-                                style="color:white;width:25%;margin:2px;"
+                                style="color:white;width:33%;margin:2px;"
                                 @click="checkBatch"
                                 >
                              <v-icon>mdi-check-all</v-icon>
@@ -702,7 +889,7 @@ background: #555160;
     v-bind="attrs"
           v-on="on"
                                 color="#5d5f83"
-                                style="color:white;width:25%;margin:2px;"
+                                style="color:white;width:33%;margin:2px;"
                                 @click="qasGroupOneCheckout"
                                 >Ok
                             </v-btn>
@@ -716,6 +903,12 @@ background: #555160;
                     
                         <!-- <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn> -->
                     </div>
+
+<div>
+    <!-- {{Object.keys(totalImportedFiles)}} -->
+    <b style="cursor:pointer" @click="fileDialog=true">Total Files:{{Object.keys(totalImportedFiles).length}}</b>
+</div>
+
                     <div class="checkContainer">
                         <div
                             v-for="(item, index) in checkHeaderBefore"
@@ -846,6 +1039,7 @@ background: #555160;
 </template>
 <script>
 /*eslint-disable*/
+var vm = require('vm');
 
 var XLSX = require("xlsx");
 import * as core from "../lib/core.js";
@@ -853,7 +1047,7 @@ import { Camera, CameraResultType } from "@capacitor/camera";
 import moment from "moment";
 import blobUtil, { base64StringToBlob } from "blob-util";
 import { v4 as uuidv4 } from "uuid";
-
+import store from './../store/index.js'
 function b64toBlob(dataURI) {
     var byteString = atob(dataURI.split(",")[1]);
     var ab = new ArrayBuffer(byteString.length);
@@ -887,7 +1081,26 @@ function base64toBlob(base64Data, contentType) {
 
 function initialState($vm) {
     return {
+        invoice_dateDialog:false,
+        grnDateDialog:false,
+        currentDateDialog:false,
+importUpdateFields:{
+product_name:'',
+// supplier_name:'',
+invoice_no:'',
+invoice_date:moment().format(store.state.dateFormat),
+grn_no:'',
+grn_date:moment().format(store.state.dateFormat),
+rmcode:'',
+eds:'',
+rm:'',
+form_format:'',
+date:moment().format(store.state.dateFormat)
+},
 
+fileDialog:false,
+selectImportedFile:'',
+totalImportedFiles:[],
 checkProduct:{
 invoice_no:'',
 isInvoice_no:true,
@@ -983,6 +1196,13 @@ export default {
         // $vm.headerFileUploader()
     },
     computed: {
+importFileListUpdate(){
+var $vm=this;
+if($vm.selectImportedFile=='') return [];
+return _.filter($vm.checkHeaderBefore,(x)=>x.fileId==$vm.selectImportedFile)
+},
+
+
         selectedCheckHeaderBefore(){
 var $vm=this
 return _.filter($vm.checkHeaderBefore,(x)=>x.selected)
@@ -1005,12 +1225,54 @@ return _.filter($vm.checkHeaderBefore,(x)=>x.selected)
         }
     },
     methods: {
+                formatDate (date) {
+  return moment(date).format("YYYY-MM-DD")
+},
+        importBulkEdit(modelKey){
+            var $vm=this;
+_.map(_.filter($vm.importFileListUpdate,f=>f.selected),x=>{
+
+    x[modelKey]=$vm.importUpdateFields[modelKey];
+    return x;
+})
+
+        },
         clear() {
             var $vm = this;
             $vm.$store.commit("defaultValue");
         },
         qasGroupOneCheckout() {
             var $vm = this;
+
+var supplierName=_.reduce($vm.checkHeaderBefore,
+(result,value,key)=>{
+result=result&&value.supplier_name!='';
+return result;
+},true)
+
+var partNo=_.reduce($vm.checkHeaderBefore,
+(result,value,key)=>{
+result=result&&value.rmcode!='';
+return result;
+},true)
+
+var invoiceNo=_.reduce($vm.checkHeaderBefore,
+(result,value,key)=>{
+result=result&&value.invoice_no!='';
+return result;
+},true)
+
+
+if(!invoiceNo){
+
+$vm.$alert("Please Check Invoice No")
+    return ;
+}
+if(!partNo){
+
+$vm.$alert("Please Check Part No(RMCODE)")
+    return ;
+}
           
 var selected=_.filter($vm.checkHeaderBefore,(x)=>x.selected);          
 if(selected.length==0){
@@ -1029,7 +1291,7 @@ $vm.$alert("Batch No Already Exist")
     return;
 }   
   $vm.checkGroupQasOneDialog = true;
-
+                        // x[core.defaultFields.invoiceDate] +
 
             $vm.qasForm1Group = _.map(
                 core.headerFileGroup(selected),
@@ -1037,7 +1299,8 @@ $vm.$alert("Batch No Already Exist")
                     x["selected"] = true;
                     x["ref"] =
                         x[core.defaultFields.supplierName] +
-                        x[core.defaultFields.invoiceDate] +
+                        // x[core.defaultFields.invoiceDate] +
+                        x[core.defaultFields.partNo] +
                         (x[core.defaultFields.invoiceNo] || "");
                     x["isExist"] = false; //validate server side
                     x["supplier_name"] = x[core.defaultFields.supplierName];
@@ -1285,11 +1548,13 @@ console.log(new_invoices)
             // return product;
 
             // })
-            // console.log("res",res)
+            console.log("++++++res+++++",$vm.checkHeaderBefore)
             var res = await $vm.$store.dispatch(
                 "checkproductsbatch",
                 $vm.checkHeaderBefore
             );
+            console.log("++++checkHeaderBefore+++")
+console.log(res)
             $vm.checkHeaderBefore = res;
         },
         async addToQualitFormOne() {
@@ -1351,16 +1616,27 @@ console.log(new_invoices)
 
             var firstSheet = workbook.SheetNames[0];
             var data = $vm.to_json(workbook);
-            //   console.log("+++result+++")
-            //   console.log(data)
+              console.log("+++sap extract+++")
+              console.log(data)
+              $vm.importStepOne(data)
+      },
+      importStepOne(data){
+        var $vm=this;
+              var fileUid=uuidv4()
             var dataMap = _.map(data, x => {
                 x["isValidProd"] = false;
+                x['fileId']=fileUid;//bulk group edit
+                x['rowId']=uuidv4();//row edit
                 return x;
             });
+
             //need to add grn no and invoice no
             var createInvProducts = [];
             var headerFile = _.map(dataMap, x => {
                 var product = {};
+
+console.log("productmapcode",$vm.$store.state.interplex.productMapCode)
+product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { product:x });
                 product["selected"] = true;
                 product["ref"] =
                     x[core.defaultFields.supplierName] +
@@ -1392,78 +1668,79 @@ console.log(new_invoices)
                     str.toString().substring(6, 8);
 
                 product["products"] = [];
-                product["supplier_name"] =
-                    $vm.$store.state.map.sapImport["supplier_name"] != ""
-                        ? x[$vm.$store.state.map.sapImport["supplier_name"]]
-                        : "";
-                product["invoice_no"] =
-                    $vm.$store.state.map.sapImport["invoice_no"] != ""
-                        ? x[$vm.$store.state.map.sapImport["invoice_no"]]
-                        : "";
-                product["invoice_date"] =
-                    $vm.$store.state.map.sapImport["invoice_date"] != ""
-                        ? x[$vm.$store.state.map.sapImport["invoice_date"]]
-                        : "";
-                product["qty"] =
-                    $vm.$store.state.map.sapImport["qty"] != ""
-                        ? x[$vm.$store.state.map.sapImport["qty"]]
-                        : "";
-                product["invoice_qty"] =
-                    $vm.$store.state.map.sapImport["invoice_qty"] != ""
-                        ? x[$vm.$store.state.map.sapImport["invoice_qty"]]
-                        : "";
-                product["invoice_date"] =
-                    $vm.$store.state.map.sapImport["invoice_date"] != ""
-                        ? x[$vm.$store.state.map.sapImport["invoice_date"]]
-                        : moment().format(store.state.dateFormat);
-                product["ir"] =
-                    $vm.$store.state.map.sapImport["ir"] != ""
-                        ? x[$vm.$store.state.map.sapImport["ir"]]
-                        : "";
-                product["date"] =
-                    $vm.$store.state.map.sapImport["date"] != ""
-                        ? x[$vm.$store.state.map.sapImport["date"]]
-                        : moment().format(store.state.dateFormat);
-                product["grn_no"] =
-                    $vm.$store.state.map.sapImport["grn_no"] != ""
-                        ? x[$vm.$store.state.map.sapImport["grn_no"]]
-                        : "";
-                product["grn_date"] =
-                    $vm.$store.state.map.sapImport["grn_date"] != ""
-                        ? x[$vm.$store.state.map.sapImport["grn_date"]]
-                        : moment().format(store.state.dateFormat);
+              product["supplier_name"] =x[$vm.$store.state.map.sapImport["product_name"]]||"";
+                product["supplier_name"] =x[$vm.$store.state.map.sapImport["supplier_name"]]||"";
+                    // $vm.$store.state.map.sapImport["supplier_name"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["supplier_name"]]
+                    //     : "";
+                product["invoice_no"] =x[$vm.$store.state.map.sapImport["invoice_no"]]||''
+                    // $vm.$store.state.map.sapImport["invoice_no"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["invoice_no"]]
+                    //     : "";
+                product["invoice_date"] =x[$vm.$store.state.map.sapImport["invoice_date"]]||moment().format(store.state.dateFormat);
+                    // $vm.$store.state.map.sapImport["invoice_date"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["invoice_date"]]
+                    //     : "";
+                product["qty"] =x[$vm.$store.state.map.sapImport["qty"]]||""
+                    // $vm.$store.state.map.sapImport["qty"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["qty"]]
+                    //     : "";
+                product["invoice_qty"] =x[$vm.$store.state.map.sapImport["invoice_qty"]]||""
+                    // $vm.$store.state.map.sapImport["invoice_qty"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["invoice_qty"]]
+                    //     : "";
+                product["invoice_date"] =x[$vm.$store.state.map.sapImport["invoice_date"]]||moment().format(store.state.dateFormat);
+                    // $vm.$store.state.map.sapImport["invoice_date"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["invoice_date"]]
+                    //     : moment().format(store.state.dateFormat);
+                product["ir"] =x[$vm.$store.state.map.sapImport["ir"]]||""
+                    // $vm.$store.state.map.sapImport["ir"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["ir"]]
+                    //     : "";
+                product["date"] =x[$vm.$store.state.map.sapImport["date"]]||moment().format(store.state.dateFormat);
+                    // $vm.$store.state.map.sapImport["date"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["date"]]
+                    //     : moment().format(store.state.dateFormat);
+                product["grn_no"] =x[$vm.$store.state.map.sapImport["grn_no"]]||""
+                    // $vm.$store.state.map.sapImport["grn_no"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["grn_no"]]
+                    //     : "";
+                product["grn_date"] =x[$vm.$store.state.map.sapImport["grn_date"]]||moment().format(store.state.dateFormat);
+                    // $vm.$store.state.map.sapImport["grn_date"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["grn_date"]]
+                    //     : moment().format(store.state.dateFormat);
 
-                product["rmcode"] =
-                    $vm.$store.state.map.sapImport["rmcode"] != ""
-                        ? x[$vm.$store.state.map.sapImport["rmcode"]]
-                        : "";
-                product["eds"] =
-                    $vm.$store.state.map.sapImport["eds"] != ""
-                        ? x[$vm.$store.state.map.sapImport["eds"]]
-                        : "";
-                product["rm"] =
-                    $vm.$store.state.map.sapImport["rm"] != ""
-                        ? x[$vm.$store.state.map.sapImport["rm"]]
-                        : "";
+                product["rmcode"] =x[$vm.$store.state.map.sapImport["rmcode"]]||""
+                    // $vm.$store.state.map.sapImport["rmcode"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["rmcode"]]
+                    //     : "";
+                product["eds"] =x[$vm.$store.state.map.sapImport["eds"]]||""
+                    // $vm.$store.state.map.sapImport["eds"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["eds"]]
+                    //     : "";
+                product["rm"] =x[$vm.$store.state.map.sapImport["rm"]]||""
+                    // $vm.$store.state.map.sapImport["rm"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["rm"]]
+                    //     : "";
                 // product['received_qty']=x[$vm.$store.state.map.sapImport['grn_date']]||'';
                 // product['product_name']=x[$vm.$store.state.map.sapImport['grn_date']]||'';
-                product["form_format"] =
-                    $vm.$store.state.map.sapImport["form_format"] != ""
-                        ? x[$vm.$store.state.map.sapImport["form_format"]]
-                        : "";
+                product["form_format"] =x[$vm.$store.state.map.sapImport["form_format"]]||""
+                    // $vm.$store.state.map.sapImport["form_format"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["form_format"]]
+                    //     : "";
 
                 // product['duedate']=x[$vm.$store.state.map.sapImport['duedate']]||'';
                 // product['remarks']=x[$vm.$store.state.map.sapImport['remarks']]||'';
                 // product['status']=x[$vm.$store.state.map.sapImport['status']]||'';
                 // product['approved_by']=x[$vm.$store.state.map.sapImport['approved_by']]||'';
-                product["product_name"] =
-                    $vm.$store.state.map.sapImport["product_name"] != ""
-                        ? x[$vm.$store.state.map.sapImport["product_name"]]
-                        : "";
-                product["batch_no"] =
-                    $vm.$store.state.map.sapImport["batch_no"] != ""
-                        ? x[$vm.$store.state.map.sapImport["batch_no"]]
-                        : "";
+                product["product_name"] =x[$vm.$store.state.map.sapImport["product_name"]]||""
+                    // $vm.$store.state.map.sapImport["product_name"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["product_name"]]
+                    //     : "";
+                product["batch_no"] =x[$vm.$store.state.map.sapImport["batch_no"]]||""
+                    // $vm.$store.state.map.sapImport["batch_no"] != ""
+                    //     ? x[$vm.$store.state.map.sapImport["batch_no"]]
+                    //     : "";
                 // product['sap']=
 
                 // return product;
@@ -1494,18 +1771,28 @@ console.log(new_invoices)
             // console.log("++++header file++++",headerFile)
             // $vm.checkHeaderBefore=headerFile||[]
             //  $vm.checkBatch()
+                        console.log("++++++single header file+++++",headerFile)
+
             async function checkBatch() {
                 var res = await $vm.$store.dispatch(
                     "checkproductsbatch",
                     headerFile
                 );
+
                 $vm.checkHeaderBefore.push(...res);
+
+        $vm.totalImportedFiles=_.groupBy($vm.checkHeaderBefore,'fileId');
+
+                             console.log("++++++multiple header file+++++",                $vm.checkHeaderBefore)
+
                                 // $vm.checkHeaderBefore = res;
 
             }
 
             checkBatch();
-        },
+  
+
+      },
 
         to_json(workbook) {
             var $vm = this;
@@ -1594,5 +1881,12 @@ console.log(new_invoices)
 } */
 .skiplevel {
     background: #d22525 !important;
+}
+.bgBlue{
+    background:rgb(48, 32, 78) !important;
+    color:white !important;
+}
+.bgSelected{
+background: antiquewhite !important;
 }
 </style>

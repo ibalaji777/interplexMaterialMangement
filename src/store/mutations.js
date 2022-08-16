@@ -189,6 +189,12 @@ setLabelSetting(state,payload){
 	state.barcodeLabel.css=payload.config.css||""
 	state.barcodeLabel.js=payload.config.js||""
 }
+,
+setMapProductCode(state,code){
+if(code!='')
+state.interplex.productMapCode=code
+	
+}
 
 }
 

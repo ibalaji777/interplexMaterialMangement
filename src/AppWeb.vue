@@ -60,7 +60,18 @@
 /*eslint-disable*/
 import * as config from "./lib/config.js";
 const { io } = require("socket.io-client");
+// var vm = require('vm');
+ 
+// window.addEventListener('load', function () {
+//     var res = vm.runInNewContext(`
+//     function map(){
+//       var ab=parseFloat(a).toFixed(2) 
+//       return ab
 
+//       }
+//      map()`, { a : 100 });
+//    console.log("+++++vm code++++",res)
+// });
 const socket = io(config.getApi());
 export default {
  props: {
@@ -150,6 +161,8 @@ export default {
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
    await $vm.$store.dispatch("labelSettingRead");
+      await $vm.$store.dispatch("mapProductCodeGet");
+
   //  await $vm.$store.dispatch("getHeaderConfig");
 
 

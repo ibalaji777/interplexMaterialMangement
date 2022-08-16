@@ -130,7 +130,7 @@ Qas Form
 </div>
 
 <div @click="qasForm2Dialog=true" class="insertProduct" style="margin-right:10px">
-<v-icon>fa-list</v-icon>
+<v-icon>mdi-format-list-checks</v-icon>
 </div>
 <div class="insertProduct" style="position:relative" @click="galleryDialog=true">
 <v-icon>fa-image</v-icon>

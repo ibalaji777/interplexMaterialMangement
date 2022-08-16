@@ -17,7 +17,6 @@ import VueCodeMirror from 'vue-codemirror'
 // require styles
 import './assets/codemiror.scss'
 import './assets/dark.scss'
- 
 // require more codemirror resource...
  
 // you can set default global options and events when use

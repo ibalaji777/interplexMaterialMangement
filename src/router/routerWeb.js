@@ -9,6 +9,8 @@ import login from '../views/login.vue'
 import userRole from '../views/userRole.vue'
 
 
+import mapProductEditor from '../views/mapProductEditor.vue'
+
 import operatorDashboard from '../views/operatorDashboard.vue'
 import operatorInsert from '../views/operatorInsert.vue'
 import operatorList from '../views/operatorList.vue'
@@ -261,6 +263,11 @@ const routes = [
 		path: '/labelSetting',
 		name: 'labelSetting',
 		component:labelSetting 
+	},
+	{
+		path: '/mapProductEditor',
+		name: 'mapProductEditor',
+		component:mapProductEditor 
 	},
 ];
 

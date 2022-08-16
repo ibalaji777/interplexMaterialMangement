@@ -3,6 +3,13 @@ import * as core from '../lib/config'
 var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
+
+
+var mapProductCodeSetApi=api+'/map_product_code/save';
+var mapProductCodeGetApi=api+'/map_product_code/read';
+
+
+
 var headerConfigGetApi=api+'/headerconfig/read';
 var headerConfigSetApi=api+'/headerconfig/save';
 
@@ -283,7 +290,8 @@ console.log("upload",upload)
 //  }
 
 async checkproductsbatch(state,payload){
-
+console.log("+++++batch check sap header++++++")
+console.log(payload)
     var result= await axios.post(checkproductsbatch,{products:payload})
     
     return result.data;
@@ -459,6 +467,25 @@ async getHeaderConfig(context,payload){
         var result=await axios.post(headerConfigSetApi,{config});
         return result.data
         },
+
+
+        async mapProductCodeGet(context,payload){
+            var result=await axios.get(mapProductCodeGetApi);
+           
+           if(result.data){
+            context.commit('setMapProductCode',result.data.code)
+           }
+            return result.data
+            },
+            async mapProductCodeSet(context,code){
+                var result=await axios.post(mapProductCodeSetApi,{code});
+                if(result.data){
+                    context.commit('setMapProductCode',result.data.code)
+                   }
+                return result.data
+                },
+        
+        
 
                     
 }

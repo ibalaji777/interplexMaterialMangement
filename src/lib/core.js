@@ -668,7 +668,7 @@ export function sapMap(observation_format,sapObject){
 
 // x['headerConfigFormat']=product.headerConfigFormat=header_result;
 
-
+// x['value']
 if(product.length==0){
    
      return {
@@ -686,23 +686,27 @@ if(product.length==0){
     var header=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
     //_.cloneDeep(database($vm,'getMasterHeaderConfig'))
 
-    //  console.log("ob+++>",product)
     
     
     var header_result= _.map(header,(x)=>{
     
-      if(x.mapFrom=='header'&&x.map!='')
+      console.log("ob+++>",object,x.name,object[x.name])
+    
+      if(x.mapFrom=='header')
       {
+        x['value']=object[x.name]||''
 
-      x['value']=(object[x.map]||'')
+if(x.map!='')  {x['value']=object[x.map]||'';}
     
     }
 
 
-      if(x.mapFrom=='product'&&x.map!='')
+      if(x.mapFrom=='product')
       {
-        x['value']=(product[0][x.map]||'')
-       
+        x['value']=object[x.name]||'';
+        if(x.map!=''){
+        x['value']=product[0][x.map]||''
+        }
       }
       return x;
     

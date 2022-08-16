@@ -445,6 +445,17 @@ productConfig:{
 
 
 interplex:{
+productMapCode:`   function map(product){
+	var newField={}
+/*map your code here*/
+newField['test']='work'
+
+/*map your coe here*/
+
+  return {...product,...newField}
+
+  }
+ map(product)`,
 	header_form_gui:{
 		one:[],
 		two:[
