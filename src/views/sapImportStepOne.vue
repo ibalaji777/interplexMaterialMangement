@@ -3,7 +3,7 @@
  
 <div class="example">
     <div class="codemirror">
-  <codemirror style="height:89vh" v-model="productMapCode" :options="jsOp"></codemirror>
+  <codemirror style="height:89vh" v-model="datOneCode" :options="jsOp"></codemirror>
     </div>
 </div>
 <v-row style="margin:10px">
@@ -71,7 +71,7 @@ export default {
   data () {
     return {
 
-        productMapCode:this.$store.state.interplex.productMapCode,
+        datOneCode:this.$store.state.interplex.datOneCode,
 
                  jsOp: {
        tabSize: 4,
@@ -115,8 +115,8 @@ export default {
     saveData(){
         var $vm=this;
 
-        var code=$vm.productMapCode;
-        $vm.$store.dispatch('mapProductCodeSet',code)
+        var code=$vm.datOneCode;
+        $vm.$store.dispatch('datOneCodeSet',code)
                 $vm.$alert("saved")
     },
     onCmReady(cm) {

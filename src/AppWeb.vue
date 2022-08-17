@@ -161,7 +161,8 @@ export default {
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
    await $vm.$store.dispatch("labelSettingRead");
-      await $vm.$store.dispatch("mapProductCodeGet");
+   await $vm.$store.dispatch("datOneCodeGet");
+   await $vm.$store.dispatch("datTwoCodeGet");
 
   //  await $vm.$store.dispatch("getHeaderConfig");
 

@@ -5,9 +5,11 @@ import axios from 'axios'
 /*eslint-disable*/
 
 
-var mapProductCodeSetApi=api+'/map_product_code/save';
-var mapProductCodeGetApi=api+'/map_product_code/read';
+var datOneCodeSetApi=api+'/datOneCode/save';
+var datOneCodeGetApi=api+'/datOneCode/read';
 
+var datTwoCodeSetApi=api+'/datTwoCode/save';
+var datTwoCodeGetApi=api+'/datTwoCode/read';
 
 
 var headerConfigGetApi=api+'/headerconfig/read';
@@ -468,24 +470,40 @@ async getHeaderConfig(context,payload){
         return result.data
         },
 
+        // mapProductCodeGet
 
-        async mapProductCodeGet(context,payload){
-            var result=await axios.get(mapProductCodeGetApi);
+        async datOneCodeGet(context,payload){
+            var result=await axios.get(datOneCodeGetApi);
            
            if(result.data){
-            context.commit('setMapProductCode',result.data.code)
+            context.commit('datOneCode',result.data.code)
            }
             return result.data
             },
-            async mapProductCodeSet(context,code){
-                var result=await axios.post(mapProductCodeSetApi,{code});
+            async datOneCodeSet(context,code){
+                var result=await axios.post(datOneCodeSetApi,{code});
                 if(result.data){
-                    context.commit('setMapProductCode',result.data.code)
+                    context.commit('datOneCode',result.data.code)
                    }
                 return result.data
                 },
         
-        
+                async datTwoCodeGet(context,payload){
+                    var result=await axios.get(datTwoCodeGetApi);
+                   
+                   if(result.data){
+                    context.commit('datTwoCode',result.data.code)
+                   }
+                    return result.data
+                    },
+                    async datTwoCodeSet(context,code){
+                        var result=await axios.post(datTwoCodeSetApi,{code});
+                        if(result.data){
+                            context.commit('datTwoCode',result.data.code)
+                           }
+                        return result.data
+                        },
+                
 
                     
 }

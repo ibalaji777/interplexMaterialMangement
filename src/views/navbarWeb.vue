@@ -397,10 +397,24 @@ $vm.items=[
                 action: "labelSetting",
                 submenu: false
             },
-                                  {
+            
+             {
                 title: "Find",
                 icon: "fa-search",
                 action: "findApproveList",
+                submenu: false
+            },
+
+             {
+                title: "Dat Import Step One",
+                icon: "fa-search",
+                action: "sapImportStepOne",
+                submenu: false
+            },
+                        {
+                title: "Dat Import Step two",
+                icon: "fa-search",
+                action: "sapImportStepTwo",
                 submenu: false
             },
 

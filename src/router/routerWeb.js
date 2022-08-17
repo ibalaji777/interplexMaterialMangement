@@ -8,8 +8,9 @@ import branches from '../views/branches.vue'
 import login from '../views/login.vue'
 import userRole from '../views/userRole.vue'
 
+import sapImportStepTwo from '../views/sapImportStepTwo.vue'
 
-import mapProductEditor from '../views/mapProductEditor.vue'
+import sapImportStepOne from '../views/sapImportStepOne.vue'
 
 import operatorDashboard from '../views/operatorDashboard.vue'
 import operatorInsert from '../views/operatorInsert.vue'
@@ -265,10 +266,17 @@ const routes = [
 		component:labelSetting 
 	},
 	{
-		path: '/mapProductEditor',
-		name: 'mapProductEditor',
-		component:mapProductEditor 
+		path: '/sapImportStepOne',
+		name: 'sapImportStepOne',
+		component:sapImportStepOne 
 	},
+	{
+		path: '/sapImportStepTwo',
+		name: 'sapImportStepTwo',
+		component:sapImportStepTwo 
+	},
+
+	
 ];
 
 const router = new VueRouter({

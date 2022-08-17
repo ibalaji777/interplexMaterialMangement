@@ -190,12 +190,19 @@ setLabelSetting(state,payload){
 	state.barcodeLabel.js=payload.config.js||""
 }
 ,
-setMapProductCode(state,code){
+// setMapProductCode
+datOneCode(state,code){
 if(code!='')
-state.interplex.productMapCode=code
+state.interplex.datOneCode=code
 	
-}
+},
 
+datTwoCode(state,code){
+	if(code!='')
+	state.interplex.datTwoCode=code
+		
+	}
+	
 }
 
 export default mutations;

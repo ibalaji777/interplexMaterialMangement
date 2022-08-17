@@ -445,7 +445,8 @@ productConfig:{
 
 
 interplex:{
-productMapCode:`   function map(product){
+// productMapCode
+datOneCode:`   function map(product){
 	var newField={}
 /*map your code here*/
 newField['test']='work'
@@ -456,6 +457,19 @@ newField['test']='work'
 
   }
  map(product)`,
+
+ datTwoCode:`   function map(product){
+	var newField={}
+/*map your code here*/
+newField['test']='work'
+
+/*map your coe here*/
+
+  return {...product,...newField}
+
+  }
+ map(product)`,
+
 	header_form_gui:{
 		one:[],
 		two:[
