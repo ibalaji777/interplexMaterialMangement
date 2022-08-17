@@ -114,6 +114,7 @@ Items
             v-model="fileDialog"
             fullscreen
             hide-overlay
+            persistent
             transition="dialog-bottom-transition"
         >
             <v-card>
@@ -135,16 +136,19 @@ Items
 <!-- {{key}} -->
 
 
-<v-card :class="{bgBlue:key==selectImportedFile}" @click="selectImportedFile=key" style="padding:10px;margin:5px;">
-    {{totalImportedFiles[key][0].supplier_name}}</v-card>
+<v-card :class="{bgBlue:key==selectImportedFile,duplicate:importStepOneDuplicatesFiles.includes(key)}" @click="selectImportedFile=key" style="padding:10px;margin:5px;display:flex;justify-content:space-between">
+{{index}}<span>    {{totalImportedFiles[key][0].supplier_name}}</span>
+    
+    <v-icon @click="removeDuplicate(index,key)">fa-trash</v-icon>
+    </v-card>
 
 
 </div>
 
-<div v-if="selectImportedFile!=''">
-<div style="display:flex;flex-wrap:wrap">
+<div v-if="selectImportedFile!=''" style="padding:10px">
+<div class="inputFields" >
 
-<div style="display:flex">
+<div style="display:flex;">
 <v-text-field
 dense
 
@@ -273,6 +277,7 @@ label="Date"
 <v-card  @click="item.selected=!item.selected" :class="{bgSelected:item.selected}" style="padding:10px;margin:5px">
 Product Name:    {{item.product_name}}<br>
 Supplier Name:    {{item.supplier_name}}<br>
+Batch No:    {{item.batch_no}}<br>
 Part No:    {{item.rmcode}}<br>
 Invoice No:    {{item.invoice_no}}<br>
 Invoice Date:    {{item.invoice_date}}<br>
@@ -832,7 +837,7 @@ background: #555160;
 
                                 color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
-                                @click="checkHeaderBefore = []"
+                                @click="checkHeaderBefore = [];totalImportedFiles={};importStepOneDuplicatesFiles=[]"
                                 >
                                 
 <v-icon>fa-trash</v-icon>
@@ -870,7 +875,7 @@ background: #555160;
                             
                                 color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
-                                @click="checkBatch"
+                                @click="validateProduct(checkHeaderBefore,false)"
                                 >
                              <v-icon>mdi-check-all</v-icon>
 
@@ -904,9 +909,12 @@ background: #555160;
                         <!-- <v-btn @click="addToQualitFormOne" color="primary">Add</v-btn> -->
                     </div>
 
-<div>
+<div style="display: flex;
+    justify-content: space-around;">
     <!-- {{Object.keys(totalImportedFiles)}} -->
     <b style="cursor:pointer" @click="fileDialog=true">Total Files:{{Object.keys(totalImportedFiles).length}}</b>
+        <b style="cursor:pointer" @click="fileDialog=true">Total Rows:{{checkHeaderBefore.length}}</b>
+    <b>Total Duplicate Files {{importStepOneDuplicatesFiles.length}}</b>
 </div>
 
                     <div class="checkContainer">
@@ -947,10 +955,37 @@ background: #555160;
 
                                 <div
                                     style="    display: flex;
-    justify-content: flex-end;"
+"
                                 >
-                                    <span v-if="item.isExist">Exist</span>
-                                    <span v-else>Not Exist</span>
+                                    <div v-if="item.isRmcodeExist" style="display: flex; justify-content: space-between; width: 100%;">
+                                        <div>
+                                        Part No:</div>
+                                        <div> Exist
+                                       </div> 
+                                        </div>
+                                    <div v-else style="display: flex; justify-content: space-between; width: 100%;">
+                                        <div> Part No:
+                                            </div>
+                                            <div>
+                                            Not Exist
+                                            </div>
+                                            </div>
+                                </div>
+                                <div
+                                    style="    display: flex;
+"
+                                >
+                                    <div v-if="item.isExist" style="display: flex; justify-content: space-between; width: 100%;">
+                                        <div>
+                                        Batch No:
+                                        </div>
+                                        <div>
+                                        Exist
+                                        </div></div>
+                                    <div v-else style="display: flex; justify-content: space-between; width: 100%;">
+                                       <div> Batch No:</div><div> Exist</div>
+                                        
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -1081,6 +1116,8 @@ function base64toBlob(base64Data, contentType) {
 
 function initialState($vm) {
     return {
+       importStepOneDuplicatesRows:[],
+        importStepOneDuplicatesFiles:[],
         invoice_dateDialog:false,
         grnDateDialog:false,
         currentDateDialog:false,
@@ -1100,7 +1137,7 @@ date:moment().format(store.state.dateFormat)
 
 fileDialog:false,
 selectImportedFile:'',
-totalImportedFiles:[],
+totalImportedFiles:{},
 checkProduct:{
 invoice_no:'',
 isInvoice_no:true,
@@ -1225,6 +1262,47 @@ return _.filter($vm.checkHeaderBefore,(x)=>x.selected)
         }
     },
     methods: {
+        rmCode(x){
+      var $vm=this;
+      console.log("rm",$vm.$store.state.map.sapImport["rmcode"])
+      console.log(x[$vm.$store.state.map.sapImport["rmcode"]])
+if($vm.$store.state.map.sapImport["rmcode"])
+{
+    var rmcode=x[$vm.$store.state.map.sapImport["rmcode"]]||""
+    if(rmcode!='')
+    return x[$vm.$store.state.map.sapImport["rmcode"]];
+    else{
+    if(x["MATTEXT"]!='')
+    return (x["MATTEXT"]).toString().substring(0,8);
+    }
+    return ''
+}      
+
+        },
+        removeDuplicate(index,key){
+var $vm=this;
+console.log($vm.importFileListUpdate)
+$vm.$confirm("Do You Want To Remove ?")
+.then(()=>{
+// $vm.totalImportedFiles
+$vm.$delete($vm.totalImportedFiles,key)
+var indexDuplicate=$vm.importStepOneDuplicatesFiles.indexOf(key)
+$vm.importStepOneDuplicatesFiles.splice(indexDuplicate,1)
+// var check=_.remove($vm.checkHeaderBefore, (x)=>x.fileId==key)
+// console.log(check,check.length,$vm.checkHeaderBefore.length)
+var get=_.reduce(_.cloneDeep($vm.checkHeaderBefore),(result,value,keye)=>{
+    console.log(value.fileId,key,value.fileId!=key)
+    if(value.fileId!=key)
+    {
+        result.push(value)
+    }
+    return result
+},[])
+console.log("get",get,key)
+$vm.$set($vm,"checkHeaderBefore",get)
+})
+
+        },
                 formatDate (date) {
   return moment(date).format("YYYY-MM-DD")
 },
@@ -1244,6 +1322,19 @@ _.map(_.filter($vm.importFileListUpdate,f=>f.selected),x=>{
         qasGroupOneCheckout() {
             var $vm = this;
 
+var checkPartNoDb=_.reduce($vm.checkHeaderBefore,
+(result,value,key)=>{
+result=result&&value.isRmcodeExist;
+return result;
+},true)
+
+var checkBatchNoDb=_.reduce($vm.checkHeaderBefore,
+(result,value,key)=>{
+result=result&&value.isExist;
+return result;
+},true)
+
+
 var supplierName=_.reduce($vm.checkHeaderBefore,
 (result,value,key)=>{
 result=result&&value.supplier_name!='';
@@ -1261,8 +1352,26 @@ var invoiceNo=_.reduce($vm.checkHeaderBefore,
 result=result&&value.invoice_no!='';
 return result;
 },true)
+if(!checkPartNoDb){
+
+$vm.$alert("Please Check Part No(Rmcode) in DB")
+    return ;
+}
+
+if(!checkBatchNoDb){
+
+$vm.$alert("Batch No already exsit")
+    return ;
+}
 
 
+
+
+if(!supplierName){
+
+$vm.$alert("Please Check Supplier")
+    return ;
+}
 if(!invoiceNo){
 
 $vm.$alert("Please Check Invoice No")
@@ -1623,6 +1732,7 @@ console.log(res)
       importStepOne(data){
         var $vm=this;
               var fileUid=uuidv4()
+ 
             var dataMap = _.map(data, x => {
                 x["isValidProd"] = false;
                 x['fileId']=fileUid;//bulk group edit
@@ -1634,15 +1744,15 @@ console.log(res)
             var createInvProducts = [];
             var headerFile = _.map(dataMap, x => {
                 var product = {};
-
 console.log("productmapcode",$vm.$store.state.interplex.productMapCode)
-product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { product:x });
+
                 product["selected"] = true;
                 product["ref"] =
                     x[core.defaultFields.supplierName] +
                     x[core.defaultFields.invoiceDate] +
                     (x[core.defaultFields.invoiceNo] || "");
                 product["isExist"] = false; //validate server side
+                product["isRmcodeExist"] = false; //validate server side
                 // if(product['DATE']){
                 // product['products']=[];
                 var str = x["DATE"];
@@ -1709,8 +1819,8 @@ product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { produc
                     // $vm.$store.state.map.sapImport["grn_date"] != ""
                     //     ? x[$vm.$store.state.map.sapImport["grn_date"]]
                     //     : moment().format(store.state.dateFormat);
-
-                product["rmcode"] =x[$vm.$store.state.map.sapImport["rmcode"]]||""
+             console.log("$vm.rmCode(x)",$vm.rmCode(x))
+             product["rmcode"] =$vm.rmCode(x)
                     // $vm.$store.state.map.sapImport["rmcode"] != ""
                     //     ? x[$vm.$store.state.map.sapImport["rmcode"]]
                     //     : "";
@@ -1746,9 +1856,11 @@ product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { produc
                 // return product;
 
                 // createInvProducts.push(product)
+                product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { product });
+                console.log(product)
+
                 return { ...x, ...product };
             });
-
             // ----------------------------------------------------
             // var headerFile=
             // _.map(core.headerFileGroup(dataMap),(x)=>{
@@ -1773,27 +1885,54 @@ product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { produc
             //  $vm.checkBatch()
                         console.log("++++++single header file+++++",headerFile)
 
-            async function checkBatch() {
+            
+$vm.validateProduct(headerFile,true)
+  
+
+      },
+validateProduct(headerFile,isPush=true){
+var $vm=this;
+var findDuplicates={}
+var duplicates={}
+
+async function checkBatchAndRmcode() {
                 var res = await $vm.$store.dispatch(
                     "checkproductsbatch",
                     headerFile
                 );
-
+                
+if(isPush){
                 $vm.checkHeaderBefore.push(...res);
-
+}
+else{
+                $vm.checkHeaderBefore=res
+}
+//--------------split files by to make easier edit--------
         $vm.totalImportedFiles=_.groupBy($vm.checkHeaderBefore,'fileId');
 
                              console.log("++++++multiple header file+++++",                $vm.checkHeaderBefore)
+//---------------find duplicates-------------------
+_.map($vm.checkHeaderBefore,product=>{
+                if(!_.has(findDuplicates,product['batch_no'])){
+                    //not duplicate
+                    findDuplicates[product['batch_no']]=product['batch_no']
+                }else{
+                    //found duplicates
+duplicates[product.fileId]=product.fileId
+                }
+                })
 
+            console.log("duplicates",duplicates,findDuplicates)
+$vm.importStepOneDuplicatesFiles=Object.keys(duplicates)
+
+//---------------find duplicates end-------------------
                                 // $vm.checkHeaderBefore = res;
 
             }
 
-            checkBatch();
-  
+            checkBatchAndRmcode();
 
-      },
-
+},
         to_json(workbook) {
             var $vm = this;
             var result = {};
@@ -1888,5 +2027,17 @@ product = vm.runInNewContext($vm.$store.state.interplex.productMapCode, { produc
 }
 .bgSelected{
 background: antiquewhite !important;
+}
+
+.inputFields{
+display:flex;flex-wrap:wrap
+    
+}
+.inputFields div{
+    /* padding:10px;margin:10px; */
+    /* width: 33% !important;; */
+}
+.duplicate{
+    background:red !important;
 }
 </style>

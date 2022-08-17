@@ -379,9 +379,9 @@ map:{
 	
 	sapImport:{
 
-		rmcode:'OLMAT',
+		rmcode:'MaterialNo',//'OLMAT',
 		supplier_name:'Vendor Name',
-		invoice_no:'invoice_no',
+		invoice_no:'Deliver Note',
 		grn_no:'grn_no',
 		grn_date:'LAST_GR_DATE_EXT',
 		invoice_date:'DATE_EXT',
