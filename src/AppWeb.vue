@@ -60,6 +60,8 @@
 /*eslint-disable*/
 import * as config from "./lib/config.js";
 const { io } = require("socket.io-client");
+import * as core from './lib/core.js'
+
 // var vm = require('vm');
  
 // window.addEventListener('load', function () {
@@ -176,7 +178,14 @@ async handler(){
    await $vm.$store.dispatch("datOneCodeGet");
    await $vm.$store.dispatch("datTwoCodeGet");
    await $vm.$store.dispatch("approverList");
+   await $vm.$store.dispatch("getSapImport");
+   await $vm.$store.dispatch("getDefaultImport");
 
+// if(get){
+
+// core.setDefaultFields();
+
+// }
   //  await $vm.$store.dispatch("getHeaderConfig");
 
 

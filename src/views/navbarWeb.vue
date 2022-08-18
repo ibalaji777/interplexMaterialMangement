@@ -343,6 +343,12 @@ $vm.items=[
                 action: "findApproveList",
                 submenu: false
             },
+            {
+                title: "App Config",
+                icon: "mdi-cog",
+                action: "appConfig",
+                submenu: false
+            },
 
 ]
 }
@@ -391,13 +397,6 @@ $vm.items=[
                 action: "qasForm2Config",
                 submenu: false
             },
-                                  {
-                title: "Label Setting",
-                icon: "mdi-qrcode",
-                action: "labelSetting",
-                submenu: false
-            },
-            
              {
                 title: "Find",
                 icon: "fa-search",
@@ -405,16 +404,36 @@ $vm.items=[
                 submenu: false
             },
 
+                                  {
+                title: "Label Setting",
+                icon: "mdi-qrcode",
+                action: "labelSetting",
+                submenu: false
+            },
+            
+
              {
                 title: "Dat Import Step One",
-                icon: "fa-search",
+                icon: "mdi-plus-box-outline",
                 action: "sapImportStepOne",
                 submenu: false
             },
-                        {
+            {
                 title: "Dat Import Step two",
-                icon: "fa-search",
+                icon: "mdi-plus-box-multiple-outline",
                 action: "sapImportStepTwo",
+                submenu: false
+            },
+{
+                title: "App Config",
+                icon: "mdi-cog",
+                action: "appConfig",
+                submenu: false
+            },
+            {
+                title: "Print/Pdf Setting",
+                icon: "mdi-animation-outline",
+                action: "inspectionPrintSetting",
                 submenu: false
             },
 

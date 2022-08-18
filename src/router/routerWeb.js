@@ -50,6 +50,8 @@ import findApproveList from '../views/findApproveList.vue'
 
 import qasForm2Config from '../views/qasForm2Config.vue'
 
+import printConfig from '../views/printConfig.vue'
+import appConfig from '../views/appConfig.vue'
 import qrScan from '../views/qrScan.vue'
 Vue.use(VueRouter);
 
@@ -275,7 +277,16 @@ const routes = [
 		name: 'sapImportStepTwo',
 		component:sapImportStepTwo 
 	},
-
+	{
+		path: '/printConfig',
+		name: 'printConfig',
+		component:printConfig 
+	},
+	{
+		path: '/appConfig',
+		name: 'appCofig',
+		component:appConfig 
+	},
 	
 ];
 

@@ -260,7 +260,7 @@ if(action=='getProductConfigValue')
 {
 //   console.log("master products,",$vm.$store.state.interplex.masterProducts)
 // console.log("payload data",prepareData.data)
-  return _.filter($vm.$store.state.interplex.masterProducts,(x)=>x['rmcode']==prepareData.data[defaultFields.partNo]);
+  return _.filter($vm.$store.state.interplex.masterProducts,(x)=>x['rmcode']==prepareData.data[store.state.defaultField.partNo]);
 
 }
 
@@ -664,7 +664,7 @@ export function sapMap(observation_format,sapObject){
    //  console.log('productConfigFormat',productConfigFormat)
     console.log("Sap map+>",object)
    
-   var product=await findProductPartNo(object[defaultFields.partNo])||[]
+   var product=await findProductPartNo(object[store.state.defaultField.partNo])||[]
 
 // x['headerConfigFormat']=product.headerConfigFormat=header_result;
 
@@ -860,7 +860,7 @@ export function headerFileGroup(array){
 
 var group= _.map(groupBy(array, function (item) {
   // item[defaultFields.invoiceDate]
-  return [item[defaultFields.partNo], item[defaultFields.supplierName],item[defaultFields.invoiceNo]||''];
+  return [item[store.state.defaultField.partNo], item[store.state.defaultField.supplierName],item[store.state.defaultField.invoiceNo]||''];
 }),(x)=>({
   total:x.length,
   invoiceQty:_.sumBy(x,(xy)=>parseFloat(xy.QTY)),
@@ -879,13 +879,13 @@ export function skiplevel($vm,array){
 
   var groupSkipLevel=_.map(groupBy(array, function (item) {
     // console.log(defaultFields.supplierName,[item[defaultFields.supplierName],item[defaultFields.partNo]].join(),item)
-    return [item[defaultFields.supplierName],item[defaultFields.partNo],item[defaultFields.invoiceNo]];
+    return [item[store.state.defaultField.supplierName],item[store.state.defaultField.partNo],item[store.state.defaultField.invoiceNo]];
   }),(x)=>{
 
     return {
       skuid:uuidv4(),
-      skref:x[0][defaultFields.supplierName]+x[0][defaultFields.partNo],
-      partNo:x[0][defaultFields.partNo],
+      skref:x[0][store.state.defaultField.supplierName]+x[0][store.state.defaultField.partNo],
+      partNo:x[0][store.state.defaultField.partNo],
       skipLevelProducts:x
       };
   });
@@ -896,7 +896,7 @@ export function skiplevel($vm,array){
 var groupSkipLevelsort=_.map(groupSkipLevel,(skiplevel)=>{
   //part no
   var partNo={}
-  partNo[defaultFields.partNo]=skiplevel.partNo;
+  partNo[store.state.defaultField.partNo]=skiplevel.partNo;
   skiplevel['skipLevelCount']=0
 var originalProduct=database($vm,'getProductConfigValue',partNo);
 if(originalProduct.length!=0){
@@ -904,7 +904,7 @@ if(originalProduct.length!=0){
  
 } 
  
-  skiplevel['skipLevelProducts']=_.orderBy(skiplevel.skipLevelProducts, [(obj) => new Date(obj[defaultFields.LAST_GR_DATE_EXT])], ['asc'])
+  skiplevel['skipLevelProducts']=_.orderBy(skiplevel.skipLevelProducts, [(obj) => new Date(obj[store.state.defaultField.LAST_GR_DATE_EXT])], ['asc'])
 return skiplevel
 })
 //part no check

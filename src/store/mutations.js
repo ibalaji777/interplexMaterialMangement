@@ -201,8 +201,17 @@ datTwoCode(state,code){
 	if(code!='')
 	state.interplex.datTwoCode=code
 		
-	}
-	
+	},
+	setdefaultField(state,config){
+		state.defaultField=config
+			
+		},
+		
+		setDefaultImport(state,config){
+			state.map.sapImport=config
+				
+			}
+			
 }
 
 export default mutations;

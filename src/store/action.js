@@ -4,6 +4,14 @@ var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
 
+var getSapImportApi=api+'/getsapimport';
+var setSapImportApi=api+'/setsapimport';
+
+var getDefaultImportApi=api+'/getdefaultimport';
+var setDefaultImportApi=api+'/setdefaultimport';
+
+
+
 
 var datOneCodeSetApi=api+'/datOneCode/save';
 var datOneCodeGetApi=api+'/datOneCode/read';
@@ -515,6 +523,44 @@ async getHeaderConfig(context,payload){
                         return result.data
                         },
                 
+async getSapImport(context,payload){
+var result=await axios.get(getSapImportApi);
+
+if(result.data){
+context.commit('setSapImport',result.data.config)
+}
+return result.data
+},
+async setSapImport(context,config){
+var result=await axios.post(setSapImportApi,{config});
+if(result.data){
+    context.commit('setSapImport',result.data.config)
+
+}
+return result.data
+},
+
+async getDefaultImport(context,payload){
+    var result=await axios.get(getDefaultImportApi);
+    
+    if(result.data){
+    context.commit('setdefaultField',result.data.config)
+    }
+    return result.data
+    },
+    async setDefaultImport(context,config){
+    var result=await axios.post(setDefaultImportApi,{config});
+    if(result.data){
+        context.commit('setdefaultField',result.data.config)
+
+        return result.data.config
+        
+    
+    }
+    return ""
+    },
+    
+
 
                     
 }

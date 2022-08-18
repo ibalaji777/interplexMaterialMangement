@@ -1825,9 +1825,9 @@ console.log(res)
 
                 product["selected"] = true;
                 product["ref"] =
-                    x[core.defaultFields.supplierName] +
-                    x[core.defaultFields.invoiceDate] +
-                    (x[core.defaultFields.invoiceNo] || "");
+                    x[$vm.$store.state.defaultField.supplierName] +
+                    x[$vm.$store.state.defaultField.invoiceDate] +
+                    (x[$vm.$store.state.defaultField.invoiceNo] || "");
                 product["isExist"] = false; //validate server side
                 product["isRmcodeExist"] = false; //validate server side
                 // if(product['DATE']){

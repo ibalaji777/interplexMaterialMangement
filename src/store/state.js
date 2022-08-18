@@ -1,6 +1,17 @@
 /*eslint-disable*/
 import moment from 'moment'
 const state = {
+
+	defaultField:{
+
+		partNo:'rmcode',
+		supplierName:'supplier_name',
+		invoiceDate:'LAST_GR_DATE',
+		invoiceDateEXT:'LAST_GR_DATE_EXT',
+		invoiceNo:'invoice_no'//correct
+		
+	  },
+
 	sapLogs:{
 
 	},
