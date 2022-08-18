@@ -200,6 +200,11 @@ export default {
         headerFileDialog:false,
     }
   },
+async  mounted(){
+    var $vm=this;
+   await $vm.$store.dispatch("approverList");
+   await $vm.$store.dispatch("getProducts");
+  },
   computed:{
 masterProductsTotal(){
 return core.database(this,'getMasterProductsTotal')

@@ -8,11 +8,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export var defaultFields={
 
-  partNo:'OLMAT',
-  supplierName:'Vendor Name',
+  partNo:'rmcode',
+  supplierName:'supplier_name',
   invoiceDate:'LAST_GR_DATE',
   invoiceDateEXT:'LAST_GR_DATE_EXT',
-  invoiceNo:'invoice_no'
+  invoiceNo:'invoice_no'//correct
   
 }
 
@@ -690,7 +690,7 @@ if(product.length==0){
     
     var header_result= _.map(header,(x)=>{
     
-      console.log("ob+++>",object,x.name,object[x.name])
+      // console.log("ob+++>",object,x.name,object[x.name])
     
       if(x.mapFrom=='header')
       {
@@ -753,12 +753,13 @@ return  _.map(products,(sapObject)=>{
 console.log("sap products..",sapObject)
 
 _.map(productConfigFormat2,(x)=>{
-
-if(x.name!='validation'){
+console.log("x",x)
+  if(x.name!='validation'){
   sapObject[x.name]=x.value||'';
 
   if(x.sapHeader){
-    sapObject[x.name]=sapObject[x.sapHeader]||''
+    if(x.sapHeader!='')
+    sapObject[x.name]=sapObject[x.sapHeader]||""
   }
 }
 else{
@@ -781,8 +782,9 @@ export async function createProductList($vm,array){
 
   //create header
  // create product form 
+ console.log('create Product list all',array)
 return await Promise.all(_.map(array,async (x)=>{
-  // console.log('x',x)
+  console.log('create Product list single',x)
 var product=await getProduct($vm,x)
 x['headerConfigFormat']=product.headerConfigFormat;
 
@@ -798,7 +800,7 @@ x['qas_form_one_ui']=product.qas_form_one_ui;
 x['qas_form_two_ui']=product.qas_form_two_ui;
 // x['products']=setQasForm2(x.products,productConfigFormat2);
 
-
+console.log("x.products,x.productConfigFormat2",x.products,x.productConfigFormat2)
 //productConfigFormat($vm,x)
 x['qasForm2']= setQasForm2(x.products,x.productConfigFormat2);
 
@@ -856,7 +858,7 @@ export function headerFileGroup(array){
 // return result;
 // console.log(result);
 
-return _.map(groupBy(array, function (item) {
+var group= _.map(groupBy(array, function (item) {
   // item[defaultFields.invoiceDate]
   return [item[defaultFields.partNo], item[defaultFields.supplierName],item[defaultFields.invoiceNo]||''];
 }),(x)=>({
@@ -866,6 +868,8 @@ return _.map(groupBy(array, function (item) {
   products:x,
 
 }));
+console.log("+++++group+++++++",group)
+return group
 }
 
 
@@ -875,7 +879,7 @@ export function skiplevel($vm,array){
 
   var groupSkipLevel=_.map(groupBy(array, function (item) {
     // console.log(defaultFields.supplierName,[item[defaultFields.supplierName],item[defaultFields.partNo]].join(),item)
-    return [item[defaultFields.supplierName],item[defaultFields.partNo]];
+    return [item[defaultFields.supplierName],item[defaultFields.partNo],item[defaultFields.invoiceNo]];
   }),(x)=>{
 
     return {

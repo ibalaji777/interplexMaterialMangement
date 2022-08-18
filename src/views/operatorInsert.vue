@@ -1395,7 +1395,7 @@ _.map(_.filter($vm.importFileListUpdate,f=>f.selected),x=>{
         },
         qasGroupOneCheckout() {
             var $vm = this;
-
+console.log("checkHeaderBefore=>",$vm.checkHeaderBefore)
 var checkPartNoDb=_.reduce($vm.checkHeaderBefore,
 (result,value,key)=>{
 result=result&&value.isRmcodeExist;
@@ -1503,8 +1503,10 @@ x= vm.runInNewContext($vm.$store.state.interplex.datTwoCode, { product:x });
             console.log("+++qasform1group++++",$vm.qasForm1Group)
         },
         async submit(){
+            var $vm=this;
             // core.submit(this)
-                        core.submit_new(this)
+await core.submit_new(this)
+$vm.$store.dispatch("approverList")
         },
         async submit_() {
             var $vm = this;
@@ -1882,7 +1884,8 @@ console.log(res)
                     // $vm.$store.state.map.sapImport["ir"] != ""
                     //     ? x[$vm.$store.state.map.sapImport["ir"]]
                     //     : "";
-                product["date"] =x[$vm.$store.state.map.sapImport["date"]]||moment().format(store.state.dateFormat);
+                product["date"] =moment().format(store.state.dateFormat);
+                //x[$vm.$store.state.map.sapImport["date"]]||moment().format(store.state.dateFormat);
                     // $vm.$store.state.map.sapImport["date"] != ""
                     //     ? x[$vm.$store.state.map.sapImport["date"]]
                     //     : moment().format(store.state.dateFormat);

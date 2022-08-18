@@ -151,7 +151,18 @@ export default {
 
 
  },
- watch: {},
+ watch: {
+     "$store.state.date":{
+async handler(){
+  var $vm=this;
+   await $vm.$store.dispatch("approverList");
+
+}
+
+
+
+     }
+ },
  methods: {
   async load() {
    var $vm = this;
@@ -160,9 +171,11 @@ export default {
    await $vm.$store.dispatch("getProductConfig");
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
+  //  await $vm.$store.dispatch("getQasFormOneByDate");
    await $vm.$store.dispatch("labelSettingRead");
    await $vm.$store.dispatch("datOneCodeGet");
    await $vm.$store.dispatch("datTwoCodeGet");
+   await $vm.$store.dispatch("approverList");
 
   //  await $vm.$store.dispatch("getHeaderConfig");
 

@@ -53,6 +53,9 @@ var invoiceUploadApi=api+'/invoiceupload'
 var checkProductBatch=api+'/productbatch/check'
 var checkproductsbatch=api+'/checkproductsbatch'
 var getQasFormOneApi=api+'/readqasformonelist'
+
+var getQasFormOneByDateApi=api+'/readqasformonedatelist'
+
 var approverListApi=api+'/approverlist'
 var getQasFormSingleApi=api+'/readqasformonesingle'
 
@@ -309,7 +312,15 @@ console.log("approverList",result)
         // return  result;
         
          },
+         async getQasFormOneByDate(context){
+            var result= await axios.get(getQasFormOneByDateApi)
+            context.commit('setQasFormOneList',result.data)
+    // console.log("approverList",result)
+            // return  result;
+            
+             },
 
+         
     async approverList(context){
 //approverList for admin or operator or approver
 var result=[]

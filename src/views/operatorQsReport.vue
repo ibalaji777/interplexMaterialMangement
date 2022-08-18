@@ -6,7 +6,8 @@
     flex-wrap: wrap;">
     <!-- {{$store.state.interplex.configHeaderFormat}} -->
 
-
+<!-- {{header_form_gui}}
+{{jsonselectedPartNoItem}} -->
 
 <div style="display:flex;flex-wrap:wrap"  :key="'headergui'">
 <div  class="flex-row-item"  v-for="(ui,index_sub) in header_form_gui.two" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
@@ -881,8 +882,8 @@ $vm.qas_form_two_ui=_.cloneDeep($vm.$store.state.interplex.qas_form_two_ui);
     },
   async  mounted(){
         var $vm=this;
-        // console.log("qs selectedPartNoItem")
-// console.log($vm.$store.state.interplex.selectedPartNoItem)
+        console.log("qs selectedPartNoItem")
+console.log($vm.$store.state.interplex.selectedPartNoItem)
 await $vm.$store.dispatch('readUploadType')
 
 $vm.header_form_gui=_.cloneDeep($vm.$store.state.interplex.header_form_gui);

@@ -210,7 +210,8 @@ Total Products
         mdi-cog
     </v-icon>
 
-        QAS Form 2 Product & Config</div>
+        QAS Form 2 Product & Config
+        </div>
 </div>
 
 </div>
@@ -240,9 +241,25 @@ export default {
         headerFileDialog:false,
     }
   },
+//   watch:{
+
+// "$state.date.from_date":{
+//     handler(){
+//         this.$store.dispatch("approverList")
+//     }
+// },
+// "$state.date.to_date":{
+//     handler(){
+//         this.$store.dispatch("approverList")
+//     }
+// },
+
+//   },
 async  mounted(){
 var $vm=this;
 await $vm.$store.dispatch('getUsers')
+await $vm.$store.dispatch("approverList");
+await $vm.$store.dispatch("getProducts");
 
   },
   computed:{

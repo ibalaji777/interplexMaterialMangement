@@ -93,7 +93,6 @@ export default {
           mode: 'text/css',
         // mode: 'text/javascript',
         theme: 'base16-dark',
-        // more codemirror options, 更多 codemirror 的高级配置...
       },
       htmlOp: {
  tabSize: 4,
@@ -105,9 +104,7 @@ export default {
           autoCloseTags: true,
           mode: 'text/html',
           
-        // mode: 'text/javascript',
         theme: 'base16-dark',
-        // more codemirror options, 更多 codemirror 的高级配置...
       }
     }
   },
