@@ -861,13 +861,17 @@ return []
 remarks:{
   get(){
 var $vm=this;
-var ref=$vm.$store.state.interplex.selectedPartNoItem.ref;
-if($vm.$store.state.interplex.tempInvoice[ref])
-return ($vm.$store.state.interplex.tempInvoice[ref].remarks)||''//selectedPartNoItem
+var ref=$vm.$store.state.interplex.selectedPartNoItem.qasRef;
+if($vm.$store.state.interplex.tempRemarks[ref])
+return ($vm.$store.state.interplex.tempRemarks[ref].remarks)||''//selectedPartNoItem
 return ''
 },
     set(value){
+        var $vm=this;
         console.log(value)
+        var ref=$vm.$store.state.interplex.selectedPartNoItem.qasRef;
+
+        $vm.$store.commit('remarks',{ref,value})
     }
 
 },

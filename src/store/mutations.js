@@ -53,6 +53,10 @@ if(payload.action=='saveQasForm2Config')
 
 const mutations = 
 {
+	remarks(state,{ref,value}){
+
+		state.interplex.tempRemarks[ref]=value
+	},
 
 	closeNavbarMenu(state,payload){
 		state.control.isNavbarHidden=false

@@ -446,7 +446,7 @@ async qasFormHeaderUpdate(context,header){
 async deleteQasFormOne(context,item){
 console.log("delete action",item)
     var result=await axios.post(deleteQasFormOneApi,{invoice_table_id:item.invoice_table_id});
-await    approverList(context)
+// await    approverList(context)
     return result.data
 },
 async productBatchCheck(context,rmcode){

@@ -1508,215 +1508,215 @@ x= vm.runInNewContext($vm.$store.state.interplex.datTwoCode, { product:x });
 await core.submit_new(this)
 $vm.$store.dispatch("approverList")
         },
-        async submit_() {
-            var $vm = this;
-            // console.log("====submit====")
-            // console.log($vm.tempInvoice)
-            var invoices = [];
-            var user_id = $vm.$store.state.interplex.user.id;
-            var invoice_no_validate = true;
+//         async submit_() {
+//             var $vm = this;
+//             // console.log("====submit====")
+//             // console.log($vm.tempInvoice)
+//             var invoices = [];
+//             var user_id = $vm.$store.state.interplex.user.id;
+//             var invoice_no_validate = true;
 
-            _.each($vm.tempInvoice, (val, key) => {
-                var invoice = {};
-                // console.log( key, val );
+//             _.each($vm.tempInvoice, (val, key) => {
+//                 var invoice = {};
+//                 // console.log( key, val );
 
-                const uuid = uuidv4();
-                const qasForm1Prod = _.cloneDeep(
-                    _.filter(
-                        $vm.getQualityAssuranceFormOne,
-                        product => product.ref == key
-                    )
-                );
+//                 const uuid = uuidv4();
+//                 const qasForm1Prod = _.cloneDeep(
+//                     _.filter(
+//                         $vm.getQualityAssuranceFormOne,
+//                         product => product.ref == key
+//                     )
+//                 );
 
-                // console.log("qasformone+++",qasForm1Prod)
-                // // validation
-                // _.map(qasForm1Prod,(product)=>{
-                // if(product.invoice_no==''){
-                //     invoice_no_validate=false
-                //    return;
-                //     }
+//                 // console.log("qasformone+++",qasForm1Prod)
+//                 // // validation
+//                 // _.map(qasForm1Prod,(product)=>{
+//                 // if(product.invoice_no==''){
+//                 //     invoice_no_validate=false
+//                 //    return;
+//                 //     }
 
-                //     })
+//                 //     })
 
-                invoice["qasForm1Prod"] = _.map(qasForm1Prod, x => {
-                    x["invoice_client_id"] = uuid;
-                    return x;
-                });
-                //chec
-                invoice["ref"] = key;
-                invoice["invoice_client_id"] = uuid;
-                invoice["gallery"] = _.map(val["gallery"], x => {
-                    x["invoice_client_id"] = uuid;
-                    return x;
-                });
-                invoice["remarks"] = val["remarks"];
+//                 invoice["qasForm1Prod"] = _.map(qasForm1Prod, x => {
+//                     x["invoice_client_id"] = uuid;
+//                     return x;
+//                 });
+//                 //chec
+//                 invoice["ref"] = key;
+//                 invoice["invoice_client_id"] = uuid;
+//                 invoice["gallery"] = _.map(val["gallery"], x => {
+//                     x["invoice_client_id"] = uuid;
+//                     return x;
+//                 });
+//                 invoice["remarks"] = val["remarks"];
 
-                invoice["operator_id"] =
-                    $vm.$store.state.interplex.user.id || 0;
-                invoice["qasForm1Prod"] = qasForm1Prod; //_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
-                invoice["supplier_name"] = "";
-                invoice["invoice_no"] = "";
-                invoice["invoice_date"] = moment().format(
-                    $vm.$store.state.dateFormat
-                );
-                invoice["invoice_qty"] = 0;
-                invoice["ir"] = "";
-                invoice["date"] = moment().format($vm.$store.state.dateFormat);
-                invoice["grn_no"] = "";
-                invoice["grn_date"] = moment().format(
-                    $vm.$store.state.dateFormat
-                );
-                invoice["rmcode"] = "";
-                invoice["eds"] = "";
-                invoice["rm"] = "";
-                invoice["received_qty"] = 0;
-                invoice["product_name"] = "";
-                invoice["form_format"] = "";
-                invoice["comment"] = "";
-                invoice["duedate"] = moment().format(
-                    $vm.$store.state.dateFormat
-                );
-                invoice["observation_format"] = [];
-                invoice["header_format"] = [];
-                // invoice['remarks']='';
-                invoice["status"] = "pending";
-                invoice["approved_by"] = 0;
+//                 invoice["operator_id"] =
+//                     $vm.$store.state.interplex.user.id || 0;
+//                 invoice["qasForm1Prod"] = qasForm1Prod; //_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
+//                 invoice["supplier_name"] = "";
+//                 invoice["invoice_no"] = "";
+//                 invoice["invoice_date"] = moment().format(
+//                     $vm.$store.state.dateFormat
+//                 );
+//                 invoice["invoice_qty"] = 0;
+//                 invoice["ir"] = "";
+//                 invoice["date"] = moment().format($vm.$store.state.dateFormat);
+//                 invoice["grn_no"] = "";
+//                 invoice["grn_date"] = moment().format(
+//                     $vm.$store.state.dateFormat
+//                 );
+//                 invoice["rmcode"] = "";
+//                 invoice["eds"] = "";
+//                 invoice["rm"] = "";
+//                 invoice["received_qty"] = 0;
+//                 invoice["product_name"] = "";
+//                 invoice["form_format"] = "";
+//                 invoice["comment"] = "";
+//                 invoice["duedate"] = moment().format(
+//                     $vm.$store.state.dateFormat
+//                 );
+//                 invoice["observation_format"] = [];
+//                 invoice["header_format"] = [];
+//                 // invoice['remarks']='';
+//                 invoice["status"] = "pending";
+//                 invoice["approved_by"] = 0;
 
-                if (qasForm1Prod.length != 0) {
-                    // ***********************************
-                    var headerData = qasForm1Prod[0].headerConfigFormat;
-                    // console.log("++++header++++",headerData)
-                    _.map(headerData, header => {
-                        invoice[header.name] = header.value;
-                    });
-                    // ***********************************
+//                 if (qasForm1Prod.length != 0) {
+//                     // ***********************************
+//                     var headerData = qasForm1Prod[0].headerConfigFormat;
+//                     // console.log("++++header++++",headerData)
+//                     _.map(headerData, header => {
+//                         invoice[header.name] = header.value;
+//                     });
+//                     // ***********************************
 
-                    invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
-                        var object = {};
+//                     invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
+//                         var object = {};
 
-                        console.log("product", product);
-                        object["batch"] = "";
-                        object["skiplevel_status"] = product.skiplevel_status;
-                        object["sk_index"] = product.sk_index;
-                        object["sk_order"] = product.sk_order;
-                        // object['status']='pending'
-                        object["invoice_client_id"] =
-                            product["invoice_client_id"];
-                        // console.log(product['invoice_client_id'])
-                        _.map(product.headerConfigFormat, header => {
-                            object[header.name] = header.value;
-                        });
-                        object["observation_format"] =
-                            product.productConfigFormat;
-                        object["header_format"] = product.headerConfigFormat;
+//                         console.log("product", product);
+//                         object["batch"] = "";
+//                         object["skiplevel_status"] = product.skiplevel_status;
+//                         object["sk_index"] = product.sk_index;
+//                         object["sk_order"] = product.sk_order;
+//                         // object['status']='pending'
+//                         object["invoice_client_id"] =
+//                             product["invoice_client_id"];
+//                         // console.log(product['invoice_client_id'])
+//                         _.map(product.headerConfigFormat, header => {
+//                             object[header.name] = header.value;
+//                         });
+//                         object["observation_format"] =
+//                             product.productConfigFormat;
+//                         object["header_format"] = product.headerConfigFormat;
 
-                        //some fiels lag
-                        object["qasForm2New"] = _.map(
-                            product.qasForm2,
-                            qasform2 => {
-                                // qasform2
-                                qasform2["invoice_client_id"] =
-                                    invoice["invoice_client_id"];
-                                return qasform2;
-                            }
-                        );
+//                         //some fiels lag
+//                         object["qasForm2New"] = _.map(
+//                             product.qasForm2,
+//                             qasform2 => {
+//                                 // qasform2
+//                                 qasform2["invoice_client_id"] =
+//                                     invoice["invoice_client_id"];
+//                                 return qasform2;
+//                             }
+//                         );
 
-                        if (product.qasForm2.length != 0) {
-                            object["batch"] = product.qasForm2[0]["batch_no"];
-                        }
-                        //Object.assign(core.dbFormate.qasform2)
-                        //asign default values
-                        // console.log($vm.$store.state.interplex.user)
-                        return { ...object, operator_id: user_id };
-                    });
-                }
+//                         if (product.qasForm2.length != 0) {
+//                             object["batch"] = product.qasForm2[0]["batch_no"];
+//                         }
+//                         //Object.assign(core.dbFormate.qasform2)
+//                         //asign default values
+//                         // console.log($vm.$store.state.interplex.user)
+//                         return { ...object, operator_id: user_id };
+//                     });
+//                 }
 
-                invoices.push(invoice);
+//                 invoices.push(invoice);
 
-                // _.map(invoices,(invoice)=>{
-                // _.map(invoice.qasForm1New,(qasForm1)=>{
-                // var id=core.randomInteger(1,1000)
-                // qasForm1['id']=id;
-                // core.database($vm,'insertQasForm1',qasForm1)
-                // _.map(invoice.qasForm2New,(qasForm2)=>{
-                // var id=core.randomInteger(1,1000)
-                // qasForm2['id']=id;
-                //     core.database($vm,'insertQasForm2',qasForm2)
-                // })
-                // })
+//                 // _.map(invoices,(invoice)=>{
+//                 // _.map(invoice.qasForm1New,(qasForm1)=>{
+//                 // var id=core.randomInteger(1,1000)
+//                 // qasForm1['id']=id;
+//                 // core.database($vm,'insertQasForm1',qasForm1)
+//                 // _.map(invoice.qasForm2New,(qasForm2)=>{
+//                 // var id=core.randomInteger(1,1000)
+//                 // qasForm2['id']=id;
+//                 //     core.database($vm,'insertQasForm2',qasForm2)
+//                 // })
+//                 // })
 
-                // })
-            });
+//                 // })
+//             });
 
-            // $vm.$store.commit('defaultValue',{})
-            $vm.$alert("Saved");
-//---------------------------------------------------
-            console.log("+++Invoices Gallery+++", invoices);
-            // ----------------
+//             // $vm.$store.commit('defaultValue',{})
+//             $vm.$alert("Saved");
+// //---------------------------------------------------
+//             console.log("+++Invoices Gallery+++", invoices);
+//             // ----------------
 
-var new_invoices=_.map(invoices,(invoice)=>{
+// var new_invoices=_.map(invoices,(invoice)=>{
 
-invoice.qasForm1New= _.map(invoice.qasForm1New,(qsform1)=>{
+// invoice.qasForm1New= _.map(invoice.qasForm1New,(qsform1)=>{
 
-var qasformone=core.setQasHeader(qsform1,qsform1.header_format)
-return qasformone
+// var qasformone=core.setQasHeader(qsform1,qsform1.header_format)
+// return qasformone
 
-})
-return invoice
-})
+// })
+// return invoice
+// })
 
-console.log(new_invoices)
+// console.log(new_invoices)
 
 
-            var result = await $vm.$store.dispatch("submitInvoice", new_invoices);
-            var blobInvoices = _.map(new_invoices, invoice => {
-                invoice["gallery"] = _.map(invoice.gallery, async image => {
-                    var formdata = new FormData();
-                    // image['invoice_client_id']=invoice['invoice_client_id'];
-                    image["invoice_table_id"] = 0;
-                    var invoiceFilter = _.filter(
-                        result,
-                        ob => ob.invoice_client_id == image.invoice_client_id
-                    );
-                    if (invoiceFilter.length != 0)
-                        image["invoice_table_id"] = invoiceFilter[0].id;
+//             var result = await $vm.$store.dispatch("submitInvoice", new_invoices);
+//             var blobInvoices = _.map(new_invoices, invoice => {
+//                 invoice["gallery"] = _.map(invoice.gallery, async image => {
+//                     var formdata = new FormData();
+//                     // image['invoice_client_id']=invoice['invoice_client_id'];
+//                     image["invoice_table_id"] = 0;
+//                     var invoiceFilter = _.filter(
+//                         result,
+//                         ob => ob.invoice_client_id == image.invoice_client_id
+//                     );
+//                     if (invoiceFilter.length != 0)
+//                         image["invoice_table_id"] = invoiceFilter[0].id;
 
-                    // formdata.append('invoice_table_id',image['invoice_table_id'])
-                    formdata.append(
-                        "invoice_table_id",
-                        image["invoice_table_id"]
-                    );
-                    formdata.append(
-                        "invoice_client_id",
-                        image["invoice_client_id"]
-                    );
-                    formdata.append("invoice_no", invoice["invoice_no"]);
-                    formdata.append("file_type", image["file_type"]);
+//                     // formdata.append('invoice_table_id',image['invoice_table_id'])
+//                     formdata.append(
+//                         "invoice_table_id",
+//                         image["invoice_table_id"]
+//                     );
+//                     formdata.append(
+//                         "invoice_client_id",
+//                         image["invoice_client_id"]
+//                     );
+//                     formdata.append("invoice_no", invoice["invoice_no"]);
+//                     formdata.append("file_type", image["file_type"]);
 
-                    formdata.append(
-                        "file",
-                        base64toBlob(image.src.split(",")[1])
-                    );
+//                     formdata.append(
+//                         "file",
+//                         base64toBlob(image.src.split(",")[1])
+//                     );
 
-                    await $vm.$store.dispatch("upload", formdata);
+//                     await $vm.$store.dispatch("upload", formdata);
 
-                    // files.push(image)
-                    return image;
-                });
-                return invoice;
-            });
-            // -----------------
-            // _.map(blobInvoices,(rt)=>{
-            //  rt['invoice_table_id']=0;
-            // var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==rt.invoice_client_id)
-            // if(invoiceFilter.length!=0)
-            // rt['invoice_table_id']=invoiceFilter[0].id
+//                     // files.push(image)
+//                     return image;
+//                 });
+//                 return invoice;
+//             });
+//             // -----------------
+//             // _.map(blobInvoices,(rt)=>{
+//             //  rt['invoice_table_id']=0;
+//             // var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==rt.invoice_client_id)
+//             // if(invoiceFilter.length!=0)
+//             // rt['invoice_table_id']=invoiceFilter[0].id
 
-            // })
+//             // })
 
-            // console.log("++++++invoices++++",invoices)
-            $vm.clear();
-        },
+//             // console.log("++++++invoices++++",invoices)
+//             $vm.clear();
+//         },
 
         selectedPartNoItem(item, index) {
             var $vm = this;

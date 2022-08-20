@@ -380,6 +380,7 @@ function  groupBy(array, f) {
   let groups = {};
   array.forEach(function (o) {
     var group = JSON.stringify(f(o));
+    o['qasRef']=group;
     groups[group] = groups[group] || [];
     groups[group].push(o);
   });
@@ -862,6 +863,7 @@ var group= _.map(groupBy(array, function (item) {
   // item[defaultFields.invoiceDate]
   return [item[store.state.defaultField.partNo], item[store.state.defaultField.supplierName],item[store.state.defaultField.invoiceNo]||''];
 }),(x)=>({
+  qasRef:x[0].qasRef,
   total:x.length,
   invoiceQty:_.sumBy(x,(xy)=>parseFloat(xy.QTY)),
   ...x[0],
@@ -1171,15 +1173,15 @@ export function setHeaderConfigData(headerData,invoice){
 }
 export async function  submit_new($vm) {
 
-  // console.log("====submit====")
-  // console.log($vm.tempInvoice)
+  console.log("====submit====")
+  console.log($vm.tempInvoice)
   var invoices = [];
   var user_id = $vm.$store.state.interplex.user.id;
   var invoice_no_validate = true;
 
   _.each($vm.tempInvoice, (val, key) => {
       var invoice = {};
-      // console.log( key, val );
+      console.log( key, val );
 
       const uuid = uuidv4();
       const qasForm1Prod = _.cloneDeep(
@@ -1192,6 +1194,7 @@ export async function  submit_new($vm) {
 
       invoice["qasForm1Prod"] = _.map(qasForm1Prod, x => {
           x["invoice_client_id"] = uuid;
+          // invoice["remarks"] = $vm.$store.state.interplex.tempRemarks[x.qasRef]
           return x;
       });
       //chec
@@ -1201,7 +1204,7 @@ export async function  submit_new($vm) {
           x["invoice_client_id"] = uuid;
           return x;
       });
-      invoice["remarks"] = val["remarks"];
+      // invoice["remarks"] = val["remarks"];
 
       invoice["operator_id"] =
           $vm.$store.state.interplex.user.id || 0;
@@ -1251,6 +1254,8 @@ export async function  submit_new($vm) {
               object["skiplevel_status"] = product.skiplevel_status;
               object["sk_index"] = product.sk_index;
               object["sk_order"] = product.sk_order;
+              object["remarks"] = $vm.$store.state.interplex.tempRemarks[product.qasRef]
+
               // object['status']='pending'
               object["invoice_client_id"] =
                   product["invoice_client_id"];

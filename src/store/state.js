@@ -1375,6 +1375,8 @@ width:'50'
     },
 	selectedPartNoItem:{},
 	tempInvoice:{},//temprory
+	tempRemarks:{},//temprory
+
 	configProductsFormat2:[
 	
 		{

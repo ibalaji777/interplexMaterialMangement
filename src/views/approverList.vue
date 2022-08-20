@@ -448,8 +448,7 @@ var $vm=this;
 $vm.$confirm("Do You Want To Delete?")
 .then(async ()=>{
 await $vm.$store.dispatch('deleteQasFormOne',item)
-      await $vm.$store.dispatch('approverList')
-
+   await $vm.$store.dispatch("approverList");
       $vm.filterResult=$vm.$store.state.interplex.qasForm1;
 
 })
