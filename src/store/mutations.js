@@ -53,6 +53,14 @@ if(payload.action=='saveQasForm2Config')
 
 const mutations = 
 {
+	setQasForm1Validation(state,value){
+
+		state.qasForm1Validation=value
+	},
+	setQasForm2Validation(state,value){
+
+		state.qasForm2Validation=value
+	},
 	remarks(state,{ref,value}){
 
 		state.interplex.tempRemarks[ref]=value

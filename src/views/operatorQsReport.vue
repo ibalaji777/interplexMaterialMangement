@@ -229,6 +229,10 @@ Width Max
        <div style="padding:10px">
 <h3>QAS FORM TWO</h3>
 <!-- {{selectedPartNoItem}} -->
+ <v-switch
+      v-model="qasForm2Validation"
+      :label="'Real Time Validation'"
+    ></v-switch>
 <div style="    height: 88vh;
     overflow: scroll;
 ">
@@ -805,7 +809,27 @@ qasForm1NewDialog:false,
         }
     },
     computed:{
+        qasForm1Validation:{
+get(){
+    var $vm=this;
+return $vm.$store.qasForm1Validation
+},
+set(value){
+        var $vm=this;
+$vm.$store.commit('setQasForm1Validation',value)
+}
+},
 
+qasForm2Validation:{
+get(){
+        var $vm=this;
+return $vm.$store.qasForm2Validation
+},
+set(value){
+        var $vm=this;
+$vm.$store.commit('setQasForm2Validation',value)
+}
+},
     observation2_format_print_view(){
 var $vm=this;
 return  _.reduce($vm.selectedPartNoItem.observation2_print_view, function(result, value, key) {
@@ -896,6 +920,23 @@ $vm.qasForm1New=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
 console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
 },
 watch:{
+
+"$store.state.qasForm1Validation":{
+
+handler(){
+    var $vm=this;
+$vm.Qas1Validate()
+
+},
+deep:true},
+"$store.state.qasForm2Validation":{
+
+handler(){
+    var $vm=this;
+$vm.Qas2Validate()
+
+},
+deep:true}
 
 // "selectedPartNoItem.headerConfigFormat":{
 // handler(){

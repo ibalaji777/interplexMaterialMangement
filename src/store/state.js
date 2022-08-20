@@ -1,7 +1,8 @@
 /*eslint-disable*/
 import moment from 'moment'
 const state = {
-
+	qasForm1Validation:false,
+	qasForm2Validation:false,
 	defaultField:{
 
 		partNo:'rmcode',
