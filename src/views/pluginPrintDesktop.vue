@@ -1,5 +1,6 @@
 <template>
     <div>
+<!-- asdfsdfsdf        {{invoice_data}}asdfsadf -->
         <!-- {{invoice_data.duedays}} -->
         <!-- {{url}}
         {{invoice_data.sales}} -->
@@ -75,14 +76,14 @@ this.print_paper_watch();
 var $vm=this
 console.log("print data ",printData.printData($vm.invoice_data))
 var data=printData.printData($vm.invoice_data)
-console.log("print data",data)
 var prepare_data={}
 prepare_data['id']='';
 prepare_data['name']='';
-prepare_data['html']=printData.qasForm.html;
-prepare_data['css']=printData.qasForm.css;
+prepare_data['html']=printData($vm).template.html;
+prepare_data['css']=printData($vm).template.css;
 prepare_data['js']='';
-prepare_data['data_set']=printData.printData($vm.invoice_data)
+prepare_data['data_set']=data
+//printData.printData($vm.invoice_data)
 
 // printData.printData($vm.invoice_data)
 // prepare_data['data_set']=format_page.angalware_report_invoice_template(
@@ -233,7 +234,7 @@ var load_page=() => {
 
 
 
-                webview.openDevTools();
+                // webview.openDevTools();
                 // $vm.print_paper_setup["sales"] = $vm.sales;
                 // });
                 try {

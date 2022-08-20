@@ -1426,33 +1426,33 @@ var invoiceNo=_.reduce($vm.checkHeaderBefore,
 result=result&&value.invoice_no!='';
 return result;
 },true)
-// if(!checkPartNoDb){
+if(!checkPartNoDb){
 
-// $vm.$alert("Please Check Part No(Rmcode) in DB")
-//     return ;
-// }
+$vm.$alert("Please Check Part No(Rmcode) in DB")
+    return ;
+}
 
-// if(!checkBatchNoDb){
+if(!checkBatchNoDb){
 
-// $vm.$alert("Batch No already exsit")
-//     return ;
-// }
+$vm.$alert("Batch No already exsit")
+    return ;
+}
 
-// if(!supplierName){
+if(!supplierName){
 
-// $vm.$alert("Please Check Supplier")
-//     return ;
-// }
-// if(!invoiceNo){
+$vm.$alert("Please Check Supplier")
+    return ;
+}
+if(!invoiceNo){
 
-// $vm.$alert("Please Check Invoice No")
-//     return ;
-// }
-// if(!partNo){
+$vm.$alert("Please Check Invoice No")
+    return ;
+}
+if(!partNo){
 
-// $vm.$alert("Please Check Part No(RMCODE)")
-//     return ;
-// }
+$vm.$alert("Please Check Part No(RMCODE)")
+    return ;
+}
           
 var selected=_.filter($vm.checkHeaderBefore,(x)=>x.selected);          
 if(selected.length==0){

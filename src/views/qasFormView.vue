@@ -56,8 +56,8 @@ mdi-file-pdf
 <label-print-desktop style="height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
 <label-print-mobile style="height:0;overflow:hidden"  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 
-<plugin-print-desktop style="height:0;overflow:hidden" v-if="$isElectron" ref="printDesktop"  :invoice_data="invoice"></plugin-print-desktop>
-<plugin-print-mobile style="height:0;overflow:hidden" v-else ref="printMobile"  :invoice_data="invoice"></plugin-print-mobile>
+<plugin-print-desktop style="height:0;overflow:hidden"   :invoice_data="invoice" v-if="$isElectron" ref="printDesktop"></plugin-print-desktop>
+<plugin-print-mobile style="height:0;overflow:hidden" :invoice_data="invoice" v-else ref="printMobile"  ></plugin-print-mobile>
 <!-- {{headerViewMap}} -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 <v-btn @click="selectForm='qasformone'" color="#2f5489 " style="color:white;margin:2px">Qas Form One</v-btn>
@@ -913,7 +913,7 @@ var $vm=this;
 },
 async mounted(){
     var $vm=this;
-
+  await $vm.$store.dispatch('getPrintConfig')
 if(['approver','admin'].includes($vm.$store.state.interplex.user.roletype))
 $vm.isApprover=true;
 await $vm.$store.dispatch('readUploadType')
@@ -940,7 +940,7 @@ $vm.printData=printData.printData(params.invoice)
 // })
 var gallery=_.map(params.invoice.gallery||[],(image)=>{
 
-image['src']=config.api+'/uploads/'+image.full_name;
+image['src']=config.getApi()+'/uploads/'+image.full_name;
 return image;
 })
 
@@ -1022,7 +1022,7 @@ if($vm.$isElectron){
     $vm.$refs.labelPrintDesktop.print()
 }
 else{
-        $vm.$refs.labelPrintMobile.print()
+    $vm.$refs.labelPrintMobile.print()
 }
     },
     labelPdf(){

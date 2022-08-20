@@ -50,6 +50,7 @@
   </v-app-bar>
   <navbar-web></navbar-web>
   <v-main>
+    <!-- {{$store.state.interplex.printConfig}} -->
    <v-container fluid style="width:100%">
     <router-view style="width:100%"></router-view>
    </v-container>
@@ -154,16 +155,16 @@ export default {
 
  },
  watch: {
-     "$store.state.date":{
+ "$store.state.date":{
 async handler(){
   var $vm=this;
+  console.log("date changing...")
    await $vm.$store.dispatch("approverList");
 
-}
+},deep:true
 
 
-
-     }
+ },
  },
  methods: {
   async load() {
@@ -180,6 +181,7 @@ async handler(){
    await $vm.$store.dispatch("approverList");
    await $vm.$store.dispatch("getSapImport");
    await $vm.$store.dispatch("getDefaultImport");
+   await $vm.$store.dispatch('getPrintConfig')
 
 // if(get){
 

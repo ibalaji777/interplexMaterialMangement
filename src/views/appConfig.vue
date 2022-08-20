@@ -97,16 +97,23 @@ export default {
    sapImport:this.$store.state.map.sapImport,    
         }
         },
-        methods:{
-            saveDefaultField(){
+async        mounted(){
 var $vm=this;
 
-$vm.$store.dispatch('setDefaultImport',$vm.defaultFields)
+await $vm.$store.dispatch('getSapImport')
+
+        },
+        methods:{
+      async      saveDefaultField(){
+var $vm=this;
+await $vm.$store.dispatch('setDefaultImport',$vm.defaultFields)
+$vm.$alert("saved")
                 
             },
-            saveSapImport(){
+          async  saveSapImport(){
 var $vm=this;
-$vm.$store.dispatch('setSapImport',$vm.defaultFields)
+await $vm.$store.dispatch('setSapImport',$vm.sapImport)
+$vm.$alert("saved")
 
 
             }

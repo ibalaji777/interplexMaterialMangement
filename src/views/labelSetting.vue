@@ -66,6 +66,7 @@
 </template>
 
 <script>
+/*eslint-disable*/
 import _ from 'lodash'
 // language js
 // import 'codemirror/mode/javascript/javascript.js'
@@ -147,7 +148,8 @@ page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
     // you can use this.codemirror to do something...
 
 _.map(this.$store.state.interplex.configHeaderFormat,(obj)=>{
-                
+    // console.log(obj)
+    //             console.log(obj.name)
  label_data_set[obj.name]=obj.value;
 
             })

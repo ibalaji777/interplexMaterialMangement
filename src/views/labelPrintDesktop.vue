@@ -142,7 +142,7 @@ var load_page=() => {
 
 
 
-                webview.openDevTools();
+                // webview.openDevTools();
                 // $vm.print_paper_setup["sales"] = $vm.sales;
                 // });
                 try {

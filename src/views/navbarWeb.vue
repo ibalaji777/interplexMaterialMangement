@@ -433,7 +433,7 @@ $vm.items=[
             {
                 title: "Print/Pdf Setting",
                 icon: "mdi-animation-outline",
-                action: "inspectionPrintSetting",
+                action: "printConfig",
                 submenu: false
             },
 

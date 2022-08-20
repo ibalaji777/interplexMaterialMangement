@@ -93,6 +93,8 @@ var $vm=this;
         console.log(core.getFiscalYearTimestamps())
    await $vm.$store.dispatch("approverList");
    await $vm.$store.dispatch("getProducts");
+   await $vm.$store.dispatch('getPrintConfig')
+
 // await $vm.$store.dispatch('readOperatorForm',{
 //     id:$vm.$store.state.interplex.user.id,
 //     from_date:$vm.$store.state.date.from_date,

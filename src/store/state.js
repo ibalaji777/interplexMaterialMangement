@@ -457,9 +457,298 @@ productConfig:{
 
 interplex:{
 // productMapCode
+printConfig:{
+	html:`
+
+	<div class="pageOne">
+	{{#if this.skiplevel_status}} 
+	<div  style="    color: grey;
+	position: absolute;
+	transform: translate(-50%,-50%) rotate(-45deg);
+	font-size: 46px;
+	top: 50%;
+	left: 50%;">
+	
+	<div style="text-align:center">
+	{{qasFormOne.sk_order}}
+	
+	<br>
+	SKIP LEVEL</div>
+	</div>
+	
+	</div>
+	{{/if}}
+	<div style="border:1px solid black;height:6vh;position: relative;">
+	
+	<div style="display:flex;height: 100%;width:100%;">
+		<div style="display:flex;flex:1;flex-direction: column;">
+			<img style="max-width: 120px;
+			position: absolute;
+			top: -42px;left: 10px;"
+			 src="{{logo}}" alt="">
+	
+	<div style="position: absolute;bottom:5px;font-wight:800"> QUALITY ASSURANCE</div>
+		</div>
+		<div style="display:flex;flex:1;align-items: center;justify-content: center;font-weight: 800;">INCOMING INSPECTION REPORT</div>
+	</div>
+	</div>
+	
+	<table class="invoiceHeader">
+	<tr>
+		<td>SUPPLIER: {{headerFormFill.supplier_name}}</td>
+		<td>IR# :{{invoice.qasFormOne.ir}}</td>
+		<td>R/M CODE: {{headerFormFill.rmcode}}</td>
+	</tr>
+	<tr>
+		<td>INVOICE/ DC #:{{headerFormFill.invoice_no}}</td>
+		<td>DATE{{date}}</td>
+		<td>EDS/QP#:{{headerFormFill.eds}}</td>
+	</tr>
+	<tr>
+		<td>INVOICE/DC DATE:{{headerFormFill.invoice_date}}</td>
+		<td>GRN NO:{{headerFormFill.grn_no}}</td>
+		<td>R/M:{{headerFormFill.rm}} </td>
+	</tr>
+	<tr>
+		<td>INVOICE QTY:{{headerFormFill.invoice_qty}}</td>
+		<td>GRN DATE:{{headerFormFill.grn_date}}</td>
+		<td>RECEIVED QTY:{{headerFormFill.received_qty}}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">Material Text:{{headerFormFill.material_text}}</td>
+	</tr>
+
+</table>
+	
+	<!-- <v-btn @click="addObservationFormat">fa-plus</v-btn> -->
+	<h5 style="padding:0;margin:2px">OBSERVATION</h5>
+	
+	
+	<table class="observationTable" >
+	
+	
+	{{#each renderQas1Header}}
+	<tr>
+	{{#each this}}
+	
+	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	{{
+		this.value
+	}}
+	
+	</td>
+	{{/each}}
+	{{/each}}
+	</tr>
+	{{#each renderQas1Body}}
+	<tr >
+	{{#each this}}
+	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	{{
+		this.value
+	}}
+	</td>
+	{{/each}}
+	</tr>
+	{{/each}}
+	
+	</table>
+	
+	
+	<div style="display:flex;position: relative;height:9vh;margin-top:2px">
+	
+	<div style="position:absolute;top:5px;">
+		Comment
+	</div>
+	
+	<div style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+	*coil weight is based on moq<br>
+	*inspection is done as per sampling plan WI/QA/46
+	</div>
+	</div>
+	<div style="display: flex;
+	justify-content: space-around;">
+	<span>Accepted</span>
+	<span>Accepted on deviation</span>
+	<span>Rejected</span>
+	<span>PPAP</span>
+	</div>
+	
+	<div style="    display: flex;
+	justify-content: space-evenly;
+	height: 6vh;
+	align-items: center;">
+	<div>Inspected By: <span>
+	{{operator_name}}
+	</span> </div>
+	<div>DEVIATION REQUEST #</div>
+	<div>Approved By
+	{{approver_name}}
+	</div>
+	</div>
+	</div>
+	
+	<div class="pageBreak"></div>
+	
+	<div  class="pageTwo" style="margin:10px 0;min-height:70vh;position:relative">
+	
+	{{#if this.skiplevel_status}} 
+		<div  style="    color: grey;
+		position: absolute;
+		transform: translate(-50%,-50%) rotate(-45deg);
+		font-size: 46px;
+		top: 50%;
+		left: 50%;" >
+		
+		<div style="text-align:center">
+	{{qasFormOne.sk_order}}
+	
+	<br>
+	SKIP LEVEL</div>
+		
+		
+		</div>
+	{{/if}}
+		<div style="border:1px solid black;height:10vh;position: relative;">
+	
+		<div style="display:flex;height: 100%;width:100%;">
+			<div style="display:flex;flex:1;flex-direction: column;">
+				<img style="    max-width: 145px;
+				position: absolute;
+				top: -42px;
+				left: 10px;
+			" src="{{logo}}" alt="">
+	
+	<div style="position: absolute;bottom:5px;font-wight:800"> QUALITY ASSURANCE</div>
+			</div>
+			<div style="display:flex;flex:1;align-thiss: center;justify-content: center;font-weight: 800;">INCOMING INSPECTION REPORT</div>
+		</div>
+	</div>
+	
+	<table class="qasform2class">
+	
+	{{#each  renderQas2Header}}
+	<tr >
+	{{#each this}}
+	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	{{#if this.value}}
+	<div>
+	{{this.value}}
+	</div>
+	{{else}}
+	<div>
+	{{
+		this.name
+	}}
+	</div>
+	{{/if}}
+	</td>
+	{{/each}}
+	</tr>
+	{{/each}}
+	
+	
+	{{#each renderQas2Body}}
+	<tr>
+	{{#each this}}
+	<td>
+	<div style="min-height:15px">
+	{{this.value}}
+	</div>
+	</td>
+	{{/each}}
+	</tr>
+	{{/each}}
+	
+	
+	
+	
+	</table>
+	
+	</div>
+	</div>
+	
+	<div class="pageBreak"></div>
+	
+	{{#each gallery}}
+	
+	<div>
+	
+	{{#if this.skiplevel_status}} 
+	<div  style="    color: grey;
+	position: absolute;
+	transform: translate(-50%,-50%) rotate(-45deg);
+	font-size: 46px;
+	top: 50%;
+	left: 50%;">SkipLevel</div>
+	{{/if}}
+	
+	<img style="max-width:205mm" src="{{this.src}}">
+	</div>
+	{{/each}}
+	
+	
+	
+	`,
+	css:`  
+	.pageBreak{
+	
+		page-break-after: always;
+	}
+	.invoiceHeader{
+	
+		width:100%;
+		border-collapse: collapse;
+		font-size:14px;
+	}
+	.invoiceHeader  td{
+		border: 1px solid black;
+		padding:5px
+	}
+	
+	.observationTable{
+	
+	width:100%;
+	border-collapse: collapse;
+	font-size: 13px;
+	}
+	.observationTable  td{
+	border: 1px solid black;
+	padding:5px
+	}
+	.qasform2class{
+	width:100%;
+	border-collapse: collapse;
+	}
+	.qasform2class th{
+	text-align:center
+	}
+	.qasform2class td,
+	.qasform2class th{
+	
+	border:1px solid black;
+	text-align: center;
+	}
+	.statusCard{
+	text-align: center;
+	width: 55px;
+	height: 55px;
+	color: white;
+	background: orange;
+	font-weight: 700;
+	line-height: 3.5;
+	vertical-align: middle;
+	}
+	.statusCard:hover{
+	background:rgb(142, 142, 235);
+	}`,
+	js:''
+
+},
 datOneCode:`   function map(product){
 	var newField={}
-/*map your code here*/
+/*mapyour code here*/
 newField['test']='work'
 
 /*map your coe here*/
@@ -1099,6 +1388,7 @@ width:'50'
 			label:'Coil #',//input field label
 			name:'header_batch_no',//column name
 			value:'Coil #',//default value
+	
 			default:true,
 			editable:true,
 			},
@@ -1122,7 +1412,6 @@ width:'50'
 			label:'Weight',//input field label
 			name:'header_weight',//column name
 			value:'Weight',//default value
-			sapHeader:'invoiceQty',
 			default:true,
 			editable:true,
 			},
@@ -1154,6 +1443,7 @@ width:'50'
 label:'Coil',//input field label
 name:'batch_no',//column name
 value:'',//default value
+sapHeader:'BATCH',
 default:true,
 editable:true,
 },
@@ -1176,7 +1466,7 @@ editable:true,
 label:'Weight',//input field label
 name:'weight',//column name
 value:'',//default value
-sapHeader:'invoiceQty',
+sapHeader:'QTY',
 default:true,
 editable:true,
 },
@@ -2872,7 +3162,7 @@ editable:true,
 		},		{
 		  label:'RECEIVED QTY',//input field label
 		  name:'received_qty',//column name
-		  value:'',//default value
+		  value:'invoiceQty',//default value
 		  show:true,
 		  showPrint:true,
 		  input_type:'number',
@@ -2890,10 +3180,23 @@ editable:true,
 			show:true,
 			showPrint:true,
 			input_type:'text',
-			map:'',
+			map:'Shelf Life',
 			mapFrom:'header',//header or product
 			default:true,
 			note:'No Need to Map'
+  
+		  }
+		  ,		{
+			label:'MATERIAL TEXT',//input field label
+			name:'material_text',//column name
+			value:'',//default value
+			show:true,
+			showPrint:true,
+			input_type:'text',
+			map:'MATTEXT',
+			mapFrom:'header',//header or product
+			default:true,
+			note:''
   
 		  },
 	  ],

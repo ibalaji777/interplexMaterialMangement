@@ -18,9 +18,19 @@
 
 <div style="display:flex">
 <span style="width:40%">{{productFormat.label}}</span>
-<input style="width:60%" class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" ><v-icon @click="selectFieldSettingfn(productFormat)" style="margin:0 5px">fa-cog</v-icon>
-</div>
 
+<div style="display: flex;
+    width: 60%;
+    height:45px;
+    align-items: baseline;">
+<v-text-field dense outlined v-if="productFormat.map==''"  v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+</v-text-field>    
+<v-text-field dense outlined v-else  append-icon="mdi-magnify-scan" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" >
+</v-text-field>    
+
+    <v-icon @click="selectFieldSettingfn(productFormat)" style="margin:0 5px">fa-cog</v-icon>
+</div>
+</div>
 
 </div>
 

@@ -326,6 +326,18 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 
 
     },
+     watch: {
+     "$store.state.date":{
+async handler(){
+  var $vm=this;
+   await $vm.$store.dispatch("approverList");
+
+}
+
+
+
+     }
+ },
     methods:{
             labelPrint(){
         var $vm=this;

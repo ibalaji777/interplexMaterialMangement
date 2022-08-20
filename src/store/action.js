@@ -4,6 +4,9 @@ var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
 
+var getprintconfigApi=api+'/getprintconfig';
+var setprintconfigApi=api+'/setprintconfig';
+
 var getSapImportApi=api+'/getsapimport';
 var setSapImportApi=api+'/setsapimport';
 
@@ -560,7 +563,28 @@ async getDefaultImport(context,payload){
     return ""
     },
     
-
+        
+        async getPrintConfig(context,payload){
+            var result=await axios.get(getprintconfigApi);
+            
+            if(result.data){
+           context.commit('setPrintConfig',result.data.config)
+            }
+            return result.data
+            },
+            async setPrintConfig(context,config){
+            var result=await axios.post(setprintconfigApi,{config});
+            if(result.data){
+               context.commit('setPrintConfig',result.data.config)
+        
+                return result.data.config
+                
+            
+            }
+            return ""
+            },
+            
+        
 
                     
 }

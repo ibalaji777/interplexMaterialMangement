@@ -204,6 +204,8 @@ async  mounted(){
     var $vm=this;
    await $vm.$store.dispatch("approverList");
    await $vm.$store.dispatch("getProducts");
+   await $vm.$store.dispatch('getPrintConfig')
+
   },
   computed:{
 masterProductsTotal(){

@@ -206,11 +206,14 @@ datTwoCode(state,code){
 		state.defaultField=config
 			
 		},
-		
-		setDefaultImport(state,config){
+		setSapImport(state,config){
 			state.map.sapImport=config
 				
-			}
+			},
+			setPrintConfig(state,config){
+				state.interplex.printConfig=config
+					
+				}
 			
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- {{invoice_data}} -->
+<!-- asdf        {{invoice_data}}asdfsdf -->
 
         <!-- <v-btn @click="print()" color="orange" style="color:white">Print</v-btn> -->
         <!-- <v-btn @click="barcode_label()" color="orange" style="color:white">Prepare Barcode</v-btn> -->
@@ -159,13 +159,17 @@ if($vm.type){
         //version 5.0.7  or above
 // --------------------------printer operation-------------------------
  print() {
+                var $vm=this;
+
+    // console.log("print data ",$vm.invoice_data)
+console.log("print data",printData.template($vm).html)
+
      var view=element().pos_paper.contentDocument.getElementsByTagName("html")[0].innerHTML;
     // console.log(view)
                 // window.frames["invoice_type_plugin"].focus();
                 // window.frames["invoice_type_plugin"].contentWindow.print();
 
      console.log("invoice_type_plugin code")
-            var $vm=this;
             if (core.isDeviceDetect()) {
                 document.addEventListener(
                     "deviceready",
@@ -195,145 +199,20 @@ if($vm.type){
                 window.frames["invoice_type_plugin"].contentWindow.print();
             }
         },
-//  print(){
-//       if (helper_utils.isDeviceDetect()) {
-//                 document.addEventListener(
-//                     "deviceready",
-//                     function() {
-//                         //  alert("work print")
 
-//                         //    console.log(element().pos_paper.contentDocument.getElementsByTagName("html")[0])
-//                         cordova.plugins.printer.print(
-//                             element().pos_paper.contentDocument.getElementsByTagName(
-//                                 "html"
-//                             )[0]
-//                         );
-//                     },
-//                     false
-//                 );
-//             } else {
-//                 // window.print()
-
-//                 //  console.log("------print test----")
-//                 //  console.log(element().pos_paper.contentDocument)
-//                 //   console.log(element().pos_paper.contentDocument.html)
-//                 //    console.log(element().pos_paper.contentDocument.body)
-//                 //     console.log(window.frames["paper"].contentWindow)
-//                 window.frames["paper"].focus();
-//                 window.frames["paper"].contentWindow.print();
-//             }
- 
-// //     return new Promise((resolve,reject)=>{
-
-// //     var $vm=this;
-// //      var iframe = element().pos_paper;
-
-// //     if($vm.$store.state.control.device.selected_device!=''){
-// //  console.log("printer name selected")
-// //  console.log($vm.$store.state.control.device.selected_device)
-// //                 // iframe.openDevTools();
-        
-// //          iframe.print(
-// //                     {
-// //                         silent: !$vm.$store.state.control.print_paper_setup.showPrintDialog,
-// //                         printBackground: true,
-// //                         deviceName: $vm.$store.state.control.device.selected_device
-// //                     }
-// //                 )
-
-// //                 .then((success)=>{
-// //                     console.log(success)
-// // resolve(success)
-// //                 })
-// //                 .catch((error)=>{
-// // console.log(error)
-// //                     reject(error)
-// //                 });
-// //     }
-// //     else{
-
-// // console.log("printer dialog")
-// //  iframe.print(
-// //                     {
-// //                         printBackground: true,
-// //                     }
-                    
-// //                 )
-// // .then((success)=>{
-                
-// // resolve(success)
-// //                 })
-// //                 .catch((error)=>{
-// //                     reject(error)
-// //                 });
-
-// //     }
-// //     })
-
-// },
-        //version 3.0.13  or below
-        // print() {
-        //     return new Promise((resolve, reject) => {
-        //         var $vm = this;
-        //         var iframe = element().pos_paper;
-        //         if ($vm.$store.state.control.device.selected_device != "") {
-        //             iframe.openDevTools();
-
-        //             iframe.print(
-        //                 {
-        //                     silent: !$vm.$store.state.control.print_paper_setup
-        //                         .showPrintDialog,
-        //                     printBackground: true,
-        //                     deviceName:
-        //                         $vm.$store.state.control.device.selected_device
-        //                 },
-        //                 (success, errorType) => {
-        //                     if (!success) {
-        //                         //console.log("not working print" + errorType);
-        //                         reject(errorType);
-        //                     }
-        //                     if (success) {
-        //                         resolve(success);
-        //                     }
-        //                 }
-        //             );
-        //         } else {
-        //             console.log("printer dialog");
-        //             iframe.print(
-        //                 {
-        //                     // silent: false,
-        //                     printBackground: true
-        //                     // deviceName: $vm.$store.state.control.device.selected_device
-        //                 },
-        //                 (success, errorType) => {
-        //                     if (!success) {
-        //                         console.log("not working print" + errorType);
-        //                         reject(errorType);
-        //                     }
-        //                     if (success) {
-        //                         resolve(success);
-        //                     }
-        //                 }
-        //             );
-
-        //             // $vm.$alert("Please Select Device",'Failed','error')
-        //             // reject('select printer device')
-        //         }
-        //     });
-        // },
         printData(){
                      
-                     var $vm=this
+var $vm=this
 console.log("print data ",printData.printData($vm.invoice_data))
 var data=printData.printData($vm.invoice_data)
-console.log("print data",data)
 var prepare_data={}
 prepare_data['id']='';
 prepare_data['name']='';
-prepare_data['html']=printData.qasForm.html;
-prepare_data['css']=printData.qasForm.css;
+prepare_data['html']=printData.template($vm).html;
+prepare_data['css']=printData.template($vm).css;
 prepare_data['js']='';
-prepare_data['data_set']=printData.printData($vm.invoice_data)
+prepare_data['data_set']=data
+//printData.printData($vm.invoice_data)
 
 // printData.printData($vm.invoice_data)
 // prepare_data['data_set']=format_page.angalware_report_invoice_template(

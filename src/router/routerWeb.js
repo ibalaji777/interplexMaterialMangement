@@ -284,7 +284,7 @@ const routes = [
 	},
 	{
 		path: '/appConfig',
-		name: 'appCofig',
+		name: 'appConfig',
 		component:appConfig 
 	},
 	

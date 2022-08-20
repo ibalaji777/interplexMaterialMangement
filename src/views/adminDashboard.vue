@@ -33,7 +33,7 @@ Total Products
             </div>
 
 </div>
-
+<!-- {{$store.state.date}} -->
 
 <h3 style="margin-top:10px">Status</h3>
 <h5 style="text-align:right"><date @date="selected_date"></date></h5>
@@ -241,25 +241,13 @@ export default {
         headerFileDialog:false,
     }
   },
-//   watch:{
-
-// "$state.date.from_date":{
-//     handler(){
-//         this.$store.dispatch("approverList")
-//     }
-// },
-// "$state.date.to_date":{
-//     handler(){
-//         this.$store.dispatch("approverList")
-//     }
-// },
-
-//   },
 async  mounted(){
 var $vm=this;
 await $vm.$store.dispatch('getUsers')
 await $vm.$store.dispatch("approverList");
 await $vm.$store.dispatch("getProducts");
+await $vm.$store.dispatch('getPrintConfig')
+
 
   },
   computed:{
