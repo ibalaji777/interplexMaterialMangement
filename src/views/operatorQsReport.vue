@@ -921,22 +921,26 @@ console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
 },
 watch:{
 
-"$store.state.qasForm1Validation":{
+// "selectedPartNoItem.productConfigFormat":{
 
-handler(){
-    var $vm=this;
-$vm.Qas1Validate()
+// handler(){
+//     var $vm=this;
+// if($vm.$store.state.qasForm1Validation)
+// $vm.Qas1Validate()
 
-},
-deep:true},
-"$store.state.qasForm2Validation":{
+// },
+// deep:true
 
-handler(){
-    var $vm=this;
-$vm.Qas2Validate()
+// },
+// "selectedPartNoItem.productConfigFormat2":{
 
-},
-deep:true}
+// handler(){
+//     var $vm=this;
+// if($vm.$store.state.qasForm2Validation)
+// $vm.Qas2Validate()
+
+// },
+// deep:true}
 
 // "selectedPartNoItem.headerConfigFormat":{
 // handler(){
