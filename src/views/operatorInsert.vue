@@ -960,7 +960,7 @@ background: #555160;
 "
                                                               >
                                <!-- {{item}}   -->
-                                {{item.isExist}}
+                                <!-- {{item.isExist}} -->
                                     <div v-if="item.isExist" style="display: flex; justify-content: space-between; width: 100%;">
                                         <div>
                                         Batch No:
@@ -1396,63 +1396,63 @@ _.map(_.filter($vm.importFileListUpdate,f=>f.selected),x=>{
         qasGroupOneCheckout() {
             var $vm = this;
 console.log("checkHeaderBefore=>",$vm.checkHeaderBefore)
-var checkPartNoDb=_.reduce($vm.checkHeaderBefore,
-(result,value,key)=>{
-result=result&&value.isRmcodeExist;
-return result;
-},true)
+// var checkPartNoDb=_.reduce($vm.checkHeaderBefore,
+// (result,value,key)=>{
+// result=result&&value.isRmcodeExist;
+// return result;
+// },true)
 
-var checkBatchNoDb=_.reduce($vm.checkHeaderBefore,
-(result,value,key)=>{
-result=result&&value.isExist;
-return result;
-},true)
+// var checkBatchNoDb=_.reduce($vm.checkHeaderBefore,
+// (result,value,key)=>{
+// result=result&&value.isExist;
+// return result;
+// },true)
 
 
-var supplierName=_.reduce($vm.checkHeaderBefore,
-(result,value,key)=>{
-result=result&&value.supplier_name!='';
-return result;
-},true)
+// var supplierName=_.reduce($vm.checkHeaderBefore,
+// (result,value,key)=>{
+// result=result&&value.supplier_name!='';
+// return result;
+// },true)
 
-var partNo=_.reduce($vm.checkHeaderBefore,
-(result,value,key)=>{
-result=result&&value.rmcode!='';
-return result;
-},true)
+// var partNo=_.reduce($vm.checkHeaderBefore,
+// (result,value,key)=>{
+// result=result&&value.rmcode!='';
+// return result;
+// },true)
 
-var invoiceNo=_.reduce($vm.checkHeaderBefore,
-(result,value,key)=>{
-result=result&&value.invoice_no!='';
-return result;
-},true)
-if(!checkPartNoDb){
+// var invoiceNo=_.reduce($vm.checkHeaderBefore,
+// (result,value,key)=>{
+// result=result&&value.invoice_no!='';
+// return result;
+// },true)
+// if(!checkPartNoDb){
 
-$vm.$alert("Please Check Part No(Rmcode) in DB")
-    return ;
-}
+// $vm.$alert("Please Check Part No(Rmcode) in DB")
+//     return ;
+// }
 
-if(!checkBatchNoDb){
+// if(!checkBatchNoDb){
 
-$vm.$alert("Batch No already exsit")
-    return ;
-}
+// $vm.$alert("Batch No already exsit")
+//     return ;
+// }
 
-if(!supplierName){
+// if(!supplierName){
 
-$vm.$alert("Please Check Supplier")
-    return ;
-}
-if(!invoiceNo){
+// $vm.$alert("Please Check Supplier")
+//     return ;
+// }
+// if(!invoiceNo){
 
-$vm.$alert("Please Check Invoice No")
-    return ;
-}
-if(!partNo){
+// $vm.$alert("Please Check Invoice No")
+//     return ;
+// }
+// if(!partNo){
 
-$vm.$alert("Please Check Part No(RMCODE)")
-    return ;
-}
+// $vm.$alert("Please Check Part No(RMCODE)")
+//     return ;
+// }
           
 var selected=_.filter($vm.checkHeaderBefore,(x)=>x.selected);          
 if(selected.length==0){

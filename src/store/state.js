@@ -3089,7 +3089,6 @@ editable:true,
 		  show:true,
 		  showPrint:true,
 		  input_type:'text',
-
 		  map:'',
 		  mapFrom:'header',//header or product
 		  default:true,
@@ -3129,8 +3128,8 @@ editable:true,
 		  showPrint:true,
 		  input_type:'text',
 
-		  map:'',
-		  mapFrom:'header',//header or product
+		  map:'eds',
+		  mapFrom:'product',//header or product
 		  default:true,
 		  note:''
 		},
@@ -3155,19 +3154,18 @@ editable:true,
 		  showPrint:true,
 		  input_type:'text',
 
-		  map:'',
-		  mapFrom:'header',//header or product
+		  map:'rm',
+		  mapFrom:'product',//header or product
 		  default:true,
 		  note:''
 		},		{
 		  label:'RECEIVED QTY',//input field label
 		  name:'received_qty',//column name
-		  value:'invoiceQty',//default value
+		  value:'',//default value
 		  show:true,
 		  showPrint:true,
 		  input_type:'number',
-
-		  map:'',
+		  map:'invoiceQty',
 		  mapFrom:'header',//header or product
 		  default:true,
 		  note:'No Need to Map'

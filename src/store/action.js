@@ -23,8 +23,8 @@ var datTwoCodeSetApi=api+'/datTwoCode/save';
 var datTwoCodeGetApi=api+'/datTwoCode/read';
 
 
-var headerConfigGetApi=api+'/headerconfig/read';
-var headerConfigSetApi=api+'/headerconfig/save';
+var headerConfigGetApi=api+'/getheaderconfig';
+var headerConfigSetApi=api+'/setheaderconfig';
 
 
 var findQasFormApi=api+'/find_qas_form';
@@ -114,15 +114,15 @@ async function updateQasForm2Config(context,config){
 
 
 
-async function updateHeaderConfig(context,config){
-    var result = await axios.post(updateHeaderConfigApi,{config})
-await getHeaderConfig(context)
-    console.log('result config',result)
-    if(result.data.successStatus) return true;
-    return false;
+// async function updateHeaderConfig(context,config){
+//     var result = await axios.post(updateHeaderConfigApi,{config})
+// await getHeaderConfig(context)
+//     console.log('result config',result)
+//     if(result.data.successStatus) return true;
+//     return false;
 
-    // await getHeaderConfig(context)
-}
+//     // await getHeaderConfig(context)
+// }
 async function getUploadType(context){
     var result = await axios.get(readUploadType)
     
@@ -160,10 +160,10 @@ const actions = {
     async updateHeaderConfig(context,payload){
 return await updateHeaderConfig(context,payload)
     },
-async    readHeaderConfig(context){
+// async    readHeaderConfig(context){
 
-        await getHeaderConfig(context)
-    },
+//         await getHeaderConfig(context)
+//     },
     async readUploadType(context){
 
         getUploadType(context)
@@ -485,10 +485,17 @@ return result.data
 
 async getHeaderConfig(context,payload){
     var result=await axios.get(headerConfigGetApi);
+    if(_.isArray(result.data.config)){
+    context.commit('setHeaderConfig',result.data.config)
+    }
     return result.data
     },
     async setHeaderConfig(context,config){
         var result=await axios.post(headerConfigSetApi,{config});
+        if(_.isArray(result.data.config)){
+            context.commit('setHeaderConfig',result.data.config)
+            }
+                
         return result.data
         },
 

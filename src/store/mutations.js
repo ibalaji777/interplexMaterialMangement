@@ -151,6 +151,7 @@ setMasterUploadType(state,uploadtypes){
 	Vue.set(state.interplex,'masterFileTypes',uploadtypes)
 },
 setHeaderConfig(state,config){
+if(config.length!=0)
 	Vue.set(state.interplex,'configHeaderFormat',config)
 
 },
@@ -198,23 +199,21 @@ state.interplex.datOneCode=code
 },
 
 datTwoCode(state,code){
-	if(code!='')
-	state.interplex.datTwoCode=code
-		
-	},
-	setdefaultField(state,config){
-		state.defaultField=config
-			
-		},
-		setSapImport(state,config){
-			state.map.sapImport=config
-				
-			},
-			setPrintConfig(state,config){
-				state.interplex.printConfig=config
-					
-				}
-			
-}
+if(code!='')
+state.interplex.datTwoCode=code
+
+},
+setdefaultField(state,config){
+state.defaultField=config
+
+},
+setSapImport(state,config){
+state.map.sapImport=config
+
+},
+setPrintConfig(state,config){
+state.interplex.printConfig=config
+
+}}
 
 export default mutations;

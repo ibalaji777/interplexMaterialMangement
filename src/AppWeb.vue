@@ -6,6 +6,8 @@
    ),
   }"
  >
+
+ <!-- {{$store.state.interplex.configHeaderFormat}} -->
 <!-- <img src="/wavetop.svg" alt=""> -->
   <!-- <plugin-print></plugin-print> -->
   <router-view name="outer"></router-view>
@@ -149,7 +151,9 @@ export default {
     await $vm.$store.dispatch("getUsers");
    }
   });
-
+  socket.on("watchHeaderConfig", async (data) => {
+    await $vm.$store.dispatch("getHeaderConfig");
+  });
 
 
 
@@ -174,7 +178,11 @@ async handler(){
    await $vm.$store.dispatch("getProductConfig");
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
-  //  await $vm.$store.dispatch("getQasFormOneByDate");
+   await $vm.$store.dispatch("getHeaderConfig");
+
+
+
+//  await $vm.$store.dispatch("getQasFormOneByDate");
    await $vm.$store.dispatch("labelSettingRead");
    await $vm.$store.dispatch("datOneCodeGet");
    await $vm.$store.dispatch("datTwoCodeGet");

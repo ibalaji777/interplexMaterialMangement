@@ -286,10 +286,10 @@ data(){
 async mounted(){
 var $vm=this;
 
-var getConfig=await $vm.$store.dispatch("getHeaderConfig")
-if(!_.isEmpty(getConfig)){
-$vm.configFormat=getConfig.config;
- }
+await $vm.$store.dispatch("getHeaderConfig")
+// if(!_.isEmpty(getConfig)){
+// $vm.configFormat=getConfig.config;
+//  }
 
 },
 methods:{
