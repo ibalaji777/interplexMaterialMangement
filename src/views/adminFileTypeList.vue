@@ -52,8 +52,9 @@ export default {
   
     computed: {
      list(){
-
-return core.database(this,'getFileTypeList',)
+var $vm=this;
+return $vm.$store.state.interplex.masterFileTypes;
+// core.database(this,'getFileTypeList',)
      }
     },
 

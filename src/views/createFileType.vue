@@ -1,6 +1,12 @@
 <template>
     <div>
-<div style="display:flex;flex-direction:column">
+
+<div @click="$router.push({name:'adminFileTypeList'})" class="insertProduct" style="width:160px">
+Total File Types  ({{$store.state.interplex.masterFileTypes.length}})
+</div>
+
+
+<div style="display:flex;flex-direction:column;margin-top:20px;">
 <input class="interInput" v-model="fileType.title"  type="text" placeholder="Title(* Ref)" >
 <input class="interInput" v-model="fileType.name"  type="text" placeholder="Name(*)" >
 <v-btn v-if="!isStateForUpdate" style="margin-top:10px" @click="save" outlined>Save</v-btn>

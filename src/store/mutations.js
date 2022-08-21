@@ -174,7 +174,7 @@ setQasFormOneList(state,list){
 	Vue.set(state.interplex,'qasForm1',list)
 },
 setFileTypes(state,list){
-
+console.log("File Types",list)
 	Vue.set(state.interplex,'masterFileTypes',list)
 },
 readProductConfig(state,payload){

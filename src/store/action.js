@@ -125,7 +125,7 @@ async function updateQasForm2Config(context,config){
 // }
 async function getUploadType(context){
     var result = await axios.get(readUploadType)
-    
+console.log("++++read file type++++",result.data)    
     context.commit('setFileTypes',result.data)  
 
 }
@@ -166,7 +166,7 @@ return await updateHeaderConfig(context,payload)
 //     },
     async readUploadType(context){
 
-        getUploadType(context)
+return       await getUploadType(context)
     },
 
     async updateUploadType(context,userWithId){
@@ -179,7 +179,7 @@ return await updateHeaderConfig(context,payload)
         await getUploadType(context)
         if(result.data.successStatus) return true;
         return false;
-            }    ,
+     }    ,
             async removeUploadType(context,id){
                 var result = await axios.post(removeUploadType,{id})
                 await getUploadType(context)
