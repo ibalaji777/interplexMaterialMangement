@@ -1,0 +1,296 @@
+
+
+	<div class="pageOne">
+	{{#if this.skiplevel_status}} 
+	<div  style="    color: grey;
+	position: absolute;
+	transform: translate(-50%,-50%) rotate(-45deg);
+	font-size: 46px;
+	top: 50%;
+	left: 50%;">
+	
+	<div style="text-align:center">
+	{{qasFormOne.sk_order}}
+	
+	<br>
+	SKIP LEVEL</div>
+	</div>
+	
+	</div>
+	{{/if}}
+	<div style="border:1px solid black;height:6vh;position: relative;">
+	
+	<div style="display:flex;height: 100%;width:100%;">
+		<div style="display:flex;flex:1;flex-direction: column;">
+			<img style="max-width: 120px;
+			position: absolute;
+			top: -42px;left: 10px;"
+			 src="{{logo}}" alt="">
+	
+	<div style="position: absolute;bottom:5px;font-wight:800"> QUALITY ASSURANCE</div>
+		</div>
+		<div style="display:flex;flex:1;align-items: center;justify-content: center;font-weight: 800;">INCOMING INSPECTION REPORT</div>
+	</div>
+	</div>
+	
+	<table class="invoiceHeader">
+	<tr>
+		<td>SUPPLIER: {{headerFormFill.supplier_name}}</td>
+		<td>IR# :{{invoice.qasFormOne.ir}}</td>
+		<td>R/M CODE: {{headerFormFill.rmcode}}</td>
+	</tr>
+	<tr>
+		<td>INVOICE/ DC #:{{headerFormFill.invoice_no}}</td>
+		<td>DATE{{date}}</td>
+		<td>EDS/QP#:{{headerFormFill.eds}}</td>
+	</tr>
+	<tr>
+		<td>INVOICE/DC DATE:{{headerFormFill.invoice_date}}</td>
+		<td>GRN NO:{{headerFormFill.grn_no}}</td>
+		<td>R/M:{{headerFormFill.rm}} </td>
+	</tr>
+	<tr>
+		<td>INVOICE QTY:{{headerFormFill.invoice_qty}}</td>
+		<td>GRN DATE:{{headerFormFill.grn_date}}</td>
+		<td>RECEIVED QTY:{{headerFormFill.received_qty}}</td>
+	</tr>
+
+	<tr>
+		<td colspan="3">Material Text:{{headerFormFill.material_text}}</td>
+	</tr>
+
+</table>
+	
+	<!-- <v-btn @click="addObservationFormat">fa-plus</v-btn> -->
+	<h5 style="padding:0;margin:2px">OBSERVATION</h5>
+	
+	
+	<table class="observationTable" >
+	
+	
+	{{#each renderQas1Header}}
+	<tr>
+	{{#each this}}
+	
+	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	{{
+		this.value
+	}}
+	
+	</td>
+	{{/each}}
+	{{/each}}
+	</tr>
+	{{#each renderQas1Body}}
+	<tr >
+	{{#each this}}
+	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	{{
+		this.value
+	}}
+	</td>
+	{{/each}}
+	</tr>
+	{{/each}}
+	
+	</table>
+	
+	
+	<div style="display:flex;position: relative;height:9vh;margin-top:2px">
+	
+	<div style="position:absolute;top:5px;">
+		Comment
+	</div>
+	
+	<div style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+	*coil weight is based on moq<br>
+	*inspection is done as per sampling plan WI/QA/46
+	</div>
+	</div>
+	<div style="display: flex;
+	justify-content: space-around;">
+	<span>Accepted 
+    {{#angal_if  status '=='  'approved'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+    </span>
+	<span>Accepted on deviation
+       {{#angal_if  status '=='  'acceptedOnDeviation'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+ 
+    </span>
+	<span>Rejected</span>
+       {{#angal_if  status '=='  'rejected'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+ 
+	<span>PPAP
+       {{#angal_if  status '=='  'ppap'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+ 
+    </span>
+	</div>
+	
+	<div style="    display: flex;
+	justify-content: space-evenly;
+	height: 6vh;
+	align-items: center;">
+	<div>Inspected By: <span>
+	{{operator_name}}
+	</span> </div>
+	<div>DEVIATION REQUEST #</div>
+	<div>Approved By
+	{{approver_name}}
+	</div>
+	</div>
+	</div>
+	
+	<div class="pageBreak"></div>
+	
+	<div  class="pageTwo" style="margin:10px 0;min-height:70vh;position:relative">
+	
+	{{#if this.skiplevel_status}} 
+		<div  style="    color: grey;
+		position: absolute;
+		transform: translate(-50%,-50%) rotate(-45deg);
+		font-size: 46px;
+		top: 50%;
+		left: 50%;" >
+		
+		<div style="text-align:center">
+	{{qasFormOne.sk_order}}
+	
+	<br>
+	SKIP LEVEL</div>
+		
+		
+		</div>
+	{{/if}}
+		<div style="border:1px solid black;height:10vh;position: relative;">
+	
+		<div style="display:flex;height: 100%;width:100%;">
+			<div style="display:flex;flex:1;flex-direction: column;">
+				<img style="    max-width: 145px;
+				position: absolute;
+				top: -42px;
+				left: 10px;
+			" src="{{logo}}" alt="">
+	
+	<div style="position: absolute;bottom:5px;font-wight:800"> QUALITY ASSURANCE</div>
+			</div>
+			<div style="display:flex;flex:1;align-thiss: center;justify-content: center;font-weight: 800;">INCOMING INSPECTION REPORT</div>
+		</div>
+	</div>
+	
+	<table class="qasform2class">
+	
+	{{#each  renderQas2Header}}
+	<tr >
+	{{#each this}}
+	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	{{#if this.value}}
+	<div>
+	{{this.value}}
+	</div>
+	{{else}}
+	<div>
+	{{
+		this.name
+	}}
+	</div>
+	{{/if}}
+	</td>
+	{{/each}}
+	</tr>
+	{{/each}}
+	
+	
+	{{#each renderQas2Body}}
+	<tr>
+	{{#each this}}
+	<td>
+	<div style="min-height:15px">
+	{{this.value}}
+	</div>
+	</td>
+	{{/each}}
+	</tr>
+	{{/each}}
+	
+	
+	
+	
+	</table>
+	
+	</div>
+	</div>
+	
+	
+	{{#each gallery}}
+	<div class="pageBreak"></div>
+	
+	<div style="position:relative">
+	
+	{{#if this.skiplevel_status}} 
+
+<div  style="    color: grey;
+	position: absolute;
+	transform: translate(-50%,-50%) rotate(-45deg);
+	font-size: 46px;
+	top: 50%;
+	left: 50%;">SkipLevel</div>
+	{{/if}}
+	
+	<img style="max-width:205mm" src="{{this.src}}">
+	</div>
+	{{/each}}
+	
+	
+	
+	
+
+ minBy(NumberArray(QasTwo),'width_min')
+_default_
+_default_
+maxBy(NumberArray(QasTwo),'width_max')
+_default_
+_default_
+minBy(NumberArray(QasTwo),'thick_min')
+_default_
+_default_
+
+maxBy(NumberArray(QasTwo),'thick_max')
+_default_
+_default_
+
+NumberObj(QasOne).width_min_spec_org  <= NumberObj(QasOne).width_sup_min  and
+NumberObj(QasOne).width_max_spec_org >= NumberObj(QasOne).width_sup_max  and NumberObj(QasOne).width_min_spec_org  <= NumberObj(QasOne).width_ieipl_min and NumberObj(QasOne).width_max_spec_org >= NumberObj(QasOne).width_ieipl_max  
+Ok
+Check
+
+NumberObj(QasOne).thickness_min_spec_org  <= NumberObj(QasOne).thickness_sup_min  and
+NumberObj(QasOne).thickness_max_spec_org >= NumberObj(QasOne).thickness_sup_max  and NumberObj(QasOne).thickness_min_spec_org  <= NumberObj(QasOne).thickness_ieipl_min and NumberObj(QasOne).thickness_max_spec_org >= NumberObj(QasOne).thickness_ieipl_max  
+Ok
+Check
+
+NumberObj(QasOne).hardness_min_spec_org  <= NumberObj(QasOne).hardness_sup_min  and
+NumberObj(QasOne).hardness_max_spec_org >= NumberObj(QasOne).hardness_sup_max 
+Ok
+Check
+
+NumberObj(QasOne).elongation_min_spec_org  <= NumberObj(QasOne).elongation_sup_min or NumberObj(QasOne).elongation_min_spec_org  <= 
+NumberObj(QasOne).elongation_sup_max  
+Ok
+Check
+
+
+qas form 2
+===========
+NumberObj(QasOne).width_min_spec_org  <= NumberObj(QasTwoEach).width_min and
+NumberObj(QasOne).width_max_spec_org >= NumberObj(QasTwoEach).width_max and NumberObj(QasOne).thickness_min_spec_org  <= NumberObj(QasTwoEach).thick_min and
+NumberObj(QasOne).thickness_max_spec_org >= NumberObj(QasTwoEach).thick_max 
+
+_default_
+_default_
