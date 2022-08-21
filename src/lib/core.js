@@ -679,7 +679,9 @@ if(product.length==0){
       productConfigFormat2:[], 
       qas_form_one_ui:{},
       qas_form_two_ui:{},
-      headerConfigFormat:[]
+      headerConfigFormat:[],
+      dbProduct:{},
+
     }
     }
     var observation_format=sapMap(product[0].observation_format,object)
@@ -720,7 +722,9 @@ if(x.map!='')  {x['value']=object[x.map]||'';}
     productConfigFormat2:product[0].observation2_format,
     qas_form_one_ui:product[0].qas_form_one_ui,
     qas_form_two_ui:product[0].qas_form_two_ui,
-    headerConfigFormat:header_result
+    headerConfigFormat:header_result,
+    dbProduct:product[0]
+
 
   };
    
@@ -788,6 +792,8 @@ return await Promise.all(_.map(array,async (x)=>{
   console.log('create Product list single',x)
 var product=await getProduct($vm,x)
 x['headerConfigFormat']=product.headerConfigFormat;
+
+x['dbProduct']=product.dbProduct;
 
 // headerConfigFormat($vm,x)
 
@@ -1255,7 +1261,9 @@ export async function  submit_new($vm) {
               object["sk_index"] = product.sk_index;
               object["sk_order"] = product.sk_order;
               object["remarks"] = $vm.$store.state.interplex.tempRemarks[product.qasRef]
-
+if(product.dbProduct){
+  object["form_format"] =product.dbProduct.form_format //$vm.$store.state.interplex.tempRemarks[product.qasRef]
+}
               // object['status']='pending'
               object["invoice_client_id"] =
                   product["invoice_client_id"];

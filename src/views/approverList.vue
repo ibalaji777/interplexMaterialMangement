@@ -189,7 +189,7 @@ ppap
 {{item.eds||"-"}}
      </template>
      <template v-slot:item.form_format="{ item }">
-{{item.form_formate||"-"}}
+{{item.form_format||"-"}}
      </template>
      <template v-slot:item.remarks="{ item }">
 {{item.remarks||"-"}}

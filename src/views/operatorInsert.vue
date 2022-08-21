@@ -1453,7 +1453,7 @@ console.log("checkHeaderBefore=>",$vm.checkHeaderBefore)
 // $vm.$alert("Please Check Part No(RMCODE)")
 //     return ;
 // }
-          
+          //working
 var selected=_.filter($vm.checkHeaderBefore,(x)=>x.selected);          
 if(selected.length==0){
    

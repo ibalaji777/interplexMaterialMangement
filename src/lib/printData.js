@@ -11,6 +11,7 @@ var tickIcon=`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAt0AAALQCAMAAAB7dzwe
 
 var status=invoice.qasFormOne.status
 var form_format=invoice.qasFormOne.form_format;
+var remarks=invoice.qasFormOne.remarks;
     console.log("iinvoice data")
     console.log(invoice)
 var observation_format_object={};
@@ -96,6 +97,7 @@ return {
     tickIcon,
 status,
 form_format,
+remarks,
     renderQas1Header,
     renderQas1Body,
     renderQas2Header,
