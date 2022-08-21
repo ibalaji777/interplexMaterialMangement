@@ -227,13 +227,16 @@ Width Max
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
+        <div style="display:flex;justify-content:space-between">
 <h3>QAS FORM TWO</h3>
 <!-- {{selectedPartNoItem}} -->
  <v-switch
       v-model="qasForm2Validation"
       :label="'Real Time Validation'"
     ></v-switch>
-<div style="    height: 88vh;
+</div>
+
+<div style="       height: 79vh;
     overflow: scroll;
 ">
 <!-- {{selectedPartNoItem.qasForm2}} -->
@@ -251,9 +254,9 @@ Width Max
             </tr>
 
 <tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
-    <td>{{index+1}}</td>
+    <td style="padding:10px">{{index+1}}</td>
 <td>
-<div  class="flex-row-container">
+<div style="    padding: 20px 7px;"  class="flex-row-container">
     <!-- {{productFormat}} -->
 <!-- {{observation2_format_print_view}} -->
 
@@ -269,16 +272,16 @@ Width Max
 {{ui.width}}
 {{getIndex2(ui.name)}} -->
 <!-- gg{{selectedPartNoItem.productConfigFormat2}} -->
-<div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
-     <h4> {{ui.label}}:  </h4>
+<div v-if="getIndex2(ui.name)!=-1" style="height:56px;padding:10px">
+     <!-- <h4> {{ui.label}}:  </h4> -->
 
-    <v-text-field v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
+    <v-text-field :label="ui.label" @input="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
     </v-text-field>
     <div  v-else>
     
-        <v-text-field v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+        <v-text-field :label="ui.label" @input="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
     </v-text-field>
-        <v-text-field v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
+        <v-text-field :label="ui.label" @input="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
     </v-text-field>
     </div>
 </div>
@@ -991,6 +994,12 @@ watch:{
 // }
 },
     methods:{
+        watchQasTwo(){
+var $vm=this;
+if($vm.$store.state.qasForm2Validation)
+$vm.Qas2Validate()
+
+        },
         formatDate (date) {
   return moment(date).format("YYYY-MM-DD")
 },
