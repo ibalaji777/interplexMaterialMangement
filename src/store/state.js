@@ -851,12 +851,12 @@ newField['test']='work'
 				width:'50'
 			},
 			{
-				label:'Width Min',
+				label:'Min',
 				name:'min_spec',
 				width:'50'
 			},
 			{
-				label:'Width Max',
+				label:'Max',
 				name:'max_spec',
 				width:'50'
 			}
