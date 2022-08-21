@@ -155,6 +155,13 @@ export default {
     await $vm.$store.dispatch("getHeaderConfig");
   });
 
+  socket.on("watchDefaultConfig", async (data) => {
+    await $vm.$store.dispatch("getDefaultImport");
+  });
+
+  socket.on("watchSapImportConfig", async (data) => {
+    await $vm.$store.dispatch("getSapImport");
+  });
 
 
  },

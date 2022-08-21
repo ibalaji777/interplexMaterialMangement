@@ -258,6 +258,7 @@ Width Max
 <td>
 <div style="    padding: 20px 7px;"  class="flex-row-container">
     <!-- {{productFormat}} -->
+<!-- {{$store.state.qasForm2Validation}} -->
 <!-- {{observation2_format_print_view}} -->
 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.one" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
@@ -266,7 +267,6 @@ Width Max
 
 </div>
 </div> 
-
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.two" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
 <!-- {{ui.name}}
 {{ui.width}}
@@ -996,8 +996,12 @@ watch:{
     methods:{
         watchQasTwo(){
 var $vm=this;
-if($vm.$store.state.qasForm2Validation)
+$vm.$nextTick(()=>{
+
+if($vm.$store.state.qasForm2Validation){
 $vm.Qas2Validate()
+}
+})
 
         },
         formatDate (date) {
