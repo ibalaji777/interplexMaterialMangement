@@ -19,29 +19,56 @@ const state = {
  bgColor:'#30204e',
  dateFormat:"YYYY-MM-DD",
  barcodeLabel:{
-html:`
-<div style="text-align:center">{{supplier_name}}</div>
+html:`<div style="position:relative;padding:3px;" class="fs14">
+	
+<div  style="    color: grey;
+position: absolute;
+transform: translate(-50%,-50%) rotate(-30deg);
+font-size: 12px;
+top: 50%;
+left: 50%;" >
+
+<div style="text-align:center; text-transform: uppercase;">
+{{status}}
+</div>
+
+</div>
+<div class="fbetween fs14"><span>{{invoice_no}} </span><span> {{batch_no}}<span><span>  {{weight}} KG</span> </div>
+<div class="fbetween fs14"><span>{{rmcode}}</span> <span><b>IR:</b>{{ir}}</span>   </div>
+
 <div style="width:100%;padding:0 10px">
-<table style="width:100%">
+<table class="labelTable" style="width:100%">
 <tr>
 <td>
-INVOICE NO:{{invoice_no}}<br>
-RM CODE:{{rmcode}}<br>
-IR:{{ir}}<br>
-GRN NO:{{grn_no}}<br>
-Batch:{{batch}}<br>
+<span style="font-size:11px">{{branch}} branch</span>
+<div class="fbetween fs14"><span><b>Gr No:</b> {{grn_no}}</span><span><b>Gr D:</b> {{grn_no}}</span></div>
+
+
+
 </td>
 <td >
-<div style="text-align:right">
-<img id="qr1" src="{{angal_qrcode_op ir 'qr1' '{"width":50,"height":50}'}}"> </td>
+<div style="display:flex;justify-content:center;align-items:center">
+<img id="qr1" src="{{angal_qrcode_op ir 'qr1' '{"width":40,"height":40}'}}"> </td>
 </div>
 </tr>
 
 
 </table>
+<div  class="fs14 fbetween"><span> Shelf:{{shelf_life}}</span> <span>{{supplier_name}}</span></div>
 </div>
-`,
-css:'.red{color:red}',
+</div>`,
+css:`.red{color:red}
+.labelTable td,
+.labelTable th{
+font-size:12px;
+}
+.fs14{
+font-size:11px
+}
+.fbetween{
+display:flex;
+justify-content:space-between;
+}`,
 dataset:[{supplier_name:'Abc',invoice_no:'01',ir:'02'}]
 
 
@@ -461,6 +488,7 @@ interplex:{
 printConfig:{
 	html:`
 
+
 	<div class="pageOne">
 	{{#if this.skiplevel_status}} 
 	<div  style="    color: grey;
@@ -496,28 +524,28 @@ printConfig:{
 	
 	<table class="invoiceHeader">
 	<tr>
-		<td>SUPPLIER: {{headerFormFill.supplier_name}}</td>
-		<td>IR# :{{invoice.qasFormOne.ir}}</td>
-		<td>R/M CODE: {{headerFormFill.rmcode}}</td>
+		<td><b>SUPPLIER:</b> {{headerFormFill.supplier_name}}</td>
+		<td><b>IR# :</b>{{invoice.qasFormOne.ir}}</td>
+		<td><b>R/M CODE:</b> {{headerFormFill.rmcode}}</td>
 	</tr>
 	<tr>
-		<td>INVOICE/ DC #:{{headerFormFill.invoice_no}}</td>
-		<td>DATE{{date}}</td>
-		<td>EDS/QP#:{{headerFormFill.eds}}</td>
+		<td><b>INVOICE/ DC #:</b>{{headerFormFill.invoice_no}}</td>
+		<td><b>DATE:</b>{{date}}</td>
+		<td><b>EDS/QP#:</b>{{headerFormFill.eds}}</td>
 	</tr>
 	<tr>
-		<td>INVOICE/DC DATE:{{headerFormFill.invoice_date}}</td>
-		<td>GRN NO:{{headerFormFill.grn_no}}</td>
-		<td>R/M:{{headerFormFill.rm}} </td>
+		<td><b>INVOICE/DC DATE:</b>{{headerFormFill.invoice_date}}</td>
+		<td><b>GRN NO:</b>{{headerFormFill.grn_no}}</td>
+		<td><b>R/M:</b>{{headerFormFill.rm}} </td>
 	</tr>
 	<tr>
-		<td>INVOICE QTY:{{headerFormFill.invoice_qty}}</td>
-		<td>GRN DATE:{{headerFormFill.grn_date}}</td>
-		<td>RECEIVED QTY:{{headerFormFill.received_qty}}</td>
+		<td><b>INVOICE QTY:</b>{{headerFormFill.invoice_qty}}</td>
+		<td><b>GRN DATE:</b>{{headerFormFill.grn_date}}</td>
+		<td><b>RECEIVED QTY:</b>{{headerFormFill.received_qty}}</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Material Text:{{headerFormFill.material_text}}</td>
+		<td colspan="3"><b>Material Text:</b>{{headerFormFill.material_text}}</td>
 	</tr>
 
 </table>
@@ -533,12 +561,12 @@ printConfig:{
 	<tr>
 	{{#each this}}
 	
-	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	<th colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
 	{{
 		this.value
 	}}
 	
-	</td>
+	</th>
 	{{/each}}
 	{{/each}}
 	</tr>
@@ -557,34 +585,54 @@ printConfig:{
 	</table>
 	
 	
-	<div style="display:flex;position: relative;height:9vh;margin-top:2px">
+	<div style="display:flex;position: relative;height:4vh;margin-top:2px">
 	
 	<div style="position:absolute;top:5px;">
-		Comment
+		<b>Comment</b>
 	</div>
-	
 	<div style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
 	*coil weight is based on moq<br>
 	*inspection is done as per sampling plan WI/QA/46
 	</div>
 	</div>
+    	<div><b>Remark:</b>{{remarks}}</div>
+
 	<div style="display: flex;
 	justify-content: space-around;">
-	<span>Accepted</span>
-	<span>Accepted on deviation</span>
-	<span>Rejected</span>
-	<span>PPAP</span>
+	<span><b>Accepted</b> 
+    {{#angal_if  status '=='  'approved'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+    </span>
+	<span><b>Accepted on deviation</b>
+       {{#angal_if  status '=='  'acceptedOnDeviation'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+ 
+    </span>
+	<span><b>Rejected</b></span>
+       {{#angal_if  status '=='  'rejected'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+ 
+	<span><b>PPAP</b>
+       {{#angal_if  status '=='  'ppap'}}
+    <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
+    {{/angal_if}} 
+ 
+    </span>
 	</div>
+	<div>{{form_format}}</div>
 	
 	<div style="    display: flex;
 	justify-content: space-evenly;
-	height: 6vh;
+	height: 4vh;
 	align-items: center;">
-	<div>Inspected By: <span>
+	<div><b>Inspected By:</b> <span>
 	{{operator_name}}
 	</span> </div>
 	<div>DEVIATION REQUEST #</div>
-	<div>Approved By
+	<div><b>Approved By:</b>
 	{{approver_name}}
 	</div>
 	</div>
@@ -632,7 +680,7 @@ printConfig:{
 	{{#each  renderQas2Header}}
 	<tr >
 	{{#each this}}
-	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	<th colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
 	{{#if this.value}}
 	<div>
 	{{this.value}}
@@ -644,7 +692,7 @@ printConfig:{
 	}}
 	</div>
 	{{/if}}
-	</td>
+	</th>
 	{{/each}}
 	</tr>
 	{{/each}}
@@ -670,14 +718,15 @@ printConfig:{
 	</div>
 	</div>
 	
-	<div class="pageBreak"></div>
 	
 	{{#each gallery}}
+	<div class="pageBreak"></div>
 	
-	<div>
+	<div style="position:relative">
 	
 	{{#if this.skiplevel_status}} 
-	<div  style="    color: grey;
+
+<div  style="    color: grey;
 	position: absolute;
 	transform: translate(-50%,-50%) rotate(-45deg);
 	font-size: 46px;
@@ -690,6 +739,9 @@ printConfig:{
 	{{/each}}
 	
 	
+
+
+	
 	
 	`,
 	css:`  
@@ -697,6 +749,23 @@ printConfig:{
 	
 		page-break-after: always;
 	}
+    
+    .qasform2class th{
+        font-weight:900;
+		border: 1px solid black;
+		padding:5px
+
+    }
+    .observationTable th{
+    font-weight:900;
+		border: 1px solid black;
+		padding:5px
+
+}
+    .observationTable td:nth-child(2){
+    font-weight:900;
+}
+
 	.invoiceHeader{
 	
 		width:100%;
@@ -863,12 +932,12 @@ newField['test']='work'
 		],
 			two:[
 				{
-					label:'Width Min',
+					label:'Sup Min',
 					name:'sup_min',
 					width:'50'
 				},
 				{
-					label:'Width Max',
+					label:'Sup Max',
 					name:'sup_max',
 					width:'50'
 				},
@@ -1137,6 +1206,130 @@ width:'50'
 		
 		},
 		{
+			no:'',
+			desc:'c',
+			unit:'c_unit_org',
+			min_spec:'c_min_spec_org',
+			max_spec:'c_max_spec_org',
+			sup_min:'c_sup_min',
+			sup_max:'c_sup_max',
+			ieipl_min:'c_ieipl_min',
+			ieipl_max:'c_ieipl_max',
+			remarks:'c_remarks',
+			
+			
+			},
+			{
+				no:'',
+				desc:'p',
+				unit:'p_unit_org',
+				min_spec:'p_min_spec_org',
+				max_spec:'p_max_spec_org',
+				sup_min:'p_sup_min',
+				sup_max:'p_sup_max',
+				ieipl_min:'p_ieipl_min',
+				ieipl_max:'p_ieipl_max',
+				remarks:'p_remarks',
+				
+				
+				},
+				{
+					no:'',
+					desc:'s',
+					unit:'s_unit_org',
+					min_spec:'s_min_spec_org',
+					max_spec:'s_max_spec_org',
+					sup_min:'s_sup_min',
+					sup_max:'s_sup_max',
+					ieipl_min:'s_ieipl_min',
+					ieipl_max:'s_ieipl_max',
+					remarks:'s_remarks',
+					
+					
+					},
+					{
+						no:'',
+						desc:'mn',
+						unit:'mn_unit_org',
+						min_spec:'mn_min_spec_org',
+						max_spec:'mn_max_spec_org',
+						sup_min:'mn_sup_min',
+						sup_max:'mn_sup_max',
+						ieipl_min:'mn_ieipl_min',
+						ieipl_max:'mn_ieipl_max',
+						remarks:'mn_remarks',
+						
+						
+						},
+						{
+							no:'',
+							desc:'pb',
+							unit:'pb_unit_org',
+							min_spec:'pb_min_spec_org',
+							max_spec:'pb_max_spec_org',
+							sup_min:'pb_sup_min',
+							sup_max:'pb_sup_max',
+							ieipl_min:'pb_ieipl_min',
+							ieipl_max:'pb_ieipl_max',
+							remarks:'pb_remarks',
+							
+							
+							},
+							{
+								no:'',
+								desc:'fe',
+								unit:'fe_unit_org',
+								min_spec:'fe_min_spec_org',
+								max_spec:'fe_max_spec_org',
+								sup_min:'fe_sup_min',
+								sup_max:'fe_sup_max',
+								ieipl_min:'fe_ieipl_min',
+								ieipl_max:'fe_ieipl_max',
+								remarks:'fe_remarks',
+								
+								
+								},
+								{
+									no:'',
+									desc:'si',
+									unit:'si_unit_org',
+									min_spec:'si_min_spec_org',
+									max_spec:'si_max_spec_org',
+									sup_min:'si_sup_min',
+									sup_max:'si_sup_max',
+									ieipl_min:'si_ieipl_min',
+									ieipl_max:'si_ieipl_max',
+									remarks:'si_remarks',
+									
+									
+									},
+									{
+										no:'',
+										desc:'ni',
+										unit:'ni_unit_org',
+										min_spec:'ni_min_spec_org',
+										max_spec:'ni_max_spec_org',
+										sup_min:'ni_sup_min',
+										sup_max:'ni_sup_max',
+										ieipl_min:'ni_ieipl_min',
+										ieipl_max:'ni_ieipl_max',
+										remarks:'ni_remarks',
+									},
+						{
+    no:'',
+    desc:'mo',
+    unit:'mo_unit_org',
+    min_spec:'mo_min_spec_org',
+    max_spec:'mo_max_spec_org',
+    sup_min:'mo_sup_min',
+    sup_max:'mo_sup_max',
+    ieipl_min:'mo_ieipl_min',
+    ieipl_max:'mo_ieipl_max',
+    remarks:'mo_remarks',
+    
+    
+    },
+	{
 		no:'',
 		desc:'cu',
 		unit:'cu_unit_org',
@@ -1151,75 +1344,109 @@ width:'50'
 		
 		},
 		{
+			no:'',
+			desc:'zn',
+			unit:'zn_unit_org',
+			min_spec:'zn_min_spec_org',
+			max_spec:'zn_max_spec_org',
+			sup_min:'zn_sup_min',
+			sup_max:'zn_sup_max',
+			ieipl_min:'zn_ieipl_min',
+			ieipl_max:'zn_ieipl_max',
+			remarks:'zn_remarks',
+			
+			
+			},
+			{
+				no:'',
+				desc:'sn',
+				unit:'sn_unit_org',
+				min_spec:'sn_min_spec_org',
+				max_spec:'sn_max_spec_org',
+				sup_min:'sn_sup_min',
+				sup_max:'sn_sup_max',
+				ieipl_min:'sn_ieipl_min',
+				ieipl_max:'sn_ieipl_max',
+				remarks:'sn_remarks',
+				
+				
+				},
+				{
+					no:'',
+					desc:'bi',
+					unit:'bi_unit_org',
+					min_spec:'bi_min_spec_org',
+					max_spec:'bi_max_spec_org',
+					sup_min:'bi_sup_min',
+					sup_max:'bi_sup_max',
+					ieipl_min:'bi_ieipl_min',
+					ieipl_max:'bi_ieipl_max',
+					remarks:'bi_remarks',
+					
+					
+					},
+{
+    no:'',
+    desc:'o',
+    unit:'o_unit_org',
+    min_spec:'o_min_spec_org',
+    max_spec:'o_max_spec_org',
+    sup_min:'o_sup_min',
+    sup_max:'o_sup_max',
+    ieipl_min:'o_ieipl_min',
+    ieipl_max:'o_ieipl_max',
+    remarks:'o_remarks',
+    
+    
+    },
+	{
 		no:'',
-		desc:'pb',
-		unit:'pb_unit_org',
-		min_spec:'pb_min_spec_org',
-		max_spec:'pb_max_spec_org',
-		sup_min:'pb_sup_min',
-		sup_max:'pb_sup_max',
-		ieipl_min:'pb_ieipl_min',
-		ieipl_max:'pb_ieipl_max',
-		remarks:'pb_remarks',
+		desc:'zr',
+		unit:'zr_unit_org',
+		min_spec:'zr_min_spec_org',
+		max_spec:'zr_max_spec_org',
+		sup_min:'zr_sup_min',
+		sup_max:'zr_sup_max',
+		ieipl_min:'zr_ieipl_min',
+		ieipl_max:'zr_ieipl_max',
+		remarks:'zr_remarks',
 		
 		
 		},
 		{
-		no:'',
-		desc:'fe',
-		unit:'fe_unit_org',
-		min_spec:'fe_min_spec_org',
-		max_spec:'fe_max_spec_org',
-		sup_min:'fe_sup_min',
-		sup_max:'fe_sup_max',
-		ieipl_min:'fe_ieipl_min',
-		ieipl_max:'fe_ieipl_max',
-		remarks:'fe_remarks',
+			no:'',
+			desc:'mg',
+			unit:'mg_unit_org',
+			min_spec:'mg_min_spec_org',
+			max_spec:'mg_max_spec_org',
+			sup_min:'mg_sup_min',
+			sup_max:'mg_sup_max',
+			ieipl_min:'mg_ieipl_min',
+			ieipl_max:'mg_ieipl_max',
+			remarks:'mg_remarks',
+			
+			
+			},
+			
+									
+	
+				
+										{
+											no:'',
+											desc:'cr',
+											unit:'cr_unit_org',
+											min_spec:'cr_min_spec_org',
+											max_spec:'cr_max_spec_org',
+											sup_min:'cr_sup_min',
+											sup_max:'cr_sup_max',
+											ieipl_min:'cr_ieipl_min',
+											ieipl_max:'cr_ieipl_max',
+											remarks:'cr_remarks',
+											
+											
+											},
+																																																				
 		
-		
-		},
-		{
-		no:'',
-		desc:'sn',
-		unit:'sn_unit_org',
-		min_spec:'sn_min_spec_org',
-		max_spec:'sn_max_spec_org',
-		sup_min:'sn_sup_min',
-		sup_max:'sn_sup_max',
-		ieipl_min:'sn_ieipl_min',
-		ieipl_max:'sn_ieipl_max',
-		remarks:'sn_remarks',
-		
-		
-		},
-		{
-		no:'',
-		desc:'zn',
-		unit:'zn_unit_org',
-		min_spec:'zn_min_spec_org',
-		max_spec:'zn_max_spec_org',
-		sup_min:'zn_sup_min',
-		sup_max:'zn_sup_max',
-		ieipl_min:'zn_ieipl_min',
-		ieipl_max:'zn_ieipl_max',
-		remarks:'zn_remarks',
-		
-		
-		},
-		{
-		no:'',
-		desc:'p',
-		unit:'p_unit_org',
-		min_spec:'p_min_spec_org',
-		max_spec:'p_max_spec_org',
-		sup_min:'p_sup_min',
-		sup_max:'p_sup_max',
-		ieipl_min:'p_ieipl_min',
-		ieipl_max:'p_ieipl_max',
-		remarks:'p_remarks',
-		
-		
-		},
 		{
 		no:'',
 		desc:'pre_plating_details',
@@ -1292,15 +1519,15 @@ width:'50'
 		},
 		{
 		no:'',
-		desc:'ther_conduct',
-		unit:'ther_conduct_unit_org',
-		min_spec:'ther_conduct_min_spec_org',
-		max_spec:'ther_conduct_max_spec_org',
-		sup_min:'ther_conduct_sup_min',
-		sup_max:'ther_conduct_sup_max',
-		ieipl_min:'ther_conduct_ieipl_min',
-		ieipl_max:'ther_conduct_ieipl_max',
-		remarks:'ther_conduct_remarks',
+		desc:'thermal',
+		unit:'thermal_unit_org',
+		min_spec:'thermal_min_spec_org',
+		max_spec:'thermal_max_spec_org',
+		sup_min:'thermal_sup_min',
+		sup_max:'thermal_sup_max',
+		ieipl_min:'thermal_ieipl_min',
+		ieipl_max:'thermal_ieipl_max',
+		remarks:'thermal_remarks',
 		
 		
 		},
@@ -1334,15 +1561,15 @@ width:'50'
 		},
 		{
 		no:'',
-		desc:'coil_300mm_900mm',
-		unit:'coil_300mm_900mm_unit_org',
-		min_spec:'coil_300mm_900mm_min_spec_org',
-		max_spec:'coil_300mm_900mm_max_spec_org',
-		sup_min:'coil_300mm_900mm_sup_min',
-		sup_max:'coil_300mm_900mm_sup_max',
-		ieipl_min:'coil_300mm_900mm_ieipl_min',
-		ieipl_max:'coil_300mm_900mm_ieipl_max',
-		remarks:'coil_300mm_900mm_remarks',
+		desc:'coil',
+		unit:'coil_unit_org',
+		min_spec:'coil_min_spec_org',
+		max_spec:'coil_max_spec_org',
+		sup_min:'coil_sup_min',
+		sup_max:'coil_sup_max',
+		ieipl_min:'coil_ieipl_min',
+		ieipl_max:'coil_ieipl_max',
+		remarks:'coil_remarks',
 		
 		
 		},
@@ -1509,7 +1736,9 @@ editable:true,
 	default:true,
 	editable:true,
 	exp:{
-		rule: "",
+		rule: `NumberObj(QasOne).width_min_spec_org  <= NumberObj(QasTwoEach).width_min and
+		NumberObj(QasOne).width_max_spec_org >= NumberObj(QasTwoEach).width_max and NumberObj(QasOne).thickness_min_spec_org  <= NumberObj(QasTwoEach).thick_min and
+		NumberObj(QasOne).thickness_max_spec_org >= NumberObj(QasTwoEach).thick_max `,
 		success: "_default_",//_default_
 		failure: "_default_",//_default_
 		status: false,
@@ -1657,6 +1886,14 @@ editable:true,
 		{
 		  "label": "WIDTH IEIPL MIN",
 		  "name": "width_ieipl_min",
+		  "exp":{
+			"rule":"minBy(NumberArray(QasTwo),'width_min')",
+			success: "_default_",//_default_
+			failure: "_default_",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
 		  "value": "",
 		  "default": true,
 		  "editable": true
@@ -1665,6 +1902,14 @@ editable:true,
 		  "label": "WIDTH IEIPL MAX",
 		  "name": "width_ieipl_max",
 		  "value": "",
+		  "exp":{
+			"rule":"maxBy(NumberArray(QasTwo),'width_max')",
+			success: "_default_",//_default_
+			failure: "_default_",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
 		  "default": true,
 		  "editable": true
 		},
@@ -1672,6 +1917,16 @@ editable:true,
 		  "label": "WIDTH REMARKS",
 		  "name": "width_remarks",
 		  "value": "",
+		  "exp":{
+			"rule":`NumberObj(QasOne).width_min_spec_org  <= NumberObj(QasOne).width_sup_min  and
+			NumberObj(QasOne).width_max_spec_org >= NumberObj(QasOne).width_sup_max  and NumberObj(QasOne).width_min_spec_org  <= NumberObj(QasOne).width_ieipl_min and NumberObj(QasOne).width_max_spec_org >= NumberObj(QasOne).width_ieipl_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
+
 		  "default": true,
 		  "editable": true
 		},
@@ -1721,6 +1976,14 @@ editable:true,
 		  "label": "THICKNESS IEIPL MIN",
 		  "name": "thickness_ieipl_min",
 		  "value": "",
+		  "exp":{
+			"rule":"minBy(NumberArray(QasTwo),'thick_min')",
+			success: "_default_",//_default_
+			failure: "_default_",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
 		  "default": true,
 		  "editable": true
 		},
@@ -1728,6 +1991,15 @@ editable:true,
 		  "label": "THICKNESS IEIPL MAX",
 		  "name": "thickness_ieipl_max",
 		  "value": "",
+		  "exp":{
+			"rule":"maxBy(NumberArray(QasTwo),'thick_max')",
+			success: "_default_",//_default_
+			failure: "_default_",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
+
 		  "default": true,
 		  "editable": true
 		},
@@ -1735,6 +2007,16 @@ editable:true,
 		  "label": "THICKNESS REMARKS",
 		  "name": "thickness_remarks",
 		  "value": "",
+		  "exp":{
+			"rule":`NumberObj(QasOne).thickness_min_spec_org  <= NumberObj(QasOne).thickness_sup_min  and
+			NumberObj(QasOne).thickness_max_spec_org >= NumberObj(QasOne).thickness_sup_max  and NumberObj(QasOne).thickness_min_spec_org  <= NumberObj(QasOne).thickness_ieipl_min and NumberObj(QasOne).thickness_max_spec_org >= NumberObj(QasOne).thickness_ieipl_max  `,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
+
 		  "default": true,
 		  "editable": true
 		},
@@ -1798,6 +2080,15 @@ editable:true,
 		  "label": "HARDNESS REMARKS",
 		  "name": "hardness_remarks",
 		  "value": "",
+		  "exp":{
+			"rule":`NumberObj(QasOne).hardness_min_spec_org  <= NumberObj(QasOne).hardness_sup_min  or
+			NumberObj(QasOne).hardness_max_spec_org >= NumberObj(QasOne).hardness_sup_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
 		  "default": true,
 		  "editable": true
 		},
@@ -1861,6 +2152,16 @@ editable:true,
 		  "label": "ELONGATION REMARKS",
 		  "name": "elongation_remarks",
 		  "value": "",
+		  "exp":{
+			"rule":`NumberObj(QasOne).elongation_min_spec_org  <= NumberObj(QasOne).elongation_sup_min or NumberObj(QasOne).elongation_max_spec_org  <= 
+			NumberObj(QasOne).elongation_sup_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+ 			note: 'For Actual Value "_default_"'	
+	
+		},
+
 		  "default": true,
 		  "editable": true
 		},
@@ -1925,6 +2226,18 @@ editable:true,
 		  "name": "tensile_str_remarks",
 		  "value": "",
 		  "default": true,
+
+		  
+"exp":{
+	"rule":`NumberObj(QasOne).tensile_str_min_spec_org  <= NumberObj(QasOne).tensile_str_sup_min and NumberObj(QasOne).tensile_str_max_spec_org  >= 
+	NumberObj(QasOne).tensile_str_sup_max`,
+	success: "Ok",//_default_
+	failure: "Check",//_default_
+	status: false,
+	 note: 'For Actual Value "_default_"'	
+
+},
+
 		  "editable": true
 		},
 		{
@@ -1987,387 +2300,1245 @@ editable:true,
 		  "label": "YIELD STR REMARKS",
 		  "name": "yield_str_remarks",
 		  "value": "",
+		  exp:{
+			rule: `NumberObj(QasOne).yield_str_min_spec_org  <= NumberObj(QasOne).yield_str_sup_min or NumberObj(QasOne).yield_str_max_spec_org  <= 
+			NumberObj(QasOne).yield_str_sup_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+			note: 'For Actual Value "_default_"'	
+		},
+	
 		  "default": true,
 		  "editable": true
 		},
+
 		{
-		  "label": "CU",
-		  "name": "cu",
-		  "value": "CU",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU UNIT",
-		  "name": "cu_unit_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU MIN SPEC",
-		  "name": "cu_min_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU MAX SPEC",
-		  "name": "cu_max_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU SUP MIN",
-		  "name": "cu_sup_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU SUP MAX",
-		  "name": "cu_sup_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU IEIPL MIN",
-		  "name": "cu_ieipl_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU IEIPL MAX",
-		  "name": "cu_ieipl_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "CU REMARKS",
-		  "name": "cu_remarks",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "PB",
-		  "name": "pb",
-		  "value": "PB",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb UNIT",
-		  "name": "pb_unit_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb MIN SPEC",
-		  "name": "pb_min_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb MAX SPEC",
-		  "name": "pb_max_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb SUP MIN",
-		  "name": "pb_sup_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb SUP MAX",
-		  "name": "pb_sup_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb IEIPL MIN",
-		  "name": "pb_ieipl_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb IEIPL MAX",
-		  "name": "pb_ieipl_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "pb REMARKS",
-		  "name": "pb_remarks",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE",
-		  "name": "fe",
-		  "value": "FE",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE UNIT",
-		  "name": "fe_unit_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE MIN SPEC",
-		  "name": "fe_min_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE MAX SPEC",
-		  "name": "fe_max_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE SUP MIN",
-		  "name": "fe_sup_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE SUP MAX",
-		  "name": "fe_sup_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE IEIPL MIN",
-		  "name": "fe_ieipl_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE IEIPL MAX",
-		  "name": "fe_ieipl_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "FE REMARKS",
-		  "name": "fe_remarks",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN",
-		  "name": "sn",
-		  "value": "SN",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN UNIT",
-		  "name": "sn_unit_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN MIN SPEC",
-		  "name": "sn_min_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN MAX SPEC",
-		  "name": "sn_max_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN SUP MIN",
-		  "name": "sn_sup_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN SUP MAX",
-		  "name": "sn_sup_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN IEIPL MIN",
-		  "name": "sn_ieipl_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN IEIPL MAX",
-		  "name": "sn_ieipl_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "SN REMARKS",
-		  "name": "sn_remarks",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN",
-		  "name": "zn",
-		  "value": "ZN",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN UNIT",
-		  "name": "zn_unit_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN MIN SPEC",
-		  "name": "zn_min_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN MAX SPEC",
-		  "name": "zn_max_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN SUP MIN",
-		  "name": "zn_sup_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN SUP MAX",
-		  "name": "zn_sup_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN IEIPL MIN",
-		  "name": "zn_ieipl_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN IEIPL MAX",
-		  "name": "zn_ieipl_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "ZN REMARKS",
-		  "name": "zn_remarks",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P",
-		  "name": "p",
-		  "value": "P",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P UNIT",
-		  "name": "p_unit_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P MIN SPEC",
-		  "name": "p_min_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P MAX SPEC",
-		  "name": "p_max_spec_org",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P SUP MIN",
-		  "name": "p_sup_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P SUP MAX",
-		  "name": "p_sup_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P IEIPL MIN",
-		  "name": "p_ieipl_min",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P IEIPL MAX",
-		  "name": "p_ieipl_max",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
-		{
-		  "label": "P REMARKS",
-		  "name": "p_remarks",
-		  "value": "",
-		  "default": true,
-		  "editable": true
-		},
+			"label": "C",
+			"name": "c",
+			"value": "C",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C UNIT",
+			"name": "c_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C MIN SPEC",
+			"name": "c_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C MAX SPEC",
+			"name": "c_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C SUP MIN",
+			"name": "c_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C SUP MAX",
+			"name": "c_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C IEIPL MIN",
+			"name": "c_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C IEIPL MAX",
+			"name": "c_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "C REMARKS",
+			"name": "c_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).c_min_spec_org  <= NumberObj(QasOne).c_sup_min  or
+				NumberObj(QasOne).c_max_spec_org >=  NumberObj(QasOne).c_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P",
+			"name": "p",
+			"value": "P",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P UNIT",
+			"name": "p_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P MIN SPEC",
+			"name": "p_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P MAX SPEC",
+			"name": "p_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P SUP MIN",
+			"name": "p_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P SUP MAX",
+			"name": "p_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P IEIPL MIN",
+			"name": "p_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P IEIPL MAX",
+			"name": "p_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "P REMARKS",
+			"name": "p_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).p_min_spec_org  <= NumberObj(QasOne).p_sup_min  or
+				NumberObj(QasOne).p_max_spec_org >=  NumberObj(QasOne).p_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  
+		
+		  {
+			"label": "S",
+			"name": "s",
+			"value": "S",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S UNIT",
+			"name": "s_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S MIN SPEC",
+			"name": "s_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S MAX SPEC",
+			"name": "s_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S SUP MIN",
+			"name": "s_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S SUP MAX",
+			"name": "s_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S IEIPL MIN",
+			"name": "s_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S IEIPL MAX",
+			"name": "s_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "S REMARKS",
+			"name": "s_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).s_min_spec_org  <= NumberObj(QasOne).s_sup_min  or
+				NumberObj(QasOne).s_max_spec_org >=  NumberObj(QasOne).s_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn",
+			"name": "mn",
+			"value": "Mn",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn UNIT",
+			"name": "mn_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn MIN SPEC",
+			"name": "mn_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn MAX SPEC",
+			"name": "mn_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn SUP MIN",
+			"name": "mn_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn SUP MAX",
+			"name": "mn_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn IEIPL MIN",
+			"name": "mn_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn IEIPL MAX",
+			"name": "mn_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mn REMARKS",
+			"name": "mn_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).mn_min_spec_org  <= NumberObj(QasOne).mn_sup_min  or
+				NumberObj(QasOne).mn_max_spec_org >=  NumberObj(QasOne).mn_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb",
+			"name": "pb",
+			"value": "Pb",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb UNIT",
+			"name": "pb_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb MIN SPEC",
+			"name": "pb_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb MAX SPEC",
+			"name": "pb_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb SUP MIN",
+			"name": "pb_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb SUP MAX",
+			"name": "pb_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb IEIPL MIN",
+			"name": "pb_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb IEIPL MAX",
+			"name": "pb_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Pb REMARKS",
+			"name": "pb_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).pb_min_spec_org  <= NumberObj(QasOne).pb_sup_min  or
+				NumberObj(QasOne).pb_max_spec_org >=  NumberObj(QasOne).pb_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe",
+			"name": "fe",
+			"value": "Fe",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe UNIT",
+			"name": "fe_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe MIN SPEC",
+			"name": "fe_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe MAX SPEC",
+			"name": "fe_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe SUP MIN",
+			"name": "fe_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe SUP MAX",
+			"name": "fe_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe IEIPL MIN",
+			"name": "fe_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe IEIPL MAX",
+			"name": "fe_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Fe REMARKS",
+			"name": "fe_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).fe_min_spec_org  <= NumberObj(QasOne).fe_sup_min  or
+				NumberObj(QasOne).fe_max_spec_org >=  NumberObj(QasOne).fe_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si",
+			"name": "si",
+			"value": "Si",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si UNIT",
+			"name": "si_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si MIN SPEC",
+			"name": "si_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si MAX SPEC",
+			"name": "si_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si SUP MIN",
+			"name": "si_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si SUP MAX",
+			"name": "si_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si IEIPL MIN",
+			"name": "si_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si IEIPL MAX",
+			"name": "si_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Si REMARKS",
+			"name": "si_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).si_min_spec_org  <= NumberObj(QasOne).si_sup_min  or
+				NumberObj(QasOne).si_max_spec_org >=  NumberObj(QasOne).si_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni",
+			"name": "ni",
+			"value": "Ni",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni UNIT",
+			"name": "ni_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni MIN SPEC",
+			"name": "ni_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni MAX SPEC",
+			"name": "ni_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni SUP MIN",
+			"name": "ni_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni SUP MAX",
+			"name": "ni_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni IEIPL MIN",
+			"name": "ni_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni IEIPL MAX",
+			"name": "ni_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Ni REMARKS",
+			"name": "ni_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).ni_min_spec_org  <= NumberObj(QasOne).ni_sup_min  or
+				NumberObj(QasOne).ni_max_spec_org >=  NumberObj(QasOne).ni_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr",
+			"name": "cr",
+			"value": "Cr",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr UNIT",
+			"name": "cr_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr MIN SPEC",
+			"name": "cr_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr MAX SPEC",
+			"name": "cr_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr SUP MIN",
+			"name": "cr_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr SUP MAX",
+			"name": "cr_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr IEIPL MIN",
+			"name": "cr_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr IEIPL MAX",
+			"name": "cr_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cr REMARKS",
+			"name": "cr_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).cr_min_spec_org  <= NumberObj(QasOne).cr_sup_min  or
+				NumberObj(QasOne).cr_max_spec_org >=  NumberObj(QasOne).cr_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo",
+			"name": "mo",
+			"value": "Mo",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo UNIT",
+			"name": "mo_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo MIN SPEC",
+			"name": "mo_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo MAX SPEC",
+			"name": "mo_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo SUP MIN",
+			"name": "mo_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo SUP MAX",
+			"name": "mo_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo IEIPL MIN",
+			"name": "mo_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo IEIPL MAX",
+			"name": "mo_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mo REMARKS",
+			"name": "mo_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).mo_min_spec_org  <= NumberObj(QasOne).mo_sup_min  or
+				NumberObj(QasOne).mo_max_spec_org >=  NumberObj(QasOne).mo_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu",
+			"name": "cu",
+			"value": "Cu",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu UNIT",
+			"name": "cu_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu MIN SPEC",
+			"name": "cu_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu MAX SPEC",
+			"name": "cu_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu SUP MIN",
+			"name": "cu_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu SUP MAX",
+			"name": "cu_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu IEIPL MIN",
+			"name": "cu_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu IEIPL MAX",
+			"name": "cu_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Cu REMARKS",
+			"name": "cu_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).cu_min_spec_org  <= NumberObj(QasOne).cu_sup_min  or
+				NumberObj(QasOne).cu_max_spec_org >=  NumberObj(QasOne).cu_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn",
+			"name": "zn",
+			"value": "Zn",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn UNIT",
+			"name": "zn_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn MIN SPEC",
+			"name": "zn_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn MAX SPEC",
+			"name": "zn_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn SUP MIN",
+			"name": "zn_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn SUP MAX",
+			"name": "zn_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn IEIPL MIN",
+			"name": "zn_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn IEIPL MAX",
+			"name": "zn_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zn REMARKS",
+			"name": "zn_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).zn_min_spec_org  <= NumberObj(QasOne).zn_sup_min  or
+				NumberObj(QasOne).zn_max_spec_org >=  NumberObj(QasOne).zn_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn",
+			"name": "sn",
+			"value": "Sn",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn UNIT",
+			"name": "sn_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn MIN SPEC",
+			"name": "sn_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn MAX SPEC",
+			"name": "sn_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn SUP MIN",
+			"name": "sn_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn SUP MAX",
+			"name": "sn_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn IEIPL MIN",
+			"name": "sn_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn IEIPL MAX",
+			"name": "sn_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Sn REMARKS",
+			"name": "sn_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).sn_min_spec_org  <= NumberObj(QasOne).sn_sup_min  or
+				NumberObj(QasOne).sn_max_spec_org >=  NumberObj(QasOne).sn_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi",
+			"name": "bi",
+			"value": "Bi",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi UNIT",
+			"name": "bi_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi MIN SPEC",
+			"name": "bi_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi MAX SPEC",
+			"name": "bi_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi SUP MIN",
+			"name": "bi_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi SUP MAX",
+			"name": "bi_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi IEIPL MIN",
+			"name": "bi_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi IEIPL MAX",
+			"name": "bi_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Bi REMARKS",
+			"name": "bi_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).bi_min_spec_org  <= NumberObj(QasOne).bi_sup_min  or
+				NumberObj(QasOne).bi_max_spec_org >=  NumberObj(QasOne).bi_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O",
+			"name": "o",
+			"value": "O",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O UNIT",
+			"name": "o_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O MIN SPEC",
+			"name": "o_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O MAX SPEC",
+			"name": "o_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O SUP MIN",
+			"name": "o_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O SUP MAX",
+			"name": "o_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O IEIPL MIN",
+			"name": "o_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O IEIPL MAX",
+			"name": "o_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "O REMARKS",
+			"name": "o_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).o_min_spec_org  <= NumberObj(QasOne).o_sup_min  or
+				NumberObj(QasOne).o_max_spec_org >=  NumberObj(QasOne).o_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr",
+			"name": "zr",
+			"value": "Zr",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr UNIT",
+			"name": "zr_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr MIN SPEC",
+			"name": "zr_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr MAX SPEC",
+			"name": "zr_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr SUP MIN",
+			"name": "zr_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr SUP MAX",
+			"name": "zr_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr IEIPL MIN",
+			"name": "zr_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr IEIPL MAX",
+			"name": "zr_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Zr REMARKS",
+			"name": "zr_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).zr_min_spec_org  <= NumberObj(QasOne).zr_sup_min  or
+				NumberObj(QasOne).zr_max_spec_org >=  NumberObj(QasOne).zr_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg",
+			"name": "mg",
+			"value": "Mg",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg UNIT",
+			"name": "mg_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg MIN SPEC",
+			"name": "mg_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg MAX SPEC",
+			"name": "mg_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg SUP MIN",
+			"name": "mg_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg SUP MAX",
+			"name": "mg_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg IEIPL MIN",
+			"name": "mg_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg IEIPL MAX",
+			"name": "mg_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "Mg REMARKS",
+			"name": "mg_remarks",
+			"value": "",
+			exp:{
+				rule: `NumberObj(QasOne).mg_min_spec_org  <= NumberObj(QasOne).mg_sup_min  or
+				NumberObj(QasOne).mg_max_spec_org >=  NumberObj(QasOne).mg_sup_max`,
+				success: "Ok",//_default_
+				failure: "Check",//_default_
+				status: false,
+				note: 'For Actual Value "_default_"'	
+			},
+		
+			"default": true,
+			"editable": true
+		  },			  
 		{
 		  "label": "PRE PLATING DETAILS",
 		  "name": "pre_plating_details",
@@ -2555,6 +3726,16 @@ editable:true,
 		  "name": "twist_remarks",
 		  "value": "",
 		  "default": true,
+		  exp:{
+			rule: `NumberObj(QasOne).twist_min_spec_org  <= NumberObj(QasOne).twist_sup_min or NumberObj(QasOne).twist_max_spec_org  >= 
+			NumberObj(QasOne).twist_sup_max or NumberObj(QasOne).twist_min_spec_org  <= NumberObj(QasOne).twist_ieipl_min or NumberObj(QasOne).twist_max_spec_org  >= 
+			NumberObj(QasOne).twist_ieipl_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+			note: 'For Actual Value "_default_"'	
+		},
+	
 		  "editable": true
 		},
 		{
@@ -2616,6 +3797,16 @@ editable:true,
 		{
 		  "label": "CAMBER REMARKS",
 		  "name": "camber_remarks",
+		  exp:{
+			rule: `NumberObj(QasOne).camber_min_spec_org  <= NumberObj(QasOne).camber_sup_min or NumberObj(QasOne).camber_max_spec_org  >= 
+			NumberObj(QasOne).camber_sup_max or NumberObj(QasOne).camber_min_spec_org  <= NumberObj(QasOne).camber_ieipl_min or NumberObj(QasOne).camber_max_spec_org  >= 
+			NumberObj(QasOne).camber_ieipl_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+			note: 'For Actual Value "_default_"'	
+		},
+
 		  "value": "",
 		  "default": true,
 		  "editable": true
@@ -2667,6 +3858,7 @@ editable:true,
 		  "name": "surface_finish_ieipl_min",
 		  "value": "",
 		  "default": true,
+
 		  "editable": true
 		},
 		{
@@ -2680,68 +3872,78 @@ editable:true,
 		  "label": "SURFACE FINISH REMARKS",
 		  "name": "surface_finish_remarks",
 		  "value": "",
+		  exp:{
+			rule: `NumberObj(QasOne).twist_min_spec_org  <= NumberObj(QasOne).twist_sup_min or NumberObj(QasOne).twist_max_spec_org  >= 
+			NumberObj(QasOne).surface_finish_sup_max or NumberObj(QasOne).surface_finish_min_spec_org  <= NumberObj(QasOne).surface_finish_ieipl_min or NumberObj(QasOne).surface_finish_max_spec_org  >= 
+			NumberObj(QasOne).surface_finish_ieipl_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+			note: 'For Actual Value "_default_"'	
+		},
+
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT",
-		  "name": "ther_conduct",
-		  "value": "THER CONDUCT",
+		  "label": "THERMAL",
+		  "name": "thermal",
+		  "value": "THERMAL",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT UNIT",
-		  "name": "ther_conduct_unit_org",
+		  "label": "THERMAL UNIT",
+		  "name": "thermal_unit_org",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT MIN SPEC",
-		  "name": "ther_conduct_min_spec_org",
+		  "label": "THERMAL MIN SPEC",
+		  "name": "thermal_min_spec_org",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT MAX SPEC",
-		  "name": "ther_conduct_max_spec_org",
+		  "label": "THERMAL MAX SPEC",
+		  "name": "thermal_max_spec_org",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT SUP MIN",
-		  "name": "ther_conduct_sup_min",
+		  "label": "THERMAL SUP MIN",
+		  "name": "thermal_sup_min",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT SUP MAX",
-		  "name": "ther_conduct_sup_max",
+		  "label": "THERMAL SUP MAX",
+		  "name": "thermal_sup_max",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT IEIPL MIN",
-		  "name": "ther_conduct_ieipl_min",
+		  "label": "THERMAL IEIPL MIN",
+		  "name": "thermal_ieipl_min",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT IEIPL MAX",
-		  "name": "ther_conduct_ieipl_max",
+		  "label": "THERMAL IEIPL MAX",
+		  "name": "thermal_ieipl_max",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "THER CONDUCT REMARKS",
-		  "name": "ther_conduct_remarks",
+		  "label": "THERMAL REMARKS",
+		  "name": "thermal_remarks",
 		  "value": "",
 		  "default": true,
 		  "editable": true
@@ -2848,6 +4050,13 @@ editable:true,
 		  "label": "COIL WEIGHT SUP MAX",
 		  "name": "coil_weight_sup_max",
 		  "value": "",
+		  exp:{
+			rule: `NumberObj(QasOne).coil_weight_ieipl_min  !=  ""  and NumberObj(QasOne).coil_weight_ieipl_max != ""`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+			note: 'For Actual Value "_default_"'	
+		}, 
 		  "default": true,
 		  "editable": true
 		},
@@ -2874,63 +4083,63 @@ editable:true,
 		},
 		{
 		  "label": "COIL",
-		  "name": "coil_300mm_900mm",
+		  "name": "coil",
 		  "value": "COIL",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MAX",
-		  "name": "coil_300mm_900mm_unit_org",
+		  "label": "COIL ID",
+		  "name": "coil_unit_org",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MAX",
-		  "name": "coil_300mm_900mm_min_spec_org",
+		  "label": "COIL",
+		  "name": "coil_min_spec_org",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MAX",
-		  "name": "coil_300mm_900mm_max_spec_org",
+		  "label": "COIL ",
+		  "name": "coil_max_spec_org",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MAX",
-		  "name": "coil_300mm_900mm_sup_min",
+		  "label": "COIL ",
+		  "name": "coil_sup_min",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MAX",
-		  "name": "coil_300mm_900mm_sup_max",
+		  "label": "COIL ",
+		  "name": "coil_sup_max",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MM IEIPL MIN",
-		  "name": "coil_300mm_900mm_ieipl_min",
+		  "label": "COIL IEIPL MIN",
+		  "name": "coil_ieipl_min",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MM IEIPL MAX",
-		  "name": "coil_300mm_900mm_ieipl_max",
+		  "label": "COIL  IEIPL MAX",
+		  "name": "coil_ieipl_max",
 		  "value": "",
 		  "default": true,
 		  "editable": true
 		},
 		{
-		  "label": "COIL ID:300MIN OD:900MM REMARKS",
-		  "name": "coil_300mm_900mm_remarks",
+		  "label": "COIL  REMARKS",
+		  "name": "coil_remarks",
 		  "value": "",
 		  "default": true,
 		  "editable": true

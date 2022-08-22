@@ -178,7 +178,7 @@ console.log("File Types",list)
 	Vue.set(state.interplex,'masterFileTypes',list)
 },
 readProductConfig(state,payload){
-
+if(payload.length!=0)
 	Vue.set(state.interplex,'configProductsFormat',payload)
 
 },set_date(state,payload){

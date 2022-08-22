@@ -127,6 +127,18 @@ export default {
 
   $vm.$store.commit("closeNavbarMenu");
 
+
+
+
+
+//   socket.on("watchQasFormConfig", async (data) => {
+// await $vm.$store.dispatch("labelSettingRead");  });
+
+
+  socket.on("watchLabelSetting", async (data) => {
+await $vm.$store.dispatch("labelSettingRead");  });
+
+
   socket.on("invoice_add", async (data) => {
    await $vm.$store.dispatch("approverList");
    socket.emit("test", { my: "data" });
@@ -190,7 +202,8 @@ async handler(){
 
 
 //  await $vm.$store.dispatch("getQasFormOneByDate");
-   await $vm.$store.dispatch("labelSettingRead");
+
+await $vm.$store.dispatch("labelSettingRead");
    await $vm.$store.dispatch("datOneCodeGet");
    await $vm.$store.dispatch("datTwoCodeGet");
    await $vm.$store.dispatch("approverList");

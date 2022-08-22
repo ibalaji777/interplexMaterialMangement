@@ -2935,9 +2935,9 @@ getColspan2() {
     async mounted() {
         var $vm = this;
         // isStateForUpdate:false,
-
-        var result = await $vm.$store.dispatch("getProductConfig");
-        $vm.insertForm.observation_format = result;
+// console.log("===",$vm.$store.state.interplex.configProductsFormat)
+        await $vm.$store.dispatch("getProductConfig");
+        $vm.insertForm.observation_format = $vm.$store.state.interplex.configProductsFormat;
         //default print view format
         if ($vm.insertForm.observation_print_view.length == 0) {
             $vm.insertForm.observation_print_view =

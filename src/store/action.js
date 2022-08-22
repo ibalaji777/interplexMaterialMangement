@@ -3,6 +3,7 @@ import * as core from '../lib/config'
 var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
+var labelGenerateApi=api+"/labelgenerate"
 
 var getprintconfigApi=api+'/getprintconfig';
 var setprintconfigApi=api+'/setprintconfig';
@@ -414,7 +415,7 @@ async qasFormUpdateStatus(context,payload){
 
 async getProductConfig(context){
     var result=await axios.get(getProductConfigApi);
-    console.log("++productconfig+",result)
+    // console.log("++productconfig+",result)
     context.commit('readProductConfig',result.data)
 return result.data
 },
@@ -590,9 +591,13 @@ async getDefaultImport(context,payload){
             }
             return ""
             },
-            
+            async labelGenerate(context,qasFormOne){
+                var result=await axios.post(labelGenerateApi,{qasFormOne});
+                
+                return result.data
+                },
         
-
+            
                     
 }
 

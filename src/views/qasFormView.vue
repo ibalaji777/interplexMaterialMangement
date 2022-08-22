@@ -23,7 +23,7 @@ mdi-file-pdf
 </v-icon>
 </v-btn>
         </div>
-<h5 style="text-align:center">Make Inspection Label</h5>
+<!-- <h5 style="text-align:center">Make Inspection Label</h5>
 
 
         <div style="background:#b9c5de;padding:10px;display:flex;justify-content:space-evenly">
@@ -45,7 +45,7 @@ mdi-file-pdf
 
 </v-icon>
 </v-btn>
-</div>
+</div> -->
 <div style="display:flex;flex-direction:column;margin:10px;">
 
 <!-- <v-btn color="red" style="color:white;margin:2px;" @click="$refs.print.print()">print</v-btn> -->

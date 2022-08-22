@@ -35,28 +35,28 @@
 	
 	<table class="invoiceHeader">
 	<tr>
-		<td>SUPPLIER: {{headerFormFill.supplier_name}}</td>
-		<td>IR# :{{invoice.qasFormOne.ir}}</td>
-		<td>R/M CODE: {{headerFormFill.rmcode}}</td>
+		<td><b>SUPPLIER:</b> {{headerFormFill.supplier_name}}</td>
+		<td><b>IR# :</b>{{invoice.qasFormOne.ir}}</td>
+		<td><b>R/M CODE:</b> {{headerFormFill.rmcode}}</td>
 	</tr>
 	<tr>
-		<td>INVOICE/ DC #:{{headerFormFill.invoice_no}}</td>
-		<td>DATE{{date}}</td>
-		<td>EDS/QP#:{{headerFormFill.eds}}</td>
+		<td><b>INVOICE/ DC #:</b>{{headerFormFill.invoice_no}}</td>
+		<td><b>DATE:</b>{{date}}</td>
+		<td><b>EDS/QP#:</b>{{headerFormFill.eds}}</td>
 	</tr>
 	<tr>
-		<td>INVOICE/DC DATE:{{headerFormFill.invoice_date}}</td>
-		<td>GRN NO:{{headerFormFill.grn_no}}</td>
-		<td>R/M:{{headerFormFill.rm}} </td>
+		<td><b>INVOICE/DC DATE:</b>{{headerFormFill.invoice_date}}</td>
+		<td><b>GRN NO:</b>{{headerFormFill.grn_no}}</td>
+		<td><b>R/M:</b>{{headerFormFill.rm}} </td>
 	</tr>
 	<tr>
-		<td>INVOICE QTY:{{headerFormFill.invoice_qty}}</td>
-		<td>GRN DATE:{{headerFormFill.grn_date}}</td>
-		<td>RECEIVED QTY:{{headerFormFill.received_qty}}</td>
+		<td><b>INVOICE QTY:</b>{{headerFormFill.invoice_qty}}</td>
+		<td><b>GRN DATE:</b>{{headerFormFill.grn_date}}</td>
+		<td><b>RECEIVED QTY:</b>{{headerFormFill.received_qty}}</td>
 	</tr>
 
 	<tr>
-		<td colspan="3">Material Text:{{headerFormFill.material_text}}</td>
+		<td colspan="3"><b>Material Text:</b>{{headerFormFill.material_text}}</td>
 	</tr>
 
 </table>
@@ -72,12 +72,12 @@
 	<tr>
 	{{#each this}}
 	
-	<td colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
+	<th colspan="{{this.merge.colspan}}" rowspan="{{this.merge.rowspan}}" >
 	{{
 		this.value
 	}}
 	
-	</td>
+	</th>
 	{{/each}}
 	{{/each}}
 	</tr>
@@ -96,46 +96,48 @@
 	</table>
 	
 	
-	<div style="display:flex;position: relative;height:9vh;margin-top:2px">
+	<div style="display:flex;position: relative;height:4vh;margin-top:2px">
 	
 	<div style="position:absolute;top:5px;">
-		Comment
+		<b>Comment</b>
 	</div>
-	
 	<div style="position: absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
 	*coil weight is based on moq<br>
 	*inspection is done as per sampling plan WI/QA/46
 	</div>
 	</div>
+    	<div><b>Remark:</b>{{remarks}}</div>
+
 	<div style="display: flex;
 	justify-content: space-around;">
-	<span>Accepted 
+	<span><b>Accepted</b> 
     {{#angal_if  status '=='  'approved'}}
     <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
     {{/angal_if}} 
     </span>
-	<span>Accepted on deviation
+	<span><b>Accepted on deviation</b>
        {{#angal_if  status '=='  'acceptedOnDeviation'}}
     <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
     {{/angal_if}} 
  
     </span>
-	<span>Rejected</span>
+	<span><b>Rejected</b></span>
        {{#angal_if  status '=='  'rejected'}}
     <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
     {{/angal_if}} 
  
-	<span>PPAP
+	<span><b>PPAP</b>
        {{#angal_if  status '=='  'ppap'}}
     <img src="{{tickIcon}}" style="max-width:20px;margin-top:-2px">
     {{/angal_if}} 
  
     </span>
 	</div>
+	<div>{{form_format}}</div>
 	
 	<div style="    display: flex;
 	justify-content: space-evenly;
-	height: 6vh;
+	height: 4vh;
 	align-items: center;">
 	<div>Inspected By: <span>
 	{{operator_name}}

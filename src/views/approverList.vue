@@ -368,23 +368,76 @@ else{
 
     },
 
-        generateLabel(){
+async        generateLabel(){
 var $vm=this;
+console.log("$vm.selected",$vm.selected)
+var labels=[];
 if($vm.selected.length==0){
-$vm.$alert("Please Select Item to create label")
+ $vm.$alert("Please Select Item to create label")
+
     return;
 }
-$vm.barcodeLabel.data_set=_.map($vm.selected,(formone)=>{
-var label={}
-// console.log("formone",formone)
-    _.map(formone.header_format,(Property)=>{
-// console.log('prop',Property)
-        label[Property.name]=Property.value
+var result=await   $vm.$store.dispatch("labelGenerate",$vm.selected);
+ console.log(result)
 
-    })
-    return label
+_.map(result,(x)=>{
+var object={}
+_.map(x.qasFormTwo,(batch_product)=>{
+
+labels.push({
+
+
+qasFormOne:x,
+...batch_product.qas_form_two_values,
+ir:x.ir,
+rm:x.rm,
+branch:x.branch,
+status:x.status,
+invoice_no:x.invoice_no,
+rmcode:x.rmcode,
+eds:x.eds,
+supplier_name:x.supplier_name,
+grn_no:x.grn_no,
+grn_date:x.grn_date,
+invoice_qty:x.invoice_qty,
+invoice_date:x.invoice_date,
+received_qty:x.received_qty,
+product_name:x.product_name,
+form_format:x.form_format,
+comment:x.comment,
+duedate:x.duedate,
+remars:x.remarsk,
+batch_no:batch_product.batch_no,
 
 })
+
+})
+
+})
+
+console.log("Label",labels)
+$vm.barcodeLabel.data_set=labels
+// _.map(labels,(formone)=>{
+// var label={}
+//     _.map(formone.qasFormOne.header_format,(Property)=>{
+//         label[Property.name]=Property.value
+//     })
+
+//     label['status']=formone.status||''
+//     return label
+
+// })
+
+// $vm.barcodeLabel.data_set=_.map($vm.selected,(formone)=>{
+// var label={}
+//     _.map(formone.header_format,(Property)=>{
+//         label[Property.name]=Property.value
+//     })
+
+//     label['status']=formone.status||''
+//     return label
+
+// })
 
         },
               async  preview(item){
