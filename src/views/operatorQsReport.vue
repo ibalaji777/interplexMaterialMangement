@@ -114,99 +114,7 @@ OBSERVATION
 </div>
 <v-textarea v-model="remarks" style="margin-top:10px" outlined label="Remarks"></v-textarea>
 
-<!-- *******************qasform2 product list dialog************************ -->
- <!-- <v-dialog
-      v-model="qasForm2Dialog"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
-      <v-card>
-        <v-toolbar
-          dark
-          :color="$store.state.bgColor"
-        >
-          <v-toolbar-title><v-icon @click="qasForm2Dialog = false">fa-times</v-icon></v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-          </v-toolbar-items>
-        </v-toolbar>
-        <v-divider></v-divider>
-       <div style="padding:10px">
-<h3>QAS FORM 2</h3>
-<div style="    height: 88vh;
-    overflow: scroll;
-">
-        <table style="width:100%">
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              
-            </tr>
-<tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
-    <td>{{index+1}}</td>
-<td>
-    <div style="width:100%;display:flex;flex-direction:column;margin:2px">
-coil # (Batch No)
-    <input  v-model="productFormat.batch_no" placeholder="coil # (Batch No)"  class="interInput"   type="text" >
-    </div>
-<div style="width:100%;display:flex;flex-direction:column;margin:2px">
-sup coil #(Lot No)
-    <input v-model="productFormat.lot_no" placeholder="sup coil #(Lot No)"  class="interInput"   type="text" >
-</div>
-<div style="width:100%;display:flex;flex-direction:column;margin:2px">
-Weight (W/KG)
-    <input v-model="productFormat.weight"  class="interInput"   type="text" placeholder="Weight (W/KG)" >
-</div>
-    <div style="display:flex">
 
-<div style="width:100%;display:flex;flex-direction:column;margin:2px">
-Width Min   
-    <input style="" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_min"  class="interInput"   type="text" placeholder="Width Min" >
-    </div>
-<div style="width:100%;display:flex;flex-direction:column;margin:2px">
-
-Width Max 
-    <input style="width:100%" @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.width_max"  class="interInput"   type="text" placeholder="Width Max" >
-    </div>
-    </div>
-        <div style="display:flex"> 
- <div style="width:100%;display:flex;flex-direction:column;margin:2px">
-           Thick Min
-    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_min"  class="interInput"   type="text" placeholder="Thick Min" >
- </div>
-<div style="width:100%;display:flex;flex-direction:column;margin:2px">
-           Thick Max 
-    <input @input="checkErrorStatus($event,index,productFormat)" v-model="productFormat.thick_max" class="interInput"   type="text" placeholder="Thick Max" >
-</div>
-    </div>
-</td>
-<td style="background:#929ed6;padding:0 9px">
-    <div style="text-align:center">
-    <div style="  
-    display:inline-block;
-      background: white;
-    padding: 5px;
-    border-radius: 50%;
-    width: 50px;
-    line-height: 42px;
-    height: 50px;
-    text-align: center;">
-    <v-icon class="defaultErorr" :class="{errorStatus:productFormat.error_status}">fa-check</v-icon>
-    </div>
-    </div>
-</td>
-
-      </tr>
-        </table>
-        </div>
-
-
-
-</div>
-      </v-card>
-    </v-dialog> -->
 <!-- *******************qasform2 product list dialog************************ -->
  <v-dialog
       v-model="qasForm2Dialog"
@@ -275,13 +183,13 @@ Width Max
 <div v-if="getIndex2(ui.name)!=-1" style="height:56px;padding:10px">
      <!-- <h4> {{ui.label}}:  </h4> -->
 
-    <v-text-field :label="ui.label" @input="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
+    <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
     </v-text-field>
     <div  v-else>
     
-        <v-text-field :label="ui.label" @input="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense >
+        <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense >
     </v-text-field>
-        <v-text-field :label="ui.label" @input="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model="productFormat[ui.name]" outlined dense>
+        <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
     </v-text-field>
     </div>
 </div>
@@ -350,6 +258,10 @@ Width Max
 <h3>QAS FORM ONE</h3>
 <!-- {{qasForm1New}} -->
 <!-- {{selectedPartNoItem.observation_print_view}} -->
+ <v-switch
+      v-model="qasForm1Validation"
+      :label="'Real Time Validation'"
+    ></v-switch>
 <div  style="    padding: 10px 20px;
     margin: 8px;
 " class="rowColor" v-for="(form,index) in selectedPartNoItem.observation_print_view" :key="index+'form'">
@@ -398,13 +310,13 @@ NO:{{index+1}}
 <div v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable" style="height:45px">
     <!-- <h4> {{ui.label}}:  </h4> -->
     <!-- normal -->
-    <v-text-field v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+    <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
     <div  v-else>
     
-        <v-text-field v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp"   append-icon="fa-calculator" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+        <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp"   append-icon="fa-calculator" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
-        <v-text-field v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+        <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
 
 </div>
@@ -425,33 +337,7 @@ NO:{{index+1}}
 </div>
 
 
-<!-- <div class="flex-row-item"  v-for="(key,index_sub) in Object.keys(form)" :key="'form'+index_sub">
-<div v-if="key=='no'">
-NO:{{index+1}}
-</div>
-<div v-if="key=='desc'&&getIndex(form[key])!=-1">
-<span v-if="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value!=''">
-    {{selectedPartNoItem.productConfigFormat[getIndex(form[key])].label+'('+key+')'}}
-    <v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value" outlined dense >
-    </v-text-field>
-</span>
-<span v-else>
-    {{selectedPartNoItem.productConfigFormat[getIndex(form[key])].label+'('+key+')'}}
-    <v-text-field  style="margin:5px" :disabled="true"   outlined dense >
-    </v-text-field>
-    </span>
-</div>
 
-<div v-if="!['no','desc'].includes(key)&&getIndex(form[key])!=-1">
-
-{{selectedPartNoItem.productConfigFormat[getIndex(form[key])].label+'('+key+')'}}
-<v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable"  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value" outlined dense >
-</v-text-field>
-<v-text-field  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[key])].editable" v-else  v-model="selectedPartNoItem.productConfigFormat[getIndex(form[key])].value" outlined dense >
-</v-text-field>
-
-</div>
-</div> -->
 </div>
      </div>  </div>
       </v-card>
@@ -792,6 +678,7 @@ export default {
     data(){
 
         return {
+            delay:2000,
             header_form_gui:[],
             headerDateShow:false,
             qasFormOneValidateLoader:false,
@@ -924,86 +811,28 @@ console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
 },
 watch:{
 
-// "selectedPartNoItem.productConfigFormat":{
 
-// handler(){
-//     var $vm=this;
-// if($vm.$store.state.qasForm1Validation)
-// $vm.Qas1Validate()
-
-// },
-// deep:true
-
-// },
-// "selectedPartNoItem.productConfigFormat2":{
-
-// handler(){
-//     var $vm=this;
-// if($vm.$store.state.qasForm2Validation)
-// $vm.Qas2Validate()
-
-// },
-// deep:true}
-
-// "selectedPartNoItem.headerConfigFormat":{
-// handler(){
-//     var $vm=this;
-// _.map($vm.selectedPartNoItem.headerConfigFormat,(input)=>{
-
-// if(input.input_type=='date'){
-
-//     input.value=moment(String(input.input_type||'')).format("YYYY-MM-DD")
-// }
-// })
-
-// },
-// deep:true,
-
-// }
-
-// "selectedPartNoItem.qasForm2":{
-//     handler(value){
-//         var $vm=this;
-//         console.log('value...',value)
-
-// if(value.length!=0){
-
-// var singleBatchProduct=value[0]
-// $vm.qasForm1New['width_sup_one']=singleBatchProduct.width_one;
-// $vm.qasForm1New['width_sup_two']=singleBatchProduct.width_two;
-// $vm.qasForm1New['thickness_sup_one']=singleBatchProduct.thick_one;
-// $vm.qasForm1New['thickness_sup_two']=singleBatchProduct.thick_two;
-// var weight=_.sumBy($vm.selectedPartNoItem.qasForm2,(qas2)=>parseFloat(qas2.weight))
-
-// $vm.selectedPartNoItem.headerConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.headerConfigFormat),(headerObj)=>{
-
-// if(headerObj.name=='invoice_qty'||headerObj.name=='received_qty')
-// {
-//     headerObj.value=parseFloat(weight||0);
-// }
-// return headerObj;
-// })
-
-
-// $vm.submitQasForm1new()
-
-// }
-
-//     },
-//     deep:true
-// }
 },
     methods:{
-        watchQasTwo(){
+        watchQasOne:_.debounce(function(){
 var $vm=this;
-$vm.$nextTick(()=>{
+// $vm.$nextTick(()=>{
+
+if($vm.$store.state.qasForm1Validation){
+$vm.validateQasFormOne()
+}
+// })
+},500),
+        watchQasTwo:_.debounce(function(){
+var $vm=this;
+// $vm.$nextTick(()=>{
 
 if($vm.$store.state.qasForm2Validation){
 $vm.Qas2Validate()
 }
-})
+// })
 
-        },
+        },500),
         formatDate (date) {
   return moment(date).format("YYYY-MM-DD")
 },
