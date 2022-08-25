@@ -17,7 +17,7 @@
 
          <webview
                  
-                       id="paper"
+                       id="paperDesktop"
             :src="'./report/invoice_type_template.html'"
                        style="height:100vh;"
                         nodeintegration
@@ -48,7 +48,7 @@ const fs = require('fs')
 // const { dialog } = require("electron").remote;
 function element() {
     return {
-        pos_paper: document.getElementById("paper")
+        pos_paper: document.getElementById("paperDesktop")
     };
 }
 export default {
@@ -72,15 +72,16 @@ this.print_paper_init();
 this.print_paper_watch();
 }
 ,methods:{
-     printData(){
+        printData(){
+                     
 var $vm=this
 console.log("print data ",printData.printData($vm.invoice_data))
 var data=printData.printData($vm.invoice_data)
 var prepare_data={}
 prepare_data['id']='';
 prepare_data['name']='';
-prepare_data['html']=printData($vm).template.html;
-prepare_data['css']=printData($vm).template.css;
+prepare_data['html']=printData.template($vm).html;
+prepare_data['css']=printData.template($vm).css;
 prepare_data['js']='';
 prepare_data['data_set']=data
 //printData.printData($vm.invoice_data)
@@ -234,7 +235,6 @@ var load_page=() => {
 
 
 
-                // webview.openDevTools();
                 // $vm.print_paper_setup["sales"] = $vm.sales;
                 // });
                 try {
@@ -243,6 +243,8 @@ var load_page=() => {
                     console.log("");
                 }
                 $vm.loader=false
+                                webview.openDevTools();
+
     $vm.$emit('load')
             }
             webview.addEventListener("dom-ready",load_page );

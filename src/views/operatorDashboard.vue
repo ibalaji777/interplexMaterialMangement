@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- eslint-disable -->
-    <h3>Operator Dashboard</h3>
+    <!-- <h3>Operator Dashboard</h3> -->
+        <h3>Inspector Dashboard</h3>
     <div style="display:flex;margin-top:10px">
         <div @click="$router.push({name:'operatorInsert'})" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-file</v-icon>
