@@ -2729,7 +2729,7 @@ value:''
         createQasRowInputDialog: false,
         qas2EdiableDialog: false,
         qasEdiableDialog: false,
-        delay: 1600,
+        delay: 7000,
                 qas2EditableIndex: -1,
         qasEditableIndex: -1,
         qasFormSetup: "config", //config or input

@@ -507,7 +507,7 @@ printConfig:{
 	
 	</div>
 	{{/if}}
-	<div style="border:1px solid black;height:6vh;position: relative;">
+	<div class="qasformOneHeader">
 	
 	<div style="display:flex;height: 100%;width:100%;">
 		<div style="display:flex;flex:1;flex-direction: column;">
@@ -659,11 +659,11 @@ printConfig:{
 		
 		</div>
 	{{/if}}
-		<div style="border:1px solid black;height:10vh;position: relative;">
+		<div class="qasformTwoHeader"  style="position: relative;">
 	
 		<div style="display:flex;height: 100%;width:100%;">
 			<div style="display:flex;flex:1;flex-direction: column;">
-				<img style="    max-width: 145px;
+				<img style="   max-width: 120px;
 				position: absolute;
 				top: -42px;
 				left: 10px;
@@ -671,7 +671,7 @@ printConfig:{
 	
 	<div style="position: absolute;bottom:5px;font-wight:800"> QUALITY ASSURANCE</div>
 			</div>
-			<div style="display:flex;flex:1;align-thiss: center;justify-content: center;font-weight: 800;">INCOMING INSPECTION REPORT</div>
+			<div style="margin-top:15px;display:flex;flex:1;align-thiss: center;justify-content: center;font-weight: 800;">INCOMING INSPECTION REPORT</div>
 		</div>
 	</div>
 	
@@ -740,16 +740,43 @@ printConfig:{
 	
 	
 
-
-	
-	
 	`,
 	css:`  
+  
 	.pageBreak{
 	
 		page-break-after: always;
 	}
     
+    .qasformOneHeader{
+        border: 1px solid black;
+    height: 9vh;
+    position: relative;
+    }
+        .qasformTwoHeader{
+        border: 1px solid black;
+    height: 10vh;
+    position: relative;
+    }
+    .pageSeperate{
+    border:1px solid black;
+    padding:10px
+    }
+    @media print {
+         .pageSeperate{
+         border:0;
+         padding:0;
+         }
+                 .qasformTwoHeader{
+        border: 1px solid black;
+    height: 6vh;
+    position: relative;
+    }
+    .qasformOneHeader{
+        border: 1px solid black;
+    height: 6vh;
+    position: relative;
+    }        }
     .qasform2class th{
         font-weight:900;
 		border: 1px solid black;
@@ -1562,9 +1589,9 @@ width:'50'
 		{
 		no:'',
 		desc:'coil',
-		unit:'coil_unit_org',
-		min_spec:'coil_min_spec_org',
-		max_spec:'coil_max_spec_org',
+		// unit:'coil_unit_org',
+		// min_spec:'coil_min_spec_org',
+		// max_spec:'coil_max_spec_org',
 		sup_min:'coil_sup_min',
 		sup_max:'coil_sup_max',
 		ieipl_min:'coil_ieipl_min',
@@ -1574,11 +1601,25 @@ width:'50'
 		
 		},
 		{
+			no:'',
+			desc:'visual',
+			// unit:'visual_unit_org',
+			// min_spec:'visual_min_spec_org',
+			// max_spec:'visual_max_spec_org',
+			sup_min:'visual_sup_min',
+			sup_max:'visual_sup_max',
+			ieipl_min:'visual_ieipl_min',
+			ieipl_max:'visual_ieipl_max',
+			remarks:'visual_remarks',
+			
+			
+			},
+		{
 		no:'',
 		desc:'next_due',
-		unit:'next_due_unit_org',
-		min_spec:'next_due_min_spec_org',
-		max_spec:'next_due_max_spec_org',
+		// unit:'next_due_unit_org',
+		// min_spec:'next_due_min_spec_org',
+		// max_spec:'next_due_max_spec_org',
 		sup_min:'next_due_sup_min',
 		sup_max:'next_due_sup_max',
 		ieipl_min:'next_due_ieipl_min',
@@ -1587,6 +1628,7 @@ width:'50'
 		
 		
 		},
+
 		],
 	user:{
 		id:0,
@@ -1682,6 +1724,7 @@ editable:true,
 	label:'Sup Coil',//input field label
 	name:'lot_no',//column name
 	value:'',//default value
+	sapHeader:'HeatNo',
 	default:true,
 	editable:true,
 	},
@@ -4085,6 +4128,11 @@ editable:true,
 		  "label": "COIL",
 		  "name": "coil",
 		  "value": "COIL",
+		  merge:{
+			colspan:4,
+			rowspan:1
+		},
+
 		  "default": true,
 		  "editable": true
 		},
@@ -4145,8 +4193,148 @@ editable:true,
 		  "editable": true
 		},
 		{
+			"label": "VISUAL",
+			"name": "visual",
+			"value": "VISUAL",
+			merge:{
+			  colspan:4,
+			  rowspan:1
+		  },
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ID",
+			"name": "visual_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL",
+			"name": "visual_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ",
+			"name": "visual_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ",
+			"name": "visual_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ",
+			"name": "visual_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL IEIPL MIN",
+			"name": "visual_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL  IEIPL MAX",
+			"name": "visual_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL  REMARKS",
+			"name": "visual_remarks",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },		{
+			"label": "VISUAL",
+			"name": "visual",
+			"value": "VISUAL",
+			merge:{
+			  colspan:4,
+			  rowspan:1
+		  },
+		
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ID",
+			"name": "visual_unit_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL",
+			"name": "visual_min_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ",
+			"name": "visual_max_spec_org",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ",
+			"name": "visual_sup_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL ",
+			"name": "visual_sup_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL IEIPL MIN",
+			"name": "visual_ieipl_min",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL  IEIPL MAX",
+			"name": "visual_ieipl_max",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		  {
+			"label": "VISUAL  REMARKS",
+			"name": "visual_remarks",
+			"value": "",
+			"default": true,
+			"editable": true
+		  },
+		{
 		  "label": "Next Due For third party validation",
 		  "name": "next_due",
+		  merge:{
+			colspan:4,
+			rowspan:1
+		},
+
 		  "value": "Next Due For third party validation",
 		  "default": true,
 		  "editable": true

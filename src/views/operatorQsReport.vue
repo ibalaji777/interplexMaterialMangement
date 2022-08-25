@@ -628,7 +628,20 @@ function meanBy(array, key) {
   return _.meanBy(array,(x)=>parseFloat(x[key]||0))
 }
 
+function defaultDateFormat(date) {
+  return moment(date).format("YYYY-MM-DD");
+}
 
+function customDateFormat(date,format) {
+  return moment(date).format(format);
+}
+
+defaultDateFormat.transform = function (date) {
+   return defaultDateFormat(date)
+}
+customDateFormat.transform = function (date,format) {
+   return customDateFormat(date,format)
+}
 // attach a transform function to the function addIt
 NumberObj.transform = function (obj) {
    return NumberObj(obj)
@@ -850,6 +863,7 @@ scope['QasOne']=observation_format;
 //core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
 scope['QasTwo']=$vm.selectedPartNoItem.qasForm2
+scope['currentDate']=moment().format("YYYY-MM-DD");
 // _.map($vm.selectedPartNoItem.qasForm2,(obj)=>{
 //     return core.validateProductObjDataset($vm,_.cloneDeep(obj))
 // })
@@ -986,6 +1000,7 @@ scope['QasOne']=observation_format
 //core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
 scope['QasTwo']=$vm.selectedPartNoItem.qasForm2;
+scope['currentDate']=moment().format("YYYY-MM-DD");
 // _.map($vm.selectedPartNoItem.qasForm2,(obj)=>{
 //     return core.validateProductObjDataset($vm,_.cloneDeep(obj))
 // })
