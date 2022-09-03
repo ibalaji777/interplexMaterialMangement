@@ -41,7 +41,7 @@ left: 50%;" >
 <tr>
 <td>
 <span style="font-size:11px">{{branch}} branch</span>
-<div class="fbetween fs14"><span><b>Gr No:</b> {{grn_no}}</span><span><b>Gr D:</b> {{grn_no}}</span></div>
+<div class="fbetween fs14"><span><b>Gr No:</b> {{grn_no}}</span><span><b>Gr D:</b> {{grn_date}}</span></div>
 
 
 
@@ -1715,7 +1715,11 @@ width:'50'
 label:'Coil',//input field label
 name:'batch_no',//column name
 value:'',//default value
-sapHeader:'BATCH',
+map:{
+	mapFrom:'header',//header or product
+	map:'BATCH', 
+
+  },
 default:true,
 editable:true,
 },
@@ -1724,7 +1728,12 @@ editable:true,
 	label:'Sup Coil',//input field label
 	name:'lot_no',//column name
 	value:'',//default value
-	sapHeader:'HeatNo',
+
+	map:{
+		mapFrom:'header',//header or product
+		map:'HeatNo', 
+	
+	  },
 	default:true,
 	editable:true,
 	},
@@ -1739,7 +1748,12 @@ editable:true,
 label:'Weight',//input field label
 name:'weight',//column name
 value:'',//default value
-sapHeader:'QTY',
+
+map:{
+	mapFrom:'header',//header or product
+	map:'QTY', 
+
+  },
 default:true,
 editable:true,
 },
@@ -4189,6 +4203,14 @@ editable:true,
 		  "label": "COIL  REMARKS",
 		  "name": "coil_remarks",
 		  "value": "",
+		  exp:{
+			rule: `NumberObj(QasOne).coil_min_spec_org <= NumberObj(QasOne).coil_ieipl_min and NumberObj(QasOne).coil_max_spec_org >= 
+			NumberObj(QasOne).coil_ieipl_max`,
+			success: "Ok",//_default_
+			failure: "Check",//_default_
+			status: false,
+			note: 'For Actual Value "_default_"'	
+		},
 		  "default": true,
 		  "editable": true
 		},
@@ -4378,6 +4400,7 @@ editable:true,
 		  "label": "NEXT DUE IEIPL MIN",
 		  "name": "next_due_ieipl_min",
 		  "value": "",
+		  
 		  "default": true,
 		  "editable": true
 		},
@@ -4385,6 +4408,11 @@ editable:true,
 		  "label": "NEXT DUE IEIPL MAX",
 		  "name": "next_due_ieipl_max",
 		  "value": "",
+		  map:{
+			mapFrom:'product',//header or product
+			map:'duedate', 
+  
+		  },
 		  "default": true,
 		  "editable": true
 		},

@@ -109,196 +109,6 @@
             </v-dialog>
         </div>
 
-<!-- <div v-for="(productFormat , index) in insertForm.observation_format" :key="'product'+index">
-<div style="display:flex">
-<span style="width:40%">{{productFormat.label}}</span>
-<input style="width:60%" class="interInput" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" ><v-icon @click="selectFieldSettingfn(productFormat)" style="margin:0 5px">fa-cog</v-icon>
-</div>
-
-
-</div> -->
-
-        <!-- <div style="display:flex;align-items:center">
-<span >
-<span >Width:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.width_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.width_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.width_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >thickness:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.thickness_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.thickness_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.thickness_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >hardness:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.hardness_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.hardness_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.hardness_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >elongation:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.elongation_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.elongation_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.elongation_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >tenstilstr:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.tenstilstr_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.tenstilstr_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.tenstilstr_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >yieldstr:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.yieldstr_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.yieldstr_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.yieldstr_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >cu:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.cu_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.cu_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.cu_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >pb:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.pb_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.pb_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.pb_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >bi:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.bi_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.bi_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.bi_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >o:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.o_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.o_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.o_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >others:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.others_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.others_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.others_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >slittingburr:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.slittingburr_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.slittingburr_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.slittingburr_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >twist:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.twist_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.twist_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.twist_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >camber:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.camber_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.camber_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.camber_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-
-<div style="display:flex;align-items:center">
-<span >
-<span >surfacefinish:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.surfacefinish_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.surfacefinish_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.surfacefinish_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >thermalconduct:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.thermalconduct_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.thermalconduct_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.thermalconduct_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >density:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.density_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.density_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.density_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div>
-<div style="display:flex;align-items:center">
-<span >
-<span >coilweight:</span>
-<div style="display:flex">
-<input class="interInput" v-model="insertForm.coilweight_unit_org"  type="text" placeholder="unit" >
-<input class="interInput" v-model="insertForm.coilweight_min_spec_org" type="text" placeholder="Min Spec" >
-<input class="interInput" v-model="insertForm.coilweight_max_spec_org" type="text" placeholder="Max Spec" >
-</div>
-</span>
-</div> -->
         <v-btn
             :loading="qasLoader"
             @click="openQasDialog"
@@ -445,8 +255,6 @@
                                                         style="margin:2px"
                                                         >mdi-table-merge-cells</v-icon
                                                     >
-                                                    <!-- <v-icon  :class="{redColor:isKeyExist(getIndex(item.name),'sapHeader')}" style="margin:2px">mdi-magnify-scan</v-icon>
-<v-icon :class="{redColor:isKeyExist(getIndex(item.name),'exp')}">fa-calculator</v-icon> -->
                                                 </div>
                                             </div>
 
@@ -619,7 +427,7 @@
                                                                             key
                                                                         ]
                                                                     ),
-                                                                    'sapHeader'
+                                                                    'map'
                                                                 )
                                                             }"
                                                             style="margin:2px"
@@ -806,8 +614,6 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                         style="margin:2px"
                                                         >mdi-table-merge-cells</v-icon
                                                     >
-                                                    <!-- <v-icon  :class="{redColor:isKeyExist2(getIndex2(item.name),'sapHeader')}" style="margin:2px">mdi-magnify-scan</v-icon>
-<v-icon :class="{redColor:isKeyExist2(getIndex2(item.name),'exp')}">fa-calculator</v-icon> -->
                                                 </div>
                                             </div>
 
@@ -968,7 +774,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                                     getIndex2(
                                                                         column.name
                                                                     ),
-                                                                    'sapHeader'
+                                                                    'map'
                                                                 )
                                                             }"
                                                             style="margin:2px"
@@ -1455,12 +1261,12 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         >
                         <v-icon
                             @click="
-                                editFieldSetting2(qas2EditableIndex, 'sapHeader')
+                                editFieldSetting2(qas2EditableIndex, 'map')
                             "
                             :class="{
                                 redColor: isKeyExist2(
                                     qas2EditableIndex,
-                                    'sapHeader'
+                                    'map'
                                 )
                             }"
                             style="margin:2px"
@@ -1522,13 +1328,21 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                         </div>
 
-                        <div v-if="isKeyExist2(qas2EditableIndex, 'sapHeader')">
-                            <v-text-field
-                                label="SAP Map"
+                        <div v-if="isKeyExist2(qas2EditableIndex, 'map')">
+                                                    <v-text-field
+                                label="Map From "
                                 v-model="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
-                                    ].sapHeader
+                                    ].map.mapFrom
+                                "
+                            ></v-text-field>
+                            <v-text-field
+                                label="Map"
+                                v-model="
+                                    insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].map.map
                                 "
                             ></v-text-field>
                         </div>
@@ -1643,12 +1457,12 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         >
                         <v-icon
                             @click="
-                                editFieldSetting(qasEditableIndex, 'sapHeader')
+                                editFieldSetting(qasEditableIndex, 'map')
                             "
                             :class="{
                                 redColor: isKeyExist(
                                     qasEditableIndex,
-                                    'sapHeader'
+                                    'map'
                                 )
                             }"
                             style="margin:2px"
@@ -1710,13 +1524,21 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                         </div>
 
-                        <div v-if="isKeyExist(qasEditableIndex, 'sapHeader')">
-                            <v-text-field
-                                label="SAP Map"
+                        <div v-if="isKeyExist(qasEditableIndex, 'map')">
+                                                        <v-text-field
+                                label="Map From"
                                 v-model="
                                     insertForm.observation_format[
                                         qasEditableIndex
-                                    ].sapHeader
+                                    ].map.mapFrom
+                                "
+                            ></v-text-field>
+                            <v-text-field
+                                label="Map"
+                                v-model="
+                                    insertForm.observation_format[
+                                        qasEditableIndex
+                                    ].map.map
                                 "
                             ></v-text-field>
                         </div>
@@ -3063,18 +2885,18 @@ default:true,
                         }
                     );
             }
-            if (action == "sapHeader") {
+            if (action == "map") {
                 if (
-                    _.has($vm.insertForm.observation_format[index], "sapHeader")
+                    _.has($vm.insertForm.observation_format[index], "map")
                 )
                     $vm.$delete(
                         $vm.insertForm.observation_format[index],
-                        "sapHeader"
+                        "map"
                     );
                 else
                     $vm.$set(
                         $vm.insertForm.observation_format[index],
-                        "sapHeader",
+                        "map",
                         ""
                     );
             }
@@ -3118,18 +2940,18 @@ default:true,
                         }
                     );
             }
-            if (action == "sapHeader") {
+            if (action == "map") {
                 if (
-                    _.has($vm.insertForm.observation2_format[index], "sapHeader")
+                    _.has($vm.insertForm.observation2_format[index], "map")
                 )
                     $vm.$delete(
                         $vm.insertForm.observation2_format[index],
-                        "sapHeader"
+                        "map"
                     );
                 else
                     $vm.$set(
                         $vm.insertForm.observation2_format[index],
-                        "sapHeader",
+                        "map",
                         ""
                     );
             }

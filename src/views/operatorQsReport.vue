@@ -183,13 +183,13 @@ OBSERVATION
 <div v-if="getIndex2(ui.name)!=-1" style="height:56px;padding:10px">
      <!-- <h4> {{ui.label}}:  </h4> -->
 
-    <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
+    <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
     </v-text-field>
     <div  v-else>
     
         <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense >
     </v-text-field>
-        <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].sapHeader"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
+        <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
     </v-text-field>
     </div>
 </div>
@@ -310,13 +310,13 @@ NO:{{index+1}}
 <div v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable" style="height:45px">
     <!-- <h4> {{ui.label}}:  </h4> -->
     <!-- normal -->
-    <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+    <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
     <div  v-else>
     
         <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp"   append-icon="fa-calculator" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
-        <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].sapHeader"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+        <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
 
 </div>
@@ -452,10 +452,10 @@ NO:{{index+1}}
     <!-- <input     class="interInput"  :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :placeholder="productFormat.label" > -->
 <!-- {{productFormat}} -->
  <!-- SAP MAP -->
- <div style="display:flex;align-items:baseline" v-if="productFormat.sapHeader">
+ <div style="display:flex;align-items:baseline" v-if="productFormat.map">
  <div>   <v-icon style="color:green" :class="{isRed:productFormat.value==''}">mdi-magnify-scan</v-icon></div>
 <v-text-field style="margin-right:2px"  dense outlined :disabled="!productFormat.editable" v-model="productFormat.value"  type="text" :label="productFormat.label+'('+productFormat.name+')'"></v-text-field>
-<div><b>Key: "{{productFormat.sapHeader}}"&nbsp;{{productFormat.value==''?'Not Found':'Found'}}</b></div>
+<div><b>Key: "{{productFormat.map0}}"&nbsp;{{productFormat.value==''?'Not Found':'Found'}}</b></div>
 
  </div>
  <!-- SAP WITHOUT MAP -->
@@ -511,9 +511,17 @@ NO:{{index+1}}
 
         <v-divider></v-divider>
        <div style="padding:10px">
-<div @click="takePicture" class="insertProduct">
+        <div style="display:flex">
+<div @click="takePicture" style="margin-right:10px" class="insertProduct">
 <v-icon>fa-camera</v-icon>
 </div>
+<div @click="openScanner" ref="btnScan" id="btn-scan"  class="insertProduct">
+<v-icon>mdi-scanner</v-icon>
+</div>
+</div>
+<div id="btn-upload"></div>
+<p class="text-danger mt-1" id="download-app" style="display:none;">No Scan app application found in your machine. Please download, install and open first then refresh the browser. <a href="Scan_App_SetUp.msi" download>Download app</a></p>
+<p class="mt-3">Integeration Plugin is missing for scan</p>
 <br>
 <div style="    background: #f13454;
     padding: 9px;
@@ -598,6 +606,8 @@ import moment from 'moment'
 import * as core from '../lib/core'
 import _ from 'lodash'
 import { create, all, string } from 'mathjs'
+
+import * as scanApp from '../lib/scaApp.js'
 const math = create(all,  {})
 
 
@@ -691,6 +701,7 @@ export default {
     data(){
 
         return {
+            disableScanBtn:false,
             delay:2000,
             header_form_gui:[],
             headerDateShow:false,
@@ -772,17 +783,11 @@ return (name)=>{
 
 return this.$store.state.interplex.selectedPartNoItem||{};
         },
-takePhoto:{
-    get(){
+takePhoto(){
 var $vm=this;
 var ref=$vm.$store.state.interplex.selectedPartNoItem.ref;
 if($vm.$store.state.interplex.tempInvoice[ref])
 return ($vm.$store.state.interplex.tempInvoice[ref].gallery)||[]//selectedPartNoItem
-return []
-    },
-    set(value){
-        console.log(value)
-    }
 
 },
 remarks:{
@@ -821,12 +826,21 @@ $vm.header_form_gui=_.cloneDeep($vm.$store.state.interplex.header_form_gui);
 $vm.qasForm1New=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
 
 console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
+scanApp.start($vm,(action,data)=>{
+if(action=='base64'){
+    console.log("img data",data)
+  $vm.takePhoto.push({src:"data:image/png;base64,"+data,file_type:''})
+}
+})
 },
 watch:{
 
 
 },
     methods:{
+openScanner(){
+scanApp.openScanner()
+},
         watchQasOne:_.debounce(function(){
 var $vm=this;
 // $vm.$nextTick(()=>{

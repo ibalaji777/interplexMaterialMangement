@@ -640,19 +640,19 @@ return originalProduct[0].observation_format||[];
   return productConfigFormat;
   }
 
-export function sapMap(observation_format,sapObject){
+export function sapMap(product,observation_format,sapObject){
 
   return _.map(observation_format,(obj)=>{
 
-    if(_.has(obj,'sapHeader')){
-      obj.value=sapObject[obj['sapHeader']]||''
-      //  if(sapObject[obj['sapHeader']]){
-      //   store.commit('setSapLog',{key:sapObject[defaultFields.partNo]+obj['sapHeader'],value:'Found'})
-      // return; 
-      // }
-      // store.commit('setSapLog',{key:sapObject[defaultFields.partNo]+obj['sapHeader'],value:'Not Found'})
 
-    }
+    if(_.has(obj,'map')){
+      //sap map
+      if(obj.map.mapFrom=='header')
+      obj.value=sapObject[obj.map.map]||''
+      if(obj.map.mapFrom=='product')
+      obj.value=product[obj.map.map]||''
+
+         }
     return obj
   })
 }
@@ -684,7 +684,7 @@ if(product.length==0){
 
     }
     }
-    var observation_format=sapMap(product[0].observation_format,object)
+    var observation_format=sapMap(product,product[0].observation_format,object)
 
     var header=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
     //_.cloneDeep(database($vm,'getMasterHeaderConfig'))
@@ -762,9 +762,9 @@ console.log("x",x)
   if(x.name!='validation'){
   sapObject[x.name]=x.value||'';
 
-  if(x.sapHeader){
-    if(x.sapHeader!='')
-    sapObject[x.name]=sapObject[x.sapHeader]||""
+  if(x.map){
+    if(x.map!='')
+    sapObject[x.name]=sapObject[x.map]||""
   }
 }
 else{

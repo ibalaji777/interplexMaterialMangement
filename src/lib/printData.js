@@ -44,7 +44,7 @@ var observation_print_view_format=core.getObservationPrintView(invoice.qasFormOn
 // })
 
 var gallery=_.map(invoice.gallery,(item)=>{
-     item['src']=config.api+'/uploads/'+item.full_name;
+     item['src']=config.getApi+'/uploads/'+item.full_name;
     return item;
 })
 

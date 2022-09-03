@@ -243,7 +243,7 @@ var load_page=() => {
                     console.log("");
                 }
                 $vm.loader=false
-                                webview.openDevTools();
+                                // webview.openDevTools();
 
     $vm.$emit('load')
             }
