@@ -515,23 +515,30 @@ NO:{{index+1}}
 <div @click="takePicture" style="margin-right:10px" class="insertProduct">
 <v-icon>fa-camera</v-icon>
 </div>
-<div @click="openScanner" ref="btnScan" id="btn-scan"  class="insertProduct">
+<div @click="openScanner" ref="btnScan" style="margin-right:10px;" id="btn-scan"  class="insertProduct">
 <v-icon>mdi-scanner</v-icon>
+</div>
+<div style="position:relative" class="insertProduct">
+    <v-icon>fa-file-pdf</v-icon>
+    <input  style="width:100%;height:100%" class="custom-file-input" id="pdfFile" @change="pdfFileUpload" type="file" accept=".pdf"  />
 </div>
 
 <!-- <div  ref="btnPdf" id="btn-scan"  class="insertProduct">
 <v-icon>mdi-pdf</v-icon>
 </div> -->
-<div><b>PDF</b><br><input id="pdfFile" @change="pdfFileUpload" type="file" accept=".pdf"  /></div>
+
 </div>
 <div id="btn-upload"></div>
 <p class="text-danger mt-1" id="download-app" style="display:none;">No Scan app application found in your machine. Please download, install and open first then refresh the browser. <a href="Scan_App_SetUp.msi" download>Download app</a></p>
 <br>
+
 <div style="    background: #f13454;
     padding: 9px;
     color: white;
     border-radius: 29px;
     font-weight: 300;">
+
+
 Total Capture:{{takePhoto.length}}
 </div>
 <div class="productContainer">
@@ -1256,5 +1263,42 @@ var $vm=this;
 
 .flex-row-item {
 //   border: 1px solid #f76707;
+}
+
+
+
+.custom-file-input{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Select some files';
+width:100%;
+height:100%;
+opacity:0;
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 </style>

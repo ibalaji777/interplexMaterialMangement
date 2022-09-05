@@ -157,23 +157,13 @@ Qas Form
 <!-- style="height:0;overflow:hidden" -->
 <plugin-print-desktop    :invoice_data="invoice" v-if="$isElectron" ref="printDesktop"></plugin-print-desktop>
 <plugin-print-mobile  :invoice_data="invoice" v-else ref="printMobile"  ></plugin-print-mobile>
-<h4>
+<h4 style="margin-top:15px">
 FILE ATTACHMENTS</h4>
-<!-- <pre>{{invoice}}</pre> -->
-<!-- {{galleryFiles}}<br>{{pdfFiles}}<br>{{invoice.gallery}} -->
-
-<!-- <h5> GALLERY</h5>
-<div v-for="(image,index) in galleryFiles" :key="index+'gallery'">
-{{index+1}}.{{image.title||""}}
-<a :href="pdf.src" download>Download File</a>
-</div> -->
-<h5>
-PDF Files </h5>
-<div v-for="(pdf,index) in pdfFiles" :key="index+'files'">
+<div v-for="(pdf,index) in pdfFiles" :key="index+'files'" style="display:flex">
 {{index+1}}.{{pdf.title||""}}
-<a :href="pdf.src" download>Download File</a>
-=>
-<div @click="pdfUrl=pdf.src;pdfViewerDialog=true">View</div>
+<a style="margin-right:10px" :href="pdf.src" download>Download File</a>
+
+<div style="cursor:pointer;" @click="pdfUrl=pdf.src;pdfViewerDialog=true">View</div>
  
 </div>
 
