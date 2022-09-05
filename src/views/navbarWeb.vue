@@ -437,6 +437,14 @@ $vm.items=[
                 submenu: false
             },
 
+            {
+                title: "Inspect",
+                icon: "mdi-account-search",
+                action: "operatorDashboard",
+                submenu: false
+            },
+            
+
 ]
 }
 }

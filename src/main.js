@@ -117,6 +117,7 @@ import VueSplit from 'vue-split-panel'
 Vue.use(VueSplit)
 Vue.component('draggable',()=>import('vuedraggable'))
 Vue.config.productionTip = true;
+import pdfViewer from './views/pdfViewer.vue'
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
 import debounce from 'v-debounce'
@@ -132,7 +133,7 @@ Vue.component('labelPrintMobile', labelPrintMobile);
 Vue.component('labelPrintDesktop', labelPrintDesktop);
 
 
-
+Vue.component('pdfViewer',pdfViewer)
 Vue.component('pluginPrintMobile',pluginPrintMobile)
 Vue.component('pluginPrintDesktop',pluginPrintDesktop)
 

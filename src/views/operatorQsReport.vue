@@ -518,10 +518,14 @@ NO:{{index+1}}
 <div @click="openScanner" ref="btnScan" id="btn-scan"  class="insertProduct">
 <v-icon>mdi-scanner</v-icon>
 </div>
+
+<!-- <div  ref="btnPdf" id="btn-scan"  class="insertProduct">
+<v-icon>mdi-pdf</v-icon>
+</div> -->
+<div><b>PDF</b><br><input id="pdfFile" @change="pdfFileUpload" type="file" accept=".pdf"  /></div>
 </div>
 <div id="btn-upload"></div>
 <p class="text-danger mt-1" id="download-app" style="display:none;">No Scan app application found in your machine. Please download, install and open first then refresh the browser. <a href="Scan_App_SetUp.msi" download>Download app</a></p>
-<p class="mt-3">Integeration Plugin is missing for scan</p>
 <br>
 <div style="    background: #f13454;
     padding: 9px;
@@ -532,9 +536,10 @@ Total Capture:{{takePhoto.length}}
 </div>
 <div class="productContainer">
 <!-- {{takePhoto}} -->
-<div v-for="(image,index) in takePhoto" :key="index+image" class="productItems" style="    display: flex;
-    justify-content: space-between;">
-<img :src="image.src" alt="" style="max-width:100px;max-height:100px">
+<div v-for="(image,index) in takePhoto" :key="index+image" class="productItems" >
+    <div style="display: flex;
+    justify-content: space-between;" v-if="image.file_type=='image'">
+<img  :src="image.src" alt="" style="max-width:100px;max-height:100px">
 <div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
     height: 40px;
     border: 1px dashed #ffeb3b;
@@ -545,10 +550,32 @@ Total Capture:{{takePhoto.length}}
 </span>
 <span style="
     padding: 10px 5px;" v-else @click="selectGalleryType(index)">
-{{image.file_type}}
+{{image.title}}
 </span>
 </div>
 <v-icon @click="takePhoto.splice(index,1)">fa-trash</v-icon>
+</div>
+
+<div style="display: flex;
+    justify-content: space-between;" v-if="image.file_type=='pdf'">
+<v-icon >fa-file-pdf</v-icon>
+<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+    height: 40px;
+    border: 1px dashed #ffeb3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
++
+</span>
+<span style="
+    padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+{{image.title}}
+</span>
+</div>
+<v-icon @click="takePhoto.splice(index,1)">fa-trash</v-icon>
+
+</div>
+
 </div>
 <!-- <div class="productItems">
 Items
@@ -829,7 +856,7 @@ console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
 scanApp.start($vm,(action,data)=>{
 if(action=='base64'){
     console.log("img data",data)
-  $vm.takePhoto.push({src:"data:image/png;base64,"+data,file_type:''})
+  $vm.takePhoto.push({src:"data:image/png;base64,"+data,file_type:'image',title:''})
 }
 })
 },
@@ -838,6 +865,25 @@ watch:{
 
 },
     methods:{
+        pdfFileUpload(e){
+var $vm=this;
+    var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+        console.log("pdf file",files[0])
+    $vm.takePhoto.push({src:files[0],file_type:'pdf',title:''})
+    //   this.createPdfFile(files[0]);
+    },
+    createPdfFile(file) {
+     
+      var reader = new FileReader();
+  
+
+      reader.onload = (e) => {
+    //------------pdf file
+      };
+      reader.readAsDataURL(file);
+    },
 openScanner(){
 scanApp.openScanner()
 },
@@ -1128,7 +1174,9 @@ var $vm=this;
 var selected_gallery=_.cloneDeep($vm.selected_gallery)
 if($vm.selected_gallery!==-1)
 {
-    this.takePhoto[selected_gallery].file_type=item.name;
+        this.takePhoto[selected_gallery].title=item.name;
+
+    // this.takePhoto[selected_gallery].file_type=item.name;
     $vm.selected_gallery=-1;
     $vm.fileTypeDialog=false;
 }
@@ -1162,7 +1210,7 @@ console.log("validatiion failed please add validation")
   // Here you get the image as result.
   const theActualPicture = image.dataUrl;
   console.log(theActualPicture)
-  $vm.takePhoto.push({src:theActualPicture,file_type:''})
+  $vm.takePhoto.push({src:theActualPicture,file_type:'image',title:''})
 },
         watchValue(event,productFormat){
 var $vm=this;

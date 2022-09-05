@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>PDF.js file input test</title>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@1.10.100/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@1.10.100/build/pdf.worker.min.js"></script>
+</head>
+<body>
+<div id="outerwrap"><input type="file" accept=".pdf" id="thisfile" /></div>
+<script>
+function readPDFFile(pdf){
+PDFJS.getDocument({data: pdf}).then(function(pdf){
+var pdfPages = pdf.pdfInfo.numPages;
+console.log(pdfPages); }); } // <--- get number of pages
+window.onload = function(){
+document.getElementById('thisfile').addEventListener('change', function(){
+var file = this.files[0]; if (!file){ return; }
+var fileReader = new FileReader();
+fileReader.onload = function(e){ readPDFFile(new Uint8Array(e.target.result)); };
+fileReader.readAsArrayBuffer(file); }); };
+</script>
+</body>
+</html>

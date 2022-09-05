@@ -90,6 +90,8 @@
   "nunjucks": "^3.2.3",
   "passport": "^0.4.1",
   "passport-google-oauth20": "^2.0.0",
+  "pdfjs": "^2.4.7",
+  "pdfjs-dist": "^2.3.200",
   "peerjs": "^1.3.2",
   "pg": "^7.18.2",
   "pouchdb": "^7.2.2",

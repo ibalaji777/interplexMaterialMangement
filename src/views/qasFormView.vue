@@ -157,6 +157,52 @@ Qas Form
 <!-- style="height:0;overflow:hidden" -->
 <plugin-print-desktop    :invoice_data="invoice" v-if="$isElectron" ref="printDesktop"></plugin-print-desktop>
 <plugin-print-mobile  :invoice_data="invoice" v-else ref="printMobile"  ></plugin-print-mobile>
+<h4>
+FILE ATTACHMENTS</h4>
+<!-- <pre>{{invoice}}</pre> -->
+<!-- {{galleryFiles}}<br>{{pdfFiles}}<br>{{invoice.gallery}} -->
+
+<!-- <h5> GALLERY</h5>
+<div v-for="(image,index) in galleryFiles" :key="index+'gallery'">
+{{index+1}}.{{image.title||""}}
+<a :href="pdf.src" download>Download File</a>
+</div> -->
+<h5>
+PDF Files </h5>
+<div v-for="(pdf,index) in pdfFiles" :key="index+'files'">
+{{index+1}}.{{pdf.title||""}}
+<a :href="pdf.src" download>Download File</a>
+=>
+<div @click="pdfUrl=pdf.src;pdfViewerDialog=true">View</div>
+ 
+</div>
+
+       <v-dialog
+      v-model="pdfViewerDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>
+            <v-icon               @click="pdfViewerDialog = false">fa-times</v-icon>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <v-divider></v-divider>
+       <div style="padding:10px">
+    <pdf-viewer :url="pdfUrl"></pdf-viewer>
+       </div>
+      </v-card>
+    </v-dialog>
+
 
 <!-- *********************Gallery************************ -->
        <v-dialog
@@ -602,6 +648,8 @@ const math = create(all,  {})
 export default {
 data(){
     return {
+        pdfUrl:'',
+        pdfViewerDialog:false,
          barcodeLabel:{
             pageSetup:{
 page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
@@ -652,6 +700,20 @@ printViewMap:{},
     }
 }    ,
 computed:{
+    galleryFiles(){
+        var $vm=this;
+        return _.map(_.filter(_.cloneDeep($vm.invoice.gallery),(x)=>x.file_type=='image'),(x)=>{
+            x['src']=config.getApi()+'/uploads/'+x.full_name;
+      return x;
+      })
+    },
+    pdfFiles(){
+        var $vm=this;
+        return _.map(_.filter(_.cloneDeep($vm.invoice.gallery),(x)=>x.file_type=='pdf'),(x)=>{
+            x['src']=config.getApi()+'/uploads/'+x.full_name;
+            return x;
+        })
+    },
     getIndex(){
     var $vm=this;
 return (name)=>{
@@ -962,7 +1024,7 @@ var $vm=this;
 var selected_gallery=_.cloneDeep($vm.selected_gallery)
 if($vm.selected_gallery!==-1)
 {
-    this.takePhoto[selected_gallery].file_type=item.name;
+    this.takePhoto[selected_gallery].title=item.name;
     $vm.selected_gallery=-1;
     $vm.fileTypeDialog=false;
 }
@@ -979,9 +1041,14 @@ formdata.append('invoice_table_id',image['invoice_table_id'])
 formdata.append('invoice_client_id',image['invoice_client_id'])
 formdata.append('invoice_no',image['invoice_no'])
 formdata.append('file_type',image['file_type'])
+formdata.append('title',image['title'])
 
+if(image.file_type=='image'){
 formdata.append('file',core.base64toBlob((image.src).split(',')[1]))        
-
+}
+          else{
+            formdata.append("file",image.src);
+          }
 await $vm.$store.dispatch('upload',formdata)
 console.log("uploading....")
 return image;

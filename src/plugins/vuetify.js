@@ -41,7 +41,8 @@ import {
 	faEdit,
 	faCubes,
 	faQuestionCircle,
-	faSignOutAlt
+	faSignOutAlt,
+	faFilePdf
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(
@@ -66,6 +67,7 @@ library.add(
 	faPlug,
 	faShoppingBasket,
 	faTasks,
+	faFilePdf
 	
 );
 library.add(

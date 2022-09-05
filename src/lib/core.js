@@ -1373,11 +1373,17 @@ console.log(new_invoices)
           );
           formdata.append("invoice_no", invoice["invoice_no"]);
           formdata.append("file_type", image["file_type"]);
+          formdata.append("title", image["title"]);
 
+           if(image.file_type=='image'){
           formdata.append(
               "file",
               base64toBlob(image.src.split(",")[1])
-          );
+          );}
+
+          else{
+            formdata.append("file",image.src);
+          }
 
           await $vm.$store.dispatch("upload", formdata);
 
