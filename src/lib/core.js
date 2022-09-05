@@ -1177,6 +1177,245 @@ export function setHeaderConfigData(headerData,invoice){
 });
 
 }
+
+export async function  submit_new_single($vm) {
+
+  console.log("====submit====")
+  console.log($vm.tempInvoice)
+  var invoices = [];
+  var user_id = $vm.$store.state.interplex.user.id;
+  var invoice_no_validate = true;
+
+  _.each($vm.tempInvoice, (val, key) => {
+      var invoice = {};
+      console.log( key, val );
+
+      const uuid = uuidv4();
+      const qasForm1Prod = _.cloneDeep(
+          _.filter(
+              $vm.getQualityAssuranceFormOne,
+              product => product.ref == key
+          )
+      );
+
+
+      invoice["qasForm1Prod"] = _.map(qasForm1Prod, x => {
+          x["invoice_client_id"] = uuid;
+          // invoice["remarks"] = $vm.$store.state.interplex.tempRemarks[x.qasRef]
+          return x;
+      });
+      //chec
+      invoice["ref"] = key;
+      invoice["invoice_client_id"] = uuid;
+      invoice["gallery"] = _.map(val["gallery"], x => {
+          x["invoice_client_id"] = uuid;
+          return x;
+      });
+      // invoice["remarks"] = val["remarks"];
+
+      invoice["operator_id"] =
+          $vm.$store.state.interplex.user.id || 0;
+      invoice["qasForm1Prod"] = qasForm1Prod; //_.filter($vm.getQualityAssuranceFormOne,(product)=>(product.ref==key));
+      invoice["supplier_name"] = "";
+      invoice["invoice_no"] = "";
+      invoice["invoice_date"] = moment().format(
+          $vm.$store.state.dateFormat
+      );
+      invoice["invoice_qty"] = 0;
+      invoice["ir"] = "";
+      invoice["date"] = moment().format($vm.$store.state.dateFormat);
+      invoice["grn_no"] = "";
+      invoice["grn_date"] = moment().format(
+          $vm.$store.state.dateFormat
+      );
+      invoice["rmcode"] = "";
+      invoice["eds"] = "";
+      invoice["rm"] = "";
+      invoice["received_qty"] = 0;
+      invoice["product_name"] = "";
+      invoice["form_format"] = "";
+      invoice["comment"] = "";
+      invoice["duedate"] = moment().format(
+          $vm.$store.state.dateFormat
+      );
+      invoice["observation_format"] = [];
+      invoice["header_format"] = [];
+      // invoice['remarks']='';
+      invoice["status"] = "pending";
+      invoice["approved_by"] = 0;
+
+      if (qasForm1Prod.length != 0) {
+          // ***********************************
+          var headerData = qasForm1Prod[0].headerConfigFormat;
+          // console.log("++++header++++",headerData)
+          _.map(headerData, header => {
+              invoice[header.name] = header.value;
+          });
+          // ***********************************
+
+          invoice["qasForm1New"] = _.map(qasForm1Prod, product => {
+              var object = {};
+
+              console.log("product", product);
+              object["batch"] = "";
+              object["skiplevel_status"] = product.skiplevel_status;
+              object["sk_index"] = product.sk_index;
+              object["sk_order"] = product.sk_order;
+              object["remarks"] = $vm.$store.state.interplex.tempRemarks[product.qasRef]
+if(product.dbProduct){
+  object["form_format"] =product.dbProduct.form_format //$vm.$store.state.interplex.tempRemarks[product.qasRef]
+}
+              // object['status']='pending'
+              object["invoice_client_id"] =
+                  product["invoice_client_id"];
+              // console.log(product['invoice_client_id'])
+              _.map(product.headerConfigFormat, header => {
+                  object[header.name] = header.value;
+              });
+              object["observation_format"] =
+                  product.productConfigFormat;
+              object["header_format"] = product.headerConfigFormat;
+              object['qas_form_one_values']=_.reduce(product.productConfigFormat,
+                (result,value,key)=>{
+                  // console.log("qas_form_one_values",value.name,value.value)
+                  result[value.name]=value.value
+                  return result;
+
+              },{})
+              object['qas_form_one_validation']=_.reduce(product.productConfigFormat,
+                (result,value,key)=>{
+                  // console.log("qas_form_one_values",key,value)
+                  if(value.exp)
+                  result[value.name]=value.exp.rule
+                  return result;
+
+              },{})
+
+
+              //some fiels lag
+              object["qasForm2New"] = _.map(
+                  product.qasForm2,
+                  qasform2 => {
+                      // qasform2
+                      qasform2["invoice_client_id"] =
+                          invoice["invoice_client_id"];
+                          qasform2['qas_form_two_values']=_.reduce(product.productConfigFormat2,
+                            (result,value,key)=>{
+                              // console.log("qas_form_one_values",key,value)
+                              result[value.name]=qasform2[value.name]//value.value
+                              return result;
+            
+                          },{})
+            
+                          qasform2['qas_form_two_validation']=_.reduce(product.productConfigFormat2,
+                            (result,value,key)=>{
+                              // console.log("qas_form_one_values",key,value)
+                              if(value.exp)
+                              result[value.name]=value.exp.rule
+                              return result;
+            
+                          },{})
+    
+                
+                          return qasform2;
+                  }
+              );
+
+              if (product.qasForm2.length != 0) {
+                  object["batch"] = product.qasForm2[0]["batch_no"];
+              }
+              return { ...object, operator_id: user_id };
+          });
+      }
+
+      invoices.push(invoice);
+  });
+
+  $vm.$alert("Saved");
+//---------------------------------------------------
+  console.log("+++Invoices Gallery+++", invoices);
+  // ----------------
+
+var new_invoices=_.map(invoices,(invoice)=>{
+
+invoice.qasForm1New= _.map(invoice.qasForm1New,(qsform1)=>{
+
+var qasformone=setQasHeader(qsform1,qsform1.header_format)
+return qasformone
+
+})
+return invoice
+})
+
+// console.log(new_invoices)
+
+_.map(invoices,async (single_invoice)=>{
+
+  var result = await $vm.$store.dispatch("submitInvoiceSingle",single_invoice);
+
+   _.map(new_invoices, invoice => {
+    invoice["gallery"] = _.map(invoice.gallery, async image => {
+        var formdata = new FormData();
+        // image['invoice_client_id']=invoice['invoice_client_id'];
+        image["invoice_table_id"] = 0;
+        var invoiceFilter = _.filter(
+            result,
+            ob => ob.invoice_client_id == image.invoice_client_id
+        );
+        if (invoiceFilter.length != 0)
+            image["invoice_table_id"] = invoiceFilter[0].id;
+
+        // formdata.append('invoice_table_id',image['invoice_table_id'])
+        formdata.append(
+            "invoice_table_id",
+            image["invoice_table_id"]
+        );
+        formdata.append(
+            "invoice_client_id",
+            image["invoice_client_id"]
+        );
+        formdata.append("invoice_no", invoice["invoice_no"]);
+        formdata.append("file_type", image["file_type"]);
+        formdata.append("title", image["title"]);
+
+         if(image.file_type=='image'){
+        formdata.append(
+            "file",
+            base64toBlob(image.src.split(",")[1])
+        );}
+
+        else{
+          formdata.append("file",image.src);
+        }
+
+        await $vm.$store.dispatch("upload", formdata);
+
+        // files.push(image)
+        return image;
+    });
+    return invoice;
+});
+
+
+
+
+})
+
+
+
+  // -----------------
+  // _.map(blobInvoices,(rt)=>{
+  //  rt['invoice_table_id']=0;
+  // var invoiceFilter=_.filter(result,(ob)=>ob.invoice_client_id==rt.invoice_client_id)
+  // if(invoiceFilter.length!=0)
+  // rt['invoice_table_id']=invoiceFilter[0].id
+
+  // })
+
+  // console.log("++++++invoices++++",invoices)
+  $vm.clear();
+}
+
 export async function  submit_new($vm) {
 
   console.log("====submit====")

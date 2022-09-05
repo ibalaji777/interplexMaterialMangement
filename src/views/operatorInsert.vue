@@ -1505,7 +1505,8 @@ x= vm.runInNewContext($vm.$store.state.interplex.datTwoCode, { product:x });
         async submit(){
             var $vm=this;
             // core.submit(this)
-await core.submit_new(this)
+// await core.submit_new(this)
+await core.submit_new_single(this)
 $vm.$store.dispatch("approverList")
         },
 //         async submit_() {

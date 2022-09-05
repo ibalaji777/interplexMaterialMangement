@@ -60,6 +60,7 @@ var updateHeaderConfigApi=api+'/headerconfig/update';
 var readQasform2Config=api+'/readqasform2config';
 var updateQasForm2ConfigApi=api+'/headerqasform2/update';
 var submitInvoiceApi=api+'/addInvoices';
+var submitInvoiceSingleApi=api+'/addInvoicesingle';
 
 var invoiceUploadApi=api+'/invoiceupload'
 var checkProductBatch=api+'/productbatch/check'
@@ -92,6 +93,13 @@ var updateQasFormApi=api+'/qasforms/update'
 async function submitInvoice(context,invoices){
 
     var result=await axios.post(submitInvoiceApi,{invoices})
+return result.data.data;
+    console.log('result',result)
+}
+
+async function submitInvoiceSingle(context,invoice){
+
+    var result=await axios.post(submitInvoiceSingleApi,{invoice})
 return result.data.data;
     console.log('result',result)
 }
@@ -158,6 +166,12 @@ const actions = {
 
         return submitInvoice(context,payload)
     },
+    async submitInvoiceSingle(context,payload){
+
+        return submitInvoiceSingle(context,payload)
+    },
+
+    
     async updateHeaderConfig(context,payload){
 return await updateHeaderConfig(context,payload)
     },
