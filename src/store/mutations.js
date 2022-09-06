@@ -168,6 +168,8 @@ if(config.length!=0)
 
 },
 setQasForm2Config(state,config){
+	console.log("++++setQasForm2Config++++",config)
+	if(config!='')
 	Vue.set(state.interplex,'configQasForm2Format',config)
 },
 setQasFormOneList(state,list){

@@ -647,6 +647,10 @@ export function sapMap(product,observation_format,sapObject){
 
     if(_.has(obj,'map')){
       //sap map
+      console.log(obj.map.mapFrom,sapObject[obj.map.map])
+      console.log(obj.map.mapFrom,product[obj.map.map])
+console.log("product",product)
+console.log("sapObject",sapObject)
       if(obj.map.mapFrom=='header')
       obj.value=sapObject[obj.map.map]||''
       if(obj.map.mapFrom=='product')
@@ -684,7 +688,7 @@ if(product.length==0){
 
     }
     }
-    var observation_format=sapMap(product,product[0].observation_format,object)
+    var observation_format=sapMap(product[0],product[0].observation_format,object)
 
     var header=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
     //_.cloneDeep(database($vm,'getMasterHeaderConfig'))

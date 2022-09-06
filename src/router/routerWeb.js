@@ -21,6 +21,8 @@ import verifierList from '../views/verifierList.vue'
 import verifierView from '../views/verifierView.vue'
 import approverList from '../views/approverList.vue'
 
+import qasFormOneDefault from '../views/qasFormOneDefault.vue'
+import qasFormTwoDefault from '../views/qasFormTwoDefault.vue'
 
 import createProduct from '../views/createProduct.vue'
 import adminDashboard from '../views/adminDashboard.vue'
@@ -172,6 +174,18 @@ const routes = [
 
 
 //------------------------------------
+
+{
+	path: '/qasFormOneDefault',
+	name: 'qasFormOneDefault',
+	component:qasFormOneDefault 
+}
+,
+{
+	path: '/qasFormTwoDefault',
+	name: 'qasFormTwoDefault',
+	component:qasFormTwoDefault 
+}
 ,
 	{
 		path: '/qasForm2Config',

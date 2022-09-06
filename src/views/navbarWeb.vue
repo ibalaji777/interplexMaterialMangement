@@ -130,6 +130,7 @@ export default {
                 action: "adminDashobard",
                 submenu: false
             },
+            
                         {
                 title: "nativePhotoCapture",
                 icon: "fa-money-bill-wave",
@@ -318,12 +319,12 @@ $vm.items=[
                 action: "qasFormOneConfigHeader",
                 submenu: false
             },
-           {
-                title: "Qas Form 2 Config",
-                icon: "mdi-form-select",
-                action: "qasForm2Config",
-                submenu: false
-            },
+        //    {
+        //         title: "Qas Form 2 Config",
+        //         icon: "mdi-form-select",
+        //         action: "qasForm2Config",
+        //         submenu: false
+        //     },
                     {
                 title: "Label Setting",
                 icon: "fa-history",
@@ -391,12 +392,14 @@ $vm.items=[
                 action: "qasFormOneConfigHeader",
                 submenu: false
             },
-           {
-                title: "Qas Form 2 Config",
-                icon: "mdi-form-select",
-                action: "qasForm2Config",
-                submenu: false
-            },
+        //    {
+        //         title: "Qas Form 2 Config",
+        //         icon: "mdi-form-select",
+        //         action: "qasForm2Config",
+        //         submenu: false
+        //     },
+
+
              {
                 title: "Find",
                 icon: "fa-search",
@@ -441,6 +444,18 @@ $vm.items=[
                 title: "Inspect",
                 icon: "mdi-account-search",
                 action: "operatorDashboard",
+                submenu: false
+            },
+         {
+                title: "Default Qas1",
+                icon: "fa-search",
+                action: "qasFormOneDefault",
+                submenu: false
+            },
+         {
+                title: "Default Qas2",
+                icon: "fa-search",
+                action: "qasFormTwoDefault",
                 submenu: false
             },
             

@@ -114,8 +114,8 @@ async function updateQasForm2Config(context,config){
     var result = await axios.post(updateQasForm2ConfigApi,{config})
     console.log('result qasform2 config',result)
     await getQasForm2Config(context)
-    if(result.data.successStatus) return true;
-    return false;
+    // if(result.data.successStatus) return true;
+    // return false;
 
 
 }

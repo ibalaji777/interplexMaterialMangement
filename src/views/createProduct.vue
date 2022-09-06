@@ -1330,7 +1330,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                         <div v-if="isKeyExist2(qas2EditableIndex, 'map')">
                                                     <v-text-field
-                                label="Map From "
+                                label="Map From (header/product)"
                                 v-model="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
@@ -1526,7 +1526,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                         <div v-if="isKeyExist(qasEditableIndex, 'map')">
                                                         <v-text-field
-                                label="Map From"
+                                label="Map From(header/product)"
                                 v-model="
                                     insertForm.observation_format[
                                         qasEditableIndex
@@ -2897,7 +2897,10 @@ default:true,
                     $vm.$set(
                         $vm.insertForm.observation_format[index],
                         "map",
-                        ""
+                        {
+                        mapFrom:'header',
+                        map:''
+                        }
                     );
             }
             if (action == "exp") {
