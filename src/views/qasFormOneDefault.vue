@@ -97,7 +97,7 @@
 
                                             <v-text-field
                                                 outlined
-                                                v-debounce="delay"
+                                                
                                                 label="value"
                                                 v-model.lazy="
                                                     insertForm
@@ -288,7 +288,7 @@
 
                                                 <v-text-field
                                                     outlined
-                                                    v-debounce="delay"
+                                                    
                                                     label="value"
                                                     v-model.lazy="
                                                         insertForm
@@ -489,7 +489,7 @@
 
                                             <v-text-field
                                                 outlined
-                                                v-debounce="delay"
+                                                
                                                 label="value"
                                                 v-model.lazy="
                                                     insertForm
@@ -680,7 +680,7 @@
 
                                                 <v-text-field
                                                     outlined
-                                                    v-debounce="delay"
+                                                    
                                                     label="value"
                                                     v-model.lazy="
                                                         insertForm
@@ -848,7 +848,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                                             <v-text-field
                                                 outlined
-                                                v-debounce="delay"
+                                                
                                                 label="value"
                                                 v-model.lazy="
                                                     insertForm
@@ -1025,7 +1025,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                                                 <v-text-field
                                                     outlined
-                                                    v-debounce="delay"
+                                                    
                                                     label="value"
                                                     v-model.lazy="
                                                         insertForm
@@ -1235,7 +1235,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <v-text-field
                         hint="whithout whitespace"
                         outlined
-                        v-debounce="delay"
+                        
                         label="Name"
                         v-model.lazy="createRowName2"
                     ></v-text-field>
@@ -1275,7 +1275,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <v-text-field
                         hint="whithout whitespace"
                         outlined
-                        v-debounce="delay"
+                        
                         label="Name"
                         v-model.lazy="createRowName"
                     ></v-text-field>

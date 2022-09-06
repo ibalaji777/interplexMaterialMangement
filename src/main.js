@@ -120,8 +120,9 @@ Vue.config.productionTip = true;
 import pdfViewer from './views/pdfViewer.vue'
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
-import debounce from 'v-debounce'
 import labelSetting from './views/labelSetting.vue'
+
+import debounce from 'v-debounce'
 Vue.use(debounce)
 
 Vue.component('appWeb', appWeb);
