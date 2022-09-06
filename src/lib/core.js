@@ -4,6 +4,7 @@ import moment from 'moment'
 import store from '../store/index.js'
 import { v4 as uuidv4 } from 'uuid';
 
+import * as utils from './utils.js'
 // export const api="https://f237-2402-3a80-133b-8b42-a1cc-2d34-1f64-c56f.in.ngrok.io";
 
 export var defaultFields={
@@ -691,10 +692,12 @@ if(product.length==0){
 
     }
     }
-    var observation_format=sapMap(product[0],product[0].observation_format,object,'qasFormOne')
+  var observation_format=utils.qas1Map(product[0],product[0].observation_format,object,'qasFormOne')
+    //sapMap(product[0],product[0].observation_format,object,'qasFormOne')
 
   // var observation2_format=sapMap(product[0],product[0].observation2_format,object,'qasFormTwo')
-  var  qasForm2=setQasForm2(object.products,product[0].observation2_format,product[0]);
+  var  qasForm2=utils.qas2Map(object.products,product[0].observation2_format,product[0]);
+  //setQasForm2(object.products,product[0].observation2_format,product[0]);
     // var observation_format2=sapMap(product[0],product[0].observation_format,object)
     var header=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
     //_.cloneDeep(database($vm,'getMasterHeaderConfig'))
