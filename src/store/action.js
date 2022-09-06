@@ -16,6 +16,12 @@ var setDefaultImportApi=api+'/setdefaultimport';
 
 
 
+var getQasFormOneDefaultApi=api+'/getqasformonedefault';
+var setQasFormOneDefaultApi=api+'/setqasformonedefault';
+
+var getQasFormTwoDefaultApi=api+'/getqasformtwodefault';
+var setQasFormTwoDefaultApi=api+'/setqasformtwodefault';
+
 
 var datOneCodeSetApi=api+'/datOneCode/save';
 var datOneCodeGetApi=api+'/datOneCode/read';
@@ -610,9 +616,55 @@ async getDefaultImport(context,payload){
                 
                 return result.data
                 },
-        
+                        
+        async getQasFormOneDefault(context){
+            var result=await axios.get(getQasFormOneDefaultApi);
             
-                    
+            if(result.data){
+                context.commit('setQasFormOneDefault',result.data.config)
+
+            }
+            return result.data
+            },
+                     
+        async getQasFormTwoDefault(context){
+            var result=await axios.get(getQasFormTwoDefaultApi);
+            
+            if(result.data){
+
+                context.commit('setQasFormTwoDefault',result.data.config)
+
+
+            }
+            return result.data
+            },
+
+                async setQasFormOneDefault(context,qasFormOne){
+                    var result=await axios.post(setQasFormOneDefaultApi,
+                        {
+                            config:{
+                            observation_header_print_view:qasFormOne.observation_header_print_view,    
+                            observation_format:qasFormOne.observation_format,
+                            observation_print_view:qasFormOne.observation_print_view
+                            }
+                    });
+                //   await  actions.getQasFormOneDefault(context)
+                    return result.data
+                    },
+                           
+                    async setQasFormTwoDefault(context,qasFormTwo){
+                        var result=await axios.post(setQasFormTwoDefaultApi,
+                            {
+                                config:{
+                                observation2_header_print_view:qasFormTwo.observation2_header_print_view,    
+                                observation2_format:qasFormTwo.observation2_format,
+                                observation2_print_view:qasFormTwo.observation2_print_view
+                                }
+                        });
+                        await  actions.getQasFormTwoDefault(context)
+                        return result.data
+                        },
+                        
 }
 
 export default actions;

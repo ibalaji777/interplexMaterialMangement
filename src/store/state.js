@@ -595,7 +595,7 @@ printConfig:{
 	*inspection is done as per sampling plan WI/QA/46
 	</div>
 	</div>
-    	<div><b>Remark:</b>{{remarks}}</div>
+    	<div style="margin-top:10px"><b>Remark:</b>{{remarks}}</div>
 
 	<div style="display: flex;
 	justify-content: space-around;">
@@ -1667,9 +1667,9 @@ width:'50'
 			
 			
 			{
-				label:'Sup Coil',//input field label
+				label:'Heat No/Sup Coil',//input field label
 				name:'header_lot_no',//column name
-				value:'Sup Coil',//default value
+				value:'Heat No/Sup Coil',//default value
 				default:true,
 				editable:true,
 				},
@@ -1725,7 +1725,7 @@ editable:true,
 },
 
 {
-	label:'Sup Coil',//input field label
+	label:'Heat No/Sup Coil',//input field label
 	name:'lot_no',//column name
 	value:'',//default value
 

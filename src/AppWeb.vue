@@ -135,6 +135,13 @@ export default {
 // await $vm.$store.dispatch("labelSettingRead");  });
 
 
+  socket.on("watchQasFormOneDefault", async (data) => {
+await $vm.$store.dispatch("getQasFormOneDefault");  });
+
+  socket.on("watchQasFormTwoDefault", async (data) => {
+await $vm.$store.dispatch("getQasFormTwoDefault");  });
+
+
   socket.on("watchLabelSetting", async (data) => {
 await $vm.$store.dispatch("labelSettingRead");  });
 
@@ -194,7 +201,10 @@ async handler(){
    var $vm = this;
 
    // ---------------------setup config------------------------------------
-   await $vm.$store.dispatch("getProductConfig");
+await $vm.$store.dispatch("getQasFormOneDefault"); 
+await $vm.$store.dispatch("getQasFormTwoDefault"); 
+
+    await $vm.$store.dispatch("getProductConfig");
    await $vm.$store.dispatch("readQasForm2Config");
    await $vm.$store.dispatch("getProducts");
    await $vm.$store.dispatch("getHeaderConfig");

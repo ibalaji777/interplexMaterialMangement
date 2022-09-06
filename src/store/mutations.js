@@ -228,6 +228,25 @@ state.map.sapImport=config
 setPrintConfig(state,config){
 state.interplex.printConfig=config
 
-}}
+},
+setQasFormOneDefault(state,payload){
+	console.log("+++++setQasFormOneDefault++++")
+	console.log(payload)
+	state.interplex.observation_print_view_format=payload.observation_print_view;
+	state.interplex.observation_header_print_view_format=payload.observation_header_print_view;
+	state.interplex.configProductsFormat=payload.observation_format;
+
+}
+,
+setQasFormTwoDefault(state,payload){
+	console.log("+++++setQasFormTwoDefault++++")
+	console.log(payload)
+	state.interplex.observation2_print_view_format=payload.observation2_print_view;
+	state.interplex.observation2_header_print_view_format=payload.observation2_header_print_view;
+	state.interplex.configProductsFormat2=payload.observation2_format;
+
+}
+
+}
 
 export default mutations;
