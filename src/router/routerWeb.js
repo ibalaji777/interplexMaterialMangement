@@ -8,8 +8,12 @@ import branches from '../views/branches.vue'
 import login from '../views/login.vue'
 import userRole from '../views/userRole.vue'
 
-import sapImportStepTwo from '../views/sapImportStepTwo.vue'
+import guiQasFormOne from '../views/guiQasFormOne.vue'
+import guiQasFormTwo from '../views/guiQasFormTwo.vue'
+import guiHeader from '../views/guiHeader.vue'
 
+
+import sapImportStepTwo from '../views/sapImportStepTwo.vue'
 import sapImportStepOne from '../views/sapImportStepOne.vue'
 
 import operatorDashboard from '../views/operatorDashboard.vue'
@@ -87,7 +91,21 @@ const routes = [
 		name: 'qrScan',
 		component:qrScan 
 	},
-
+	{
+		path: '/guiQasFormOne',
+		name: 'guiQasFormOne',
+		component:guiQasFormOne 
+	},
+	{
+		path: '/guiQasFormTwo',
+		name: 'guiQasFormTwo',
+		component:guiQasFormTwo 
+	},
+	{
+		path: '/guiHeader',
+		name: 'guiHeader',
+		component:guiHeader 
+	},
 
 	
 	{

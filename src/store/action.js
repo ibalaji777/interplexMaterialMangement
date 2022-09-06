@@ -5,6 +5,19 @@ import axios from 'axios'
 /*eslint-disable*/
 var labelGenerateApi=api+"/labelgenerate"
 
+
+var getGuiHeaderApi=api+'/getguiheader';
+var setGuiHeaderApi=api+'/setguiheader';
+
+var getGuiQasFormOneApi=api+'/getguiqasformone';
+var setGuiQasFormOneApi=api+'/setguiqasformone';
+
+var getGuiQasFormTwoApi=api+'/getguiqasformtwo';
+var setGuiQasFormTwoApi=api+'/setguiqasformtwo';
+
+
+
+
 var getprintconfigApi=api+'/getprintconfig';
 var setprintconfigApi=api+'/setprintconfig';
 
@@ -664,7 +677,67 @@ async getDefaultImport(context,payload){
                         await  actions.getQasFormTwoDefault(context)
                         return result.data
                         },
+
+                        async getGuiQasFormOne(context,payload){
+                            var result=await axios.get(getGuiQasFormOneApi);
+                            
+                            if(result.data){
+                            context.commit('setGuiQasFormOne',result.data.config)
+                            }
+                            return result.data
+                            },
+                            async setGuiQasFormOne(context,config){
+                            var result=await axios.post(setGuiQasFormOneApi,{config});
+                            if(result.data){
+                                context.commit('setGuiQasFormOne',result.data.config)
                         
+                                return result.data.config
+                                
+                            
+                            }
+                            return ""
+                            },
+                            
+                            async getGuiQasFormTwo(context,payload){
+                                var result=await axios.get(getGuiQasFormTwoApi);
+                                
+                                if(result.data){
+                                context.commit('setGuiQasFormTwo',result.data.config)
+                                }
+                                return result.data
+                                },
+                                async setGuiQasFormTwo(context,config){
+                                var result=await axios.post(setGuiQasFormTwoApi,{config});
+                                if(result.data){
+                                    context.commit('setGuiQasFormTwo',result.data.config)
+                            
+                                    return result.data.config
+                                    
+                                
+                                }
+                                return ""
+                                },
+
+                                async getGuiHeader(context,payload){
+                                    var result=await axios.get(getGuiHeaderApi);
+                                    
+                                    if(result.data){
+                                    context.commit('setHeader',result.data.config)
+                                    }
+                                    return result.data
+                                    },
+                                    async setGuiHeader(context,config){
+                                    var result=await axios.post(setGuiHeaderApi,{config});
+                                    if(result.data){
+                                        context.commit('setHeader',result.data.config)
+                                
+                                        return result.data.config
+                                        
+                                    
+                                    }
+                                    return ""
+                                    },
+
 }
 
 export default actions;

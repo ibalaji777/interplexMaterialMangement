@@ -133,6 +133,15 @@ export default {
 
 //   socket.on("watchQasFormConfig", async (data) => {
 // await $vm.$store.dispatch("labelSettingRead");  });
+  socket.on("watchGuiQasFormOne", async (data) => {
+await $vm.$store.dispatch("getGuiQasFormOne");  });
+
+  socket.on("watchGuiQasFormTwo", async (data) => {
+await $vm.$store.dispatch("getGuiQasFormTwo");  });
+
+  socket.on("watchGuiHeader", async (data) => {
+await $vm.$store.dispatch("getGuiHeader");  });
+
 
 
   socket.on("watchQasFormOneDefault", async (data) => {
@@ -220,7 +229,10 @@ await $vm.$store.dispatch("labelSettingRead");
    await $vm.$store.dispatch("getSapImport");
    await $vm.$store.dispatch("getDefaultImport");
    await $vm.$store.dispatch('getPrintConfig')
+await $vm.$store.dispatch("getGuiQasFormOne"); 
 
+await $vm.$store.dispatch("getGuiQasFormTwo"); 
+await $vm.$store.dispatch("getGuiHeader");
 // if(get){
 
 // core.setDefaultFields();

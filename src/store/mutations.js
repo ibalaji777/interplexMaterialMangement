@@ -245,7 +245,23 @@ setQasFormTwoDefault(state,payload){
 	state.interplex.observation2_header_print_view_format=payload.observation2_header_print_view;
 	state.interplex.configProductsFormat2=payload.observation2_format;
 
+},
+setGuiQasFormOne(state,payload){
+	state.interplex.qas_form_one_ui=payload;
+},
+
+setGuiQasFormTwo(state,payload){
+	state.interplex.qas_form_two_ui=payload;
+},
+setHeader(state,payload){
+	state.interplex.header_form_gui=payload;
 }
+
+
+
+
+
+
 
 }
 

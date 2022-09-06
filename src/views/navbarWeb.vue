@@ -458,8 +458,26 @@ $vm.items=[
                 action: "qasFormTwoDefault",
                 submenu: false
             },
+         {
+                title: "Gui Header",
+                icon: "mdi-puzzle-edit-outline",
+                action: "guiHeader",
+                submenu: false
+            },
             
 
+         {
+                title: "Gui Qas1",
+                icon: "mdi-puzzle-edit-outline",
+                action: "guiQasFormOne",
+                submenu: false
+            },
+         {
+                title: "Gui Qas2",
+                icon: "mdi-puzzle-edit-outline",
+                action: "guiQasFormTwo",
+                submenu: false
+            },
 ]
 }
 }

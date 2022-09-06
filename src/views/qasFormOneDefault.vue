@@ -357,7 +357,7 @@
 <div style="display: flex;
     margin-top: 25px;
     justify-content: flex-end;">
-            <v-btn outlined @click="clear" style=";margin-right:10px;"
+            <v-btn outlined @click="reset" style=";margin-right:10px;"
                 >Reset</v-btn
             >
             <v-btn  outlined @click="save" style=""
@@ -2734,7 +2734,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 <script>
 /*eslint-disable*/
 import * as core from "../lib/core.js";
-
+import * as reset from '../lib/dataset.js'
 import  moment from 'moment'
 import _ from 'lodash'
 
@@ -3290,6 +3290,29 @@ return;
                 }
             );
         },
+
+        async reset() {
+            var $vm = this;
+                        $vm.$confirm("Do you want to reset ?", "warning", "warning").then(
+                async () => {
+
+// ------------------qasformone----------
+var payload={
+observation_header_print_view:reset.dataset.observation_header_print_view_format,    
+observation_format:reset.dataset.configProductsFormat,
+observation_print_view:reset.dataset.observation_print_view_format,
+}
+
+await $vm.$store.dispatch('setQasFormOneDefault',payload)
+$vm.$alert("Reset")
+// var payload={
+// observation2_header_print_view:$vm.insertForm.observation2_header_print_view,    
+// observation2_format:$vm.insertForm.observation2_format,
+// observation2_print_view:$vm.insertForm.observation2_print_view
+// }
+                })
+        },
+
         async save() {
             var $vm = this;
 // ------------------qasformone----------
