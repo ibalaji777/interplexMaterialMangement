@@ -640,8 +640,10 @@ return originalProduct[0].observation_format||[];
   return productConfigFormat;
   }
 
-export function sapMap(product,observation_format,sapObject){
+export function sapMap(product,observation_format,sapObject,code){
 
+  console.log("------code-------")
+  console.log(code)
   return _.map(observation_format,(obj)=>{
 
 
@@ -685,11 +687,15 @@ if(product.length==0){
       qas_form_two_ui:{},
       headerConfigFormat:[],
       dbProduct:{},
+      qasForm2:[]
 
     }
     }
-    var observation_format=sapMap(product[0],product[0].observation_format,object)
+    var observation_format=sapMap(product[0],product[0].observation_format,object,'qasFormOne')
 
+  // var observation2_format=sapMap(product[0],product[0].observation2_format,object,'qasFormTwo')
+  var  qasForm2=setQasForm2(object.products,product[0].observation2_format,product[0]);
+    // var observation_format2=sapMap(product[0],product[0].observation_format,object)
     var header=_.cloneDeep($vm.$store.state.interplex.configHeaderFormat);
     //_.cloneDeep(database($vm,'getMasterHeaderConfig'))
 
@@ -727,7 +733,8 @@ if(x.map!='')  {x['value']=object[x.map]||'';}
     qas_form_one_ui:product[0].qas_form_one_ui,
     qas_form_two_ui:product[0].qas_form_two_ui,
     headerConfigFormat:header_result,
-    dbProduct:product[0]
+    dbProduct:product[0],
+    qasForm2
 
 
   };
@@ -755,26 +762,68 @@ if(x.map!='')  {x['value']=object[x.map]||'';}
      return productConfigFormat;
      }
 
-     export function setQasForm2(products,productConfigFormat2){
+//      export function setQasForm2(products,productConfigFormat2){
 
+//       console.log("---------setQasForm2---------")
+// console.log(products,productConfigFormat2)
+// var result=  _.map(products,(sapObject)=>{
+// console.log("sap products..",sapObject)
 
-return  _.map(products,(sapObject)=>{
-console.log("sap products..",sapObject)
+// _.map(productConfigFormat2,(x)=>{
+// console.log("x",x)
+//   if(x.name!='validation'){
+//   sapObject[x.name]=x.value||'';
+
+//   if(x.map){
+//     if(x.map!='')
+//     sapObject[x.name]=sapObject[x.map]||""
+//   }
+// }
+// else{
+//   if(x.exp){
+//     sapObject['validation']=false;
+//   }
+
+// }
+
+// })
+
+// console.log("qasform2",sapObject)
+// return sapObject
+//   })
+
+//   return result
+
+// }
+export function setQasForm2(products,productConfigFormat2,defaultProduct){
+
+  console.log("---------setQasForm2---------")
+console.log(products,productConfigFormat2)
+var result=  _.map(products,(sapObject)=>{
+// console.log("sap",x.name)
 
 _.map(productConfigFormat2,(x)=>{
-console.log("x",x)
-  if(x.name!='validation'){
-  sapObject[x.name]=x.value||'';
+// console.log("x",x)
+if(x.name!='validation'){
+sapObject[x.name]=x.value||'';
 
-  if(x.map){
-    if(x.map!='')
-    sapObject[x.name]=sapObject[x.map]||""
-  }
+if(x.map){
+  console.log(".....map starting....")
+  console.log(x.map.mapFrom,sapObject[x.map.map],x.map.map)
+  console.log(x.map.mapFrom,defaultProduct[x.map.map],x.map.map)
+
+  if(x.map.mapFrom=='header')
+sapObject[x.name]=sapObject[x.map.map]||""
+if(x.map.mapFrom=='product')
+sapObject[x.name]=defaultProduct[x.map.map]||""
+}
+
+
 }
 else{
-  if(x.exp){
-    sapObject['validation']=false;
-  }
+if(x.exp){
+sapObject['validation']=false;
+}
 
 }
 
@@ -782,11 +831,11 @@ else{
 
 console.log("qasform2",sapObject)
 return sapObject
-  })
+})
 
+return result
 
 }
-
 export async function createProductList($vm,array){
 
   //create header
@@ -812,8 +861,11 @@ x['qas_form_two_ui']=product.qas_form_two_ui;
 // x['products']=setQasForm2(x.products,productConfigFormat2);
 
 console.log("x.products,x.productConfigFormat2",x.products,x.productConfigFormat2)
+console.log("products.productConfigFormat2",product.productConfigFormat2)
 //productConfigFormat($vm,x)
-x['qasForm2']= setQasForm2(x.products,x.productConfigFormat2);
+x['qasForm2']=product.qasForm2; 
+
+// setQasForm2(x.products,x.productConfigFormat2);
 
 // productQasForm2ConfigSArray($vm,x.products)
 return x

@@ -180,7 +180,7 @@ OBSERVATION
 {{ui.width}}
 {{getIndex2(ui.name)}} -->
 <!-- gg{{selectedPartNoItem.productConfigFormat2}} -->
-<div v-if="getIndex2(ui.name)!=-1" style="height:56px;padding:10px">
+<div v-if="getIndex2(ui.name)!=-1" style="height:66px;padding:10px">
      <!-- <h4> {{ui.label}}:  </h4> -->
 
     <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
@@ -189,8 +189,11 @@ OBSERVATION
     
         <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp"   append-icon="fa-calculator"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense >
     </v-text-field>
-        <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map"   append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
+    <div style="position:relative" v-if="selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map">
+        <v-text-field :messages="'Map From '+selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map.mapFrom+' Search Of '+selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map.map+''"  :label="ui.label" v-debounce="delay" @keyup="watchQasTwo"    append-icon="mdi-magnify-scan"  :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
     </v-text-field>
+   <!-- <span style="margin:0;padding:0"> {{selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map.mapFrom}}" "    {{selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map.map}}</span> -->
+    </div>
     </div>
 </div>
 </div> 
@@ -316,7 +319,7 @@ NO:{{index+1}}
     
         <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp"   append-icon="fa-calculator" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
-        <v-text-field @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
+        <v-text-field  :messages="'Map From '+selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map.mapFrom+' Search Of '+selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map.map+''"  @keyup="watchQasOne" v-debounce="delay" v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map"   append-icon="mdi-magnify-scan" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model.lazy="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
 
 </div>
