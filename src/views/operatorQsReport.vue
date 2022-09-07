@@ -855,7 +855,7 @@ $vm.qas_form_two_ui=_.cloneDeep($vm.$store.state.interplex.qas_form_two_ui);
     },
   async  mounted(){
         var $vm=this;
-        console.log("qs selectedPartNoItem")
+        console.log("++++++selectedPartNoItem++++++")
 console.log($vm.$store.state.interplex.selectedPartNoItem)
 await $vm.$store.dispatch('readUploadType')
 
@@ -929,6 +929,8 @@ checkQas2Rules(){
 //Observationformat array to object for scope
 var scope={}
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
+
+scope['Product']=$vm.selectedPartNoItem.dbProduct;
 scope['QasOne']=observation_format;
 //core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
@@ -1066,6 +1068,7 @@ var scope={}
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
 // var scope=core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
+scope['Product']=$vm.selectedPartNoItem.dbProduct;
 scope['QasOne']=observation_format
 //core.validateProductObjDataset($vm,_.cloneDeep(observation_format));
 
