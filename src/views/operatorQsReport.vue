@@ -135,13 +135,31 @@ OBSERVATION
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
+        <h3>QAS FORM TWO</h3>
         <div style="display:flex;justify-content:space-between">
-<h3>QAS FORM TWO</h3>
-<!-- {{selectedPartNoItem}} -->
+
+<div style="display:flex;justify-content:flex-end">
  <v-switch
       v-model="qasForm2Validation"
       :label="'Real Time Validation'"
     ></v-switch>
+</div>
+<!-- {{selectedPartNoItem}} -->
+<div>Pass:
+<div style="display:flex;">
+<div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
+{{pass.No}}    <v-icon style="color:green;size:12px">fa-check</v-icon>
+</div>
+</div>
+Fail:
+<div style="display:flex;">
+<div  style="margin:2px" v-for="(pass,index) in qas2Result.fail" :key="'pass'+index">
+{{pass.No}}
+    <v-icon style="color:red;size:12px">fa-check</v-icon>
+
+</div>
+</div>
+</div>
 </div>
 
 <div style="       height: 79vh;
@@ -161,7 +179,7 @@ OBSERVATION
 
             </tr>
 
-<tr class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
+<tr :id="qasTwoLink(index)" class="rowColor" v-for="(productFormat , index) in selectedPartNoItem.qasForm2" :key="'product'+index">
     <td style="padding:10px">{{index+1}}</td>
 <td>
 <div style="    padding: 20px 7px;"  class="flex-row-container">
@@ -213,7 +231,7 @@ OBSERVATION
     text-align: center;">
     <div v-if="getIndex2('validation')!=-1">
 <div v-if="selectedPartNoItem.productConfigFormat2[getIndex2('validation')].exp"></div>
-    <v-icon class="defaultErorr" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
+<v-icon class="defaultErorr" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
     </div>
     </div>
     </div>
@@ -827,6 +845,30 @@ qasForm1NewDialog:false,
         }
     },
     computed:{
+
+        qas2Result(){
+            var $vm=this;
+          var i=1;
+          var pass=[];
+          var fail=[]
+          _.map($vm.selectedPartNoItem.qasForm2,(productFormat)=>{
+            console.log("pass or fail"+i+1,productFormat.validation)
+               if(productFormat.validation)
+               {
+                pass.push({No:i,validation:productFormat['validation']})
+
+               }
+               else{
+                fail.push({No:i,validation:productFormat['validation']})
+
+               } 
+               i++;
+            })
+            return {
+                pass,
+                fail
+            }
+        },
         qasForm1Validation:{
 get(){
     var $vm=this;
@@ -942,6 +984,9 @@ watch:{
 
 },
     methods:{
+        qasTwoLink(index){
+           return 'qas2No'+(index+1);
+        },
 reduceImage(){
 var $vm=this;
 var base64ToBlob=core.base64toBlob($vm.selectedImage.split(",")[1])

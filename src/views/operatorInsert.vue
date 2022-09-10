@@ -23,7 +23,16 @@
         >
             Invoice with Products
         </h3>
-        <div class="productContainer">
+        
+            <div>
+                                <div v-if="getQualityAssuranceFormOne.length==0" style="text-align:center">
+                <img style="width:58vw" src="search3.gif" alt="">
+                </div>
+
+            </div>
+
+        <div v-if="getQualityAssuranceFormOne.length!=0" class="productContainer">
+            
             <div
                 :class="{ skiplevel: item.skiplevel_status }"
                 v-for="(item, index) in getQualityAssuranceFormOne"
@@ -508,6 +517,7 @@ Items
         <v-dialog
             v-model="headerFileDialog"
             fullscreen
+            persistent
             hide-overlay
             transition="dialog-bottom-transition"
         >
@@ -532,6 +542,16 @@ Items
     transform: translateY(-50%);
     width: 100%;"
                 >
+                <div v-if="isFileCsv&&checkFilesLength!=0" style="text-align:center">
+                <img style="max-width:90px" src="tick.gif" alt="">
+                </div>
+                <div v-if="!isFileCsv&&checkFilesLength!=0" style="text-align:center">
+                <img style="max-width:200px" src="wrong1.gif" alt="">
+                </div>
+                
+               <div v-if="checkFilesLength==0" style="text-align:center">
+                <img style="max-width:250px" src="upload.gif" alt="">
+                </div>
                     <h3 style="text-align:center;" class="interColor" >
                         CHOOSE SAP FILE
                     </h3>
@@ -540,13 +560,16 @@ Items
                         style="background:beige;  margin-top: 10px;padding: 10px;display: flex;justify-content:space-between"
                     >
                         <input
+                        @change="checkFileBeforeSubmit"
                             type="file"
                             id="docpicker"
                             accept=".dat,.txt,.csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"
                             multiple
                         />
-                        <v-btn style="color:white" color="rgb(48, 32, 78)" @click="headerFileUploader">check</v-btn>
+                        <v-btn style="color:white" color="rgb(48, 32, 78)" @click="checkDialog = true" >check</v-btn>
                     </div>
+ <div style="margin:10px 5px"> Previous  Batches are {{checkHeaderBefore.length}} &nbsp; <v-icon @click="clearCheckedProducts"  style="cursor:pointer">fa-trash</v-icon></div>
+
                 </div>
             </v-card>
         </v-dialog>
@@ -840,7 +863,7 @@ background: #555160;
 
                                 color="#5d5f83"
                                 style="color:white;width:33%;margin:2px;"
-                                @click="checkHeaderBefore = [];totalImportedFiles={};importStepOneDuplicatesFiles=[]"
+                                @click="clearCheckedProducts"
                                 >
                                 
 <v-icon>fa-trash</v-icon>
@@ -1148,7 +1171,7 @@ Validate your data Manually
 <script>
 /*eslint-disable*/
 var vm = require('vm');
-
+const detectCsv=require('detect-csv')
 var XLSX = require("xlsx");
 import * as core from "../lib/core.js";
 import { Camera, CameraResultType } from "@capacitor/camera";
@@ -1189,6 +1212,8 @@ function base64toBlob(base64Data, contentType) {
 
 function initialState($vm) {
     return {
+        checkFilesLength:0,
+        isFileCsv:false,
         importStepOneHelpDialog:false,
        importStepOneDuplicatesRows:[],
         importStepOneDuplicatesFiles:[],
@@ -1336,6 +1361,12 @@ return _.filter($vm.checkHeaderBefore,(x)=>x.selected)
         }
     },
     methods: {
+        clearCheckedProducts(){
+            var $vm=this;
+$vm.checkHeaderBefore = [];
+$vm.totalImportedFiles={};
+$vm.importStepOneDuplicatesFiles=[]
+        },
         rmCode(x){
       var $vm=this;
     //   console.log("rm",$vm.$store.state.map.sapImport["rmcode"])
@@ -1791,11 +1822,29 @@ var applySkipLevel=await core.applySkipLevel($vm,main_list)
             $vm.fileTypeDialog = false;
         },
 
+checkFileBeforeSubmit(){
+var $vm=this;
+if($vm.checkHeaderBefore==0){
+    $vm.headerFileUploader()
+    return;
+}
+$vm.$confirm("Do you want to add current batches with previous batch files?")
+.then(()=>{
+      $vm.headerFileUploader()
+})
+},
         headerFileUploader() {
             var $vm = this;
-            $vm.checkDialog = true;
+
+           
             var file = document.getElementById("docpicker");
             var f = file.files;//[0]
+            $vm.checkFilesLength=f.length
+          if(f.length==0){
+            $vm.$alert("Please Select atleast single file before check")
+            $vm.isFileCsv=false;
+            return;
+          }
             var filesContent=[]
             Object.keys(f).forEach(i=>{
 
@@ -1804,6 +1853,14 @@ var applySkipLevel=await core.applySkipLevel($vm,main_list)
             if (f) {
                 var r = new FileReader();
                 r.onload = e => {
+             if(!detectCsv(e.target.result))
+             {
+
+$vm.$alert("Wrong File Found")
+            $vm.isFileCsv=false;
+return ;
+             }
+            $vm.isFileCsv=true;
                     filesContent.push(e.target.result)
                     var contents = $vm.processExcel(e.target.result);
                     //   console.log(contents)
