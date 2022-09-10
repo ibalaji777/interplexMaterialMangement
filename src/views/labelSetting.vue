@@ -50,9 +50,9 @@
 
 <v-btn color="primary" style="color:white" @click="saveData">Save</v-btn>
 
-<h4 style="text-align:center">Preview</h4>
-<label-print-desktop v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
-<label-print-mobile  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
+<!-- <h4 style="text-align:center">Preview</h4> -->
+<label-print-desktop style="with:0;height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
+<label-print-mobile  style="with:0;height:0;overflow:hidden" v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 
   <!-- <codemirror ref="myCm"
               :value="code" 

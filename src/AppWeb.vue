@@ -11,6 +11,7 @@
 <!-- <img src="/wavetop.svg" alt=""> -->
   <!-- <plugin-print></plugin-print> -->
   <router-view name="outer"></router-view>
+  <loader :isLoading="$store.state.loader"></loader>
   <v-app-bar
    app
    clipped-left

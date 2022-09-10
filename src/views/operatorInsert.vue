@@ -1504,6 +1504,10 @@ x= vm.runInNewContext($vm.$store.state.interplex.datTwoCode, { product:x });
         },
         async submit(){
             var $vm=this;
+            if($vm.getQualityAssuranceFormOne.length==0){
+$vm.$alert("Inspection Product List is Empty")
+                return ;
+            }
             // core.submit(this)
 // await core.submit_new(this)
 await core.submit_new_single(this)

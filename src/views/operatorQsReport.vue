@@ -487,6 +487,42 @@ NO:{{index+1}}
       </v-card>
     </v-dialog>
 
+<!-- *********************Gallery Viewer************************ -->
+       <v-dialog
+      v-model="galleryViewerDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>Gallery Viewer</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="galleryViewerDialog = false"
+            >
+              Close
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <v-divider></v-divider>
+
+<div>
+    <!-- <v-btn @click="reduceImage">Compress</v-btn> -->
+    <img style="max-width:700px" :src="selectedImage" />
+</div>
+
+      </v-card>
+    </v-dialog>
+
+
 <!-- *********************Gallery************************ -->
        <v-dialog
       v-model="galleryDialog"
@@ -499,7 +535,7 @@ NO:{{index+1}}
           dark
           :color="$store.state.bgColor"
         >
-          <v-toolbar-title>Gallery</v-toolbar-title>
+          <v-toolbar-title>Document</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -542,15 +578,15 @@ NO:{{index+1}}
     font-weight: 300;">
 
 
-Total Capture:{{takePhoto.length}}
+Total Documents:{{takePhoto.length}}
 </div>
 <div class="productContainer">
 <!-- {{takePhoto}} -->
 <div v-for="(image,index) in takePhoto" :key="index+image" class="productItems" >
     <div style="display: flex;
     justify-content: space-between;" v-if="image.file_type=='image'">
-<img  :src="image.src" alt="" style="max-width:100px;max-height:100px">
-<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+<img  @click="selectedImage=image.src;galleryViewerDialog=true"  :src="image.src" alt="" style="max-width:100px;max-height:100px">
+<div style="display:flex;align-items:center;"><span v-if="image.file_type=='image'" @click="selectGalleryType(index)" style="width: 40px;
     height: 40px;
     border: 1px dashed #ffeb3b;
     display: flex;
@@ -568,8 +604,9 @@ Total Capture:{{takePhoto.length}}
 
 <div style="display: flex;
     justify-content: space-between;" v-if="image.file_type=='pdf'">
-<v-icon >fa-file-pdf</v-icon>
-<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+<v-icon  @click="pdfUrl=image.url;pdfViewerDialog=true">fa-file-pdf</v-icon>
+<!-- {{image}} -->
+<div style="display:flex;align-items:center;"><span v-if="image.file_type=='pdf'" @click="selectGalleryType(index)" style="width: 40px;
     height: 40px;
     border: 1px dashed #ffeb3b;
     display: flex;
@@ -634,6 +671,31 @@ Items
 </div>
       </v-card>
     </v-dialog>
+       <v-dialog
+      v-model="pdfViewerDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>
+            <v-icon               @click="pdfViewerDialog = false">fa-times</v-icon>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <v-divider></v-divider>
+       <div style="padding:10px">
+    <pdf-viewer :url="pdfUrl"></pdf-viewer>
+       </div>
+      </v-card>
+    </v-dialog>
 
     </div>
 </template>
@@ -643,11 +705,12 @@ import moment from 'moment'
 import * as core from '../lib/core'
 import _ from 'lodash'
 import { create, all, string } from 'mathjs'
-
+// const reduce = require('image-blob-reduce')();
+import reduce from 'image-blob-reduce'
 import * as scanApp from '../lib/scaApp.js'
 const math = create(all,  {})
-
-
+import blobUtil from 'blob-util'
+import imageCompression from 'browser-image-compression';
 
 // create a function
 
@@ -738,7 +801,11 @@ export default {
     data(){
 
         return {
-            disableScanBtn:false,
+                    pdfUrl:'',
+        pdfViewerDialog:false,
+         galleryViewerDialog:false,
+         selectedImage:'',
+         disableScanBtn:false,
             delay:2000,
             header_form_gui:[],
             headerDateShow:false,
@@ -875,13 +942,34 @@ watch:{
 
 },
     methods:{
+reduceImage(){
+var $vm=this;
+var base64ToBlob=core.base64toBlob($vm.selectedImage.split(",")[1])
+reduce
+  .toBlob(base64ToBlob, { max: 1000 })
+  .then(blob => { 
+blobUtil.blobToBase64String(blob).then(function (base64String) {
+  // success
+$vm.selectedImage=base64String
+}).catch(function (err) {
+  // error
+});
+
+
+  });
+  
+  },
+        
         pdfFileUpload(e){
 var $vm=this;
+ $vm.$store.commit('showLoader')
     var files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
         console.log("pdf file",files[0])
-    $vm.takePhoto.push({src:files[0],file_type:'pdf',title:''})
+    var url = URL.createObjectURL(files[0]);
+    $vm.takePhoto.push({src:files[0],file_type:'pdf',title:'',url})
+     $vm.$store.commit('hideLoader')
     //   this.createPdfFile(files[0]);
     },
     createPdfFile(file) {
@@ -1214,16 +1302,42 @@ console.log("validatiion failed please add validation")
         },
                    async takePicture() {
             var $vm=this;
+
   const image = await Camera.getPhoto({
     quality: 100,
     allowEditing: false,
     resultType: CameraResultType.DataUrl,
   });
-
+ $vm.$store.commit('showLoader')
   // Here you get the image as result.
   const theActualPicture = image.dataUrl;
   console.log(theActualPicture)
-  $vm.takePhoto.push({src:theActualPicture,file_type:'image',title:''})
+   const options = {
+    maxSizeMB: 2,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
+  }
+  var base64ToBlob=await core.base64toBlob(theActualPicture.split(",")[1],'image/png')
+  console.log(base64ToBlob)
+const compressedFile = await imageCompression(base64ToBlob, options);
+ console.log(compressedFile)
+core.blobToBase64(compressedFile,(base64String)=>{
+  console.log("+++compessed image++++")
+  console.log(base64String)
+  $vm.takePhoto.push({src:"data:image/png;base64,"+base64String,file_type:'image',title:''})
+            $vm.$store.commit('hideLoader')
+
+})
+// console.log(compressedFile)
+// blobUtil.blobToBase64String(base64ToBlob).then(function (base64String) {
+//   // success
+//   console.log("+++compessed image++++")
+//   console.log(base64String)
+// // $vm.selectedImage=base64String
+// }).catch(function (err) {
+//   // error
+// });
+
 },
         watchValue(event,productFormat){
 var $vm=this;

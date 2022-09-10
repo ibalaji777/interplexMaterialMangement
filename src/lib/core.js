@@ -1470,8 +1470,8 @@ return invoice
 // console.log(new_invoices)
 
 _.map(invoices,async (single_invoice)=>{
-
-  var result = await $vm.$store.dispatch("submitInvoiceSingle",single_invoice);
+var opt=  _.omit(_.cloneDeep(single_invoice),'gallery')
+  var result = await $vm.$store.dispatch("submitInvoiceSingle",opt);
 
    _.map(new_invoices, invoice => {
     invoice["gallery"] = _.map(invoice.gallery, async image => {
@@ -2232,3 +2232,15 @@ console.log("check",check==ind)
 
   return rt
 }
+
+
+
+export  function blobToBase64(blob, callback) {
+  var reader = new FileReader();
+  reader.onload = function() {
+      var dataUrl = reader.result;
+      var base64 = dataUrl.split(',')[1];
+      callback(base64);
+  };
+  reader.readAsDataURL(blob);
+};

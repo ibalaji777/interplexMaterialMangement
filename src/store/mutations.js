@@ -256,6 +256,15 @@ setGuiQasFormTwo(state,payload){
 setHeader(state,payload){
 	state.interplex.header_form_gui=payload;
 }
+,
+
+showLoader(state){
+	state.loader=true;
+
+},
+hideLoader(state){
+	state.loader=false;
+}
 
 
 

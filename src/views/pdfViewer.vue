@@ -1,15 +1,17 @@
 <template>
     <div>
-        <div class="top-bar">
+        <div style="    display: flex;
+    justify-content: space-around;" class="top-bar">
       <button class="btn" id="prev-page">
         <i class="fas fa-arrow-circle-left"></i> Prev Page
       </button>
+            <span class="page-info">
+        Page <span id="page-num"></span> of <span id="page-count"></span>
+      </span>
+
       <button class="btn" id="next-page">
         Next Page <i class="fas fa-arrow-circle-right"></i>
       </button>
-      <span class="page-info">
-        Page <span id="page-num"></span> of <span id="page-count"></span>
-      </span>
     </div>
 
     <canvas id="pdf-render"></canvas>
@@ -19,10 +21,13 @@
 <script>
 // import '../lib/pdf.js'
 // const pdfjsLib =require('')
-const pdfjsLib = require('pdfjs-dist');
+// const pdfjsLib = require('pdfjs-dist');
+
+
+
 export default {
  props:['url'],
- mounted(){
+async mounted(){
 var $vm=this;
 let pdfDoc = null,
   pageNum = 1,
@@ -89,9 +94,11 @@ const showNextPage = () => {
   pageNum++;
   queueRenderPage(pageNum);
 };
-
+ const pdfjs = await import('pdfjs-dist/build/pdf');
+const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker
 // Get Document
-pdfjsLib
+pdfjs
   .getDocument($vm.url)
   .promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;

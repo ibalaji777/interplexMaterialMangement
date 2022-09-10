@@ -1,6 +1,7 @@
 /*eslint-disable*/
 import moment from 'moment'
 const state = {
+	loader:false,
 	qasForm1Validation:false,
 	qasForm2Validation:false,
 	defaultField:{
