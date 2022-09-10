@@ -940,6 +940,67 @@ return group
 }
 
 
+export function skiplevelGroup($vm,array,skLevel_){
+  console.log("already grouped array",array)
+
+  var groupedBy_sup_name_and_rmcode=_.map(groupBy(array, function (item) {
+    return [item[store.state.defaultField.supplierName],item[store.state.defaultField.partNo]];
+  }),(x)=>{
+
+    return {
+      skuid:uuidv4(),
+      skref:x[0][store.state.defaultField.supplierName]+x[0][store.state.defaultField.partNo],
+      partNo:x[0][store.state.defaultField.partNo],
+      groupedBy_sup_name_and_rmcode:x
+      };
+  });
+
+  console.log("----groupedBy_sup_name_and_rmcode-----")
+  console.log(groupedBy_sup_name_and_rmcode)
+
+var grouped_list = _.map(groupedBy_sup_name_and_rmcode,(x)=>{
+var group_list=      _.map(groupBy(x.groupedBy_sup_name_and_rmcode, function (item) {
+        return [item[store.state.defaultField.supplierName],item[store.state.defaultField.partNo],item[store.state.defaultField.invoiceNo]];
+      })
+,(group)=>{
+  return {
+    map:store.state.defaultField,
+    'length':group.length,
+    'skref':group[0][store.state.defaultField.supplierName]+group[0][store.state.defaultField.partNo]+group[0][store.state.defaultField.invoiceNo],
+    'skList':group
+  }
+
+})  
+      console.log("grouped  sk list",group_list)
+
+      return group_list
+    })
+
+  console.log("+++group+++",grouped_list)
+ var list=[]
+var result=_.map(grouped_list,(x)=>{
+  var i=1
+return   _.map(x,(y)=>{
+
+    y['localIndex']=i
+    _.map(y.skList,(yy)=>{
+      // yy['localIndex']=i
+      list.push({...yy,localIndex:i})
+
+    })
+    i++;
+    return y;
+  })
+
+})
+console.log("--grouped--",result)
+console.log("---grouped--list--",list)
+return list;
+}
+
+
+
+
 
 export function skiplevel($vm,array){
   console.log("already grouped array",array)
@@ -976,13 +1037,13 @@ return skiplevel
 })
 //part no check
 var markSkipLevelsort=_.map(groupSkipLevelsort,(markSkipLevel)=>{
-console.log("++++marked skiplevel+++",markSkipLevel)
+// console.log("++++marked skiplevel+++",markSkipLevel)
 
 var givenSkipLevel=markSkipLevel['skipLevelCount'];  
-console.log("skipLevel",givenSkipLevel+1)
+// console.log("skipLevel",givenSkipLevel+1)
 
 var ignoreSkipLevelEnd=givenSkipLevel+1
-console.log("products",markSkipLevel.skipLevelProducts)
+// console.log("products",markSkipLevel.skipLevelProducts)
  markSkipLevel.skipLevelProducts.forEach((value,index)=>{
   value['skuid']=markSkipLevel.skuid;
   value['skiplevel_status']=true;
@@ -1004,16 +1065,16 @@ return markSkipLevel
   var skipLevelResult=[];
 
 (markSkipLevelsort).forEach(element => {
-console.log("el=>",element)
+// console.log("el=>",element)
   skipLevelResult.push(...element.skipLevelProducts)
 });
 
 
 
-console.log("++++markskiplevel sort++++",markSkipLevelsort)
+// console.log("++++markskiplevel sort++++",markSkipLevelsort)
 
 
-console.log("++++markskiplevel sort++++",skipLevelResult)
+// console.log("++++markskiplevel sort++++",skipLevelResult)
 // console.log("skip level sort",groupSkipLevelsort)
 
 return skipLevelResult;
@@ -2054,4 +2115,120 @@ results.push(row)
 console.log("checking",format,new_format,results)
 
 return results;
+}
+
+export async function applySkipLevel($vm,array){
+console.log("+++b/sk+++")
+console.log(array)
+  var skiplotdb=await Promise.all(
+    _.map(array,async (qasformone)=>{
+     var skipLevelCheck=await $vm.$store.dispatch('skipLevel',{invoice_no:qasformone.invoice_no,rmcode:qasformone.rmcode,supplier_name:qasformone.supplier_name});
+     qasformone['skipLotCount']=skipLevelCheck.total
+     qasformone['isThisInvoiceFound']=skipLevelCheck.found
+     qasformone['isThisInvoiceRef']=skipLevelCheck.ref
+    //   console.log("++++++skiop/level+++++++")
+    //  console.log(qasformone)
+    return qasformone
+    }))
+    console.log("+++++++s/k+++++++")
+    console.log(skiplotdb)
+    
+var skiplevel_result = await skiplevelGroup($vm, _.cloneDeep(skiplotdb));
+var result=_.map(skiplevel_result,(x)=>{ 
+  x['currentIndexSk']=parseFloat(x['localIndex'])+parseFloat(x['skipLotCount'])
+  if(!_.isEmpty(x.dbProduct)){
+var   sk= skiplevelMarker(x.currentIndexSk,x.dbProduct.skiplevel)
+console.log("+++sk++",sk,x.currentIndexSk,x.dbProduct.skiplevel) 
+x['skiplevel_status']=!sk.isSkipLevelFill;
+    x['sk_order']=sk.skipLot;
+    x['sk_index']=sk.currentIndex;
+  }
+  else{
+  x['skiplevel_status']=false
+  x['sk_order']='';
+  x['sk_index']='';
+  }
+  return x;
+}) 
+
+
+console.log("+++++++skiplevel result new+++++++")
+console.log(result)
+// console.log(skip)
+return result;
+}
+
+export function skiplevelMarker(currentIndex,skiplevel){
+  // var rt=true;
+  var indexFound=-1;
+  var ref={}
+  var ind=currentIndex||1
+var  isSkipLevelFill=false;
+  for(var i=1;i<=ind;i++){
+    var skip_a=parseFloat(skiplevel||0)+1;
+    var check=parseFloat(skip_a||0)*parseFloat(i||0)- parseFloat(skiplevel||0);
+    if(ind<check){
+      indexFound=check
+       break;
+    }
+
+  }
+
+  for(var i=1;i<=ind;i++){
+    var skip_a=parseFloat(skiplevel||0)+1;
+    var check=parseFloat(skip_a||0)*parseFloat(i||0)- parseFloat(skiplevel||0);
+    if(ind==check)
+    {
+     isSkipLevelFill=true;
+    }
+
+  }
+
+  //  console.log(indexFound)
+
+  var skiplot=indexFound-skiplevel
+  var temp=1
+  for(var i=skiplot;i<indexFound;i++){
+
+     ref[i]=temp;
+     temp++
+
+  }
+
+
+ //  console.log("ind",ind,"check",check,"ref",ref)
+
+ var ret= {
+         isSkipLevelFill,
+         currentIndex,
+         skipLot:!isSkipLevelFill?(ref[currentIndex]+"/"+skiplevel):''
+
+     }
+     console.log(ret)
+     // console.log(isSkipLevelFill,currentIndex+" skipLot found"+ref[currentIndex]+"/"+skiplevel+"")
+
+     return ret
+
+ }
+
+
+
+export function donotSkip(index,skiplevel){
+ console.log("++++donot skip+++++++")
+ console.log(index,skiplevel)
+  var rt=true;
+  var ind=((index||0)+1||1)
+  for(var i=0;i<=ind;i++){
+
+    var skip_a=parseFloat(skiplevel||0)+1;
+
+    var check=parseFloat(skip_a||0)*(i||0)- parseFloat(skiplevel||0);
+console.log("check",check==ind)
+    if(check==ind){
+
+      rt=false;
+    }
+  }
+
+  return rt
 }

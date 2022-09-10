@@ -1103,7 +1103,7 @@ Validate your data Manually
                             @click="addToQualitFormOne"
                             color="rgb(48, 32, 78)"
                             style="width:100%;color:white"
-                            >Add</v-btn
+                            >Submit List</v-btn
                         >
                     </div>
                     <div class="checkContainer">
@@ -1758,9 +1758,26 @@ console.log(res)
             var main_list = await core.createProductList($vm, checked);
             console.log("++++main product list+++++", main_list);
             //skiplevel check
-            var skiplevel = await core.skiplevel($vm, _.cloneDeep(main_list));
-            console.log("++skiplevel+++", skiplevel);
-            $vm.$store.commit("addToQualitFormOne", _.cloneDeep(skiplevel));
+            // var skiplevel = await core.skiplevel($vm, _.cloneDeep(main_list));
+
+var applySkipLevel=await core.applySkipLevel($vm,main_list)
+ console.log(applySkipLevel)
+// ---------------------------dbskiplevel-------------------
+
+// var ref={}
+
+
+// console.log("+++++++++skiplotdb+++++++")
+// console.log(skiplotdb)
+
+
+// ---------------------------dbskiplevel-------------------
+
+// console.log("++skiplevel+++", skiplevel);
+
+            // $vm.$store.commit("addToQualitFormOne", _.cloneDeep(skiplevel));
+
+            $vm.$store.commit("addToQualitFormOne", _.cloneDeep(applySkipLevel));
             $vm.$store.commit("tempInvoice", createInvoice);
 
             // console.log("Skip level",_.cloneDeep(skiplevel))
