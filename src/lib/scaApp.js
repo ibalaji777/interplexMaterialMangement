@@ -20,12 +20,14 @@ export function start($vm,callback){
             }
         };
         ws.onopen = function(){
-         $vm.disableScanBtn=false
+        //  $vm.disableScanBtn=false
+         callback("success")
          console.log("scanner working")
         };
         ws.onerror = function(e){
+        callback("error")
             console.log("Scanner Plugin Missing")
-            $vm.disableScanBtn=true
+            // $vm.disableScanBtn=true
         }
 
      

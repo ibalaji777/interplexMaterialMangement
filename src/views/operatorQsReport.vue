@@ -138,14 +138,8 @@ OBSERVATION
         <h3>QAS FORM TWO</h3>
         <div style="display:flex;justify-content:space-between">
 
-<div style="display:flex;justify-content:flex-end">
- <v-switch
-      v-model="qasForm2Validation"
-      :label="'Real Time Validation'"
-    ></v-switch>
-</div>
-<!-- {{selectedPartNoItem}} -->
-<div>Pass:
+<div style="display:flex;">
+    <div>Pass:
 <div style="display:flex;">
 <div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
 {{pass.No}}    <v-icon style="color:green;size:12px">fa-check</v-icon>
@@ -160,6 +154,13 @@ Fail:
 </div>
 </div>
 </div>
+ <v-switch
+      v-model="qasForm2Validation"
+      :label="'Real Time Validation'"
+    ></v-switch>
+</div>
+<!-- {{selectedPartNoItem}} -->
+
 </div>
 
 <div style="       height: 79vh;
@@ -585,11 +586,11 @@ NO:{{index+1}}
 </div> -->
 
 </div>
-<div id="btn-upload"></div>
+<!-- <div id="btn-upload"></div>
 <p class="text-danger mt-1" id="download-app" style="display:none;">No Scan app application found in your machine. Please download, install and open first then refresh the browser. <a href="Scan_App_SetUp.msi" download>Download app</a></p>
-<br>
+<br> -->
 
-<div style="    background: #f13454;
+<div style="  margin-top:25px;  background: #f13454;
     padding: 9px;
     color: white;
     border-radius: 29px;
@@ -609,7 +610,7 @@ Total Documents:{{takePhoto.length}}
     border: 1px dashed #ffeb3b;
     display: flex;
     justify-content: center;
-    align-items: center;">
+    align-items: center;cursor:pointer">
 +
 </span>
 <span style="
@@ -629,7 +630,7 @@ Total Documents:{{takePhoto.length}}
     border: 1px dashed #ffeb3b;
     display: flex;
     justify-content: center;
-    align-items: center;">
+    align-items: center;cursor:pointer">
 +
 </span>
 <span style="
@@ -650,7 +651,14 @@ Items
 </div> -->
 </div>
 
+<div style="margin-top:15px">
+<b >Scanner App Status:</b><div v-if="scannerConnectionAppStatus">Found</div>
+<div v-else>Not Found</div>
 
+<!-- <div><b style="color:red">Note:</b></div> -->
+<div v-if="!scannerConnectionAppStatus"><b style="color:red">Note:</b> Install Scan App and Reload/Restart App</div>
+
+</div>
 </div>
       </v-card>
     </v-dialog>
@@ -731,6 +739,12 @@ import blobUtil from 'blob-util'
 import imageCompression from 'browser-image-compression';
 
 // create a function
+const options = {
+    maxSizeMB: 2,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
+  }
+
 
 function NumberObj(obj){
   return core.validateNumberObj(obj)
@@ -819,6 +833,7 @@ export default {
     data(){
 
         return {
+            scannerConnectionAppStatus:false,
                     pdfUrl:'',
         pdfViewerDialog:false,
          galleryViewerDialog:false,
@@ -972,12 +987,40 @@ $vm.header_form_gui=_.cloneDeep($vm.$store.state.interplex.header_form_gui);
 $vm.qasForm1New=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
 
 console.log("atoo",core.arrayToObj($vm.selectedPartNoItem.productConfigFormat))
-scanApp.start($vm,(action,data)=>{
-if(action=='base64'){
-    console.log("img data",data)
-  $vm.takePhoto.push({src:"data:image/png;base64,"+data,file_type:'image',title:''})
+scanApp.start($vm,async (action,data)=>{
+
+if(action=='success'){
+$vm.scannerConnectionAppStatus=true;
 }
+if(action=='error'){
+$vm.scannerConnectionAppStatus=false;
+}
+if(action=='base64'){
+  $vm.$store.commit('showLoader')
+
+setTimeout(async ()=>{
+
+    //-------------actual----------------
+//     console.log("img data",data)
+//   $vm.takePhoto.push({src:"data:image/png;base64,"+data,file_type:'image',title:''})
+    //-------------actual----------------
+  var base64ToBlob=await core.base64toBlob(data,'image/png')
+const compressedFile = await imageCompression(base64ToBlob, options);
+
+core.blobToBase64(compressedFile,(base64String)=>{
+  console.log("+++compessed image++++")
+  console.log(base64String)
+  $vm.takePhoto.push({src:"data:image/png;base64,"+base64String,file_type:'image',title:''})
+            $vm.$store.commit('hideLoader')
+
 })
+
+},10)
+
+}
+
+})
+
 },
 watch:{
 
@@ -987,23 +1030,23 @@ watch:{
         qasTwoLink(index){
            return 'qas2No'+(index+1);
         },
-reduceImage(){
-var $vm=this;
-var base64ToBlob=core.base64toBlob($vm.selectedImage.split(",")[1])
-reduce
-  .toBlob(base64ToBlob, { max: 1000 })
-  .then(blob => { 
-blobUtil.blobToBase64String(blob).then(function (base64String) {
-  // success
-$vm.selectedImage=base64String
-}).catch(function (err) {
-  // error
-});
+// reduceImage(){
+// var $vm=this;
+// var base64ToBlob=core.base64toBlob($vm.selectedImage.split(",")[1])
+// reduce
+//   .toBlob(base64ToBlob, { max: 1000 })
+//   .then(blob => { 
+// blobUtil.blobToBase64String(blob).then(function (base64String) {
+//   // success
+// $vm.selectedImage=base64String
+// }).catch(function (err) {
+//   // error
+// });
 
 
-  });
+//   });
   
-  },
+//   },
         
         pdfFileUpload(e){
 var $vm=this;
@@ -1354,15 +1397,12 @@ console.log("validatiion failed please add validation")
     resultType: CameraResultType.DataUrl,
   });
  $vm.$store.commit('showLoader')
+ setTimeout(async ()=>{
+
   // Here you get the image as result.
   const theActualPicture = image.dataUrl;
   console.log(theActualPicture)
-   const options = {
-    maxSizeMB: 2,
-    maxWidthOrHeight: 1920,
-    useWebWorker: true
-  }
-  var base64ToBlob=await core.base64toBlob(theActualPicture.split(",")[1],'image/png')
+     var base64ToBlob=await core.base64toBlob(theActualPicture.split(",")[1],'image/png')
   console.log(base64ToBlob)
 const compressedFile = await imageCompression(base64ToBlob, options);
  console.log(compressedFile)
@@ -1373,6 +1413,8 @@ core.blobToBase64(compressedFile,(base64String)=>{
             $vm.$store.commit('hideLoader')
 
 })
+
+ },60)
 // console.log(compressedFile)
 // blobUtil.blobToBase64String(base64ToBlob).then(function (base64String) {
 //   // success
