@@ -144,12 +144,12 @@ OBSERVATION
     <div>Pass:
 <div style="display:flex;">
 <div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
-{{pass.No}}    <v-icon style="color:green;size:12px">fa-check</v-icon>
+{{pass.No}}    <v-icon @click="scrollToErrorSpot(pass.No)" style="color:green;size:12px">fa-check</v-icon>
 </div>
 </div>
 Fail:
 <div style="display:flex;">
-<div  style="margin:2px" v-for="(pass,index) in qas2Result.fail" :key="'pass'+index">
+<div @click="scrollToErrorSpot(pass.No)"  style="margin:2px" v-for="(pass,index) in qas2Result.fail" :key="'pass'+index">
 {{pass.No}}
     <v-icon style="color:red;size:12px">fa-check</v-icon>
 
@@ -1033,6 +1033,17 @@ watch:{
 
 },
     methods:{
+scrollToErrorSpot(no){
+var $vm=this;
+// console.log("element",element)
+// var index=element-1;
+console.log("element","qas2No"+no)
+
+var container = document.getElementById("qas2No"+no);
+container.scrollIntoView;
+
+},
+
         qasTwoLink(index){
            return 'qas2No'+(index+1);
         },
@@ -1108,6 +1119,9 @@ $vm.checkQas2Rules()
         },
 checkQas2Rules(){
     var $vm=this;
+    var rule="";
+    try {
+        
 //Observationformat array to object for scope
 var scope={}
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
@@ -1200,6 +1214,10 @@ ob_format.exp.status=false;
 
 return ob_format;    
 })
+    } catch (error) {
+        $vm.$alert(String(error)+rule,"Rule Failed Please Check",'error',{width:'850px'})
+
+    }
 
 
 },
@@ -1245,6 +1263,10 @@ return x;
 
 checkQasOneRules(){
 var $vm=this;
+var rule="";
+var rule_index=1;
+try {
+    
 var scope={}
 //Observationformat array to object for scope
 var observation_format=core.arrayToObj($vm.selectedPartNoItem.productConfigFormat)
@@ -1267,10 +1289,13 @@ console.log(scope)
 $vm.selectedPartNoItem.productConfigFormat=_.map(_.cloneDeep($vm.selectedPartNoItem.productConfigFormat),(ob_format)=>{
 
 if(ob_format.exp){
-console.log(ob_format.exp.rule)
-console.log("exp_>",scope,ob_format.exp.rule,math.evaluate(ob_format.exp.rule,scope))
+// console.log(ob_format.exp.rule)
+// console.log("exp_>",scope,ob_format.exp.rule,math.evaluate(ob_format.exp.rule,scope))
 if(ob_format.exp.rule!=''){
+        rule=ob_format.exp.rule;
+
  if(math.evaluate(ob_format.exp.rule,scope)){
+
 if(ob_format.exp.success=='_default_'){
 ob_format.value=math.evaluate(ob_format.exp.rule,scope);
 ob_format.exp.status=true;
@@ -1301,16 +1326,20 @@ ob_format.exp.status=false;
  else{
 ob_format.value=ob_format.exp.failure;
 ob_format.exp.status=false;
-
  }
 }
   }
 
     }
     }
+
 return ob_format;    
 })
 
+} catch (error) {
+console.log(error)
+$vm.$alert(String(error)+rule,"Rule Failed Please Check",'error',{width:'850px'})
+}
 
 
 },
