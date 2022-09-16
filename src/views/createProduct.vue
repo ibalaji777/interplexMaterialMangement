@@ -204,7 +204,7 @@
                                     :colspan="getColspan(item.name)"
                                     :rowspan="getRowspan(item.name)"
                                     v-for="(item, index_sub) in form.column"
-                                    :key="'inde' + index_sub"
+                                    :key="'headerRow' + index_sub"
                                 >
                                     <div>
                                         <div v-if="getIndex(item.name) != -1">
@@ -217,11 +217,20 @@
                                                         getIndex(item.name)
                                                     ].label
                                                 }}
-                                                <v-icon
+                                                <!-- <v-icon
                                                     @click="
                                                         removeObservationHeaderPrintView(
                                                             index,
                                                             item.name
+                                                        )
+                                                    "
+                                                    >fa-trash</v-icon
+                                                > -->
+                                               <v-icon
+                                                    @click="
+                                                        qasOneHeaderRowRemove(
+                                                            index,
+                                                            index_sub
                                                         )
                                                     "
                                                     >fa-trash</v-icon
@@ -288,9 +297,12 @@
                                                 style="display:flex;width:250px;justify-content:space-between"
                                             >
                                                 <div></div>
-                                                <v-icon
+                                                                                               <v-icon
                                                     @click="
-                                                        removeTable(index, key)
+                                                        qasOneHeaderRowRemove(
+                                                            index,
+                                                            index_sub
+                                                        )
                                                     "
                                                     >fa-trash</v-icon
                                                 >
@@ -1344,7 +1356,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         >
                             <v-text-field dense
                                 label="Label"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].label
@@ -1352,7 +1364,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                             <v-text-field dense
                                 label="Name"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].name
@@ -1363,7 +1375,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         <div v-if="isKeyExist2(qas2EditableIndex, 'map')">
                                                     <v-text-field dense
                                 label="Map From (header/product)"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].map.mapFrom
@@ -1371,7 +1383,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                             <v-text-field dense
                                 label="Map"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].map.map
@@ -1383,7 +1395,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             <label for="">For Merge Cell</label>
                             <v-text-field dense
                                 label="ColSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].merge.colspan
@@ -1391,7 +1403,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                             <v-text-field dense
                                 label="RowSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].merge.rowspan
@@ -1401,7 +1413,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         <div v-if="isKeyExist2(qas2EditableIndex, 'exp')">
                             <v-textarea
                                 label="Write Rule"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.rule
@@ -1411,7 +1423,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                             <v-text-field dense
                                 label="Success"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.success
@@ -1420,7 +1432,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             </v-text-field>
                             <v-text-field dense
                                 label="Failure"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.failure
@@ -1540,7 +1552,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         >
                             <v-text-field dense
                                 label="Label"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].label
@@ -1548,7 +1560,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                             <v-text-field dense
                                 label="Name"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].name
@@ -1559,7 +1571,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         <div v-if="isKeyExist(qasEditableIndex, 'map')">
                                                         <v-text-field dense
                                 label="Map From(header/product)"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].map.mapFrom
@@ -1567,7 +1579,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                             <v-text-field dense
                                 label="Map"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].map.map
@@ -1579,7 +1591,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             <label for="">For Merge Cell</label>
                             <v-text-field dense
                                 label="ColSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].merge.colspan
@@ -1587,7 +1599,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                             <v-text-field dense
                                 label="RowSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].merge.rowspan
@@ -1595,9 +1607,13 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                         </div>
                         <div v-if="isKeyExist(qasEditableIndex, 'exp')">
+                        <v-btn color="primary" @click="checkNewLine(insertForm.observation_format[
+                                        qasEditableIndex
+                                    ].exp.rule)">Check</v-btn>
+
                             <v-textarea
                                 label="Write Rule"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].exp.rule
@@ -1605,9 +1621,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             >
                             </v-textarea>
 
+
                             <v-text-field dense
                                 label="Success"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].exp.success
@@ -1616,7 +1633,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             </v-text-field>
                             <v-text-field dense
                                 label="Failure"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].exp.failure
@@ -2843,11 +2860,32 @@ getColspan2() {
    console.log("inserform:2",$vm.insertForm)
    },
     methods: {
+        checkNewLine(value){
+var $vm=this;
+
+var reg=/(.*?(\n))+.*?/gm
+
+if(reg.test(value)){
+ $vm.$alert("Line Found")
+ }
+ else{
+    $vm.$alert("Looks Perfect")
+ }
+return ''
+        },
 qasOneHeaderRow(index){
 var $vm=this;
 console.log("index",index)
 console.log($vm.insertForm.observation_header_print_view)
 $vm.insertForm.observation_header_print_view[index].column.push({name:''})
+
+},
+qasOneHeaderRowRemove(index,index_sub){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove").
+then(()=>{
+$vm.insertForm.observation_header_print_view[index].column.splice(index_sub,1)
+})
 
 },
 obFormat(field){
