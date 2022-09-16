@@ -1991,6 +1991,82 @@ if(header)
   }
 
 
+  export function observationTableBodyOrder(order,format,printView)
+  {
+    // var torder=tableOrder(Object.keys(x),order)
+
+    var count=0;
+return _.map(printView,(x)=>{
+  count++
+var row=[]
+  var torder=tableOrder(Object.keys(x),order)
+
+   _.map(torder,(col ,key)=>{
+    // console.log("c",col,"k",key)
+
+    var column=x[col]
+
+
+    if(col=='no'){
+      row.push({
+      name:'no',
+      value:count,
+      merge:{
+        colspan:1,
+        rowspan:1,
+      }
+    })
+    return;
+  
+  }
+
+    var  header=_.find(format,(data)=>data.name==column)
+    console.log("++++header++++")
+    console.log(header,column,col)
+if(header){
+   row.push({...header,
+    merge:{
+      colspan:header.merge?header.merge.colspan:1,
+      rowspan:header.merge?header.merge.rowspan:1
+    }
+    }) 
+  }
+else{
+row.push({
+  name:'',
+  value:'Not Found',
+  merge:{
+    colspan:1,
+    rowspan:1,
+  }
+  })
+}
+
+
+    if(col=='no'){
+    row.push({
+    name:'no',
+    value:count,
+    merge:{
+      colspan:1,
+      rowspan:1,
+    }
+  })
+  return;
+
+}
+
+  
+  })
+
+
+  return row;
+})
+
+
+  }
+
+
   export function observationTableBody(order,format,printView)
   {
 

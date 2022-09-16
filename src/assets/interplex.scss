@@ -96,6 +96,10 @@ transform: translate(-50%,-50%);
 .interListRow tbody tr:nth-child(odd) {
 }
 
+.interListRow tbody tr:hover {
+
+background-color: #a2afdb !important;}
+
 .pendingCard{
 
     height: 100px;

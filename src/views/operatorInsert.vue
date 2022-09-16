@@ -26,7 +26,7 @@
         
             <div>
                                 <div v-if="getQualityAssuranceFormOne.length==0" style="text-align:center">
-                <img style="width:58vw" src="search3.gif" alt="">
+                <img style="width:408px" src="search3.gif" alt="">
                 </div>
 
             </div>

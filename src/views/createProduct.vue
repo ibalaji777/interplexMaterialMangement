@@ -84,7 +84,7 @@
                 width="290px"
             >
                 <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
+                    <v-text-field dense
                         v-model="insertForm.duedate"
                         label="Picker in dialog"
                         prepend-icon="mdi-calendar"
@@ -226,6 +226,17 @@
                                                     "
                                                     >fa-trash</v-icon
                                                 >
+                                                <div v-if="index_sub==0">
+                                                    <!-- {{index}} -->
+                                                <v-icon
+                                                @click="qasOneHeaderRow(index)"
+  
+                                                    style="font-size:25px;color:red"
+                                                    class="drag"
+                                                    >fa-plus</v-icon
+                                                >
+</div>
+
                                             </div>
                                             <div
                                                 style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
@@ -258,7 +269,7 @@
                                                 </div>
                                             </div>
 
-                                            <v-text-field
+                                            <v-text-field dense
                                                 outlined
 
                                                 label="value"
@@ -269,6 +280,8 @@
                                                     ].value
                                                 "
                                             ></v-text-field>
+                                           {{form.column[index_sub].name}}
+
                                         </div>
                                         <div v-else>
                                             <div
@@ -284,6 +297,21 @@
                                             </div>
 
                                             Not Found
+
+                                            <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation_format
+                                                    "
+                                                    dense
+                                                    v-model="item.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                ></v-combobox>
+                                                
                                         </div>
                                     </div>
                                 </td>
@@ -306,6 +334,7 @@
                                         )"
                                         :key="'inde' + index_sub"
                                     >
+                                    
                                         <div v-if="key == 'no'">
                                             {{ index + 1 }}<br />
                                             <!-- {{}} -->
@@ -449,7 +478,7 @@
                                                     </div>
                                                 </div>
 
-                                                <v-text-field
+                                                <v-text-field dense
                                                     outlined
     
                                                     label="value"
@@ -473,6 +502,7 @@
                                                     hide-selected
                                                     small-chips
                                                 ></v-combobox>
+                                                {{Object.keys(form)[index_sub]}}
                                             </div>
                                             <div v-else>
                                                 <div
@@ -617,8 +647,9 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 </div>
                                             </div>
 
-                                            <v-text-field
+                                            <v-text-field dense
                                                 outlined
+                                                
 
                                                 label="value"
                                                 v-model.lazy="
@@ -794,7 +825,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     </div>
                                                 </div>
 
-                                                <v-text-field
+                                                <v-text-field dense
                                                     outlined
     
                                                     label="value"
@@ -895,7 +926,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <div>
                         <!-- <div> -->
                         <!-- <span class="text-h5">Table Header </span>
-<v-text-field v-model="headerColumnName" label="Create  Column">
+<v-text-field dense v-model="headerColumnName" label="Create  Column">
 </v-text-field> <br> -->
                         <!-- <table  class="observationTable" style="width:100vw">
     <tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
@@ -907,7 +938,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
         </table> -->
 
                         <span class="text-h5">Table Header Sort</span>
-                        <v-text-field
+                        <v-text-field dense
                             v-model="createColumnName"
                             label="Create  Column"
                         >
@@ -956,7 +987,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                     <!-- <div>
 <span class="text-h5">Create New Table Column</span>
-<v-text-field v-model="createNewTableColumnName" label="Create  Column">
+<v-text-field dense v-model="createNewTableColumnName" label="Create  Column">
 </v-text-field> <br>
 <v-btn color="primary" @click="createHeaderColumn" style="margin:15px 0">Submit</v-btn>
  <table style="border:1px solid black;width:100%;border-collapse: collapse;margin:10px 0">
@@ -1003,9 +1034,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     >
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
+                    <v-text-field dense
                         hint="whithout whitespace"
                         outlined
+                        
                         
                         label="Name"
                         v-model.lazy="createRowName2"
@@ -1043,7 +1075,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     >
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
+                    <v-text-field dense
                         hint="whithout whitespace"
                         outlined
                         
@@ -1086,7 +1118,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         </draggable>
                     </table>
 
-                    <!-- <v-text-field  v-model="createRowName" label="Name"></v-text-field> -->
+                    <!-- <v-text-field dense  v-model="createRowName" label="Name"></v-text-field> -->
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -1110,7 +1142,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <span class="text-h5">Create New Row</span>
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
+                    <v-text-field dense
                         hint="Avoid White space and Enter small letter"
                         v-model="rowName"
                         label="Name"
@@ -1126,15 +1158,15 @@ ob2 format{{insertForm.observation2_format}}<br> -->
     padding: 11px;">
     Create Row Setup (For Add New Column)<br>
     <div style="display: flex;">
-                        <v-text-field
+                        <v-text-field dense
                             label="Key"
-                            dense
+                            
                             style="margin:2px"
                             v-model="postfix.key"
                         ></v-text-field>
-                        <v-text-field
+                        <v-text-field dense
                             label="Value"
-                            dense
+                            
                             style="margin:2px"
                             v-model="postfix.value"
                         ></v-text-field>
@@ -1178,8 +1210,8 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                         }}</div
                                     >
                                     <div style="height:37px">
-                                    <v-text-field
-                                        dense
+                                    <v-text-field dense
+                                        
                                         outlined
                                         label="mask"
                                         v-model="
@@ -1310,7 +1342,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     .default
                             "
                         >
-                            <v-text-field
+                            <v-text-field dense
                                 label="Label"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1318,7 +1350,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     ].label
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Name"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1329,7 +1361,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         </div>
 
                         <div v-if="isKeyExist2(qas2EditableIndex, 'map')">
-                                                    <v-text-field
+                                                    <v-text-field dense
                                 label="Map From (header/product)"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1337,7 +1369,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     ].map.mapFrom
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Map"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1349,7 +1381,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                         <div v-if="isKeyExist2(qas2EditableIndex, 'merge')">
                             <label for="">For Merge Cell</label>
-                            <v-text-field
+                            <v-text-field dense
                                 label="ColSpan"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1357,7 +1389,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     ].merge.colspan
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="RowSpan"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1377,7 +1409,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             >
                             </v-textarea>
 
-                            <v-text-field
+                            <v-text-field dense
                                 label="Success"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1386,7 +1418,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                 "
                             >
                             </v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Failure"
                                 v-model="
                                     insertForm.observation2_format[
@@ -1506,7 +1538,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     .default
                             "
                         >
-                            <v-text-field
+                            <v-text-field dense
                                 label="Label"
                                 v-model="
                                     insertForm.observation_format[
@@ -1514,7 +1546,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     ].label
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Name"
                                 v-model="
                                     insertForm.observation_format[
@@ -1525,7 +1557,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         </div>
 
                         <div v-if="isKeyExist(qasEditableIndex, 'map')">
-                                                        <v-text-field
+                                                        <v-text-field dense
                                 label="Map From(header/product)"
                                 v-model="
                                     insertForm.observation_format[
@@ -1533,7 +1565,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     ].map.mapFrom
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Map"
                                 v-model="
                                     insertForm.observation_format[
@@ -1545,7 +1577,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                         <div v-if="isKeyExist(qasEditableIndex, 'merge')">
                             <label for="">For Merge Cell</label>
-                            <v-text-field
+                            <v-text-field dense
                                 label="ColSpan"
                                 v-model="
                                     insertForm.observation_format[
@@ -1553,7 +1585,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     ].merge.colspan
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="RowSpan"
                                 v-model="
                                     insertForm.observation_format[
@@ -1573,7 +1605,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             >
                             </v-textarea>
 
-                            <v-text-field
+                            <v-text-field dense
                                 label="Success"
                                 v-model="
                                     insertForm.observation_format[
@@ -1582,7 +1614,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                 "
                             >
                             </v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Failure"
                                 v-model="
                                     insertForm.observation_format[
@@ -1761,7 +1793,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         >
                         <b v-else>Not a Default Field</b>
                     </div>
-                    <!-- <v-text-field></v-text-field> -->
+                    <!-- <v-text-field dense></v-text-field> -->
                     <!-- {{}} -->
                     <v-checkbox
                         v-model="selectedFieldSetting.show"
@@ -2173,11 +2205,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 <v-divider></v-divider>
                 <div style="padding:10px">
                     <h3>Qaulity Assurance Form Two Dataset</h3>
-              <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+              <v-text-field dense text label="Label"  v-model="createDataset.label"></v-text-field>
                   
-                   <v-text-field dense text label="Name(*)" v-model="createDataset.name"></v-text-field>
+                   <v-text-field dense  text label="Name(*)" v-model="createDataset.name"></v-text-field>
 
-                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <v-text-field dense  text label="Value" v-model="createDataset.value"></v-text-field>
 
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservation2Format">create</v-btn>
@@ -2285,11 +2317,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 <v-divider></v-divider>
                 <div style="padding:10px">
                    <h3>Dataset For Qas Form One</h3>
-  <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+  <v-text-field dense text label="Label"  v-model="createDataset.label"></v-text-field>
                   
-                   <v-text-field dense text label="Name" v-model="createDataset.name"></v-text-field>
+                   <v-text-field dense  text label="Name" v-model="createDataset.name"></v-text-field>
 
-                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <v-text-field dense  text label="Value" v-model="createDataset.value"></v-text-field>
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservationFormat">create</v-btn>
                    </div>
@@ -2404,11 +2436,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 <v-divider></v-divider>
                 <div style="padding:10px">
                    <h3>Dataset For Qas Form Two</h3>
-  <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+  <v-text-field dense text label="Label"  v-model="createDataset.label"></v-text-field>
                   
-                   <v-text-field dense text label="Name" v-model="createDataset.name"></v-text-field>
+                   <v-text-field dense  text label="Name" v-model="createDataset.name"></v-text-field>
 
-                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <v-text-field dense  text label="Value" v-model="createDataset.value"></v-text-field>
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservation2Format">create</v-btn>
                    </div>
@@ -2811,6 +2843,13 @@ getColspan2() {
    console.log("inserform:2",$vm.insertForm)
    },
     methods: {
+qasOneHeaderRow(index){
+var $vm=this;
+console.log("index",index)
+console.log($vm.insertForm.observation_header_print_view)
+$vm.insertForm.observation_header_print_view[index].column.push({name:''})
+
+},
 obFormat(field){
     var $vm=this;
 var obj=$vm.$store.state.map.productConfig

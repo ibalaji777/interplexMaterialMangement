@@ -28,8 +28,18 @@ var headerFormFill={}
 // console.log(core.observationTableHeader($vm.invoice.qasFormOne.observation_format,$vm.invoice.qasFormOne.observation_header_print_view))
 var setSavedValues=core.setObservationFormat(invoice.qasFormOne.observation_format,invoice.qasFormOne.qas_form_one_values)
 var renderQas1Header=core.observationTableHeader(setSavedValues,invoice.qasFormOne.observation_header_print_view)
-var renderQas1Body=core.observationTableBody(invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
 
+// var renderQas1Body=core.observationTableBody(invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
+
+var renderQas1Body=core.observationTableBodyOrder(invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
+
+// var renderQas1BodyOrder=core.observationTableBodyOrder(invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
+
+
+console.log("renderbody config file",invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
+console.log("++++renderQas1Body+++++")
+console.log(renderQas1Body)
+// console.log(renderQas1BodyOrder)
 // var setSavedValues=core.setObservationFormat(invoice.qasFormOne.observation_format,invoice.qasFormOne.qas_form_one_values)
 
 var renderQas2Header=core.observationTableHeader(invoice.qasFormOne.observation2_format,invoice.qasFormOne.observation2_header_print_view)

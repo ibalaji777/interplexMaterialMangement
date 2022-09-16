@@ -138,7 +138,9 @@ OBSERVATION
         <h3>QAS FORM TWO</h3>
         <div style="display:flex;justify-content:space-between">
 
-<div style="display:flex;">
+<div style="display: flex;
+    justify-content: space-between;
+    width: 100%;">
     <div>Pass:
 <div style="display:flex;">
 <div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
@@ -154,10 +156,12 @@ Fail:
 </div>
 </div>
 </div>
+<div>
  <v-switch
       v-model="qasForm2Validation"
       :label="'Real Time Validation'"
     ></v-switch>
+    </div>
 </div>
 <!-- {{selectedPartNoItem}} -->
 
@@ -280,10 +284,12 @@ Fail:
 <h3>QAS FORM ONE</h3>
 <!-- {{qasForm1New}} -->
 <!-- {{selectedPartNoItem.observation_print_view}} -->
+<div style="display:flex;justify-content:flex-end">
  <v-switch
       v-model="qasForm1Validation"
       :label="'Real Time Validation'"
     ></v-switch>
+    </div>
 <div  style="    padding: 10px 20px;
     margin: 8px;
 " class="rowColor" v-for="(form,index) in selectedPartNoItem.observation_print_view" :key="index+'form'">
