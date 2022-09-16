@@ -1411,6 +1411,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                         </div>
                         <div v-if="isKeyExist2(qas2EditableIndex, 'exp')">
+                            
+                            <v-btn color="primary" @click="checkNewLine(insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].exp.rule)">Check</v-btn>
                             <v-textarea
                                 label="Write Rule"
                                 v-model.lazy="
