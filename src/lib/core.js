@@ -1993,14 +1993,17 @@ if(header)
 
   export function observationTableBodyOrder(order,format,printView)
   {
+
+    console.log("+++observationTableBodyOrder+++")
+    console.log(order,format,printView)
     // var torder=tableOrder(Object.keys(x),order)
 
     var count=0;
 return _.map(printView,(x)=>{
   count++
 var row=[]
-  var torder=tableOrder(Object.keys(x),order)
-
+  var torder=tableOrder(order,Object.keys(x))
+console.log("torder",torder)
    _.map(torder,(col ,key)=>{
     // console.log("c",col,"k",key)
 
@@ -2021,8 +2024,8 @@ var row=[]
   }
 
     var  header=_.find(format,(data)=>data.name==column)
-    console.log("++++header++++")
-    console.log(header,column,col)
+    // console.log("++++header++++")
+    // console.log(header,column,col)
 if(header){
    row.push({...header,
     merge:{
@@ -2157,7 +2160,7 @@ if(check)
 
 _.forEach(_.cloneDeep(qasFormTwo),(x,index)=>{
 var row=[]
-console.log('++',x,index)
+// console.log('++',x,index)
 _.map(_.cloneDeep(new_format),(input)=>{
 
   input.value=x.qas_form_two_values[input.name]
