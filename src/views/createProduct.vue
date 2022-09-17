@@ -588,7 +588,7 @@
         >
             <v-card>
                 <v-toolbar dark :color="$store.state.bgColor">
-                    <span>Create Qas Form </span>
+                    <span>Qas Form Two Setup </span>
                     <v-spacer></v-spacer>
                     <v-toolbar-title
                         ><v-icon @click="configQas2PrintViewDialog = false"
@@ -599,17 +599,17 @@
                     <v-toolbar-items> </v-toolbar-items>
                 </v-toolbar>
                 <v-divider></v-divider>
-                <div style="padding:10px;position:relative">
+                <div style="position:relative">
 
-                    <h3 style="padding:0;margin:10px 0">Product List Group Format</h3>
+                    <!-- <h3 style="padding:0;margin:10px 0">Product List Group Format</h3> -->
 
 <!-- header{{insertForm.observation2_header_print_view}}<br>
 print view{{insertForm.observation2_print_view}}<br>
 ob2 format{{insertForm.observation2_format}}<br> -->
-            <v-btn style="position:absolute;top:15px;right:10px" @click="product2SettingDialog = true" outlined>
-                config
+            <v-btn  color="primary" style="margin:10px;" @click="product2SettingDialog = true" outlined>
+                <v-icon>fa-cog</v-icon>
             </v-btn>
-                    <div style="height:78vh;overflow:scroll">
+                    <div style="padding:10px;overflow:scroll">
                         <table class="observationTable" style="width:100vw">
                             <tr
                                 v-for="(form,
@@ -624,10 +624,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                 >
                                     <div >
                                         <div>
-                                        {{item.name}}<br>
+                                        <!-- {{item.name}}<br> -->
                                         <!-- {{getIndex2(item.name)}} -->
                                         <div v-if="getIndex2(item.name) != -1">
-                                            <div
+                                            <!-- <div
                                                 style="display:flex;width:250px;justify-content:space-between"
                                             >
                                                 {{
@@ -645,10 +645,32 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     "
                                                     >fa-trash</v-icon
                                                 >
-                                            </div>
+                                            </div> -->
+                                            <!-- {{form}} -->
                                             <div
                                                 style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
                                             >
+
+                                                                                                                                  <div v-if="index_sub==0">
+                                                    <!-- {{index}} -->
+                                                 
+                                                <v-icon
+                                                @click="qasTwoHeaderRow(index)"
+  
+                                                    style="font-size:25px;color:red"
+                                                    class="drag"
+                                                    >fa-plus</v-icon
+                                                >
+</div>
+   <v-icon
+                                                    @click="
+                                                        qasTwoHeaderRemove(
+                                                            index,
+                                                            index_sub
+                                                        )
+                                                    "
+                                                    >fa-trash</v-icon
+                                                >
                                                 <v-icon
                                                     @click="
                                                         selectQas2Editable(
@@ -681,7 +703,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 outlined
                                                 
 
-                                                label="value"
+                                                :label="insertForm
+                                                        .observation2_format[
+                                                        getIndex2(item.name)
+                                                    ].label"
                                                 v-model.lazy="
                                                     insertForm
                                                         .observation2_format[
@@ -689,6 +714,21 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     ].value
                                                 "
                                             ></v-text-field>
+
+                                             <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation2_format
+                                                    "
+                                                    dense
+                                                    v-model="item.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                    :messages="item.name"
+                                                ></v-combobox>
                                         </div>
                                         <div v-else>
                                             Header
@@ -696,15 +736,35 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 style="display:flex;width:250px;justify-content:space-between"
                                             >
                                                 <div></div>
-                                                <v-icon
+                                            <v-icon
                                                     @click="
-                                                        removeObsrevationPrintView2(index, key)
+                                                        qasTwoHeaderRemove(
+                                                            index,
+                                                            index_sub
+                                                        )
                                                     "
                                                     >fa-trash</v-icon
                                                 >
+                
                                             </div>
 
-                                            Not Found
+                                            Not Found<br>
+                                                                                         <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation2_format
+                                                    "
+                                                    dense
+                                                    v-model="item.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                    :messages="item.name"
+                                                ></v-combobox>
+
+                                                
                                         </div>
                                     </div>
                                     </div>
@@ -758,16 +818,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                             <div
                                                 v-if="getIndex2(column.name) != -1"
                                             >
+                                           
                                                 <div
-                                                    style="display:flex;width:250px;justify-content:space-between"
+                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
                                                 >
-                                                    {{
-                                                        insertForm
-                                                            .observation2_format[
-                                                            getIndex2(column.name)
-                                                        ].label
-                                                    }}
-                                                    <v-icon
+                                                   <v-icon
                                                         @click="
                                                             removeObsrevationPrintView2(
                                                                 index,
@@ -776,10 +831,6 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                         "
                                                         >fa-trash</v-icon
                                                     >
-                                                </div>
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
-                                                >
                                                     <v-icon
                                                         @click="
                                                             selectQas2Editable(
@@ -858,7 +909,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 <v-text-field dense
                                                     outlined
     
-                                                    label="value"
+                                                    :label="insertForm
+                                                            .observation2_format[
+                                                            getIndex2(column.name)
+                                                        ].label"
                                                     v-model.lazy="
                                                         insertForm
                                                             .observation2_format[
@@ -920,7 +974,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 ></v-combobox>
 
                                                 <br />
-                                                {{ column.name }}<br>
+                                                <!-- {{ column.name }}<br> -->
 
 <v-btn text @click="createQas2Field(column.name)">
                                                 <v-icon>fa-plus</v-icon>
@@ -2366,9 +2420,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                    </div>
 
                    <div style="display:flex;justify-content:flex-end;margin-right:15px">
-                    <div v-if="checkDuplicate(insertForm.observation_format)">
-                        Some Duplicate Dataset found
-                    </div>
+                  
                     <v-icon @click="fixObservationFormate">mdi-auto-fix</v-icon>
                    </div>
                     <!-- <v-btn
@@ -2498,9 +2550,12 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     > -->
                     <!-- <v-btn outlined @click="preFields">Pre Fields</v-btn> -->
                 </div>
-
+ <div style="display:flex;justify-content:flex-end;margin-right:15px">
+                  
+                    <v-icon @click="fixObservation2Formate">mdi-auto-fix</v-icon>
+                   </div>
                 <div
-                    style="padding:10px;height: 85vh;
+                    style="padding:10px;height: 60vh;background:rgb(250, 250, 255);
     overflow: scroll;"
                 >
                 <table  class="obFormatTable">
@@ -2909,6 +2964,24 @@ if(reg.test(value)){
  }
 return ''
         },
+        qasTwoHeaderRemove(index,index_sub){
+            var $vm=this;
+            $vm.$confirm("Do You want to Delete?")
+            .then(()=>{
+// console.log("index",index)
+// console.log($vm.insertForm.observation2_header_print_view)
+$vm.insertForm.observation2_header_print_view[index].column.splice(index_sub,1)
+
+            })
+
+        },
+        qasTwoHeaderRow(index){
+            var $vm=this;
+console.log("index",index)
+console.log($vm.insertForm.observation2_header_print_view)
+$vm.insertForm.observation2_header_print_view[index].column.push({name:''})
+
+        },
 qasOneHeaderRow(index){
 var $vm=this;
 console.log("index",index)
@@ -2944,7 +3017,7 @@ $vm.insertForm.observation2_format.push({
  label:'',//input field label
 name,//column name
 value:'',//default value
-default:true,   
+default:false,   
 })
         },
         removePostfix(key) {
@@ -3401,6 +3474,13 @@ $vm.$confirm("Do You Want to Remove Duplicates?")
     $vm.insertForm.observation_format=_.uniqBy(_.cloneDeep($vm.insertForm.observation_format), function (e) {return e.name;});
 })
         },
+          fixObservation2Formate(){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove Duplicates?")
+.then(()=>{
+    $vm.insertForm.observation2_format=_.uniqBy(_.cloneDeep($vm.insertForm.observation2_format), function (e) {return e.name;});
+})
+        },
                 createObservationFormat() {
             var $vm=this;
      if($vm.createDataset.name==''){
@@ -3422,7 +3502,7 @@ return;
         $vm.$alert("Name Must Be Filled");
         return;
      }
-      if(_.findIndex($vm.insertForm.observation2_format,(x)=>x.name==$vm.observationFormatName)!=-1)
+      if(_.findIndex($vm.insertForm.observation2_format,(x)=>x.name==$vm.createDataset.name)!=-1)
             {
 
 $vm.$alert("Column Already Exist Please Try Other Name")
