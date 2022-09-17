@@ -84,7 +84,7 @@
                 width="290px"
             >
                 <template v-slot:activator="{ on, attrs }">
-                    <v-text-field dense
+                    <v-text-field 
                         v-model="insertForm.duedate"
                         label="Picker in dialog"
                         prepend-icon="mdi-calendar"
@@ -148,7 +148,7 @@
         >
             <v-card>
                 <v-toolbar dark :color="$store.state.bgColor">
-                    <span>Create Qas Form</span>
+                    <span>Create Observation</span>
                     <v-spacer></v-spacer>
                     <v-toolbar-title
                         ><v-icon @click="configQasPrintViewDialog = false"
@@ -159,19 +159,17 @@
                     <v-toolbar-items> </v-toolbar-items>
                 </v-toolbar>
                 <v-divider></v-divider>
-                <div style="padding:10px">
+                <div style="">
                     <!-- <v-btn @click="insertObservation" outlined color="red">
     <v-icon>fa-plus</v-icon>
 </v-btn> -->
-        <div style="display:flex;justify-content:flex-end">
-            <v-btn @click="productSettingDialog = true" outlined>
-                config
-            </v-btn>
-        </div>
+       
 
 
-                    <h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
-                    <div style="display:flex;margin:10px 0">
+                    <!-- <h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
+                     -->
+                     <div style="display:flex;justify-conente:flex-between">
+                    <div style="display:flex;">
                         <v-btn
                         outlined
                             style="margin:10px"
@@ -179,7 +177,7 @@
                             color="primary"
                         >
                         <v-icon style="margin-righ:5px">mdi-table-row-plus-after</v-icon>
-                            Create Row
+                          
                         </v-btn>
                         <v-btn outlined
                             style="margin:10px"
@@ -189,11 +187,14 @@
                                                 <v-icon style="margin-righ:5px">                        mdi-table-column-plus-after
 </v-icon>
 
-                            Create Column
-                        </v-btn>
-                    </div>
+                           </v-btn>
 
-                    <div style="height:69vh;overflow:scroll">
+                              <v-btn  color="primary" style="margin:10px" @click="productSettingDialog = true" outlined>
+                <v-icon>fa-cog</v-icon>
+            </v-btn>
+                    </div>
+</div>
+                    <div style="height:84vh;overflow:scroll;background:#fafaff">
                         <table class="observationTable" style="width:100vw">
                             <tr
                                 v-for="(form,
@@ -208,34 +209,12 @@
                                 >
                                     <div>
                                         <div v-if="getIndex(item.name) != -1">
+
                                             <div
-                                                style="display:flex;width:250px;justify-content:space-between"
+                                                style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
                                             >
-                                                {{
-                                                    insertForm
-                                                        .observation_format[
-                                                        getIndex(item.name)
-                                                    ].label
-                                                }}
-                                                <!-- <v-icon
-                                                    @click="
-                                                        removeObservationHeaderPrintView(
-                                                            index,
-                                                            item.name
-                                                        )
-                                                    "
-                                                    >fa-trash</v-icon
-                                                > -->
-                                               <v-icon
-                                                    @click="
-                                                        qasOneHeaderRowRemove(
-                                                            index,
-                                                            index_sub
-                                                        )
-                                                    "
-                                                    >fa-trash</v-icon
-                                                >
-                                                <div v-if="index_sub==0">
+
+                                                                                      <div v-if="index_sub==0">
                                                     <!-- {{index}} -->
                                                 <v-icon
                                                 @click="qasOneHeaderRow(index)"
@@ -245,11 +224,17 @@
                                                     >fa-plus</v-icon
                                                 >
 </div>
+                                                                                           <v-icon
+                                                    @click="
+                                                        qasOneHeaderRowRemove(
+                                                            index,
+                                                            index_sub
+                                                        )
+                                                    "
+                                                    >fa-trash</v-icon
+                                                >
+      
 
-                                            </div>
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
-                                            >
                                                 <v-icon
                                                     @click="
                                                         selectQasEditable(
@@ -281,7 +266,10 @@
                                             <v-text-field dense
                                                 outlined
 
-                                                label="value"
+                                                :label=" insertForm
+                                                        .observation_format[
+                                                        getIndex(item.name)
+                                                    ].label"
                                                 v-model.lazy="
                                                     insertForm
                                                         .observation_format[
@@ -289,8 +277,23 @@
                                                     ].value
                                                 "
                                             ></v-text-field>
-                                           {{form.column[index_sub].name}}
+                                           <!-- {{form.column[index_sub].name}} -->
 
+                                            <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation_format
+                                                    "
+                                                    dense
+                                                    v-model="item.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                    :messages="form.column[index_sub].name+' Dataset For'"
+                                             
+                                                ></v-combobox>
                                         </div>
                                         <div v-else>
                                             <div
@@ -322,6 +325,8 @@
                                                     clearable
                                                     hide-selected
                                                     small-chips
+                                                    :messages="form.column[index_sub].name+' Dataset For'"
+                                             
                                                 ></v-combobox>
                                                 
                                         </div>
@@ -381,7 +386,7 @@
                                             <div
                                                 v-if="getIndex(form[key]) != -1"
                                             >
-                                                <div
+                                                <!-- <div
                                                     style="display:flex;width:250px;justify-content:space-between"
                                                 >
                                                     {{
@@ -399,10 +404,19 @@
                                                         "
                                                         >fa-trash</v-icon
                                                     >
-                                                </div>
+                                                </div> -->
                                                 <div
                                                     style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
                                                 >
+                                                  <v-icon
+                                                        @click="
+                                                            removeTable(
+                                                                index,
+                                                                key
+                                                            )
+                                                        "
+                                                        >fa-trash</v-icon
+                                                    >
                                                     <v-icon
                                                         @click="
                                                             selectQasEditable(
@@ -493,7 +507,10 @@
                                                 <v-text-field dense
                                                     outlined
     
-                                                    label="value"
+                                                    :label="insertForm
+                                                            .observation_format[
+                                                            getIndex(form[key])
+                                                        ].label"
                                                     v-model.lazy="
                                                         insertForm
                                                             .observation_format[
@@ -513,8 +530,9 @@
                                                     clearable
                                                     hide-selected
                                                     small-chips
+                                                    :messages="Object.keys(form)[index_sub]+' Dataset For'"
                                                 ></v-combobox>
-                                                {{Object.keys(form)[index_sub]}}
+                                                <!-- {{Object.keys(form)[index_sub]}} -->
                                             </div>
                                             <div v-else>
                                                 <div
@@ -2346,6 +2364,13 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservationFormat">create</v-btn>
                    </div>
+
+                   <div style="display:flex;justify-content:flex-end;margin-right:15px">
+                    <div v-if="checkDuplicate(insertForm.observation_format)">
+                        Some Duplicate Dataset found
+                    </div>
+                    <v-icon @click="fixObservationFormate">mdi-auto-fix</v-icon>
+                   </div>
                     <!-- <v-btn
                         outlined
                         @click="createFieldSettingDialog = true"
@@ -2356,8 +2381,8 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 </div>
 
                 <div
-                    style="padding:10px;height: 85vh;
-    overflow: scroll;"
+                    style="padding:10px;height: 58vh;
+    overflow: scroll;background:rgb(250, 250, 255)"
                 >
                 <table  class="obFormatTable">
                     <draggable
@@ -2686,6 +2711,12 @@ export default {
     },
 
     computed: {
+        checkDuplicate(){
+            return (array)=>{
+var $vm=this;
+return array.length==_.uniqBy(array,(e)=>e.name)
+            }
+        },
         tableOrder() {
             var $vm = this;
             return array => {
@@ -2864,6 +2895,7 @@ getColspan2() {
    console.log("inserform:2",$vm.insertForm)
    },
     methods: {
+        
         checkNewLine(value){
 var $vm=this;
 
@@ -3362,13 +3394,20 @@ return;
     $vm.insertForm.observation_format.push($vm.createField);
             $vm.$alert("added");
         },
+        fixObservationFormate(){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove Duplicates?")
+.then(()=>{
+    $vm.insertForm.observation_format=_.uniqBy(_.cloneDeep($vm.insertForm.observation_format), function (e) {return e.name;});
+})
+        },
                 createObservationFormat() {
             var $vm=this;
      if($vm.createDataset.name==''){
         $vm.$alert("Name Must Be Filled");
         return;
      }
-     if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.observationFormatName)!=-1)
+     if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.createDataset.name)!=-1)
             {
 
 $vm.$alert("Column Already Exist Please Try Other Name")

@@ -1,4 +1,4 @@
-(window.webpackJsonp$angalware_report=window.webpackJsonp$angalware_report||[]).push([[6],{kzlf:function(t,e,n){(function(e){
+(window.webpackJsonp$angalware_report=window.webpackJsonp$angalware_report||[]).push([[5],{kzlf:function(t,e,n){(function(e){
 /*!
  * Quill Editor v1.3.6
  * https://quilljs.com/
