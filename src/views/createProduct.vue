@@ -609,7 +609,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
             <v-btn  color="primary" style="margin:10px;" @click="product2SettingDialog = true" outlined>
                 <v-icon>fa-cog</v-icon>
             </v-btn>
-                    <div style="padding:10px;overflow:scroll">
+                    <div style="padding:10px;overflow:scroll;background:rgb(250, 250, 255)">
                         <table class="observationTable" style="width:100vw">
                             <tr
                                 v-for="(form,
@@ -2895,10 +2895,14 @@ getColspan2() {
     },
     async mounted() {
         var $vm = this;
+          $vm.$store.commit('showLoader')
+
         // isStateForUpdate:false,
 // console.log("===",$vm.$store.state.interplex.configProductsFormat)
         await $vm.$store.dispatch("getProductConfig");
-        $vm.insertForm.observation_format = $vm.$store.state.interplex.configProductsFormat;
+        await $vm.$store.dispatch("getQasFormOneDefault");
+        await $vm.$store.dispatch("getQasFormTwoDefault");
+$vm.insertForm.observation_format = $vm.$store.state.interplex.configProductsFormat;
         //default print view format
         if ($vm.insertForm.observation_print_view.length == 0) {
             $vm.insertForm.observation_print_view =
@@ -2948,6 +2952,8 @@ getColspan2() {
             // $vm.insertForm.observation_format=params.item.observation_format
         }
    console.log("inserform:2",$vm.insertForm)
+     $vm.$store.commit('hideLoader')
+
    },
     methods: {
         

@@ -1,15 +1,21 @@
 <template>
-<div style="padding:10px;position:relative">
-
-                    <h3 style="padding:0;margin:10px 0">Product List Group Format</h3>
-
-<!-- header{{insertForm.observation2_header_print_view}}<br>
-print view{{insertForm.observation2_print_view}}<br>
-ob2 format{{insertForm.observation2_format}}<br> -->
-            <v-btn style="position:absolute;top:15px;right:10px" @click="product2SettingDialog = true" outlined>
-                config
+<div style="position:relative">
+                   <div style="display:flex;justify-content:space-between">
+                    <div style="display:flex;">
+                      
+            <v-btn  color="primary" style="margin:10px;" @click="product2SettingDialog = true" outlined>
+                <v-icon>fa-cog</v-icon>
             </v-btn>
-                    <div style="height:78vh;overflow:scroll">
+ 
+
+
+                   </div>
+                   <div style="padding:10px">
+                                <v-btn outlined style="margin-right:10px" color="primary" @click="reset">Reset</v-btn>
+                         <v-btn outlined color="primary" @click="save">Save</v-btn>
+                         </div>
+</div>
+                   <div style="padding:10px;overflow:scroll;background:rgb(250, 250, 255)">
                         <table class="observationTable" style="width:100vw">
                             <tr
                                 v-for="(form,
@@ -24,10 +30,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                 >
                                     <div >
                                         <div>
-                                        {{item.name}}<br>
+                                        <!-- {{item.name}}<br> -->
                                         <!-- {{getIndex2(item.name)}} -->
                                         <div v-if="getIndex2(item.name) != -1">
-                                            <div
+                                            <!-- <div
                                                 style="display:flex;width:250px;justify-content:space-between"
                                             >
                                                 {{
@@ -45,10 +51,32 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     "
                                                     >fa-trash</v-icon
                                                 >
-                                            </div>
+                                            </div> -->
+                                            <!-- {{form}} -->
                                             <div
                                                 style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
                                             >
+
+                                                                                                                                  <div v-if="index_sub==0">
+                                                    <!-- {{index}} -->
+                                                 
+                                                <v-icon
+                                                @click="qasTwoHeaderRow(index)"
+  
+                                                    style="font-size:25px;color:red"
+                                                    class="drag"
+                                                    >fa-plus</v-icon
+                                                >
+</div>
+   <v-icon
+                                                    @click="
+                                                        qasTwoHeaderRemove(
+                                                            index,
+                                                            index_sub
+                                                        )
+                                                    "
+                                                    >fa-trash</v-icon
+                                                >
                                                 <v-icon
                                                     @click="
                                                         selectQas2Editable(
@@ -77,10 +105,14 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 </div>
                                             </div>
 
-                                            <v-text-field
+                                            <v-text-field dense
                                                 outlined
-                                                v-debounce="delay"
-                                                label="value"
+                                                
+
+                                                :label="insertForm
+                                                        .observation2_format[
+                                                        getIndex2(item.name)
+                                                    ].label"
                                                 v-model.lazy="
                                                     insertForm
                                                         .observation2_format[
@@ -88,6 +120,21 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     ].value
                                                 "
                                             ></v-text-field>
+
+                                             <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation2_format
+                                                    "
+                                                    dense
+                                                    v-model="item.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                    :messages="item.name"
+                                                ></v-combobox>
                                         </div>
                                         <div v-else>
                                             Header
@@ -95,15 +142,35 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 style="display:flex;width:250px;justify-content:space-between"
                                             >
                                                 <div></div>
-                                                <v-icon
+                                            <v-icon
                                                     @click="
-                                                        removeObsrevationPrintView2(index, key)
+                                                        qasTwoHeaderRemove(
+                                                            index,
+                                                            index_sub
+                                                        )
                                                     "
                                                     >fa-trash</v-icon
                                                 >
+                
                                             </div>
 
-                                            Not Found
+                                            Not Found<br>
+                                                                                         <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation2_format
+                                                    "
+                                                    dense
+                                                    v-model="item.name"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                                    :messages="item.name"
+                                                ></v-combobox>
+
+                                                
                                         </div>
                                     </div>
                                     </div>
@@ -157,16 +224,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                             <div
                                                 v-if="getIndex2(column.name) != -1"
                                             >
+                                           
                                                 <div
-                                                    style="display:flex;width:250px;justify-content:space-between"
+                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
                                                 >
-                                                    {{
-                                                        insertForm
-                                                            .observation2_format[
-                                                            getIndex2(column.name)
-                                                        ].label
-                                                    }}
-                                                    <v-icon
+                                                   <v-icon
                                                         @click="
                                                             removeObsrevationPrintView2(
                                                                 index,
@@ -175,10 +237,6 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                         "
                                                         >fa-trash</v-icon
                                                     >
-                                                </div>
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
-                                                >
                                                     <v-icon
                                                         @click="
                                                             selectQas2Editable(
@@ -254,10 +312,13 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                     </div>
                                                 </div>
 
-                                                <v-text-field
+                                                <v-text-field dense
                                                     outlined
-                                                    v-debounce="delay"
-                                                    label="value"
+    
+                                                    :label="insertForm
+                                                            .observation2_format[
+                                                            getIndex2(column.name)
+                                                        ].label"
                                                     v-model.lazy="
                                                         insertForm
                                                             .observation2_format[
@@ -319,7 +380,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                                 ></v-combobox>
 
                                                 <br />
-                                                {{ column.name }}<br>
+                                                <!-- {{ column.name }}<br> -->
 
 <v-btn text @click="createQas2Field(column.name)">
                                                 <v-icon>fa-plus</v-icon>
@@ -331,753 +392,6 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                    </draggable>
                         </table>
                     </div>
-                    <div style="display: flex;
-    margin-top: 25px;
-    justify-content: flex-end;">
-            <v-btn outlined @click="reset" style=";margin-right:10px;"
-                >Reset</v-btn
-            >
-            <v-btn  outlined @click="save" style=""
-                >Save</v-btn
-            >
-
-</div>            
-  <!-- ^^^^^^^^^^^^^^^^^^^^^^^^qas form 1^^^^^^^^^^^^^^^^^^^^ -->
-        <v-dialog
-            v-model="configQasPrintViewDialog"
-            fullscreen
-            hide-overlay
-            persistent
-            transition="dialog-bottom-transition"
-        >
-            <v-card>
-                <v-toolbar dark :color="$store.state.bgColor">
-                    <span>Create Qas Form</span>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-title
-                        ><v-icon @click="configQasPrintViewDialog = false"
-                            >fa-times</v-icon
-                        ></v-toolbar-title
-                    >
-
-                    <v-toolbar-items> </v-toolbar-items>
-                </v-toolbar>
-                <v-divider></v-divider>
-                <div style="padding:10px">
-                    <!-- <v-btn @click="insertObservation" outlined color="red">
-    <v-icon>fa-plus</v-icon>
-</v-btn> -->
-        <div style="display:flex;justify-content:flex-end">
-            <v-btn @click="productSettingDialog = true" outlined>
-                config
-            </v-btn>
-        </div>
-
-
-                    <h3 style="padding:0;margin:10px 0">OBSERVATION</h3>
-                    <div style="display:flex;margin:10px 0">
-                        <v-btn
-                        outlined
-                            style="margin:10px"
-                            @click="createQasRowInputDialog = true"
-                            color="primary"
-                        >
-                        <v-icon style="margin-righ:5px">mdi-table-row-plus-after</v-icon>
-                            Create Row
-                        </v-btn>
-                        <v-btn outlined
-                            style="margin:10px"
-                            @click="tableColumnSetupDialog = true"
-                            color="primary"
-                        >
-                                                <v-icon style="margin-righ:5px">                        mdi-table-column-plus-after
-</v-icon>
-
-                            Create Column
-                        </v-btn>
-                    </div>
-
-                    <div style="height:69vh;overflow:scroll">
-                        <table class="observationTable" style="width:100vw">
-                            <tr
-                                v-for="(form,
-                                index) in insertForm.observation_header_print_view"
-                                :key="'printview' + index"
-                            >
-                                <td
-                                    :colspan="getColspan(item.name)"
-                                    :rowspan="getRowspan(item.name)"
-                                    v-for="(item, index_sub) in form.column"
-                                    :key="'inde' + index_sub"
-                                >
-                                    <div>
-                                        <div v-if="getIndex(item.name) != -1">
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between"
-                                            >
-                                                {{
-                                                    insertForm
-                                                        .observation_format[
-                                                        getIndex(item.name)
-                                                    ].label
-                                                }}
-                                                <v-icon
-                                                    @click="
-                                                        removeObservationHeaderPrintView(
-                                                            index,
-                                                            item.name
-                                                        )
-                                                    "
-                                                    >fa-trash</v-icon
-                                                >
-                                            </div>
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
-                                            >
-                                                <v-icon
-                                                    @click="
-                                                        selectQasEditable(
-                                                            getIndex(item.name)
-                                                        )
-                                                    "
-                                                    >fa-cog</v-icon
-                                                >
-                                                <div>
-                                                    <!-- {{insertForm.observation_format[getIndex(item.name)]}}
-{{item.name}}
-{{getIndex(item.name)}}
-{{isKeyExist(form[item.name],'merge')}} -->
-                                                    <v-icon
-                                                        :class="{
-                                                            redColor: isKeyExist(
-                                                                getIndex(
-                                                                    item.name
-                                                                ),
-                                                                'merge'
-                                                            )
-                                                        }"
-                                                        style="margin:2px"
-                                                        >mdi-table-merge-cells</v-icon
-                                                    >
-                                                </div>
-                                            </div>
-
-                                            <v-text-field
-                                                outlined
-                                                v-debounce="delay"
-                                                label="value"
-                                                v-model.lazy="
-                                                    insertForm
-                                                        .observation_format[
-                                                        getIndex(item.name)
-                                                    ].value
-                                                "
-                                            ></v-text-field>
-                                        </div>
-                                        <div v-else>
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between"
-                                            >
-                                                <div></div>
-                                                <v-icon
-                                                    @click="
-                                                        removeTable(index, key)
-                                                    "
-                                                    >fa-trash</v-icon
-                                                >
-                                            </div>
-
-                                            Not Found
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <draggable
-                                handle=".drag"
-                                tag="tbody"
-                                v-model="insertForm.observation_print_view"
-                            >
-                                <tr
-                                    v-for="(form,
-                                    index) in insertForm.observation_print_view"
-                                    :key="'printview' + index"
-                                >
-                                    <td
-                                        :colspan="getColspan(form[key])"
-                                        :rowspan="getRowspan(form[key])"
-                                        v-for="(key, index_sub) in tableOrder(
-                                            Object.keys(form)
-                                        )"
-                                        :key="'inde' + index_sub"
-                                    >
-                                        <div v-if="key == 'no'">
-                                            {{ index + 1 }}<br />
-                                            <!-- {{}} -->
-                                            <div
-                                                style="display:flex;justify-content:space-evenly"
-                                            >
-                                                <v-icon
-                                                    style="font-size:50px"
-                                                    class="drag"
-                                                    >mdi-drag-horizontal</v-icon
-                                                >
-                                                <v-icon
-                                                    @click="
-                                                        removeTableRow(index)
-                                                    "
-                                                    style="font-size:25px;color:red"
-                                                    class="drag"
-                                                    >fa-trash</v-icon
-                                                >
-                                                <v-icon
-                                                    @click="
-                                                        selectedRow = index;
-                                                        selectedRowDialog = true;
-                                                    "
-                                                    style="font-size:25px;color:red"
-                                                    class="drag"
-                                                    >fa-plus</v-icon
-                                                >
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <div
-                                                v-if="getIndex(form[key]) != -1"
-                                            >
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between"
-                                                >
-                                                    {{
-                                                        insertForm
-                                                            .observation_format[
-                                                            getIndex(form[key])
-                                                        ].label
-                                                    }}
-                                                    <v-icon
-                                                        @click="
-                                                            removeTable(
-                                                                index,
-                                                                key
-                                                            )
-                                                        "
-                                                        >fa-trash</v-icon
-                                                    >
-                                                </div>
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
-                                                >
-                                                    <v-icon
-                                                        @click="
-                                                            selectQasEditable(
-                                                                getIndex(
-                                                                    form[key]
-                                                                )
-                                                            )
-                                                        "
-                                                        >fa-cog</v-icon
-                                                    >
-                                                    <!-- <v-switch label="Input Disable" v-model="insertForm.observation_format[getIndex(form[key])].disable"></v-switch> -->
-                                                    <div>
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor:
-                                                                    insertForm
-                                                                        .observation_format[
-                                                                        getIndex(
-                                                                            form[
-                                                                                key
-                                                                            ]
-                                                                        )
-                                                                    ].editable
-                                                            }"
-                                                            @click="
-                                                                insertForm.observation_format[
-                                                                    getIndex(
-                                                                        form[
-                                                                            key
-                                                                        ]
-                                                                    )
-                                                                ].editable = !insertForm
-                                                                    .observation_format[
-                                                                    getIndex(
-                                                                        form[
-                                                                            key
-                                                                        ]
-                                                                    )
-                                                                ].editable
-                                                            "
-                                                            style="margin:2px"
-                                                            >mdi-account-edit</v-icon
-                                                        >
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor: isKeyExist(
-                                                                    getIndex(
-                                                                        form[
-                                                                            key
-                                                                        ]
-                                                                    ),
-                                                                    'merge'
-                                                                )
-                                                            }"
-                                                            style="margin:2px"
-                                                            >mdi-table-merge-cells</v-icon
-                                                        >
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor: isKeyExist(
-                                                                    getIndex(
-                                                                        form[
-                                                                            key
-                                                                        ]
-                                                                    ),
-                                                                    'map'
-                                                                )
-                                                            }"
-                                                            style="margin:2px"
-                                                            >mdi-magnify-scan</v-icon
-                                                        >
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor: isKeyExist(
-                                                                    getIndex(
-                                                                        form[
-                                                                            key
-                                                                        ]
-                                                                    ),
-                                                                    'exp'
-                                                                )
-                                                            }"
-                                                            >fa-calculator</v-icon
-                                                        >
-                                                    </div>
-                                                </div>
-
-                                                <v-text-field
-                                                    outlined
-                                                    v-debounce="delay"
-                                                    label="value"
-                                                    v-model.lazy="
-                                                        insertForm
-                                                            .observation_format[
-                                                            getIndex(form[key])
-                                                        ].value
-                                                    "
-                                                ></v-text-field>
-                                                <v-combobox
-                                                    :return-object="false"
-                                                    :items="
-                                                        insertForm.observation_format
-                                                    "
-                                                    dense
-                                                    v-model="form[key]"
-                                                    item-text="name"
-                                                    item-value="name"
-                                                    clearable
-                                                    hide-selected
-                                                    small-chips
-                                                ></v-combobox>
-                                            </div>
-                                            <div v-else>
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between"
-                                                >
-                                                    <div></div>
-                                                    <v-icon
-                                                        @click="
-                                                            removeTable(
-                                                                index,
-                                                                key
-                                                            )
-                                                        "
-                                                        >fa-trash</v-icon
-                                                    >
-                                                </div>
-
-                                                Not Found
-
-                                                <v-combobox
-                                                    :return-object="false"
-                                                    :items="
-                                                        insertForm.observation_format
-                                                    "
-                                                    dense
-                                                    v-model="form[key]"
-                                                    item-text="name"
-                                                    item-value="name"
-                                                    clearable
-                                                    hide-selected
-                                                    small-chips
-                                                ></v-combobox>
-
-                                                <br />
-                                                {{ form[key] }}
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </draggable>
-                        </table>
-                    </div>
-                </div>
-            </v-card>
-        </v-dialog>
-        <!-- ^^^^^^^^^^^^^^^^^^^^^^^^qas form 2^^^^^^^^^^^^^^^^^^^^ -->
-          <v-dialog
-            v-model="configQas2PrintViewDialog"
-            fullscreen
-            hide-overlay
-            persistent
-            transition="dialog-bottom-transition"
-        >
-            <v-card>
-                <v-toolbar dark :color="$store.state.bgColor">
-                    <span>Create Qas Form </span>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-title
-                        ><v-icon @click="configQas2PrintViewDialog = false"
-                            >fa-times</v-icon
-                        ></v-toolbar-title
-                    >
-
-                    <v-toolbar-items> </v-toolbar-items>
-                </v-toolbar>
-                <v-divider></v-divider>
-                <div style="padding:10px;position:relative">
-
-                    <h3 style="padding:0;margin:10px 0">Product List Group Format</h3>
-
-<!-- header{{insertForm.observation2_header_print_view}}<br>
-print view{{insertForm.observation2_print_view}}<br>
-ob2 format{{insertForm.observation2_format}}<br> -->
-            <v-btn style="position:absolute;top:15px;right:10px" @click="product2SettingDialog = true" outlined>
-                config
-            </v-btn>
-                    <div style="height:78vh;overflow:scroll">
-                        <table class="observationTable" style="width:100vw">
-                            <tr
-                                v-for="(form,
-                                index) in insertForm.observation2_header_print_view"
-                                :key="'printv' + index"
-                            >
-                                <td
-                                    :colspan="getColspan2(item.name)"
-                                    :rowspan="getRowspan2(item.name)"
-                                    v-for="(item, index_sub) in form.column"
-                                    :key="'inde' + index_sub"
-                                >
-                                    <div >
-                                        <div>
-                                        {{item.name}}<br>
-                                        <!-- {{getIndex2(item.name)}} -->
-                                        <div v-if="getIndex2(item.name) != -1">
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between"
-                                            >
-                                                {{
-                                                    insertForm
-                                                        .observation2_format[
-                                                        getIndex2(item.name)
-                                                    ].label
-                                                }}
-                                                <v-icon
-                                                    @click="
-                                                        removeObservationHeaderPrintView2(
-                                                            index,
-                                                            item.name
-                                                        )
-                                                    "
-                                                    >fa-trash</v-icon
-                                                >
-                                            </div>
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between;padding:10px 0"
-                                            >
-                                                <v-icon
-                                                    @click="
-                                                        selectQas2Editable(
-                                                            getIndex2(item.name)
-                                                        )
-                                                    "
-                                                    >fa-cog</v-icon
-                                                >
-                                                <div>
-                                                    <!-- {{insertForm.observation2_format[getIndex2(item.name)]}}
-{{item.name}}
-{{getIndex2(item.name)}}
-{{isKeyExist2(form[item.name],'merge')}} -->
-                                                    <v-icon
-                                                        :class="{
-                                                            redColor: isKeyExist2(
-                                                                getIndex2(
-                                                                    item.name
-                                                                ),
-                                                                'merge'
-                                                            )
-                                                        }"
-                                                        style="margin:2px"
-                                                        >mdi-table-merge-cells</v-icon
-                                                    >
-                                                </div>
-                                            </div>
-
-                                            <v-text-field
-                                                outlined
-                                                v-debounce="delay"
-                                                label="value"
-                                                v-model.lazy="
-                                                    insertForm
-                                                        .observation2_format[
-                                                        getIndex2(item.name)
-                                                    ].value
-                                                "
-                                            ></v-text-field>
-                                        </div>
-                                        <div v-else>
-                                            Header
-                                            <div
-                                                style="display:flex;width:250px;justify-content:space-between"
-                                            >
-                                                <div></div>
-                                                <v-icon
-                                                    @click="
-                                                        removeObsrevationPrintView2(index, key)
-                                                    "
-                                                    >fa-trash</v-icon
-                                                >
-                                            </div>
-
-                                            Not Found
-                                        </div>
-                                    </div>
-                                    </div>
-                                </td>
-                            </tr>
-                                   <draggable
-                                :list="insertForm.observation2_print_view"
-                                style="
-                     margin-top:10px "
-                                tag="tr"
-                                ghost-class="ghost"
-                                group="product"
-                                @start="dragging = true"
-                                @end="dragging = false"
-                            >   
-
-                                    <td
-
-                                       v-for="(column,
-                                    index) in insertForm.observation2_print_view"
-                                    :key="'pri' + index"
-
-                                        :colspan="getColspan2(column)"
-                                        :rowspan="getRowspan2(column)"
-                                     >
-                                     <!-- {{column}} -->
-                              
-                                        <div v-if="column.name == 'no'">
-                                            {{ index + 1 }}<br />
-                                            <!-- {{}} -->
-                                            <div
-                                                style="display:flex;justify-content:space-evenly"
-                                            >
-                                                <v-icon
-                                                    style="font-size:50px"
-                                                    class="drag"
-                                                    >mdi-drag-horizontal</v-icon
-                                                >
-                                                <v-icon
-                                                    @click="
-                                                        selectedRow2 = index;
-                                                        selectedRowDialog2 = true;
-                                                    "
-                                                    style="font-size:25px;color:red"
-                                                    class="drag"
-                                                    >fa-plus</v-icon
-                                                >
-                                            </div>
-                                        </div>
-                                        <div v-else>
-                                            <div
-                                                v-if="getIndex2(column.name) != -1"
-                                            >
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between"
-                                                >
-                                                    {{
-                                                        insertForm
-                                                            .observation2_format[
-                                                            getIndex2(column.name)
-                                                        ].label
-                                                    }}
-                                                    <v-icon
-                                                        @click="
-                                                            removeObsrevationPrintView2(
-                                                                index,
-                                                                column.name
-                                                            )
-                                                        "
-                                                        >fa-trash</v-icon
-                                                    >
-                                                </div>
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between;padding:15px 0"
-                                                >
-                                                    <v-icon
-                                                        @click="
-                                                            selectQas2Editable(
-                                                                getIndex2(
-                                                                    column.name
-                                                                )
-                                                            )
-                                                        "
-                                                        >fa-cog</v-icon
-                                                    >
-                                                    <!-- <v-switch label="Input Disable" v-model="insertForm.observation2_format[getIndex2(column.name)].disable"></v-switch> -->
-                                                    <div>
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor:
-                                                                    insertForm
-                                                                        .observation2_format[
-                                                                        getIndex2(
-                                                                            column.name
-                                                                        )
-                                                                    ].editable
-                                                            }"
-                                                            @click="
-                                                                insertForm.observation2_format[
-                                                                    getIndex2(
-                                                                      column.name
-                                                                    )
-                                                                ].editable = !insertForm
-                                                                    .observation2_format[
-                                                                    getIndex2(
-                                                                        column.name
-                                                                    )
-                                                                ].editable
-                                                            "
-                                                            style="margin:2px"
-                                                            >mdi-account-edit</v-icon
-                                                        >
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor: isKeyExist2(
-                                                                    getIndex2(
-                                                                        column.name
-                                                                    ),
-                                                                    'merge'
-                                                                )
-                                                            }"
-                                                            style="margin:2px"
-                                                            >mdi-table-merge-cells</v-icon
-                                                        >
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor: isKeyExist2(
-                                                                    getIndex2(
-                                                                        column.name
-                                                                    ),
-                                                                    'map'
-                                                                )
-                                                            }"
-                                                            style="margin:2px"
-                                                            >mdi-magnify-scan</v-icon
-                                                        >
-                                                        <v-icon
-                                                            :class="{
-                                                                redColor: isKeyExist2(
-                                                                    getIndex2(
-                                                                        column.name
-                                                                    ),
-                                                                    'exp'
-                                                                )
-                                                            }"
-                                                            >fa-calculator</v-icon
-                                                        >
-                                                    </div>
-                                                </div>
-
-                                                <v-text-field
-                                                    outlined
-                                                    v-debounce="delay"
-                                                    label="value"
-                                                    v-model.lazy="
-                                                        insertForm
-                                                            .observation2_format[
-                                                            getIndex2(column.name)
-                                                        ].value
-                                                    "
-                                                ></v-text-field>
-                                                <v-combobox
-                                                    :return-object="false"
-                                                    :items="
-                                                        insertForm.observation2_format
-                                                    "
-                                                    dense
-                                                    v-model="column.name"
-                                                    item-text="name"
-                                                    item-value="name"
-                                                    clearable
-                                                    hide-selected
-                                                    small-chips
-                                                ></v-combobox>
-                                                                                                <v-icon
-                                                    style="font-size:50px"
-                                                    class="drag"
-                                                    >mdi-drag-horizontal</v-icon
-                                                >
-                                            
-                                                
-                                            </div>
-                                            <div v-else>
-                                                <div
-                                                    style="display:flex;width:250px;justify-content:space-between"
-                                                >
-                                                    <div></div>
-                                                    <v-icon
-                                                        @click="
-                                                            removeObsrevationPrintView2(
-                                                                index,
-                                                                column.name
-                                                            )
-                                                        "
-                                                        >fa-trash</v-icon
-                                                    >
-                                                </div>
-
-                                                Not Found
-<!-- {{insertForm.observation2_format}} -->
-                                                <v-combobox
-                                                    :return-object="false"
-                                                    :items="
-                                                        insertForm.observation2_format
-                                                    "
-                                                    dense
-                                                    v-model="column.name"
-                                                    item-text="name"
-                                                    item-value="name"
-                                                    clearable
-                                                    hide-selected
-                                                    small-chips
-                                                ></v-combobox>
-
-                                                <br />
-                                                {{ column.name }}<br>
-
-<v-btn text @click="createQas2Field(column.name)">
-                                                <v-icon>fa-plus</v-icon>
-                                                </v-btn>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                   </draggable>
-                        </table>
-                    </div>
-                </div>
-            </v-card>
-        </v-dialog>
 
 
         <!-- tableColumnSetupDialog -->
@@ -1099,7 +413,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <div>
                         <!-- <div> -->
                         <!-- <span class="text-h5">Table Header </span>
-<v-text-field v-model="headerColumnName" label="Create  Column">
+<v-text-field dense v-model="headerColumnName" label="Create  Column">
 </v-text-field> <br> -->
                         <!-- <table  class="observationTable" style="width:100vw">
     <tr v-for="(form,index) in insertForm.observation_header_print_view" :key="'printview'+index">
@@ -1111,7 +425,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
         </table> -->
 
                         <span class="text-h5">Table Header Sort</span>
-                        <v-text-field
+                        <v-text-field dense
                             v-model="createColumnName"
                             label="Create  Column"
                         >
@@ -1160,7 +474,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                     <!-- <div>
 <span class="text-h5">Create New Table Column</span>
-<v-text-field v-model="createNewTableColumnName" label="Create  Column">
+<v-text-field dense v-model="createNewTableColumnName" label="Create  Column">
 </v-text-field> <br>
 <v-btn color="primary" @click="createHeaderColumn" style="margin:15px 0">Submit</v-btn>
  <table style="border:1px solid black;width:100%;border-collapse: collapse;margin:10px 0">
@@ -1207,10 +521,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     >
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
+                    <v-text-field dense
                         hint="whithout whitespace"
                         outlined
-                        v-debounce="delay"
+                        
+                        
                         label="Name"
                         v-model.lazy="createRowName2"
                     ></v-text-field>
@@ -1247,10 +562,10 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     >
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
+                    <v-text-field dense
                         hint="whithout whitespace"
                         outlined
-                        v-debounce="delay"
+                        
                         label="Name"
                         v-model.lazy="createRowName"
                     ></v-text-field>
@@ -1290,7 +605,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         </draggable>
                     </table>
 
-                    <!-- <v-text-field  v-model="createRowName" label="Name"></v-text-field> -->
+                    <!-- <v-text-field dense  v-model="createRowName" label="Name"></v-text-field> -->
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -1314,7 +629,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     <span class="text-h5">Create New Row</span>
                 </v-card-title>
                 <v-card-text>
-                    <v-text-field
+                    <v-text-field dense
                         hint="Avoid White space and Enter small letter"
                         v-model="rowName"
                         label="Name"
@@ -1330,15 +645,15 @@ ob2 format{{insertForm.observation2_format}}<br> -->
     padding: 11px;">
     Create Row Setup (For Add New Column)<br>
     <div style="display: flex;">
-                        <v-text-field
+                        <v-text-field dense
                             label="Key"
-                            dense
+                            
                             style="margin:2px"
                             v-model="postfix.key"
                         ></v-text-field>
-                        <v-text-field
+                        <v-text-field dense
                             label="Value"
-                            dense
+                            
                             style="margin:2px"
                             v-model="postfix.value"
                         ></v-text-field>
@@ -1382,8 +697,8 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                         }}</div
                                     >
                                     <div style="height:37px">
-                                    <v-text-field
-                                        dense
+                                    <v-text-field dense
+                                        
                                         outlined
                                         label="mask"
                                         v-model="
@@ -1514,17 +829,17 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     .default
                             "
                         >
-                            <v-text-field
+                            <v-text-field dense
                                 label="Label"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].label
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Name"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].name
@@ -1533,17 +848,17 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         </div>
 
                         <div v-if="isKeyExist2(qas2EditableIndex, 'map')">
-                                                    <v-text-field
+                                                    <v-text-field dense
                                 label="Map From (header/product)"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].map.mapFrom
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Map"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].map.map
@@ -1553,17 +868,17 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                         <div v-if="isKeyExist2(qas2EditableIndex, 'merge')">
                             <label for="">For Merge Cell</label>
-                            <v-text-field
+                            <v-text-field dense
                                 label="ColSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].merge.colspan
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="RowSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].merge.rowspan
@@ -1571,9 +886,13 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                         </div>
                         <div v-if="isKeyExist2(qas2EditableIndex, 'exp')">
+                            
+                            <v-btn color="primary" @click="checkNewLine(insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ].exp.rule)">Check</v-btn>
                             <v-textarea
                                 label="Write Rule"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.rule
@@ -1581,18 +900,18 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             >
                             </v-textarea>
 
-                            <v-text-field
+                            <v-text-field dense
                                 label="Success"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.success
                                 "
                             >
                             </v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Failure"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.failure
@@ -1710,17 +1029,17 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                     .default
                             "
                         >
-                            <v-text-field
+                            <v-text-field dense
                                 label="Label"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].label
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Name"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].name
@@ -1729,17 +1048,17 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         </div>
 
                         <div v-if="isKeyExist(qasEditableIndex, 'map')">
-                                                        <v-text-field
+                                                        <v-text-field dense
                                 label="Map From(header/product)"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].map.mapFrom
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Map"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].map.map
@@ -1749,17 +1068,17 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 
                         <div v-if="isKeyExist(qasEditableIndex, 'merge')">
                             <label for="">For Merge Cell</label>
-                            <v-text-field
+                            <v-text-field dense
                                 label="ColSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].merge.colspan
                                 "
                             ></v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="RowSpan"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].merge.rowspan
@@ -1767,9 +1086,13 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             ></v-text-field>
                         </div>
                         <div v-if="isKeyExist(qasEditableIndex, 'exp')">
+                        <v-btn color="primary" @click="checkNewLine(insertForm.observation_format[
+                                        qasEditableIndex
+                                    ].exp.rule)">Check</v-btn>
+
                             <v-textarea
                                 label="Write Rule"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].exp.rule
@@ -1777,18 +1100,19 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             >
                             </v-textarea>
 
-                            <v-text-field
+
+                            <v-text-field dense
                                 label="Success"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].exp.success
                                 "
                             >
                             </v-text-field>
-                            <v-text-field
+                            <v-text-field dense
                                 label="Failure"
-                                v-model="
+                                v-model.lazy="
                                     insertForm.observation_format[
                                         qasEditableIndex
                                     ].exp.failure
@@ -1965,7 +1289,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                         >
                         <b v-else>Not a Default Field</b>
                     </div>
-                    <!-- <v-text-field></v-text-field> -->
+                    <!-- <v-text-field dense></v-text-field> -->
                     <!-- {{}} -->
                     <v-checkbox
                         v-model="selectedFieldSetting.show"
@@ -2377,11 +1701,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 <v-divider></v-divider>
                 <div style="padding:10px">
                     <h3>Qaulity Assurance Form Two Dataset</h3>
-              <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+              <v-text-field dense text label="Label"  v-model="createDataset.label"></v-text-field>
                   
-                   <v-text-field dense text label="Name(*)" v-model="createDataset.name"></v-text-field>
+                   <v-text-field dense  text label="Name(*)" v-model="createDataset.name"></v-text-field>
 
-                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <v-text-field dense  text label="Value" v-model="createDataset.value"></v-text-field>
 
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservation2Format">create</v-btn>
@@ -2489,13 +1813,18 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 <v-divider></v-divider>
                 <div style="padding:10px">
                    <h3>Dataset For Qas Form One</h3>
-  <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+  <v-text-field dense text label="Label"  v-model="createDataset.label"></v-text-field>
                   
-                   <v-text-field dense text label="Name" v-model="createDataset.name"></v-text-field>
+                   <v-text-field dense  text label="Name" v-model="createDataset.name"></v-text-field>
 
-                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <v-text-field dense  text label="Value" v-model="createDataset.value"></v-text-field>
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservationFormat">create</v-btn>
+                   </div>
+
+                   <div style="display:flex;justify-content:flex-end;margin-right:15px">
+                  
+                    <v-icon @click="fixObservationFormate">mdi-auto-fix</v-icon>
                    </div>
                     <!-- <v-btn
                         outlined
@@ -2507,8 +1836,8 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 </div>
 
                 <div
-                    style="padding:10px;height: 85vh;
-    overflow: scroll;"
+                    style="padding:10px;height: 58vh;
+    overflow: scroll;background:rgb(250, 250, 255)"
                 >
                 <table  class="obFormatTable">
                     <draggable
@@ -2608,11 +1937,11 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 <v-divider></v-divider>
                 <div style="padding:10px">
                    <h3>Dataset For Qas Form Two</h3>
-  <v-text-field text label="Label" dense v-model="createDataset.label"></v-text-field>
+  <v-text-field dense text label="Label"  v-model="createDataset.label"></v-text-field>
                   
-                   <v-text-field dense text label="Name" v-model="createDataset.name"></v-text-field>
+                   <v-text-field dense  text label="Name" v-model="createDataset.name"></v-text-field>
 
-                   <v-text-field dense text label="Value" v-model="createDataset.value"></v-text-field>
+                   <v-text-field dense  text label="Value" v-model="createDataset.value"></v-text-field>
                    <div style="display:flex;justify-content:center">
                    <v-btn text @click="createObservation2Format">create</v-btn>
                    </div>
@@ -2624,9 +1953,12 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                     > -->
                     <!-- <v-btn outlined @click="preFields">Pre Fields</v-btn> -->
                 </div>
-
+ <div style="display:flex;justify-content:flex-end;margin-right:15px">
+                  
+                    <v-icon @click="fixObservation2Formate">mdi-auto-fix</v-icon>
+                   </div>
                 <div
-                    style="padding:10px;height: 85vh;
+                    style="padding:10px;height: 60vh;background:rgb(250, 250, 255);
     overflow: scroll;"
                 >
                 <table  class="obFormatTable">
@@ -2702,6 +2034,8 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                 </div>
             </v-card>
         </v-dialog>
+
+
                 </div>
 </template>
 <script>
@@ -2840,6 +2174,7 @@ export default {
     },
         async mounted() {
         var $vm = this;
+        $vm.$store.commit('showLoader')
         await $vm.$store.dispatch("getProductConfig");
         await $vm.$store.dispatch("getQasFormTwoDefault");
 
@@ -2859,10 +2194,57 @@ export default {
        console.log("observation2_header_print_view",_.cloneDeep($vm.$store.state.interplex.observation2_header_print_view_format))
         }
 
-
+     $vm.$store.commit('hideLoader')
    },
 
     methods: {
+        
+        checkNewLine(value){
+var $vm=this;
+
+var reg=/(.*?(\n))+.*?/gm
+
+if(reg.test(value)){
+ $vm.$alert("Line Found")
+ }
+ else{
+    $vm.$alert("Looks Perfect")
+ }
+return ''
+        },
+        qasTwoHeaderRemove(index,index_sub){
+            var $vm=this;
+            $vm.$confirm("Do You want to Delete?")
+            .then(()=>{
+// console.log("index",index)
+// console.log($vm.insertForm.observation2_header_print_view)
+$vm.insertForm.observation2_header_print_view[index].column.splice(index_sub,1)
+
+            })
+
+        },
+        qasTwoHeaderRow(index){
+            var $vm=this;
+console.log("index",index)
+console.log($vm.insertForm.observation2_header_print_view)
+$vm.insertForm.observation2_header_print_view[index].column.push({name:''})
+
+        },
+qasOneHeaderRow(index){
+var $vm=this;
+console.log("index",index)
+console.log($vm.insertForm.observation_header_print_view)
+$vm.insertForm.observation_header_print_view[index].column.push({name:''})
+
+},
+qasOneHeaderRowRemove(index,index_sub){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove").
+then(()=>{
+$vm.insertForm.observation_header_print_view[index].column.splice(index_sub,1)
+})
+
+},
 obFormat(field){
     var $vm=this;
 var obj=$vm.$store.state.map.productConfig
@@ -2883,7 +2265,7 @@ $vm.insertForm.observation2_format.push({
  label:'',//input field label
 name,//column name
 value:'',//default value
-default:true,   
+default:false,   
 })
         },
         removePostfix(key) {
@@ -2950,7 +2332,7 @@ default:true,
                         $vm.insertForm.observation_format[index],
                         "map",
                         {
-                        mapFrom:'',
+                        mapFrom:'header',
                         map:''
                         }
                     );
@@ -3265,10 +2647,10 @@ return;
                 }
             );
         },
-                async reset() {
-            var $vm = this;
-                        $vm.$confirm("Do you want to reset ?", "warning", "warning").then(
-                async () => {
+async reset() {
+  var $vm = this;
+              $vm.$confirm("Do you want to reset ?", "warning", "warning").then(
+      async () => {
 
 // ------------------qasformone----------
 var payload={
@@ -3284,11 +2666,11 @@ $vm.$alert("Reset")
 // observation2_format:$vm.insertForm.observation2_format,
 // observation2_print_view:$vm.insertForm.observation2_print_view
 // }
-                })
-        },
+      })
+},
 
-        async save() {
-            var $vm = this;
+async save() {
+  var $vm = this;
 // ------------------qasformone----------
 var payload={
 observation2_header_print_view:$vm.insertForm.observation2_header_print_view,    
@@ -3299,15 +2681,15 @@ await $vm.$store.dispatch('setQasFormTwoDefault',payload)
 $vm.$alert("Saved")
 
 
-        },
-        async update() {
-            var $vm = this;
-            // core.database(this,'updateMasterProduct',this.insertForm)
+},
+async update() {
+  var $vm = this;
+  // core.database(this,'updateMasterProduct',this.insertForm)
 
-            $vm.$store.dispatch("updateProduct", $vm.insertForm);
+  $vm.$store.dispatch("updateProduct", $vm.insertForm);
 
-            $vm.$alert("Successfully Updated");
-        },
+  $vm.$alert("Successfully Updated");
+},
         selectFieldSettingfn(item) {
             this.selectedFieldSetting = item;
             this.productFieldSettingDialog = true;
@@ -3336,13 +2718,27 @@ return;
     $vm.insertForm.observation_format.push($vm.createField);
             $vm.$alert("added");
         },
+        fixObservationFormate(){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove Duplicates?")
+.then(()=>{
+    $vm.insertForm.observation_format=_.uniqBy(_.cloneDeep($vm.insertForm.observation_format), function (e) {return e.name;});
+})
+        },
+          fixObservation2Formate(){
+var $vm=this;
+$vm.$confirm("Do You Want to Remove Duplicates?")
+.then(()=>{
+    $vm.insertForm.observation2_format=_.uniqBy(_.cloneDeep($vm.insertForm.observation2_format), function (e) {return e.name;});
+})
+        },
                 createObservationFormat() {
             var $vm=this;
      if($vm.createDataset.name==''){
         $vm.$alert("Name Must Be Filled");
         return;
      }
-     if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.observationFormatName)!=-1)
+     if(_.findIndex($vm.insertForm.observation_format,(x)=>x.name==$vm.createDataset.name)!=-1)
             {
 
 $vm.$alert("Column Already Exist Please Try Other Name")
@@ -3357,7 +2753,7 @@ return;
         $vm.$alert("Name Must Be Filled");
         return;
      }
-      if(_.findIndex($vm.insertForm.observation2_format,(x)=>x.name==$vm.observationFormatName)!=-1)
+      if(_.findIndex($vm.insertForm.observation2_format,(x)=>x.name==$vm.createDataset.name)!=-1)
             {
 
 $vm.$alert("Column Already Exist Please Try Other Name")
