@@ -5,7 +5,7 @@
 <!-- {{$store.state.interplex.qasForm1}} -->
 
 <label-print-desktop style="width:0;height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
-<label-print-mobile style="width:0;height:0;overflow:hidden"  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
+<label-print-mobile  style="width:0;height:0;overflow:hidden"   v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 <div style="padding:15px;    padding: 15px;
     justify-content: space-between;
     display: flex;
@@ -271,8 +271,8 @@ export default {
 isApprover:false,    
         barcodeLabel:{
             pageSetup:{
-page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
-    label:_.cloneDeep(this.$store.state.barcode.pageSetup.label),
+        page:_.cloneDeep(this.$store.state.barcode.pageSetup.page),
+        label:_.cloneDeep(this.$store.state.barcode.pageSetup.label),
             },
             html:_.cloneDeep(this.$store.state.barcodeLabel.html),
             css:_.cloneDeep(this.$store.state.barcodeLabel.css),
@@ -299,7 +299,7 @@ return $vm.$store.state.interplex.qasForm1;
         var $vm=this;
 
       await $vm.$store.dispatch('approverList')
-
+await $vm.$store.dispatch("labelSettingRead");
       $vm.filterResult=$vm.list||[];
 
 
@@ -339,6 +339,15 @@ async handler(){
      }
  },
     methods:{
+        checkDate(date){
+var $vm=this;
+if(!moment(date, "YYYY-MM-DD",true).isValid())
+{
+    return moment(date).format("YYYY-MM-DD")
+}
+return "";
+
+        },
             labelPrint(){
         var $vm=this;
         if($vm.selected.length==0){
@@ -381,11 +390,15 @@ var result=await   $vm.$store.dispatch("labelGenerate",$vm.selected);
  console.log(result)
 
 _.map(result,(x)=>{
-var object={}
+var object={};
+
+_.map(x.header_format,(view)=>{
+    object['head_'+view.name]=view.value
+})
 _.map(x.qasFormTwo,(batch_product)=>{
 
 labels.push({
-
+...object,
 
 qasFormOne:x,
 ...batch_product.qas_form_two_values,
@@ -398,15 +411,16 @@ rmcode:x.rmcode,
 eds:x.eds,
 supplier_name:x.supplier_name,
 grn_no:x.grn_no,
-grn_date:x.grn_date,
+grn_date:$vm.checkDate(x.grn_date),
 invoice_qty:x.invoice_qty,
 invoice_date:x.invoice_date,
 received_qty:x.received_qty,
 product_name:x.product_name,
 form_format:x.form_format,
 comment:x.comment,
-duedate:x.duedate,
-remars:x.remarsk,
+duedate:$vm.checkDate(x.duedate),
+date:$vm.checkDate(x.date),
+remars:x.remarks,
 batch_no:batch_product.batch_no,
 
 })

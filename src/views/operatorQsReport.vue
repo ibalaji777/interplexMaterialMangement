@@ -953,9 +953,10 @@ return this.$store.state.interplex.selectedPartNoItem||{};
 takePhoto(){
 var $vm=this;
 var ref=$vm.$store.state.interplex.selectedPartNoItem.ref;
-if($vm.$store.state.interplex.tempInvoice[ref])
+if($vm.$store.state.interplex.tempInvoice[ref]){
 return ($vm.$store.state.interplex.tempInvoice[ref].gallery)||[]//selectedPartNoItem
-
+}
+return [];
 },
 remarks:{
   get(){

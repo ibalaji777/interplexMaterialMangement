@@ -1174,6 +1174,7 @@ var vm = require('vm');
 const detectCsv=require('detect-csv')
 var XLSX = require("xlsx");
 import * as core from "../lib/core.js";
+const isNumber =require('is-number')
 import { Camera, CameraResultType } from "@capacitor/camera";
 import moment from "moment";
 import blobUtil, { base64StringToBlob } from "blob-util";
@@ -2095,13 +2096,32 @@ $vm.importStepOneDuplicatesFiles=Object.keys(duplicates)
             var result = {};
             //   workbook.SheetNames.forEach(function(sheetName) {
             var sheetName = workbook.SheetNames[0];
-            var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {});
+            var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {raw:false});
             if (roa.length) result[sheetName] = roa;
             var rt = JSON.stringify(roa);
-            // console.log("+++|||result|||++++")
-            //     console.log(JSON.parse(rt))
+            console.log("+++|||result|||++++")
+                console.log(JSON.parse(rt))
+    var crlt =         _.map(JSON.parse(rt),(x)=>{
+
+ _.map(x,(value,key)=>{
+// console.log(x,value,key)
+
+if(isNumber(value)&&!['BATCH'].includes(key))
+{
+    x[key]=parseFloat(value)
+}
+else{
+    x[key]=value;
+}
+
+})
+return x;
+
+                })
+                console.log("crlt",crlt)
             //   });
-            return JSON.parse(rt);
+            // return JSON.parse(rt);
+            return crlt
         },
 
         selectGalleryType(index) {

@@ -2389,7 +2389,10 @@ default:false,
                     $vm.$set(
                         $vm.insertForm.observation2_format[index],
                         "map",
-                        ""
+                        {
+                        mapFrom:'header',
+                        map:''
+                        }
                     );
             }
             if (action == "exp") {

@@ -1349,7 +1349,7 @@ ob2 format{{insertForm.observation2_format}}<br> -->
 <v-dialog v-model="qas2EdiableDialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>
-                    <span class="text-h5">Input Config</span>
+                    <span class="text-h5">Input Config For Qas2</span>
                 </v-card-title>
                 <v-card-text>
                     <div v-if="qas2EditableIndex != -1">
@@ -1443,7 +1443,9 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                 "
                             ></v-text-field>
                         </div>
-
+<!-- {{insertForm.observation2_format[
+                                        qas2EditableIndex
+                                    ]}} -->
                         <div v-if="isKeyExist2(qas2EditableIndex, 'map')">
                                                     <v-text-field dense
                                 label="Map From (header/product)"
@@ -3147,7 +3149,10 @@ default:false,
                     $vm.$set(
                         $vm.insertForm.observation2_format[index],
                         "map",
-                        ""
+                        {
+                        mapFrom:'header',
+                        map:''
+                        }
                     );
             }
             if (action == "exp") {
