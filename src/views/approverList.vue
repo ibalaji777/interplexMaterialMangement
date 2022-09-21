@@ -339,11 +339,11 @@ async handler(){
      }
  },
     methods:{
-        checkDate(date){
+       checkDate(date){
 var $vm=this;
-if(!moment(date, "YYYY-MM-DD",true).isValid())
+if(!moment(date, "DD-MM-YYYY",true).isValid())
 {
-    return moment(date).format("YYYY-MM-DD")
+    return moment(date).format("DD-MM-YYYY")
 }
 return "";
 
@@ -422,7 +422,7 @@ duedate:$vm.checkDate(x.duedate),
 date:$vm.checkDate(x.date),
 remars:x.remarks,
 batch_no:batch_product.batch_no,
-
+interQr:'&'+(x.rmcode||'')+'&'+(batch_product.qas_form_two_values.batch_no||'')+'&'+parseFloat(batch_product.weight||0).toFixed(2)
 })
 
 })
