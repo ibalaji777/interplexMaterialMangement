@@ -10,6 +10,8 @@
         <v-list nav>
             <v-divider></v-divider>
 <!-- {{$store.state.control.isNavbarHidden}} -->
+<h4>1.2.2{{checkUpdate}}
+    <br><v-btn @click="updateSoftware">Update Software</v-btn></h4>
             <div v-for="navLink in items" :key="navLink.title">
                 <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">
                     <v-list-item-icon >
@@ -80,16 +82,29 @@
 </template>
 <script>
 /*eslint-disable*/
+window.ipcRenderer = require("electron").ipcRenderer;
+
 export default {
     props: {
         source: String
     },
-    mounted() {
-        var $vm = this;
-    },
+//     mounted() {
+//         var $vm = this;
+//         window.ipcRenderer.on("updater", (event, message) => {
+//     switch (message) {
+//       case "update_available":
+//         this.state = "Available";
+//         break;
+//       case "update_not_available":
+//         this.state = "Not Available";
+//         break;
+//     }
+//   });
+//     },
     data: () => ({
         selected_obj: {},
         drawer: null,
+        checkUpdate:"is Update available",
         items: [
             // {
             //     title: "Sale",
@@ -247,13 +262,30 @@ export default {
    async mounted(){
 var $vm=this;
 
+        window.ipcRenderer.on("updater", (event, message) => {
+    switch (message) {
+      case "update_available":
+        this.checkUpdate = "Available";
+        break;
+      case "update_not_available":
+        this.checkUpdate = "Not Available";
+        break;
+    }
+  });
+
+  ipcRenderer.on('software-update-response', function(event, data) {
+    console.log(data);
+});
 
 
 $vm.navbarSetup()
 
     },
     methods: {
-
+updateSoftware(){
+    console.log("manual update software ")
+  ipcRenderer.send('update-software', 'update-software')
+},
 navbarSetup(){
     var $vm=this;
     $vm.items=[];

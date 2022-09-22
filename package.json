@@ -1,7 +1,9 @@
 {
  "name": "QC",
- "version": "1.2.3",
+ "version": "1.2.4",
  "private": true,
+ "description": "Incoming Digitalization App",
+"author": "isat software solutions",
  "scripts": {
   "serve": "vue-cli-service serve",
   "build": "vue-cli-service build",
@@ -115,6 +117,7 @@
   "tabulator-tables": "^4.9.3",
   "twilio": "^3.76.0",
   "undo-manager": "^1.0.5",
+  "update-electron-app": "^2.0.1",
   "uuid": "^7.0.3",
   "v-debounce": "^0.2.0",
   "v-jsoneditor": "^1.4.5",
@@ -181,6 +184,5 @@
  },
  "keywords": [
   "Invoice software"
- ],
- "author": "Isat software solutions"
+ ]
 }

@@ -7,15 +7,13 @@ import Vue from 'vue';
 // import dbserver from '../backend_db/server.js'
 // const { app, BrowserWindow,ipcMain,protocol } = require('electron');
 import { app, protocol, BrowserWindow,ipcMain,dialog } from 'electron'
+app.setAppUserModelId("com.interplex.qc")
+
 // import server from '../backend_resource/server.js'
-//seted2
+//seted2 
+
 // import googleDrive from '../google drive/index.js'
 const schedule = require('node-schedule');
-// const { dialog } = require("electron").remote;
-// const {
-//   createProtocol,
-//   installVueDevtools
-// } =require('vue-cli-plugin-electron-builder/lib')
 import {
   createProtocol,
   installVueDevtools
@@ -29,10 +27,14 @@ console.log(__dirname)
 console.log(path.join(__static, 'icon.ico'))
 
 import { autoUpdater } from 'electron-updater'
+// autoUpdater.autoDownload = false;
 
+process.env.GH_TOKEN = "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";
 autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "info";
-
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, 60000)
 autoUpdater.on('update-downloaded', () => {
   console.log('update-downloaded lats quitAndInstall');
 
@@ -46,6 +48,8 @@ autoUpdater.on('update-downloaded', () => {
       if (buttonIndex === 0) {
         const isSilent = true;
         const isForceRunAfter = true; 
+        autoUpdater.checkForUpdates();
+
         // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
         autoUpdater.quitAndInstall()
 
@@ -58,29 +62,13 @@ autoUpdater.on('update-downloaded', () => {
   }
   
 })
-// import { autoUpdater } from 'electron-updater'
-
-// // autoUpdater.setFeedURL('https://quickmargo.pl/dist/download');
-
-// autoUpdater.on('update-downloaded', () => {
-//     autoUpdater.quitAndInstall()
-// });
-
-// autoUpdater.on('update-available', (ev, info) => {
-//     alert('Update required!');
-// });
-
-// // app.on('ready', async () => {
-// //     if (process.env.NODE_ENV === 'production') {
-// //         await autoUpdater.checkForUpdates()
-// //     }
-// // });
 
 
 
 
 
-// ---------------------------------myapp-----------------------------
+
+// ---------------------------------myapp-----------------------------// ---------------------------------myapp-----------------------------
 
 let myWindow = null
 
@@ -100,10 +88,6 @@ if (!gotTheLock) {
   // Create myWindow, load the rest of the app, etc...
   app.whenReady().then(() => {
     
-  if (process.env.NODE_ENV === 'production') { 
-    // autoUpdater.checkForUpdates() 
-     autoUpdater.checkForUpdatesAndNotify();
-  }
     myWindow = createWindow()
     //every minute
     schedule.scheduleJob('0 0/1 * 1/1 * ? *', function(){
@@ -145,9 +129,11 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 //added
 Vue.config.devtools = process.env.NODE_ENV === 'development'
 app.on('ready',()=>{
+  if (process.env.NODE_ENV === 'production') { 
+    autoUpdater.checkForUpdatesAndNotify();
+  }
 
-  app.setAppUserModelId("com.interplex.qc")
-  
+  // autoUpdater.checkForUpdatesAndNotify();
 
 });
 // app.setAppUserModelId("com.angalware.soft")
@@ -171,6 +157,49 @@ function createWindow () {
   },
   //eslint-disable-next-line
   icon: path.join(__static, 'icon.ico'), })
+// ------------------------------------------
+
+ipcMain.on('update-software', function(event, arg) {
+  autoUpdater.checkForUpdates();
+  // autoUpdater.checkForUpdatesAndNotify();
+
+  // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
+  autoUpdater.quitAndInstall()
+   event.sender.send('software-update-response', arg);
+});
+// win.webContents.on('update-software', () => {
+//   autoUpdater.checkForUpdates();
+//   autoUpdater.checkForUpdatesAndNotify();
+
+// });
+
+autoUpdater.on("checking-for-update", (info) => {
+  win.webContents.send("software-update-response", {info,msg:'chekcing for update'});
+ 
+});
+/*Download Completion Message*/
+autoUpdater.on("update-downloaded", info => {
+  win.webContents.send("software-update-response", {info,msg:'update-downloaded'});
+});
+
+/*Download Status Report*/
+autoUpdater.on("download-progress", progressObj => {
+  win.webContents.send("software-update-response", {info:progressObj,msg:'Download Progress'});
+  });
+autoUpdater.on("update-available", (info) => {
+  // log.info("update_available”);
+  win.webContents.send("software-update-response", {info,msg:'Update Available'});
+  win.webContents.send("updater", "update_available");
+});
+
+autoUpdater.on("update-not-available", (info) => {
+  // log.info("update_not_available");
+  win.webContents.send("software-update-response",{info,msg:'update not available'});
+  win.webContents.send("updater", "update_not_available");
+});
+// ------------------------------------------
+
+
     // if the render process crashes, reload the window
     //*******************crash***************************** */
   win.webContents.on('crashed', () => {
@@ -191,6 +220,10 @@ if (process.env.WEBPACK_DEV_SERVER_URL) {
   // Load the url of the dev server if in development mode
   win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
   if (!process.env.IS_TEST) win.webContents.openDevTools()
+  autoUpdater.updateConfigPath = path.join(
+    __dirname,
+    "../dev-app-update.yml" // change path if needed
+  );
 } else {
   createProtocol('app')
   // Load the index.html when not in development

@@ -29,10 +29,20 @@ module.exports = {
           ],
           icon: './public/interplex.png',
           // "requestedExecutionLevel": "requireAdministrator",
-          "publish": [{
-            "provider": "generic",
-            "url": "https://angalware.com/dist/download/"
-          }]
+          // "publish": [{
+          //   "provider": "generic",
+          //   "url": "http://127.0.0.1:3333/update"
+          // }]  
+                    "publish": [{
+                "provider": "github",
+                "owner": "ibalaji777",
+                "repo": "interplexMaterialMangement",
+                "private":true,
+                "host":"github.com",
+                "token":"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"
+
+            
+              }],
         },
         "nsis": {
           "installerIcon": "public/icon.ico",
