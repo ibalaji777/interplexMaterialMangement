@@ -241,7 +241,7 @@ console.log(date.to_date)
 .otherContainer{
     margin-top:10px;
 }
-.insertProduct{
+/* .insertProduct{
 
 border: 1px dashed red;
     width: 80px;
@@ -250,7 +250,7 @@ border: 1px dashed red;
     justify-content: center;
     align-items: center;
     background:beige;
-}
+} */
 .productContainer{
     background: grey;
     margin-top: 20px;

@@ -135,23 +135,35 @@ OBSERVATION
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-        <h3>QAS FORM TWO</h3>
+        <div style="display: flex;
+    justify-content: space-between;
+    width: 100%;">
+   <div style="padding:5px"><b>Pass</b>
+<div style="display:flex;">
+<div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
+{{pass.No}}.    <v-icon @click="scrollToErrorSpot(pass.No)" style="color:green;" class="pass_and_fail_icon">fa-check</v-icon>
+</div>
+</div>
+   </div>  
+        <h5 style="text-align:right">QAS FORM TWO</h5>
+        </div>
         <div style="display:flex;justify-content:space-between">
 
 <div style="display: flex;
     justify-content: space-between;
     width: 100%;">
-    <div>Pass:
-<div style="display:flex;">
+    <div style="padding:5px">
+        <!-- <b>Pass</b> -->
+<!-- <div style="display:flex;">
 <div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
-{{pass.No}}    <v-icon @click="scrollToErrorSpot(pass.No)" style="color:green;size:12px">fa-check</v-icon>
+{{pass.No}}.    <v-icon @click="scrollToErrorSpot(pass.No)" style="color:green;" class="pass_and_fail_icon">fa-check</v-icon>
 </div>
-</div>
-Fail:
+</div> -->
+<b>Fail</b>
 <div style="display:flex;">
 <div @click="scrollToErrorSpot(pass.No)"  style="margin:2px" v-for="(pass,index) in qas2Result.fail" :key="'pass'+index">
 {{pass.No}}
-    <v-icon style="color:red;size:12px">fa-check</v-icon>
+    <v-icon class="pass_and_fail_icon" style="color:red;">fa-check</v-icon>
 
 </div>
 </div>
@@ -167,9 +179,11 @@ Fail:
 
 </div>
 
-<div style="       height: 79vh;
+<div style=" outline: darkblue;">
+<div style="          height: 75vh;
     overflow: scroll;
-">
+
+   ">
 <!-- {{selectedPartNoItem.qasForm2}} -->
         <table style="width:100%">
             <tr>
@@ -223,7 +237,7 @@ Fail:
 
 </div>
 </td>
-<td style="background:#929ed6;padding:0 9px">
+<td class="qas2inter_tick_bg" >
     <div style="text-align:center">
     <div style="  
     display:inline-block;
@@ -250,7 +264,7 @@ Fail:
       </tr>
         </table>
         </div>
-
+</div>
 
 
 </div>

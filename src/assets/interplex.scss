@@ -69,7 +69,7 @@ transform: translate(-50%,-50%);
     background-color: Lightgreen;
 }
 .rowColor:nth-child(odd) {
-    background-color: lightcoral;
+    background-color: #75ce9f;
 }
 
 .rowColor2:nth-child(even) {
@@ -104,14 +104,23 @@ background-color: #a2afdb !important;}
 
     height: 100px;
     font-weight: 800;
-    background: #30204e;
-    color: white;
+    background: #423b51;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 .acceptedOnDeviation{
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
     margin-right: 10px;
     height: 100px;
     font-weight: 800;
@@ -123,6 +132,7 @@ background-color: #a2afdb !important;}
     align-items: center;
 }
 .approved{
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
     margin-right: 10px;
     height: 100px;
     font-weight: 800;
@@ -176,3 +186,20 @@ background-color: #a2afdb !important;}
     color: black !important;
    
 }
+.qas2inter_tick_bg{
+    background:#6f7aad  !important;padding:0 9px
+}
+.pass_and_fail_icon{
+    font-size:14px !important;
+}
+.insertProduct{
+    border: 1px solid darkblue;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    /* border: 1px dashed red;   */
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background:beige;
+    }

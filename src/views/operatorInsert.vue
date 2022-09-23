@@ -2173,7 +2173,7 @@ return x;
 .otherContainer {
     margin-top: 10px;
 }
-.insertProduct {
+/* .insertProduct {
     border: 1px dashed red;
     width: 60px;
     height: 60px;
@@ -2181,7 +2181,7 @@ return x;
     justify-content: center;
     align-items: center;
     background: beige;
-}
+} */
 /* .productContainer{
     background: grey;
     margin-top: 20px;

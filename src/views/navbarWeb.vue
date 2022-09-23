@@ -10,7 +10,7 @@
         <v-list nav>
             <v-divider></v-divider>
 <!-- {{$store.state.control.isNavbarHidden}} -->
-<h4>1.2.2{{checkUpdate}}
+<h4>1.2.4{{checkUpdate}}
     <br><v-btn @click="updateSoftware">Update Software</v-btn></h4>
             <div v-for="navLink in items" :key="navLink.title">
                 <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">

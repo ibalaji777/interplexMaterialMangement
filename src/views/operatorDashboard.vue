@@ -155,16 +155,7 @@ deep:true
 .otherContainer{
     margin-top:10px;
 }
-.insertProduct{
 
-border: 1px dashed red;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background:beige;
-}
 /* .productContainer{
     background: grey;
     margin-top: 20px;

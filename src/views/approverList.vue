@@ -111,7 +111,7 @@ ACD
 Rej
     </div>
     <div  style="background:blue"  @click="markStaus('ppap')" class="statusCard">
-PP
+PPAP
     </div>
     </div>
     </div>

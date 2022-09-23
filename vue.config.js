@@ -38,10 +38,9 @@ module.exports = {
                 "owner": "ibalaji777",
                 "repo": "interplexMaterialMangement",
                 "private":true,
-                "host":"github.com",
+                // "host":"github.com",
                 "token":"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"
-
-            
+          
               }],
         },
         "nsis": {
@@ -51,7 +50,20 @@ module.exports = {
           "license": "public/license.txt",
           "oneClick": false,
           "allowToChangeInstallationDirectory": true
-        }
+        },
+        // "nsis": {
+        //   "artifactName": "${productName}-Setup-${version}.${ext}",
+        //   "oneClick": true,
+        //   // "perMachine": false,
+        //   "allowToChangeInstallationDirectory": false,
+        //   "runAfterFinish": true,
+        //   "deleteAppDataOnUninstall": true,
+        //   "installerIcon": "public/icon.ico",
+        //   "uninstallerIcon": "public/icon.ico",
+        //   "uninstallDisplayName": "angalware",
+        //   "license": "public/license.txt",
+         
+        // }
       }
     }
   }
