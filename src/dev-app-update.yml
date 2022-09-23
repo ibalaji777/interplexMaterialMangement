@@ -1,9 +1,0 @@
-directories:
-  output: release
-publish:
-  appId: com.interplex.qc
-  provider: github
-  private: true
-  token: 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
-  owner: ibalaji777
-  repo: interplexMaterialMangement

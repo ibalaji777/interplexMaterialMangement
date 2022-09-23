@@ -29,39 +29,39 @@ console.log(path.join(__static, 'icon.ico'))
 import { autoUpdater } from 'electron-updater'
 // autoUpdater.autoDownload = false;
 
-process.env.GH_TOKEN = "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";
+// process.env.GH_TOKEN = "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";
 autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "info";
 setInterval(() => {
   autoUpdater.checkForUpdates()
 }, 60000)
-autoUpdater.on('update-downloaded', () => {
-  console.log('update-downloaded lats quitAndInstall');
+// autoUpdater.on('update-downloaded', () => {
+//   console.log('update-downloaded lats quitAndInstall');
 
-  if (process.env.NODE_ENV === 'production') { 
-    dialog.showMessageBox({
-      type: 'info',
-      title: 'Found Updates',
-      message: 'Found updates, do you want update now?',
-      buttons: ['Sure', 'No']
-    }, (buttonIndex) => {
-      if (buttonIndex === 0) {
-        const isSilent = true;
-        const isForceRunAfter = true; 
-        autoUpdater.checkForUpdates();
+//   if (process.env.NODE_ENV === 'production') { 
+//     dialog.showMessageBox({
+//       type: 'info',
+//       title: 'Found Updates',
+//       message: 'Found updates, do you want update now?',
+//       buttons: ['Sure', 'No']
+//     }, (buttonIndex) => {
+//       if (buttonIndex === 0) {
+//         const isSilent = true;
+//         const isForceRunAfter = true; 
+//         autoUpdater.checkForUpdates();
 
-        // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
-        autoUpdater.quitAndInstall()
+//         // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
+//         autoUpdater.quitAndInstall()
 
-      } 
-      // else {
-      //   updater.enabled = true
-      //   updater = null
-      // }
-    })
-  }
+//       } 
+//       // else {
+//       //   updater.enabled = true
+//       //   updater = null
+//       // }
+//     })
+//   }
   
-})
+// })
 
 
 

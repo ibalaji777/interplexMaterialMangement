@@ -39,31 +39,31 @@ module.exports = {
                 "repo": "interplexMaterialMangement",
                 "private":true,
                 // "host":"github.com",
-                "token":"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"
+                "token":"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"
           
               }],
         },
-        "nsis": {
-          "installerIcon": "public/icon.ico",
-          "uninstallerIcon": "public/icon.ico",
-          "uninstallDisplayName": "angalware",
-          "license": "public/license.txt",
-          "oneClick": false,
-          "allowToChangeInstallationDirectory": true
-        },
         // "nsis": {
-        //   "artifactName": "${productName}-Setup-${version}.${ext}",
-        //   "oneClick": true,
-        //   // "perMachine": false,
-        //   "allowToChangeInstallationDirectory": false,
-        //   "runAfterFinish": true,
-        //   "deleteAppDataOnUninstall": true,
         //   "installerIcon": "public/icon.ico",
         //   "uninstallerIcon": "public/icon.ico",
-        //   "uninstallDisplayName": "angalware",
+        //   "uninstallDisplayName": "qc",
         //   "license": "public/license.txt",
+        //   "oneClick": false,
+        //   "allowToChangeInstallationDirectory": true
+        // },
+        "nsis": {
+          "artifactName": "${productName}-Setup-${version}.${ext}",
+          "oneClick": true,
+          // "perMachine": false,
+          "allowToChangeInstallationDirectory": false,
+          "runAfterFinish": true,
+          "deleteAppDataOnUninstall": true,
+          "installerIcon": "public/icon.ico",
+          "uninstallerIcon": "public/icon.ico",
+          "uninstallDisplayName": "qc",
+          "license": "public/license.txt",
          
-        // }
+        }
       }
     }
   }
