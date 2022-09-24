@@ -39,7 +39,7 @@ module.exports = {
                 "repo": "interplexMaterialMangement",
                 "private":true,
                 // "host":"github.com",
-                "token":"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"
+                // "token":"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"
           
               }],
         },

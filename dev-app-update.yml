@@ -1,4 +1,5 @@
 provider: github
 owner: ibalaji777
 repo: interplexMaterialMangement
-
+private: true
+token: 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

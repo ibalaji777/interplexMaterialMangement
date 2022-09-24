@@ -29,12 +29,12 @@ console.log(path.join(__static, 'icon.ico'))
 import { autoUpdater } from 'electron-updater'
 // autoUpdater.autoDownload = false;
 
-// process.env.GH_TOKEN = "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";
+process.env.GH_TOKEN = "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";
 autoUpdater.logger = require("electron-log");
 autoUpdater.logger.transports.file.level = "info";
-setInterval(() => {
-  autoUpdater.checkForUpdates()
-}, 60000)
+// setInterval(() => {
+//   autoUpdater.checkForUpdates()
+// }, 60000)
 // autoUpdater.on('update-downloaded', () => {
 //   console.log('update-downloaded lats quitAndInstall');
 
