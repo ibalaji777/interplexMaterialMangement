@@ -137,7 +137,7 @@ if(isUserCreated)
 $vm.user=intialState().user
 return ;
 }
-   $vm.$alert("Something Went Wrong")
+   $vm.$alert("Looks Already Created")
 
 // core.database(this,'insertMasterUsers',this.user)
 
