@@ -43,27 +43,27 @@ module.exports = {
           
               }],
         },
-        // "nsis": {
-        //   "installerIcon": "public/icon.ico",
-        //   "uninstallerIcon": "public/icon.ico",
-        //   "uninstallDisplayName": "qc",
-        //   "license": "public/license.txt",
-        //   "oneClick": false,
-        //   "allowToChangeInstallationDirectory": true
-        // },
         "nsis": {
-          "artifactName": "${productName}-Setup-${version}.${ext}",
-          "oneClick": true,
-          // "perMachine": false,
-          "allowToChangeInstallationDirectory": false,
-          "runAfterFinish": true,
-          "deleteAppDataOnUninstall": true,
           "installerIcon": "public/icon.ico",
           "uninstallerIcon": "public/icon.ico",
           "uninstallDisplayName": "qc",
           "license": "public/license.txt",
+          "oneClick": false,
+          "allowToChangeInstallationDirectory": true
+        },
+        // "nsis": {
+        //   "artifactName": "${productName}-Setup-${version}.${ext}",
+        //   "oneClick": true,
+        //   "perMachine": false,
+        //   "allowToChangeInstallationDirectory": false,
+        //   "runAfterFinish": true,
+        //   "deleteAppDataOnUninstall": true,
+        //   "installerIcon": "public/icon.ico",
+        //   "uninstallerIcon": "public/icon.ico",
+        //   "uninstallDisplayName": "qc",
+        //   "license": "public/license.txt",
          
-        }
+        // }
       }
     }
   }

@@ -35,33 +35,35 @@ autoUpdater.logger.transports.file.level = "info";
 // setInterval(() => {
 //   autoUpdater.checkForUpdates()
 // }, 60000)
-// autoUpdater.on('update-downloaded', () => {
-//   console.log('update-downloaded lats quitAndInstall');
 
-//   if (process.env.NODE_ENV === 'production') { 
-//     dialog.showMessageBox({
-//       type: 'info',
-//       title: 'Found Updates',
-//       message: 'Found updates, do you want update now?',
-//       buttons: ['Sure', 'No']
-//     }, (buttonIndex) => {
-//       if (buttonIndex === 0) {
-//         const isSilent = true;
-//         const isForceRunAfter = true; 
-//         autoUpdater.checkForUpdates();
+autoUpdater.checkForUpdatesAndNotify();
+autoUpdater.on('update-downloaded', () => {
+  console.log('update-downloaded lats quitAndInstall');
 
-//         // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
-//         autoUpdater.quitAndInstall()
+  if (process.env.NODE_ENV === 'production') { 
+    dialog.showMessageBox({
+      type: 'info',
+      title: 'Found Updates',
+      message: 'Found updates, do you want update now?',
+      buttons: ['Sure', 'No']
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) {
+        const isSilent = true;
+        const isForceRunAfter = true; 
+        autoUpdater.checkForUpdates();
 
-//       } 
-//       // else {
-//       //   updater.enabled = true
-//       //   updater = null
-//       // }
-//     })
-//   }
+        // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
+        autoUpdater.quitAndInstall()
+
+      } 
+      // else {
+      //   updater.enabled = true
+      //   updater = null
+      // }
+    })
+  }
   
-// })
+})
 
 
 
@@ -128,14 +130,14 @@ if (!gotTheLock) {
 const isDevelopment = process.env.NODE_ENV !== 'production'
 //added
 Vue.config.devtools = process.env.NODE_ENV === 'development'
-app.on('ready',()=>{
-  if (process.env.NODE_ENV === 'production') { 
-    autoUpdater.checkForUpdatesAndNotify();
-  }
+// app.on('ready',()=>{
+//   if (process.env.NODE_ENV === 'production') { 
+//     autoUpdater.checkForUpdatesAndNotify();
+//   }
 
-  // autoUpdater.checkForUpdatesAndNotify();
+//   // autoUpdater.checkForUpdatesAndNotify();
 
-});
+// });
 // app.setAppUserModelId("com.angalware.soft")
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -159,12 +161,18 @@ function createWindow () {
   icon: path.join(__static, 'icon.ico'), })
 // ------------------------------------------
 
-ipcMain.on('update-software', function(event, arg) {
-  autoUpdater.checkForUpdates();
-  // autoUpdater.checkForUpdatesAndNotify();
+// autoUpdater.checkForUpdatesAndNotify();
 
+ipcMain.on('update-software', function(event, arg) {
+ 
+  autoUpdater.checkForUpdates();
+  // autoUpdater.downloadUpdate()
+  const isSilent = true;
+  const isForceRunAfter = true; 
+ 
   // autoUpdater.quitAndInstall(isSilent, isForceRunAfter); 
   autoUpdater.quitAndInstall()
+
    event.sender.send('software-update-response', arg);
 });
 // win.webContents.on('update-software', () => {

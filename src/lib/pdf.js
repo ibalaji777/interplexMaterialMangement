@@ -1085,7 +1085,7 @@ function createPromiseCapability() {
 
 var _is_node = __w_pdfjs_require__(3);
 
-;
+
 
 /***/ }),
 /* 3 */
@@ -10646,7 +10646,7 @@ exports.NodeStandardFontDataFactory = exports.NodeCanvasFactory = exports.NodeCM
 
 var _base_factory = __w_pdfjs_require__(9);
 
-;
+
 
 const fetchData = function (url) {
   return new Promise((resolve, reject) => {
@@ -12424,7 +12424,7 @@ function fitCubic(points, leftTangent, rightTangent, error, progressCallback) {
   return beziers;
 }
 
-;
+
 
 function generateAndReport(points, paramsOrig, paramsPrime, leftTangent, rightTangent, progressCallback) {
   var bezCurve, maxError, splitPoint;
@@ -12509,13 +12509,13 @@ function generateBezier(points, parameters, leftTangent, rightTangent) {
   return bezCurve;
 }
 
-;
+
 
 function reparameterize(bezier, points, parameters) {
   return parameters.map((p, i) => newtonRaphsonRootFind(bezier, points[i], p));
 }
 
-;
+
 
 function newtonRaphsonRootFind(bez, point, u) {
   var d = maths.subtract(bezier.q(bez, u), point),
@@ -12530,7 +12530,7 @@ function newtonRaphsonRootFind(bez, point, u) {
   }
 }
 
-;
+
 
 function chordLengthParameterize(points) {
   var u = [],
@@ -12547,7 +12547,7 @@ function chordLengthParameterize(points) {
   return u;
 }
 
-;
+
 
 function computeMaxError(points, bez, parameters) {
   var dist, maxDist, splitPoint, v, i, count, point, t;
@@ -12570,7 +12570,7 @@ function computeMaxError(points, bez, parameters) {
   return [maxDist, splitPoint];
 }
 
-;
+
 
 var mapTtoRelativeDistances = function (bez, B_parts) {
   var B_t_curr;
@@ -17436,7 +17436,7 @@ var _util = __w_pdfjs_require__(1);
 
 var _network_utils = __w_pdfjs_require__(33);
 
-;
+
 
 const fs = require("fs");
 
@@ -18174,7 +18174,7 @@ var _util = __w_pdfjs_require__(1);
 
 var _network_utils = __w_pdfjs_require__(33);
 
-;
+
 const OK_RESPONSE = 200;
 const PARTIAL_CONTENT_RESPONSE = 206;
 
@@ -18715,7 +18715,7 @@ var _util = __w_pdfjs_require__(1);
 
 var _network_utils = __w_pdfjs_require__(33);
 
-;
+
 
 function createFetchOptions(headers, withCredentials, abortController) {
   return {

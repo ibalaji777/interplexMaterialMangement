@@ -10,7 +10,7 @@
         <v-list nav>
             <v-divider></v-divider>
 <!-- {{$store.state.control.isNavbarHidden}} -->
-<h4>1.2.3{{checkUpdate}}
+<h4>{{version}}{{checkUpdate}}
     <br><v-btn @click="updateSoftware">Update Software</v-btn></h4>
             <div v-for="navLink in items" :key="navLink.title">
                 <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">
@@ -83,7 +83,7 @@
 <script>
 /*eslint-disable*/
 window.ipcRenderer = require("electron").ipcRenderer;
-
+import {version} from '../../package.json'
 export default {
     props: {
         source: String
@@ -102,9 +102,10 @@ export default {
 //   });
 //     },
     data: () => ({
+        version:version,
         selected_obj: {},
         drawer: null,
-        checkUpdate:"is Update available",
+        checkUpdate:"",
         items: [
             // {
             //     title: "Sale",

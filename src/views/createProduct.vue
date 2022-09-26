@@ -381,6 +381,22 @@
                                                     >fa-plus</v-icon
                                                 >
                                             </div>
+                                         <div>
+                                             <v-combobox
+                                                    :return-object="false"
+                                                    :items="
+                                                        insertForm.observation_format
+                                                    "
+                                                    dense
+                                                    v-model="form[key]"
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+
+                                                ></v-combobox>
+                                         </div>
                                         </div>
                                         <div v-else>
                                             <div
@@ -3350,8 +3366,11 @@ return;
                 //create input format
                 //double check below column
                 var obj = _.cloneDeep($vm.$store.state.map.productConfig);
+                if(key!='no'){
                 obj["name"] = $vm.rowName + value;
+                 }
                 map[key] = obj.name;
+               
                 rows.push(obj);
             });
     $vm.insertForm.observation_format.push(...rows);
