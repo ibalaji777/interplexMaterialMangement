@@ -298,11 +298,19 @@ OBSERVATION
 <h3>QAS FORM ONE</h3>
 <!-- {{qasForm1New}} -->
 <!-- {{selectedPartNoItem.observation_print_view}} -->
-<div style="display:flex;justify-content:flex-end">
+<div style="display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;">
+    <div>
+<v-btn @click="qasOneExcel=true" color="primary">Table</v-btn>
+    </div>
+    <div style="display:flex;justify-content:flex-end">
  <v-switch
       v-model="qasForm1Validation"
       :label="'Real Time Validation'"
     ></v-switch>
+    </div>
     </div>
 <div  style="    padding: 10px 20px;
     margin: 8px;
@@ -310,7 +318,7 @@ OBSERVATION
 <div style="background: white;
     padding: 6px 15px;
     border-radius: 24px;
-    box-shadow: 4px 9px burlywood;" class="flex-row-container">
+    box-shadow:#9087de 4px 9px;" class="flex-row-container">
 
 
 
@@ -743,6 +751,78 @@ Items
       </v-card>
     </v-dialog>
 
+<!-- *******************qasone Excel************************ -->
+ <v-dialog
+      v-model="qasOneExcel"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title><v-icon @click="qasOneExcel = false">fa-times</v-icon></v-toolbar-title>
+          <v-spacer></v-spacer>
+        
+          <v-toolbar-items>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-divider></v-divider>
+     <div>
+
+         <div >
+    <h2 class="table-title" contenteditable="true">Sales</h2>
+    <table class="inter_table_excel">
+    <tr class="inter_table_header_excel">
+      <th contenteditable=true>Year</th>
+      <th contenteditable=true>Product A</th>
+      <th contenteditable=true>Product B</th>
+      <th contenteditable=true>Product C</th>
+      <th contenteditable=true>Product D</th>
+    </tr>
+    <tr>
+      <td contenteditable=true>2010</td>
+      <td contenteditable=true>2</td>
+      <td contenteditable=true>31</td>
+      <td contenteditable=true>24</td>
+      <td contenteditable=true>51</td>
+    </tr>
+    <tr>
+      <td contenteditable=true>2011</td>
+      <td contenteditable=true>36</td>
+      <td contenteditable=true>21</td>
+      <td contenteditable=true>47</td>
+      <td contenteditable=true>109</td>
+    </tr>
+    <tr>
+      <td contenteditable=true>2012</td>
+      <td contenteditable=true>56</td>
+      <td contenteditable=true>9</td>
+      <td contenteditable=true>33</td>
+      <td contenteditable=true>18</td>
+    </tr>
+    <tr>
+      <td contenteditable=true>2013</td>
+      <td contenteditable=true>90</td>
+      <td contenteditable=true>55</td>
+      <td contenteditable=true>71</td>
+      <td contenteditable=true>12</td>
+    </tr>
+    <tr>
+      <td contenteditable=true>2014</td>
+      <td contenteditable=true>36</td>
+      <td contenteditable=true>92</td>
+      <td contenteditable=true>77</td>
+      <td contenteditable=true>61</td>
+    </tr>
+  </table>
+  </div>
+     </div>
+      </v-card>
+    </v-dialog>
+
     </div>
 </template>
 <script>
@@ -853,6 +933,7 @@ export default {
     data(){
 
         return {
+            qasOneExcel:false,
             scannerConnectionAppStatus:false,
                     pdfUrl:'',
         pdfViewerDialog:false,

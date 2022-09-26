@@ -203,3 +203,38 @@ background-color: #a2afdb !important;}
         align-items: center;
         background:beige;
     }
+    
+/* ***************************** */
+.inter_table_excel {
+	margin: 50px auto;
+	
+
+  }
+  
+  .inter_table_excel  table {
+	width:100%;
+  }
+  
+
+  .inter_table_excel tr {
+	padding:5px;
+	
+	
+  }
+  .inter_table_excel	td:first-of-type{
+	background:#ddd;
+  }
+
+  .inter_table_excel th {
+	border: 1px solid grey;
+	padding: 5px 20px;
+	background:#ddd;
+  }
+  
+  .inter_table_excel td { 
+	border: 1px solid grey;
+	padding: 5px 20px;
+	cursor:pointer;
+  }
+  
+  
