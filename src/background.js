@@ -182,27 +182,27 @@ ipcMain.on('update-software', function(event, arg) {
 // });
 
 autoUpdater.on("checking-for-update", (info) => {
-  win.webContents.send("software-update-response", {info,msg:'chekcing for update'});
+  win.webContents.send("software-update-response", {info,msg:'chekcing for update',action:"checking"});
  
 });
 /*Download Completion Message*/
 autoUpdater.on("update-downloaded", info => {
-  win.webContents.send("software-update-response", {info,msg:'update-downloaded'});
+  win.webContents.send("software-update-response", {info,msg:'update-downloaded',action:"downloaded"});
 });
 
 /*Download Status Report*/
 autoUpdater.on("download-progress", progressObj => {
-  win.webContents.send("software-update-response", {info:progressObj,msg:'Download Progress'});
+  win.webContents.send("software-update-response", {info:progressObj,msg:'Download Progress',action:"progress"});
   });
 autoUpdater.on("update-available", (info) => {
   // log.info("update_available”);
-  win.webContents.send("software-update-response", {info,msg:'Update Available'});
+  win.webContents.send("software-update-response", {info,msg:'Update Available',action:"avialable"});
   win.webContents.send("updater", "update_available");
 });
 
 autoUpdater.on("update-not-available", (info) => {
   // log.info("update_not_available");
-  win.webContents.send("software-update-response",{info,msg:'update not available'});
+  win.webContents.send("software-update-response",{info,msg:'update not available',action:"notAvailalbe"});
   win.webContents.send("updater", "update_not_available");
 });
 // ------------------------------------------

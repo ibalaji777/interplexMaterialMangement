@@ -276,6 +276,7 @@ var $vm=this;
 
   ipcRenderer.on('software-update-response', function(event, data) {
     console.log(data);
+    $vm.checkUpdate=data.action||'_'
 });
 
 
