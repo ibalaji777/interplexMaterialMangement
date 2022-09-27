@@ -44,9 +44,11 @@ module.exports = {
               }],
         },
         "nsis": {
+          "artifactName": "${productName}-Setup-${version}.${ext}",
           "installerIcon": "public/icon.ico",
           "uninstallerIcon": "public/icon.ico",
           "uninstallDisplayName": "qc",
+          "runAfterFinish": true,
           "license": "public/license.txt",
           "oneClick": false,
           "allowToChangeInstallationDirectory": true
