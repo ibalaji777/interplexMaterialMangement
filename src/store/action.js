@@ -49,6 +49,7 @@ var headerConfigGetApi=api+'/getheaderconfig';
 var headerConfigSetApi=api+'/setheaderconfig';
 
 
+var findQasFormDateApi=api+'/find_qas_form_date';
 var findQasFormApi=api+'/find_qas_form';
 var labelSettingReadApi=api+'/labelsetting/read';
 var labelSettingSaveApi=api+'/labelsetting/save';
@@ -517,7 +518,11 @@ var result=await axios.post(findQasFormApi,payload);
 // context.commit("setLabelSetting",result.data)
 return result.data
 },
-
+async findQasFormDate(context,payload){
+    var result=await axios.post(findQasFormDateApi,payload);
+    // context.commit("setLabelSetting",result.data)
+    return result.data
+    },
 
 async getHeaderConfig(context,payload){
 var result=await axios.get(headerConfigGetApi);

@@ -96,9 +96,28 @@ ppap
 <div style="display:flex;margin-top:15px">
 
 <div style="width:15%">
-    <v-btn color="primary"><v-icon>mdi-calendar</v-icon></v-btn>
+    <v-btn @click="isDateRangeSelected=!isDateRangeSelected" color="primary"><v-icon>mdi-calendar</v-icon></v-btn>
 </div>
-<div style="width:100%;display:flex">
+<div style="display:flex" v-if="isDateRangeSelected">
+    <v-select
+v-model="findByKeyDate"
+:items="datesColumns"
+ item-text="title"
+ item-value="value"
+ label="Find By"
+ style="margin:5px;"
+>
+
+</v-select>
+
+    <date-filter @date="setDate"></date-filter>
+
+<v-btn color="primary" style="color:white" @click="findDateArray">
+            Submit
+           </v-btn>
+
+</div>
+<div v-else style="width:100%;display:flex">
 
 <div style="display:flex;align-items:baseline;width:100%">
 <v-select
@@ -240,9 +259,24 @@ Vue.filter('formatDate', function(value) {
 export default {
     data(){
         return {
+
+            datesColumns:[
+            {
+            title:'Invoice Date',
+            value:'invoice_date'
+            },
+            {
+            title:'Grn Date',
+            value:'grn_date'
+            }
+            ],
+            isDateRangeSelected:false,
+            from_date:moment().format("YYYY-MM-DD"),
+            to_date:moment().format("YYYY-MM-DD"),
             foundList:[],
             selected:[],
             findByKey:'',
+            findByKeyDate:'invoice_date',
             search: '',
 isApprover:false,    
         barcodeLabel:{
@@ -303,9 +337,32 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 
     },
     methods:{
-async        findArray(){
+setDate(date){
+    var $vm=this;
+    $vm.from_date=date.from_date;
+    $vm.to_date=date.to_date;
+},
+async findDateArray()
+{
+
 var $vm=this;
 
+
+$vm.foundList=await $vm.$store.dispatch("findQasFormDate",{
+    key:$vm.findByKeyDate,
+    value:$vm.search,
+    from_date:$vm.from_date,
+    to_date:$vm.to_date,
+})
+
+}
+,
+async        findArray(){
+var $vm=this;
+if($vm.search=="") {
+$vm.$alert("Please Fill Search");
+return;
+}
 $vm.foundList=await $vm.$store.dispatch("findQasForm",{
     key:$vm.findByKey,
     value:$vm.search
