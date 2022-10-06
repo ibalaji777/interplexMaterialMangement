@@ -122,7 +122,7 @@ v-model="findByKeyDate"
 <div style="display:flex;align-items:baseline;width:100%">
 <v-select
 v-model="findByKey"
-:items="$store.state.interplex.configHeaderFormat"
+:items="filters()"
  item-text="label"
  item-value="name"
  label="Find By"
@@ -337,6 +337,21 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
 
     },
     methods:{
+
+        filters(){
+var $vm=this;
+var custom_filters=[
+    {
+label:'Batch No',
+// value:'batch_no',
+name:'batch_no',
+
+}]
+
+
+return [...$vm.$store.state.interplex.configHeaderFormat,...custom_filters]
+        },
+        
 setDate(date){
     var $vm=this;
     $vm.from_date=date.from_date;
@@ -359,14 +374,28 @@ $vm.foundList=await $vm.$store.dispatch("findQasFormDate",{
 ,
 async        findArray(){
 var $vm=this;
+if($vm.findByKey=="") {
+$vm.$alert("Please Fill Search key");
+return;
+}
 if($vm.search=="") {
 $vm.$alert("Please Fill Search");
 return;
 }
+if(['batch_no'].includes($vm.findByKey)){
+$vm.foundList=await $vm.$store.dispatch("findQasForm2",{
+    key:$vm.findByKey,
+    value:$vm.search
+})
+
+
+}
+else{
 $vm.foundList=await $vm.$store.dispatch("findQasForm",{
     key:$vm.findByKey,
     value:$vm.search
 })
+}
 
 },
             labelPrint(){
