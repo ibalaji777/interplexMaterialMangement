@@ -217,9 +217,22 @@ FILE ATTACHMENTS</h4>
 
         <v-divider></v-divider>
        <div style="padding:10px">
-<div @click="takePicture" class="insertProduct">
+<!-- <div @click="takePicture" class="insertProduct">
+<v-icon>fa-camera</v-icon>
+</div> -->
+        <div style="display:flex">
+<div @click="takePicture" style="margin-right:10px" class="insertProduct">
 <v-icon>fa-camera</v-icon>
 </div>
+<div @click="openScanner" ref="btnScan" style="margin-right:10px;" id="btn-scan"  class="insertProduct">
+<v-icon>mdi-scanner</v-icon>
+</div>
+<div style="position:relative" class="insertProduct">
+    <v-icon>fa-file-pdf</v-icon>
+    <input  style="width:100%;height:100%" class="custom-file-input" id="pdfFile" @change="pdfFileUpload" type="file" accept=".pdf"  />
+</div>
+        </div>
+
 <br>
 <div style="    background: #f13454;
     padding: 9px;
@@ -300,15 +313,12 @@ Items
           <v-toolbar-title><v-icon @click="qasForm1NewDialog = false">fa-times</v-icon></v-toolbar-title>
           <v-spacer></v-spacer>
 
-          <!-- <v-btn :loading="qasFormOneValidateLoader" @click="validateQasFormOne" style="color:white" text>
-            validate
-          </v-btn> -->
           <v-toolbar-items>
           </v-toolbar-items>
         </v-toolbar>
         <v-divider></v-divider>
        <div style="padding:10px">
-        <!-- {{invoice.qasFormOne.observation_format}} -->
+
 <h3>QAS FORM ONE</h3>
 <div  style="    padding: 10px 20px;
     margin: 8px;
@@ -357,7 +367,7 @@ NO:{{index+1}}
 <div v-else>
 <div v-if="invoice.qasFormOne.observation_format[getIndex(form[ui.name])].editable" style="height:85px">
 
-    <h4>write {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}  </h4>
+    <h4> {{ui.label}}:{{invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value}}  </h4>
     <v-text-field  style="margin:5px" :disabled="!invoice.qasFormOne.observation_format[getIndex(form[ui.name])].editable"  v-model="invoice.qasFormOne.observation_format[getIndex(form[ui.name])].value" outlined dense >
     </v-text-field>
  </div>
@@ -436,7 +446,7 @@ NO:{{index+1}}
 {{getIndex2(ui.name)}} -->
 <!-- gg{{invoice.qasFormOne.observation2_format}} -->
 <div v-if="getIndex2(ui.name)!=-1" style="height:86px;padding:10px">
-     <h4> write{{ui.label}}:{{productFormat[ui.name]}}  </h4>
+     <h4> {{ui.label}}:{{productFormat[ui.name]}}  </h4>
          <!-- <v-text-field v-if="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp&&!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].map" :label="ui.label"  style="margin:5px" :disabled="!selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].editable"  v-model="productFormat[ui.name]" outlined dense >
     </v-text-field> -->
 
@@ -624,6 +634,7 @@ NO:{{index+1}}
 </template>
 <script>
 /*eslint-disable*/
+import * as scanApp from '../lib/scaApp.js'
 import * as printData from '../lib/printData.js'
 import * as core from '../lib/core.js'
 import * as config from '../lib/config.js'
@@ -760,8 +771,36 @@ return image;
 
 // $vm.$set($vm,"invoice",invoice)
 $vm.$set($vm.invoice,"qasFormOne",params.invoice.qasFormOne)
-$vm.$set($vm.invoice,"qasFormTwo",params.invoice.qasFormTwo)
-$vm.$set($vm.invoice.qasFormOne,"observation_format",params.invoice.qasFormOne.observation_format)
+
+// var map_qas_two_values=params.invoice.qasFormOne.qas_form_one_values;
+
+// var observation_format=_.map(params.invoice.qasFormOne.observation_format,(x)=>{
+// x["value"]=map_qas_one_values[x.name]
+// return x;
+// })
+
+
+var qasFormTwo=_.map(params.invoice.qasFormTwo,(obj)=>{
+return {...obj,...obj.qas_form_two_values}
+})
+
+$vm.$set($vm.invoice,"qasFormTwo",qasFormTwo)
+// $vm.$set($vm.invoice,"qasFormTwo",params.invoice.qasFormTwo)
+
+var map_qas_one_values=params.invoice.qasFormOne.qas_form_one_values;
+
+var observation_format=_.map(params.invoice.qasFormOne.observation_format,(x)=>{
+x["value"]=map_qas_one_values[x.name]
+return x;
+})
+
+
+$vm.$set($vm.invoice.qasFormOne,"observation_format",observation_format)
+
+// $vm.$set($vm.invoice.qasFormOne,"observation_format",params.invoice.qasFormOne.observation_format)
+
+
+
 $vm.$set($vm.invoice.qasFormOne,"observation2_format",params.invoice.qasFormOne.observation2_format)
 $vm.$set($vm.invoice,"gallery",gallery)
 
@@ -829,6 +868,21 @@ $vm.observation_print_view_format=core.getObservationPrintView($vm.invoice.qasFo
 console.log("observation print view",$vm.observation_print_view_format)
 },
 methods:{
+    openScanner(){
+scanApp.openScanner(this)
+},
+       pdfFileUpload(e){
+var $vm=this;
+ $vm.$store.commit('showLoader')
+    var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+        console.log("pdf file",files[0])
+    var url = URL.createObjectURL(files[0]);
+    $vm.takePhoto.push({src:files[0],file_type:'pdf',title:'',url})
+     $vm.$store.commit('hideLoader')
+    //   this.createPdfFile(files[0]);
+    },
             labelPrint(){
         var $vm=this;
 
@@ -921,6 +975,7 @@ await $vm.$store.dispatch('updateQasForm',{
     qasFormOne,
     qasFormTwo
 })
+
 $vm.saveMedia()
 
 

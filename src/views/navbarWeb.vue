@@ -10,8 +10,9 @@
         <v-list nav>
             <v-divider></v-divider>
 <!-- {{$store.state.control.isNavbarHidden}} -->
-<h4>{{version}}{{checkUpdate}}
-    <br><v-btn @click="updateSoftware">Update Software</v-btn></h4>
+<!-- <h4>{{version}}{{checkUpdate}}
+    <br><v-btn @click="updateSoftware">Update Software</v-btn></h4> -->
+    <app-updater></app-updater>
             <div v-for="navLink in items" :key="navLink.title">
                 <v-list-item v-if="!navLink.submenu" @click="$router.push({name:navLink.action})">
                     <v-list-item-icon >
@@ -82,8 +83,8 @@
 </template>
 <script>
 /*eslint-disable*/
-window.ipcRenderer = require("electron").ipcRenderer;
-import {version} from '../../package.json'
+// window.ipcRenderer = require("electron").ipcRenderer;
+// import {version} from '../../package.json'
 export default {
     props: {
         source: String
@@ -102,7 +103,7 @@ export default {
 //   });
 //     },
     data: () => ({
-        version:version,
+        // version:version,
         selected_obj: {},
         drawer: null,
         checkUpdate:"",
@@ -263,31 +264,31 @@ export default {
    async mounted(){
 var $vm=this;
 
-        window.ipcRenderer.on("updater", (event, message) => {
-    switch (message) {
-      case "update_available":
-        this.checkUpdate = "Available";
-        break;
-      case "update_not_available":
-        this.checkUpdate = "Not Available";
-        break;
-    }
-  });
+//         window.ipcRenderer.on("updater", (event, message) => {
+//     switch (message) {
+//       case "update_available":
+//         this.checkUpdate = "Available";
+//         break;
+//       case "update_not_available":
+//         this.checkUpdate = "Not Available";
+//         break;
+//     }
+//   });
 
-  ipcRenderer.on('software-update-response', function(event, data) {
-    console.log(data);
-    $vm.checkUpdate=data.action||'_'
-});
+//   ipcRenderer.on('software-update-response', function(event, data) {
+//     console.log(data);
+//     $vm.checkUpdate=data.action||'_'
+// });
 
 
 $vm.navbarSetup()
 
     },
     methods: {
-updateSoftware(){
-    console.log("manual update software ")
-  ipcRenderer.send('update-software', 'update-software')
-},
+// updateSoftware(){
+//     console.log("manual update software ")
+//   ipcRenderer.send('update-software', 'update-software')
+// },
 navbarSetup(){
     var $vm=this;
     $vm.items=[];

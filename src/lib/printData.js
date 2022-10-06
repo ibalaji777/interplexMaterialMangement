@@ -36,9 +36,9 @@ var renderQas1Body=core.observationTableBodyOrder(invoice.qasFormOne.table_heade
 // var renderQas1BodyOrder=core.observationTableBodyOrder(invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
 
 
-console.log("renderbody config file",invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
-console.log("++++renderQas1Body+++++")
-console.log(renderQas1Body)
+// console.log("renderbody config file",invoice.qasFormOne.table_header_format,setSavedValues,invoice.qasFormOne.observation_print_view)
+// console.log("++++renderQas1Body+++++")
+// console.log(renderQas1Body)
 // console.log(renderQas1BodyOrder)
 // var setSavedValues=core.setObservationFormat(invoice.qasFormOne.observation_format,invoice.qasFormOne.qas_form_one_values)
 

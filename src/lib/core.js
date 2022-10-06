@@ -1991,11 +1991,20 @@ if(header)
   }
 
 
+export function qas_form_one_values(array){
+return  _.reduce(array,
+    (result,value,key)=>{
+      result[value.name]=value.value
+      return result;
+
+  },{})
+}
+
   export function observationTableBodyOrder(order,format,printView)
   {
 
     console.log("+++observationTableBodyOrder+++")
-    console.log(order,format,printView)
+    console.log("order",order,"format",format,"printview",printView)
     // var torder=tableOrder(Object.keys(x),order)
 
     var count=0;
@@ -2003,7 +2012,7 @@ return _.map(printView,(x)=>{
   count++
 var row=[]
   var torder=tableOrder(order,Object.keys(x))
-console.log("torder",torder)
+// console.log("torder",torder)
    _.map(torder,(col ,key)=>{
     // console.log("c",col,"k",key)
 
@@ -2122,20 +2131,14 @@ if(header)
 
 export  function observation2TableBody(ob_form,ob_view,qasFormTwo){
 
-
   var format=[];
-
   var results=[]
-
   _.map(ob_view,(x)=>{
-
     format.push(x.name)
   })
 
 var new_format=_.map(format,(name)=>{
-
 var check=_.find(ob_form,(x)=>x.name==name)
-
 if(check)
   return { ...check,
   merge:{
@@ -2143,7 +2146,6 @@ if(check)
     rowspan:check.merge?check.merge.rowspan:1,
   }
   }
-
   return {
 
     name,

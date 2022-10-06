@@ -1184,7 +1184,7 @@ var $vm=this;
       reader.readAsDataURL(file);
     },
 openScanner(){
-scanApp.openScanner()
+scanApp.openScanner(this)
 },
         watchQasOne:_.debounce(function(){
 var $vm=this;
