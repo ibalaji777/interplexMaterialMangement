@@ -250,7 +250,8 @@ OBSERVATION
     text-align: center;">
     <div v-if="getIndex2('validation')!=-1">
 <div v-if="selectedPartNoItem.productConfigFormat2[getIndex2('validation')].exp"></div>
-<v-icon class="defaultErorr" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
+<v-icon class="defaultErorr" v-if="productFormat['validation']" :class="{errorStatus:productFormat['validation']}">fa-check</v-icon>
+<v-icon style="font-size:33px" class="defaultErorr" v-else :class="{errorStatus:productFormat['validation']}">mdi-close</v-icon>
     </div>
     </div>
     </div>
@@ -324,19 +325,18 @@ OBSERVATION
 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_one_ui.one" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
 <div v-if="ui.name=='no'">
-NO:{{index+1}}
+<b>No:{{index+1}}</b>
 </div>
 
 
  <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
 
 <div v-if="ui.name=='desc'">
-    {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}
-
+ <b>{{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</b>
 </div>
 <div v-else>
     <div v-if="getIndex(form[ui.name])!=-1">
-   <span style="margin-right:5px"> {{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</span> <v-icon  v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp">fa-calculator</v-icon>
+   <span style="margin-right:5px"><b>{{ui.label}}:{{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</b></span> <v-icon  v-if="selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].exp">fa-calculator</v-icon>
 
 
 </div>
@@ -349,11 +349,11 @@ NO:{{index+1}}
         <!-- <div style="background:lightgrey"> -->
 
 <div v-if="ui.name=='no'">
-NO:{{index+1}}
+<b>No:{{index+1}}</b>
 </div>
  <div v-if="!['no'].includes(ui.name)&&getIndex(form[ui.name])!=-1">
 <div v-if="ui.name=='desc'">
-   {{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}
+  <b> {{selectedPartNoItem.productConfigFormat[getIndex(form[ui.name])].value}}</b>
 </div>
 
 <div v-else>
