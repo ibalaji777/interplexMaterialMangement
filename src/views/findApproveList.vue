@@ -94,6 +94,13 @@ ppap
        
 </div>
 <div style="display:flex;margin-top:15px">
+
+<div style="width:15%">
+    <v-btn color="primary"><v-icon>mdi-calendar</v-icon></v-btn>
+</div>
+<div style="width:100%;display:flex">
+
+<div style="display:flex;align-items:baseline;width:100%">
 <v-select
 v-model="findByKey"
 :items="$store.state.interplex.configHeaderFormat"
@@ -104,7 +111,6 @@ v-model="findByKey"
 >
 
 </v-select>
-
      <v-text-field
         style="margin:5px"
         dense
@@ -115,6 +121,8 @@ v-model="findByKey"
            <v-btn color="primary" style="color:white" @click="findArray">
             Submit
            </v-btn>
+           </div>
+</div>
 </div>
          <v-data-table
          dense

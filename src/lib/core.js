@@ -1111,7 +1111,7 @@ export function choose_date_type(action){
       }
   
 
-      store.commit('set_date',{action,from_date,to_date})
+      // store.commit('set_date',{action,from_date,to_date})
       return {
           from_date,
           to_date
@@ -1496,7 +1496,7 @@ var opt=  _.omit(_.cloneDeep(single_invoice),'gallery')
         );
         formdata.append("invoice_no", invoice["invoice_no"]);
         formdata.append("file_type", image["file_type"]);
-        formdata.append("title", image["title"]);
+        formdata.append("title", image["title"]||'');
 
          if(image.file_type=='image'){
         formdata.append(

@@ -164,7 +164,6 @@ export default {
             var $vm=this;
 
 var date=core.choose_date_type(action)
-$vm.$store.commit('set_date',{action,from_date:date.from_date,to_date:date.to_date})
 console.log("---date----")
 console.log(date)
 if(date['from_date']&&date['to_date']){

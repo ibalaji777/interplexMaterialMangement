@@ -58,7 +58,7 @@ mdi-file-pdf
 <!-- <v-btn @click="selectForm='qasformone'" color="#2f5489 " style="color:white;margin:2px">Qas Form One</v-btn>
 <v-btn @click="selectForm='qasformtwo'" color="#2f5489 " style="color:white;margin:2px">Qas Form two</v-btn>
 <v-btn @click="selectForm='media'" color="#2f5489 " style="color:white;margin:2px">Media</v-btn> -->
-<v-btn @click="selectForm='edit'" color="#2f5489 " style="color:white;margin:2px">Edit</v-btn>
+<v-btn  :disabled="editPermistion" @click="selectForm='edit'" color="#2f5489 " style="color:white;margin:2px">Edit</v-btn>
 
 </div>
 
@@ -243,8 +243,7 @@ Total Capture:{{invoice.gallery.length}}
 </div>
 <div class="productContainer">
 <!-- {{takePhoto}} -->
-<div v-for="(image,index) in invoice.gallery" :key="index+image" class="productItems" style="    display: flex;
-    justify-content: space-between;">
+<div v-for="(image,index) in invoice.gallery" :key="index+image" class="productItems" style="display:flex;justify-content: space-between;">
 <img :src="image.src" alt="" style="max-width:100px;max-height:100px">
 <div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
     height: 40px;
@@ -256,6 +255,7 @@ Total Capture:{{invoice.gallery.length}}
 </span>
 <span style="
     padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+
 {{image.file_type}}
 </span>
 </div>
@@ -264,8 +264,50 @@ Total Capture:{{invoice.gallery.length}}
 </div>
 <div v-for="(image,index) in takePhoto" :key="index+'newphoto'" class="productItems" style="    display: flex;
     justify-content: space-between;">
-<img :src="image.src" alt="" style="max-width:100px;max-height:100px">
-<div style="display:flex;align-items:center;"><span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
+
+<div style="display: flex;justify-content: space-between;width:100%" v-if="image.file_type=='image'">
+<img  @click="selectedImage=image.src;galleryViewerDialog=true"  :src="image.src" alt="" style="max-width:100px;max-height:100px">
+<div style="display:flex;align-items:center;"><span v-if="image.file_type=='image'" @click="selectGalleryType(index)" style="width: 40px;
+    height: 40px;
+    border: 1px dashed #ffeb3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;cursor:pointer">
++
+</span>
+<span style="
+    padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+{{image.title}}
+</span>
+</div>
+<v-icon @click="takePhoto.splice(index,1)">fa-trash</v-icon>
+</div>
+
+<div style="display: flex;
+    justify-content: space-between;width:100%" v-if="image.file_type=='pdf'">
+<v-icon  @click="pdfUrl=image.url;pdfViewerDialog=true">fa-file-pdf</v-icon>
+<!-- {{image}} -->
+<div style="display:flex;align-items:center;"><span v-if="image.file_type=='pdf'" @click="selectGalleryType(index)" style="width: 40px;
+    height: 40px;
+    border: 1px dashed #ffeb3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;cursor:pointer">
++
+</span>
+<span style="
+    padding: 10px 5px;" v-else @click="selectGalleryType(index)">
+{{image.title}}
+</span>
+</div>
+<v-icon @click="takePhoto.splice(index,1)">fa-trash</v-icon>
+
+</div>
+</div>
+<!-- <img :src="image.src" alt="" style="max-width:100px;max-height:100px">
+
+<div style="display:flex;align-items:center;">
+<span v-if="image.file_type==''" @click="selectGalleryType(index)" style="width: 40px;
     height: 40px;
     border: 1px dashed #ffeb3b;
     display: flex;
@@ -282,7 +324,7 @@ Total Capture:{{invoice.gallery.length}}
 </div>
 <v-icon @click="(takePhoto.splice(index,1))">fa-trash</v-icon>
 
-</div>
+</div> -->
 
 
 <!-- <div class="productItems">
@@ -295,6 +337,40 @@ Items
 
 
 </div>
+      </v-card>
+    </v-dialog>
+<!-- *********************Gallery Viewer************************ -->
+       <v-dialog
+      v-model="galleryViewerDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-toolbar
+          dark
+          :color="$store.state.bgColor"
+        >
+          <v-toolbar-title>Gallery Viewer</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="galleryViewerDialog = false"
+            >
+              Close
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+
+        <v-divider></v-divider>
+
+<div>
+    <!-- <v-btn @click="reduceImage">Compress</v-btn> -->
+    <img style="max-width:700px" :src="selectedImage" />
+</div>
+
       </v-card>
     </v-dialog>
 
@@ -649,6 +725,8 @@ const math = create(all,  {})
 export default {
 data(){
     return {
+        galleryViewerDialog:false,
+        selectedImage:'',
         pdfUrl:'',
         pdfViewerDialog:false,
          barcodeLabel:{
@@ -666,6 +744,7 @@ label:_.cloneDeep(this.$store.state.barcode.pageSetup.label),
             qas_form_two_ui:{},
             qas_form_one_ui:{},
 isApprover:false,
+editPermistion:false,
 fileTypeDialog:false,
 selected_gallery:0,
 
@@ -739,8 +818,11 @@ var $vm=this;
 async mounted(){
     var $vm=this;
   await $vm.$store.dispatch('getPrintConfig')
-if(['approver','admin'].includes($vm.$store.state.interplex.user.roletype))
+if(['approver','admin'].includes($vm.$store.state.interplex.user.roletype)){
 $vm.isApprover=true;
+$vm.editPermistion=true;
+}
+
 await $vm.$store.dispatch('readUploadType')
 var params=$vm.$route.params
 
@@ -803,7 +885,9 @@ $vm.$set($vm.invoice.qasFormOne,"observation_format",observation_format)
 
 $vm.$set($vm.invoice.qasFormOne,"observation2_format",params.invoice.qasFormOne.observation2_format)
 $vm.$set($vm.invoice,"gallery",gallery)
-
+//----
+if(['pending','rejected'].includes($vm.invoice.qasFormOne.status))  $vm.editPermistion=true;
+//----
 
 var label={}
 // console.log("formone",formone)
@@ -1076,8 +1160,8 @@ if($vm.selected_gallery!==-1)
     },
     saveMedia(){
 var $vm=this;
-  _.map($vm.takePhoto,async (image)=>{
-    var formdata=new FormData()
+_.map($vm.takePhoto,async (image)=>{
+var formdata=new FormData()
 image['invoice_table_id']=$vm.invoice.qasFormOne.invoice_table_id;
 image['invoice_client_id']=$vm.invoice.qasFormOne.invoice_client_id;
 image['invoice_no']=$vm.invoice.qasFormOne.invoice_no;
@@ -1086,14 +1170,15 @@ formdata.append('invoice_table_id',image['invoice_table_id'])
 formdata.append('invoice_client_id',image['invoice_client_id'])
 formdata.append('invoice_no',image['invoice_no'])
 formdata.append('file_type',image['file_type'])
-formdata.append('title',image['title'])
+formdata.append('title',image['title']||'')
 
 if(image.file_type=='image'){
 formdata.append('file',core.base64toBlob((image.src).split(',')[1]))        
 }
-          else{
-            formdata.append("file",image.src);
-          }
+else{
+//pdf
+formdata.append("file",image.src);
+}
 await $vm.$store.dispatch('upload',formdata)
 console.log("uploading....")
 return image;
@@ -1143,7 +1228,7 @@ $vm.$alert("Saved")
   // Here you get the image as result.
   const theActualPicture = image.dataUrl;
   console.log(theActualPicture)
-  $vm.takePhoto.push({src:theActualPicture,file_type:''})
+  $vm.takePhoto.push({src:theActualPicture,file_type:'image'})
 },
     status(status){
 var $vm=this;
