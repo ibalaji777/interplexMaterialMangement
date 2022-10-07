@@ -264,8 +264,11 @@ showLoader(state){
 },
 hideLoader(state){
 	state.loader=false;
-}
+},
+select_printer(state,payload){
 
+    state.printer=payload;
+}
 
 
 

@@ -312,6 +312,13 @@ $vm.items=[
                 action: "findApproveList",
                 submenu: false
             },
+
+                {
+                title: "Devices",
+                icon: "fa-search",
+                action: "devices",
+                submenu: false
+            },
 ]
 }
 
@@ -385,7 +392,12 @@ $vm.items=[
                 action: "appConfig",
                 submenu: false
             },
-
+                {
+                title: "Devices",
+                icon: "fa-search",
+                action: "devices",
+                submenu: false
+            },
 ]
 }
 if($vm.$store.state.interplex.user.roletype=='admin'){
@@ -511,6 +523,12 @@ $vm.items=[
                 title: "Gui Qas2",
                 icon: "mdi-puzzle-edit-outline",
                 action: "guiQasFormTwo",
+                submenu: false
+            },
+                            {
+                title: "Devices",
+                icon: "fa-search",
+                action: "devices",
                 submenu: false
             },
 ]

@@ -1,6 +1,10 @@
 /*eslint-disable*/
 import moment from 'moment'
 const state = {
+	printer:{
+label:'',
+receipt:''
+	},
 	loader:false,
 	qasForm1Validation:false,
 	qasForm2Validation:false,

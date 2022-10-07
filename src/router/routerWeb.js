@@ -25,6 +25,9 @@ import verifierList from '../views/verifierList.vue'
 import verifierView from '../views/verifierView.vue'
 import approverList from '../views/approverList.vue'
 
+import devices from '../views/devices.vue'
+
+
 import qasFormOneDefault from '../views/qasFormOneDefault.vue'
 import qasFormTwoDefault from '../views/qasFormTwoDefault.vue'
 
@@ -75,6 +78,12 @@ const routes = [
 	//dashboardList
 	//adminDashboardView
 	//adminDashboardOtherConfig
+	
+	{
+		path: '/devices',
+		name: 'devices',
+		component:devices
+	},
 
 	{
 		path: '/',

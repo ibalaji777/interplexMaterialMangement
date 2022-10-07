@@ -16,7 +16,10 @@ const vuexLocalStorage = new VuexPersist({
 	reducer: (state) => {
 
 		return ({
-
+			printer:{
+				label:state.printer.label||'',
+				receipt:state.printer.receipt||'',
+					},
 			interplex: {
 				user:state.interplex.user,
 				currentBranch:state.interplex.currentBranch,
