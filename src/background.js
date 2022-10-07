@@ -243,9 +243,27 @@ if (process.env.WEBPACK_DEV_SERVER_URL) {
 
 
 
-win.on('closed', () => {
-  win = null
-})
+// win.on('closed', () => {
+//   win = null
+// })
+var hasConfirmedClose = false;
+win.on('close',async  (e) => {
+    if (!hasConfirmedClose) {
+        e.preventDefault(); // Prevent default no matter what.
+        var choice =await  dialog.showMessageBox(win, {
+            type:    'question',
+            buttons: ['Yes', 'No'],
+            title:   'Confirm',
+            message: 'Are you sure you want to quit?'
+        });
+        console.log("choice",choice)
+        if (choice.response==0) {
+            hasConfirmedClose = true;
+            win.close();
+            win = null
+        }
+    }
+});
 // --------------------print window----------------------------
 // printWin= new BrowserWindow({ frame:false, width: 800, height: 600, webPreferences: {
 //   webSecurity:false,
@@ -372,39 +390,39 @@ if (isDevelopment) {
 // google drive window--------------------------------------------------
 var childWindow;
 // Function to create child window of parent one
-function createChildWindow() {
+// function createChildWindow() {
 
-  childWindow = new BrowserWindow({
-    width: 500,
-    height: 700,
+//   childWindow = new BrowserWindow({
+//     width: 500,
+//     height: 700,
     
-    // modal: true,
-    // show: false,
-    icon:path.join(__static, 'icon.ico'),//'../public/icon.ico',
-    // parent: myWindow, // Make sure to add parent window here
+//     // modal: true,
+//     // show: false,
+//     icon:path.join(__static, 'icon.ico'),//'../public/icon.ico',
+//     // parent: myWindow, // Make sure to add parent window here
   
-    // Make sure to add webPreferences with below configuration
-    // webPreferences: {
-    //   nodeIntegration: true,
-    //   contextIsolation: false,
-    //   enableRemoteModule: true,
-    // },
-  });
-  childWindow.setIcon(path.join(__static, 'icon.ico'));
+//     // Make sure to add webPreferences with below configuration
+//     // webPreferences: {
+//     //   nodeIntegration: true,
+//     //   contextIsolation: false,
+//     //   enableRemoteModule: true,
+//     // },
+//   });
+//   childWindow.setIcon(path.join(__static, 'icon.ico'));
 
-  childWindow.setMenu(null)
-  // Child window loads settings.html file
-  // childWindow.loadFile("http://localhost:3333/auth/login/google");
-  childWindow.loadURL('http://localhost:3333/auth/login/google');
-  // childWindow.once("ready-to-show", () => {
-  //   childWindow.show();
-  // });
-  childWindow.webContents.on('crashed', () => {
-    childWindow.destroy();
-    createChildWindow();
-  });
+//   childWindow.setMenu(null)
+//   // Child window loads settings.html file
+//   // childWindow.loadFile("http://localhost:3333/auth/login/google");
+//   childWindow.loadURL('http://localhost:3333/auth/login/google');
+//   // childWindow.once("ready-to-show", () => {
+//   //   childWindow.show();
+//   // });
+//   childWindow.webContents.on('crashed', () => {
+//     childWindow.destroy();
+//     createChildWindow();
+//   });
   
-}
+// }
   
 // ipcMain.on("openGoogleDriveAuthWindow", (event, arg) => {
 //   createChildWindow();

@@ -58,7 +58,7 @@ mdi-file-pdf
 <!-- <v-btn @click="selectForm='qasformone'" color="#2f5489 " style="color:white;margin:2px">Qas Form One</v-btn>
 <v-btn @click="selectForm='qasformtwo'" color="#2f5489 " style="color:white;margin:2px">Qas Form two</v-btn>
 <v-btn @click="selectForm='media'" color="#2f5489 " style="color:white;margin:2px">Media</v-btn> -->
-<v-btn  :disabled="editPermistion" @click="selectForm='edit'" color="#2f5489 " style="color:white;margin:2px">Edit</v-btn>
+<v-btn  :disabled="!editPermission" @click="selectForm='edit'" color="#2f5489 " style="color:white;margin:2px">Edit</v-btn>
 
 </div>
 
@@ -744,7 +744,7 @@ label:_.cloneDeep(this.$store.state.barcode.pageSetup.label),
             qas_form_two_ui:{},
             qas_form_one_ui:{},
 isApprover:false,
-editPermistion:false,
+editPermission:false,
 fileTypeDialog:false,
 selected_gallery:0,
 
@@ -820,7 +820,7 @@ async mounted(){
   await $vm.$store.dispatch('getPrintConfig')
 if(['approver','admin'].includes($vm.$store.state.interplex.user.roletype)){
 $vm.isApprover=true;
-$vm.editPermistion=true;
+$vm.editPermission=true;
 }
 
 await $vm.$store.dispatch('readUploadType')
@@ -886,7 +886,7 @@ $vm.$set($vm.invoice.qasFormOne,"observation_format",observation_format)
 $vm.$set($vm.invoice.qasFormOne,"observation2_format",params.invoice.qasFormOne.observation2_format)
 $vm.$set($vm.invoice,"gallery",gallery)
 //----
-if(['pending','rejected'].includes($vm.invoice.qasFormOne.status))  $vm.editPermistion=true;
+if(['pending','rejected'].includes($vm.invoice.qasFormOne.status)){$vm.editPermission=true};
 //----
 
 var label={}
