@@ -13,7 +13,8 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'reveal.js/dist/reveal.css'
 // require lib
 import VueCodeMirror from 'vue-codemirror'
-
+import contenteditable from 'vue-contenteditable'
+Vue.use(contenteditable)
 // require styles
 import './assets/codemiror.scss'
 import './assets/dark.scss'

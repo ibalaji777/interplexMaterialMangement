@@ -733,6 +733,10 @@ if(x.map!='')  {x['value']=object[x.map]||'';}
     observation_print_view:product[0].observation_print_view,
     observation2_print_view:product[0].observation2_print_view,
     productConfigFormat2:product[0].observation2_format,
+   
+    table_header_format:product[0].table_header_format,
+    observation_header_print_view:product[0].observation_header_print_view,
+    
     qas_form_one_ui:product[0].qas_form_one_ui,
     qas_form_two_ui:product[0].qas_form_two_ui,
     headerConfigFormat:header_result,
@@ -856,9 +860,14 @@ x['dbProduct']=product.dbProduct;
 
 x['productConfigFormat']=product.productConfigFormat;
 x['observation_print_view']=product.observation_print_view;
+//
+x['table_header_format']=product.table_header_format;
+x['observation_header_print_view']=product.observation_header_print_view;
+// x['observation2_format']=product.observation2_format;
 
 x['observation2_print_view']=product.observation2_print_view;
 x['productConfigFormat2']=product.productConfigFormat2;
+
 x['qas_form_one_ui']=product.qas_form_one_ui;
 x['qas_form_two_ui']=product.qas_form_two_ui;
 // x['products']=setQasForm2(x.products,productConfigFormat2);
@@ -2003,8 +2012,8 @@ return  _.reduce(array,
   export function observationTableBodyOrder(order,format,printView)
   {
 
-    console.log("+++observationTableBodyOrder+++")
-    console.log("order",order,"format",format,"printview",printView)
+    // console.log("+++observationTableBodyOrder+++")
+    // console.log("order",order,"format",format,"printview",printView)
     // var torder=tableOrder(Object.keys(x),order)
 
     var count=0;
@@ -2023,6 +2032,7 @@ var row=[]
       row.push({
       name:'no',
       value:count,
+      editable:false,
       merge:{
         colspan:1,
         rowspan:1,
@@ -2035,8 +2045,16 @@ var row=[]
     var  header=_.find(format,(data)=>data.name==column)
     // console.log("++++header++++")
     // console.log(header,column,col)
-if(header){
-   row.push({...header,
+
+    var style=""
+    if(header){
+  if(header.exp){
+    style="background:#e4dff0;"
+  }
+  if(header.map){
+    style="background:beige;"
+  }
+   row.push({...header,style:style,
     merge:{
       colspan:header.merge?header.merge.colspan:1,
       rowspan:header.merge?header.merge.rowspan:1

@@ -3,6 +3,8 @@ import * as core from '../lib/config'
 var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
+
+var findByHeaderApi=api+'/findbyheader';
 var labelGenerateApi=api+"/labelgenerate"
 
 var getSkipLevelApi=api+'/skiplevel';
@@ -756,7 +758,12 @@ async skipLevel(context,{invoice_no,rmcode,supplier_name}){
 var result=await axios.post(getSkipLevelApi,{invoice_no,rmcode,supplier_name});
 return result.data
 },
-    
+async findByHeader(context,payload){
+    var result=await axios.post(findByHeaderApi,{find:payload});
+    return result.data
+    },
+
+
 
 
 }

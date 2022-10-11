@@ -1,5 +1,8 @@
 <template>
     <div>
+        <!-- <pre>{{renderQas1Header}}</pre> -->
+                <!-- <pre>{{renderQas1Body}}</pre> -->
+<!-- <pre>{{selectedPartNoItem.productConfigFormat}}</pre> -->
 <h3>Quality assurance Form</h3>
 <br>
 <div style="    display: flex;
@@ -85,8 +88,8 @@ style="width:100%"
 </div>
 OBSERVATION
 <div style="display:flex;">
-
-<div @click="productFormatDialog=true" class="insertProduct" style="margin-right:10px">
+<!-- @click="productFormatDialog=true" -->
+<div @click="qasOneExcel=true"  class="insertProduct" style="margin-right:10px">
 <v-icon>fa-check</v-icon>
 </div>
 <div @click="qasForm1NewDialog=true" class="insertProduct" style="margin-right:10px">
@@ -304,7 +307,7 @@ OBSERVATION
     justify-content: space-around;
     align-items: center;">
     <div>
-<v-btn @click="qasOneExcel=true" color="primary">Table</v-btn>
+<!-- <v-btn @click="qasOneExcel=true" color="primary">Table</v-btn> -->
     </div>
     <div style="display:flex;justify-content:flex-end">
  <v-switch
@@ -763,20 +766,110 @@ Items
           dark
           :color="$store.state.bgColor"
         >
-          <v-toolbar-title><v-icon @click="qasOneExcel = false">fa-times</v-icon></v-toolbar-title>
+          <v-toolbar-title>
+              <div class="table-title"><v-icon style="margin-right:15px" @click="qasOneExcel = false">fa-times</v-icon>Inspection Form</div>
+          </v-toolbar-title>
           <v-spacer></v-spacer>
-        
+          <v-btn dense :loading="qasFormOneValidateLoader" @click="validateQasFormOne" text>
+            validate
+          </v-btn>        
           <v-toolbar-items>
           </v-toolbar-items>
         </v-toolbar>
         <v-divider></v-divider>
-     <div>
+        <div style="background:#f6f6f6">
+        <div class="inter_right_center">
+
+<v-btn small fab >
+    <v-icon>
+    mdi-file
+    </v-icon>
+    </v-btn>
+<v-btn small fab style="">
+<v-icon>
+    mdi-format-list-checks
+    </v-icon>    
+</v-btn>
+        </div>
+      <div style="display:flex;justify-content:center">
+     <div style="width:75vw">
 
          <div >
-    <h2 class="table-title" contenteditable="true">Sales</h2>
-    <table class="inter_table_excel">
+
+    <!-- <div style="    display: flex;
+    flex-wrap: wrap;">
+
+       
+
+<div style="display:flex;flex-wrap:wrap"  :key="'headergui'">
+
+<div  class="flex-row-item"  v-for="(ui,index_sub) in header_form_gui.two" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
+<div v-if="getIndexHeader(ui.name)!=-1" >
+<div style="height: 45px;margin:2px 3px;"
+       > 
+<div v-if="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type!='date'">
+<v-text-field 
+style="width:100%"
+v-if="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].map==''"
+ :label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label"  :type="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :placeholder="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
+</v-text-field>
+<v-text-field 
+v-else
+style="width:100%"
+ append-icon="mdi-magnify-scan"
+:label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label"  :type="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :placeholder="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
+</v-text-field>
+</div>
+<div v-else>
+    <v-text-field  @click="headerDateShow = true" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
+</v-text-field>
+<date-picker  @close="headerDateShow = false"
+             v-if="headerDateShow"
+             v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"
+             :format="formatDate"
+             ></date-picker>
+</div>
+</div>
+
+</div>
+</div> 
+
+
+</div>
+</div> -->
+
+<table class="inter_table_excel">
+    <tr ></tr>
+    <tr class="inter_table_header_excel"  v-for="(row,index) in renderQas1Header" :key="index+'qas1Header'">
+<td :colspan="cell.merge.colspan" :rowspan="cell.merge.rowspan" contenteditable=true v-for="(cell,cellindex) in row" :key="cellindex+'4cell'">
+   <div> {{cell.value}}</div>
+</td>
+   
+    <tr class="inter_table_header_excel"  v-for="(row,index) in renderQas1Body" :key="index+'qas1Body'">
+<td   :style="cell.style" :colspan="cell.merge.colspan" :rowspan="cell.merge.rowspan"  v-for="(cell,cellindex) in row" :key="cellindex+'cell'">
+    <input :cell="JSON.stringify(cell)" @change="editableQas1" v-if="cell.editable" v-model="cell.value" type="text">
+     <div v-else>
+{{cell.value}}
+     </div>
+    
+</td>
+     </tr>
+</table>
+
+
+<!-- <table class="inter_table_excel">
+    <tr class="inter_table_header_excel"  v-for="(form,index) in selectedPartNoItem.observation_print_view" :key="index+'form'">
+<td contenteditable=true v-for="(cell,cellindex) in form" :key="cellindex+'cell'">
+    {{cell}}
+
+</td>
+     </tr>
+</table> -->
+
+    <!-- <table class="inter_table_excel">
     <tr class="inter_table_header_excel">
       <th contenteditable=true>Year</th>
+       <contenteditable tag="th" :contenteditable="true"   :no-html="true"  />
       <th contenteditable=true>Product A</th>
       <th contenteditable=true>Product B</th>
       <th contenteditable=true>Product C</th>
@@ -817,9 +910,12 @@ Items
       <td contenteditable=true>77</td>
       <td contenteditable=true>61</td>
     </tr>
-  </table>
+  </table> -->
   </div>
      </div>
+
+     </div>
+        </div>
       </v-card>
     </v-dialog>
 
@@ -933,6 +1029,7 @@ export default {
     data(){
 
         return {
+            renderQas1Body:[],
             qasOneExcel:false,
             scannerConnectionAppStatus:false,
                     pdfUrl:'',
@@ -961,7 +1058,19 @@ qasForm1NewDialog:false,
         }
     },
     computed:{
+renderQas1Header(){
+    var $vm=this;
+var result= _.cloneDeep(core.observationTableHeader($vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_header_print_view))
+console.log("Header Print view",result)
+return result;
+},
 
+// renderQas1Body(){
+//     var $vm=this;
+// var result= _.cloneDeep(core.observationTableBodyOrder($vm.selectedPartNoItem.table_header_format,$vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_print_view))
+// // console.log("Observation Print view",result)
+// return result;
+// },
         qas2Result(){
             var $vm=this;
           var i=1;
@@ -1123,12 +1232,33 @@ core.blobToBase64(compressedFile,(base64String)=>{
 
 })
 
+$vm.renderQas1BodyFn()
 },
 watch:{
 
 
 },
     methods:{
+        renderQas1BodyFn(){
+          var $vm=this;
+          console.log("+++renderQas1Body+++")
+        //   $vm.$set($vm,"renderQas1Body",[])
+
+          $vm.$set($vm,"renderQas1Body",core.observationTableBodyOrder($vm.selectedPartNoItem.table_header_format,$vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_print_view))
+        //   $vm.renderQas1Body=_.cloneDeep(core.observationTableBodyOrder($vm.selectedPartNoItem.table_header_format,$vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_print_view))
+        },
+        editableQas1(e){
+            var $vm=this;
+            var cell=JSON.parse(e.target.getAttribute("cell"));
+            if(cell.name!='no')
+{
+var value=e.target.value;
+            console.log("text editing",value)
+            console.log(cell)
+            
+$vm.selectedPartNoItem.productConfigFormat[$vm.getIndex(cell.name)].value=value;
+}
+        },
 scrollToErrorSpot(no){
 var $vm=this;
 // console.log("element",element)
@@ -1212,6 +1342,7 @@ $vm.Qas2Validate()
 var $vm=this;
 
 $vm.checkQas2Rules()
+
         },
 checkQas2Rules(){
     var $vm=this;
@@ -1444,6 +1575,7 @@ validateQasFormOne(){
 var $vm=this;
 $vm.qasFormOneValidateLoader=true;
 $vm.checkQasOneRules()
+$vm.renderQas1BodyFn()
 setTimeout(() => {
     $vm.qasFormOneValidateLoader=false
 }, 1000);

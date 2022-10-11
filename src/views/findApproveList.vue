@@ -95,19 +95,27 @@ ppap
 </div>
 <div style="display:flex;margin-top:15px">
 
-<div style="width:15%">
-    <v-btn @click="isDateRangeSelected=!isDateRangeSelected" color="primary"><v-icon>mdi-calendar</v-icon></v-btn>
+<div style="text-align:center">
+    <!-- <v-btn @click="isDateRangeSelected=!isDateRangeSelected" color="primary"><v-icon>mdi-calendar</v-icon></v-btn> -->
+    <v-btn color="blue" @click="selectChooser">
+    <v-icon color="white">mdi-filter</v-icon>
+    </v-btn>
+    <br>
+    {{selectedChooser}}
+
 </div>
-<div style="display:flex" v-if="isDateRangeSelected">
-    <v-select
+<div style="display:flex;align-items:baseline" v-if="selectedChooser=='date'">
+
+<v-select
 v-model="findByKeyDate"
 :items="datesColumns"
  item-text="title"
  item-value="value"
  label="Find By"
  style="margin:5px;"
+ outlined
+ dense
 >
-
 </v-select>
 
     <date-filter @date="setDate"></date-filter>
@@ -117,7 +125,7 @@ v-model="findByKeyDate"
            </v-btn>
 
 </div>
-<div v-else style="width:100%;display:flex">
+<div v-if="selectedChooser=='default'" style="width:100%;display:flex">
 
 <div style="display:flex;align-items:baseline;width:100%">
 <v-select
@@ -127,6 +135,8 @@ v-model="findByKey"
  item-value="name"
  label="Find By"
  style="margin:5px;"
+                     outlined
+                     dense
 >
 
 </v-select>
@@ -142,7 +152,37 @@ v-model="findByKey"
            </v-btn>
            </div>
 </div>
+
+<div style="display:flex;align-items:baseline" v-if="selectedChooser=='header'">
+
+<v-select
+v-model="headerKey"
+:items="headerFormat"
+ item-text="title"
+ item-value="value"
+ label="Find By"
+ style="margin:5px;"
+ outlined
+ dense
+>
+</v-select>
+
+     <v-text-field
+        style="margin:5px"
+        dense
+        outlined
+          v-model="search"
+          label="Search"
+           ></v-text-field>
+
+
+<v-btn color="primary" style="color:white" @click="findHeaderArray">
+            Submit
+           </v-btn>
+
 </div>
+</div>
+
          <v-data-table
          dense
       v-model="selected"
@@ -255,10 +295,21 @@ Vue.filter('formatDate', function(value) {
     return moment(String(value)).format("YYYY-MM-DD")
   }
 })
+var chooserIndex=1;
+var chooser=['default','date','header'];
 
 export default {
     data(){
         return {
+            headerKey:'',
+            headerFormat:[
+                {
+                    title:'label',
+                    value:'label'
+                    
+                }
+            ],
+            selectedChooser:'default',
 
             datesColumns:[
             {
@@ -338,6 +389,30 @@ $vm.filterResult=_.filter($vm.list,(qasform1)=>qasform1.status==params.status)
     },
     methods:{
 
+selectChooser(){
+var $vm=this;
+$vm.selectedChooser=chooser[chooserIndex]
+if(chooserIndex==chooser.length-1){
+    chooserIndex=0;
+    return;
+}
+chooserIndex++
+},
+async findHeaderArray(){
+var $vm=this;
+if($vm.headerKey==''){
+$vm.$alert("Please Select Filter")
+return ;
+}
+var find={}
+find[$vm.headerKey]=$vm.search;
+console.log("find header array",find)
+var dataset=await $vm.$store.dispatch("findByHeader",[find]);
+console.log("dataset",dataset)
+$vm.foundList=dataset
+
+
+},
         filters(){
 var $vm=this;
 var custom_filters=[

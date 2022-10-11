@@ -10,6 +10,7 @@
                     item-value="value"
                     @change="choose_date_type"
                     dense
+
                 ></v-select
             ></v-col>
             <v-col v-if="select_date == 'custom_date'">

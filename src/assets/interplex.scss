@@ -206,14 +206,19 @@ background-color: #a2afdb !important;}
     
 /* ***************************** */
 .inter_table_excel {
-	margin: 50px auto;
-	
 
+	margin: 10px auto;
+    font-size: 13px;
+    font-weight: 600;
+    border-collapse: collapse;
+    box-shadow: -2px 2px 13px 3px !important;
   }
   
   .inter_table_excel  table {
 	width:100%;
-  }
+    background: white;
+
+}
   
 
   .inter_table_excel tr {
@@ -228,13 +233,51 @@ background-color: #a2afdb !important;}
   .inter_table_excel th {
 	border: 1px solid grey;
 	padding: 5px 20px;
-	background:#ddd;
+	/* background:#ddd;*/
   }
   
   .inter_table_excel td { 
 	border: 1px solid grey;
-	padding: 5px 20px;
 	cursor:pointer;
   }
   
-  
+  .inter_table_excel td input{
+    padding: 3px 5px;
+    min-width: 100%;
+    width: 60px;
+    font-size: 12px;
+  } 
+  .inter_table_excel td div{
+	padding: 4px 20px;
+
+  } 
+  .inter_table_header_excel td{
+    font-size:12px
+  }
+  .validationContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: #c4bafd;
+  }
+  .inter_right_center{
+     display: flex; 
+      right: 10px;
+      padding:5px;
+     border-radius: 18%;
+     flex-direction: column;
+     background: #38353f;
+     position: fixed;
+     top: 50%;
+     transform: translateY(-50%);
+  }
+
+  .inter_right_center button{
+
+    width:50px;
+    height:50px;
+    background:#736892;
+    color:white;
+    margin:4px;
+  }
