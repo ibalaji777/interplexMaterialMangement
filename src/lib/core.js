@@ -733,7 +733,7 @@ if(x.map!='')  {x['value']=object[x.map]||'';}
     observation_print_view:product[0].observation_print_view,
     observation2_print_view:product[0].observation2_print_view,
     productConfigFormat2:product[0].observation2_format,
-   
+ 
     table_header_format:product[0].table_header_format,
     observation_header_print_view:product[0].observation_header_print_view,
     
@@ -741,7 +741,8 @@ if(x.map!='')  {x['value']=object[x.map]||'';}
     qas_form_two_ui:product[0].qas_form_two_ui,
     headerConfigFormat:header_result,
     dbProduct:product[0],
-    qasForm2
+    qasForm2,
+    observation2_header_print_view:product[0].observation2_header_print_view
 
 
   };
@@ -815,9 +816,9 @@ if(x.name!='validation'){
 sapObject[x.name]=x.value||'';
 
 if(x.map){
-  console.log(".....map starting....")
-  console.log(x.map.mapFrom,sapObject[x.map.map],x.map.map)
-  console.log(x.map.mapFrom,defaultProduct[x.map.map],x.map.map)
+  // console.log(".....map starting....")
+  // console.log(x.map.mapFrom,sapObject[x.map.map],x.map.map)
+  // console.log(x.map.mapFrom,defaultProduct[x.map.map],x.map.map)
 
   if(x.map.mapFrom=='header')
 sapObject[x.name]=sapObject[x.map.map]||""
@@ -863,6 +864,8 @@ x['observation_print_view']=product.observation_print_view;
 //
 x['table_header_format']=product.table_header_format;
 x['observation_header_print_view']=product.observation_header_print_view;
+// observation2_header_print_view:product[0].observation2_header_print_view
+x['observation2_header_print_view']=product.observation2_header_print_view;
 // x['observation2_format']=product.observation2_format;
 
 x['observation2_print_view']=product.observation2_print_view;
@@ -2154,7 +2157,6 @@ export  function observation2TableBody(ob_form,ob_view,qasFormTwo){
   _.map(ob_view,(x)=>{
     format.push(x.name)
   })
-
 var new_format=_.map(format,(name)=>{
 var check=_.find(ob_form,(x)=>x.name==name)
 if(check)
@@ -2165,7 +2167,6 @@ if(check)
   }
   }
   return {
-
     name,
     label:'not found',
     value:'not found'+'('+name+')',
@@ -2176,43 +2177,22 @@ if(check)
   }
 
 })
-
-
 _.forEach(_.cloneDeep(qasFormTwo),(x,index)=>{
 var row=[]
-// console.log('++',x,index)
 _.map(_.cloneDeep(new_format),(input)=>{
-
+  // console.log('input',input.name) 
+  // console.log('x',x) 
+  // console.log('two_values',x.qas_form_two_values[input.name])
   input.value=x.qas_form_two_values[input.name]
-
-
   if(input.name=='no'){
       input.value=index+1;
-    
-    }
-  
-  
+  }
   row.push(input)
 })
-
-
 results.push(row)
-// })
-// var count=0;
-// results= _.map(_.cloneDeep(results),(row)=>{
-// count++
-// return  _.map(row,(col)=>{
-//  console.log(count)
-//     if(col.name=='no'){
-//       col.value=count;
-    
-//     }
-//   return col;
-//   })
 
 })
-console.log("checking",format,new_format,results)
-
+// console.log("checking",format,new_format,results)
 return results;
 }
 

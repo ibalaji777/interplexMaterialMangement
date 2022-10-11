@@ -254,6 +254,20 @@ background-color: #a2afdb !important;}
   .inter_table_header_excel td{
     font-size:12px
   }
+  .inter_table2_excel td input{
+    padding: 3px 5px;
+    min-width: 100%;
+    width: 80px;
+    font-size: 12px;
+  } 
+  .inter_table2_excel td div{
+	padding: 4px 20px;
+
+  } 
+  .inter_table2_header_excel td{
+    font-size:12px
+  }
+
   .validationContainer{
     display: flex;
     flex-wrap: wrap;

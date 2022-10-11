@@ -156,17 +156,11 @@ OBSERVATION
     justify-content: space-between;
     width: 100%;">
     <div style="padding:5px">
-        <!-- <b>Pass</b> -->
-<!-- <div style="display:flex;">
-<div  style="margin:2px" v-for="(pass,index) in qas2Result.pass" :key="'pass'+index">
-{{pass.No}}.    <v-icon @click="scrollToErrorSpot(pass.No)" style="color:green;" class="pass_and_fail_icon">fa-check</v-icon>
-</div>
-</div> -->
 <b>Fail</b>
 <div style="display:flex;">
 <div @click="scrollToErrorSpot(pass.No)"  style="margin:2px" v-for="(pass,index) in qas2Result.fail" :key="'pass'+index">
 {{pass.No}}
-    <v-icon class="pass_and_fail_icon" style="color:red;">fa-check</v-icon>
+ <v-icon class="pass_and_fail_icon" style="color:red;">fa-check</v-icon>
 
 </div>
 </div>
@@ -216,6 +210,7 @@ OBSERVATION
 </div>
 </div> 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.two" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
+{{ui.name}}
 <!-- {{ui.name}}
 {{ui.width}}
 {{getIndex2(ui.name)}} -->
@@ -223,7 +218,7 @@ OBSERVATION
 <div v-if="getIndex2(ui.name)!=-1" style="height:66px;padding:10px">
      <!-- <h4> {{ui.label}}:  </h4> -->
 
-    <v-text-field :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
+    <v-text-field  :label="ui.label" v-debounce="delay" @keyup="watchQasTwo" v-if="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].exp&&!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].map" :disabled="!selectedPartNoItem.productConfigFormat2[getIndex2(ui.name)].editable"  v-model.lazy="productFormat[ui.name]" outlined dense>
     </v-text-field>
     <div  v-else>
     
@@ -770,73 +765,38 @@ Items
               <div class="table-title"><v-icon style="margin-right:15px" @click="qasOneExcel = false">fa-times</v-icon>Inspection Form</div>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn dense :loading="qasFormOneValidateLoader" @click="validateQasFormOne" text>
+          <v-btn v-if="selectedFormType=='qas1'" dense :loading="qasFormOneValidateLoader" @click="validateQasFormOne" text>
             validate
           </v-btn>        
+         <v-btn v-if="selectedFormType=='qas2'" dense  @click="Qas2Validate" text>
+             validate
+          </v-btn>        
+
           <v-toolbar-items>
           </v-toolbar-items>
         </v-toolbar>
         <v-divider></v-divider>
-        <div style="background:#f6f6f6">
+        <div style="
+        background: rgb(246, 246, 246);
+    height: 91vh;
+    overflow-y: scroll;">
         <div class="inter_right_center">
 
-<v-btn small fab >
+<v-btn small fab @click="selectedFormType='qas1'" >
     <v-icon>
     mdi-file
     </v-icon>
     </v-btn>
-<v-btn small fab style="">
+<v-btn small fab @click="selectedFormType='qas2'">
 <v-icon>
     mdi-format-list-checks
     </v-icon>    
 </v-btn>
         </div>
-      <div style="display:flex;justify-content:center">
+      <div v-if="selectedFormType=='qas1'" style="display:flex;justify-content:center">
      <div style="width:75vw">
 
          <div >
-
-    <!-- <div style="    display: flex;
-    flex-wrap: wrap;">
-
-       
-
-<div style="display:flex;flex-wrap:wrap"  :key="'headergui'">
-
-<div  class="flex-row-item"  v-for="(ui,index_sub) in header_form_gui.two" :key="'formOne'+index_sub" :style="{width:ui.width+'%'}">
-<div v-if="getIndexHeader(ui.name)!=-1" >
-<div style="height: 45px;margin:2px 3px;"
-       > 
-<div v-if="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type!='date'">
-<v-text-field 
-style="width:100%"
-v-if="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].map==''"
- :label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label"  :type="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :placeholder="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
-</v-text-field>
-<v-text-field 
-v-else
-style="width:100%"
- append-icon="mdi-magnify-scan"
-:label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label"  :type="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].input_type" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :placeholder="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
-</v-text-field>
-</div>
-<div v-else>
-    <v-text-field  @click="headerDateShow = true" dense outlined v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"  :label="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].label" >
-</v-text-field>
-<date-picker  @close="headerDateShow = false"
-             v-if="headerDateShow"
-             v-model="selectedPartNoItem.headerConfigFormat[getIndexHeader(ui.name)].value"
-             :format="formatDate"
-             ></date-picker>
-</div>
-</div>
-
-</div>
-</div> 
-
-
-</div>
-</div> -->
 
 <table class="inter_table_excel">
     <tr ></tr>
@@ -856,64 +816,36 @@ style="width:100%"
      </tr>
 </table>
 
-
-<!-- <table class="inter_table_excel">
-    <tr class="inter_table_header_excel"  v-for="(form,index) in selectedPartNoItem.observation_print_view" :key="index+'form'">
-<td contenteditable=true v-for="(cell,cellindex) in form" :key="cellindex+'cell'">
-    {{cell}}
-
-</td>
-     </tr>
-</table> -->
-
-    <!-- <table class="inter_table_excel">
-    <tr class="inter_table_header_excel">
-      <th contenteditable=true>Year</th>
-       <contenteditable tag="th" :contenteditable="true"   :no-html="true"  />
-      <th contenteditable=true>Product A</th>
-      <th contenteditable=true>Product B</th>
-      <th contenteditable=true>Product C</th>
-      <th contenteditable=true>Product D</th>
-    </tr>
-    <tr>
-      <td contenteditable=true>2010</td>
-      <td contenteditable=true>2</td>
-      <td contenteditable=true>31</td>
-      <td contenteditable=true>24</td>
-      <td contenteditable=true>51</td>
-    </tr>
-    <tr>
-      <td contenteditable=true>2011</td>
-      <td contenteditable=true>36</td>
-      <td contenteditable=true>21</td>
-      <td contenteditable=true>47</td>
-      <td contenteditable=true>109</td>
-    </tr>
-    <tr>
-      <td contenteditable=true>2012</td>
-      <td contenteditable=true>56</td>
-      <td contenteditable=true>9</td>
-      <td contenteditable=true>33</td>
-      <td contenteditable=true>18</td>
-    </tr>
-    <tr>
-      <td contenteditable=true>2013</td>
-      <td contenteditable=true>90</td>
-      <td contenteditable=true>55</td>
-      <td contenteditable=true>71</td>
-      <td contenteditable=true>12</td>
-    </tr>
-    <tr>
-      <td contenteditable=true>2014</td>
-      <td contenteditable=true>36</td>
-      <td contenteditable=true>92</td>
-      <td contenteditable=true>77</td>
-      <td contenteditable=true>61</td>
-    </tr>
-  </table> -->
   </div>
      </div>
 
+     </div>
+     <div v-if="selectedFormType=='qas2'" style="display:flex;justify-content:center;flex-direction:column">
+      
+  
+<table class="inter_table_excel">
+<tr class="inter_table2_header_excel"  v-for="(row,index) in renderQas2Header" :key="index+'qas1Header'">
+<td :colspan="cell.merge.colspan" :rowspan="cell.merge.rowspan" contenteditable=true v-for="(cell,cellindex) in row" :key="cellindex+'4cell'">
+   <div> {{cell.value}}</div>
+</td>
+<td>
+    validation
+</td>
+</tr>   
+    <tr class="inter_table2_header_excel"  v-for="(row,index) in renderQas2Body" :key="index+'qas1Body'">
+<td   :style="cell.style" :colspan="cell.merge.colspan" :rowspan="cell.merge.rowspan"  v-for="(cell,cellindex) in row" :key="cellindex+'cell'">
+    <input :index="index" :cell="JSON.stringify(cell)" @change="editableQas2" v-if="cell.editable" v-model="cell.value" type="text">
+     <div v-else>
+{{cell.value}}
+     </div>
+    
+</td>
+<td style="text-align:center">
+<v-icon  style="font-size:13px" class="defaultErorr" v-if="selectedPartNoItem.qasForm2[index]['validation']"  :class="{errorStatus:selectedPartNoItem.qasForm2[index]['validation']}">fa-check</v-icon>
+<v-icon style="font-size:13px" v-else class="defaultErorr"  :class="{errorStatus:selectedPartNoItem.qasForm2[index]['validation']}">mdi-close</v-icon>
+</td>
+     </tr>
+</table>
      </div>
         </div>
       </v-card>
@@ -1029,7 +961,10 @@ export default {
     data(){
 
         return {
+            selectedFormType:'qas1',//qas2
             renderQas1Body:[],
+            renderQas2Body:[],
+            renderQas2Header:[],
             qasOneExcel:false,
             scannerConnectionAppStatus:false,
                     pdfUrl:'',
@@ -1077,7 +1012,7 @@ return result;
           var pass=[];
           var fail=[]
           _.map($vm.selectedPartNoItem.qasForm2,(productFormat)=>{
-            console.log("pass or fail"+i+1,productFormat.validation)
+            // console.log("pass or fail"+i+1,productFormat.validation)
                if(productFormat.validation)
                {
                 pass.push({No:i,validation:productFormat['validation']})
@@ -1233,6 +1168,8 @@ core.blobToBase64(compressedFile,(base64String)=>{
 })
 
 $vm.renderQas1BodyFn()
+$vm.renderQas2BodyFn()
+$vm.renderQas2HeaderFn()
 },
 watch:{
 
@@ -1242,21 +1179,54 @@ watch:{
         renderQas1BodyFn(){
           var $vm=this;
           console.log("+++renderQas1Body+++")
-        //   $vm.$set($vm,"renderQas1Body",[])
-
-          $vm.$set($vm,"renderQas1Body",core.observationTableBodyOrder($vm.selectedPartNoItem.table_header_format,$vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_print_view))
-        //   $vm.renderQas1Body=_.cloneDeep(core.observationTableBodyOrder($vm.selectedPartNoItem.table_header_format,$vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_print_view))
+          var prepare=core.observationTableBodyOrder($vm.selectedPartNoItem.table_header_format,$vm.selectedPartNoItem.productConfigFormat,$vm.selectedPartNoItem.observation_print_view)
+          $vm.$set($vm,"renderQas1Body",prepare)
+        },
+        renderQas2HeaderFn(){
+        var $vm=this;
+        var prepare=core.observationTableHeader($vm.selectedPartNoItem.productConfigFormat2,$vm.selectedPartNoItem.observation2_header_print_view);
+        $vm.$set($vm,"renderQas2Header",prepare)
+        // $vm.renderQas2Header=core.observationTableHeader($vm.selectedPartNoItem.observation2_format,$vm.selectedPartNoItem.observation2_header_print_view)
+        console.log("++++renderQas2Header++++")
+        console.log(prepare)
+        },
+        renderQas2BodyFn(){
+        var $vm=this;
+        var qas_form_two_values=_.map($vm.selectedPartNoItem.qasForm2,(x)=>{
+        return {
+        qas_form_two_values:x
+        }
+        })       
+        var prepare=core.observation2TableBody($vm.selectedPartNoItem.productConfigFormat2,$vm.selectedPartNoItem.observation2_print_view,qas_form_two_values)     
+        $vm.$set($vm,"renderQas2Body",prepare);
+        console.log("+++renderQas2Body+++")
+        console.log($vm.selectedPartNoItem.productConfigFormat2,$vm.selectedPartNoItem.observation2_print_view,qas_form_two_values)
+        console.log(qas_form_two_values)
+        console.log(prepare)
         },
         editableQas1(e){
             var $vm=this;
             var cell=JSON.parse(e.target.getAttribute("cell"));
             if(cell.name!='no')
 {
-var value=e.target.value;
+        var value=e.target.value;
             console.log("text editing",value)
             console.log(cell)
             
 $vm.selectedPartNoItem.productConfigFormat[$vm.getIndex(cell.name)].value=value;
+}
+        },
+        editableQas2(e){
+    var $vm=this;
+            var cell=JSON.parse(e.target.getAttribute("cell"));
+            var index=e.target.getAttribute('index');
+            if(cell.name!='no')
+{
+        var value=e.target.value;
+            console.log("text editing",value)
+            console.log(cell)
+            console.log("cell",cell,"index",index)
+$vm.selectedPartNoItem.qasForm2[index][cell.name]=value;
 }
         },
 scrollToErrorSpot(no){
@@ -1265,8 +1235,8 @@ var $vm=this;
 // var index=element-1;
 console.log("element","qas2No"+no)
 
-var container = document.getElementById("qas2No"+no);
-container.scrollIntoView;
+// var container = document.getElementById("qas2No"+no);
+// container.scrollIntoView;
 
 },
 

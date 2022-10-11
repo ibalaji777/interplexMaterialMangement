@@ -38,9 +38,9 @@ export function qas2Map(products,productConfigFormat2,defaultProduct){
     sapObject[x.name]=x.value||'';
     
     if(x.map){
-      console.log(".....map starting....")
-      console.log(x.map.mapFrom,sapObject[x.map.map],x.map.map)
-      console.log(x.map.mapFrom,defaultProduct[x.map.map],x.map.map)
+      // console.log(".....map starting....")
+      // console.log(x.map.mapFrom,sapObject[x.map.map],x.map.map)
+      // console.log(x.map.mapFrom,defaultProduct[x.map.map],x.map.map)
     
       if(x.map.mapFrom=='header')
     sapObject[x.name]=sapObject[x.map.map]||""
