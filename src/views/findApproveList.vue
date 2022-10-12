@@ -4,7 +4,7 @@
 <!-- eslint-disable -->
 <!-- {{$store.state.interplex.qasForm1}} -->
 <!-- {{foundList}} -->
-<pre>{{$store.state.interplex.configHeaderFormat}}</pre>
+<!-- <pre>{{$store.state.interplex.configHeaderFormat}}</pre> -->
 <label-print-desktop style="width:0;height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
 <label-print-mobile style="width:0;height:0;overflow:hidden"  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 <div style="padding:15px;    padding: 15px;
@@ -158,9 +158,9 @@ v-model="findByKey"
 
 <v-select
 v-model="headerKey"
-:items="headerFormat"
- item-text="title"
- item-value="value"
+:items="$store.state.interplex.configHeaderFormat"
+ item-text="label"
+ item-value="name"
  label="Find By"
  style="margin:5px;"
  outlined
