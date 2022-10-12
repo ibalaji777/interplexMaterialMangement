@@ -8,25 +8,41 @@
             <span class="page-info">
         Page <span id="page-num"></span> of <span id="page-count"></span>
       </span>
-
+<div ><v-icon @click="rotate">mdi-rotate-right</v-icon></div>
       <button class="btn" id="next-page">
         Next Page <i class="fas fa-arrow-circle-right"></i>
       </button>
     </div>
-
+<div id="rotate">
     <canvas id="pdf-render"></canvas>
+</div>
+
     </div>
 </template>
 
 <script>
+/*eslint-disable*/
 // import '../lib/pdf.js'
 // const pdfjsLib =require('')
 // const pdfjsLib = require('pdfjs-dist');
 
-
+var rotate=90;
 
 export default {
  props:['url'],
+ methods:{
+rotate(){
+// var canvas=    document.getElementById('pdf-render');
+
+//     const ctx = canvas.getContext('2d');
+
+//     ctx.rotate(rotate * Math.PI / 180)
+    document.getElementById('rotate').style.transform="rotate("+rotate+"deg)"
+    rotate+=90;
+
+
+}
+ },
 async mounted(){
 var $vm=this;
 let pdfDoc = null,
