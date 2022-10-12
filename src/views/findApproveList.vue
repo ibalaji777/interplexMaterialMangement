@@ -3,7 +3,8 @@
 <!-- sss{{$store.state.interplex.user}} -->
 <!-- eslint-disable -->
 <!-- {{$store.state.interplex.qasForm1}} -->
-
+<!-- {{foundList}} -->
+<pre>{{$store.state.interplex.configHeaderFormat}}</pre>
 <label-print-desktop style="width:0;height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
 <label-print-mobile style="width:0;height:0;overflow:hidden"  v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
 <div style="padding:15px;    padding: 15px;
@@ -171,7 +172,7 @@ v-model="headerKey"
         style="margin:5px"
         dense
         outlined
-          v-model="search"
+          v-model="headerSearch"
           label="Search"
            ></v-text-field>
 
@@ -301,6 +302,7 @@ var chooser=['default','date','header'];
 export default {
     data(){
         return {
+            headerSearch:'',
             headerKey:'',
             headerFormat:[
                 {
@@ -404,12 +406,17 @@ if($vm.headerKey==''){
 $vm.$alert("Please Select Filter")
 return ;
 }
+if($vm.headerSearch==''){
+$vm.$alert("Please Fill Search Data")
+return ;
+}
 var find={}
-find[$vm.headerKey]=$vm.search;
+find[$vm.headerKey]=$vm.headerSearch;
 console.log("find header array",find)
 var dataset=await $vm.$store.dispatch("findByHeader",[find]);
 console.log("dataset",dataset)
-$vm.foundList=dataset
+$vm.$set($vm,'foundList',dataset)
+//$vm.foundList=dataset
 
 
 },

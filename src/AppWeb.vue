@@ -234,6 +234,7 @@ await $vm.$store.dispatch("getGuiQasFormOne");
 
 await $vm.$store.dispatch("getGuiQasFormTwo"); 
 await $vm.$store.dispatch("getGuiHeader");
+await $vm.$store.dispatch("rulesList");
 // if(get){
 
 // core.setDefaultFields();

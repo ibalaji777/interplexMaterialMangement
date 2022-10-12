@@ -268,6 +268,12 @@ hideLoader(state){
 select_printer(state,payload){
 
     state.printer=payload;
+},
+setRulesList(state,payload){
+	console.log("set rules list")
+	console.log(payload)
+state.interplex.rulesList=payload;
+
 }
 
 

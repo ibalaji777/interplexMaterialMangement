@@ -398,6 +398,12 @@ $vm.items=[
                 action: "devices",
                 submenu: false
             },
+                            {
+                title: "Rule",
+                icon: "fa-search",
+                action: "rule",
+                submenu: false
+            },
 ]
 }
 if($vm.$store.state.interplex.user.roletype=='admin'){
@@ -529,6 +535,12 @@ $vm.items=[
                 title: "Devices",
                 icon: "fa-search",
                 action: "devices",
+                submenu: false
+            },
+                                        {
+                title: "Rule",
+                icon: "fa-search",
+                action: "rule",
                 submenu: false
             },
 ]

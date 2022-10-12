@@ -3,7 +3,9 @@ import * as core from '../lib/config'
 var api=core.getApi()//core.api;
 import axios from 'axios'
 /*eslint-disable*/
-
+var saveRuleApi=api+'/saverule'
+var rulesListApi=api+'/ruleslist'
+var ruleDeleteApi=api+'/ruleDelete'
 var findByHeaderApi=api+'/findbyheader';
 var labelGenerateApi=api+"/labelgenerate"
 
@@ -763,7 +765,28 @@ async findByHeader(context,payload){
     return result.data
     },
 
+    async saveRule(context,payload){
+        var result=await axios.post(saveRuleApi,{data:payload});
+        actions.rulesList(context)
+        return result.data
 
+
+
+        },
+        async rulesList(context){
+            var result=await axios.get(rulesListApi);
+        context.commit('setRulesList',result.data)
+            return result.data
+            },
+            async ruleDelete(context,id){
+                var result=await axios.post(ruleDeleteApi,{id});
+                actions.rulesList(context)
+                return result.data
+                },
+
+            
+
+        
 
 
 }

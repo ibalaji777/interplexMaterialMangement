@@ -62,6 +62,9 @@ import qasForm2Config from '../views/qasForm2Config.vue'
 import printConfig from '../views/printConfig.vue'
 import appConfig from '../views/appConfig.vue'
 import qrScan from '../views/qrScan.vue'
+
+import rules from '../views/createRules.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -78,7 +81,11 @@ const routes = [
 	//dashboardList
 	//adminDashboardView
 	//adminDashboardOtherConfig
-	
+	{
+		path: '/rule',
+		name: 'rule',
+		component:rules
+	},	
 	{
 		path: '/devices',
 		name: 'devices',
