@@ -1505,6 +1505,21 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                             <v-btn color="primary" @click="checkNewLine(insertForm.observation2_format[
                                         qas2EditableIndex
                                     ].exp.rule)">Check</v-btn>
+                            
+                                                                        <v-combobox
+                                                    :return-object="false"
+                                                    :items="$store.state.interplex.rulesList"
+                                                    dense
+                                                    label="Search Rules"
+                                                    @change="selectedRuleObservation2Format"
+
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                             
+                                                ></v-combobox>
                             <v-textarea
                                 label="Write Rule"
                                 v-model.lazy="
@@ -1705,6 +1720,20 @@ ob2 format{{insertForm.observation2_format}}<br> -->
                                         qasEditableIndex
                                     ].exp.rule)">Check</v-btn>
 
+                                            <v-combobox
+                                                    :return-object="false"
+                                                    :items="$store.state.interplex.rulesList"
+                                                    dense
+                                                    label="Search Rules"
+                                                    @change="selectedRuleObservationFormat"
+
+                                                    item-text="name"
+                                                    item-value="name"
+                                                    clearable
+                                                    hide-selected
+                                                    small-chips
+                                             
+                                                ></v-combobox>
                             <v-textarea
                                 label="Write Rule"
                                 v-model.lazy="
@@ -2974,7 +3003,36 @@ $vm.insertForm.observation_format = $vm.$store.state.interplex.configProductsFor
 
    },
     methods: {
-        
+       selectedRuleObservationFormat(value){
+var $vm=this;
+if($vm.insertForm.observation_format[$vm.qasEditableIndex].exp&&value!=''){
+var result=_.find($vm.$store.state.interplex.rulesList,(x)=>x.name==value)
+if(result){
+$vm.insertForm.observation_format[$vm.qasEditableIndex].exp.rule=result.rule
+}
+
+
+        // console.log("value")
+        // console.log(value,result)
+}
+
+       }, 
+
+       selectedRuleObservation2Format(value){
+var $vm=this;
+if($vm.insertForm.observation2_format[$vm.qas2EditableIndex].exp&&value!=''){
+var result=_.find($vm.$store.state.interplex.rulesList,(x)=>x.name==value)
+if(result){
+$vm.insertForm.observation2_format[$vm.qas2EditableIndex].exp.rule=result.rule
+}
+
+
+        // console.log("value")
+        // console.log(value,result)
+}
+
+       }, 
+
         checkNewLine(value){
 var $vm=this;
 
