@@ -9,9 +9,11 @@
                        style="height:100vh;"
                         nodeintegration
                     ></webview>
-                            <div class="window" v-if="loader">
+ <div style="z-index:1000;position:fixed;top:0;left:0;width:100%;height:100%;background:#685da7" v-if="loader">
+          <div class="window" >
             <div id="someid" class="loader_container">
-                <img src="/loader.svg" id="loader" />
+                <img style="max-width:100px" src="/loader.svg" id="loader" />
+            </div>
             </div>
         </div>
     </div>
@@ -119,6 +121,7 @@ this.pdf_generation('native')
 
          webview.print(
                     {
+                        silent:true,
                         // silent: !$vm.$store.state.control.print_paper_setup.showPrintDialog,
                         printBackground: true,
                         deviceName: $vm.$store.state.printer.label
@@ -188,4 +191,10 @@ this.print_paper_watch();
 </script>
 <style lang="scss">
 // @import "../../../../assets/loader.scss"    
+.loader_container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 </style>

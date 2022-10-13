@@ -22,10 +22,12 @@
                        style="height:100vh;"
                         nodeintegration
                     ></webview>
-                            <div class="window" v-if="loader">
-            <div id="someid" class="loader_container">
-                <img src="/loader.svg" id="loader" />
+                                        <div style="top:0;left:0;width:100%;height:100%;background:#685da7" v-if="loader">
+                            <div class="window" >
+            <div style="position:fixed;top:0;bottom:50%;width:100%" id="someid" class="loader_container">
+                <img style="max-width:100px" src="/loader.svg" id="loader" />
             </div>
+                            </div>
         </div>
     </div>
 </template>
@@ -61,12 +63,14 @@ export default {
         }
     }
 ,mounted(){
+    var $vm=this;
 // console.log(this.url)
 // var pdf_viewer=document.getElementById("pdf_viewer");
 //   pdf_viewer.addEventListener("dom-ready",()=>{
 
 // pdf_viewer.openDevTools();
-
+console.log("+++selected printer Receipt+++")
+console.log($vm.$store.state.printer.receipt)
 //   } );
 this.print_paper_init();
 this.print_paper_watch();
@@ -186,9 +190,10 @@ this.pdf_generation('native')
 
          webview.print(
                     {
+                        silent:true,
                         // silent: !$vm.$store.state.control.print_paper_setup.showPrintDialog,
                         printBackground: true,
-                        // deviceName: $vm.$store.state.control.device.selected_device
+                        deviceName: $vm.$store.state.printer.receipt
                     }                )
                     .then(()=>{
                         

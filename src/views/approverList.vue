@@ -104,10 +104,10 @@ PE
     <div style="background:green" @click="markStaus('approved')" class="statusCard">
 AC
     </div>
-    <div  style="background:yellow;color:black"  @click="markStaus('acceptedOnDeviation')" class="statusCard">
+    <div  style="background:#dada51;color:black"  @click="markStaus('acceptedOnDeviation')" class="statusCard">
 ACD
     </div>
-    <div  style="background:red" @click="markStaus('rejected')" class="statusCard">
+    <div  style="background:#d83e3e" @click="markStaus('rejected')" class="statusCard">
 Rej
     </div>
     <div  style="background:blue"  @click="markStaus('ppap')" class="statusCard">
@@ -125,7 +125,7 @@ Pending
 approved
 </v-btn>
     </div> -->
-    <div style="display:flex;margin-top:3px">
+    <!-- <div style="display:flex;margin-top:3px">
 <v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('acceptedOnDeviation')">
 accepted On Deviation
 </v-btn>
@@ -137,7 +137,7 @@ rejected
 <v-btn outlined color="white" style="flex:1;margin:0 5px" @click="markStaus('ppap')">
 ppap
 </v-btn>
-</div>
+</div> -->
     </div>
        
 </div>

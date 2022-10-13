@@ -77,10 +77,10 @@ mdi-file-pdf
     <div style="background:green" @click="updateFormStatus('approved')" class="statusCard">
 AC
     </div>
-    <div  style="background:yellow;color:black" @click="updateFormStatus('acceptedOnDeviation')" class="statusCard">
+    <div  style="background:#dada51;color:black" @click="updateFormStatus('acceptedOnDeviation')" class="statusCard">
 ACD
     </div>
-    <div  style="background:red" @click="updateFormStatus('rejected')" class="statusCard">
+    <div  style="background:#d83e3e" @click="updateFormStatus('rejected')" class="statusCard">
 Rej
     </div>
     <div  style="background:blue" @click="updateFormStatus('ppap')" class="statusCard">
