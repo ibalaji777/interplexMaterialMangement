@@ -145,7 +145,7 @@ v-model="findByKey"
         style="margin:5px"
         dense
         outlined
-          v-model="search"
+          v-model="searchValue"
           label="Search"
            ></v-text-field>
            <v-btn color="primary" style="color:white" @click="findArray">
@@ -154,9 +154,9 @@ v-model="findByKey"
            </div>
 </div>
 
-<div style="display:flex;align-items:baseline" v-if="selectedChooser=='header'">
+<div style="display:flex;align-items:baseline;width:100%" v-if="selectedChooser=='header'">
 
-<v-select
+<!-- <v-select
 v-model="headerKey"
 :items="$store.state.interplex.configHeaderFormat"
  item-text="label"
@@ -166,7 +166,7 @@ v-model="headerKey"
  outlined
  dense
 >
-</v-select>
+</v-select> -->
 
      <v-text-field
         style="margin:5px"
@@ -302,6 +302,7 @@ var chooser=['default','date','header'];
 export default {
     data(){
         return {
+            searchValue:'',
             headerSearch:'',
             headerKey:'',
             headerFormat:[
@@ -410,10 +411,10 @@ if($vm.headerSearch==''){
 $vm.$alert("Please Fill Search Data")
 return ;
 }
-var find={}
-find[$vm.headerKey]=$vm.headerSearch;
-console.log("find header array",find)
-var dataset=await $vm.$store.dispatch("findByHeader",[find]);
+// var find={}
+// find[$vm.headerKey]=$vm.headerSearch;
+// console.log("find header array",find)
+var dataset=await $vm.$store.dispatch("findByHeader",{name:$vm.headerKey,value:$vm.headerSearch});
 console.log("dataset",dataset)
 $vm.$set($vm,'foundList',dataset)
 //$vm.foundList=dataset
@@ -447,7 +448,7 @@ var $vm=this;
 
 $vm.foundList=await $vm.$store.dispatch("findQasFormDate",{
     key:$vm.findByKeyDate,
-    value:$vm.search,
+    value:$vm.searchValue,
     from_date:$vm.from_date,
     to_date:$vm.to_date,
 })
@@ -460,14 +461,14 @@ if($vm.findByKey=="") {
 $vm.$alert("Please Fill Search key");
 return;
 }
-if($vm.search=="") {
+if($vm.searchValue=="") {
 $vm.$alert("Please Fill Search");
 return;
 }
 if(['batch_no'].includes($vm.findByKey)){
 $vm.foundList=await $vm.$store.dispatch("findQasForm2",{
     key:$vm.findByKey,
-    value:$vm.search
+    value:$vm.searchValue
 })
 
 
@@ -475,7 +476,7 @@ $vm.foundList=await $vm.$store.dispatch("findQasForm2",{
 else{
 $vm.foundList=await $vm.$store.dispatch("findQasForm",{
     key:$vm.findByKey,
-    value:$vm.search
+    value:$vm.searchValue
 })
 }
 

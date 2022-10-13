@@ -489,6 +489,7 @@ productConfig:{
 
 
 interplex:{
+hold:[],
 rulesList:[],
 // productMapCode
 printConfig:{

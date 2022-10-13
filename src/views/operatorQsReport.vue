@@ -210,7 +210,7 @@ OBSERVATION
 </div>
 </div> 
 <div  class="flex-row-item"  v-for="(ui,index_sub) in qas_form_two_ui.two" :key="'form'+index_sub" :style="{width:ui.width+'%'}">
-{{ui.name}}
+<!-- {{ui.name}} -->
 <!-- {{ui.name}}
 {{ui.width}}
 {{getIndex2(ui.name)}} -->

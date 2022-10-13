@@ -21,6 +21,7 @@ const vuexLocalStorage = new VuexPersist({
 				receipt:state.printer.receipt||'',
 					},
 			interplex: {
+				hold:state.interplex.hold,
 				user:state.interplex.user,
 				currentBranch:state.interplex.currentBranch,
 				currentRoleType:state.interplex.currentRoleType,

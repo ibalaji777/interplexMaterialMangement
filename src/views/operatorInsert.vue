@@ -108,6 +108,12 @@ Items
                 >
                     Clear
                 </v-btn>
+                                <v-btn
+                class="interBtn"
+                    @click="holdDialog=true"
+                >
+                    Hold
+                </v-btn>
                 <v-btn
                     @click="submit"
                                     class="interBtn"
@@ -117,7 +123,110 @@ Items
                 </v-btn>
             </div>
         </div>
+  <v-dialog
+            v-model="holdInvoice"
+            hide-overlay
+            persistent
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar dark :color="$store.state.bgColor">
+                    <v-toolbar-title>Edit Files</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn dark text @click="holdInvoice = false">
+                            Close
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
 
+                <v-divider></v-divider>
+                <div style="padding:10px">
+
+<v-text-field label="Name(*)" v-model="holdInvoiceName"></v-text-field>
+
+<v-btn @click="holdData">Submit</v-btn>
+
+
+                </div>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog
+            v-model="holdDialog"
+            fullscreen
+            hide-overlay
+            persistent
+            transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-toolbar dark :color="$store.state.bgColor">
+                    <v-toolbar-title>Edit Files</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn dark text @click="holdDialog = false">
+                            Close
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+
+                <v-divider></v-divider>
+                <div style="padding:10px">
+<v-btn fab style="background:#272727;color:white"  small @click="holdInvoice=true">
+    <v-icon>mdi-gesture-tap-hold</v-icon>
+</v-btn>
+
+Hold List:{{$store.state.interplex.hold.length}}
+<!-- <v-btn fab small @click="holdData">
+    <v-icon>fa-trash</v-icon>
+</v-btn> -->
+  <v-data-table
+         dense
+      :headers="[
+      {
+        text:'Name',
+		value:'name',
+      },
+      {
+        text:'Action',
+		value:'action',
+      }
+      ]"
+      :items="$store.state.interplex.hold"
+      
+        mobile-breakpoint="0"
+ 
+    >
+
+     <template v-slot:item.action="{ item }">
+ 
+ <div style="display:flex;">
+
+ <v-icon
+ small
+         @click="readHoldInvoice(item)"
+         style="margin-right:10px"
+ >
+    fa-eye
+ </v-icon>   
+  <!-- <v-btn @click="removeHoldList(item)">remove</v-btn> -->
+      <v-icon
+        small
+        @click="removeHoldList(item)"
+      >
+mdi-trash-can
+      </v-icon>
+   </div> 
+    </template>
+    </v-data-table>
+
+
+
+
+
+                </div>
+            </v-card>
+        </v-dialog>
 
         <v-dialog
             v-model="fileDialog"
@@ -1213,6 +1322,10 @@ function base64toBlob(base64Data, contentType) {
 
 function initialState($vm) {
     return {
+        
+        holdInvoiceName:'',
+        holdInvoice:false,
+        holdDialog:false,
         checkFilesLength:0,
         isFileCsv:false,
         importStepOneHelpDialog:false,
@@ -1362,6 +1475,32 @@ return _.filter($vm.checkHeaderBefore,(x)=>x.selected)
         }
     },
     methods: {
+        removeHoldList(value){
+var $vm=this;
+var index=_.findIndex($vm.$store.state.interplex.hold,(x)=>x.name==value.name)
+$vm.$store.commit("removeHoldList",index)
+
+        },
+        readHoldInvoice(value){
+var $vm=this;
+console.log("++++value++++")
+console.log(value)
+$vm.$store.commit("readHoldInvoice",value)
+
+
+        },
+        holdData(){
+var $vm=this;
+
+$vm.$store.commit("hold",$vm.holdInvoiceName)
+$vm.$confirm("Data Holded successfully,Do You Want to clear?")
+.then(()=>{
+$vm.clear();    
+})
+},
+        hold(){
+            $vm.holdDialog=true;
+        },
         clearCheckedProducts(){
             var $vm=this;
 $vm.checkHeaderBefore = [];

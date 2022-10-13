@@ -137,7 +137,26 @@ defaultValue(state,payload){
 	state.interplex.tempInvoice={}
 	state.interplex.qualityAssuranceFormOne=[]
 },
+hold(state,name){
+var hold={
+	name:name,	
+	tempInvoice:state.interplex.tempInvoice,
+	qualityAssuranceFormOne:state.interplex.qualityAssuranceFormOne
+}
+	state.interplex.hold.push(_.cloneDeep(hold))
+},
+removeHoldList(state,index){
+	// state.interplex.hold.splice(1,index)
 
+	Vue.delete(state.interplex.hold, index)
+},
+
+readHoldInvoice(state,payload){
+
+Vue.set(state.interplex,'tempInvoice',payload.tempInvoice)
+Vue.set(state.interplex,'qualityAssuranceFormOne',payload.qualityAssuranceFormOne)
+	// qualityAssuranceFormOne:state.interplex.tempInvoice
+},
 //api start here--------------------------
 setMasterBranches(state,payload){
 	console.log("++setMasterBranches+",payload)
