@@ -81,8 +81,11 @@ transform: translate(-50%,-50%);
 }
 
 .interListRow thead tr {
-    background-color: #33ff5e;
+    background-color: #3e3564;
     color: white;
+}
+.interListRow  th {
+  color:white !important;
 }
 .interListRow  th ,
 .interListRow  td {
@@ -90,7 +93,7 @@ transform: translate(-50%,-50%);
     width: 80px;
 }
 .interListRow tbody tr:nth-child(even) {
-    background-color: #ff6868;
+    background-color: #453390;
     color: white;
 }
 .interListRow tbody tr:nth-child(odd) {

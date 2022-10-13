@@ -122,7 +122,7 @@ import pdfViewer from './views/pdfViewer.vue'
 import appWeb from './AppWeb.vue'
 import navbarWeb from './views/navbarWeb.vue'
 import labelSetting from './views/labelSetting.vue'
-// import update from './views/update.vue'
+import update from './views/update.vue'
 import loader from './views/loader.vue'
 import debounce from 'v-debounce'
 import datefilter from './views/dateFilter.vue'
@@ -130,7 +130,7 @@ Vue.use(debounce)
 
 
 Vue.component('dateFilter', datefilter);
-// Vue.component('app-updater', update);
+Vue.component('app-updater', update);
 Vue.component('loader', loader);
 Vue.component('appWeb', appWeb);
 Vue.component('navbarWeb', navbarWeb);

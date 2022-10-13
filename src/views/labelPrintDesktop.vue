@@ -47,8 +47,12 @@ export default {
         }
     }
 ,mounted(){
+    var $vm=this;
 this.print_paper_init();
 this.print_paper_watch();
+
+console.log("++++selected print+++")
+console.log($vm.$store.state.printer.label)
 }
 ,methods:{
             pdf_generation(action) {
@@ -117,7 +121,7 @@ this.pdf_generation('native')
                     {
                         // silent: !$vm.$store.state.control.print_paper_setup.showPrintDialog,
                         printBackground: true,
-                        // deviceName: $vm.$store.state.control.device.selected_device
+                        deviceName: $vm.$store.state.printer.label
                     }                )
                     .then(()=>{
                         

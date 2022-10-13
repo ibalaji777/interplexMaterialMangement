@@ -42,7 +42,7 @@ var $vm=this;
 });
 
 
-$vm.navbarSetup()
+// $vm.navbarSetup()
 
     },
 
