@@ -96,11 +96,9 @@ ppap
 </div>
 <div style="display:flex;margin-top:15px">
 
-<div style="text-align:center">
-    <!-- <v-btn @click="isDateRangeSelected=!isDateRangeSelected" color="primary"><v-icon>mdi-calendar</v-icon></v-btn> -->
-    <v-btn color="blue" @click="selectChooser">
-    <v-icon color="white">mdi-filter</v-icon>
-    </v-btn>
+<div style="text-align:center;width:90px;">
+    <!-- <v-btn @click="isDateRangeSelected=!isDateRangeSelected" color="rgb(47, 84, 137)"><v-icon>mdi-calendar</v-icon></v-btn> -->
+    <v-icon  @click="selectChooser" color="grey">mdi-filter</v-icon>
     <br>
     {{selectedChooser}}
 
@@ -121,7 +119,7 @@ v-model="findByKeyDate"
 
     <date-filter @date="setDate"></date-filter>
 
-<v-btn color="primary" style="color:white" @click="findDateArray">
+<v-btn color="rgb(47, 84, 137)" style="color:white" @click="findDateArray">
             Submit
            </v-btn>
 
@@ -148,7 +146,7 @@ v-model="findByKey"
           v-model="searchValue"
           label="Search"
            ></v-text-field>
-           <v-btn color="primary" style="color:white" @click="findArray">
+           <v-btn color="rgb(47, 84, 137)" style="color:white" @click="findArray">
             Submit
            </v-btn>
            </div>
@@ -177,7 +175,7 @@ v-model="headerKey"
            ></v-text-field>
 
 
-<v-btn color="primary" style="color:white" @click="findHeaderArray">
+<v-btn color="rgb(47, 84, 137)" style="color:white" @click="findHeaderArray">
             Submit
            </v-btn>
 
@@ -403,10 +401,10 @@ chooserIndex++
 },
 async findHeaderArray(){
 var $vm=this;
-if($vm.headerKey==''){
-$vm.$alert("Please Select Filter")
-return ;
-}
+// if($vm.headerKey==''){
+// $vm.$alert("Please Select Filter")
+// return ;
+// }
 if($vm.headerSearch==''){
 $vm.$alert("Please Fill Search Data")
 return ;

@@ -25,7 +25,7 @@
                                         <div style="top:0;left:0;width:100%;height:100%;background:#685da7" v-if="loader">
                             <div class="window" >
             <div style="position:fixed;top:0;bottom:50%;width:100%" id="someid" class="loader_container">
-                <img style="max-width:100px" src="/loader.svg" id="loader" />
+                <img style="max-width:100px" src="/check.gif" id="loader" />
             </div>
                             </div>
         </div>
