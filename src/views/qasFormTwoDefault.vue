@@ -11,6 +11,7 @@
 
                    </div>
                    <div style="padding:10px">
+                                <v-btn outlined style="margin-right:10px" color="primary" @click="defaultFormat">Default</v-btn>
                                 <v-btn outlined style="margin-right:10px" color="primary" @click="reset">Reset</v-btn>
                          <v-btn outlined color="primary" @click="save">Save</v-btn>
                          </div>
@@ -2055,6 +2056,7 @@
 </template>
 <script>
 /*eslint-disable*/
+import state from '../store/state.js'
 import * as reset from '../lib/dataset.js'
 import * as core from "../lib/core.js";
 import  moment from 'moment'
@@ -2213,6 +2215,16 @@ export default {
    },
 
     methods: {
+       defaultFormat(){
+var $vm=this;
+
+ $vm.$set($vm.insertForm,'observation2_print_view',_.cloneDeep(state.interplex.observation2_print_view_format))
+ $vm.$set($vm.insertForm,'observation2_format',_.cloneDeep(state.interplex.configProductsFormat2))
+ $vm.$set($vm.insertForm,'observation2_header_print_view',_.cloneDeep(state.interplex.observation2_header_print_view_format))
+        
+
+
+       }, 
               selectedRuleObservationFormat(value){
 var $vm=this;
 if($vm.insertForm.observation_format[$vm.qasEditableIndex].exp&&value!=''){

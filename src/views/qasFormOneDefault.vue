@@ -38,8 +38,9 @@
 
                    </div>
                    <div style="padding:10px">
-                                <v-btn outlined style="margin-right:10px" color="primary" @click="reset">Reset</v-btn>
-                         <v-btn outlined color="primary" @click="save">Save</v-btn>
+                       <v-btn outlined style="margin-right:10px" color="primary" @click="defaultFormat">Default</v-btn>
+                       <v-btn outlined style="margin-right:10px" color="primary" @click="reset">Reset</v-btn>
+                       <v-btn outlined color="primary" @click="save">Save</v-btn>
                          </div>
 </div>
                     <div style="height:83vh;overflow:scroll;background:#fafaff">
@@ -2498,7 +2499,7 @@ import * as core from "../lib/core.js";
 import * as reset from '../lib/dataset.js'
 import  moment from 'moment'
 import _ from 'lodash'
-
+import state from '../store/state.js'
 var create_field = {
     label: "", //input field label
     name: "", //column name
@@ -2650,6 +2651,19 @@ if ($vm.insertForm.observation_print_view.length == 0) {
    },
 
     methods: {
+        defaultFormat(){
+var $vm=this;
+$vm.insertForm.observation_format =_.cloneDeep(state.interplex.configProductsFormat);
+$vm.insertForm.observation_print_view =_.cloneDeep(state.interplex.observation_print_view_format);
+$vm.insertForm.postfix_observation_print_view_format =_.cloneDeep(state.map.postfix_observation_print_view_format);
+$vm.insertForm.observation_header_print_view =_.cloneDeep(state.interplex.observation_header_print_view_format);
+
+console.log(state.interplex.configProductsFormat)
+console.log(state.interplex.observation_print_view_format)
+console.log(state.map.postfix_observation_print_view_format)
+console.log(state.interplex.observation_header_print_view_format)
+
+        },
               selectedRuleObservationFormat(value){
 var $vm=this;
 if($vm.insertForm.observation_format[$vm.qasEditableIndex].exp&&value!=''){
