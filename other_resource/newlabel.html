@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    .textRotate {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    /* z-index: -1; */
+    transform: translate(-92%, -50%) rotate(-90deg);
+    font-size: large;
+    text-transform: uppercase;
+    color: black;
+
+}
+.fz{
+font-size:10px}
+.red{color:red}
+.labelTable td,
+.labelTable th{
+font-size:12px;
+}
+.fs14{
+font-size:11px
+}
+._fbetween_{
+display:flex;
+justify-content:space-between;
+}
+@media print {
+    @page {
+        size: 100mm 25mm;
+        margin: 0;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="fz" style="padding:2px;position: relative;
+    margin-top: -12px;">
+        <span class="textRotate"> <b>{{status}}</b></span><br>
+
+        <div  class="_fbetween_">
+        <span></span>
+        <span>Interplex {{branch}}</span>
+            </div>
+        <table class="fz" style="width:100%">
+            <tr>
+                <td>
+        <span><b>{{rmcode}}</b></span><br>
+        <span><b>{{olmat}}</b></span><br>
+        <!-- <span>GRN NO:{{grn_no}}</span><br> -->
+        
+        <div style="position:relative">
+        <svg id="{{uq}}" > {{angal_barcode_op_uq uq  batch_no '{"format":"CODE128","width":1, "displayValue":"false", "height":20}'}} </svg> <br>
+        <span style="position: absolute;
+            bottom: -2px;"><b>{{batch_no}}</b></span>
+        </div>
+                </td>
+                <td>
+        <span> <b>IR#/No:{{ir}}</b></span><br>
+        <span> <b>IR#/date:{{grn_date}}</b></span><br>
+        <span><b> Qty:{{weight}} {{uom}}</b></span><br>
+        <span> Shelf Life:{{head_shelf_life}}</span><br>
+        <span> Heat No:{{lot_no}}</span><br>
+        </td>
+                <td>
+    <div id="{{angal_concat 'qr' uq}}" >
+{{angal_qrcode_op_uq   (angal_concat 'qr' uq) 
+                      (angal_concat olmat interQr) '{"width":55,  "height":55}'}} </div>
+                    <!-- <img stye="max-width:70px"  id="qr1"  src="{{angal_qrcode_op interQr 'qr1' '{"width":50,"height":50}'}}"> -->
+                </td>
+            </tr>
+        </table>
+        
+        <div  class="_fbetween_">
+            <span>{{head_material_text}}</span>
+            <span>Supplier Name: {{head_vendor_name}}</span>
+                </div>
+                </div>
+        
+        
+        
+    
+</body>
+</html>

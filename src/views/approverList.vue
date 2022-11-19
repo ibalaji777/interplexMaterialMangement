@@ -422,7 +422,8 @@ duedate:$vm.checkDate(x.duedate),
 date:$vm.checkDate(x.date),
 remars:x.remarks,
 batch_no:batch_product.batch_no,
-interQr:'&'+(x.rmcode||'')+'&'+(batch_product.qas_form_two_values.batch_no||'')+'&'+parseFloat(batch_product.weight||0).toFixed(2)
+interQr:'&'+(x.rmcode||'')+'&'+(batch_product.qas_form_two_values.batch_no||'')+'&'+parseFloat(batch_product.weight||0).toFixed(2),
+// interNew:(object.head_olmat||'')+'&'+(x.rmcode||'')+'&'+(batch_product.qas_form_two_values.batch_no||'')+'&'+parseFloat(batch_product.weight||0).toFixed(2)
 })
 
 })
