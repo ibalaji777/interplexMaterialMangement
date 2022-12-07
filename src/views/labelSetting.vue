@@ -1,5 +1,14 @@
 <template>
 <div>
+
+<v-btn color="primary" @click="$store.commit('showLabelGenerator',!$store.state.printer.showLabelGenerator)">
+    Show Label Generator
+</v-btn>
+<div style="display:flex;paddng:10px;">
+<div style="margin-right:5px"> Label Generator :</div>
+<div v-if="$store.state.printer.showLabelGenerator">Visible</div>
+<div v-else>Hidden</div>
+</div>
     <h3 style="text-align:center">code</h3>
   <codemirror v-model="barcodeLabel.html" :options="htmlOp"></codemirror>
 

@@ -4,10 +4,9 @@
 <!-- eslint-disable -->
 <!-- {{$store.state.interplex.qasForm1}} -->
 
-<label-print-desktop style="width:0;height:0;overflow:hidden" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
-<label-print-mobile  style="width:0;height:0;overflow:hidden"   v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
-<div style="padding:15px;    padding: 15px;
-    justify-content: space-between;
+<label-print-desktop :class="{hidden:!$store.state.printer.showLabelGenerator}" v-if="$isElectron"    :invoice_data="barcodeLabel" ref="labelPrintDesktop"></label-print-desktop>
+<label-print-mobile  :class="{hidden:!$store.state.printer.showLabelGenerator}"   v-else  :invoice_data="barcodeLabel" ref="labelPrintMobile"></label-print-mobile>
+<div style="    justify-content: space-between;
     display: flex;
 ">
 
@@ -49,45 +48,23 @@ mdi-file-pdf
 </div>
 </div>
 <div v-if="filterResult.length!=0">
-<div style="margin:10px 0">
-    <div v-if="isApprover" style="
+<div >
+    <!-- <div v-if="isApprover" style="
     padding: 10px;
     border-radius: 6px;
-">
+"> -->
 
     <!-- <v-icon v-if="!$isElectron" @click="$router.push({name:'qrScan'})">mdi-qrcode-scan
 </v-icon> -->
 
 
-</div>
-<h3 style="text-align:center">Label Action Print/pdf</h3>
-<div style="display:flex;justify-content:space-evenly">
-    <v-btn  color="#2f5489"  @click="generateLabel" style="color:white;width:33%;margin:5px">
-    Make Label
-</v-btn>
-
-
-    <v-btn @click="labelPrint()" color="#2f5489" style="color:white;margin:5px;width:33%">
-<v-icon >
-     fa-print
-</v-icon>
-</v-btn>
-
-
-<v-btn @click="labelPdf()" color="#2f5489 " style="color:white;margin:5px;width:33%">
-
-<v-icon  >
-mdi-file-pdf
-</v-icon>
-</v-btn>
-
-
-</div>
+<!-- </div> -->
+<!-- <h3 style="text-align:center">Label Action Print/pdf</h3> -->
 
 
 
 <div >
-<div style="margin:10px 0">
+<!-- <div style="margin:10px 0">
     <div v-if="isApprover" style="background: rgb(239 239 239);
     padding: 10px;
     border-radius: 6px;
@@ -115,7 +92,7 @@ PPAP
     </div>
     </div>
     </div>
-</div>
+</div> -->
     <!-- <div style="display:flex">
 
 <v-btn outlined color="white" style="flex:1;margin:0 5px;" @click="markStaus('pending')">
@@ -141,7 +118,8 @@ ppap
     </div>
        
 </div>
-<h5 style="text-align:right"><date ></date></h5>
+<div style="display:flex">
+<!-- <h5 style="text-align:right"><date ></date></h5> -->
      <v-text-field
         style="margin-top:15px"
         dense
@@ -149,9 +127,35 @@ ppap
           v-model="search"
           label="Search"
            ></v-text-field>
+<div style="display: flex;
+    justify-content: baseline;
+    align-items: center;">
+    <v-btn  color="#2f5489"  @click="generateLabel" style="color:white;margin:5px">
+    Make Label
+</v-btn>
 
+
+    <!-- <v-btn  color="#2f5489" style="color:white;margin:5px;width:33%"> -->
+<v-icon @click="labelPrint()" style="color:black" >
+     fa-print
+</v-icon>
+<!-- </v-btn> -->
+
+
+<!-- <v-btn  color="#2f5489 " style="color:white;margin:5px;width:33%"> -->
+
+<v-icon style="color:red"  @click="labelPdf()">
+mdi-file-pdf
+</v-icon>
+<!-- </v-btn> -->
+
+
+</div>
+
+</div>
          <v-data-table
          dense
+         height="70vh"
       v-model="selected"
       :headers="$store.state.report.qasForm1"
       :items="approverListOrder"
@@ -225,7 +229,7 @@ ppap
  <v-icon
  small
          @click="preview(item)"
-         style="margin-right:10px"
+         style="margin-right:20px"
  >
     fa-eye
  </v-icon>
@@ -238,7 +242,7 @@ ppap
         mdi-pencil
       </v-icon> -->
       <v-icon
-        small
+        small v-if="isApprover"
         @click="deleteItem(item)"
       >
         mdi-delete
@@ -530,6 +534,9 @@ await $vm.$store.dispatch('deleteQasFormOne',item)
 </script>
 <style lang="scss">
     
+    .hidden{
+        width:0;height:0;overflow:hidden
+    }
     // .interListRow tr{
     //     background: red !important;
     // }

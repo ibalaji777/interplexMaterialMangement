@@ -107,9 +107,9 @@ PP
 OBSERVATION
 <div style="display:flex;">
 
-<div @click="qasForm1Dialog=true" class="insertProduct" style="margin-right:10px">
+<!-- <div @click="qasForm1Dialog=true" class="insertProduct" style="margin-right:10px">
 <v-icon>fa-check</v-icon>
-</div>
+</div> -->
 </div>
 <div style="display:flex;justify-content:flex-end;margin:10px">
 <!-- <v-btn color="primary" @click="saveQasFormOne">Save </v-btn> -->
@@ -817,7 +817,43 @@ var $vm=this;
 },
 async mounted(){
     var $vm=this;
-  await $vm.$store.dispatch('getPrintConfig')
+ 
+ scanApp.start($vm,async (action,data)=>{
+
+if(action=='success'){
+$vm.scannerConnectionAppStatus=true;
+}
+if(action=='error'){
+$vm.scannerConnectionAppStatus=false;
+}
+if(action=='base64'){
+  $vm.$store.commit('showLoader')
+
+setTimeout(async ()=>{
+
+    //-------------actual----------------
+//     console.log("img data",data)
+//   $vm.takePhoto.push({src:"data:image/png;base64,"+data,file_type:'image',title:''})
+    //-------------actual----------------
+  var base64ToBlob=await core.base64toBlob(data,'image/png')
+const compressedFile = await imageCompression(base64ToBlob, options);
+
+core.blobToBase64(compressedFile,(base64String)=>{
+  console.log("+++compessed image++++")
+  console.log(base64String)
+  $vm.takePhoto.push({src:"data:image/png;base64,"+base64String,file_type:'image',title:''})
+            $vm.$store.commit('hideLoader')
+
+})
+
+},10)
+
+}
+
+})
+ 
+ 
+ await $vm.$store.dispatch('getPrintConfig')
 if(['approver','admin'].includes($vm.$store.state.interplex.user.roletype)){
 $vm.isApprover=true;
 $vm.editPermission=true;

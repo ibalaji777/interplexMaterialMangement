@@ -17,22 +17,30 @@ const vuexLocalStorage = new VuexPersist({
 
 		return ({
 			printer:{
+				showLabelGenerator:false,
 				label:state.printer.label||'',
 				receipt:state.printer.receipt||'',
 					},
+		
+
+		})
+	}
+}
+);
+
+const vuexLocalStorage2 = new VuexPersist({
+	// strictMode:true,
+	key: '2key22',
+	storage: window.localStorage,
+	reducer: (state) => {
+
+		return ({
 			interplex: {
 				hold:state.interplex.hold,
 				user:state.interplex.user,
 				currentBranch:state.interplex.currentBranch,
 				currentRoleType:state.interplex.currentRoleType,
-				// qasForm1: state.interplex.qasForm1,
-				// qasForm2: state.interplex.qasForm2,
-				// configProductsFormat: state.interplex.configProductsFormat,
-				// configHeaderFormat: state.interplex.configHeaderFormat,
-				// masterBranches: state.interplex.masterBranches,
-				// masterProducts: state.interplex.masterProducts,
-				// configProductsFormat:state.interplex.configProductsFormat,
-			}
+				}
 
 
 		})
@@ -44,7 +52,7 @@ const store = new Vuex.Store({
 	state,
 	mutations,
 	actions,
-	plugins: [vuexLocalStorage.plugin]
+	plugins: [vuexLocalStorage.plugin,vuexLocalStorage2.plugin]
 })
 
 

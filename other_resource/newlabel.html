@@ -71,10 +71,10 @@ justify-content:space-between;
         <span> Heat No:{{lot_no}}</span><br>
         </td>
                 <td>
-    <div id="{{angal_concat 'qr' uq}}" >
+    <!-- <div id="{{angal_concat 'qr' uq}}" >
 {{angal_qrcode_op_uq   (angal_concat 'qr' uq) 
-                      (angal_concat olmat interQr) '{"width":55,  "height":55}'}} </div>
-                    <!-- <img stye="max-width:70px"  id="qr1"  src="{{angal_qrcode_op interQr 'qr1' '{"width":50,"height":50}'}}"> -->
+                      (angal_concat olmat interQr) '{"width":55,  "height":55}'}} </div> -->
+    <img stye="max-width:50px"    src="{{angal_qrcode_op (angal_concat 'qr' uq) 'l' '{"width":50,"height":50}'}}">
                 </td>
             </tr>
         </table>

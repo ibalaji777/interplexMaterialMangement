@@ -2,6 +2,7 @@
 import moment from 'moment'
 const state = {
 	printer:{
+showLabelGenerator:false,		
 label:'',
 receipt:''
 	},
@@ -126,6 +127,13 @@ report:{
 
 qasForm1:[
 	{
+		text:'ACTION',
+		value:'action'
+		,class:'interplexHeader'
+
+	},
+
+	{
 		text:'SUPPLIER NAME',
 		value:'supplier_name',
 		class:'interplexHeader'
@@ -243,12 +251,6 @@ qasForm1:[
 	{
 		text:'Skiplevel Order',
 		value:'sk_order'
-		,class:'interplexHeader'
-
-	},
-	{
-		text:'ACTION',
-		value:'action'
 		,class:'interplexHeader'
 
 	},

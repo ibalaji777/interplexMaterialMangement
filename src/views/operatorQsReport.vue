@@ -798,7 +798,7 @@ Items
 
          <div >
 
-<table class="inter_table_excel">
+<table class="inter_table_excel" >
     <tr ></tr>
     <tr class="inter_table_header_excel"  v-for="(row,index) in renderQas1Header" :key="index+'qas1Header'">
 <td :colspan="cell.merge.colspan" :rowspan="cell.merge.rowspan" contenteditable=true v-for="(cell,cellindex) in row" :key="cellindex+'4cell'">
@@ -823,7 +823,7 @@ Items
      <div v-if="selectedFormType=='qas2'" style="display:flex;justify-content:center;flex-direction:column">
       
   
-<table class="inter_table_excel">
+<table class="inter_table_excel" style="width:88%">
 <tr class="inter_table2_header_excel"  v-for="(row,index) in renderQas2Header" :key="index+'qas1Header'">
 <td :colspan="cell.merge.colspan" :rowspan="cell.merge.rowspan" contenteditable=true v-for="(cell,cellindex) in row" :key="cellindex+'4cell'">
    <div> {{cell.value}}</div>

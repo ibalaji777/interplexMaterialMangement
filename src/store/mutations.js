@@ -143,7 +143,7 @@ var hold={
 	tempInvoice:state.interplex.tempInvoice,
 	qualityAssuranceFormOne:state.interplex.qualityAssuranceFormOne
 }
-	state.interplex.hold.push(_.cloneDeep(hold))
+	state.interplex.hold.push(Object.freeze(_.cloneDeep(hold)))
 },
 removeHoldList(state,index){
 	// state.interplex.hold.splice(1,index)
@@ -153,8 +153,8 @@ removeHoldList(state,index){
 
 readHoldInvoice(state,payload){
 
-Vue.set(state.interplex,'tempInvoice',payload.tempInvoice)
-Vue.set(state.interplex,'qualityAssuranceFormOne',payload.qualityAssuranceFormOne)
+Vue.set(state.interplex,'tempInvoice',_.cloneDeep(payload.tempInvoice))
+Vue.set(state.interplex,'qualityAssuranceFormOne',_.cloneDeep(payload.qualityAssuranceFormOne))
 	// qualityAssuranceFormOne:state.interplex.tempInvoice
 },
 //api start here--------------------------
@@ -176,7 +176,7 @@ setMasterUsers(state,users){
 
 setMasterProducts(state,products){
 
-	Vue.set(state.interplex,'masterProducts',products)
+	Vue.set(state.interplex,'masterProducts',Object.freeze(products))
 },
 setMasterUploadType(state,uploadtypes){
 	Vue.set(state.interplex,'masterFileTypes',uploadtypes)
@@ -192,7 +192,8 @@ setQasForm2Config(state,config){
 	Vue.set(state.interplex,'configQasForm2Format',config)
 },
 setQasFormOneList(state,list){
-	Vue.set(state.interplex,'qasForm1',list)
+	// Vue.set(state.interplex,'qasForm1',list)
+	Vue.set(state.interplex,'qasForm1',Object.freeze(list))
 },
 setFileTypes(state,list){
 console.log("File Types",list)
@@ -294,8 +295,10 @@ setRulesList(state,payload){
 state.interplex.rulesList=payload;
 
 }
-
-
+,
+showLabelGenerator(state,payload){
+state.printer.showLabelGenerator=payload
+}
 
 
 
